@@ -13,7 +13,6 @@ export const getComments = async ({
   nextCursor?: number;
   message: string;
 }> => {
-  console.log(id);
   const isServer = typeof window === 'undefined';
   const requestUrl = `${
     isServer ? process.env.SERVER_URL : process.env.NEXT_PUBLIC_SERVER_URL
