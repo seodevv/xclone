@@ -1,0 +1,69 @@
+.navPill {
+  display: inline-flex;
+  height: 50px;
+  padding: 12px;
+  align-items: center;
+  fill: rgb(var(--foreground-rgb));
+}
+.navPill:hover {
+  background-color: rgba(15, 20, 25, 0.1);
+  border-radius: 29px;
+}
+
+.navPill > div {
+  margin-left: 20px;
+  margin-right: 16px;
+  font-size: 20px;
+  display: inline-block;
+}
+
+.activeBold {
+  font-weight: bold;
+}
+
+.tweet {
+  margin: 16px 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  box-shadow: rgba(0, 0, 0, 0.08) 0px 8px 28px;
+  background-color: rgb(29, 155, 240);
+  width: 234px;
+  height: 52px;
+  border-radius: 26px;
+  border: none;
+  color: rgb(255, 255, 255);
+  font-weight: 700;
+  font-size: 17px;
+}
+.tweet:hover {
+  background-color: rgb(26, 140, 216);
+}
+.tweet span {
+  display: inline-block;
+}
+.tweet svg {
+  display: none;
+}
+
+@media all and (max-width: 1300px) {
+  .tweet {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+  }
+  .tweet span {
+    display: none;
+  }
+  .tweet svg {
+    display: inline-block;
+    fill: white;
+    width: 24px;
+  }
+}
+
+@media all and (max-width: 1300px) {
+  .navPill > div {
+    display: none;
+  }
+}

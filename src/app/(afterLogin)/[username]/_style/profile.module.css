@@ -1,0 +1,192 @@
+.header {
+  padding: 0 16px;
+  position: fixed;
+  z-index: 1;
+  display: flex;
+  align-items: center;
+  flex-grow: 1;
+  width: 600px;
+  height: 53px;
+  background: rgba(var(--background-start-rgb), 0.65);
+  backdrop-filter: blur(12px);
+}
+
+.headerInfo {
+  display: flex;
+  flex-flow: column nowrap;
+  justify-content: flex-start;
+}
+
+.headerTitle {
+  font-size: 20px;
+  font-weight: bold;
+}
+
+.headerSub {
+  font-size: 13px;
+  color: rgb(var(--link-rgb));
+}
+
+.banner {
+  width: 100%;
+  height: 200px;
+  background: rgb(51, 54, 57);
+}
+
+.bannerImage {
+  object-fit: cover;
+}
+
+.userZone {
+  margin-bottom: 16px;
+  padding: 12px 16px 0px 16px;
+  display: flex;
+  flex-direction: column;
+}
+
+.userImage {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  border-radius: 50%;
+}
+.imageBox {
+  margin-top: -15%;
+  margin-bottom: 12px;
+  width: 145px;
+  height: 145px;
+  background: rgb(22, 24, 28);
+  border: 3px solid rgb(var(--background-start-rgb));
+  border-radius: 50%;
+  box-sizing: content-box;
+}
+.userImage img {
+  border-radius: 50%;
+  object-fit: cover;
+}
+.followButton {
+  margin-bottom: 12px;
+  padding: 0 16px;
+  border-radius: 9999px;
+  height: 36px;
+  background-color: rgb(var(--foreground-rgb));
+  font-size: 1rem;
+  color: rgb(var(--background-start-rgb));
+  font-weight: bold;
+  cursor: pointer;
+  box-sizing: content-box;
+  transition: 0.1s opacity ease-in;
+}
+.followButton:hover {
+  opacity: 0.9;
+}
+
+.userName {
+  font-size: 15px;
+}
+.userName > div:first-child {
+  margin: 4px 0 12px 0;
+}
+.userNick {
+  font-size: 20px;
+  font-weight: bold;
+}
+.userId {
+  font-size: 15px;
+  color: rgb(var(--link-rgb));
+}
+.userDesc {
+  margin-bottom: 12px;
+}
+
+.userDesc > span {
+  display: block;
+}
+
+.userExtra {
+  margin-bottom: 12px;
+  font-size: 14px;
+}
+
+.userRefer {
+  margin-right: 12px;
+  line-height: 12px;
+}
+
+.userRefer > span {
+  color: rgb(var(--link-primary-rgb));
+  vertical-align: middle;
+}
+
+.userRefer:hover > span {
+  text-decoration: underline;
+  text-decoration-thickness: 1px;
+}
+
+.refer {
+  margin-right: 4px;
+  fill: rgb(var(--link-rgb));
+  vertical-align: middle;
+}
+
+.registDate {
+  fill: rgb(var(--link-rgb));
+  vertical-align: middle;
+  color: rgb(var(--link-rgb));
+}
+
+.calendar {
+  margin-right: 4px;
+  vertical-align: middle;
+}
+
+.calendar > span {
+  vertical-align: middle;
+}
+
+.userFollowInfo {
+  display: flex;
+  flex-flow: row wrap;
+  flex: 1;
+  align-items: stretch;
+  font-size: 14px;
+  line-height: 16px;
+}
+
+.userFollow {
+  margin-right: 20px;
+}
+
+.userFollow > a {
+  line-height: 20px;
+  vertical-align: middle;
+}
+
+.userFollow > a:hover {
+  border-bottom: 1px solid rgb(var(--foreground-rgb));
+}
+
+.number {
+  margin-right: 5px;
+  font-weight: bold;
+}
+
+.text {
+  color: rgb(var(--link-rgb));
+  font-weight: bold;
+}
+
+.userNotFound {
+  margin: 32px 99px;
+  padding: 40px 20px;
+}
+
+.userNotFound > div:first-child {
+  font-size: 31px;
+  font-weight: bold;
+}
+
+.userNotFound > div:last-child {
+  font-size: 15px;
+  color: rgb(var(--link-rgb));
+}

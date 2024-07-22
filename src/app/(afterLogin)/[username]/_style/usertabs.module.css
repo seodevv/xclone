@@ -1,0 +1,57 @@
+.userTabs {
+    display: flex;
+    flex-flow: row nowrap;
+    align-items: stretch;
+    height: 53px;
+    border-bottom-width: 1px;
+    border-bottom-style: solid;
+    border-bottom-color: rgb(var(--border-start-rgb));
+    font-size: 15px;
+  }
+  
+  .userTab {
+    display: flex;
+    flex-grow: 1;
+    flex-shrink: 1;
+    justify-items: stretch;
+    justify-content: center;
+    transition: 0.2s background-color ease-in;
+  }
+  
+  .userTabLink {
+    padding: 0 16px;
+    display: flex;
+    flex-flow: column nowrap;
+    align-items: stretch;
+    justify-items: stretch;
+    text-align: center;
+  }
+  
+  .userTab:hover {
+    background: rgba(var(--foreground-rgb), 0.1);
+  }
+  
+  .userTabLink > div:first-child {
+    padding: 16px 0;
+    flex-grow: 1;
+    color: rgb(var(--link-rgb));
+  }
+  
+  .userTabLink > div:last-child {
+    min-width: 56px;
+    min-height: 4px;
+    background: rgb(var(--primary-button-rgb));
+    visibility: hidden;
+    opacity: 0;
+  }
+  
+  .linkActive > div:first-child {
+    font-weight: bold;
+    color: rgb(var(--foreground-rgb));
+  }
+  
+  .linkActive > div:last-child {
+    visibility: visible;
+    opacity: 1;
+  }
+  

@@ -1,0 +1,50 @@
+.disconnection {
+  padding: 20px 12px;
+  display: flex;
+  flex-flow: column nowrap;
+  align-items: center;
+}
+
+.icon {
+  margin-bottom: 20px;
+  fill: rgb(var(--link-rgb));
+}
+
+.message {
+  margin-bottom: 20px;
+  font-size: 15px;
+  color: rgb(var(--link-rgb));
+}
+
+.btn {
+  padding: 0 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 36px;
+  min-height: 36px;
+  background: rgb(var(--primary-button-rgb));
+  border-radius: 9999px;
+  cursor: pointer;
+  transition: 0.1s opacity ease-in;
+}
+
+.btn svg {
+  margin-right: 4px;
+  fill: rgb(var(--foreground-rgb));
+}
+
+.btn span {
+  margin-bottom: 1px;
+  font-size: 15px;
+  font-weight: bold;
+  color: rgb(var(--foreground-rgb));
+}
+
+.btn:hover:enabled {
+  opacity: 0.9;
+}
+
+.btn:active:enabled {
+  opacity: 0.75;
+}

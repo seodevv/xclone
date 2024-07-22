@@ -1,0 +1,154 @@
+.container {
+  display: flex;
+  align-items: stretch;
+}
+
+.leftSectionWrapper {
+  display: flex;
+  align-items: flex-end;
+  flex-direction: column;
+  flex-grow: 1;
+}
+
+/* viewport 가 1020 px 이하일 경우 */
+/* container 가 가운데 정렬로 적용된다 */
+@media screen and (max-width: 1020px) {
+  .container {
+    justify-content: center;
+  }
+
+  .leftSectionWrapper {
+    flex-grow: unset;
+  }
+
+  .rightSectionWrapper {
+    max-width: 600px;
+  }
+}
+
+.leftSection {
+  width: 275px;
+  height: 100dvh;
+}
+.leftSectionFixed {
+  position: fixed;
+  width: inherit;
+  padding: 0 8px;
+  height: 100dvh;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+/* viewport 가 1300 px 이하일 경우 */
+/* NavBar 가 아이콘만 표시되고 가운데 정렬 된다. */
+@media all and (max-width: 1300px) {
+  .leftSection {
+    width: 88px;
+  }
+  .leftSectionFixed {
+    align-items: center;
+  }
+}
+
+/* viewport 가 720 px 이하일 경우 */
+/* NavBar 의 여백이 줄어든다. */
+@media screen and (max-width: 720px) {
+  .leftSection {
+    width: 72px;
+  }
+}
+
+/* viewport 가 720 px 이하일 경우 */
+/* NavBar 의 여백이 줄어든다. */
+@media screen and (max-width: 632px) {
+  .leftSection {
+    width: 60px;
+  }
+}
+
+.leftSectionFixed nav {
+  flex: 1;
+}
+.leftSectionFixed nav li {
+  list-style-type: none;
+}
+
+.logo {
+  margin-top: 2px;
+  display: inline-block;
+  height: 56px;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+}
+
+.logo:hover {
+  filter: drop-shadow(5px 5px 15px #fff);
+}
+
+.XLogo {
+  fill: rgb(var(--foreground-rgb));
+}
+
+.logoPill {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.logoPill:hover .XLogo {
+  filter: drop-shadow(2px 2px 2px #fff);
+}
+
+.rightSectionWrapper {
+  display: flex;
+  align-items: flex-start;
+  flex-direction: column;
+  flex-grow: 1;
+}
+.rightSectionInner {
+  display: flex;
+  justify-content: space-between;
+  width: 1050px;
+}
+.rightSection {
+  margin-right: 70px;
+  display: flex;
+  flex-flow: column nowrap;
+  width: 350px;
+  height: 100%;
+}
+
+/* viewport 가 1110 px 이하일 경우 */
+/* rightSection 의 width 를 줄인다. */
+@media all and (max-width: 1110px) {
+  .rightSection {
+    width: 290px;
+  }
+}
+
+/* viewport 가 1020 px 이하일 경우 */
+/* rightSection 이 없어진다. */
+@media all and (max-width: 1020px) {
+  .rightSection {
+    display: none;
+  }
+  .rightSectionInner {
+    max-width: 600px;
+    width: 100%;
+  }
+}
+
+.main {
+  width: 100%;
+  max-width: 600px;
+  min-height: 100dvh;
+  border-left-style: solid;
+  border-left-width: 1px;
+  border-right-style: solid;
+  border-right-width: 1px;
+  border-color: rgb(var(--border-start-rgb));
+}

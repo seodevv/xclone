@@ -1,0 +1,73 @@
+.followRecommend {
+  order: 2;
+  border: 1px solid rgb(var(--border-start-rgb));
+  border-radius: 16px;
+  margin: 12px 0;
+  padding: 12px 16px;
+}
+
+.followRecommend h3 {
+  padding-bottom: 12px;
+  font-size: 20px;
+  font-weight: bold;
+}
+
+.firstOrder {
+  order: 0;
+}
+
+.container {
+  padding: 12px 0;
+  height: 66px;
+  display: flex;
+}
+
+.container:hover:not(:has(> button:hover)) {
+  background: rgba(var(--foreground-rgb), 0.1);
+}
+
+.userLogo {
+  width: 40px;
+  margin-right: 12px;
+}
+
+.userLogo,
+.userLogo img {
+  width: 40px;
+  height: 40px;
+  border-radius: 20px;
+}
+
+.userInfo {
+  flex: 1;
+  width: 188px;
+}
+
+.nickname {
+  font-size: 15px;
+  font-weight: bold;
+  line-height: 20px;
+}
+
+.identifier {
+  font-size: 13px;
+  color: rgb(var(--link-rgb));
+  line-height: 16px;
+  word-wrap: break-word;
+}
+
+.error {
+  text-align: center;
+}
+
+.error > span {
+  display: block;
+  color: rgb(var(--link-rgb));
+}
+
+.refresh {
+  margin: 20px 0 10px 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}

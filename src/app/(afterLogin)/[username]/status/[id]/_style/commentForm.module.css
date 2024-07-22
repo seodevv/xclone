@@ -1,0 +1,323 @@
+.replyInfoSection {
+  padding: 0 16px;
+  display: flex;
+  flex-flow: row nowrap;
+  min-height: 12px;
+  animation-name: fade-in;
+  animation-duration: 0.2s;
+  animation-timing-function: ease-in;
+  animation-iteration-count: 1;
+}
+
+.replyInfoSection > div:first-child {
+  margin-right: 8px;
+  flex-basis: 40px;
+  flex-grow: 0;
+}
+
+.replyInfo {
+  flex-grow: 1;
+}
+
+.replyInfoButton {
+  background: transparent;
+  border: none;
+  font-size: 15px;
+  color: rgb(var(--link-rgb));
+}
+
+.replyInfoButton span {
+  color: rgb(var(--primary-rgb));
+}
+
+.postForm {
+  padding: 4px 16px 12px 16px;
+  display: flex;
+  flex-flow: row nowrap;
+  align-items: center;
+  column-gap: 2px;
+  border-color: rgb(var(--border-start-rgb));
+  border-bottom-width: 1px;
+  border-bottom-style: solid;
+  overflow-x: hidden;
+}
+
+.postForm.active {
+  align-items: flex-start;
+}
+
+.postUserSection {
+  margin-right: 8px;
+  width: 40px;
+}
+
+.active .postUserSection {
+  padding-top: 12px;
+}
+
+.postUserImage {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+}
+
+.postUserImage img {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+}
+
+.postInputSection {
+  padding-top: 4px;
+  display: flex;
+  flex-flow: column nowrap;
+  flex-grow: 1;
+}
+
+.postTextareaSection {
+  display: flex;
+  align-items: center;
+}
+
+.postButtonSection {
+  padding-bottom: 8px;
+  display: flex;
+  align-items: center;
+  animation-name: fade-in;
+  animation-duration: 0.2s;
+  animation-timing-function: ease-in;
+  animation-iteration-count: 1;
+}
+
+.replyButtonSection {
+  display: flex;
+  align-items: center;
+}
+
+.actionButton {
+  margin-left: 12px;
+  padding: 0 16px;
+  height: 36px;
+  background-color: rgb(var(--primary-rgb));
+  border: none;
+  border-radius: 9999px;
+  font-size: 15px;
+  font-weight: 700;
+  color: #fff;
+  cursor: pointer;
+  transition: 0.1s opacity ease-in;
+}
+
+.actionButton:disabled {
+  opacity: 0.5;
+}
+
+.actionButton:hover:enabled {
+  opacity: 0.9;
+}
+
+.actionButton:active:enabled {
+  opacity: 0.75;
+}
+
+.footerButtons {
+  margin: 4px 0 0 -8px;
+  display: flex;
+  align-items: center;
+  flex-flow: row nowrap;
+  flex-grow: 1;
+}
+
+.postContent {
+  padding: 12px 0;
+  width: 100%;
+  border: none;
+  font-size: 20px;
+  line-height: 24px;
+  outline: none;
+  resize: none;
+}
+
+.postContent::-webkit-scrollbar {
+  width: 15px;
+}
+
+.postContent::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.postContent::-webkit-scrollbar-thumb {
+  margin: 5px;
+  background: #686868;
+  border-radius: 10px;
+  border: 3px solid #424242;
+}
+
+.postForm textarea::placeholder {
+  font-family: 'Malgun Gothic', sans-serif;
+}
+
+.funcButton {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 34px;
+  height: 34px;
+  background: transparent;
+  border: none;
+  border-radius: 50%;
+  cursor: pointer;
+  transition: 0.2s background-color ease-in;
+}
+
+.funcButton:hover:enabled {
+  background: rgba(var(--primary-rgb), 0.25);
+}
+
+.funcButton:active {
+  background: rgba(var(--primary-rgb), 0.5);
+}
+
+.funcButton:disabled {
+  opacity: 0.5;
+}
+
+.funcButton svg {
+  fill: rgb(29, 155, 240);
+}
+
+.commentFormPreview {
+  margin: 4px 0;
+  position: relative;
+  max-width: 516px;
+  overflow: hidden;
+}
+
+.previewSection {
+  display: flex;
+  flex-flow: row nowrap;
+}
+
+.previewImage {
+  margin-right: 8px;
+  position: relative;
+  display: flex;
+  flex-flow: column nowrap;
+  flex-shrink: 0;
+  width: calc(50% - 4px);
+  transition: 0.2s transform ease-in;
+}
+
+.previewImage:last-child {
+  margin-right: unset;
+}
+
+.previewImage.isSingle {
+  margin-right: unset;
+  margin-left: unset;
+  width: 100%;
+}
+
+.previewImage > img {
+  width: 100%;
+  height: 100%;
+  border-radius: 16px;
+  aspect-ratio: 1 / 1.1;
+  object-fit: cover;
+}
+
+.previewImageRefer {
+  margin: 0 8px;
+  display: flex;
+  align-items: flex-end;
+}
+
+.previewImageRefer > span {
+  font-size: 15px;
+  color: rgb(var(--link-rgb));
+}
+
+.brandLogo {
+  margin: 0 4px;
+  width: 16px;
+  height: 16px;
+}
+
+.brandTitle {
+  font-weight: bold;
+}
+
+.previewEdit,
+.previewCancle,
+.previewCarousel {
+  margin: 8px 8px 0 0;
+  position: absolute;
+  top: 0;
+  right: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 30px;
+  height: 30px;
+  background: rgba(var(--background-start-rgb), 0.75);
+  border: none;
+  border-radius: 50%;
+  cursor: pointer;
+  transition: 0.1s background-color ease-in;
+}
+
+.previewEdit {
+  margin: 8px 0 0 8px;
+  right: unset;
+  left: 0;
+}
+
+.previewCarousel {
+  margin: 0 8px;
+  top: 50%;
+  width: 34px;
+  height: 34px;
+  transform: translateY(-50%);
+}
+
+.previewCarouselLeft {
+  left: 0;
+  right: unset;
+}
+
+.previewCarouselRight {
+  right: 0;
+}
+
+.previewCancle:hover:enabled,
+.previewEdit:hover:enabled,
+.previewCarouselButton:hover:enabled {
+  background: rgb(var(--foreground-rgb), 0.1);
+}
+
+.previewCancle:active:enabled,
+.previewEdit:active:enabled,
+.previewCarouselButton:active:enabled {
+  background: rgb(var(--foreground-rgb), 0.25);
+}
+
+.fadeIn {
+  animation-name: fade-in;
+  animation-duration: 0.2s;
+  animation-timing-function: ease-in;
+  animation-iteration-count: 1;
+}
+
+@keyframes fade-in {
+  from {
+    visibility: hidden;
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+
+  to {
+    visibility: visible;
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
