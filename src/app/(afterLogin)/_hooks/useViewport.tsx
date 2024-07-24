@@ -7,8 +7,8 @@ export default function useViewport() {
   useEffect(() => {
     const listener = (e: UIEvent) => {
       setViewport({
-        width: document.body.offsetWidth,
-        height: document.body.offsetHeight,
+        width: window.innerWidth,
+        height: window.innerHeight,
       });
     };
     window.addEventListener('resize', listener);

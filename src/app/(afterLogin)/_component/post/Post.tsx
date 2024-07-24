@@ -15,16 +15,19 @@ import ActionButtons from '@/app/(afterLogin)/_component/post/ActionButtons';
 import OptionSvg from '@/app/_svg/post/OptionSvg';
 import ViewSvg from '@/app/_svg/actionbuttons/ViewSvg';
 import OtherProfile from '../profile/OtherProfile';
+import PostReplyInfo from './PostReplyInfo';
 
 interface Props {
   post: AdvancedPost;
   isSingle?: boolean;
   noImage?: boolean;
+  isComment?: boolean;
 }
 export default function Post({
   post,
   isSingle = false,
   noImage = false,
+  isComment = false,
 }: Props) {
   const { data: session } = useSession();
 
@@ -64,6 +67,9 @@ export default function Post({
               </Link>
               <PostDate className={style.postDate} date={post.createAt} />
             </div>
+          )}
+          {post.Parent && !isComment && (
+            <PostReplyInfo id={post.Parent.User.id} />
           )}
           <PostContent className={style.postContent} content={post.content} />
           {!noImage && (

@@ -4,7 +4,6 @@ import {
   HydrationBoundary,
   QueryClient,
 } from '@tanstack/react-query';
-import { getUser } from '../_lib/getUser';
 import { getUserPostsCount } from '../_lib/getUserPostsCount';
 import ProfileHeaderContent from './ProfileHeaderContent';
 import BackButton from '@/app/(afterLogin)/_component/buttons/BackButton';
@@ -21,18 +20,10 @@ export default async function ProfileHeader({ username }: Props) {
       gcTime: 10 * 60 * 1000,
     },
   });
-  await Promise.all([
-    queryClient.prefetchQuery({
-      queryKey: ['users', username],
-      queryFn: getUser,
-      staleTime: 5 * 60 * 1000,
-      gcTime: 10 * 60 * 1000,
-    }),
-    queryClient.prefetchQuery({
-      queryKey: ['posts', 'count', username, { filter: 'all' }],
-      queryFn: getUserPostsCount,
-    }),
-  ]);
+  await queryClient.prefetchQuery({
+    queryKey: ['posts', 'count', username, { filter: 'all' }],
+    queryFn: getUserPostsCount,
+  });
   const dehydrateState = dehydrate(queryClient);
 
   return (

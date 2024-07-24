@@ -3,10 +3,11 @@
 import { createContext, Dispatch, SetStateAction, useState } from 'react';
 import AlterModal from '../_component/alter/AlterModal';
 
-interface Modal {
+export interface Modal {
   show: boolean;
   message: string;
   duration: number;
+  type: 'notice' | 'warning' | 'error';
 }
 
 export const initialAlterModalState: {
@@ -17,6 +18,7 @@ export const initialAlterModalState: {
     show: false,
     message: '',
     duration: 2000,
+    type: 'notice',
   },
   setModal: () => {},
 };

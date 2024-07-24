@@ -52,6 +52,7 @@ const FileUploader = forwardRef<FileRef, Props>(
           hidden
         />
         <button
+          type="button"
           className={className}
           style={style}
           onClick={onClickUpload}

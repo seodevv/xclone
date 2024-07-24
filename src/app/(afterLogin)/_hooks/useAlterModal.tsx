@@ -4,6 +4,7 @@ import { useCallback, useContext } from 'react';
 import {
   AlterModalContext,
   initialAlterModalState,
+  Modal,
 } from '../_provider/AlterModalProvider';
 
 export default function useAlterModal() {
@@ -17,14 +18,23 @@ export default function useAlterModal() {
     return modal.duration;
   }, [modal.duration]);
 
+  const getType = useCallback(() => {
+    return modal.type;
+  }, [modal.type]);
+
   const alterMessage = useCallback(
-    (message: string, duration?: number) => {
+    (
+      message: Modal['message'],
+      type?: Modal['type'],
+      duration?: Modal['duration']
+    ) => {
       resetMessage();
       setTimeout(() => {
         setModal({
           show: true,
           message,
           duration: duration ? duration : 2000,
+          type: type ? type : 'notice',
         });
       });
     },
@@ -42,5 +52,12 @@ export default function useAlterModal() {
     setModal(initialAlterModalState.modal);
   }, [setModal]);
 
-  return { getMessage, getDuration, alterMessage, setDuration, resetMessage };
+  return {
+    getMessage,
+    getDuration,
+    getType,
+    alterMessage,
+    setDuration,
+    resetMessage,
+  };
 }

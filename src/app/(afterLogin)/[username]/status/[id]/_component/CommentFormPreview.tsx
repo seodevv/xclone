@@ -44,6 +44,7 @@ export default function CommentFormPreview({ images, setImages }: Props) {
               alt=""
               width={image.width}
               height={image.height}
+              unoptimized={image.type === 'gif'}
             />
             {image.type === 'gif' && (
               <div className={styles.previewImageRefer}>
@@ -56,10 +57,13 @@ export default function CommentFormPreview({ images, setImages }: Props) {
                 <span className={styles.brandTitle}>TENOR</span>
               </div>
             )}
-            <button className={styles.previewEdit}>
-              <EditSvg white />
-            </button>
+            {image.type === 'image' && (
+              <button type="button" className={styles.previewEdit}>
+                <EditSvg white />
+              </button>
+            )}
             <button
+              type="button"
               className={styles.previewCancle}
               onClick={() => {
                 setImages((prev) => {
@@ -79,6 +83,7 @@ export default function CommentFormPreview({ images, setImages }: Props) {
         <>
           {current === 'next' ? (
             <button
+              type="button"
               className={cx(styles.previewCarousel, styles.previewCarouselLeft)}
               onClick={() => setCurrent('prev')}
             >
@@ -86,6 +91,7 @@ export default function CommentFormPreview({ images, setImages }: Props) {
             </button>
           ) : (
             <button
+              type="button"
               className={cx(
                 styles.previewCarousel,
                 styles.previewCarouselRight

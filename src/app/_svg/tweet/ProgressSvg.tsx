@@ -36,7 +36,7 @@ export default function ProgressSvg({
   const p = isMax ? 0 : d - temp;
 
   const stroke =
-    progress >= 1 ? '#F4212F' : progress >= 0.9 ? '#fFD400' : progressColor;
+    progress >= 1 ? '#F4212F' : progress >= 0.9 ? '#FFD400' : progressColor;
 
   const count = maxValue - value;
   const isHidden = value - maxValue >= 100;

@@ -25,7 +25,7 @@ export default function ActionButtons({
 }: Props) {
   const { data: session } = useSession();
 
-  const commented = post.Hearts.some((u) => u.id === session?.user?.email);
+  const commented = post.Comments.some((u) => u.id === session?.user?.email);
   const reposted = post.Reposts.some((u) => u.id === session?.user?.email);
   const hearted = post.Hearts.some((u) => u.id === session?.user?.email);
   const bookmarked = false;

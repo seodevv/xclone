@@ -226,6 +226,10 @@
   object-fit: cover;
 }
 
+.previewImage.isSingle > img {
+  height: auto;
+  aspect-ratio: unset;
+}
 .previewImageRefer {
   margin: 0 8px;
   display: flex;

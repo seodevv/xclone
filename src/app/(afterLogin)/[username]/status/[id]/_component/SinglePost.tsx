@@ -18,7 +18,13 @@ export default function SinglePost({ session, id }: Props) {
   return (
     <div className={style.main}>
       <Post post={post.data} isSingle={true} />
-      {session && <CommentForm id={post.data.User.id} />}
+      {session && (
+        <CommentForm
+          id={post.data.User.id}
+          postId={post.data.postId}
+          session={session}
+        />
+      )}
       <Comments id={id} />
     </div>
   );

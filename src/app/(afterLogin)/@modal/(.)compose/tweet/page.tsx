@@ -1,4 +1,4 @@
-import ComposeTweet from '@/app/(afterLogin)/_component/ComposeTweet';
+import ComposeTweet from '@/app/(afterLogin)/_component/tweet/ComposeTweet';
 
 export default function Page() {
   return (

@@ -5,20 +5,15 @@ interface Params {
 }
 
 export const getUser = async ({
-  queryKey,
+  queryKey: [, username],
 }: Params): Promise<{ data: AdvancedUser; message: string }> => {
-  const [, username] = queryKey;
   const isServer = typeof window === 'undefined';
-  const nextHeaders = isServer ? await import('next/headers') : undefined;
   const requestUrl = `${
     isServer ? process.env.SERVER_URL : process.env.NEXT_PUBLIC_SERVER_URL
   }/api/users/${username}`;
   const requestOptions: RequestInit = {
     method: 'GET',
     credentials: 'include',
-    headers: nextHeaders
-      ? { Cookie: nextHeaders.cookies().toString() }
-      : undefined,
     next: {
       tags: ['users', username],
     },

@@ -1,4 +1,4 @@
-import { useQuery, useSuspenseQuery } from '@tanstack/react-query';
+import { useSuspenseQuery } from '@tanstack/react-query';
 import { getSinglePost } from '../_lib/getSinglePost';
 
 export const useSinglePostQuery = (id: string) =>

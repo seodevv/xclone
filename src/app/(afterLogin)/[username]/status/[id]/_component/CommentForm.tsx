@@ -23,29 +23,67 @@ import GifPicker from '@/app/(afterLogin)/_component/gif/GifPicker';
 import EmojiSelector from '@/app/(afterLogin)/_component/emoji/EmojiSelector';
 import LocationSvg from '@/app/_svg/tweet/LocationSvg';
 import ProgressSvg from '@/app/_svg/tweet/ProgressSvg';
+import usePostMutation from '@/app/(afterLogin)/_hooks/usePostMutation';
+import { useQueryClient } from '@tanstack/react-query';
+import { Session } from 'next-auth';
 
 interface Props {
   id: string;
+  postId: number;
+  session: Session;
 }
 
 export type MediaType =
   | { type: 'image'; link: string; file: File; width: number; height: number }
   | { type: 'gif'; link: string; width: number; height: number };
 
-export default function CommentForm({ id }: Props) {
+export default function CommentForm({ id, postId, session }: Props) {
   const { alterMessage } = useAlterModal();
   const [active, setActive] = useState(false);
   const [content, setContent] = useState('');
   const [images, setImages] = useState<MediaType[]>([]);
   const contentRef = useRef<HTMLTextAreaElement>(null);
   const fileRef = useRef<FileRef>(null);
+  const maxContent = process.env.NEXT_PUBLIC_CONTENT_MAX_LENGTH
+    ? parseInt(process.env.NEXT_PUBLIC_CONTENT_MAX_LENGTH)
+    : 280;
 
   const preventDefaultEvent = (e: FormEvent | ChangeEvent | MouseEvent) => {
     e.preventDefault();
     e.stopPropagation();
   };
-  const onSubmitForm: FormEventHandler<HTMLFormElement> = (e) => {
+
+  const postMutation = usePostMutation();
+  const queryClient = useQueryClient();
+  const onSubmitForm: FormEventHandler<HTMLFormElement> = async (e) => {
     preventDefaultEvent(e);
+
+    if (content.length > maxContent) {
+      alterMessage(
+        `Content can be up to ${maxContent} characters long.`,
+        'warning'
+      );
+      return;
+    }
+
+    postMutation.mutate(
+      {
+        queryClient,
+        session,
+        content,
+        media: images,
+        parentId: postId,
+      },
+      {
+        onSuccess: () => {
+          setContent('');
+          setImages([]);
+        },
+        onError: () => {
+          alterMessage('Upload failed. please try again.', 'error');
+        },
+      }
+    );
   };
   const onChangeContent: ChangeEventHandler<HTMLTextAreaElement> = (e) => {
     setActive(true);
@@ -109,7 +147,7 @@ export default function CommentForm({ id }: Props) {
         <div className={style.replyInfoSection}>
           <div></div>
           <div className={style.replyInfo}>
-            <button className={style.replyInfoButton}>
+            <button type="button" className={style.replyInfoButton}>
               Replying to <span>@{id}</span>
             </button>
           </div>
@@ -158,7 +196,6 @@ export default function CommentForm({ id }: Props) {
                 />
                 <GifPicker
                   className={style.funcButton}
-                  state={images}
                   setState={setImages}
                   disabled={images.length === 4}
                 />
@@ -168,8 +205,8 @@ export default function CommentForm({ id }: Props) {
                   onFocus={onFocusContent}
                 />
                 <button
-                  className={style.funcButton}
                   type="button"
+                  className={style.funcButton}
                   onClick={onClickLocation}
                   disabled
                 >
@@ -177,15 +214,9 @@ export default function CommentForm({ id }: Props) {
                 </button>
               </div>
               <div className={style.replyButtonSection}>
-                <ProgressSvg
-                  value={content.length}
-                  maxValue={
-                    process.env.NEXT_PUBLIC_CONTENT_MAX_LENGTH
-                      ? parseInt(process.env.NEXT_PUBLIC_CONTENT_MAX_LENGTH)
-                      : 280
-                  }
-                />
+                <ProgressSvg value={content.length} maxValue={maxContent} />
                 <button
+                  type="submit"
                   className={style.actionButton}
                   disabled={!content && images.length === 0}
                 >

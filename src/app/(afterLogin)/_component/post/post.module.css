@@ -113,6 +113,24 @@
   text-decoration: underline;
 }
 
+.postReplyInfo {
+  margin-bottom: 2px;
+  font-size: 15px;
+}
+
+.postReplyInfo span {
+  margin-right: 4px;
+  color: rgb(var(--link-rgb));
+}
+
+.postReplyInfo a {
+  color: rgb(var(--primary-rgb));
+}
+
+.postReplyInfo a:hover {
+  text-decoration: underline;
+}
+
 .postBody {
   display: flex;
   flex-direction: column;
@@ -128,8 +146,13 @@
 }
 
 .postMeta {
+  margin-bottom: 2px;
   display: flex;
   flex-direction: row;
+}
+
+.postContent {
+  word-break: break-all;
 }
 
 .isSinglePost .postContent {

@@ -9,10 +9,12 @@ import {
   Dispatch,
   MouseEventHandler,
   SetStateAction,
+  useEffect,
   useRef,
   useState,
 } from 'react';
 import cx from 'classnames';
+import useViewport from '../../_hooks/useViewport';
 
 interface Props {
   setState: Dispatch<SetStateAction<string>>;
@@ -29,12 +31,14 @@ const EmojiSelector = ({
   emojiButtonSize = 38,
   emojiSize = 20,
 }: Props) => {
+  const { height } = useViewport();
   const [active, setActive] = useState<{
     flag: boolean;
     position: 'top' | 'bottom';
     x: number;
     y: number;
   }>({ flag: false, position: 'bottom', x: 0, y: 0 });
+  const [fadeOut, setFadeOut] = useState(false);
   const btnRef = useRef<HTMLButtonElement>(null);
   const outsideRef = useRef<HTMLDivElement>(null);
 
@@ -53,11 +57,9 @@ const EmojiSelector = ({
 
     const contentWidth = 370;
     const contentHeight = 435;
-
-    const { offsetWidth, offsetHeight } = document.body;
     const { x, y } = btnRef.current.getBoundingClientRect();
 
-    const isTop = offsetHeight - y <= contentHeight;
+    const isTop = height - y <= contentHeight && y >= contentHeight;
     if (isTop) {
       return setActive((prev) => ({
         flag: !prev.flag,
@@ -77,19 +79,48 @@ const EmojiSelector = ({
 
   const onClickOutSide = (e: Event) => {
     if (e.target === outsideRef.current) {
-      setActive((prev) => ({ ...prev, flag: false }));
+      selectorClose();
       if (typeof onFocus === 'function') {
         onFocus();
       }
     }
   };
 
+  const selectorClose = () => {
+    setFadeOut(true);
+    setTimeout(() => {
+      setActive((prev) => ({ ...prev, flag: false }));
+      setFadeOut(false);
+    }, 300);
+  };
+
+  useEffect(() => {
+    const scrollListener = () => {
+      selectorClose();
+    };
+    const keydownListener = (e: KeyboardEvent) => {
+      if (e.key === 'Escape') {
+        selectorClose();
+      }
+    };
+    if (active) {
+      window.addEventListener('scroll', scrollListener);
+      window.addEventListener('keydown', keydownListener);
+    }
+    return () => {
+      if (active) {
+        window.removeEventListener('scroll', scrollListener);
+        window.removeEventListener('keydown', keydownListener);
+      }
+    };
+  }, [active]);
+
   return (
     <div className={styles.emojiPicker}>
       <button
+        type="button"
         ref={btnRef}
         className={className}
-        type="button"
         onClick={onClickActive}
       >
         <EmojiSvg />
@@ -97,7 +128,11 @@ const EmojiSelector = ({
       {active.flag && (
         <div ref={outsideRef} className={styles.emojiOutside}>
           <div
-            className={cx(styles.emojiContainer, styles[active.position])}
+            className={cx(
+              styles.emojiContainer,
+              styles[active.position],
+              fadeOut && styles.fadeOut
+            )}
             style={{ top: active.y, left: active.x }}
           >
             <Picker

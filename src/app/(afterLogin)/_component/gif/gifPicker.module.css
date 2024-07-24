@@ -26,6 +26,15 @@
   animation-iteration-count: 1;
 }
 
+.fadeOut {
+  visibility: hidden;
+  opacity: 0;
+  animation-name: fade-out;
+  animation-duration: 0.3s;
+  animation-timing-function: ease-out;
+  animation-iteration-count: 1;
+}
+
 @keyframes fade-in {
   from {
     visibility: hidden;
@@ -37,5 +46,17 @@
     visibility: visible;
     opacity: 1;
     transform: translateY(0);
+  }
+}
+
+@keyframes fade-out {
+  from {
+    visibility: visible;
+    opacity: 1;
+  }
+  to {
+    visibility: hidden;
+    opacity: 0;
+    filter: blur(15px);
   }
 }

@@ -37,8 +37,12 @@ export default function PostImages({
           <Image
             src={generateImagePath(image.link)}
             alt={image.imageId.toString()}
-            width={272}
-            height={272}
+            width={image.width > 600 ? 600 : image.width}
+            height={
+              image.width > 600
+                ? (image.height * 600) / image.width
+                : image.height
+            }
           />
         </Link>
       ))}

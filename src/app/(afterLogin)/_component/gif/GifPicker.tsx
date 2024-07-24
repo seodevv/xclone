@@ -1,27 +1,29 @@
 'use client';
 
 import styles from './gifPicker.module.css';
-import { Dispatch, MouseEventHandler, SetStateAction, useState } from 'react';
+import {
+  Dispatch,
+  MouseEventHandler,
+  SetStateAction,
+  useEffect,
+  useState,
+} from 'react';
 import Gif, { TenorImage, Theme } from 'gif-picker-react';
+import cx from 'classnames';
 import { MediaType } from '../../[username]/status/[id]/_component/CommentForm';
 import useAlterModal from '../../_hooks/useAlterModal';
 import GifSvg from '@/app/_svg/tweet/GifSvg';
 
 interface Props {
   className?: string;
-  state?: MediaType[];
   setState?: Dispatch<SetStateAction<MediaType[]>>;
   disabled?: boolean;
 }
 
-export default function GifPicker({
-  className,
-  state,
-  setState,
-  disabled,
-}: Props) {
+export default function GifPicker({ className, setState, disabled }: Props) {
   const { alterMessage } = useAlterModal();
   const [active, setActive] = useState(false);
+  const [fadeOut, setFadeOut] = useState(false);
 
   const onClickActive: MouseEventHandler<HTMLButtonElement> = (e) => {
     e.preventDefault();
@@ -53,13 +55,48 @@ export default function GifPicker({
     setActive(false);
   };
 
+  const selectorClose = () => {
+    setFadeOut(true);
+    setTimeout(() => {
+      setActive(false);
+      setFadeOut(false);
+    }, 300);
+  };
+
+  useEffect(() => {
+    const scrollListener = () => {
+      selectorClose();
+    };
+    const keydownListener = (e: KeyboardEvent) => {
+      if (e.key === 'Escape') selectorClose();
+    };
+    if (active) {
+      window.addEventListener('scroll', scrollListener);
+      window.addEventListener('keydown', keydownListener);
+    }
+    return () => {
+      if (active) {
+        window.removeEventListener('keydown', keydownListener);
+        window.removeEventListener('scroll', scrollListener);
+      }
+    };
+  }, [active]);
+
   return (
     <div className={styles.gifPicker}>
-      <button className={className} onClick={onClickActive} disabled={disabled}>
+      <button
+        type="button"
+        className={className}
+        onClick={onClickActive}
+        disabled={disabled}
+      >
         <GifSvg />
       </button>
       {active && (
-        <div className={styles.gifOutside} onClick={onClickClose}>
+        <div
+          className={cx(styles.gifOutside, fadeOut && styles.fadeOut)}
+          onClick={onClickClose}
+        >
           <div className={styles.gifContainer}>
             <Gif
               tenorApiKey={`${process.env.NEXT_PUBLIC_TENOR_API}`}
