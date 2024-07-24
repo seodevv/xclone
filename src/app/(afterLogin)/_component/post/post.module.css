@@ -165,6 +165,14 @@
   line-height: 24px;
 }
 
+.contentMore {
+  color: rgb(var(--primary-rgb));
+}
+
+.contentMore:hover {
+  text-decoration: underline;
+}
+
 .postDateView {
   margin: 16px 0;
   font-size: 15px;

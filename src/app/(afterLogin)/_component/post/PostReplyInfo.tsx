@@ -13,7 +13,9 @@ export default function PostReplyInfo({ className, style, id }: Props) {
   return (
     <div className={cx(styles.postReplyInfo, className)} style={style}>
       <span>Replying to</span>
-      <Link href={`/${id}`}>@{id}</Link>
+      <Link href={`/${id}`} onClick={(e) => e.stopPropagation()}>
+        @{id}
+      </Link>
     </div>
   );
 }

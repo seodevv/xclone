@@ -17,7 +17,13 @@ export default function PostRecommends() {
     });
 
     if (posts) {
-      return posts.data.map((post) => <Post key={post.postId} post={post} />);
+      return posts.data.map((post) => (
+        <Post
+          key={post.postId}
+          post={post.Original ? post.Original : post}
+          isRepost={!!post.Original}
+        />
+      ));
     }
   }
 
@@ -28,7 +34,13 @@ export default function PostRecommends() {
     });
 
     if (posts) {
-      return posts.data.map((post) => <Post key={post.postId} post={post} />);
+      return posts.data.map((post) => (
+        <Post
+          key={post.postId}
+          post={post.Original ? post.Original : post}
+          isRepost={!!post.Original}
+        />
+      ));
     }
   }
 

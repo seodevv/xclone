@@ -1,0 +1,32 @@
+.postRepostInfoSection {
+  padding-top: 6px;
+}
+
+.postRepostInfo {
+  margin-top: -8px;
+  margin-bottom: 6px;
+  display: flex;
+  flex-flow: row nowrap;
+}
+
+.repostIcon {
+  margin-right: 8px;
+  display: flex;
+  justify-content: flex-end;
+  align-items: flex-end;
+  flex-basis: 40px;
+}
+
+.repostInfo {
+  font-size: 13px;
+  font-weight: bold;
+  color: rgb(var(--link-rgb));
+}
+
+.repostInfo:hover {
+  text-decoration: underline;
+}
+
+.repostInfo > span:first-child {
+  margin-right: 2px;
+}

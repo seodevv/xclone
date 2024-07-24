@@ -33,6 +33,7 @@ export default function PostImages({
         <Link
           key={index}
           href={`/${userId}/status/${postId}/photo/${image.imageId}`}
+          onClick={(e) => e.stopPropagation()}
         >
           <Image
             src={generateImagePath(image.link)}

@@ -16,23 +16,27 @@ import OptionSvg from '@/app/_svg/post/OptionSvg';
 import ViewSvg from '@/app/_svg/actionbuttons/ViewSvg';
 import OtherProfile from '../profile/OtherProfile';
 import PostReplyInfo from './PostReplyInfo';
+import PostRepostInfo from './PostRepostInfo';
 
 interface Props {
   post: AdvancedPost;
   isSingle?: boolean;
   noImage?: boolean;
   isComment?: boolean;
+  isRepost?: boolean;
 }
 export default function Post({
   post,
   isSingle = false,
   noImage = false,
   isComment = false,
+  isRepost = false,
 }: Props) {
   const { data: session } = useSession();
 
   return (
     <PostArticle post={post} className={style.post} isSingle={isSingle}>
+      {isRepost && <PostRepostInfo session={session} userId={post.User.id} />}
       <div className={cx(style.postWrapper, isSingle && style.isSinglePost)}>
         <div className={style.postUserSection}>
           <OtherProfile user={post.User} isSingle />
@@ -42,6 +46,7 @@ export default function Post({
                 <Link
                   href={`/${post.User.id}`}
                   className={style.singlePostMeta}
+                  onClick={(e) => e.stopPropagation()}
                 >
                   <span className={style.postUserName}>
                     {post.User.nickname}
@@ -60,7 +65,10 @@ export default function Post({
         <div className={style.postBody}>
           {!isSingle && (
             <div className={style.postMeta}>
-              <Link href={`/${post.User.id}`}>
+              <Link
+                href={`/${post.User.id}`}
+                onClick={(e) => e.stopPropagation()}
+              >
                 <span className={style.postUserName}>{post.User.nickname}</span>
                 <span className={style.postUserId}>@{post.User.id}</span>
                 <span className={style.postUserDot}>·</span>
@@ -71,7 +79,13 @@ export default function Post({
           {post.Parent && !isComment && (
             <PostReplyInfo id={post.Parent.User.id} />
           )}
-          <PostContent className={style.postContent} content={post.content} />
+          <PostContent
+            className={style.postContent}
+            postId={post.postId}
+            userId={post.User.id}
+            content={post.content}
+            isSingle={isSingle}
+          />
           {!noImage && (
             <div>
               <PostImages
@@ -103,7 +117,7 @@ export default function Post({
               )}
             </>
           )}
-          <ActionButtons post={post} isSingle={isSingle} />
+          <ActionButtons post={post} isSingle={isSingle} width={22.5} />
         </div>
       </div>
     </PostArticle>

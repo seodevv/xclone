@@ -6,6 +6,7 @@ interface Props {
   className?: HTMLAttributes<HTMLOrSVGElement>['className'];
   style?: CSSProperties;
   width?: number;
+  white?: boolean;
   active?: boolean;
 }
 
@@ -13,11 +14,12 @@ export default function HeartSvg({
   className,
   style,
   width = 22.5,
+  white,
   active = false,
 }: Props) {
   return (
     <svg
-      className={cx(styles.defaultSvg, className)}
+      className={cx(styles.defaultSvg, white && styles.white, className)}
       style={style}
       width={width}
       viewBox="0 0 24 24"

@@ -29,6 +29,9 @@ export default function OtherProfile({
         isSingle && styles.isSingle,
         className
       )}
+      onClick={(e) => {
+        e.stopPropagation();
+      }}
       style={{ ...style, width, height: width }}
     >
       <Image

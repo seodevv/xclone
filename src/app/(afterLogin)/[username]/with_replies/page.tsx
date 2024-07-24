@@ -1,5 +1,3 @@
-import { getServerSession } from 'next-auth';
-import { authOptions } from '@/app/api/auth/[...nextauth]/route';
 import UserPosts from '../_component/UserPosts';
 import {
   dehydrate,
@@ -13,7 +11,6 @@ interface Props {
 }
 
 export default async function WithRepliesPage({ params }: Props) {
-  const session = await getServerSession(authOptions);
   const queryClient = new QueryClient();
   await queryClient.prefetchQuery({
     queryKey: ['posts', 'list', params.username, { filter: 'reply' }],
@@ -25,7 +22,7 @@ export default async function WithRepliesPage({ params }: Props) {
 
   return (
     <HydrationBoundary state={dehydrateState}>
-      <UserPosts session={session} username={params.username} filter="reply" />
+      <UserPosts username={params.username} filter="reply" />
     </HydrationBoundary>
   );
 }

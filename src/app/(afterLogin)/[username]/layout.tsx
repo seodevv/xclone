@@ -11,6 +11,7 @@ import {
   QueryClient,
 } from '@tanstack/react-query';
 import { getUser } from './_lib/getUser';
+import { getUserPostsCount } from './_lib/getUserPostsCount';
 
 interface Props {
   children: ReactNode;
@@ -20,12 +21,18 @@ interface Props {
 export default async function layout({ children, params }: Props) {
   const session = await getServerSession(authOptions);
   const queryClient = new QueryClient();
-  await queryClient.prefetchQuery({
-    queryKey: ['users', params.username],
-    queryFn: getUser,
-    staleTime: 5 * 60 * 1000,
-    gcTime: 10 * 60 * 1000,
-  });
+  await Promise.all([
+    queryClient.prefetchQuery({
+      queryKey: ['users', params.username],
+      queryFn: getUser,
+      staleTime: 5 * 60 * 1000,
+      gcTime: 10 * 60 * 1000,
+    }),
+    queryClient.prefetchQuery({
+      queryKey: ['posts', 'count', params.username, { filter: 'all' }],
+      queryFn: getUserPostsCount,
+    }),
+  ]);
   const dehydrateState = dehydrate(queryClient);
 
   return (

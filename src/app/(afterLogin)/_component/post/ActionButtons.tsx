@@ -16,12 +16,14 @@ type Props = {
   post: AdvancedPost;
   isSingle?: boolean;
   white?: boolean;
+  width?: number;
 };
 
 export default function ActionButtons({
   post,
   isSingle,
   white = false,
+  width = 18.75,
 }: Props) {
   const { data: session } = useSession();
 
@@ -29,7 +31,6 @@ export default function ActionButtons({
   const reposted = post.Reposts.some((u) => u.id === session?.user?.email);
   const hearted = post.Hearts.some((u) => u.id === session?.user?.email);
   const bookmarked = false;
-  const width = isSingle ? 22.5 : 18.75;
 
   const onClickComment: MouseEventHandler<HTMLButtonElement> = (e) => {};
   const onClickRepost: MouseEventHandler<HTMLButtonElement> = (e) => {};
@@ -44,7 +45,7 @@ export default function ActionButtons({
           className={cx(style.primaryButton, commented && style.primary)}
           onClick={onClickComment}
         >
-          <CommentSvg width={width} />
+          <CommentSvg width={width} white={white} />
         </button>
         <div className={cx(style.reactionCount, white && style.white)}>
           {post._count.Comments || ''}
@@ -55,7 +56,7 @@ export default function ActionButtons({
           className={cx(style.secondaryButton, reposted && style.reposted)}
           onClick={onClickRepost}
         >
-          <RepostSvg width={width} />
+          <RepostSvg width={width} white={white} />
         </button>
         <div className={style.reactionCount}>{post._count.Reposts || ''}</div>
       </div>
@@ -64,7 +65,7 @@ export default function ActionButtons({
           className={cx(style.tertiaryButton, hearted && style.hearted)}
           onClick={onClickHeart}
         >
-          <HeartSvg active={hearted} width={width} />
+          <HeartSvg active={hearted} width={width} white={white} />
         </button>
         <div className={style.reactionCount}>{post._count.Hearts || ''}</div>
       </div>
@@ -74,7 +75,7 @@ export default function ActionButtons({
             className={cx(style.primaryButton, bookmarked && style.primary)}
             onClick={onClickBookmark}
           >
-            <BookmarkSvg active={bookmarked} width={width} />
+            <BookmarkSvg active={bookmarked} width={width} white={white} />
           </button>
           <div className={style.reactionCount}>{post._count.Hearts || ''}</div>
         </div>
@@ -82,7 +83,7 @@ export default function ActionButtons({
       {!isSingle && (
         <div className={style.actionButton}>
           <button className={style.primaryButton}>
-            <ViewSvg width={width} />
+            <ViewSvg width={width} white={white} />
           </button>
           <div className={style.reactionCount}>{1}</div>
         </div>
@@ -93,11 +94,11 @@ export default function ActionButtons({
             className={cx(style.primaryButton, bookmarked && style.primary)}
             onClick={onClickBookmark}
           >
-            <BookmarkSvg active={bookmarked} width={width} />
+            <BookmarkSvg active={bookmarked} width={width} white={white} />
           </button>
         )}
         <button className={style.primaryButton} onClick={onClickShare}>
-          <ShareSvg width={width} />
+          <ShareSvg width={width} white={white} />
         </button>
       </div>
     </div>

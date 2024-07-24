@@ -13,7 +13,6 @@ interface Props {
 }
 
 export default async function ProfilePage({ params }: Props) {
-  const session = await getServerSession(authOptions);
   const queryClient = new QueryClient();
   queryClient.setDefaultOptions({
     queries: {
@@ -29,7 +28,7 @@ export default async function ProfilePage({ params }: Props) {
 
   return (
     <HydrationBoundary state={dehydrateState}>
-      <UserPosts session={session} username={params.username} />
+      <UserPosts username={params.username} />
     </HydrationBoundary>
   );
 }
