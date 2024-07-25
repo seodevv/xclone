@@ -15,13 +15,15 @@ import ShareSvg from '@/app/_svg/actionbuttons/ShareSvg';
 type Props = {
   post: AdvancedPost;
   isSingle?: boolean;
+  isPhoto?: boolean;
   white?: boolean;
   width?: number;
 };
 
 export default function ActionButtons({
   post,
-  isSingle,
+  isSingle = false,
+  isPhoto = false,
   white = false,
   width = 18.75,
 }: Props) {
@@ -58,7 +60,9 @@ export default function ActionButtons({
         >
           <RepostSvg width={width} white={white} />
         </button>
-        <div className={style.reactionCount}>{post._count.Reposts || ''}</div>
+        <div className={cx(style.reactionCount, white && style.white)}>
+          {post._count.Reposts || ''}
+        </div>
       </div>
       <div className={style.actionButton}>
         <button
@@ -85,11 +89,13 @@ export default function ActionButtons({
           <button className={style.primaryButton}>
             <ViewSvg width={width} white={white} />
           </button>
-          <div className={style.reactionCount}>{1}</div>
+          <div className={cx(style.reactionCount, white && style.white)}>
+            {1}
+          </div>
         </div>
       )}
       <div className={style.doubleButton}>
-        {!isSingle && (
+        {!isSingle && !isPhoto && (
           <button
             className={cx(style.primaryButton, bookmarked && style.primary)}
             onClick={onClickBookmark}

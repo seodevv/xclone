@@ -15,14 +15,13 @@ export default function Tab() {
 
   return (
     <div className={style.homeFixed}>
-      <div className={style.homeText}>홈</div>
       <div className={style.homeTab}>
         <div onClick={onClickRec}>
-          추천
+          For you
           <div className={style.tabIndicator} hidden={tab === 'fol'}></div>
         </div>
         <div onClick={onClickFol}>
-          팔로우 중
+          Following
           <div className={style.tabIndicator} hidden={tab === 'rec'}></div>
         </div>
       </div>

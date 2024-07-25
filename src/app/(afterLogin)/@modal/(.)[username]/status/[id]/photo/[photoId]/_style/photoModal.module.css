@@ -6,17 +6,40 @@
   z-index: 10;
   width: 100dvw;
   height: 100dvh;
-  background: rgba(var(--background-start-rgb), 0.75);
+  background: rgba(var(--background-start-rgb), 0.9);
+}
+
+.PhotoModal.isLoading {
+  align-items: center;
+  justify-content: center;
 }
 
 .photoSection {
+  position: relative;
   display: flex;
   flex-flow: column nowrap;
   flex-grow: 1;
+  overflow: hidden;
 }
 
 .imageSection {
-  flex-grow: 1;
+  position: relative;
+  display: flex;
+  height: calc(100dvh - 46px);
+}
+
+.imageCarousel {
+  display: flex;
+  width: 100%;
+  height: 100%;
+}
+
+.imageCarousel img {
+  width: 100%;
+  height: 100%;
+  flex-shrink: 0;
+  object-fit: contain;
+  transition: 0.2s transform ease-in;
 }
 
 .reactionSection {
@@ -27,13 +50,57 @@
 
 .reaction {
   margin: auto;
+  padding: 0 16px;
   width: 100%;
   max-width: 600px;
   height: 48px;
 }
 
+.photoClose {
+  position: absolute;
+  top: 12px;
+  left: 12px;
+}
+
+.photoClose > button {
+  background: rgba(0, 0, 0, 0.9);
+  transition: 0.2s all ease-in;
+}
+
+.photoClose > button:hover {
+  background: rgba(0, 0, 0, 0.5);
+  opacity: 0.75;
+}
+
+.photoPrev {
+  position: absolute;
+  top: 50%;
+  left: 12px;
+  transform: translateY(-50%);
+}
+
+.photoNext {
+  position: absolute;
+  top: 50%;
+  right: 12px;
+  transform: translateY(-50%);
+}
+
 .postSection {
-  width: 360px;
+  position: relative;
+  min-width: 360px;
   border-left: 1px solid rgb(var(--border-start-rgb));
   background: rgb(var(--background-start-rgb));
+}
+
+.postFold {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+}
+
+@media screen and (max-width: 700px) {
+  .postSection {
+    display: none;
+  }
 }

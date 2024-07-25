@@ -1,3 +1,24 @@
+.btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 34px;
+  height: 34px;
+  border: none;
+  border-radius: 50%;
+  background: rgba(0, 0, 0, 0.5);
+  cursor: pointer;
+  transition: 0.2s opacity ease-in;
+}
+
+.btn:hover:enabled {
+  opacity: 0.5;
+}
+
+.btn:active:enabled {
+  opacity: 0.75;
+}
+
 .refreshBtn {
   padding: 0 16px;
   display: flex;
@@ -32,7 +53,8 @@
   opacity: 0.75;
 }
 
-.backBtn {
+.backBtn,
+.closeBtn {
   margin-right: 25px;
   display: flex;
   justify-content: center;
@@ -41,13 +63,18 @@
   height: 34px;
   background: transparent;
   border: none;
-  border-radius: 17px;
+  border-radius: 50%;
   fill: rgb(var(--foreground-rgb));
   cursor: pointer;
   transition: 0.2s background-color ease-in;
 }
-.backBtn:hover {
+.backBtn:hover,
+.closeBtn:hover {
   background: rgba(var(--foreground-rgb), 0.2);
+}
+
+.closeBtn {
+  margin-right: unset;
 }
 
 .followBtn {

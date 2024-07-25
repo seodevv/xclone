@@ -7,6 +7,7 @@ import {
 import { getSinglePost } from '@/app/(afterLogin)/[username]/status/[id]/_lib/getSinglePost';
 import PhotoSection from './_component/PhotoSection';
 import PostSection from './_component/PostSection';
+import FoldProvider from './_provider/FoldProvider';
 
 interface Props {
   params: { username: string; id: string; photoId: string };
@@ -24,10 +25,12 @@ export default async function PhotoPage({ params }: Props) {
 
   return (
     <HydrationBoundary state={dehydrateState}>
-      <main className={style.PhotoModal}>
-        <PhotoSection id={params.id} />
-        <PostSection />
-      </main>
+      <FoldProvider>
+        <main className={style.PhotoModal}>
+          <PhotoSection id={params.id} photoId={params.photoId} />
+          <PostSection id={params.id} />
+        </main>
+      </FoldProvider>
     </HydrationBoundary>
   );
 }
