@@ -105,21 +105,7 @@ body {
 body {
   background: rgba(var(--background-start-rgb));
   color: rgb(var(--foreground-rgb));
-}
-
-body::-webkit-scrollbar {
-  width: 19px;
-}
-
-body::-webkit-scrollbar-track {
-  background: #424242;
-}
-
-body::-webkit-scrollbar-thumb {
-  margin: 5px;
-  background: #686868;
-  border-radius: 10px;
-  border: 3px solid #424242;
+  scrollbar-color: rgb(62, 65, 68) rgb(22, 24, 28);
 }
 
 a {

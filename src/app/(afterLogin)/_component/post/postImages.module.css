@@ -4,6 +4,7 @@
   display: grid;
   grid-template-columns: 1fr 1fr;
   grid-template-rows: 136px 136px;
+  gap: 1px;
   border: 1px solid rgb(var(--border-start-rgb));
   border-radius: 16px;
   overflow: hidden;

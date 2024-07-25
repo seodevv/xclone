@@ -12,6 +12,7 @@ import FollowRecommendsSection from './_component/follow_recommends/FollowRecomm
 import RightSearchZone from '@/app/(afterLogin)/_component/search/RightSearchZone';
 import Logout from './_component/logout/Logout';
 import TrendSection from './_component/trends/TrendSection';
+import ModalController from './_controller/ModalController';
 
 type Props = { children: ReactNode; modal: ReactNode };
 export default async function AfterLoginLayout({ children, modal }: Props) {
@@ -42,7 +43,7 @@ export default async function AfterLoginLayout({ children, modal }: Props) {
                   </section>
                 </div>
               </div>
-              {modal}
+              <ModalController>{modal}</ModalController>
             </div>
           </AlterModalProvider>
         </ViewportProvider>

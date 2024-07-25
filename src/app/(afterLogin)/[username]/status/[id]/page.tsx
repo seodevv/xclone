@@ -18,8 +18,7 @@ export default async function SinglePostPage({ params: { id } }: Props) {
   const queryClient = new QueryClient();
   queryClient.setDefaultOptions({
     queries: {
-      staleTime: 5 * 60 * 1000,
-      gcTime: 10 * 60 * 1000,
+      staleTime: 1 * 60 * 1000,
     },
   });
   await Promise.all([

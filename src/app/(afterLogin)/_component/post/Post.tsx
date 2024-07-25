@@ -12,11 +12,10 @@ import PostView from '@/app/(afterLogin)/_component/post/PostView';
 import PostContent from '@/app/(afterLogin)/_component/post/PostContent';
 import PostImages from '@/app/(afterLogin)/_component/post/PostImages';
 import ActionButtons from '@/app/(afterLogin)/_component/post/ActionButtons';
-import OptionSvg from '@/app/_svg/post/OptionSvg';
 import ViewSvg from '@/app/_svg/actionbuttons/ViewSvg';
-import OtherProfile from '../profile/OtherProfile';
 import PostReplyInfo from './PostReplyInfo';
 import PostRepostInfo from './PostRepostInfo';
+import PostHeader from './PostHeader';
 
 interface Props {
   post: AdvancedPost;
@@ -38,45 +37,23 @@ export default function Post({
     <PostArticle post={post} className={style.post} isSingle={isSingle}>
       {isRepost && <PostRepostInfo session={session} userId={post.User.id} />}
       <div className={cx(style.postWrapper, isSingle && style.isSinglePost)}>
-        <div className={style.postUserSection}>
-          <OtherProfile user={post.User} isSingle />
-          {isSingle && (
-            <>
-              <div className={style.postUserInfo}>
-                <Link
-                  href={`/${post.User.id}`}
-                  className={style.singlePostMeta}
-                  onClick={(e) => e.stopPropagation()}
-                >
-                  <span className={style.postUserName}>
-                    {post.User.nickname}
-                  </span>
-                  <span className={style.postUserId}>@{post.User.id}</span>
-                </Link>
-              </div>
-              <div className={style.postUserOption}>
-                <button>
-                  <OptionSvg />
-                </button>
-              </div>
-            </>
-          )}
-        </div>
+        <PostHeader post={post} isSingle={isSingle} />
         <div className={style.postBody}>
           {!isSingle && (
             <div className={style.postMeta}>
               <Link
+                className={style.postUserInfo}
                 href={`/${post.User.id}`}
                 onClick={(e) => e.stopPropagation()}
               >
-                <span className={style.postUserName}>{post.User.nickname}</span>
-                <span className={style.postUserId}>@{post.User.id}</span>
-                <span className={style.postUserDot}>·</span>
+                <span>{post.User.nickname}</span>
+                <span>@{post.User.id}</span>
+                <span>·</span>
               </Link>
               <PostDate className={style.postDate} date={post.createAt} />
             </div>
           )}
-          {post.Parent && !isComment && (
+          {post.Parent && !isComment && !isSingle && (
             <PostReplyInfo id={post.Parent.User.id} />
           )}
           <PostContent
@@ -87,14 +64,12 @@ export default function Post({
             isSingle={isSingle}
           />
           {!noImage && (
-            <div>
-              <PostImages
-                userId={post.User.id}
-                postId={post.postId}
-                images={post.images}
-                isSingle={isSingle}
-              />
-            </div>
+            <PostImages
+              userId={post.User.id}
+              postId={post.postId}
+              images={post.images}
+              isSingle={isSingle}
+            />
           )}
           {isSingle && (
             <>

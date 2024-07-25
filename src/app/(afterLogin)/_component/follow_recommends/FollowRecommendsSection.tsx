@@ -11,8 +11,7 @@ export default async function FollowRecommendsSection() {
   await queryClient.prefetchQuery({
     queryKey: ['users', 'list', 'recommends'],
     queryFn: getFollowRecommends,
-    staleTime: 5 * 1000 * 60,
-    gcTime: 10 * 1000 * 60,
+    staleTime: 1 * 60 * 1000,
   });
   const dehydrateState = dehydrate(queryClient);
 

@@ -25,8 +25,7 @@ export default async function layout({ children, params }: Props) {
     queryClient.prefetchQuery({
       queryKey: ['users', params.username],
       queryFn: getUser,
-      staleTime: 5 * 60 * 1000,
-      gcTime: 10 * 60 * 1000,
+      staleTime: 1 * 60 * 1000,
     }),
     queryClient.prefetchQuery({
       queryKey: ['posts', 'count', params.username, { filter: 'all' }],

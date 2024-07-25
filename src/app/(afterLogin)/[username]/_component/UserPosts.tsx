@@ -19,13 +19,15 @@ export default function UserPosts({ username, filter = 'all' }: Props) {
   return (
     <>
       <div className={style.userPosts}>
-        {posts?.data.map((p) => (
-          <Post
-            key={p.postId}
-            post={p.Original ? p.Original : p}
-            isRepost={!!p.Original}
-          />
-        ))}
+        {posts.pages.map((page) =>
+          page.data.map((p) => (
+            <Post
+              key={p.postId}
+              post={p.Original ? p.Original : p}
+              isRepost={!!p.Original}
+            />
+          ))
+        )}
       </div>
     </>
   );

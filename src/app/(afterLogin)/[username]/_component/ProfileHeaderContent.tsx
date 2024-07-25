@@ -17,7 +17,7 @@ export default function ProfileHeaderContent({ username }: Props) {
     filter: segment === 'media' ? 'media' : 'all',
   });
 
-  if (!segment) {
+  if (!segment || segment === 'with_replies') {
     return (
       <div className={style.headerInfo}>
         <h3 className={style.headerTitle}>{user?.data.nickname}</h3>

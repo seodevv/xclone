@@ -1,5 +1,3 @@
-import { getServerSession } from 'next-auth';
-import { authOptions } from '@/app/api/auth/[...nextauth]/route';
 import UserPosts from './_component/UserPosts';
 import {
   dehydrate,
@@ -14,15 +12,11 @@ interface Props {
 
 export default async function ProfilePage({ params }: Props) {
   const queryClient = new QueryClient();
-  queryClient.setDefaultOptions({
-    queries: {
-      staleTime: 5 * 60 * 1000,
-      gcTime: 10 * 60 * 1000,
-    },
-  });
-  await queryClient.prefetchQuery({
-    queryKey: ['posts', 'list', params.username, { filter: 'all' }],
+  await queryClient.prefetchInfiniteQuery({
+    queryKey: ['posts', 'list', params.username, { filter: 'all' as const }],
     queryFn: getUserPosts,
+    initialPageParam: 0,
+    staleTime: 1 * 60 * 1000,
   });
   const dehydrateState = dehydrate(queryClient);
 

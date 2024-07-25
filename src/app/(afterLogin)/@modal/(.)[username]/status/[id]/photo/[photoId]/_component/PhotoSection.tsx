@@ -1,7 +1,7 @@
 'use client';
 
 import styles from '../_style/photoModal.module.css';
-import { useContext, useEffect, useState } from 'react';
+import { useContext, useState } from 'react';
 import Image from 'next/image';
 import { useSinglePostQuery } from '@/app/(afterLogin)/[username]/status/[id]/_hooks/useSinglePostQuery';
 import { generateImagePath } from '@/app/_lib/common';
@@ -42,8 +42,6 @@ export default function PhotoSection({ id, photoId }: Props) {
   const onClickFold = () => {
     setFold((prev) => !prev);
   };
-
-  useEffect(() => {});
 
   return (
     <section className={styles.photoSection}>

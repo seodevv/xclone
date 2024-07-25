@@ -33,18 +33,16 @@ export default function MyProfile({ width = 45, height = 45 }: Props) {
   }
 
   return (
-    <>
-      <Image
-        src={generateImagePath(session.user.image)}
-        alt={session.user.email as string}
-        width={width}
-        height={width}
-        className={styles.profile}
-        style={{
-          width,
-          height,
-        }}
-      />
-    </>
+    <Image
+      src={generateImagePath(session.user.image)}
+      alt={session.user.email as string}
+      width={width}
+      height={width}
+      className={styles.profile}
+      style={{
+        width,
+        height,
+      }}
+    />
   );
 }

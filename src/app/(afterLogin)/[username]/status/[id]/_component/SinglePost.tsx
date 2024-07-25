@@ -24,9 +24,9 @@ export default function SinglePost({ session, id }: Props) {
       />
       {session && (
         <CommentForm
-          id={post.data.User.id}
-          postId={post.data.postId}
           session={session}
+          userId={post.data.User.id}
+          postId={post.data.postId}
         />
       )}
       <Comments id={id} />

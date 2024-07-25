@@ -1,21 +1,26 @@
 import { AdvancedPost } from '@/model/Post';
 
 interface Params {
-  queryKey: [
-    string,
-    string,
-    string,
-    { filter?: 'all' | 'reply' | 'media' | 'like' }
-  ];
+  queryKey: (string | { filter?: 'all' | 'reply' | 'media' | 'like' })[];
+  pageParam: number;
 }
 
 export const getUserPosts = async ({
-  queryKey: [, , username, { filter = 'all' }],
-}: Params): Promise<{ data: AdvancedPost[]; message: string }> => {
+  queryKey: [, , username, options],
+  pageParam,
+}: Params): Promise<{
+  data: AdvancedPost[];
+  nextCursor?: number;
+  message: string;
+}> => {
+  if (typeof username !== 'string' || typeof options !== 'object') {
+    throw new Error('Invalid query key');
+  }
+
   const isServer = typeof window === 'undefined';
   const requestUrl = `${
     isServer ? process.env.SERVER_URL : process.env.NEXT_PUBLIC_SERVER_URL
-  }/api/users/${username}/posts?filter=${filter}`;
+  }/api/users/${username}/posts?filter=${options.filter}&cursor=${pageParam}`;
   const requestOptions: RequestInit = {
     method: 'GET',
     credentials: 'include',

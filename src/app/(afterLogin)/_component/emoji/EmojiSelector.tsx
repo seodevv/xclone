@@ -31,7 +31,7 @@ const EmojiSelector = ({
   emojiButtonSize = 38,
   emojiSize = 20,
 }: Props) => {
-  const { height } = useViewport();
+  const { width, height } = useViewport();
   const [active, setActive] = useState<{
     flag: boolean;
     position: 'top' | 'bottom';
@@ -60,20 +60,15 @@ const EmojiSelector = ({
     const { x, y } = btnRef.current.getBoundingClientRect();
 
     const isTop = height - y <= contentHeight && y >= contentHeight;
-    if (isTop) {
-      return setActive((prev) => ({
-        flag: !prev.flag,
-        position: 'top',
-        x: x - 70,
-        y: y - contentHeight,
-      }));
-    }
+    const isLeft = width - x <= contentWidth && x >= contentWidth;
+    const _x = isLeft ? x - 15 - (contentWidth - (width - x)) : x - 70;
+    const _y = isTop ? y - contentHeight : y + 35;
 
     setActive((prev) => ({
       flag: !prev.flag,
-      position: 'bottom',
-      x: x - 70,
-      y: y + 35,
+      position: isTop ? 'top' : 'bottom',
+      x: _x,
+      y: _y,
     }));
   };
 

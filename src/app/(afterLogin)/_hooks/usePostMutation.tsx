@@ -13,7 +13,10 @@ import { Session } from 'next-auth';
 interface MutationParams {
   queryClient: QueryClient;
   session: Session;
-  parentId?: number;
+  parent?: {
+    postId: AdvancedPost['postId'];
+    userId: AdvancedPost['User']['id'];
+  };
   content: string;
   media: MediaType[];
 }
@@ -21,7 +24,7 @@ interface MutationParams {
 const usePostMutation = () =>
   useMutation({
     mutationFn: async ({
-      parentId,
+      parent,
       content,
       media,
     }: MutationParams): Promise<{ data: AdvancedPost; message: string }> => {
@@ -48,7 +51,7 @@ const usePostMutation = () =>
       });
 
       const requestUrl = `${process.env.NEXT_PUBLIC_SERVER_URL}/api/posts${
-        parentId ? `/${parentId}/comments` : ''
+        parent ? `/${parent.postId}/comments` : ''
       }`;
       const requestOptions: RequestInit = {
         method: 'POST',
@@ -62,21 +65,20 @@ const usePostMutation = () =>
       }
       return response.json();
     },
-    onSuccess: (response, { queryClient, session, parentId }) => {
-      if (parentId) {
-        const targetUser = response.data.User.id;
+    onSuccess: (response, { queryClient, session, parent }) => {
+      if (parent) {
         queryClient.invalidateQueries({
-          queryKey: ['posts', 'list', 'comments', parentId.toString()],
+          queryKey: ['posts', 'list', 'comments', parent.postId.toString()],
           refetchType: 'none',
         });
         queryClient.invalidateQueries({
-          queryKey: ['posts', 'list', targetUser],
+          queryKey: ['posts', 'list', parent.userId],
         });
         queryClient.invalidateQueries({
-          queryKey: ['posts', parentId.toString()],
+          queryKey: ['posts', parent.postId.toString()],
         });
         queryClient.invalidateQueries({
-          queryKey: ['users', targetUser],
+          queryKey: ['users', parent.userId],
         });
       }
       queryClient.invalidateQueries({
@@ -96,6 +98,34 @@ const usePostMutation = () =>
       queryClient.invalidateQueries({
         queryKey: ['hashtags', 'list'],
       });
+
+      const queryKeys = queryClient
+        .getQueryCache()
+        .getAll()
+        .map((cache) => cache.queryKey)
+        .filter((q) => q[0] === 'posts' && q[1] === 'list');
+      queryKeys.forEach((queryKey) => {
+        const queryData =
+          queryClient.getQueryData<
+            InfiniteData<
+              { data: AdvancedPost[]; nextCursor?: number; message: string },
+              number
+            >
+          >(queryKey);
+        if (queryData) {
+          queryData.pages.forEach((page, i) => {
+            const optimisticPostIndex = page.data.findIndex(
+              (p) => p.postId === -1
+            );
+            if (optimisticPostIndex > -1) {
+              const shallow = { ...queryData };
+              shallow.pages = [...queryData.pages];
+              shallow.pages[i].data[optimisticPostIndex] = response.data;
+              queryClient.setQueryData(queryKey, shallow);
+            }
+          });
+        }
+      });
     },
     onError: (
       error,
@@ -107,15 +137,17 @@ const usePostMutation = () =>
               { data: AdvancedPost[]; message: string },
               number
             >;
-          }
+          }[]
         | undefined
     ) => {
       console.error(error);
       if (context) {
-        queryClient.setQueryData(context.queryKey, context.queryData);
+        context.forEach(({ queryKey, queryData }) => {
+          queryClient.setQueryData(queryKey, queryData);
+        });
       }
     },
-    onMutate: ({ queryClient, session, parentId, content, media }) => {
+    onMutate: ({ queryClient, session, parent, content, media }) => {
       const newPost: AdvancedPost = {
         postId: -1,
         userId: session.user?.email as string,
@@ -127,7 +159,7 @@ const usePostMutation = () =>
           height: m.height,
         })),
         createAt: new Date().toISOString(),
-        parentId,
+        parentId: parent?.postId,
         User: {
           id: session.user?.email as string,
           image: session.user?.image as string,
@@ -144,16 +176,32 @@ const usePostMutation = () =>
         },
       };
 
-      if (parentId) {
-        const queryKey: QueryKey = [
-          'posts',
-          'list',
-          'comments',
-          parentId?.toString(),
-        ];
+      const queryCache = queryClient.getQueryCache();
+      const queryKeys = queryCache
+        .getAll()
+        .map((q) => q.queryKey)
+        .filter(
+          (key) =>
+            (key[0] === 'posts' &&
+              key[1] === 'list' &&
+              key[2] === 'comments' &&
+              key[3] === parent?.postId?.toString()) ||
+            (key[0] === 'posts' && key[1] === 'list' && key[2] === 'recommends')
+        );
+      const context: {
+        queryKey: QueryKey;
+        queryData: InfiniteData<
+          { data: AdvancedPost[]; message: string },
+          number
+        >;
+      }[] = [];
+      queryKeys.forEach((queryKey) => {
         const queryData =
           queryClient.getQueryData<
-            InfiniteData<{ data: AdvancedPost[]; message: string }, number>
+            InfiniteData<
+              { data: AdvancedPost[]; nextCursor?: String; message: string },
+              number
+            >
           >(queryKey);
         if (queryData) {
           const shallow = { ...queryData };
@@ -163,9 +211,10 @@ const usePostMutation = () =>
           shallow.pages[0].data.unshift(newPost);
           queryClient.setQueryData(queryKey, shallow);
 
-          return { queryKey, queryData };
+          context.push({ queryKey, queryData });
         }
-      }
+      });
+      return context;
     },
   });
 

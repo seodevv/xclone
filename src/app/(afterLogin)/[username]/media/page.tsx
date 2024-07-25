@@ -12,11 +12,11 @@ interface Props {
 
 export default async function MediaPage({ params }: Props) {
   const queryClient = new QueryClient();
-  await queryClient.prefetchQuery({
-    queryKey: ['posts', 'list', params.username, { filter: 'media' }],
+  await queryClient.prefetchInfiniteQuery({
+    queryKey: ['posts', 'list', params.username, { filter: 'media' as const }],
     queryFn: getUserPosts,
-    staleTime: 5 * 60 * 1000,
-    gcTime: 10 * 60 * 1000,
+    initialPageParam: 0,
+    staleTime: 1 * 60 * 1000,
   });
   const dehydrateState = dehydrate(queryClient);
 

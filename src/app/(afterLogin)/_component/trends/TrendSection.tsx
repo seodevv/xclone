@@ -17,8 +17,7 @@ export default async function TrendSection() {
   await queryClient.prefetchQuery({
     queryKey: ['hashtags', 'list'],
     queryFn: getTrends,
-    staleTime: 5 * 60 * 1000,
-    gcTime: 10 * 60 * 1000,
+    staleTime: 1 * 60 * 1000,
   });
   const dehydrateState = dehydrate(queryClient);
 

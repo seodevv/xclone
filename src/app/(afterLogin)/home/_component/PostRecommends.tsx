@@ -1,47 +1,39 @@
 'use client';
 
-import { useQuery } from '@tanstack/react-query';
-import { getPostRecommends } from '../_lib/getPostRecommends';
 import { useContext } from 'react';
 import { TabContext } from './TabProvider';
-import { getPostFollowings } from '../_lib/getPostFollowings';
 import Post from '@/app/(afterLogin)/_component/post/Post';
+import usePostRecommendsQuery from '../_hook/usePostRecommendsQuery';
 
 export default function PostRecommends() {
   const { tab } = useContext(TabContext);
 
   if (tab === 'rec') {
-    const { data: posts } = useQuery({
-      queryKey: ['posts', 'list', 'recommends'],
-      queryFn: getPostRecommends,
-    });
+    const { data: posts } = usePostRecommendsQuery('recommends');
 
-    if (posts) {
-      return posts.data.map((post) => (
+    return posts.pages.map((page) =>
+      page.data.map((post) => (
         <Post
           key={post.postId}
           post={post.Original ? post.Original : post}
           isRepost={!!post.Original}
         />
-      ));
-    }
+      ))
+    );
   }
 
   if (tab === 'fol') {
-    const { data: posts } = useQuery({
-      queryKey: ['posts', 'list', 'followings'],
-      queryFn: getPostFollowings,
-    });
+    const { data: posts } = usePostRecommendsQuery('followings');
 
-    if (posts) {
-      return posts.data.map((post) => (
+    return posts.pages.map((page) =>
+      page.data.map((post) => (
         <Post
           key={post.postId}
           post={post.Original ? post.Original : post}
           isRepost={!!post.Original}
         />
-      ));
-    }
+      ))
+    );
   }
 
   return null;

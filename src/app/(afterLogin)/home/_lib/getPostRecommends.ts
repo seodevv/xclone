@@ -1,12 +1,27 @@
 import { AdvancedPost } from '@/model/Post';
 
-export const getPostRecommends = async (): Promise<{
+interface Params {
+  pageParam: number;
+}
+
+export const getPostRecommends = async ({
+  pageParam,
+}: Params): Promise<{
   data: AdvancedPost[];
+  nextCursor?: number;
   message: string;
 }> => {
+  const isServer = typeof window === 'undefined';
   const response = await fetch(
-    `${process.env.NEXT_PUBLIC_SERVER_URL}/api/posts/recommends`,
+    `${
+      isServer ? process.env.SERVER_URL : process.env.NEXT_PUBLIC_SERVER_URL
+    }/api/posts/recommends?cursor=${pageParam}`,
     {
+      method: 'GET',
+      credentials: 'include',
+      next: {
+        tags: ['posts', 'list', 'recommends'],
+      },
       cache: 'no-store',
     }
   );

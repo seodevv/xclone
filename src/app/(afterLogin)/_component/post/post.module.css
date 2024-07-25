@@ -35,17 +35,6 @@
   fill: rgb(83, 100, 113);
 }
 
-.postUserSection {
-  margin-right: 12px;
-  width: 40px;
-}
-
-.isSinglePost .postUserSection {
-  display: flex;
-  flex-flow: row nowrap;
-  width: unset;
-}
-
 .postUserImage {
   position: relative;
   display: inline-block;
@@ -69,21 +58,6 @@
   opacity: 0.75;
 }
 
-.postUserInfo {
-  flex-grow: 1;
-}
-
-.postUserOption {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.postUserOption > button {
-  background: transparent;
-  border: none;
-}
-
 .singlePostMeta {
   display: flex;
   flex-flow: column nowrap;
@@ -91,15 +65,6 @@
   flex-grow: 1;
 }
 
-.postUserName {
-  margin-right: 5px;
-  font-size: 15px;
-  font-weight: bold;
-}
-.postUserId {
-  margin-right: 5px;
-  color: rgb(var(--link-rgb));
-}
 .postUserDot {
   margin-right: 5px;
   color: rgb(var(--link-rgb));
@@ -141,14 +106,22 @@
   margin: 16px 0;
 }
 
-.postUserName:hover {
-  text-decoration: underline;
-}
-
 .postMeta {
   margin-bottom: 2px;
   display: flex;
   flex-direction: row;
+}
+
+.postUserInfo {
+  color: rgb(var(--link-rgb));
+}
+
+.postUserInfo > span {
+  margin-right: 5px;
+}
+
+.postUserInfo > span:first-child {
+  color: rgb(var(--foreground-rgb));
 }
 
 .postContent {

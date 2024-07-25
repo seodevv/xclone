@@ -28,18 +28,24 @@ import { useQueryClient } from '@tanstack/react-query';
 import { Session } from 'next-auth';
 
 interface Props {
-  id: string;
-  postId: number;
   session: Session;
+  userId?: string;
+  postId?: number;
+  isActive?: boolean;
 }
 
 export type MediaType =
   | { type: 'image'; link: string; file: File; width: number; height: number }
   | { type: 'gif'; link: string; width: number; height: number };
 
-export default function CommentForm({ id, postId, session }: Props) {
+export default function CommentForm({
+  userId,
+  postId,
+  session,
+  isActive = false,
+}: Props) {
   const { alterMessage } = useAlterModal();
-  const [active, setActive] = useState(false);
+  const [active, setActive] = useState(isActive);
   const [content, setContent] = useState('');
   const [images, setImages] = useState<MediaType[]>([]);
   const contentRef = useRef<HTMLTextAreaElement>(null);
@@ -72,7 +78,13 @@ export default function CommentForm({ id, postId, session }: Props) {
         session,
         content,
         media: images,
-        parentId: postId,
+        parent:
+          postId && userId
+            ? {
+                postId,
+                userId,
+              }
+            : undefined,
       },
       {
         onSuccess: () => {
@@ -143,12 +155,12 @@ export default function CommentForm({ id, postId, session }: Props) {
 
   return (
     <div style={active ? { marginTop: '-5px' } : {}}>
-      {active && (
+      {active && userId && (
         <div className={style.replyInfoSection}>
           <div></div>
           <div className={style.replyInfo}>
             <button type="button" className={style.replyInfoButton}>
-              Replying to <span>@{id}</span>
+              Replying to <span>@{userId}</span>
             </button>
           </div>
         </div>

@@ -13,15 +13,15 @@ export const getFollowRecommends = async (): Promise<{
   const requestOptions: RequestInit = {
     method: 'GET',
     credentials: 'include',
-    next: {
-      tags: ['users', 'list', 'recommends'],
-    },
-    cache: 'no-store',
     headers: nextHeaders
       ? {
           Cookie: nextHeaders.cookies().toString(),
         }
       : undefined,
+    next: {
+      tags: ['users', 'list', 'recommends'],
+    },
+    cache: 'no-store',
   };
 
   const response = await fetch(requestUrl, requestOptions);
