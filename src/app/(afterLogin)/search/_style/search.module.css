@@ -1,0 +1,130 @@
+.header {
+  position: sticky;
+  top: 0;
+  z-index: 2;
+  display: flex;
+  flex-flow: column nowrap;
+  background: rgba(var(--background-start-rgb), 0.65);
+  backdrop-filter: blur(12px);
+}
+
+.form {
+  padding: 0 16px;
+  display: flex;
+  flex-flow: row nowrap;
+  align-items: center;
+  min-height: 56px;
+}
+
+.bar {
+  flex-grow: 1;
+}
+
+.options {
+  display: flex;
+  justify-content: flex-end;
+  min-width: 56px;
+}
+
+.tabs {
+  display: flex;
+  flex-flow: row nowrap;
+  align-items: stretch;
+  height: 53px;
+  border-bottom-width: 1px;
+  border-bottom-style: solid;
+  border-bottom-color: rgb(var(--border-start-rgb));
+  font-size: 15px;
+}
+
+.tab {
+  display: flex;
+  flex-grow: 1;
+  flex-shrink: 1;
+  justify-items: stretch;
+  justify-content: center;
+  background: transparent;
+  border: none;
+  font-size: 15px;
+  cursor: pointer;
+  transition: 0.2s background-color ease-in;
+}
+
+.tab:hover {
+  background: rgba(var(--foreground-rgb), 0.1);
+}
+
+.navigation {
+  padding: 0 16px;
+  display: flex;
+  flex-flow: column nowrap;
+  align-items: stretch;
+  justify-items: stretch;
+  text-align: center;
+}
+
+.navigation > div:first-child {
+  padding: 16px 0;
+  flex-grow: 1;
+  color: rgb(var(--link-rgb));
+}
+
+.navigation > div:last-child {
+  min-width: 56px;
+  min-height: 4px;
+  background: rgb(var(--primary-button-rgb));
+  visibility: hidden;
+  opacity: 0;
+}
+
+.active > div:first-child {
+  font-weight: bold;
+  color: rgb(var(--foreground-rgb));
+}
+
+.active > div:last-child {
+  visibility: visible;
+  opacity: 1;
+}
+
+.noResult {
+  margin: 30px auto;
+  padding: 0 30px;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  max-width: 400px;
+}
+
+.query {
+  margin-bottom: 8px;
+  font-size: 31px;
+  font-weight: bold;
+  line-height: 40px;
+}
+
+.query > span {
+  word-break: keep-all;
+  word-wrap: break-word;
+}
+
+.desc {
+  margin-bottom: 28px;
+  font-size: 15px;
+  font-weight: 400;
+  line-height: 20px;
+  color: rgb(var(--link-rgb));
+  text-align: left;
+}
+
+.desc > span {
+  word-break: keep-all;
+}
+
+.desc a {
+  color: rgb(var(--primary-rgb));
+}
+
+.desc a:hover {
+  text-decoration: underline;
+}

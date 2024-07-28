@@ -1,18 +1,18 @@
 import styles from '../_style/svg.module.css';
-import { CSSProperties, HTMLAttributes } from 'react';
+import { CSSProperties } from 'react';
 import cx from 'classnames';
 
 interface Props {
-  className?: HTMLAttributes<HTMLOrSVGElement>['className'];
+  className?: string;
   style?: CSSProperties;
   width?: number;
   white?: boolean;
 }
 
-export default function OptionSvg({
+export default function CheckSvg({
   className,
   style,
-  width = 18.75,
+  width = 16,
   white,
 }: Props) {
   return (
@@ -24,7 +24,7 @@ export default function OptionSvg({
       aria-hidden="true"
     >
       <g>
-        <path d="M3 12c0-1.1.9-2 2-2s2 .9 2 2-.9 2-2 2-2-.9-2-2zm9 2c1.1 0 2-.9 2-2s-.9-2-2-2-2 .9-2 2 .9 2 2 2zm7 0c1.1 0 2-.9 2-2s-.9-2-2-2-2 .9-2 2 .9 2 2 2z"></path>
+        <path d="M9.64 18.952l-5.55-4.861 1.317-1.504 3.951 3.459 8.459-10.948L19.4 6.32 9.64 18.952z"></path>
       </g>
     </svg>
   );

@@ -17,11 +17,7 @@ export default function SinglePost({ session, id }: Props) {
 
   return (
     <div className={style.main}>
-      <Post
-        post={post.data.Original ? post.data.Original : post.data}
-        isSingle={true}
-        isRepost={!!post.data.Original}
-      />
+      <Post post={post.data} isSingle={true} />
       {session && (
         <CommentForm
           session={session}

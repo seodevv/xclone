@@ -3,7 +3,7 @@ import Link from 'next/link';
 import cx from 'classnames';
 import { AdvancedPost } from '@/model/Post';
 import OtherProfile from '../profile/OtherProfile';
-import OptionSvg from '@/app/_svg/post/OptionSvg';
+import OptionButton from '../buttons/OptionButton';
 
 interface Props {
   post: AdvancedPost;
@@ -27,9 +27,7 @@ export default function PostHeader({ post, isSingle }: Props) {
             </Link>
           </div>
           <div className={styles.postUserOption}>
-            <button>
-              <OptionSvg />
-            </button>
+            <OptionButton />
           </div>
         </>
       )}

@@ -1,0 +1,41 @@
+.search {
+  margin-top: 6px;
+  margin-bottom: 12px;
+  display: flex;
+  align-items: center;
+  width: inherit;
+  height: 42px;
+  background-color: rgb(var(--search-rgb));
+  border: 2px solid transparent;
+  border-radius: 21px;
+  overflow: hidden;
+  transition: 0.1s all ease-in;
+}
+
+.search:focus-within {
+  border: 2px solid rgb(var(--primary-button-rgb));
+}
+
+.search:focus-within > svg {
+  fill: rgb(var(--primary-button-rgb));
+}
+
+.search > svg {
+  margin-left: 20px;
+  fill: rgb(var(--link-rgb));
+}
+
+.search input {
+  outline: none;
+  background-color: inherit;
+  border: none;
+  padding: 12px;
+  margin-left: 5px;
+  font-size: 15px;
+  color: rgb(var(--foreground-rgb));
+  width: calc(100% - 60px);
+}
+
+.searchFocus {
+  background: rgb(var(--background-start-rgb));
+}

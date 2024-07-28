@@ -20,13 +20,7 @@ export default function UserPosts({ username, filter = 'all' }: Props) {
     <>
       <div className={style.userPosts}>
         {posts.pages.map((page) =>
-          page.data.map((p) => (
-            <Post
-              key={p.postId}
-              post={p.Original ? p.Original : p}
-              isRepost={!!p.Original}
-            />
-          ))
+          page.data.map((p) => <Post key={p.postId} post={p} />)
         )}
       </div>
     </>

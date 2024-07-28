@@ -21,23 +21,22 @@ interface Props {
   post: AdvancedPost;
   isSingle?: boolean;
   noImage?: boolean;
-  isComment?: boolean;
-  isRepost?: boolean;
 }
 export default function Post({
   post,
   isSingle = false,
   noImage = false,
-  isComment = false,
-  isRepost = false,
 }: Props) {
   const { data: session } = useSession();
+  const data = post.Original ? post.Original : post;
+  const isComment = !!post.Parent;
+  const isRepost = !!post.Original;
 
   return (
-    <PostArticle post={post} className={style.post} isSingle={isSingle}>
-      {isRepost && <PostRepostInfo session={session} userId={post.User.id} />}
+    <PostArticle post={data} className={style.post} isSingle={isSingle}>
+      {isRepost && <PostRepostInfo session={session} userId={data.User.id} />}
       <div className={cx(style.postWrapper, isSingle && style.isSinglePost)}>
-        <PostHeader post={post} isSingle={isSingle} />
+        <PostHeader post={data} isSingle={isSingle} />
         <div className={style.postBody}>
           {!isSingle && (
             <div className={style.postMeta}>
@@ -46,28 +45,28 @@ export default function Post({
                 href={`/${post.User.id}`}
                 onClick={(e) => e.stopPropagation()}
               >
-                <span>{post.User.nickname}</span>
-                <span>@{post.User.id}</span>
+                <span>{data.User.nickname}</span>
+                <span>@{data.User.id}</span>
                 <span>·</span>
               </Link>
-              <PostDate className={style.postDate} date={post.createAt} />
+              <PostDate className={style.postDate} date={data.createAt} />
             </div>
           )}
-          {post.Parent && !isComment && !isSingle && (
-            <PostReplyInfo id={post.Parent.User.id} />
+          {data.Parent && !isComment && !isSingle && (
+            <PostReplyInfo id={data.Parent.User.id} />
           )}
           <PostContent
             className={style.postContent}
-            postId={post.postId}
-            userId={post.User.id}
-            content={post.content}
+            postId={data.postId}
+            userId={data.User.id}
+            content={data.content}
             isSingle={isSingle}
           />
           {!noImage && (
             <PostImages
-              userId={post.User.id}
-              postId={post.postId}
-              images={post.images}
+              userId={data.User.id}
+              postId={data.postId}
+              images={data.images}
               isSingle={isSingle}
             />
           )}
@@ -76,15 +75,15 @@ export default function Post({
               <div className={style.postDateView}>
                 <PostDate
                   className={style.postDate}
-                  date={post.createAt}
+                  date={data.createAt}
                   isFull={true}
                 />
                 <span style={{ margin: '0 5px' }}>·</span>
                 <PostView className={style.postView} />
               </div>
-              {session?.user?.email === post.User.id && (
+              {session?.user?.email === data.User.id && (
                 <div className={style.engagement}>
-                  <Link href={`${post.postId}/quotes`}>
+                  <Link href={`${data.postId}/quotes`}>
                     <ViewSvg width={18.75} />
                     <span>View post engagements</span>
                   </Link>
@@ -92,7 +91,7 @@ export default function Post({
               )}
             </>
           )}
-          <ActionButtons post={post} isSingle={isSingle} width={22.5} />
+          <ActionButtons post={data} isSingle={isSingle} width={22.5} />
         </div>
       </div>
     </PostArticle>

@@ -29,7 +29,7 @@ export default function FollowButton({
 
   return (
     <button
-      className={cx(styles.followBtn, className)}
+      className={cx(styles.btn, styles.followBtn, className)}
       style={style}
       onClick={onFollow}
       disabled={disabled}

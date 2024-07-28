@@ -1,36 +1,40 @@
-import style from './search.module.css';
-import SearchForm from '@/app/(afterLogin)/_component/search/SearchForm';
-import Tab from '@/app/(afterLogin)/search/_component/Tab';
+import {
+  dehydrate,
+  HydrationBoundary,
+  QueryClient,
+} from '@tanstack/react-query';
+import { getPostSearch } from '../_lib/getPostSearch';
+import SearchBody from './_component/body/SearchBody';
+import { redirect } from 'next/navigation';
+import { getUserSearch } from '../_lib/getUserSearch';
 
 type Props = {
-  searchParams: { q: string; f?: string; pf?: string; lf?: string };
+  searchParams: { q?: string; f?: string; pf?: string; lf?: string };
 };
-export default function Search({ searchParams }: Props) {
+export default async function Search({ searchParams }: Props) {
+  if (!searchParams.q) redirect('/explore');
+
+  const queryClient = new QueryClient();
+  queryClient.setDefaultOptions({
+    queries: { staleTime: 1 * 60 * 1000 },
+  });
+  Promise.all([
+    queryClient.prefetchInfiniteQuery({
+      queryKey: ['posts', 'list', 'search', searchParams],
+      queryFn: getPostSearch,
+      initialPageParam: 0,
+    }),
+    queryClient.prefetchInfiniteQuery({
+      queryKey: ['users', 'list', 'search', searchParams],
+      queryFn: getUserSearch,
+      initialPageParam: '',
+    }),
+  ]);
+  const dehydrateState = dehydrate(queryClient);
+
   return (
-    <main className={style.main}>
-      <div className={style.searchTop}>
-        <div className={style.searchZone}>
-          <div className={style.buttonZone}>{/* <BackButton /> */}</div>
-          <div className={style.formZone}>
-            <SearchForm q={searchParams.q} />
-          </div>
-        </div>
-        <Tab />
-      </div>
-      <div className={style.list}>
-        {/* <Post />
-        <Post />
-        <Post />
-        <Post />
-        <Post />
-        <Post />
-        <Post />
-        <Post />
-        <Post />
-        <Post />
-        <Post /> */}
-        {/* <SearchResult searchParams={searchParams} /> */}
-      </div>
-    </main>
+    <HydrationBoundary state={dehydrateState}>
+      <SearchBody searchParams={searchParams} />
+    </HydrationBoundary>
   );
 }

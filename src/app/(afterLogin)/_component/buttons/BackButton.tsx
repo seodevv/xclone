@@ -20,7 +20,7 @@ export default function BackButton({ className, style }: Props) {
 
   return (
     <button
-      className={cx(styles.backBtn, className)}
+      className={cx(styles.btn, styles.backBtn, className)}
       style={style}
       onClick={onClick}
     >

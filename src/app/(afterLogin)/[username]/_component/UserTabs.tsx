@@ -1,6 +1,6 @@
 'use client';
 
-import style from '@/app/(afterLogin)/[username]/_style/usertabs.module.css';
+import style from '../_style/usertabs.module.css';
 import { Session } from 'next-auth';
 import Link from 'next/link';
 import { useSelectedLayoutSegment } from 'next/navigation';

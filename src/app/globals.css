@@ -11,6 +11,7 @@
 
   --border-start-rgb: 47, 51, 54;
   --primary-button-rgb: 26, 140, 216;
+  --button-hover-rgb: 239, 243, 244;
   --label-rgb: 83, 100, 113;
   --link-rgb: 113, 118, 123;
   --link-primary-rgb: 29, 155, 240;
@@ -19,6 +20,9 @@
   --primary-rgb: 29, 155, 240;
   --secondary-rgb: 11, 175, 123;
   --tertiary-rgb: 228, 34, 126;
+
+  --scroll-thumb: 62, 65, 68;
+  --scroll-background: 22, 24, 28;
 
   --primary-glow: conic-gradient(
     from 180deg at 50% 50%,
@@ -105,7 +109,7 @@ body {
 body {
   background: rgba(var(--background-start-rgb));
   color: rgb(var(--foreground-rgb));
-  scrollbar-color: rgb(62, 65, 68) rgb(22, 24, 28);
+  scrollbar-color: rgb(var(--scroll-thumb)) rgb(var(--scroll-background));
 }
 
 a {

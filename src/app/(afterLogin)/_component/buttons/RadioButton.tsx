@@ -1,31 +1,30 @@
-'use client';
-
 import styles from './button.module.css';
 import { CSSProperties, MouseEventHandler } from 'react';
 import cx from 'classnames';
-import RefreshSvg from '@/app/_svg/error/RefreshSvg';
+import CheckSvg from '@/app/_svg/input/CheckSvg';
 
 interface Props {
   className?: string;
   style?: CSSProperties;
-  text?: string;
+  width?: number;
   onClick?: MouseEventHandler<HTMLButtonElement>;
+  isChecked?: boolean;
 }
 
-export default function RefreshButton({
+export default function RadioButton({
   className,
   style,
-  text = 'Retry',
+  width = 16,
   onClick,
+  isChecked,
 }: Props) {
   return (
     <button
-      className={cx(styles.btn, styles.refreshBtn, className)}
+      className={cx(styles.RadioBtn, isChecked && styles.active, className)}
       style={style}
       onClick={onClick}
     >
-      <RefreshSvg white />
-      <span>{text}</span>
+      {isChecked && <CheckSvg width={width} white />}
     </button>
   );
 }

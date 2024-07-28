@@ -28,14 +28,7 @@ export default function Comments({ id }: Props) {
     return (
       <div>
         {comments.pages.map((page) =>
-          page.data.map((p) => (
-            <Post
-              key={p.postId}
-              post={p.Original ? p.Original : p}
-              isComment
-              isRepost={!!p.Original}
-            />
-          ))
+          page.data.map((p) => <Post key={p.postId} post={p} />)
         )}
         {isError && <DisConnection />}
       </div>

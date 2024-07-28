@@ -1,31 +1,33 @@
-'use client';
-
 import styles from './button.module.css';
 import { CSSProperties, MouseEventHandler } from 'react';
 import cx from 'classnames';
-import RefreshSvg from '@/app/_svg/error/RefreshSvg';
+import OptionSvg from '@/app/_svg/post/OptionSvg';
 
 interface Props {
   className?: string;
   style?: CSSProperties;
-  text?: string;
+  width?: number;
+  white?: boolean;
   onClick?: MouseEventHandler<HTMLButtonElement>;
+  disabled?: boolean;
 }
 
-export default function RefreshButton({
+export default function OptionButton({
   className,
   style,
-  text = 'Retry',
+  width = 20,
+  white,
   onClick,
+  disabled,
 }: Props) {
   return (
     <button
-      className={cx(styles.btn, styles.refreshBtn, className)}
+      className={cx(styles.btn, className)}
       style={style}
       onClick={onClick}
+      disabled={disabled}
     >
-      <RefreshSvg white />
-      <span>{text}</span>
+      <OptionSvg width={width} white={white} />
     </button>
   );
 }

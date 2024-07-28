@@ -1,0 +1,10 @@
+.body {
+  display: flex;
+  flex-flow: column nowrap;
+}
+
+.people {
+  padding: 12px 16px;
+  font-size: 20px;
+  font-weight: 800;
+}

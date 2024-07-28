@@ -122,6 +122,7 @@
 
 .postUserInfo > span:first-child {
   color: rgb(var(--foreground-rgb));
+  font-weight: bold;
 }
 
 .postContent {

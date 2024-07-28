@@ -2,7 +2,7 @@ import { useSuspenseInfiniteQuery } from '@tanstack/react-query';
 import { getPostRecommends } from '../_lib/getPostRecommends';
 import { getPostFollowings } from '../_lib/getPostFollowings';
 
-const usePostRecommendsQuery = (type: 'recommends' | 'followings') =>
+const useHomePostQuery = (type: 'recommends' | 'followings') =>
   useSuspenseInfiniteQuery({
     queryKey: ['posts', 'list', type],
     queryFn: type === 'recommends' ? getPostRecommends : getPostFollowings,
@@ -10,4 +10,4 @@ const usePostRecommendsQuery = (type: 'recommends' | 'followings') =>
     getNextPageParam: (lastPage) => lastPage.nextCursor,
   });
 
-export default usePostRecommendsQuery;
+export default useHomePostQuery;
