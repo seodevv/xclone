@@ -35,7 +35,7 @@ export default function FollowRecommends() {
       <div className={cx(style.followRecommend, isProfile && style.firstOrder)}>
         <h3>{isProfile ? 'You might like' : 'Who to follow'}</h3>
         {followRecommends.data.map((f) => (
-          <FollowRecommend key={f.id} data={f} />
+          <FollowRecommend key={f.id} user={f} />
         ))}
       </div>
     );

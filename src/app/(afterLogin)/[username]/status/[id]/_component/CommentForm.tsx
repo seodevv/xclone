@@ -31,7 +31,7 @@ interface Props {
   session: Session;
   userId?: string;
   postId?: number;
-  isActive?: boolean;
+  isPost?: boolean;
 }
 
 export type MediaType =
@@ -42,10 +42,10 @@ export default function CommentForm({
   userId,
   postId,
   session,
-  isActive = false,
+  isPost = false,
 }: Props) {
   const { alterMessage } = useAlterModal();
-  const [active, setActive] = useState(isActive);
+  const [active, setActive] = useState(isPost);
   const [content, setContent] = useState('');
   const [images, setImages] = useState<MediaType[]>([]);
   const contentRef = useRef<HTMLTextAreaElement>(null);
@@ -232,7 +232,7 @@ export default function CommentForm({
                   className={style.actionButton}
                   disabled={!content && images.length === 0}
                 >
-                  Reply
+                  {isPost ? 'Post' : 'Reply'}
                 </button>
               </div>
             </div>

@@ -1,4 +1,6 @@
-import styles from './post.module.css';
+'use client';
+
+import styles from './postBody.module.css';
 import { CSSProperties } from 'react';
 import cx from 'classnames';
 import Link from 'next/link';

@@ -17,7 +17,6 @@ export default function SearchHeader() {
         <SearchForm
           className={styles.bar}
           style={{ margin: 0, height: '100%' }}
-          q={searchParams.get('q')}
         />
         <div className={styles.options}>
           <OptionButton white />

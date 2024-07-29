@@ -17,19 +17,18 @@ import CloseButton from '../buttons/CloseButton';
 interface Props {
   className?: string;
   style?: CSSProperties;
-  q?: string | null;
   autoFocus?: boolean;
 }
 
 export default function SearchForm({
   className,
   style,
-  q,
   autoFocus = false,
 }: Props) {
   const router = useRouter();
   const searchParams = useSearchParams();
-  const [search, setSearch] = useState(q ? q : '');
+  const q = searchParams.get('q');
+  const [search, setSearch] = useState(q ? decodeURIComponent(q) : '');
   const [focus, setFocus] = useState(false);
   const formRef = useRef<HTMLFormElement>(null);
   const inputRef = useRef<HTMLInputElement>(null);
@@ -47,7 +46,7 @@ export default function SearchForm({
 
     if (search) {
       const writetableSearchParams = new URLSearchParams(searchParams);
-      writetableSearchParams.set('q', search);
+      writetableSearchParams.set('q', encodeURIComponent(search));
       router.push(`/search?${writetableSearchParams.toString()}`);
     }
   };
@@ -57,6 +56,12 @@ export default function SearchForm({
       inputRef.current?.focus();
     }
   }, [autoFocus]);
+
+  useEffect(() => {
+    if (q) {
+      setSearch(decodeURIComponent(q));
+    }
+  }, [searchParams]);
 
   return (
     <form

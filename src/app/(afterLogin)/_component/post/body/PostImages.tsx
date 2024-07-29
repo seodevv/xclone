@@ -1,9 +1,9 @@
 'use client';
 
+import style from './media.module.css';
 import Link from 'next/link';
-import style from './postImages.module.css';
-import cx from 'classnames';
 import Image from 'next/image';
+import cx from 'classnames';
 import { generateImagePath } from '@/app/_lib/common';
 import { AdvancedPost } from '@/model/Post';
 
@@ -26,7 +26,7 @@ export default function PostImages({
       className={cx(
         style.postImages,
         style[`postImages-${images.length}`],
-        isSingle && style.isSinglePostImage
+        isSingle && style.single
       )}
     >
       {images.map((image, index) => (

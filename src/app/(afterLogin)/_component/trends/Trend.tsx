@@ -2,18 +2,27 @@
 
 import style from './trendSection.module.css';
 import Link from 'next/link';
-import { HashTag } from '@/model/Hashtag';
+import { Tags } from '@/model/Hashtag';
+import { unitConversion } from '@/app/_lib/common';
 
 interface Props {
-  tag: HashTag;
+  tag: Tags;
+  index?: number;
 }
 
-export default function Trend({ tag }: Props) {
+export default function Trend({ tag, index }: Props) {
   return (
-    <Link href={`/search?q=${tag.title}`} className={style.trend}>
-      <div className={style.count}>Trending</div>
-      <div className={style.title}>{tag.title}</div>
-      <div className={style.count}>{tag.count.toLocaleString()} posts</div>
+    <Link
+      href={`/search?q=${encodeURIComponent('#' + tag.title)}`}
+      className={style.trend}
+    >
+      <div className={style.count}>
+        {typeof index !== 'undefined' && `${index + 1} · `}Trending
+      </div>
+      <div className={style.title}>
+        {tag.type === 'tag' ? `#${tag.title}` : tag.title}
+      </div>
+      <div className={style.count}>{unitConversion(tag.count)} posts</div>
     </Link>
   );
 }

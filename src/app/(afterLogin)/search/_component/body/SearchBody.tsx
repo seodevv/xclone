@@ -2,13 +2,10 @@
 
 import styles from './searchBody.module.css';
 import { usePostSearchQuery } from '../../_hook/usePostSearchQuery';
-import Post from '../../../_component/post/Post';
-import SearchNoResult from '../SearchNoResult';
-import LoadingSpinner from '../../../_component/loading/LoadingSpinner';
-import DisConnection from '../../../_component/error/DisConnection';
 import { useUserSearchQuery } from '../../_hook/useUserSearchQuery';
-import { useState } from 'react';
 import SearchPosts from './SearchPosts';
+import LoadingSpinner from '@/app/(afterLogin)/_component/loading/LoadingSpinner';
+import SearchNoResult from './SearchNoResult';
 import SearchUsers from './SearchUsers';
 
 interface Props {
@@ -16,49 +13,39 @@ interface Props {
 }
 
 export default function SearchBody({ searchParams }: Props) {
-  const isUser =
-    typeof searchParams.f === 'undefined' || searchParams.f === 'user';
-  const isPost = searchParams.f !== 'user';
   const {
-    data: searchPosts,
-    isLoading: postIsLoading,
-    isFetching: postIsFetching,
-    isFetchingNextPage,
-    isError,
-  } = usePostSearchQuery({ searchParams });
+    isLoading: pLoading,
+    isFetching: pFetching,
+    isEmpty: pEmpty,
+    enabled: pEnabled,
+  } = usePostSearchQuery({
+    searchParams,
+  });
   const {
-    data: searchUsers,
-    isLoading: userIsLoading,
-    isFetching: userIsFetching,
+    isLoading: uLoading,
+    isFetching: uFetching,
+    isEmpty: uEmpty,
+    enabled: uEnabled,
   } = useUserSearchQuery({
     searchParams,
-    enabled: isUser,
   });
 
-  if (
-    (isPost && (postIsLoading || postIsFetching)) ||
-    (isUser && (userIsLoading || userIsFetching))
-  ) {
+  if (pLoading || pFetching || uLoading || uFetching) {
     return <LoadingSpinner />;
   }
 
-  if (
-    searchPosts?.pages[0].data.length === 0 &&
-    searchUsers?.pages[0].data.length === 0
-  ) {
+  if (pEnabled && uEnabled && pEmpty && uEmpty) {
+    return <SearchNoResult q={searchParams.q} />;
+  } else if (pEnabled && !uEnabled && pEmpty) {
+    return <SearchNoResult q={searchParams.q} />;
+  } else if (!pEnabled && uEnabled && uEmpty) {
     return <SearchNoResult q={searchParams.q} />;
   }
 
   return (
     <section className={styles.body}>
-      {isUser &&
-        searchUsers?.pages.map((page, i) => (
-          <SearchUsers key={i} users={page.data} />
-        ))}
-      {isPost &&
-        searchPosts?.pages.map((page) => <SearchPosts posts={page.data} />)}
-      {isError && <DisConnection />}
-      {isFetchingNextPage && <LoadingSpinner />}
+      <SearchUsers searchParams={searchParams} />
+      <SearchPosts searchParams={searchParams} />
     </section>
   );
 }

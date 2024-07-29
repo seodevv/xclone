@@ -42,8 +42,7 @@ export default async function HomePage() {
       <HydrationBoundary state={dehydrateState}>
         <TabProvider>
           <Tab />
-          {/* <PostForm /> */}
-          <CommentForm session={session} isActive />
+          <CommentForm session={session} isPost />
           <PostRecommends />
         </TabProvider>
       </HydrationBoundary>

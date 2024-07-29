@@ -5,13 +5,13 @@ import { useContext, useState } from 'react';
 import Image from 'next/image';
 import { useSinglePostQuery } from '@/app/(afterLogin)/[username]/status/[id]/_hooks/useSinglePostQuery';
 import { generateImagePath } from '@/app/_lib/common';
-import ActionButtons from '@/app/(afterLogin)/_component/post/ActionButtons';
 import CloseButton from '@/app/(afterLogin)/_component/buttons/CloseButton';
 import NextButton from '@/app/(afterLogin)/_component/buttons/NextButton';
 import PrevButton from '@/app/(afterLogin)/_component/buttons/PrevButton';
 import { FoldContext } from '../_provider/FoldProvider';
 import RightFoldButton from '@/app/(afterLogin)/_component/buttons/RightFoldButton';
 import LeftFoldButton from '@/app/(afterLogin)/_component/buttons/LeftFoldButton';
+import ActionButtons from '@/app/(afterLogin)/_component/post/body/ActionButtons';
 
 interface Props {
   id: string;

@@ -66,6 +66,36 @@ const usePostMutation = () =>
       return response.json();
     },
     onSuccess: (response, { queryClient, session, parent }) => {
+      const queryKeys = queryClient
+        .getQueryCache()
+        .getAll()
+        .map((cache) => cache.queryKey)
+        .filter((q) => q[0] === 'posts' && q[1] === 'list');
+      queryKeys.forEach((queryKey) => {
+        const queryData =
+          queryClient.getQueryData<
+            InfiniteData<
+              { data: AdvancedPost[]; nextCursor?: number; message: string },
+              number
+            >
+          >(queryKey);
+        if (queryData) {
+          queryData.pages.forEach((page, i) => {
+            const optimisticPostIndex = page.data.findIndex(
+              (p) => p.postId === -1
+            );
+            if (optimisticPostIndex > -1) {
+              const shallow = { ...queryData };
+              shallow.pages = [...queryData.pages];
+              shallow.pages[i] = { ...queryData.pages[i] };
+              shallow.pages[i].data = [...queryData.pages[i].data];
+              shallow.pages[i].data[optimisticPostIndex] = response.data;
+              queryClient.setQueryData(queryKey, shallow);
+            }
+          });
+        }
+      });
+
       if (parent) {
         queryClient.invalidateQueries({
           queryKey: ['posts', 'list', 'comments', parent.postId.toString()],
@@ -97,34 +127,7 @@ const usePostMutation = () =>
       });
       queryClient.invalidateQueries({
         queryKey: ['hashtags', 'list'],
-      });
-
-      const queryKeys = queryClient
-        .getQueryCache()
-        .getAll()
-        .map((cache) => cache.queryKey)
-        .filter((q) => q[0] === 'posts' && q[1] === 'list');
-      queryKeys.forEach((queryKey) => {
-        const queryData =
-          queryClient.getQueryData<
-            InfiniteData<
-              { data: AdvancedPost[]; nextCursor?: number; message: string },
-              number
-            >
-          >(queryKey);
-        if (queryData) {
-          queryData.pages.forEach((page, i) => {
-            const optimisticPostIndex = page.data.findIndex(
-              (p) => p.postId === -1
-            );
-            if (optimisticPostIndex > -1) {
-              const shallow = { ...queryData };
-              shallow.pages = [...queryData.pages];
-              shallow.pages[i].data[optimisticPostIndex] = response.data;
-              queryClient.setQueryData(queryKey, shallow);
-            }
-          });
-        }
+        refetchType: 'none',
       });
     },
     onError: (

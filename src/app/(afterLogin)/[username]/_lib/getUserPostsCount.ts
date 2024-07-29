@@ -15,7 +15,7 @@ export const getUserPostsCount = async ({
     next: {
       tags: ['posts', 'count', username, filter],
     },
-    // cache: 'no-store'
+    cache: 'no-store',
   };
 
   const response = await fetch(requestUrl, requestOptions);

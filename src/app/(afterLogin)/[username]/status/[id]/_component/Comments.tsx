@@ -3,7 +3,7 @@
 import Post from '@/app/(afterLogin)/_component/post/Post';
 import { useCommentsInfiniteQuery } from '../_hooks/useCommentsQuery';
 import DisConnection from '@/app/(afterLogin)/_component/error/DisConnection';
-import { MouseEventHandler } from 'react';
+import { Fragment, MouseEventHandler } from 'react';
 import LoadingSpinner from '@/app/(afterLogin)/_component/loading/LoadingSpinner';
 
 interface Props {
@@ -27,9 +27,15 @@ export default function Comments({ id }: Props) {
   if (comments) {
     return (
       <div>
-        {comments.pages.map((page) =>
-          page.data.map((p) => <Post key={p.postId} post={p} />)
-        )}
+        {comments.pages.map((page, i) => {
+          return (
+            <Fragment key={i}>
+              {page.data.map((p) => (
+                <Post key={p.postId} post={p} />
+              ))}
+            </Fragment>
+          );
+        })}
         {isError && <DisConnection />}
       </div>
     );

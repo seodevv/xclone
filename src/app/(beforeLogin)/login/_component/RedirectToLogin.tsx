@@ -9,5 +9,6 @@ export default function RedirectToLogin() {
   useEffect(() => {
     router.replace('/i/flow/login');
   }, []);
+
   return null;
 }

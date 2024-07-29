@@ -1,26 +1,56 @@
 'use client';
 
-import { useContext } from 'react';
+import { Fragment, useContext, useEffect, useRef, useState } from 'react';
 import { TabContext } from './TabProvider';
 import Post from '@/app/(afterLogin)/_component/post/Post';
 import useHomePostQuery from '../_hook/useHomePostQuery';
+import LoadingSpinner from '../../_component/loading/LoadingSpinner';
 
 export default function PostRecommends() {
   const { tab } = useContext(TabContext);
+  const {
+    data: posts,
+    hasNextPage,
+    fetchNextPage,
+    isFetchingNextPage,
+  } = useHomePostQuery(tab === 'rec' ? 'recommends' : 'followings');
+  const nextRef = useRef<HTMLDivElement>(null);
 
-  if (tab === 'rec') {
-    const { data: posts } = useHomePostQuery('recommends');
+  useEffect(() => {
+    const observer = new IntersectionObserver((entries) => {
+      if (entries[0].isIntersecting) {
+        hasNextPage && !isFetchingNextPage && fetchNextPage();
+      }
+    });
+    if (nextRef.current) {
+      observer.observe(nextRef.current);
+    }
+    return () => {
+      observer.disconnect();
+    };
+  }, []);
 
-    return posts.pages.map((page) =>
-      page.data.map((p) => <Post key={p.postId} post={p} />)
-    );
-  }
-
-  if (tab === 'fol') {
-    const { data: posts } = useHomePostQuery('followings');
-
-    return posts.pages.map((page) =>
-      page.data.map((p) => <Post key={p.postId} post={p} />)
+  if (posts) {
+    return (
+      <>
+        {posts.pages.map((page, i) => (
+          <Fragment key={i}>
+            {page.data.map((p) => {
+              return <Post key={p.postId} post={p} />;
+            })}
+          </Fragment>
+        ))}
+        {isFetchingNextPage && <LoadingSpinner style={{ padding: '30px' }} />}
+        {hasNextPage && (
+          <div
+            ref={nextRef}
+            style={{
+              padding: isFetchingNextPage ? '0' : '60px 0',
+              textAlign: 'center',
+            }}
+          ></div>
+        )}
+      </>
     );
   }
 

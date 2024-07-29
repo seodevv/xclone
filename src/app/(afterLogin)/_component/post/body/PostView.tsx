@@ -1,5 +1,7 @@
-import { unitConversion } from '@/app/_lib/common';
+import styles from './postBody.module.css';
 import { CSSProperties } from 'react';
+import cx from 'classnames';
+import { unitConversion } from '@/app/_lib/common';
 
 interface Props {
   className?: string;
@@ -8,7 +10,7 @@ interface Props {
 
 export default function PostView({ className, style }: Props) {
   return (
-    <span className={className} style={style}>
+    <span className={cx(styles.postView, className)} style={style}>
       <span>{unitConversion(1234)}</span>
       <span>Views</span>
     </span>

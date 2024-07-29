@@ -1,7 +1,7 @@
-import { HashTag } from '@/model/Hashtag';
+import { Tags } from '@/model/Hashtag';
 
 export const getTrends = async (): Promise<{
-  data: HashTag[];
+  data: Tags[];
   message: string;
 }> => {
   const isServer = typeof window === 'undefined';
@@ -12,12 +12,13 @@ export const getTrends = async (): Promise<{
   const requestOptions: RequestInit = {
     method: 'GET',
     credentials: 'include',
-    next: {
-      tags: ['hashtags', 'list'],
-    },
     headers: nextHeaders
       ? { Cookie: nextHeaders.cookies().toString() }
       : undefined,
+    next: {
+      tags: ['hashtags', 'list'],
+    },
+    cache: 'no-store',
   };
   const response = await fetch(requestUrl, requestOptions);
 

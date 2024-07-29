@@ -17,6 +17,7 @@ export const getSinglePost = async ({
     next: {
       tags: ['posts', id],
     },
+    cache: 'no-store',
   };
   const response = await fetch(requestUrl, requestOptions);
 

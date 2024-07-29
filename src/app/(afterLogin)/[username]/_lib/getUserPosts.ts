@@ -27,7 +27,7 @@ export const getUserPosts = async ({
     next: {
       tags: ['posts', 'list', username],
     },
-    // cache: 'no-store',
+    cache: 'no-store',
   };
 
   const response = await fetch(requestUrl, requestOptions);

@@ -1,18 +1,26 @@
 'use client';
 
 import style from '../_style/search.module.css';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useRouter, useSearchParams } from 'next/navigation';
 import cx from 'classnames';
 import { captialCase } from '@/app/_lib/common';
 
 type Tab = 'top' | 'live' | 'user' | 'media' | 'lists';
 
+const isTab = (str: string | null): Tab => {
+  if (str === 'live') return 'live';
+  if (str === 'user') return 'user';
+  if (str === 'media') return 'media';
+  if (str === 'lists') return 'lists';
+  return 'top';
+};
+
 export default function SearchTab() {
   const router = useRouter();
   const searchParams = useSearchParams();
   const f = searchParams.get('f');
-  const [tab, setTab] = useState<Tab>(f ? (f as Tab) : 'top');
+  const [tab, setTab] = useState<Tab>(f ? isTab(f) : 'top');
   const tabs: { text?: string; f: Tab }[] = [
     { f: 'top' },
     { text: 'latest', f: 'live' },
@@ -31,6 +39,10 @@ export default function SearchTab() {
     setTab(tab);
     router.replace(`/search?${writableSearchParams.toString()}`);
   };
+
+  useEffect(() => {
+    setTab(f ? isTab(f) : 'top');
+  }, [searchParams]);
 
   return (
     <nav className={style.tabs}>

@@ -18,11 +18,11 @@
 
 .container {
   padding: 12px 0;
-  height: 66px;
+  min-height: 66px;
   display: flex;
 }
 
-.container:hover:not(:has(> button:hover)) {
+.container:hover:not(:has(button:hover)) {
   background: rgba(var(--foreground-rgb), 0.1);
 }
 
@@ -39,8 +39,16 @@
 }
 
 .userInfo {
-  flex: 1;
+  flex-grow: 1;
   width: 188px;
+}
+
+.userInfo > div:first-child {
+  display: flex;
+}
+
+.userInfo > div:first-child > div {
+  flex-grow: 1;
 }
 
 .nickname {
@@ -54,6 +62,17 @@
   color: rgb(var(--link-rgb));
   line-height: 16px;
   word-wrap: break-word;
+}
+
+.description {
+  padding-top: 4px;
+  max-height: 52px;
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 16px;
+  word-break: break-all;
+  word-wrap: break-word;
+  overflow: hidden;
 }
 
 .error {

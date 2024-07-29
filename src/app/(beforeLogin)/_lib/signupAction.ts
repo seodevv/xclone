@@ -25,7 +25,7 @@ const signupAction = async (
     return { message: 'invalid_image' };
   }
 
-  const allowExt = ['png', 'gif', 'jpeg'];
+  const allowExt = ['png', 'gif', 'jpeg', 'webp'];
   if (!allowExt.includes(image.type.split('/')[1])) {
     return { message: 'invalid_image_type' };
   }

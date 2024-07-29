@@ -37,6 +37,7 @@ export const getPostSearch = async ({
     next: {
       tags: ['posts', 'list', 'search', JSON.stringify(option)],
     },
+    cache: 'no-store',
   };
 
   const response = await fetch(requestUrl, requestOptions);

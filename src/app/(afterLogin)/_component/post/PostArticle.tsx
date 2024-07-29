@@ -1,7 +1,9 @@
 'use client';
 
+import styles from './post.module.css';
 import { MouseEventHandler, ReactNode } from 'react';
 import { useRouter } from 'next/navigation';
+import cx from 'classnames';
 import { AdvancedPost } from '@/model/Post';
 
 type Props = {
@@ -28,8 +30,7 @@ export default function PostArticle({
   return (
     <article
       onClick={onClick}
-      className={className}
-      style={isSingle ? { borderBottom: 'unset', cursor: 'unset' } : {}}
+      className={cx(styles.post, isSingle && styles.single, className)}
     >
       {children}
     </article>

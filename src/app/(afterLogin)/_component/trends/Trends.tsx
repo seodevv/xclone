@@ -3,18 +3,13 @@
 import style from './trendSection.module.css';
 import Link from 'next/link';
 import { useSelectedLayoutSegment } from 'next/navigation';
-import { useQuery } from '@tanstack/react-query';
-import { getTrends } from '@/app/(afterLogin)/_lib/getTrends';
 import Trend from '@/app/(afterLogin)/_component/trends/Trend';
-import SpinnerSvg from '@/app/_svg/spinner/SpinnerSvg';
+import LoadingSpinner from '../loading/LoadingSpinner';
+import { useTrendsQuery } from '../../_hooks/useTrendsQuery';
 
 export default function Trends() {
   const segment = useSelectedLayoutSegment();
-  const { data: trends, isLoading } = useQuery({
-    queryKey: ['hashtags', 'list'],
-    queryFn: getTrends,
-    enabled: segment !== 'explore',
-  });
+  const { data: trends, isLoading } = useTrendsQuery(segment);
 
   if (segment === 'explore') return null;
 
@@ -22,8 +17,8 @@ export default function Trends() {
     return (
       <div className={style.trendSection}>
         <h3>Trends for you</h3>
-        {trends.data.map((tag) => (
-          <Trend key={tag.id} tag={tag} />
+        {trends.data.map((tag, index) => (
+          <Trend key={tag.id} tag={tag} index={index} />
         ))}
         <Link href={'/i/trends'} className={style.trendMore}>
           Show more
@@ -34,8 +29,8 @@ export default function Trends() {
 
   if (isLoading) {
     return (
-      <div className={style.trendSection} style={{ textAlign: 'center' }}>
-        <SpinnerSvg />
+      <div className={style.trendSection}>
+        <LoadingSpinner />
       </div>
     );
   }

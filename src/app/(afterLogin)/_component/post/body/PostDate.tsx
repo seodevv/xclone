@@ -1,3 +1,4 @@
+import styles from './postBody.module.css';
 import { CSSProperties } from 'react';
 import dayjs from 'dayjs';
 import relativeTime from 'dayjs/plugin/relativeTime';
@@ -63,7 +64,7 @@ export default function PostDate({
   }
 
   return (
-    <span className={className} style={style}>
+    <span className={styles.postDate} style={style}>
       {content}
     </span>
   );

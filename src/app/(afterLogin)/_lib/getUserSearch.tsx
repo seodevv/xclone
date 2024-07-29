@@ -35,6 +35,7 @@ export const getUserSearch = async ({
     next: {
       tags: ['users', 'list', 'search', JSON.stringify(options)],
     },
+    cache: 'no-store',
   };
 
   const response = await fetch(requestUrl, requestOptions);

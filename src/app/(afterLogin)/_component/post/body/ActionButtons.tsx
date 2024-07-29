@@ -1,6 +1,6 @@
 'use client';
 
-import style from './post.module.css';
+import style from './postBody.module.css';
 import { MouseEventHandler } from 'react';
 import { useSession } from 'next-auth/react';
 import cx from 'classnames';
@@ -41,7 +41,7 @@ export default function ActionButtons({
   const onClickShare: MouseEventHandler<HTMLButtonElement> = (e) => {};
 
   return (
-    <div className={cx(style.actionButtons, isSingle && style.isSingleActions)}>
+    <div className={cx(style.actionButtons, isSingle && style.single)}>
       <div className={style.actionButton}>
         <button
           className={cx(style.primaryButton, commented && style.primary)}

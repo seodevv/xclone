@@ -18,7 +18,11 @@ export default function PostRepostInfo({ session, userId }: Props) {
         <div className={styles.repostIcon}>
           <RepostSvg width={16} />
         </div>
-        <Link href={`/${userId}`} className={styles.repostInfo}>
+        <Link
+          href={`/${userId}`}
+          className={styles.repostInfo}
+          onClick={(e) => e.stopPropagation()}
+        >
           <span>{session?.user?.email === userId ? 'You' : userId}</span>
           <span>reposted</span>
         </Link>

@@ -7,6 +7,6 @@ interface Props {
   reset: () => void;
 }
 
-export default function Error({ error, reset }: Props) {
+export default function ProfileError({ error, reset }: Props) {
   return <DisConnection onClick={() => reset()} />;
 }

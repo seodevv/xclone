@@ -17,7 +17,7 @@ export const getUser = async ({
     next: {
       tags: ['users', username],
     },
-    // cache: 'no-store',
+    cache: 'no-store',
   };
 
   const response = await fetch(requestUrl, requestOptions);

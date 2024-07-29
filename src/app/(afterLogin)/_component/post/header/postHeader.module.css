@@ -1,14 +1,13 @@
+/* PostRepostInfo */
 .postRepostInfoSection {
   padding-top: 6px;
 }
-
 .postRepostInfo {
   margin-top: -8px;
   margin-bottom: 6px;
   display: flex;
   flex-flow: row nowrap;
 }
-
 .repostIcon {
   margin-right: 8px;
   display: flex;
@@ -16,65 +15,51 @@
   align-items: flex-end;
   flex-basis: 40px;
 }
-
 .repostInfo {
   font-size: 13px;
   font-weight: bold;
   color: rgb(var(--link-rgb));
 }
-
 .repostInfo:hover {
   text-decoration: underline;
 }
-
 .repostInfo > span:first-child {
   margin-right: 2px;
 }
 
+/* PostHeader */
 .postUserSection {
   margin-right: 12px;
   width: 40px;
 }
-
-.postUserSection.isSingle {
+.postUserSection.single {
   display: flex;
   flex-flow: row nowrap;
   width: unset;
 }
-
 .postUserInfo {
   flex-grow: 1;
 }
-
-.singlePostMeta {
+.postMeta {
   display: flex;
   flex-flow: column nowrap;
   justify-content: flex-start;
   flex-grow: 1;
 }
-
 .postUserName {
   margin-right: 5px;
   font-size: 15px;
   font-weight: bold;
 }
-
 .postUserName:hover {
   text-decoration: underline;
 }
-
 .postUserId {
   margin-right: 5px;
   color: rgb(var(--link-rgb));
 }
-
 .postUserOption {
   display: flex;
   align-items: center;
   justify-content: center;
-}
-
-.postUserOption > button {
-  background: transparent;
-  border: none;
 }

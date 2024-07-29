@@ -34,7 +34,7 @@ export default function FollowButton({
       onClick={onFollow}
       disabled={disabled}
     >
-      {isFollow ? '언팔로우' : '팔로우'}
+      {isFollow ? 'Following' : 'Follow'}
     </button>
   );
 }

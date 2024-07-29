@@ -39,7 +39,7 @@ export const unitConversion = (num: number) => {
     return `${Math.round(num / 100) / 10}K`;
   }
 
-  return parseInt(num.toString());
+  return num.toString();
 };
 
 export const getFileDataURL = (file: File): Promise<string> => {

@@ -1,34 +1,44 @@
 'use client';
 
-import style from './followRecommend.module.css';
+import styles from './followRecommend.module.css';
 import Image from 'next/image';
 import Link from 'next/link';
 import { generateImagePath } from '@/app/_lib/common';
 import { AdvancedUser } from '@/model/User';
 import FollowButton from '@/app/(afterLogin)/_component/buttons/FollowButton';
+import { CSSProperties } from 'react';
 
 interface Props {
-  data: AdvancedUser;
+  style?: CSSProperties;
+  user: AdvancedUser;
+  isDesc?: boolean;
 }
 
-export default function FollowRecommend({ data }: Props) {
+export default function FollowRecommend({ style, user, isDesc }: Props) {
   return (
-    <Link className={style.container} href={`/${data.id}`}>
-      <div className={style.userLogoSection}>
-        <div className={style.userLogo}>
+    <Link className={styles.container} style={style} href={`/${user.id}`}>
+      <div className={styles.userLogoSection}>
+        <div className={styles.userLogo}>
           <Image
-            src={generateImagePath(data.image)}
-            alt={data.id}
+            src={generateImagePath(user.image)}
+            alt={user.id}
             width={40}
             height={40}
           />
         </div>
       </div>
-      <div className={style.userInfo}>
-        <div className={style.nickname}>{data.nickname}</div>
-        <div className={style.identifier}>@{data.id}</div>
+      <div className={styles.userInfo}>
+        <div>
+          <div>
+            <div className={styles.nickname}>{user.nickname}</div>
+            <div className={styles.identifier}>@{user.id}</div>
+          </div>
+          <FollowButton className={styles.follow} user={user} />
+        </div>
+        {isDesc && user.desc && (
+          <div className={styles.description}>{user.desc}</div>
+        )}
       </div>
-      <FollowButton className={style.follow} user={data} />
     </Link>
   );
 }
