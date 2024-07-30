@@ -39,18 +39,14 @@ export default function PostContent({
         const regex = /#[^\s#)\]]+/g;
         const matched = t.match(regex);
         if (matched) {
+          let lastIndex = 0;
           return (
             <div key={i}>
               {matched.map((m, i) => {
-                const index = t.indexOf(m);
-                const hasPrev = matched[i - 1]
-                  ? t.indexOf(matched[i - 1]) + matched[i - 1].length
-                  : 0;
-                const hasNext = matched[i + 1]
-                  ? t.indexOf(matched[i + 1]) - 1
-                  : undefined;
-                const a = t.substring(hasPrev, index);
-                const b = '#' + t.substring(index + 1, hasNext);
+                const index = t.indexOf(m, lastIndex);
+                const a = t.substring(lastIndex, index);
+                const b = t.substring(index, index + m.length);
+                lastIndex = index + m.length;
                 return (
                   <Fragment key={i}>
                     <span>{a}</span>

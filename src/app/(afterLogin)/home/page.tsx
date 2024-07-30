@@ -1,17 +1,17 @@
 import style from './_style/home.module.css';
-import Tab from '@/app/(afterLogin)/home/_component/Tab';
-import TabProvider from '@/app/(afterLogin)/home/_component/TabProvider';
 import {
   dehydrate,
   HydrationBoundary,
   QueryClient,
 } from '@tanstack/react-query';
 import { getPostRecommends } from './_lib/getPostRecommends';
-import PostRecommends from './_component/PostRecommends';
 import { getPostFollowings } from './_lib/getPostFollowings';
 import CommentForm from '../[username]/status/[id]/_component/CommentForm';
 import { getServerSession } from 'next-auth';
 import { authOptions } from '@/app/api/auth/[...nextauth]/route';
+import HomeTab from './_component/HomeTab';
+import HomeTabProvider from './_component/HomeTabProvider';
+import HomePosts from './_component/HomePosts';
 
 export default async function HomePage() {
   const session = await getServerSession(authOptions);
@@ -40,11 +40,11 @@ export default async function HomePage() {
   return (
     <main className={style.main}>
       <HydrationBoundary state={dehydrateState}>
-        <TabProvider>
-          <Tab />
+        <HomeTabProvider>
+          <HomeTab />
           <CommentForm session={session} isPost />
-          <PostRecommends />
-        </TabProvider>
+          <HomePosts />
+        </HomeTabProvider>
       </HydrationBoundary>
     </main>
   );

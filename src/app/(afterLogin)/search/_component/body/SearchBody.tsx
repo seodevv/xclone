@@ -1,9 +1,9 @@
 'use client';
 
 import styles from './searchBody.module.css';
+import SearchPosts from './SearchPosts';
 import { usePostSearchQuery } from '../../_hook/usePostSearchQuery';
 import { useUserSearchQuery } from '../../_hook/useUserSearchQuery';
-import SearchPosts from './SearchPosts';
 import LoadingSpinner from '@/app/(afterLogin)/_component/loading/LoadingSpinner';
 import SearchNoResult from './SearchNoResult';
 import SearchUsers from './SearchUsers';

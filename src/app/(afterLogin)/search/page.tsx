@@ -11,7 +11,7 @@ import { getUserSearch } from '../_lib/getUserSearch';
 type Props = {
   searchParams: { q?: string; f?: string; pf?: string; lf?: string };
 };
-export default async function Search({ searchParams }: Props) {
+export default async function SearchPage({ searchParams }: Props) {
   if (!searchParams.q) redirect('/explore');
 
   const queryClient = new QueryClient();

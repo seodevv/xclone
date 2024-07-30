@@ -3,8 +3,7 @@
 import style from '../_style/search.module.css';
 import { useEffect, useState } from 'react';
 import { useRouter, useSearchParams } from 'next/navigation';
-import cx from 'classnames';
-import { captialCase } from '@/app/_lib/common';
+import TabButton from '../../_component/tab/TabButton';
 
 type Tab = 'top' | 'live' | 'user' | 'media' | 'lists';
 
@@ -47,12 +46,11 @@ export default function SearchTab() {
   return (
     <nav className={style.tabs}>
       {tabs.map((t) => (
-        <button key={t.f} className={style.tab} onClick={() => changeTabs(t.f)}>
-          <div className={cx(style.navigation, t.f === tab && style.active)}>
-            <div>{t.text ? captialCase(t.text) : captialCase(t.f)}</div>
-            <div></div>
-          </div>
-        </button>
+        <TabButton
+          onClick={() => changeTabs(t.f)}
+          text={t.text ? t.text : t.f}
+          active={t.f === tab}
+        />
       ))}
     </nav>
   );

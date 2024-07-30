@@ -82,7 +82,7 @@ export default function NavMenu({ session }: Props) {
         <li>
           <Link href={`/settings`}>
             <div className={style.navPill}>
-              <SettingSvg active={segment === 'settings'} />
+              <SettingSvg active={segment === 'settings'} white />
               <div className={segment === 'settings' ? style.activeBold : ''}>
                 Settings
               </div>

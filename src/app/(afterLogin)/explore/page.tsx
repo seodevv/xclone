@@ -1,30 +1,21 @@
-import style from './_style/explore.module.css';
+import styles from './_style/explore.module.css';
 import SearchForm from '@/app/(afterLogin)/_component/search/SearchForm';
-import {
-  dehydrate,
-  HydrationBoundary,
-  QueryClient,
-} from '@tanstack/react-query';
-import { getTrends } from '../_lib/getTrends';
 import Trends from '../_component/trends/Trends';
+import TrendsHydrationBoundary from '../_component/trends/TrendsHydrationBoundary';
+import SettingButton from '../_component/buttons/SettingButton';
 
 export default async function ExplorePage() {
-  const queryClient = new QueryClient();
-  await queryClient.prefetchQuery({
-    queryKey: ['hashtags', 'list'],
-    queryFn: getTrends,
-    staleTime: 1 * 60 * 1000,
-  });
-  const dehydrateState = dehydrate(queryClient);
-
   return (
-    <main className={style.main}>
-      <div className={style.formZone}>
+    <main className={styles.main}>
+      <div className={styles.formZone}>
         <SearchForm />
+        <div className={styles.settings}>
+          <SettingButton />
+        </div>
       </div>
-      <HydrationBoundary state={dehydrateState}>
+      <TrendsHydrationBoundary>
         <Trends />
-      </HydrationBoundary>
+      </TrendsHydrationBoundary>
     </main>
   );
 }

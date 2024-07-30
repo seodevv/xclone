@@ -13,18 +13,18 @@ interface ITabContext {
   setTab: Dispatch<SetStateAction<ITabContext['tab']>>;
 }
 
-export const TabContext = createContext<ITabContext>({
+export const HomeTabContext = createContext<ITabContext>({
   tab: 'rec',
   setTab: () => {},
 });
 
 type Props = { children: ReactNode };
-export default function TabProvider({ children }: Props) {
+export default function HomeTabProvider({ children }: Props) {
   const [tab, setTab] = useState<'rec' | 'fol'>('rec');
 
   return (
-    <TabContext.Provider value={{ tab, setTab }}>
+    <HomeTabContext.Provider value={{ tab, setTab }}>
       {children}
-    </TabContext.Provider>
+    </HomeTabContext.Provider>
   );
 }

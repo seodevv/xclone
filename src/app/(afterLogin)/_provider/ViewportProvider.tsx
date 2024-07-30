@@ -23,7 +23,10 @@ interface Props {
 }
 
 export default function ViewportProvider({ children }: Props) {
-  const [viewport, setViewport] = useState({ width: 0, height: 0 });
+  const [viewport, setViewport] = useState({
+    width: typeof window !== 'undefined' ? window.innerWidth : 0,
+    height: typeof window !== 'undefined' ? window.innerHeight : 0,
+  });
 
   return (
     <ViewportContext.Provider value={{ viewport, setViewport }}>

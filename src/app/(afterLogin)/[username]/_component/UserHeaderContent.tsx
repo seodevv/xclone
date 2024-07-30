@@ -9,7 +9,7 @@ interface Props {
   username: string;
 }
 
-export default function ProfileHeaderContent({ username }: Props) {
+export default function UserHeaderContent({ username }: Props) {
   const segment = useSelectedLayoutSegment();
   const { data: user } = useUserQuery(username);
   const { data: count } = useUserPostsCountQuery({

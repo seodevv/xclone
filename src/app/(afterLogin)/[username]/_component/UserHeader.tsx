@@ -1,16 +1,16 @@
 import style from '@/app/(afterLogin)/[username]/_style/profile.module.css';
-import ProfileHeaderContent from './ProfileHeaderContent';
 import BackButton from '@/app/(afterLogin)/_component/buttons/BackButton';
+import UserHeaderContent from './UserHeaderContent';
 
 interface Props {
   username: string;
 }
 
-export default async function ProfileHeader({ username }: Props) {
+export default async function UserHeader({ username }: Props) {
   return (
     <div className={style.header}>
       <BackButton />
-      <ProfileHeaderContent username={username} />
+      <UserHeaderContent username={username} />
     </div>
   );
 }

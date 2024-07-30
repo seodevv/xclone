@@ -29,25 +29,29 @@ export default function PostImages({
         isSingle && style.single
       )}
     >
-      {images.map((image, index) => (
-        <Link
-          key={index}
-          href={`/${userId}/status/${postId}/photo/${image.imageId}`}
-          onClick={(e) => e.stopPropagation()}
-          scroll={false}
-        >
-          <Image
-            src={generateImagePath(image.link)}
-            alt={image.imageId.toString()}
-            width={image.width > 600 ? 600 : image.width}
-            height={
-              image.width > 600
-                ? (image.height * 600) / image.width
-                : image.height
-            }
-          />
-        </Link>
-      ))}
+      {images.map((image, index) => {
+        const isGif = image.link.endsWith('.gif');
+        return (
+          <Link
+            key={index}
+            href={`/${userId}/status/${postId}/photo/${image.imageId}`}
+            onClick={(e) => e.stopPropagation()}
+            scroll={false}
+          >
+            <Image
+              src={generateImagePath(image.link)}
+              alt={image.imageId.toString()}
+              width={image.width > 600 ? 600 : image.width}
+              height={
+                image.width > 600
+                  ? (image.height * 600) / image.width
+                  : image.height
+              }
+              unoptimized={isGif}
+            />
+          </Link>
+        );
+      })}
     </div>
   );
 }

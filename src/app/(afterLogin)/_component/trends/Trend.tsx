@@ -11,17 +11,17 @@ interface Props {
 }
 
 export default function Trend({ tag, index }: Props) {
+  const indexing =
+    typeof index !== 'undefined' ? `${index + 1}ㆍTrending` : 'Trending';
+  const content = tag.type === 'tag' ? `#${tag.title}` : tag.title;
+
   return (
     <Link
-      href={`/search?q=${encodeURIComponent('#' + tag.title)}`}
+      href={`/search?q=${encodeURIComponent(content)}`}
       className={style.trend}
     >
-      <div className={style.count}>
-        {typeof index !== 'undefined' && `${index + 1} · `}Trending
-      </div>
-      <div className={style.title}>
-        {tag.type === 'tag' ? `#${tag.title}` : tag.title}
-      </div>
+      <div className={style.count}>{indexing}</div>
+      <div className={style.title}>{content}</div>
       <div className={style.count}>{unitConversion(tag.count)} posts</div>
     </Link>
   );

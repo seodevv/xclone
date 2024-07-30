@@ -11,8 +11,10 @@ import XLogo from './_component/XLogo';
 import FollowRecommendsSection from './_component/follow_recommends/FollowRecommendsSection';
 import RightSearchZone from '@/app/(afterLogin)/_component/search/RightSearchZone';
 import Logout from './_component/logout/Logout';
-import TrendSection from './_component/trends/TrendSection';
 import ModalController from './_controller/ModalController';
+import Sticky from './_component/sticky/Sticky';
+import SearchFilters from './search/_component/SearchFilters';
+import TrendSection from './_component/trends/TrendSection';
 
 type Props = { children: ReactNode; modal: ReactNode };
 export default async function AfterLoginLayout({ children, modal }: Props) {
@@ -38,8 +40,11 @@ export default async function AfterLoginLayout({ children, modal }: Props) {
                   <main className={style.main}>{children}</main>
                   <section className={style.rightSection}>
                     <RightSearchZone />
-                    <TrendSection />
-                    <FollowRecommendsSection />
+                    <Sticky>
+                      <SearchFilters />
+                      <TrendSection session={session} />
+                      <FollowRecommendsSection />
+                    </Sticky>
                   </section>
                 </div>
               </div>

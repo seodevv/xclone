@@ -1,0 +1,44 @@
+/* Tab */
+.tab {
+  display: flex;
+  flex-grow: 1;
+  flex-shrink: 1;
+  justify-items: stretch;
+  justify-content: center;
+  background: transparent;
+  border: none;
+  font-size: 15px;
+  cursor: pointer;
+  transition: 0.2s background-color ease-in;
+}
+.tab:hover {
+  background: rgba(var(--foreground-rgb), 0.1);
+}
+.navigation {
+  padding: 0 16px;
+  display: flex;
+  flex-flow: column nowrap;
+  align-items: stretch;
+  justify-items: stretch;
+  text-align: center;
+}
+.text {
+  padding: 16px 0;
+  flex-grow: 1;
+  color: rgb(var(--link-rgb));
+}
+.underline {
+  min-width: 56px;
+  min-height: 4px;
+  background: rgb(var(--primary-button-rgb));
+  visibility: hidden;
+  opacity: 0;
+}
+.active > .text {
+  font-weight: bold;
+  color: rgb(var(--foreground-rgb));
+}
+.active > .underline {
+  visibility: visible;
+  opacity: 1;
+}

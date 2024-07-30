@@ -4,7 +4,6 @@ import { getServerSession } from 'next-auth';
 import { authOptions } from '@/app/api/auth/[...nextauth]/route';
 import UserProfile from './_component/UserProfile';
 import UserTabs from './_component/UserTabs';
-import ProfileHeader from './_component/ProfileHeader';
 import {
   dehydrate,
   HydrationBoundary,
@@ -12,6 +11,7 @@ import {
 } from '@tanstack/react-query';
 import { getUser } from './_lib/getUser';
 import { getUserPostsCount } from './_lib/getUserPostsCount';
+import UserHeader from './_component/UserHeader';
 
 interface Props {
   children: ReactNode;
@@ -37,7 +37,7 @@ export default async function layout({ children, params }: Props) {
   return (
     <HydrationBoundary state={dehydrateState}>
       <main className={style.main}>
-        <ProfileHeader username={params.username} />
+        <UserHeader username={params.username} />
         <section className={style.content}>
           <UserProfile session={session} username={params.username} />
           <UserTabs session={session} username={params.username} />
