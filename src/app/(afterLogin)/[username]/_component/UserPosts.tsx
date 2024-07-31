@@ -1,13 +1,15 @@
 'use client';
 
-import style from '@/app/(afterLogin)/[username]/_style/userPosts.module.css';
+import style from '../_style/userPosts.module.css';
+import cx from 'classnames';
 import { useUserQuery } from '../_hooks/useUserQuery';
 import { useUserPostsQuery } from '../_hooks/useUserPostsQuery';
 import Post from '@/app/(afterLogin)/_component/post/Post';
-import { Fragment } from 'react';
 import LoadingSpinner from '../../_component/loading/LoadingSpinner';
 import DisConnection from '../../_component/error/DisConnection';
 import PageLoading from '../../_component/loading/PageLoading';
+import PostMedia from '../../_component/post/body/PostMedia';
+import NoMedia from './NoMedias';
 
 interface Props {
   username: string;
@@ -29,18 +31,22 @@ export default function UserPosts({ username, filter = 'all' }: Props) {
   if (!user) return null;
 
   if (posts) {
+    const isMedia = filter === 'media';
     return (
       <>
-        <div className={style.userPosts}>
-          {posts.pages.map((page, i) => {
-            return (
-              <Fragment key={i}>
-                {page.data.map((p) => (
+        <div>
+          {posts.pages.map((page, i) => (
+            <div key={i} className={cx(isMedia && style.postMedia)}>
+              {page.data.map((p) =>
+                isMedia ? (
+                  <PostMedia key={p.postId} post={p} />
+                ) : (
                   <Post key={p.postId} post={p} />
-                ))}
-              </Fragment>
-            );
-          })}
+                )
+              )}
+            </div>
+          ))}
+          {isMedia && posts.pages.at(0)?.data.length === 0 && <NoMedia />}
           <PageLoading
             hasNextPage={hasNextPage}
             isFetchingNextPage={isFetchingNextPage}

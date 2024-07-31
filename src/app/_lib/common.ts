@@ -78,3 +78,18 @@ export const getImageMeta = (
 export const captialCase = (word: string) => {
   return word.substring(0, 1).toUpperCase() + word.substring(1).toLowerCase();
 };
+
+export const MONTH_EN = [
+  'January',
+  'February',
+  'March',
+  'April',
+  'May',
+  'June',
+  'July',
+  'August',
+  'September',
+  'October',
+  'November',
+  'December',
+];

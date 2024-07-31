@@ -7,7 +7,7 @@ import Link from 'next/link';
 import { useSelectedLayoutSegment } from 'next/navigation';
 import { Session } from 'next-auth';
 import { useUserQuery } from '../_hooks/useUserQuery';
-import { generateImagePath } from '@/app/_lib/common';
+import { generateImagePath, MONTH_EN } from '@/app/_lib/common';
 import CalendarSvg from '@/app/_svg/profile/CalendarSvg';
 import ReferenceSvg from '@/app/_svg/profile/ReferenceSvg';
 
@@ -91,8 +91,8 @@ export default function UserProfile({ session, username }: Props) {
                 <span className={style.registDate}>
                   <CalendarSvg className={style.calendar} />
                   <span>
-                    가입일: {new Date(user.data.regist).getFullYear()}년{' '}
-                    {new Date(user.data.regist).getMonth()}월
+                    Joined {MONTH_EN[new Date(user.data.regist).getMonth()]}{' '}
+                    {new Date(user.data.regist).getFullYear()}{' '}
                   </span>
                 </span>
               </div>

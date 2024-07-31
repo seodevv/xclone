@@ -1,0 +1,30 @@
+/* UserPost */
+.postMedia {
+  display: flex;
+  flex-flow: row wrap;
+  gap: 3px;
+}
+
+/* NoMedias */
+.noMedia {
+  margin: 32px 99px;
+  padding: 0 32px;
+}
+.title {
+  margin-bottom: 8px;
+  font-size: 31px;
+  font-weight: 800;
+  line-height: 36px;
+  color: rgb(var(--foreground-rgb));
+  word-break: keep-all;
+  word-wrap: break-word;
+}
+.message {
+  margin-bottom: 28px;
+  font-size: 15px;
+  font-weight: 400;
+  line-height: 20px;
+  color: rgb(var(--link-rgb));
+  word-break: keep-all;
+  word-wrap: break-word;
+}

@@ -2,24 +2,11 @@ import styles from './postBody.module.css';
 import { CSSProperties } from 'react';
 import dayjs from 'dayjs';
 import relativeTime from 'dayjs/plugin/relativeTime';
+import cx from 'classnames';
+import { MONTH_EN } from '@/app/_lib/common';
 
 dayjs.locale('en');
 dayjs.extend(relativeTime);
-
-const CONVERT_MONTH = [
-  'Jan',
-  'Feb',
-  'Mar',
-  'Apr',
-  'May',
-  'Jun',
-  'Jul',
-  'Aug',
-  'Sep',
-  'Oct',
-  'Nov',
-  'Dec',
-];
 
 const CONVERT_TIME = (date: Date) => {
   const hour = date.getHours();
@@ -50,13 +37,14 @@ export default function PostDate({
   const isRelatived = Date.now() - parsed.getTime() <= based;
   const isSameYear = new Date().getFullYear() === parsed.getFullYear();
 
-  let content = `${CONVERT_MONTH[parsed.getMonth()]} ${parsed.getDate()}${
-    isSameYear ? '' : `, ${parsed.getFullYear()}`
-  }`;
+  let content = `${MONTH_EN[parsed.getMonth()].substring(
+    0,
+    3
+  )} ${parsed.getDate()}${isSameYear ? '' : `, ${parsed.getFullYear()}`}`;
   if (isFull) {
-    content = `${CONVERT_TIME(parsed)} · ${
-      CONVERT_MONTH[parsed.getMonth()]
-    } ${parsed.getDate()}, ${parsed.getFullYear()}`;
+    content = `${CONVERT_TIME(parsed)} · ${MONTH_EN[
+      parsed.getMonth()
+    ].substring(0, 3)} ${parsed.getDate()}, ${parsed.getFullYear()}`;
   }
 
   if (isRelatived && !isFull) {
@@ -64,7 +52,7 @@ export default function PostDate({
   }
 
   return (
-    <span className={styles.postDate} style={style}>
+    <span className={cx(styles.postDate, className)} style={style}>
       {content}
     </span>
   );
