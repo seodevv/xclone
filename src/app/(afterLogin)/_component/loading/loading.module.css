@@ -1,6 +1,12 @@
+/* LoadingSpinner */
 .loadingSpinner {
-  padding: 20px 12px;
+  padding: 30px 12px;
   display: flex;
   align-items: center;
   justify-content: center;
+}
+
+/* PageLoading */
+.pageLoadingSpinner {
+  padding: 30;
 }

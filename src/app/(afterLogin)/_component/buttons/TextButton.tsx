@@ -3,28 +3,21 @@
 import styles from './button.module.css';
 import { CSSProperties, MouseEventHandler } from 'react';
 import cx from 'classnames';
-import RefreshSvg from '@/app/_svg/error/RefreshSvg';
 
 interface Props {
   className?: string;
   style?: CSSProperties;
-  text?: string;
+  text: string;
   onClick?: MouseEventHandler<HTMLButtonElement>;
 }
 
-export default function RefreshButton({
-  className,
-  style,
-  text = 'Retry',
-  onClick,
-}: Props) {
+export default function TextButton({ className, style, text, onClick }: Props) {
   return (
     <button
       className={cx(styles.btn, styles.primaryBtn, className)}
       style={style}
       onClick={onClick}
     >
-      <RefreshSvg white />
       <span>{text}</span>
     </button>
   );

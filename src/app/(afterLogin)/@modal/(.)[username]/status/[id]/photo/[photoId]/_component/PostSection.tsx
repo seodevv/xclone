@@ -11,12 +11,12 @@ import Comments from '@/app/(afterLogin)/[username]/status/[id]/_component/Comme
 
 interface Props {
   session: Session | null;
-  id: string;
+  params: { username: string; id: string };
 }
 
-export default function PostSection({ session, id }: Props) {
+export default function PostSection({ session, params }: Props) {
   const { fold } = useContext(FoldContext);
-  const { data: post } = useSinglePostQuery(id);
+  const { data: post } = useSinglePostQuery(params);
 
   if (fold) return null;
 
@@ -30,7 +30,7 @@ export default function PostSection({ session, id }: Props) {
           postId={post.data.postId}
         />
       )}
-      <Comments id={id} />
+      <Comments params={params} />
     </section>
   );
 }

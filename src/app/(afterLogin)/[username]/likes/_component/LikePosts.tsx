@@ -5,9 +5,18 @@ import { useLikePostsQuery } from '../_hooks/useLikePostsQuery';
 import Post from '@/app/(afterLogin)/_component/post/Post';
 import LoadingSpinner from '@/app/(afterLogin)/_component/loading/LoadingSpinner';
 import DisConnection from '@/app/(afterLogin)/_component/error/DisConnection';
+import PageLoading from '@/app/(afterLogin)/_component/loading/PageLoading';
 
 export default function LikePosts() {
-  const { data: likePosts, isLoading, isError, refetch } = useLikePostsQuery();
+  const {
+    data: likePosts,
+    isLoading,
+    hasNextPage,
+    isFetchingNextPage,
+    fetchNextPage,
+    isError,
+    refetch,
+  } = useLikePostsQuery();
 
   if (likePosts) {
     return (
@@ -19,13 +28,19 @@ export default function LikePosts() {
             ))}
           </Fragment>
         ))}
-        {isError && <DisConnection onClick={() => refetch()} />}
+        <PageLoading
+          hasNextPage={hasNextPage}
+          isFetchingNextPage={isFetchingNextPage}
+          isError={isError}
+          fetchNextPage={fetchNextPage}
+          refetch={refetch}
+        />
       </section>
     );
   }
 
   if (isLoading) {
-    return <LoadingSpinner style={{ padding: 30 }} />;
+    return <LoadingSpinner />;
   }
 
   if (isError) {

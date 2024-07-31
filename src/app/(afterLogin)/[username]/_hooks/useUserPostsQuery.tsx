@@ -1,4 +1,4 @@
-import { useSuspenseInfiniteQuery } from '@tanstack/react-query';
+import { useInfiniteQuery } from '@tanstack/react-query';
 import { getUserPosts } from '../_lib/getUserPosts';
 
 interface Params {
@@ -7,7 +7,7 @@ interface Params {
 }
 
 export const useUserPostsQuery = ({ username, filter = 'all' }: Params) =>
-  useSuspenseInfiniteQuery({
+  useInfiniteQuery({
     queryKey: ['posts', 'list', username, { filter }],
     queryFn: getUserPosts,
     initialPageParam: 0,

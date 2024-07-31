@@ -1,12 +1,10 @@
 'use client';
 
-import { Fragment, useContext, useEffect, useRef } from 'react';
+import { Fragment, useContext } from 'react';
 import { HomeTabContext } from './HomeTabProvider';
 import Post from '@/app/(afterLogin)/_component/post/Post';
-import LoadingSpinner from '../../_component/loading/LoadingSpinner';
 import { useHomePostQuery } from '../_hook/useHomePostQuery';
-import DisConnection from '../../_component/error/DisConnection';
-import ObserveElement from '../../_component/observer/ObserveElement';
+import PageLoading from '../../_component/loading/PageLoading';
 
 export default function HomePosts() {
   const { tab } = useContext(HomeTabContext);
@@ -28,19 +26,13 @@ export default function HomePosts() {
           })}
         </Fragment>
       ))}
-      {isFetchingNextPage && <LoadingSpinner style={{ padding: '30px' }} />}
-      <ObserveElement
-        callback={() => {
-          if (!isError && hasNextPage && !isFetchingNextPage) {
-            console.log('fetching');
-            fetchNextPage();
-          }
-        }}
-        dependencies={[isError, hasNextPage, isFetchingNextPage, fetchNextPage]}
-        isFetching={isFetchingNextPage}
-        active={hasNextPage && !isError}
+      <PageLoading
+        hasNextPage={hasNextPage}
+        isFetchingNextPage={isFetchingNextPage}
+        isError={isError}
+        fetchNextPage={fetchNextPage}
+        refetch={refetch}
       />
-      {isError && <DisConnection onClick={() => refetch()} />}
     </>
   );
 }

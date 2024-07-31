@@ -1,0 +1,49 @@
+.link {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 34px;
+  height: 34px;
+  border: none;
+  border-radius: 50%;
+  background: rgba(0, 0, 0, 0.5);
+  cursor: pointer;
+  transition: 0.15s background-color ease-in;
+}
+.link:hover:enabled {
+  background: rgba(var(--button-hover-rgb), 0.1);
+}
+.link:active:enabled {
+  background: rgba(var(--button-hover-rgb), 0.2);
+  transition: none;
+}
+.primaryLink {
+  padding: 0 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: unset;
+  height: unset;
+  min-width: 36px;
+  min-height: 36px;
+  background: rgb(var(--primary-button-rgb));
+  border: none;
+  border-radius: 9999px;
+}
+.primaryLink svg {
+  margin-right: 4px;
+  fill: rgb(var(--foreground-rgb));
+}
+.primaryLink span {
+  margin-bottom: 1px;
+  font-size: 15px;
+  font-weight: bold;
+  color: rgb(var(--foreground-rgb));
+}
+.primaryLink:hover:enabled {
+  background: rgba(var(--primary-button-rgb), 0.9);
+}
+.primaryLink:active:enabled {
+  background: rgba(var(--primary-button-rgb), 0.75);
+  transition: none;
+}

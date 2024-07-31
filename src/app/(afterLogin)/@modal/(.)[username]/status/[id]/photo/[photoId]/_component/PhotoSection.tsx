@@ -14,15 +14,14 @@ import LeftFoldButton from '@/app/(afterLogin)/_component/buttons/LeftFoldButton
 import ActionButtons from '@/app/(afterLogin)/_component/post/body/ActionButtons';
 
 interface Props {
-  id: string;
-  photoId: string;
+  params: { username: string; id: string; photoId: string };
 }
 
-export default function PhotoSection({ id, photoId }: Props) {
+export default function PhotoSection({ params }: Props) {
   const { fold, setFold } = useContext(FoldContext);
-  const { data: post } = useSinglePostQuery(id);
+  const { data: post } = useSinglePostQuery(params);
   const [index, setIndex] = useState(
-    post.data.images.findIndex((image) => image.imageId === ~~photoId)
+    post.data.images.findIndex((image) => image.imageId === ~~params.photoId)
   );
   const hasPrev = !!post.data.images[index - 1];
   const hasNext = !!post.data.images[index + 1];

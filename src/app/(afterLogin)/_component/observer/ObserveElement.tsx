@@ -9,6 +9,7 @@ interface Props {
   dependencies?: any[];
   isFetching?: boolean;
   active: boolean;
+  threshold?: number;
 }
 
 export default function ObserveElement({
@@ -18,16 +19,19 @@ export default function ObserveElement({
   dependencies = [],
   isFetching,
   active,
+  threshold = 0.5,
 }: Props) {
   const ref = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    const observer = new IntersectionObserver((entries) => {
-      if (entries[0].isIntersecting) {
-        console.log('show');
-        callback();
-      }
-    });
+    const observer = new IntersectionObserver(
+      (entries) => {
+        if (entries[0].isIntersecting) {
+          callback();
+        }
+      },
+      { threshold: threshold }
+    );
     if (ref.current) {
       observer.observe(ref.current);
     }

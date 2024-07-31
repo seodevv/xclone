@@ -1,28 +1,16 @@
 import UserPosts from '../_component/UserPosts';
-import {
-  dehydrate,
-  HydrationBoundary,
-  QueryClient,
-} from '@tanstack/react-query';
-import { getUserPosts } from '../_lib/getUserPosts';
+import UserPostHydartionBoundary from '../_component/UserPostHydrationBoundary';
 
 interface Props {
   params: { username: string };
 }
 
 export default async function MediaPage({ params }: Props) {
-  const queryClient = new QueryClient();
-  await queryClient.prefetchInfiniteQuery({
-    queryKey: ['posts', 'list', params.username, { filter: 'media' as const }],
-    queryFn: getUserPosts,
-    initialPageParam: 0,
-    staleTime: 1 * 60 * 1000,
-  });
-  const dehydrateState = dehydrate(queryClient);
+  const filter = 'media' as const;
 
   return (
-    <HydrationBoundary state={dehydrateState}>
+    <UserPostHydartionBoundary username={params.username} filter={filter}>
       <UserPosts username={params.username} filter="media" />
-    </HydrationBoundary>
+    </UserPostHydartionBoundary>
   );
 }

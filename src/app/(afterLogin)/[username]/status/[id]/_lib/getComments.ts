@@ -1,18 +1,21 @@
 import { AdvancedPost } from '@/model/Post';
 
 interface Params {
-  queryKey: string[];
+  queryKey: (string | { username: string })[];
   pageParam: number;
 }
 
 export const getComments = async ({
-  queryKey: [, , , id],
+  queryKey: [, , , id, params],
   pageParam,
 }: Params): Promise<{
   data: AdvancedPost[];
   nextCursor?: number;
   message: string;
 }> => {
+  if (typeof params !== 'object' || typeof id !== 'string') {
+    throw new Error('Invalid query key');
+  }
   const isServer = typeof window === 'undefined';
   const requestUrl = `${
     isServer ? process.env.SERVER_URL : process.env.NEXT_PUBLIC_SERVER_URL
@@ -25,6 +28,10 @@ export const getComments = async ({
     },
   };
   const response = await fetch(requestUrl, requestOptions);
+
+  if (response.status === 404) {
+    throw new Error('not-found');
+  }
 
   if (!response.ok) {
     throw new Error('Failed to fetch data');

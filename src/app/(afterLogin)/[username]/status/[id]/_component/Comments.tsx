@@ -7,16 +7,16 @@ import { Fragment, MouseEventHandler } from 'react';
 import LoadingSpinner from '@/app/(afterLogin)/_component/loading/LoadingSpinner';
 
 interface Props {
-  id: string;
+  params: { username: string; id: string };
 }
 
-export default function Comments({ id }: Props) {
+export default function Comments({ params }: Props) {
   const {
     data: comments,
     isLoading,
     isError,
     refetch,
-  } = useCommentsInfiniteQuery(id);
+  } = useCommentsInfiniteQuery(params);
 
   const onClickRetry: MouseEventHandler<HTMLButtonElement> = (e) => {
     e.preventDefault();

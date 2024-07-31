@@ -17,6 +17,14 @@ export default function UserHeaderContent({ username }: Props) {
     filter: segment === 'media' ? 'media' : 'all',
   });
 
+  if (!user) {
+    return (
+      <div className={style.headerInfo}>
+        <h3 className={style.headerTitle}>Profile</h3>
+      </div>
+    );
+  }
+
   if (!segment || segment === 'with_replies') {
     return (
       <div className={style.headerInfo}>
@@ -54,9 +62,5 @@ export default function UserHeaderContent({ username }: Props) {
     );
   }
 
-  return (
-    <div className={style.headerInfo}>
-      <h3 className={style.headerTitle}>프로필</h3>
-    </div>
-  );
+  return null;
 }

@@ -47,6 +47,7 @@ export default function SearchTab() {
     <nav className={style.tabs}>
       {tabs.map((t) => (
         <TabButton
+          key={t.f}
           onClick={() => changeTabs(t.f)}
           text={t.text ? t.text : t.f}
           active={t.f === tab}

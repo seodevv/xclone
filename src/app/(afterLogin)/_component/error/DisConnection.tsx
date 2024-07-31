@@ -8,13 +8,14 @@ interface Props {
 }
 
 export default function DisConnection({ onClick }: Props) {
+  const text =
+    'Looks like you lost your connection. Please check it and try again.';
+
   return (
     <div className={style.disconnection}>
       <DisConnectSvg className={style.icon} white />
       <div className={style.message}>
-        <span>
-          Looks like you lost your connection. Please check it and try again.
-        </span>
+        <span>{text}</span>
       </div>
       <RefreshButton onClick={onClick} />
     </div>

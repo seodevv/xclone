@@ -117,8 +117,8 @@ export default function UserProfile({ session, username }: Props) {
             </>
           ) : (
             <div className={style.userNotFound}>
-              <div>계정이 존재하지 않음</div>
-              <div>다른 검색어를 시도해보세요.</div>
+              <div>This account doesn't exist</div>
+              <div>Try searching for another.</div>
             </div>
           )}
         </div>

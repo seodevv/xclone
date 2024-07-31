@@ -8,12 +8,12 @@ import Comments from './Comments';
 import Post from '@/app/(afterLogin)/_component/post/Post';
 
 interface Props {
-  id: string;
+  params: { username: string; id: string };
   session: Session | null;
 }
 
-export default function SinglePost({ session, id }: Props) {
-  const { data: post } = useSinglePostQuery(id);
+export default function SinglePost({ params, session }: Props) {
+  const { data: post } = useSinglePostQuery(params);
 
   return (
     <div className={style.main}>
@@ -25,7 +25,7 @@ export default function SinglePost({ session, id }: Props) {
           postId={post.data.postId}
         />
       )}
-      <Comments id={id} />
+      <Comments params={params} />
     </div>
   );
 }
