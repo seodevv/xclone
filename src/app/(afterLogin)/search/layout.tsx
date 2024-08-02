@@ -1,5 +1,5 @@
-import styles from './_style/searchLayout.module.css';
-import SearchHeader from './_component/SearchHeader';
+import styles from './searchLayout.module.css';
+import SearchHeader from './_component/_header/SearchHeader';
 
 interface Props {
   children: React.ReactNode;

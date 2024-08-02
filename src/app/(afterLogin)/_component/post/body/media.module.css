@@ -50,6 +50,11 @@
   aspect-ratio: 1 / 1;
   object-fit: cover;
 }
+.postMediaMulty {
+  position: absolute;
+  right: 12px;
+  bottom: 12px;
+}
 .postMediaHover {
   position: absolute;
   top: 0;

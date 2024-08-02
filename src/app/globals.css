@@ -104,14 +104,14 @@
 
 html,
 body {
-  max-width: 100vw;
-  overflow-x: hidden;
+  max-width: 100dvw;
+  /* overflow-x: hidden; */
+  scrollbar-color: rgb(var(--scroll-thumb)) rgb(var(--scroll-background));
 }
 
 body {
   background: rgba(var(--background-start-rgb));
   color: rgb(var(--foreground-rgb));
-  scrollbar-color: rgb(var(--scroll-thumb)) rgb(var(--scroll-background));
 }
 
 a {

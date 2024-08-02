@@ -1,25 +1,26 @@
-import {
-  dehydrate,
-  HydrationBoundary,
-  QueryClient,
-} from '@tanstack/react-query';
-import { getFollowRecommends } from '@/app/(afterLogin)/_lib/getFollowRecommends';
+'use client';
+
+import styles from './followRecommend.module.css';
+import { useSelectedLayoutSegment } from 'next/navigation';
+import cx from 'classnames';
 import FollowRecommends from '@/app/(afterLogin)/_component/follow_recommends/FollowRecommends';
 
-export default async function FollowRecommendsSection() {
-  const queryClient = new QueryClient();
-  await queryClient.prefetchQuery({
-    queryKey: ['users', 'list', 'recommends'],
-    queryFn: getFollowRecommends,
-    staleTime: 1 * 60 * 1000,
-  });
-  const dehydrateState = dehydrate(queryClient);
+export default function FollowRecommendsSection() {
+  const segment = useSelectedLayoutSegment();
+
+  if (!segment || segment === 'messages') return null;
+
+  if (['home', 'explore', 'search', 'messages', 'settings'].includes(segment)) {
+    return (
+      <div className={cx(styles.followRecommendSection)}>
+        <FollowRecommends />
+      </div>
+    );
+  }
 
   return (
-    <>
-      <HydrationBoundary state={dehydrateState}>
-        <FollowRecommends />
-      </HydrationBoundary>
-    </>
+    <div className={cx(styles.followRecommendSection, styles.firstOrder)}>
+      <FollowRecommends title="You might like" />
+    </div>
   );
 }

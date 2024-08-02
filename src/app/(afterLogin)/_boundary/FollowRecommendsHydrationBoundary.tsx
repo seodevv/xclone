@@ -3,25 +3,23 @@ import {
   HydrationBoundary,
   QueryClient,
 } from '@tanstack/react-query';
-import { getUserPosts } from '../_lib/getUserPosts';
+import { getFollowRecommends } from '../_lib/getFollowRecommends';
 
 interface Props {
   children: React.ReactNode;
-  username: string;
-  filter: 'all' | 'reply' | 'media';
 }
 
-export default async function UserPostHydartionBoundary({
+export default async function FollowRecommendsHydrationBoundary({
   children,
-  username,
-  filter,
 }: Props) {
   const queryClient = new QueryClient();
+  queryClient.setDefaultOptions({
+    queries: { staleTime: 1 * 60 * 1000 },
+  });
   await queryClient.prefetchInfiniteQuery({
-    queryKey: ['posts', 'list', username, { filter }],
-    queryFn: getUserPosts,
-    initialPageParam: 0,
-    staleTime: 1 * 60 * 1000,
+    queryKey: ['users', 'list', 'recommends'],
+    queryFn: getFollowRecommends,
+    initialPageParam: '',
   });
   const dehydrateState = dehydrate(queryClient);
 

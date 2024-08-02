@@ -45,5 +45,9 @@ export default function Comments({ params }: Props) {
     return <LoadingSpinner />;
   }
 
-  return <DisConnection onClick={onClickRetry} />;
+  if (isError) {
+    return <DisConnection onClick={onClickRetry} />;
+  }
+
+  return null;
 }

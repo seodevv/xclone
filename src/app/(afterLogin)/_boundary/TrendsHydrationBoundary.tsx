@@ -4,7 +4,7 @@ import {
   HydrationBoundary,
   QueryClient,
 } from '@tanstack/react-query';
-import { getTrends } from '../../_lib/getTrends';
+import { getTrends } from '../_lib/getTrends';
 
 interface Props {
   children: ReactNode;

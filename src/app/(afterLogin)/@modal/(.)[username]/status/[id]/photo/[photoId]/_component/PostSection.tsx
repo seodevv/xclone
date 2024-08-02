@@ -2,7 +2,7 @@
 
 import { useSinglePostQuery } from '@/app/(afterLogin)/[username]/status/[id]/_hooks/useSinglePostQuery';
 import styles from '../_style/photoModal.module.css';
-import { useContext } from 'react';
+import { useContext, useEffect } from 'react';
 import { FoldContext } from '../_provider/FoldProvider';
 import Post from '@/app/(afterLogin)/_component/post/Post';
 import { Session } from 'next-auth';
@@ -17,6 +17,13 @@ interface Props {
 export default function PostSection({ session, params }: Props) {
   const { fold } = useContext(FoldContext);
   const { data: post } = useSinglePostQuery(params);
+
+  useEffect(() => {
+    document.body.style.overflow = 'hidden';
+    return () => {
+      document.body.style.overflow = '';
+    };
+  }, []);
 
   if (fold) return null;
 

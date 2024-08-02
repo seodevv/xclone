@@ -1,5 +1,5 @@
 interface Params {
-  queryKey: [string, string, string, { filter?: 'all' | 'media' }];
+  queryKey: [string, string, string, { filter?: 'all' | 'media' | 'likes' }];
 }
 
 export const getUserPostsCount = async ({

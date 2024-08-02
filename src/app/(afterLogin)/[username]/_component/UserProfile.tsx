@@ -56,7 +56,7 @@ export default function UserProfile({ session, username }: Props) {
           </div>
           {user && user.data.id !== session?.user?.email && (
             <button className={style.followButton} onClick={onClickFollow}>
-              팔로우
+              follow
             </button>
           )}
         </div>

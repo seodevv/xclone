@@ -7,6 +7,7 @@ import { useUserSearchQuery } from '../../_hook/useUserSearchQuery';
 import LoadingSpinner from '@/app/(afterLogin)/_component/loading/LoadingSpinner';
 import SearchNoResult from './SearchNoResult';
 import SearchUsers from './SearchUsers';
+import { useEffect } from 'react';
 
 interface Props {
   searchParams: { q?: string; f?: string; pf?: string; lf?: string };
@@ -15,7 +16,6 @@ interface Props {
 export default function SearchBody({ searchParams }: Props) {
   const {
     isLoading: pLoading,
-    isFetching: pFetching,
     isEmpty: pEmpty,
     enabled: pEnabled,
   } = usePostSearchQuery({
@@ -23,14 +23,19 @@ export default function SearchBody({ searchParams }: Props) {
   });
   const {
     isLoading: uLoading,
-    isFetching: uFetching,
     isEmpty: uEmpty,
     enabled: uEnabled,
   } = useUserSearchQuery({
     searchParams,
   });
 
-  if (pLoading || pFetching || uLoading || uFetching) {
+  useEffect(() => {
+    if (pLoading || uLoading) {
+      window.scrollTo(0, 0);
+    }
+  }, [searchParams.f]);
+
+  if (pLoading || uLoading) {
     return <LoadingSpinner />;
   }
 

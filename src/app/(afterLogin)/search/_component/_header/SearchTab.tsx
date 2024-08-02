@@ -1,9 +1,9 @@
 'use client';
 
-import style from '../_style/search.module.css';
+import style from './searchHeader.module.css';
 import { useEffect, useState } from 'react';
 import { useRouter, useSearchParams } from 'next/navigation';
-import TabButton from '../../_component/tab/TabButton';
+import TabButton from '../../../_component/tab/TabButton';
 
 type Tab = 'top' | 'live' | 'user' | 'media' | 'lists';
 
@@ -36,7 +36,9 @@ export default function SearchTab() {
       writableSearchParams.set('f', tab);
     }
     setTab(tab);
-    router.replace(`/search?${writableSearchParams.toString()}`);
+    router.replace(`/search?${writableSearchParams.toString()}`, {
+      scroll: false,
+    });
   };
 
   useEffect(() => {

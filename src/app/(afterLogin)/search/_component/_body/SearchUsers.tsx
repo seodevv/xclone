@@ -2,7 +2,6 @@ import styles from './searchBody.module.css';
 import { useUserSearchQuery } from '../../_hook/useUserSearchQuery';
 import FollowRecommend from '@/app/(afterLogin)/_component/follow_recommends/FollowRecommend';
 import Link from 'next/link';
-import { Fragment } from 'react';
 
 interface Props {
   searchParams: { q?: string; f?: string; pf?: string; lf?: string };
@@ -22,21 +21,17 @@ export default function SearchUsers({ searchParams }: Props) {
         </div>
         {searchUsers.pages.map((page, i) => {
           if (isShort && i > 0) return null;
-          return (
-            <Fragment key={i}>
-              {page.data.map((u, i) => {
-                if (isShort && i > 2) return null;
-                return (
-                  <FollowRecommend
-                    key={u.id}
-                    style={{ paddingLeft: 16, paddingRight: 16 }}
-                    user={u}
-                    isDesc
-                  />
-                );
-              })}
-            </Fragment>
-          );
+          return page.data.map((u, i) => {
+            if (isShort && i > 2) return null;
+            return (
+              <FollowRecommend
+                key={u.id}
+                style={{ paddingLeft: 16, paddingRight: 16 }}
+                user={u}
+                isDesc
+              />
+            );
+          });
         })}
         {isShort && (
           <Link

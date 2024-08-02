@@ -19,7 +19,7 @@ export const getComments = async ({
   const isServer = typeof window === 'undefined';
   const requestUrl = `${
     isServer ? process.env.SERVER_URL : process.env.NEXT_PUBLIC_SERVER_URL
-  }/api/posts/${id}/comments?cursor=${pageParam}`;
+  }/api/posts/${id}/comments?cursor=${pageParam}&userId=${params.username}`;
   const requestOptions: RequestInit = {
     method: 'GET',
     credentials: 'include',

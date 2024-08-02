@@ -1,7 +1,14 @@
 import { AdvancedUser } from '@/model/User';
 
-export const getFollowRecommends = async (): Promise<{
+interface Params {
+  pageParam: string;
+}
+
+export const getFollowRecommends = async ({
+  pageParam,
+}: Params): Promise<{
   data: AdvancedUser[];
+  nextCursor?: string;
   message: string;
 }> => {
   const isServer = typeof window === 'undefined';
@@ -9,7 +16,7 @@ export const getFollowRecommends = async (): Promise<{
 
   const requestUrl = `${
     isServer ? process.env.SERVER_URL : process.env.NEXT_PUBLIC_SERVER_URL
-  }/api/users/followRecommends`;
+  }/api/users/followRecommends?cursor=${pageParam}`;
   const requestOptions: RequestInit = {
     method: 'GET',
     credentials: 'include',

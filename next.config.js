@@ -5,7 +5,6 @@ const nextConfig = {
       {
         protocol: 'http',
         hostname: 'localhost',
-        // pathname: '/api/image',
       },
       {
         protocol: 'https',
@@ -29,6 +28,9 @@ const nextConfig = {
         hostname: 'avatars.githubusercontent.com',
       },
     ],
+  },
+  experimental: {
+    scrollRestoration: true,
   },
 };
 

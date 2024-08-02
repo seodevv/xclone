@@ -3,7 +3,7 @@ import { getUserPostsCount } from '../_lib/getUserPostsCount';
 
 interface Params {
   username: string;
-  filter?: 'all' | 'media';
+  filter?: 'all' | 'media' | 'likes';
 }
 
 export const useUserPostsCountQuery = ({ username, filter = 'all' }: Params) =>

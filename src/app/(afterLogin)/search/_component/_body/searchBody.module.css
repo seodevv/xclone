@@ -1,56 +1,15 @@
+/* SearchBody */
 .body {
   display: flex;
   flex-flow: column nowrap;
 }
 
+/* SearchUsers */
 .people {
   padding: 12px 16px;
   font-size: 20px;
   font-weight: 800;
 }
-
-.noResult {
-  margin: 30px auto;
-  padding: 0 30px;
-  display: flex;
-  flex-direction: column;
-  width: 100%;
-  max-width: 400px;
-}
-
-.query {
-  margin-bottom: 8px;
-  font-size: 31px;
-  font-weight: bold;
-  line-height: 40px;
-}
-
-.query > span {
-  word-break: keep-all;
-  word-wrap: break-word;
-}
-
-.desc {
-  margin-bottom: 28px;
-  font-size: 15px;
-  font-weight: 400;
-  line-height: 20px;
-  color: rgb(var(--link-rgb));
-  text-align: left;
-}
-
-.desc > span {
-  word-break: keep-all;
-}
-
-.desc a {
-  color: rgb(var(--primary-rgb));
-}
-
-.desc a:hover {
-  text-decoration: underline;
-}
-
 .viewAll {
   padding: 16px;
   border-bottom: 1px solid rgb(var(--border-start-rgb));
@@ -59,13 +18,55 @@
   color: rgb(var(--primary-rgb));
   transition: 0.1s all ease-in;
 }
-
 .viewAll:hover {
   background: rgba(var(--button-hover-rgb), 0.1);
   text-decoration: underline;
 }
-
 .viewAll:active {
   background: transparent;
   transition: none;
+}
+
+/* SearchNoResult */
+.noResult {
+  margin: 30px auto;
+  padding: 0 30px;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  max-width: 400px;
+}
+.query {
+  margin-bottom: 8px;
+  font-size: 31px;
+  font-weight: bold;
+  line-height: 40px;
+}
+.query > span {
+  word-break: keep-all;
+  word-wrap: break-word;
+}
+.desc {
+  margin-bottom: 28px;
+  font-size: 15px;
+  font-weight: 400;
+  line-height: 20px;
+  color: rgb(var(--link-rgb));
+  text-align: left;
+}
+.desc > span {
+  word-break: keep-all;
+}
+.desc a {
+  color: rgb(var(--primary-rgb));
+}
+.desc a:hover {
+  text-decoration: underline;
+}
+
+/* SearchPosts */
+.postMedia {
+  display: flex;
+  flex-flow: row wrap;
+  gap: 3px;
 }

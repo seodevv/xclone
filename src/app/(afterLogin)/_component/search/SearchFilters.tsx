@@ -1,17 +1,14 @@
 'use client';
 
-import styles from '../_style/searchFilter.module.css';
+import styles from './searchFilter.module.css';
 import { usePathname, useRouter, useSearchParams } from 'next/navigation';
-import RadioButton from '../../_component/buttons/RadioButton';
+import RadioButton from '../buttons/RadioButton';
 import Link from 'next/link';
 
 export default function SearchFilters() {
   const router = useRouter();
   const pathname = usePathname();
   const searchParams = useSearchParams();
-
-  if (pathname !== '/search') return null;
-
   const groups = [
     {
       title: 'People',
@@ -38,6 +35,8 @@ export default function SearchFilters() {
     }
     router.replace(`/search?${writableSearchParams.toString()}`);
   };
+
+  if (pathname !== '/search') return null;
 
   return (
     <section className={styles.main}>

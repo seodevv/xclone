@@ -1,5 +1,6 @@
 'use client';
 
+import MultySvg from '@/app/_svg/post/MultySvg';
 import styles from './media.module.css';
 import { generateImagePath } from '@/app/_lib/common';
 import { AdvancedPost } from '@/model/Post';
@@ -30,6 +31,7 @@ export default function PostMedia({ post, row = 3, gap = 2 }: Props) {
       onMouseLeave={() => {
         setHover(false);
       }}
+      scroll={false}
     >
       <Image
         src={generateImagePath(first.link)}
@@ -37,6 +39,9 @@ export default function PostMedia({ post, row = 3, gap = 2 }: Props) {
         width={first.width}
         height={first.height}
       />
+      {post.images.length > 1 && (
+        <MultySvg className={styles.postMediaMulty} white />
+      )}
       {hover && <div className={styles.postMediaHover}></div>}
     </Link>
   );

@@ -1,5 +1,5 @@
-import Link from 'next/link';
 import styles from './searchBody.module.css';
+import Link from 'next/link';
 
 interface Props {
   q?: string;

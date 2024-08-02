@@ -1,15 +1,12 @@
 'use client';
 
-import styles from '../_style/search.module.css';
-import BackButton from '../../_component/buttons/BackButton';
-import SearchForm from '../../_component/search/SearchForm';
-import OptionButton from '../../_component/buttons/OptionButton';
+import styles from './searchHeader.module.css';
+import BackButton from '../../../_component/buttons/BackButton';
+import SearchForm from '../../../_component/search/SearchForm';
+import OptionButton from '../../../_component/buttons/OptionButton';
 import SearchTab from './SearchTab';
-import { useSearchParams } from 'next/navigation';
 
 export default function SearchHeader() {
-  const searchParams = useSearchParams();
-
   return (
     <section className={styles.header}>
       <div className={styles.form}>

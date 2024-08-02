@@ -1,8 +1,15 @@
 /* UserPost */
-.postMedia {
+.userPosts {
+  display: flex;
+  flex-flow: column nowrap;
+}
+.userMedia {
   display: flex;
   flex-flow: row wrap;
   gap: 3px;
+}
+.followRecommends {
+  border-bottom: 1px solid rgb(var(--border-start-rgb));
 }
 
 /* NoMedias */

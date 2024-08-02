@@ -1,20 +1,17 @@
+'use client';
+
 import { Session } from 'next-auth';
 import Trends from '@/app/(afterLogin)/_component/trends/Trends';
-import TrendsHydrationBoundary from './TrendsHydrationBoundary';
-import TrendsController from './TrendsController';
+import { useSelectedLayoutSegment } from 'next/navigation';
 
 interface Props {
   session: Session | null;
 }
 
 export default function TrendSection({ session }: Props) {
-  if (!session) return null;
+  const segment = useSelectedLayoutSegment();
 
-  return (
-    <TrendsHydrationBoundary>
-      <TrendsController>
-        <Trends />
-      </TrendsController>
-    </TrendsHydrationBoundary>
-  );
+  if (segment === 'explore' || !session) return null;
+
+  return <Trends />;
 }

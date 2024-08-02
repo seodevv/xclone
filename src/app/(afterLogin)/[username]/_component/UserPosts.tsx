@@ -1,6 +1,6 @@
 'use client';
 
-import style from '../_style/userPosts.module.css';
+import styles from '../_style/userPosts.module.css';
 import cx from 'classnames';
 import { useUserQuery } from '../_hooks/useUserQuery';
 import { useUserPostsQuery } from '../_hooks/useUserPostsQuery';
@@ -10,6 +10,7 @@ import DisConnection from '../../_component/error/DisConnection';
 import PageLoading from '../../_component/loading/PageLoading';
 import PostMedia from '../../_component/post/body/PostMedia';
 import NoMedia from './NoMedias';
+import FollowRecommends from '../../_component/follow_recommends/FollowRecommends';
 
 interface Props {
   username: string;
@@ -33,29 +34,30 @@ export default function UserPosts({ username, filter = 'all' }: Props) {
   if (posts) {
     const isMedia = filter === 'media';
     return (
-      <>
-        <div>
-          {posts.pages.map((page, i) => (
-            <div key={i} className={cx(isMedia && style.postMedia)}>
-              {page.data.map((p) =>
-                isMedia ? (
-                  <PostMedia key={p.postId} post={p} />
-                ) : (
-                  <Post key={p.postId} post={p} />
-                )
-              )}
-            </div>
-          ))}
-          {isMedia && posts.pages.at(0)?.data.length === 0 && <NoMedia />}
-          <PageLoading
-            hasNextPage={hasNextPage}
-            isFetchingNextPage={isFetchingNextPage}
-            isError={isError}
-            fetchNextPage={fetchNextPage}
-            refetch={refetch}
-          />
-        </div>
-      </>
+      <div className={cx(styles.userPosts, isMedia && styles.userMedia)}>
+        {posts.pages.map((page, i) =>
+          page.data.map((p, j) =>
+            isMedia ? (
+              <PostMedia key={p.postId} post={p} />
+            ) : (
+              <Post key={p.postId} post={p} style={{ order: 10 * i + j + 1 }} />
+            )
+          )
+        )}
+        {isMedia && posts.pages.at(0)?.data.length === 0 && <NoMedia />}
+        {!isMedia && (
+          <div className={styles.followRecommends} style={{ order: 5 }}>
+            <FollowRecommends isDesc />
+          </div>
+        )}
+        <PageLoading
+          hasNextPage={hasNextPage}
+          isFetchingNextPage={isFetchingNextPage}
+          isError={isError}
+          fetchNextPage={fetchNextPage}
+          refetch={refetch}
+        />
+      </div>
     );
   }
 

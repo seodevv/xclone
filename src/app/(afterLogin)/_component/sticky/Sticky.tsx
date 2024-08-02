@@ -25,9 +25,8 @@ export default function Sticky({ children }: Props) {
 
   const scrollListener = () => {
     const init = ['/explore', '/search'].includes(pathname) ? 0 : 60;
-    const scrollTop = document.body.scrollTop;
+    const scrollTop = window.scrollY;
     const diff = lastScrollTop.current - scrollTop;
-    console.log(pathname, diff, init);
     if (diff === 0) {
       setTop(init);
     } else if (diff > 0) {
@@ -49,9 +48,9 @@ export default function Sticky({ children }: Props) {
 
   useEffect(() => {
     scrollListener();
-    document.body.addEventListener('scroll', scrollListener);
+    window.addEventListener('scroll', scrollListener);
     return () => {
-      document.body.removeEventListener('scroll', scrollListener);
+      window.removeEventListener('scroll', scrollListener);
     };
   }, [height, pathname, setTop]);
 

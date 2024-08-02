@@ -1,22 +1,24 @@
 'use client';
 
 import styles from './post.module.css';
-import { MouseEventHandler, ReactNode } from 'react';
+import { CSSProperties, MouseEventHandler, ReactNode } from 'react';
 import { useRouter } from 'next/navigation';
 import cx from 'classnames';
 import { AdvancedPost } from '@/model/Post';
 
-type Props = {
+interface Props {
+  className?: string;
+  style?: CSSProperties;
   children: ReactNode;
   post: AdvancedPost;
-  className?: string;
   isSingle?: boolean;
-};
+}
 
 export default function PostArticle({
+  className,
+  style,
   children,
   post,
-  className,
   isSingle = false,
 }: Props) {
   const router = useRouter();
@@ -29,8 +31,9 @@ export default function PostArticle({
 
   return (
     <article
-      onClick={onClick}
       className={cx(styles.post, isSingle && styles.single, className)}
+      style={style}
+      onClick={onClick}
     >
       {children}
     </article>
