@@ -65,22 +65,6 @@
   border-radius: 50%;
   object-fit: cover;
 }
-.followButton {
-  margin-bottom: 12px;
-  padding: 0 16px;
-  border-radius: 9999px;
-  height: 36px;
-  background-color: rgb(var(--foreground-rgb));
-  font-size: 1rem;
-  color: rgb(var(--background-start-rgb));
-  font-weight: bold;
-  cursor: pointer;
-  box-sizing: content-box;
-  transition: 0.1s opacity ease-in;
-}
-.followButton:hover {
-  opacity: 0.9;
-}
 
 .userName {
   font-size: 15px;
@@ -89,6 +73,8 @@
   margin: 4px 0 12px 0;
 }
 .userNick {
+  display: flex;
+  align-items: flex-end;
   font-size: 20px;
   font-weight: bold;
 }

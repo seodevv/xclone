@@ -18,7 +18,7 @@ export default function LogoutButton({ children }: Props) {
         credentials: 'include',
       });
       router.push('/');
-      router.refresh();
+      // router.refresh();
     } catch (error) {
       console.error(error);
     }

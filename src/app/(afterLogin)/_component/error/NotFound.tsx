@@ -7,6 +7,7 @@ import TextButton from '../buttons/TextButton';
 import useAlterModal from '../../_hooks/useAlterModal';
 
 interface AlterMessage {
+  type?: string;
   alterMessage?: string;
 }
 interface Button extends AlterMessage {
@@ -18,9 +19,10 @@ interface Link extends AlterMessage {
 type Props = Button | Link;
 
 export default function NotFound(props: Props) {
+  const type = props.type || 'page';
+
   const { alterMessage } = useAlterModal();
-  const message =
-    'Hmm...this page doesn’t exist. Try searching for something else.';
+  const message = `Hmm...this ${type} doesn’t exist. Try searching for something else.`;
   const isButton = (prop: Props): prop is Button => {
     return Object.hasOwn(prop, 'onClick');
   };

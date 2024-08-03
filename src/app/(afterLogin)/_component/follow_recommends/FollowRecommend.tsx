@@ -8,6 +8,7 @@ import cx from 'classnames';
 import { generateImagePath } from '@/app/_lib/common';
 import { AdvancedUser } from '@/model/User';
 import FollowButton from '@/app/(afterLogin)/_component/buttons/FollowButton';
+import BadgeSvg from '@/app/_svg/verified/BadgeSvg';
 
 interface Props {
   className?: string;
@@ -39,7 +40,10 @@ export default function FollowRecommend({
       <div className={styles.userInfo}>
         <div className={styles.flex}>
           <div className={styles.grow}>
-            <div className={styles.nickname}>{user.nickname}</div>
+            <div className={styles.nickname}>
+              {user.nickname}
+              <BadgeSvg type={user.verified?.type} />
+            </div>
             <div className={styles.identifier}>@{user.id}</div>
           </div>
           <FollowButton user={user} />

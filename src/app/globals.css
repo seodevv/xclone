@@ -8,6 +8,8 @@
   --foreground-rgb: 0, 0, 0;
   --background-start-rgb: 214, 219, 220;
   --background-end-rgb: 255, 255, 255;
+  --r-background-start-rgb: 0, 0, 0;
+  --background-modal-rgb: 91, 112, 131;
 
   --border-start-rgb: 47, 51, 54;
   --primary-button-rgb: 26, 140, 216;
@@ -62,6 +64,7 @@
     --foreground-rgb: 255, 255, 255;
     --background-start-rgb: 0, 0, 0;
     --background-end-rgb: 0, 0, 0;
+    --r-background-start-rgb: 214, 219, 220;
 
     --border-start-rgb: 47, 51, 54;
     --primary-button-rgb: 26, 140, 216;

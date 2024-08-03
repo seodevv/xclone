@@ -30,7 +30,7 @@ export default async function UserHydrationBoundary({
     queryClient.prefetchInfiniteQuery({
       queryKey: ['users', 'list', 'recommends'],
       queryFn: getFollowRecommends,
-      initialPageParam: 0,
+      initialPageParam: '',
     }),
   ]);
   const dehydrateState = dehydrate(queryClient);

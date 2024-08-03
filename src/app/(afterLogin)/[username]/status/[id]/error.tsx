@@ -10,7 +10,9 @@ interface Props {
 
 export default function Error({ error, reset }: Props) {
   if (error.message === 'not-found') {
-    return <NotFound href="/search" alterMessage="this post not found" />;
+    return (
+      <NotFound href="/search" type="post" alterMessage="this post not found" />
+    );
   }
 
   return <DisConnection onClick={() => reset()} />;

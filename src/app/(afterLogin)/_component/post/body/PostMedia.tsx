@@ -38,6 +38,7 @@ export default function PostMedia({ post, row = 3, gap = 2 }: Props) {
         alt={first.imageId.toString()}
         width={first.width}
         height={first.height}
+        unoptimized={first.link.endsWith('.gif')}
       />
       {post.images.length > 1 && (
         <MultySvg className={styles.postMediaMulty} white />

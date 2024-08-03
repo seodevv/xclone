@@ -167,7 +167,6 @@ const usePostMutation = () =>
           id: session.user?.email as string,
           image: session.user?.image as string,
           nickname: session.user?.name as string,
-          regist: new Date().toISOString(),
         },
         Hearts: [],
         Reposts: [],

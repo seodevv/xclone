@@ -9,8 +9,10 @@ import { useFormState } from 'react-dom';
 import signupAction from '../_lib/signupAction';
 import { ChangeEventHandler, useEffect, useState } from 'react';
 import { signIn } from 'next-auth/react';
+import { useRouter } from 'next/navigation';
 
 export default function SignupModal() {
+  const router = useRouter();
   const [state, onSubmit] = useFormState(signupAction, { message: '' });
   const [image, setImage] = useState('');
   const [loading, setLoading] = useState(false);
@@ -31,6 +33,10 @@ export default function SignupModal() {
       login(state.user.id, state.user.password);
     }
   }, [state]);
+
+  useEffect(() => {
+    router.refresh();
+  }, []);
 
   return (
     <>

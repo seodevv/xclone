@@ -1,19 +1,23 @@
+import styles from '../_style/svg.module.css';
 import { CSSProperties } from 'react';
+import cx from 'classnames';
 
 interface Props {
   className?: string;
   style?: CSSProperties;
   width?: number;
+  white?: boolean;
 }
 
 export default function CalendarSvg({
   className,
   style,
   width = 18.75,
+  white,
 }: Props) {
   return (
     <svg
-      className={className}
+      className={cx(styles.defaultSvg, white && styles.white, className)}
       style={style}
       width={width}
       viewBox="0 0 24 24"

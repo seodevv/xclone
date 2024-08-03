@@ -1,0 +1,22 @@
+/* UserFollowNoContent */
+.noContent {
+  margin: 32px 99px;
+  padding: 0 32px;
+  width: 400px;
+}
+.title {
+  margin-bottom: 8px;
+  font-size: 31px;
+  font-weight: 800;
+  color: rgb(var(--foreground-rgb));
+  line-height: 36px;
+}
+.sub {
+  margin-bottom: 28px;
+  font-size: 15px;
+  font-weight: 400;
+  color: rgb(var(--link-rgb));
+  line-height: 20px;
+  word-break: keep-all;
+  word-wrap: break-word;
+}

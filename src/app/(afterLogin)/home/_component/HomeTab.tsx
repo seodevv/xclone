@@ -1,6 +1,6 @@
 'use client';
 import style from '../_style/tab.module.css';
-import { useContext, useEffect } from 'react';
+import { useContext } from 'react';
 import { HomeTabContext } from './HomeTabProvider';
 
 export default function HomeTab() {

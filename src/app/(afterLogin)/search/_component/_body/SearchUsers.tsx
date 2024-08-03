@@ -23,14 +23,7 @@ export default function SearchUsers({ searchParams }: Props) {
           if (isShort && i > 0) return null;
           return page.data.map((u, i) => {
             if (isShort && i > 2) return null;
-            return (
-              <FollowRecommend
-                key={u.id}
-                style={{ paddingLeft: 16, paddingRight: 16 }}
-                user={u}
-                isDesc
-              />
-            );
+            return <FollowRecommend key={u.id} user={u} isDesc />;
           });
         })}
         {isShort && (

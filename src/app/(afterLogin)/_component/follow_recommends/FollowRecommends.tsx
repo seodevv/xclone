@@ -32,12 +32,7 @@ export default function FollowRecommends({
         {followRecommends.pages
           .map((page) =>
             page.data.map((u) => (
-              <FollowRecommend
-                key={u.id}
-                className={styles.list}
-                user={u}
-                isDesc={isDesc}
-              />
+              <FollowRecommend key={u.id} user={u} isDesc={isDesc} />
             ))
           )
           .flat()

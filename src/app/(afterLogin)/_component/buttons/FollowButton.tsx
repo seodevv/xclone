@@ -1,10 +1,14 @@
 'use client';
 
 import styles from './button.module.css';
-import { CSSProperties, MouseEventHandler } from 'react';
+import { CSSProperties, MouseEventHandler, useState } from 'react';
 import { useSession } from 'next-auth/react';
 import cx from 'classnames';
 import { AdvancedUser } from '@/model/User';
+import useFollowMutation from '../../_hooks/useFollowMutation';
+import { useQueryClient } from '@tanstack/react-query';
+import useAlterModal from '../../_hooks/useAlterModal';
+import useUnFollowModal from '../../_hooks/useUnFollowModal';
 
 interface Props {
   className?: string;
@@ -20,21 +24,54 @@ export default function FollowButton({
   disabled,
 }: Props) {
   const { data: session } = useSession();
+  const { alterMessage } = useAlterModal();
+  const { alterModal } = useUnFollowModal();
+  const queryClient = useQueryClient();
+  const followMutation = useFollowMutation();
+  const [hover, setHover] = useState(false);
   const isFollow = user.Followers.some((u) => u.id === session?.user?.email);
 
-  const onFollow: MouseEventHandler<HTMLButtonElement> = (e) => {
+  const onClickFollow: MouseEventHandler<HTMLButtonElement> = (e) => {
     e.preventDefault();
     e.stopPropagation();
+    if (!session?.user?.email) return;
+    if (isFollow) {
+      alterModal({ sourceId: session.user.email, targetId: user.id });
+    } else {
+      
+      followMutation.mutate(
+        {
+          queryClient,
+          type: 'follow',
+          sourceId: session.user.email,
+          targetId: user.id,
+        },
+        {
+          onError: (error) => {
+            console.error(error);
+            alterMessage('Follow failed. please try again', 'error');
+          },
+        }
+      );
+    }
   };
 
   return (
     <button
-      className={cx(styles.btn, styles.followBtn, className)}
+      className={cx(
+        styles.btn,
+        styles.followBtn,
+        isFollow && styles.isFollow,
+        className
+      )}
       style={style}
-      onClick={onFollow}
+      type="button"
+      onClick={onClickFollow}
+      onMouseOver={() => setHover(true)}
+      onMouseLeave={() => setHover(false)}
       disabled={disabled}
     >
-      {isFollow ? 'Following' : 'Follow'}
+      {isFollow ? (hover ? 'Unfollow' : 'Following') : 'Follow'}
     </button>
   );
 }

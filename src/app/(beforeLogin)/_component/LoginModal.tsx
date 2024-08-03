@@ -4,7 +4,12 @@ import style from '@/app/(beforeLogin)/_styles/login.module.css';
 import BackButton from './BackButton';
 import LoginButton from './LoginButton';
 import cx from 'classnames';
-import { ChangeEventHandler, FormEventHandler, useState } from 'react';
+import {
+  ChangeEventHandler,
+  FormEventHandler,
+  useEffect,
+  useState,
+} from 'react';
 import { signIn } from 'next-auth/react';
 import { useRouter } from 'next/navigation';
 import { translateKorean } from '@/app/_lib/common';
@@ -53,6 +58,10 @@ export default function LoginModal() {
       return setMessage('server_error');
     }
   };
+
+  useEffect(() => {
+    router.refresh();
+  }, []);
 
   return (
     <div className={style.modalBackground}>

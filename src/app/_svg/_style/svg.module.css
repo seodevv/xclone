@@ -35,3 +35,17 @@
   font-weight: bold;
   transform: rotate(90deg) translate(0px, -54.5px);
 }
+
+/* BadgeSvg */
+.badge {
+  margin-left: 2px;
+}
+.blue {
+  fill: rgb(var(--primary-rgb));
+}
+.gold {
+  fill: #d18800;
+}
+.gray {
+  fill: #829aab;
+}

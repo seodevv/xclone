@@ -1,7 +1,6 @@
 'use client';
 
-import style from '@/app/(afterLogin)/[username]/_style/profile.module.css';
-import { MouseEventHandler } from 'react';
+import style from '../_style/profile.module.css';
 import Image from 'next/image';
 import Link from 'next/link';
 import { useSelectedLayoutSegment } from 'next/navigation';
@@ -10,6 +9,8 @@ import { useUserQuery } from '../_hooks/useUserQuery';
 import { generateImagePath, MONTH_EN } from '@/app/_lib/common';
 import CalendarSvg from '@/app/_svg/profile/CalendarSvg';
 import ReferenceSvg from '@/app/_svg/profile/ReferenceSvg';
+import BadgeButton from '../../_component/buttons/BadgeButton';
+import FollowButton from '../../_component/buttons/FollowButton';
 
 interface Props {
   session: Session | null;
@@ -19,8 +20,6 @@ interface Props {
 export default function UserProfile({ session, username }: Props) {
   const segment = useSelectedLayoutSegment();
   const { data: user } = useUserQuery(username);
-
-  const onClickFollow: MouseEventHandler<HTMLButtonElement> = (e) => {};
 
   if (
     segment &&
@@ -55,17 +54,16 @@ export default function UserProfile({ session, username }: Props) {
             )}
           </div>
           {user && user.data.id !== session?.user?.email && (
-            <button className={style.followButton} onClick={onClickFollow}>
-              follow
-            </button>
+            <FollowButton user={user.data} />
           )}
         </div>
         <div className={style.userName}>
           <div>
             <div className={style.userNick}>
               {user ? user.data.nickname : '@' + username}
+              <BadgeButton badge={user?.data.verified} />
             </div>
-            {user && <div className={style.userId}>@{user.data.id}</div>}
+            {user && <div className={style.userId}>@{user.data.id} </div>}
           </div>
           {user ? (
             <>
