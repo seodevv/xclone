@@ -25,6 +25,7 @@
   background: rgba(var(--foreground-rgb), 0.1);
 }
 .error {
+  padding: 20px 12px;
   text-align: center;
 }
 .error > span {

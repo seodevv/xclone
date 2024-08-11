@@ -1,9 +1,13 @@
-import SignupModal from '@/app/(beforeLogin)/_component/SignupModal';
+import IFlowSignUpPage from '@/app/(beforeLogin)/i/flow/signup/page';
 
-export default function Signup() {
+interface Props {
+  searchParams: { from?: string };
+}
+
+export default function IFlowSignUpSlot({ searchParams }: Props) {
   return (
     <>
-      <SignupModal />
+      <IFlowSignUpPage searchParams={searchParams} />
     </>
   );
 }

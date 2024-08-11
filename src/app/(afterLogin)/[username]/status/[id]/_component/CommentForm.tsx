@@ -17,8 +17,7 @@ import FileUploader, {
   FileRef,
 } from '@/app/(afterLogin)/_component/upload/FileUploader';
 import CommentFormPreview from './CommentFormPreview';
-import useAlterModal from '@/app/(afterLogin)/_hooks/useAlterModal';
-import { getFileDataURL, getImageMeta } from '@/app/_lib/common';
+import { getFileDataURL, getImageMeta, splitEmoji } from '@/app/_lib/common';
 import GifPicker from '@/app/(afterLogin)/_component/gif/GifPicker';
 import EmojiSelector from '@/app/(afterLogin)/_component/emoji/EmojiSelector';
 import LocationSvg from '@/app/_svg/tweet/LocationSvg';
@@ -26,6 +25,7 @@ import ProgressSvg from '@/app/_svg/tweet/ProgressSvg';
 import usePostMutation from '@/app/(afterLogin)/_hooks/usePostMutation';
 import { useQueryClient } from '@tanstack/react-query';
 import { Session } from 'next-auth';
+import useAlterModal from '@/app/_hooks/useAlterModal';
 
 interface Props {
   session: Session;
@@ -47,6 +47,7 @@ export default function CommentForm({
   const { alterMessage } = useAlterModal();
   const [active, setActive] = useState(isPost);
   const [content, setContent] = useState('');
+  const [lastSelection, setLastSelection] = useState(0);
   const [images, setImages] = useState<MediaType[]>([]);
   const contentRef = useRef<HTMLTextAreaElement>(null);
   const fileRef = useRef<FileRef>(null);
@@ -150,6 +151,8 @@ export default function CommentForm({
     preventDefaultEvent(e);
   };
   const onFocusContent = () => {
+    const range = splitEmoji(content).splice(0, lastSelection).join('').length;
+    contentRef.current?.setSelectionRange(range, range);
     contentRef.current?.focus();
   };
 
@@ -188,6 +191,13 @@ export default function CommentForm({
               onFocus={() => {
                 setActive(true);
               }}
+              onBlur={(e) => {
+                const prevContent = content.substring(
+                  0,
+                  e.target.selectionStart
+                );
+                setLastSelection(splitEmoji(prevContent).length);
+              }}
             />
 
             {!active && (
@@ -214,6 +224,8 @@ export default function CommentForm({
                 <EmojiSelector
                   className={style.funcButton}
                   setState={setContent}
+                  lastSelection={lastSelection}
+                  setLastSelection={setLastSelection}
                   onFocus={onFocusContent}
                 />
                 <button

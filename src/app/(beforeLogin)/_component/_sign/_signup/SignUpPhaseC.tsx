@@ -1,0 +1,115 @@
+'use client';
+
+import styles from './beforeLogin.signup.module.css';
+import utils from '@/app/utility.module.css';
+import Image from 'next/image';
+import cx from 'classnames';
+import SignModalTitle from '@/app/(beforeLogin)/_component/_sign/_signup/SIgnModalTitle';
+import PhotoButton from '@/app/(beforeLogin)/_component/_button/PhotoButton';
+import DEFAULT_PROFILE from '/public/default_profile.png';
+import { ChangeEventHandler, MouseEventHandler, useRef } from 'react';
+import useSignUp from '@/app/(beforeLogin)/_component/_sign/_signup/useSignUp';
+import PhotoEditor from '@/app/_component/_photo/PhotoEditor';
+import { getFileDataURL } from '@/app/_lib/common';
+
+export default function SignUpPhaseC() {
+  const {
+    options: { edit },
+    profile: { value },
+    set,
+    setEdit,
+  } = useSignUp();
+  const fileRef = useRef<HTMLInputElement>(null);
+  const title = 'Have a favorite selfie? Upload it now.';
+
+  const onClickPhoto: MouseEventHandler<HTMLButtonElement> = () => {
+    fileRef.current?.click();
+  };
+
+  const onChangeFile: ChangeEventHandler<HTMLInputElement> = async (e) => {
+    const files = e.target.files;
+    if (!files) return;
+
+    const file = files[0];
+    if (file) {
+      const dataUrl = await getFileDataURL(file);
+      set({
+        type: 'profile',
+        payload: { value: { file, link: dataUrl }, disabled: false },
+      });
+      setEdit(true);
+    } else {
+      set({
+        type: 'profile',
+        payload: { value: { file: null, link: '' }, disabled: true },
+      });
+    }
+  };
+
+  return (
+    <div className={cx(styles.slide, edit && utils.pa_0, styles.slideRightIn)}>
+      {!edit && (
+        <div className={styles.content}>
+          <SignModalTitle text="Pick a profile picture">
+            <div className={cx(styles.rulesSub, utils.mt_8)}>{title}</div>
+          </SignModalTitle>
+          <div className={styles.profileSection}>
+            <div className={styles.profileBox}>
+              <div className={styles.profile}>
+                <div className={utils.pb_100}></div>
+                <div className={cx(utils.absolute, utils.t_r_b_l_0)}>
+                  <Image
+                    className={cx(utils.w_100, utils.h_100, utils.obj_cover)}
+                    src={value.link ? value.link : DEFAULT_PROFILE}
+                    alt="default_profile"
+                    width={200}
+                    height={200}
+                  />
+                </div>
+                <div
+                  className={cx(
+                    utils.absolute,
+                    utils.t_r_b_l_0,
+                    styles.profileBg
+                  )}
+                ></div>
+                <div
+                  className={cx(
+                    utils.absolute,
+                    utils.t_r_b_l_0,
+                    styles.profileAction
+                  )}
+                >
+                  <PhotoButton onClick={onClickPhoto} />
+                  <input
+                    ref={fileRef}
+                    type="file"
+                    accept="image/jpeg,image/png,image/webp,image/gif"
+                    hidden
+                    onChange={onChangeFile}
+                  />
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
+      {edit && (
+        <PhotoEditor
+          imageSrc={value.link}
+          fileName={value.file?.name}
+          type={value.file?.type}
+          onClose={() => {
+            setEdit(false);
+          }}
+          onComplete={(dataUrl, file) => {
+            set({
+              type: 'profile',
+              payload: { value: { file, link: dataUrl }, disabled: false },
+            });
+          }}
+        />
+      )}
+    </div>
+  );
+}

@@ -96,28 +96,6 @@
   opacity: 0.75;
 }
 
-.closeButton {
-  width: 34px;
-  height: 34px;
-  border-radius: 17px;
-  border: none;
-  cursor: pointer;
-  position: absolute;
-  left: 16px;
-  top: 16px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  background: transparent;
-}
-.closeButton:hover {
-  background: rgb(var(--border-start-rgb));
-}
-
-.closeButton svg {
-  fill: rgb(var(--foreground-rgb));
-}
-
 .message {
   text-align: center;
   color: red;

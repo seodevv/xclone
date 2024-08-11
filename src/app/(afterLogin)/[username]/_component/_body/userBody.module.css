@@ -1,0 +1,13 @@
+/* NoProfile */
+.userNotFound {
+  margin: 32px 99px;
+  padding: 40px 20px;
+}
+.userNotFound > div:first-child {
+  font-size: 31px;
+  font-weight: bold;
+}
+.userNotFound > div:last-child {
+  font-size: 15px;
+  color: rgb(var(--link-rgb));
+}

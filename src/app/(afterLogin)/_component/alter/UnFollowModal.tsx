@@ -5,7 +5,7 @@ import { MouseEventHandler } from 'react';
 import cx from 'classnames';
 import useFollowMutation from '../../_hooks/useFollowMutation';
 import { useQueryClient } from '@tanstack/react-query';
-import useAlterModal from '../../_hooks/useAlterModal';
+import useAlterModal from '@/app/_hooks/useAlterModal';
 import useUnFollowModal from '../../_hooks/useUnFollowModal';
 
 export default function UnFollowModal() {

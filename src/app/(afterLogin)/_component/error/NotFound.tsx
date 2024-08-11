@@ -4,7 +4,7 @@ import styles from './error.module.css';
 import { MouseEventHandler, useEffect } from 'react';
 import TextLink from '../Link/TextLink';
 import TextButton from '../buttons/TextButton';
-import useAlterModal from '../../_hooks/useAlterModal';
+import useAlterModal from '@/app/_hooks/useAlterModal';
 
 interface AlterMessage {
   type?: string;

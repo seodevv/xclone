@@ -10,12 +10,25 @@ interface Props {
   style?: CSSProperties;
   text: string;
   href: string;
+  type?: 'temporary' | 'primary';
 }
 
-export default function TextLink({ className, style, text, href }: Props) {
+export default function TextLink({
+  className,
+  style,
+  text,
+  type = 'primary',
+  href,
+}: Props) {
   return (
     <Link
-      className={cx(styles.link, styles.primaryLink, className)}
+      className={cx(
+        styles.link,
+        styles.textLink,
+        type === 'temporary' && styles.temporaryLink,
+        type === 'primary' && styles.primaryLink,
+        className
+      )}
       style={style}
       href={href}
     >

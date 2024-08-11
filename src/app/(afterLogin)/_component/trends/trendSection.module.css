@@ -19,7 +19,7 @@
   padding: 12px 16px;
   display: block;
   color: rgb(var(--primary-button-rgb));
-  transition: 0.1s background-color ease-in;
+  transition: 100ms background-color ease-in;
 }
 .trendMore:hover {
   background-color: rgba(var(--foreground-rgb), 0.1);
@@ -30,7 +30,7 @@
   padding: 12px 16px;
   height: 82px;
   display: block;
-  transition: 0.1s background-color ease-in;
+  transition: 100ms background-color ease-in;
 }
 .trend:hover {
   background-color: rgba(var(--foreground-rgb), 0.1);

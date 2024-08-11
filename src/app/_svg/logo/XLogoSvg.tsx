@@ -9,9 +9,9 @@ interface Props {
 export default function XLogoSvg({ className, style, width = 50 }: Props) {
   return (
     <svg
-      width={width}
       className={className}
       style={style}
+      width={width}
       viewBox="0 0 24 24"
       aria-hidden="true"
     >

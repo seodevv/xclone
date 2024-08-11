@@ -18,28 +18,26 @@
   background: rgba(var(--button-hover-rgb), 0.2);
   transition: none;
 }
-.primaryBtn {
+.textBtn {
   padding: 0 16px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
   width: unset;
   height: unset;
   min-width: 36px;
   min-height: 36px;
-  background: rgb(var(--primary-button-rgb));
-  border: none;
   border-radius: 9999px;
 }
-.primaryBtn svg {
-  margin-right: 4px;
-  fill: rgb(var(--foreground-rgb));
-}
-.primaryBtn span {
+.textBtn span {
   margin-bottom: 1px;
   font-size: 15px;
   font-weight: bold;
   color: rgb(var(--foreground-rgb));
+}
+.temporaryBtn {
+  background: rgb(var(--background-start-rgb));
+  border: 1px solid rgb(var(--label-rgb));
+}
+.primaryBtn {
+  background: rgb(var(--primary-button-rgb));
 }
 .primaryBtn:hover:enabled {
   background: rgba(var(--primary-button-rgb), 0.9);
@@ -94,7 +92,7 @@
   background: rgb(var(--primary-rgb));
   visibility: hidden;
   opacity: 0;
-  transition: 0.2s all ease-in;
+  transition: 200ms all ease-in;
 }
 .searchBtn.visible {
   visibility: visible;
@@ -125,6 +123,38 @@
 .RadioBtn.active {
   background: rgb(var(--primary-rgb));
   border-color: rgb(var(--primary-rgb));
+}
+
+/* RefreshButton */
+.refreshBtn {
+  padding: 0 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: unset;
+  height: unset;
+  min-width: 36px;
+  min-height: 36px;
+  background: rgb(var(--primary-button-rgb));
+  border: none;
+  border-radius: 9999px;
+}
+.refreshBtn svg {
+  margin-right: 4px;
+  fill: rgb(var(--foreground-rgb));
+}
+.refreshBtn span {
+  margin-bottom: 1px;
+  font-size: 15px;
+  font-weight: bold;
+  color: rgb(var(--foreground-rgb));
+}
+.refreshBtn:hover:enabled {
+  background: rgba(var(--primary-button-rgb), 0.9);
+}
+.refreshBtn:active:enabled {
+  background: rgba(var(--primary-button-rgb), 0.75);
+  transition: none;
 }
 
 /* BadgeButton */
@@ -206,14 +236,14 @@
   font-size: 14px;
   font-weight: 700;
   color: rgb(var(--background-start-rgb));
-  transition: 0.1s background-color ease-in;
+  transition: 100ms background-color ease-in;
 }
 .getPremium:hover {
   background: rgba(var(--button-hover-rgb), 0.9);
 }
 .fadeIn {
   animation-name: fade-in;
-  animation-duration: 0.2s;
+  animation-duration: 200ms;
   animation-timing-function: ease-in;
   animation-iteration-count: 1;
 }
@@ -221,7 +251,7 @@
   visibility: hidden;
   opacity: 0;
   animation-name: fade-out;
-  animation-duration: 0.2s;
+  animation-duration: 200ms;
   animation-timing-function: ease-out;
   animation-iteration-count: 1;
 }

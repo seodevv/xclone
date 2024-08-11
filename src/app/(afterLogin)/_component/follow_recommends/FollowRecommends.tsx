@@ -21,7 +21,9 @@ export default function FollowRecommends({
   const {
     data: followRecommends,
     isLoading,
+    isFetching,
     isError,
+    fetchStatus,
     refetch,
   } = useFollowRecommendsQuery();
 
@@ -44,7 +46,7 @@ export default function FollowRecommends({
     );
   }
 
-  if (isLoading) {
+  if (isLoading || isFetching) {
     return (
       <div className={styles.followRecommend}>
         <h3>{title}</h3>
@@ -53,7 +55,7 @@ export default function FollowRecommends({
     );
   }
 
-  if (isError) {
+  if (isError || fetchStatus === 'paused') {
     return (
       <div className={styles.error}>
         <span>A problem has occurred</span>

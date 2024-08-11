@@ -14,11 +14,11 @@
 
 .progress {
   transform: rotate(-90deg);
-  transition: 0.3s transform ease-in;
+  transition: 300ms transform ease-in;
 }
 
 .progress > circle {
-  transition: 0.3s all ease-in;
+  transition: 300ms all ease-in;
 }
 
 .progress.scaleUp {

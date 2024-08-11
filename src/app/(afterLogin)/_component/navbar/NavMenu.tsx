@@ -1,6 +1,6 @@
 'use client';
 
-import style from './navMenu.module.css';
+import styles from './navMenu.module.css';
 import { useSelectedLayoutSegment } from 'next/navigation';
 import Link from 'next/link';
 import { Session } from 'next-auth';
@@ -10,6 +10,8 @@ import MessageSvg from '@/app/_svg/navbar/MessageSvg';
 import ProfileSvg from '@/app/_svg/navbar/ProfileSvg';
 import SettingSvg from '@/app/_svg/navbar/SettingSvg';
 import TweetSvg from '@/app/_svg/navbar/TweetSvg';
+import cx from 'classnames';
+import { captialCase } from '@/app/_lib/common';
 
 interface Props {
   session: Session | null;
@@ -18,81 +20,46 @@ interface Props {
 export default function NavMenu({ session }: Props) {
   const segment = useSelectedLayoutSegment();
 
+  const menus = [
+    { link: 'home', icon: <HomeSvg />, sessionRequired: true },
+    { link: 'explore', icon: <ExploreSvg />, sessionRequired: true },
+    { link: 'messages', icon: <MessageSvg />, sessionRequired: true },
+    { link: 'profile', icon: <ProfileSvg />, sessionRequired: true },
+    { link: 'settings', icon: <SettingSvg />, sessionRequired: false },
+  ];
+
   return (
     <nav>
       <ul>
-        {session && session.user && (
-          <>
-            <li>
-              <Link href="/home">
-                <div className={style.navPill}>
-                  <HomeSvg active={segment === 'home'} />
-                  <div className={segment === 'home' ? style.activeBold : ''}>
-                    Home
+        {menus.map((menu) => {
+          if (!session && menu.sessionRequired) {
+            return null;
+          }
+          const active =
+            menu.link === 'profile'
+              ? segment === session?.user?.email
+              : segment === menu.link;
+          const link =
+            menu.link === 'profile'
+              ? `/${session?.user?.email}`
+              : `/${menu.link}`;
+          return (
+            <li key={menu.link}>
+              <Link href={link}>
+                <div className={styles.navPill}>
+                  <menu.icon.type {...menu.icon.props} active={active} white />
+                  <div className={cx(styles.navTitle, active && styles.bold)}>
+                    {captialCase(menu.link)}
                   </div>
                 </div>
               </Link>
             </li>
-            <li>
-              <Link href="/explore">
-                <div className={style.navPill}>
-                  <ExploreSvg
-                    active={segment === 'search' || segment === 'explore'}
-                  />
-                  <div
-                    className={
-                      segment === 'search' || segment === 'explore'
-                        ? style.activeBold
-                        : ''
-                    }
-                  >
-                    Explore
-                  </div>
-                </div>
-              </Link>
-            </li>
-            <li>
-              <Link href="/messages">
-                <div className={style.navPill}>
-                  <MessageSvg active={segment === 'messages'} />
-                  <div
-                    className={segment === 'messages' ? style.activeBold : ''}
-                  >
-                    Messages
-                  </div>
-                </div>
-              </Link>
-            </li>
-            <li>
-              <Link href={`/${session.user.email}`}>
-                <div className={style.navPill}>
-                  <ProfileSvg active={segment === session.user.email} />
-                  <div
-                    className={
-                      segment === session.user.email ? style.activeBold : ''
-                    }
-                  >
-                    Profile
-                  </div>
-                </div>
-              </Link>
-            </li>
-          </>
-        )}
-        <li>
-          <Link href={`/settings`}>
-            <div className={style.navPill}>
-              <SettingSvg active={segment === 'settings'} white />
-              <div className={segment === 'settings' ? style.activeBold : ''}>
-                Settings
-              </div>
-            </div>
-          </Link>
-        </li>
+          );
+        })}
       </ul>
       {session && (
-        <Link href="/compose/tweet" className={style.tweet}>
-          <span>게시하기</span>
+        <Link href="/compose/tweet" className={styles.tweet}>
+          <span className={styles.post}>Post</span>
           <TweetSvg white />
         </Link>
       )}

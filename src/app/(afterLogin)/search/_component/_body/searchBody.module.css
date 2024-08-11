@@ -16,7 +16,7 @@
   background: transparent;
   font-size: 15px;
   color: rgb(var(--primary-rgb));
-  transition: 0.1s all ease-in;
+  transition: 100ms all ease-in;
 }
 .viewAll:hover {
   background: rgba(var(--button-hover-rgb), 0.1);

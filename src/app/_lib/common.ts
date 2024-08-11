@@ -79,6 +79,30 @@ export const captialCase = (word: string) => {
   return word.substring(0, 1).toUpperCase() + word.substring(1).toLowerCase();
 };
 
+export const getYearsArray = () => {
+  return new Array(200)
+    .fill(undefined)
+    .map((v, i) => {
+      const year = new Date().getFullYear() - i;
+      return year >= 1920 ? year : undefined;
+    })
+    .filter((v) => typeof v !== 'undefined');
+};
+
+export const getMonthsArray = () => {
+  return new Array(12).fill(undefined).map((v, i) => i + 1);
+};
+
+export const getDaysArray = (date: Date) => {
+  const day = new Date(date.getFullYear(), date.getMonth() + 1, 0);
+  return new Array(day.getDate()).fill(undefined).map((v, i) => i + 1);
+};
+
+export const getLastDay = (date: Date) => {
+  const temp = new Date(date.getFullYear(), date.getMonth() + 1, 0);
+  return temp.getDate();
+};
+
 export const MONTH_EN = [
   'January',
   'February',
@@ -93,3 +117,14 @@ export const MONTH_EN = [
   'November',
   'December',
 ];
+
+export const splitEmoji = (string: string) => {
+  return [...new Intl.Segmenter().segment(string)].map((x) => x.segment);
+};
+
+export const delay = (duration: number) =>
+  new Promise((res) => {
+    setTimeout(() => {
+      res(null);
+    }, duration);
+  });

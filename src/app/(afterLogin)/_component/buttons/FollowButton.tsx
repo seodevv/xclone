@@ -7,7 +7,7 @@ import cx from 'classnames';
 import { AdvancedUser } from '@/model/User';
 import useFollowMutation from '../../_hooks/useFollowMutation';
 import { useQueryClient } from '@tanstack/react-query';
-import useAlterModal from '../../_hooks/useAlterModal';
+import useAlterModal from '@/app/_hooks/useAlterModal';
 import useUnFollowModal from '../../_hooks/useUnFollowModal';
 
 interface Props {
@@ -38,7 +38,6 @@ export default function FollowButton({
     if (isFollow) {
       alterModal({ sourceId: session.user.email, targetId: user.id });
     } else {
-      
       followMutation.mutate(
         {
           queryClient,

@@ -39,7 +39,7 @@
   height: 100%;
   flex-shrink: 0;
   object-fit: contain;
-  transition: 0.2s transform ease-in;
+  transition: 200ms transform ease-in;
 }
 
 .reactionSection {
@@ -64,7 +64,7 @@
 
 .photoClose > button {
   background: rgba(0, 0, 0, 0.9);
-  transition: 0.2s all ease-in;
+  transition: 200ms all ease-in;
 }
 
 .photoClose > button:hover {
@@ -107,5 +107,11 @@
 @media screen and (max-width: 700px) {
   .postSection {
     display: none;
+  }
+  .postFold {
+    display: none;
+  }
+  .reaction {
+    padding: 0 28px;
   }
 }

@@ -48,7 +48,7 @@
 
 .advanced {
   display: flex;
-  transition: 0.2s background-color ease-in;
+  transition: 200ms background-color ease-in;
 }
 
 .advanced:hover {

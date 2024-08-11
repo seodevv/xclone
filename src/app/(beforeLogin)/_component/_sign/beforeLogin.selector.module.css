@@ -1,0 +1,87 @@
+.birthSelector {
+  margin: 16px 0;
+  position: relative;
+  display: flex;
+  flex-flow: row nowrap;
+}
+.date {
+  margin-right: 12px;
+  position: relative;
+  display: flex;
+  flex-flow: column nowrap;
+  flex-grow: 1;
+  background: rgb(var(--background-start-rgb));
+  border: 1px solid rgb(var(--border-start-rgb));
+  border-radius: 4px;
+}
+.date:focus-within {
+  box-shadow: rgb(var(--primary-rgb)) 0 0 0 1px;
+  border: 1px solid rgb(var(--primary-rgb));
+}
+.date:focus-within .label {
+  color: rgb(var(--primary-rgb));
+}
+.date:focus-within .arrow {
+  fill: rgb(var(--primary-rgb));
+}
+.month {
+  flex-grow: 2;
+}
+.year {
+  margin-right: 0;
+}
+.label {
+  padding: 8px;
+  position: absolute;
+  font-size: 13px;
+  font-weight: 400;
+  color: rgb(var(--link-rgb));
+  line-height: 16px;
+}
+.select {
+  margin-top: 16px;
+  padding: 12px 8px 8px 8px;
+  position: relative;
+  z-index: 1;
+  background: transparent;
+  border: none;
+  outline: none;
+  font-size: 17px;
+  color: rgb(var(--foreground-rgb));
+  line-height: 20px;
+  cursor: pointer;
+  appearance: none;
+}
+.select::-webkit-scrollbar {
+  width: 14px;
+}
+.select::-webkit-scrollbar-track {
+  background: rgb(var(--scroll-background));
+}
+.select::-webkit-scrollbar-thumb {
+  background: rgb(var(--scroll-thumb));
+}
+.option {
+  background: rgb(var(--background-start-rgb));
+  font-size: inherit;
+  color: rgb(var(--link-rgb));
+  line-height: inherit;
+}
+.arrow {
+  position: absolute;
+  top: 50%;
+  right: 12px;
+  display: inline-block;
+  margin-top: -0.75em;
+  height: 1.5em;
+  cursor: pointer;
+}
+.disabled {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  background: rgb(var(--search-rgb));
+  opacity: 0.5;
+}

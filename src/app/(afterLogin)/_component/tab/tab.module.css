@@ -9,7 +9,7 @@
   border: none;
   font-size: 15px;
   cursor: pointer;
-  transition: 0.2s background-color ease-in;
+  transition: 200ms background-color ease-in;
 }
 .tab:hover {
   background: rgba(var(--foreground-rgb), 0.1);

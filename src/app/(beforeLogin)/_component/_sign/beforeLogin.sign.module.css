@@ -1,0 +1,302 @@
+/* LoginModal */
+.background {
+  position: fixed;
+  top: 0;
+  left: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 100dvw;
+  height: 100dvh;
+  background-color: rgba(var(--background-modal-rgb), 0.4);
+}
+.inner {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  flex-shrink: 1;
+  min-width: 600px;
+  max-width: 80dvw;
+  height: 700px;
+  min-height: 400px;
+  max-height: 90dvh;
+  border: 1px solid rgb(var(--border-start-rgb));
+  border-radius: 16px;
+  overflow: hidden;
+}
+.modal {
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+  flex-shrink: 1;
+  height: inherit;
+  max-height: inherit;
+  background: rgb(var(--background-start-rgb));
+}
+.middle {
+  display: flex;
+  flex-direction: row;
+  flex-grow: 1;
+  flex-shrink: 1;
+  width: 100%;
+  max-width: 600px;
+  height: calc(100% - 53px);
+  transform: translateX(0%);
+  transition: 300ms all ease-in;
+}
+.middleFlex {
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+  flex-shrink: 1;
+  min-width: 100%;
+  overflow-x: hidden;
+  overflow-y: auto;
+}
+.middleContent {
+  margin: auto;
+  padding: 0 32px 48px 32px;
+  display: flex;
+  flex-direction: column;
+  flex-shrink: 1;
+  min-width: 364px;
+  max-width: 364px;
+}
+.middleContent.create {
+  margin: 0;
+  padding: 0;
+  flex-direction: row;
+  flex-grow: 1;
+  max-width: unset;
+}
+
+/* SignModalHeader */
+.header {
+  height: 53px;
+  background: rgba(var(--background-start-rgb), 0.65);
+  backdrop-filter: blur(12px);
+}
+.headerContent {
+  padding: 0 16px;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  width: 100%;
+  max-width: 600px;
+  height: 53px;
+}
+.close {
+  display: flex;
+  align-items: center;
+  flex-basis: 50%;
+  flex-grow: 1;
+  min-width: 56px;
+  min-height: 32px;
+}
+.logo {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  flex-grow: 1;
+  flex-shrink: 1;
+  height: 100%;
+}
+.xLogo {
+  height: 2rem;
+  fill: rgb(var(--foreground-rgb));
+}
+.grow {
+  flex-basis: 50%;
+  flex-grow: 1;
+}
+
+.middleOAtuh {
+  margin: 12px auto;
+  width: 300px;
+  height: 40px;
+}
+.passwordConfirm {
+  margin-top: 30px;
+}
+.rules {
+  margin-top: 20px;
+}
+.rulesTitle {
+  margin-bottom: 8px;
+  font-size: 15px;
+  font-weight: 700;
+  color: rgb(var(--foreground-rgb));
+  line-height: 20px;
+}
+.rulesSub {
+  margin-bottom: 4px;
+  font-size: 14px;
+  font-weight: 400;
+  color: rgb(var(--link-rgb));
+}
+.middleProfile {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+}
+.middleProfileContent {
+  margin: 80px 0;
+  width: 192px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  border: 2px solid rgb(var(--foreground-rgb));
+  border-radius: 9999px;
+  overflow-x: hidden;
+  overflow-y: hidden;
+}
+.profile {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+  border: 2px solid rgb(var(--background-start-rgb));
+  border-radius: 9999px;
+  overflow: hidden;
+}
+.absolute {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+}
+.profileAction {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  opacity: 0.75;
+}
+.profileBg {
+  background: rgba(var(--background-start-rgb), 0.3);
+}
+.mt_8 {
+  margin-top: 8px;
+}
+.largeBtn {
+  padding: 0 80px;
+}
+
+/* NoAccount */
+.noAccount {
+  margin-top: 40px;
+  font-size: 15px;
+  font-weight: 400;
+  color: rgb(var(--link-rgb));
+  line-height: 20px;
+}
+.signUp {
+  margin-left: 4px;
+  background: transparent;
+  border: none;
+  font-size: 15px;
+  font-weight: 400;
+  color: rgb(var(--primary-rgb));
+  cursor: pointer;
+}
+.signUp:hover {
+  text-decoration: underline;
+}
+.signUp:active {
+  opacity: 0.75;
+}
+
+/* AlreadyAccount */
+.alreadyAccount {
+  display: flex;
+  justify-content: flex-end;
+}
+.alreadyBtn {
+  background: transparent;
+  border: none;
+  font-size: 15px;
+  font-weight: 400;
+  color: rgb(var(--primary-rgb));
+  cursor: pointer;
+}
+.alreadyBtn:hover:enabled {
+  text-decoration: underline;
+}
+.alreadyBtn:active:enabled {
+  opacity: 0.75;
+}
+
+@media screen and (max-width: 705px) {
+  .inner {
+    width: 100dvw;
+    max-width: 100dvw;
+    height: 100dvh;
+    max-height: 100dvh;
+  }
+  .headerContent {
+    max-width: unset;
+  }
+  .middle {
+    max-width: unset;
+  }
+}
+
+.fadeIn {
+  animation-name: fade-in;
+  animation-duration: 300ms;
+  animation-timing-function: ease-in;
+  animation-iteration-count: 1;
+}
+@keyframes fade-in {
+  from {
+    visibility: hidden;
+    opacity: 0;
+    filter: blur(5px);
+  }
+  to {
+    visibility: visible;
+    opacity: 1;
+  }
+}
+
+.slideLeftIn {
+  animation-name: slide-left-in;
+  animation-duration: 300ms;
+  animation-timing-function: ease-in;
+  animation-iteration-count: 1;
+}
+.slideRightIn {
+  animation-name: slide-right-in;
+  animation-duration: 300ms;
+  animation-timing-function: ease-in;
+  animation-iteration-count: 1;
+}
+
+@keyframes slide-left-in {
+  from {
+    visibility: hidden;
+    opacity: 0;
+    transform: translateX(-50%);
+  }
+  to {
+    visibility: visible;
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+@keyframes slide-right-in {
+  from {
+    visibility: hidden;
+    opacity: 0;
+    transform: translateX(50%);
+  }
+  to {
+    visibility: visible;
+    opacity: 1;
+    transform: translateX(0);
+  }
+}

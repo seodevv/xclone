@@ -8,7 +8,7 @@ import FollowRecommends from '@/app/(afterLogin)/_component/follow_recommends/Fo
 export default function FollowRecommendsSection() {
   const segment = useSelectedLayoutSegment();
 
-  if (!segment || segment === 'messages') return null;
+  if (!segment || ['messages', 'settings'].includes(segment)) return null;
 
   if (['home', 'explore', 'search', 'messages', 'settings'].includes(segment)) {
     return (

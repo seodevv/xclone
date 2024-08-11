@@ -1,0 +1,10 @@
+.main {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 99;
+  width: 100dvh;
+  height: 100dvh;
+  background: rgb(var(--background-start-rgb));
+  overflow: hidden;
+}

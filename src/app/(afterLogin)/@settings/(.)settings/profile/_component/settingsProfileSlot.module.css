@@ -1,0 +1,13 @@
+.main {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 99;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 100dvw;
+  height: 100dvh;
+  background: rgba(var(--background-modal-rgb), 0.4);
+}

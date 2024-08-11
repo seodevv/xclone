@@ -1,9 +1,9 @@
-import LoginModal from '@/app/(beforeLogin)/_component/LoginModal';
+import IFlowLoginPage from '@/app/(beforeLogin)/i/flow/login/page';
 
-export default function Page() {
-  return (
-    <>
-      <LoginModal />
-    </>
-  );
+interface Props {
+  searchParams: { from?: string };
+}
+
+export default function IFlowLoginSlot({ searchParams }: Props) {
+  return <IFlowLoginPage searchParams={searchParams} />;
 }

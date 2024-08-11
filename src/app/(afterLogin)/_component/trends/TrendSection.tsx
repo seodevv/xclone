@@ -11,7 +11,11 @@ interface Props {
 export default function TrendSection({ session }: Props) {
   const segment = useSelectedLayoutSegment();
 
-  if (segment === 'explore' || !session) return null;
+  if (
+    (segment && ['explore', 'messages', 'settings'].includes(segment)) ||
+    !session
+  )
+    return null;
 
   return <Trends />;
 }

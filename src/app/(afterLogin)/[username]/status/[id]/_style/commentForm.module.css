@@ -4,7 +4,7 @@
   flex-flow: row nowrap;
   min-height: 12px;
   animation-name: fade-in;
-  animation-duration: 0.2s;
+  animation-duration: 200ms;
   animation-timing-function: ease-in;
   animation-iteration-count: 1;
 }
@@ -85,7 +85,7 @@
   display: flex;
   align-items: center;
   animation-name: fade-in;
-  animation-duration: 0.2s;
+  animation-duration: 200ms;
   animation-timing-function: ease-in;
   animation-iteration-count: 1;
 }
@@ -106,7 +106,7 @@
   font-weight: 700;
   color: #fff;
   cursor: pointer;
-  transition: 0.1s opacity ease-in;
+  transition: 100ms opacity ease-in;
 }
 
 .actionButton:disabled {
@@ -168,7 +168,7 @@
   border: none;
   border-radius: 50%;
   cursor: pointer;
-  transition: 0.2s background-color ease-in;
+  transition: 200ms background-color ease-in;
 }
 
 .funcButton:hover:enabled {
@@ -206,7 +206,7 @@
   flex-flow: column nowrap;
   flex-shrink: 0;
   width: calc(50% - 4px);
-  transition: 0.2s transform ease-in;
+  transition: 200ms transform ease-in;
 }
 
 .previewImage:last-child {
@@ -269,7 +269,7 @@
   border: none;
   border-radius: 50%;
   cursor: pointer;
-  transition: 0.1s background-color ease-in;
+  transition: 100ms background-color ease-in;
 }
 
 .previewEdit {
@@ -309,7 +309,7 @@
 
 .fadeIn {
   animation-name: fade-in;
-  animation-duration: 0.2s;
+  animation-duration: 200ms;
   animation-timing-function: ease-in;
   animation-iteration-count: 1;
 }

@@ -11,6 +11,7 @@ import PageLoading from '../../_component/loading/PageLoading';
 import PostMedia from '../../_component/post/body/PostMedia';
 import NoMedia from './NoMedias';
 import FollowRecommends from '../../_component/follow_recommends/FollowRecommends';
+import NoProfile from './_body/NoProfile';
 
 interface Props {
   username: string;
@@ -29,7 +30,7 @@ export default function UserPosts({ username, filter = 'all' }: Props) {
     refetch,
   } = useUserPostsQuery({ username, filter });
 
-  if (!user) return null;
+  if (!user) return <NoProfile />;
 
   if (posts) {
     const isMedia = filter === 'media';

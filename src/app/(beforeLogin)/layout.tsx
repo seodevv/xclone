@@ -1,5 +1,5 @@
+import styles from './beforeLogin.layout.module.css';
 import { ReactNode } from 'react';
-import styles from '@/app/(beforeLogin)/_styles/main.module.css';
 import { getServerSession } from 'next-auth';
 import { authOptions } from '../api/auth/[...nextauth]/route';
 import { redirect } from 'next/navigation';
@@ -13,9 +13,9 @@ export default async function Layout({ children, modal }: Props) {
   }
 
   return (
-    <div className={styles.main_container}>
+    <main className={styles.main_container}>
       {children}
       {modal}
-    </div>
+    </main>
   );
 }

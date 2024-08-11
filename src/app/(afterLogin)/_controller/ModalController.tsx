@@ -9,7 +9,10 @@ interface Props {
 export default function Modalontroller({ children }: Props) {
   const pathname = usePathname();
   const split = pathname.split('/');
-  if (split[2] === 'status' && split[4] === 'photo' && !!split[5]) {
+  if (
+    (split[2] === 'status' && split[4] === 'photo' && !!split[5]) ||
+    (split[1] === 'i' && split[2] === 'premium_sign_up')
+  ) {
     return <>{children}</>;
   }
 

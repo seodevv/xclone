@@ -11,7 +11,7 @@ import {
 import Gif, { TenorImage, Theme } from 'gif-picker-react';
 import cx from 'classnames';
 import { MediaType } from '../../[username]/status/[id]/_component/CommentForm';
-import useAlterModal from '../../_hooks/useAlterModal';
+import useAlterModal from '@/app/_hooks/useAlterModal';
 import GifSvg from '@/app/_svg/tweet/GifSvg';
 
 interface Props {

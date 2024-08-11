@@ -1,23 +1,21 @@
+/* NavMenu */
 .navPill {
   display: inline-flex;
   height: 50px;
   padding: 12px;
   align-items: center;
-  fill: rgb(var(--foreground-rgb));
 }
 .navPill:hover {
   background-color: rgba(15, 20, 25, 0.1);
   border-radius: 29px;
 }
-
-.navPill > div {
+.navTitle {
   margin-left: 20px;
   margin-right: 16px;
   font-size: 20px;
   display: inline-block;
 }
-
-.activeBold {
+.bold {
   font-weight: bold;
 }
 
@@ -39,7 +37,7 @@
 .tweet:hover {
   background-color: rgb(26, 140, 216);
 }
-.tweet span {
+.post {
   display: inline-block;
 }
 .tweet svg {

@@ -7,16 +7,18 @@ interface Props {
   className?: string;
   style?: CSSProperties;
   type?: 'block';
+  fill?: 'theme' | 'reverse';
 }
 
 export default function LoadingSpinner({
   className,
   style,
   type = 'block',
+  fill,
 }: Props) {
   return (
     <div className={cx(styles.loadingSpinner, className)} style={style}>
-      <SpinnerSvg type={type} />
+      <SpinnerSvg type={type} fill={fill} />
     </div>
   );
 }

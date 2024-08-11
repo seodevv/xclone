@@ -1,7 +1,7 @@
 'use client';
 
-import { useSinglePostQuery } from '@/app/(afterLogin)/[username]/status/[id]/_hooks/useSinglePostQuery';
 import styles from '../_style/photoModal.module.css';
+import { useSinglePostQuery } from '@/app/(afterLogin)/[username]/status/[id]/_hooks/useSinglePostQuery';
 import { useContext, useEffect } from 'react';
 import { FoldContext } from '../_provider/FoldProvider';
 import Post from '@/app/(afterLogin)/_component/post/Post';

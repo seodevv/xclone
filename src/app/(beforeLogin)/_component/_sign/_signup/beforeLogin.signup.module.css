@@ -1,0 +1,170 @@
+/* Default Settings */
+.phase {
+  margin: auto;
+  padding: 0;
+  display: flex;
+  flex-grow: 1;
+}
+.slide {
+  padding: 0 80px;
+  display: flex;
+  flex-flow: column nowrap;
+  width: 100%;
+  min-width: 100%;
+  max-width: 100%;
+  flex-shrink: 0;
+  transition: 300ms transform ease-in;
+}
+.content {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  flex-grow: 1;
+}
+.rule {
+  margin-top: 20px;
+}
+.ruleTitle {
+  margin-bottom: 8px;
+  font-size: 15px;
+  font-weight: 700;
+  color: rgb(var(--foreground-rgb));
+  line-height: 20px;
+}
+.ruleSub {
+  margin-bottom: 4px;
+  font-size: 14px;
+  font-weight: 400;
+  color: rgb(var(--link-rgb));
+}
+.largeBtn {
+  padding: 0 80px;
+}
+
+/* SignUpModalHeader */
+.header {
+  height: 53px;
+  background: rgba(var(--background-start-rgb), 0.65);
+  backdrop-filter: blur(12px);
+}
+.headerContent {
+  padding: 0 16px;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  width: 100%;
+  max-width: 600px;
+  height: 53px;
+}
+.close {
+  display: flex;
+  align-items: center;
+  flex-basis: 50%;
+  flex-grow: 1;
+  min-width: 56px;
+  min-height: 32px;
+}
+.logo {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  flex-grow: 1;
+  flex-shrink: 1;
+  height: 100%;
+}
+.xLogo {
+  height: 2rem;
+  fill: rgb(var(--foreground-rgb));
+}
+.grow {
+  flex-basis: 50%;
+  flex-grow: 1;
+}
+
+/* SignupPageC.tsx */
+.profileSection {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+}
+.profileBox {
+  margin: 80px 0;
+  width: 192px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  border: 2px solid rgb(var(--foreground-rgb));
+  border-radius: 9999px;
+  overflow-x: hidden;
+  overflow-y: hidden;
+}
+.profile {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+  border: 2px solid rgb(var(--background-start-rgb));
+  border-radius: 9999px;
+  overflow: hidden;
+}
+.profileBg {
+  background: rgba(var(--background-start-rgb), 0.3);
+}
+.profileAction {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  opacity: 0.75;
+}
+
+/* SignModalTitle */
+.signModalTitle {
+  margin: 20px 0;
+}
+.signModalTitle > h1 {
+  font-size: 31px;
+  font-weight: 700;
+  color: rgb(var(--foreground-rgb));
+  line-height: 36px;
+}
+
+/* Animation */
+.slideLeftIn {
+  animation-name: slide-left-in;
+  animation-duration: 300ms;
+  animation-timing-function: ease-in;
+  animation-iteration-count: 1;
+}
+.slideRightIn {
+  animation-name: slide-right-in;
+  animation-duration: 300ms;
+  animation-timing-function: ease-in;
+  animation-iteration-count: 1;
+}
+@keyframes slide-left-in {
+  from {
+    visibility: hidden;
+    opacity: 0;
+    transform: translateX(-50%);
+  }
+  to {
+    visibility: visible;
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+@keyframes slide-right-in {
+  from {
+    visibility: hidden;
+    opacity: 0;
+    transform: translateX(50%);
+  }
+  to {
+    visibility: visible;
+    opacity: 1;
+    transform: translateX(0);
+  }
+}

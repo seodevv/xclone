@@ -27,7 +27,7 @@
   align-items: center;
   flex-direction: column;
   transition-property: background-color;
-  transition-duration: 0.2s;
+  transition-duration: 200ms;
   border-color: rgb(var(--border-start-rgb));
   cursor: pointer;
   border-bottom: 1px solid rgb(var(--border-start-rgb));

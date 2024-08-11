@@ -9,9 +9,10 @@ import cx from 'classnames';
 interface Props {
   className?: string;
   style?: CSSProperties;
+  width?: number;
 }
 
-export default function BackButton({ className, style }: Props) {
+export default function BackButton({ className, style, width = 18 }: Props) {
   const router = useRouter();
 
   const onClick = () => {
@@ -24,7 +25,7 @@ export default function BackButton({ className, style }: Props) {
       style={style}
       onClick={onClick}
     >
-      <LeftArrowSvg width={18} white />
+      <LeftArrowSvg width={width} white />
     </button>
   );
 }

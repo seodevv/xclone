@@ -53,7 +53,7 @@
   border: none;
   cursor: pointer;
   border-radius: 17px;
-  transition-duration: 0.2s;
+  transition-duration: 200ms;
   transition-property: background-color;
   background-color: rgb(29, 155, 240, 0.01);
   display: flex;

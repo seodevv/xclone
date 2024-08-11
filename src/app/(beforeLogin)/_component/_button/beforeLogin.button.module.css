@@ -1,0 +1,94 @@
+/* FlexButton */
+.btn {
+  margin: 12px 0;
+  padding: 0 16px;
+  width: 100%;
+  min-width: 36px;
+  min-height: 36px;
+  border: none;
+  border-radius: 9999px;
+  cursor: pointer;
+  transition: 100ms background-color ease-in, 100ms opacity ease-in;
+}
+.btn.large {
+  margin: 24px 0;
+  min-height: 52px;
+}
+.btn:disabled {
+  opacity: 0.5;
+}
+.btn:active:enabled {
+  opacity: 0.75;
+  transition: none;
+}
+.theme {
+  background: rgb(var(--foreground-rgb));
+  color: rgb(var(--background-start-rgb));
+}
+.theme:hover:enabled {
+  background: rgb(215, 219, 220);
+}
+.reverse {
+  background: rgb(var(--background-start-rgb));
+  border: 1px solid rgb(var(--label-rgb));
+  color: rgb(var(--foreground-rgb));
+}
+.reverse:hover:enabled {
+  background: rgba(var(--r-background-start-rgb), 0.1);
+}
+.btnText {
+  font-size: 15px;
+  font-weight: 700;
+  color: inherit;
+  line-height: 20px;
+}
+.btnText.large {
+  font-size: 17px;
+}
+
+/* CloseBtn */
+.closeBtn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 36px;
+  min-height: 36px;
+  background: transparent;
+  border: none;
+  border-radius: 17px;
+  cursor: pointer;
+}
+.closeBtn:hover:enabled {
+  background: rgb(var(--border-start-rgb));
+}
+.closeBtn:disabled {
+  opacity: 0.5;
+}
+
+/* PasswordButton */
+.passwordBtn {
+  background: transparent;
+  border: none;
+  cursor: pointer;
+}
+.passwordBtn:hover {
+  filter: drop-shadow(1px 1px 1px rgb(var(--foreground-rgb)));
+}
+
+/* PhotoButton */
+.photoBtn {
+  min-width: 44px;
+  min-height: 44px;
+  background: rgba(15, 20, 25, 0.75);
+  border: 1px solid transparent;
+  border-radius: 9999px;
+  outline: none;
+  transition: 200ms background-color ease;
+  cursor: pointer;
+}
+.photoBtn:hover:enabled {
+  background: rgba(39, 44, 48, 0.75);
+}
+.photoBtn:active:enabled {
+  background: rgba(63, 67, 71, 0.75);
+}

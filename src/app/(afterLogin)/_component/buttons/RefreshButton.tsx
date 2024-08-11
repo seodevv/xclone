@@ -20,7 +20,7 @@ export default function RefreshButton({
 }: Props) {
   return (
     <button
-      className={cx(styles.btn, styles.primaryBtn, className)}
+      className={cx(styles.btn, styles.refreshBtn, className)}
       style={style}
       onClick={onClick}
     >

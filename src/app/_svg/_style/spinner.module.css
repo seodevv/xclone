@@ -15,6 +15,10 @@
   animation-delay: -0.8s;
 }
 
+.reverse {
+  fill: rgb(var(--background-start-rgb));
+}
+
 @keyframes spinner_blocks {
   8.33% {
     x: 13px;

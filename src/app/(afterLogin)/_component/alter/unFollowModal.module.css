@@ -55,7 +55,7 @@
   text-align: center;
   line-height: 02px;
   cursor: pointer;
-  transition: 0.1s background-color ease;
+  transition: 100ms background-color ease;
 }
 .unFollow {
   background: rgb(var(--foreground-rgb));

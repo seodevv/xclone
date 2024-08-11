@@ -17,14 +17,14 @@
 
 .top {
   animation-name: fade-in-top;
-  animation-duration: 0.2s;
+  animation-duration: 200ms;
   animation-timing-function: ease-in;
   animation-iteration-count: 1;
 }
 
 .bottom {
   animation-name: fade-in-bottom;
-  animation-duration: 0.2s;
+  animation-duration: 200ms;
   animation-timing-function: ease-in;
   animation-iteration-count: 1;
 }
@@ -33,7 +33,7 @@
   visibility: hidden;
   opacity: 0;
   animation-name: fade-out;
-  animation-duration: 0.2s;
+  animation-duration: 200ms;
   animation-timing-function: ease-out;
   animation-iteration-count: 1;
 }

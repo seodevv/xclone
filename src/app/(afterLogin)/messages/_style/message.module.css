@@ -1,11 +1,5 @@
 .main {
-  width: 600px;
   min-height: 100dvh;
-  border-color: rgb(var(--border-start-rgb));
-  border-right-width: 1px;
-  border-left-width: 1px;
-  border-left-style: solid;
-  border-right-style: solid;
   display: flex;
   flex-direction: column;
   align-items: stretch;
@@ -28,7 +22,7 @@
   display: flex;
   flex-direction: row;
   transition-property: background-color;
-  transition-duration: 0.2s;
+  transition-duration: 200ms;
   border-color: rgb(var(--border-start-rgb));
   cursor: pointer;
 }

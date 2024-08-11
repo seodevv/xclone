@@ -4,6 +4,7 @@ import styles from './sticky.module.css';
 import { ReactNode, useEffect, useRef, useState } from 'react';
 import useViewport from '../../_hooks/useViewport';
 import { usePathname } from 'next/navigation';
+import cx from 'classnames';
 
 interface Props {
   children: ReactNode;
@@ -55,7 +56,14 @@ export default function Sticky({ children }: Props) {
   }, [height, pathname, setTop]);
 
   return (
-    <div ref={ref} className={styles.sticky} style={{ top: top }}>
+    <div
+      ref={ref}
+      className={cx(
+        styles.sticky,
+        ['/search', '/explore'].includes(pathname) && styles.noMargin
+      )}
+      style={{ top: top }}
+    >
       {children}
     </div>
   );

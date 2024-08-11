@@ -7,7 +7,7 @@ export default function RedirectToLogin() {
   const router = useRouter();
 
   useEffect(() => {
-    router.replace('/i/flow/login');
+    router.replace('/i/flow/login', { scroll: false });
   }, []);
 
   return null;

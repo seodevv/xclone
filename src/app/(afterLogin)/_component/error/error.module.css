@@ -24,7 +24,7 @@
   background: rgb(var(--primary-button-rgb));
   border-radius: 9999px;
   cursor: pointer;
-  transition: 0.1s opacity ease-in;
+  transition: 100ms opacity ease-in;
 }
 .btn svg {
   margin-right: 4px;

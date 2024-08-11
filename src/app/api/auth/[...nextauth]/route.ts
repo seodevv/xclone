@@ -73,27 +73,22 @@ export const authOptions: NextAuthOptions = {
 
         const requestUrl = `${process.env.SERVER_URL}/api/login`;
         const requestOptions: RequestInit = {
-          method: 'post',
+          method: 'POST',
           body: formData,
           credentials: 'include',
         };
-        try {
-          const response = await fetch(requestUrl, requestOptions);
-          if (!response.ok) return null;
-          settingCookies(response);
+        const response = await fetch(requestUrl, requestOptions);
+        if (!response.ok) return null;
+        settingCookies(response);
 
-          const user: { data: AdvancedUser; message: string } =
-            await response.json();
-          return {
-            id: user.data.id,
-            email: user.data.id,
-            name: user.data.nickname,
-            image: user.data.image,
-          };
-        } catch (error) {
-          console.error(error);
-          return null;
-        }
+        const user: { data: AdvancedUser; message: string } =
+          await response.json();
+        return {
+          id: user.data.id,
+          email: user.data.id,
+          name: user.data.nickname,
+          image: user.data.image,
+        };
       },
     }),
   ],

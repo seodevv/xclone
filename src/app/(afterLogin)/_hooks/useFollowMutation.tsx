@@ -66,21 +66,24 @@ const useFollowMutation = () =>
           const queryData = queryClient.getQueryData<TData>(queryKey);
           if (!queryData) return;
 
-          const check = queryData.data.Followers.some((f) => f.id === b);
+          const check = queryData.data.Followers.some((f) => f.id === sourceId);
           if (type === 'follow' && check) return;
           if (type === 'unfollow' && !check) return;
 
           const shallow = { ...queryData };
           shallow.data = { ...queryData.data };
           if (type === 'follow') {
-            shallow.data.Followers = [...queryData.data.Followers, { id: b }];
+            shallow.data.Followers = [
+              ...queryData.data.Followers,
+              { id: sourceId },
+            ];
             shallow.data._count = {
               ...queryData.data._count,
               Followers: queryData.data._count.Followers + 1,
             };
           } else {
             shallow.data.Followers = queryData.data.Followers.filter(
-              (u) => u.id !== b
+              (u) => u.id !== sourceId
             );
             shallow.data._count = {
               ...queryData.data._count,

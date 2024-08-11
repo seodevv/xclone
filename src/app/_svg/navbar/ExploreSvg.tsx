@@ -1,9 +1,12 @@
+import styles from '../_style/svg.module.css';
 import { CSSProperties } from 'react';
+import cx from 'classnames';
 
 interface Props {
   className?: string;
   style?: CSSProperties;
   width?: number;
+  white?: boolean;
   active?: boolean;
 }
 
@@ -11,11 +14,12 @@ export default function ExploreSvg({
   className,
   style,
   width = 26,
+  white,
   active = false,
 }: Props) {
   return (
     <svg
-      className={className}
+      className={cx(styles.defaultSvg, white && styles.white, className)}
       style={style}
       width={width}
       viewBox="0 0 24 24"

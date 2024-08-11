@@ -1,11 +1,12 @@
 import styles from '../_style/spinner.module.css';
-import cx from 'classnames';
 import { CSSProperties } from 'react';
+import cx from 'classnames';
 
 interface Props {
   type?: 'block';
   className?: string;
   style?: CSSProperties;
+  fill?: 'theme' | 'reverse';
   width?: number;
 }
 
@@ -13,13 +14,18 @@ export default function SpinnerSvg({
   type = 'block',
   className,
   style,
+  fill = 'theme',
   width = 24,
 }: Props) {
   if (type === 'block') {
     return (
       <>
         <svg
-          className={className ? className : styles.spinner}
+          className={cx(
+            styles.spinner,
+            fill === 'reverse' && styles.reverse,
+            className
+          )}
           style={style}
           width={width}
           viewBox="0 0 24 24"

@@ -15,19 +15,24 @@ import {
 } from 'react';
 import cx from 'classnames';
 import useViewport from '../../_hooks/useViewport';
+import { splitEmoji } from '@/app/_lib/common';
 
 interface Props {
-  setState: Dispatch<SetStateAction<string>>;
-  onFocus?: () => void;
   className?: string;
+  setState: Dispatch<SetStateAction<string>>;
+  lastSelection: number;
+  setLastSelection: Dispatch<SetStateAction<number>>;
+  onFocus?: () => void;
   emojiButtonSize?: number;
   emojiSize?: number;
 }
 
 const EmojiSelector = ({
-  setState,
-  onFocus,
   className,
+  setState,
+  lastSelection,
+  setLastSelection,
+  onFocus,
   emojiButtonSize = 38,
   emojiSize = 20,
 }: Props) => {
@@ -43,10 +48,14 @@ const EmojiSelector = ({
   const outsideRef = useRef<HTMLDivElement>(null);
 
   const onClickEmojiSelect = (emoji: typeof Emoji.Props) => {
-    setState((prev) => prev + emoji.native);
-    if (typeof onFocus === 'function') {
-      onFocus();
-    }
+    setState((prev) => {
+      // const a = prev.substring(0, lastSelection);
+      // const b = prev.substring(lastSelection);
+      const a = splitEmoji(prev).splice(0, lastSelection).join('');
+      const b = splitEmoji(prev).splice(lastSelection).join('');
+      return a + emoji.native + b;
+    });
+    setLastSelection((prev) => prev + 1);
   };
 
   const onClickActive: MouseEventHandler<HTMLButtonElement> = (e) => {
@@ -87,6 +96,10 @@ const EmojiSelector = ({
       setActive((prev) => ({ ...prev, flag: false }));
       setFadeOut(false);
     }, 300);
+
+    if (typeof onFocus === 'function') {
+      onFocus();
+    }
   };
 
   useEffect(() => {

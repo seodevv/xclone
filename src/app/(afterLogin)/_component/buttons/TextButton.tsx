@@ -8,13 +8,26 @@ interface Props {
   className?: string;
   style?: CSSProperties;
   text: string;
+  type?: 'temporary' | 'primary';
   onClick?: MouseEventHandler<HTMLButtonElement>;
 }
 
-export default function TextButton({ className, style, text, onClick }: Props) {
+export default function TextButton({
+  className,
+  style,
+  text,
+  type = 'primary',
+  onClick,
+}: Props) {
   return (
     <button
-      className={cx(styles.btn, styles.primaryBtn, className)}
+      className={cx(
+        styles.btn,
+        styles.textBtn,
+        type === 'temporary' && styles.temporaryBtn,
+        type === 'primary' && styles.primaryBtn,
+        className
+      )}
       style={style}
       onClick={onClick}
     >

@@ -7,12 +7,12 @@ export default function MessagePage() {
       <div className={style.header}>
         <h2>Message</h2>
       </div>
+      {/* <Room />
       <Room />
       <Room />
       <Room />
       <Room />
-      <Room />
-      <Room />
+      <Room /> */}
     </main>
   );
 }
