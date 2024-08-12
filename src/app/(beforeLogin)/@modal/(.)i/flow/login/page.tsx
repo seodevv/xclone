@@ -5,5 +5,9 @@ interface Props {
 }
 
 export default function IFlowLoginSlot({ searchParams }: Props) {
-  return <IFlowLoginPage searchParams={searchParams} />;
+  return (
+    <>
+      <IFlowLoginPage searchParams={searchParams} />
+    </>
+  );
 }

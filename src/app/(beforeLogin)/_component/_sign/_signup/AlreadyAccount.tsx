@@ -1,6 +1,6 @@
 'use client';
 
-import styles from '../beforeLogin.sign.module.css';
+import styles from './beforeLogin.signup.module.css';
 import { useRouter } from 'next/navigation';
 
 export default function AlreadyAccount() {

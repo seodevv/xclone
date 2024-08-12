@@ -1,32 +1,29 @@
 'use client';
 
-import styles from './beforelogin.login.module.css';
+import styles from './beforeLogin.login.module.css';
 import CloseButton from '@/app/(beforeLogin)/_component/_button/CloseButton';
 import PrevButton from '@/app/(beforeLogin)/_component/_button/PrevButton';
+import { LoginContext } from '@/app/(beforeLogin)/_component/_sign/_login/LoginProvider';
 import XLogoSvg from '@/app/_svg/logo/XLogoSvg';
+import { useContext } from 'react';
 
 interface Props {
   isNext?: boolean;
-  callback?: () => void;
   disabled?: boolean;
 }
 
-export default function LoginModalHeader({
-  isNext,
-  callback,
-  disabled,
-}: Props) {
+export default function LoginModalHeader({ isNext, disabled }: Props) {
+  const { state, dispatch } = useContext(LoginContext);
+
   const onClickPrev = () => {
-    if (typeof callback === 'function') {
-      callback();
-    }
+    dispatch({ type: 'prevPage' });
   };
 
   return (
     <div className={styles.header}>
       <div className={styles.headerContent}>
         <div className={styles.close}>
-          {isNext ? (
+          {state.options.page !== 0 ? (
             <PrevButton onClick={onClickPrev} disabled={disabled} />
           ) : (
             <CloseButton disabled={disabled} />

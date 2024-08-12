@@ -1,5 +1,5 @@
+import styles from './beforeLogin.noAccount.module.css';
 import { useRouter } from 'next/navigation';
-import styles from './beforeLogin.sign.module.css';
 
 export default function NoAccount() {
   const router = useRouter();

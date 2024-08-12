@@ -186,30 +186,6 @@
   padding: 0 80px;
 }
 
-/* NoAccount */
-.noAccount {
-  margin-top: 40px;
-  font-size: 15px;
-  font-weight: 400;
-  color: rgb(var(--link-rgb));
-  line-height: 20px;
-}
-.signUp {
-  margin-left: 4px;
-  background: transparent;
-  border: none;
-  font-size: 15px;
-  font-weight: 400;
-  color: rgb(var(--primary-rgb));
-  cursor: pointer;
-}
-.signUp:hover {
-  text-decoration: underline;
-}
-.signUp:active {
-  opacity: 0.75;
-}
-
 /* AlreadyAccount */
 .alreadyAccount {
   display: flex;

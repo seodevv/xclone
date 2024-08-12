@@ -10,6 +10,7 @@ import {
 } from 'react';
 import cx from 'classnames';
 import PasswordButton from '../_button/PasswordButton';
+import { useFormStatus } from 'react-dom';
 
 interface Props {
   type?: 'text' | 'password';
@@ -26,6 +27,7 @@ interface Props {
   };
   maxLength?: number;
   disabled?: boolean;
+  readOnly?: boolean;
   passwordHide?: boolean;
   noTab?: boolean;
   onEnter?: () => void;
@@ -47,6 +49,7 @@ const IdentifierInput = forwardRef<IdentifierInputRef, Props>(
       defaultValue,
       validate,
       disabled = false,
+      readOnly = false,
       passwordHide,
       noTab,
       onEnter,
@@ -55,6 +58,7 @@ const IdentifierInput = forwardRef<IdentifierInputRef, Props>(
     },
     ref
   ) => {
+    const { pending } = useFormStatus();
     const [state, setState] = useState<string>(defaultValue || '');
     const [highlight, setHighlight] = useState<boolean>(
       !!(disabled || defaultValue)
@@ -184,6 +188,7 @@ const IdentifierInput = forwardRef<IdentifierInputRef, Props>(
                   onChange={onChangeInput}
                   onKeyDown={onKeyDownInput}
                   disabled={disabled}
+                  readOnly={readOnly || pending}
                   spellCheck={false}
                   autoComplete="off"
                   tabIndex={noTab ? -1 : undefined}
@@ -203,7 +208,9 @@ const IdentifierInput = forwardRef<IdentifierInputRef, Props>(
               </div>
             </div>
           </div>
-          {disabled && <div className={styles.disabled}></div>}
+          {(disabled || readOnly || pending) && (
+            <div className={styles.disabled}></div>
+          )}
         </label>
         {error.flag && (
           <div className={cx(styles.errorMessage, styles.fadeIn)}>

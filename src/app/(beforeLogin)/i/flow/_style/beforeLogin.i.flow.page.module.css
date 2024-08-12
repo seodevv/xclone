@@ -33,7 +33,7 @@
   max-height: inherit;
   background: rgb(var(--background-start-rgb));
 }
-.middle {
+.body {
   display: flex;
   flex-direction: row;
   flex-grow: 1;
@@ -43,4 +43,34 @@
   height: calc(100% - 53px);
   transform: translateX(0%);
   transition: 300ms all ease-in;
+}
+.bodyFlex {
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+  flex-shrink: 1;
+  min-width: 100%;
+  overflow-x: hidden;
+  overflow-y: auto;
+}
+.bodyContent {
+  margin: auto;
+  padding: 0;
+  display: flex;
+  flex-grow: 1;
+}
+
+@media screen and (max-width: 705px) {
+  .inner {
+    width: 100dvw;
+    min-width: unset;
+    max-width: unset;
+    height: 100dvh;
+    min-height: unset;
+    max-height: unset;
+    border-radius: unset;
+  }
+  .body {
+    max-width: unset;
+  }
 }

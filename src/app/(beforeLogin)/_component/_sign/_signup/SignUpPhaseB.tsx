@@ -21,7 +21,7 @@ export default function SignUpPhaseB() {
     <div
       className={cx(
         styles.slide,
-        animated && prevPage < page ? styles.slideRightIn : styles.slideLeftIn
+        animated && prevPage < page ? utils.slide_right_in : utils.slide_left_in
       )}
     >
       <div className={styles.content}>

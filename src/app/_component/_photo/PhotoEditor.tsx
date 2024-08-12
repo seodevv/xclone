@@ -13,6 +13,7 @@ import PrevButton from '@/app/(beforeLogin)/_component/_button/PrevButton';
 import FlexButton from '@/app/(beforeLogin)/_component/_button/FlexButton';
 import ZoomSvg from '@/app/_svg/post/ZoomSvg';
 import { getCroppedImage } from '@/app/_lib/photoCropper';
+import useAlterModal from '@/app/_hooks/useAlterModal';
 
 interface Props {
   imageSrc: string;
@@ -29,6 +30,7 @@ export default function PhotoEditor({
   onClose,
   onComplete,
 }: Props) {
+  const { alterMessage } = useAlterModal();
   const [crop, setCrop] = useState({ x: 0, y: 0 });
   const [zoom, setZoom] = useState(1);
   const [rotation, setRotation] = useState(0);
@@ -62,7 +64,7 @@ export default function PhotoEditor({
   ) => {
     setCroppedAreaPixels(croppedAreaPixels);
   };
-  const onCropAppliy: MouseEventHandler<HTMLButtonElement> = () => {
+  const onCropApply: MouseEventHandler<HTMLButtonElement> = () => {
     onCroppedImage();
   };
   const onCroppedImage = async () => {
@@ -82,6 +84,11 @@ export default function PhotoEditor({
         }
       }
     } catch (error) {
+      alterMessage(
+        'An error occurred while editing your photo.\nPlease try again.',
+        'error',
+        3000
+      );
       console.error(error);
     }
   };
@@ -147,7 +154,7 @@ export default function PhotoEditor({
           <FlexButton
             text="Apply"
             style={{ minHeight: 32 }}
-            onClick={onCropAppliy}
+            onClick={onCropApply}
           />
         </div>
       </div>

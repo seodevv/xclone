@@ -1,6 +1,7 @@
 'use client';
 
 import styles from './beforeLogin.signup.module.css';
+import utils from '@/app/utility.module.css';
 import cx from 'classnames';
 import SignModalTitle from '@/app/(beforeLogin)/_component/_sign/_signup/SIgnModalTitle';
 import IdentifierInput from '@/app/(beforeLogin)/_component/_sign/IdentifierInput';
@@ -23,7 +24,8 @@ export default function SignUpPhaseA() {
     <div
       className={cx(
         styles.slide,
-        animated && (prevPage < page ? styles.slideRightIn : styles.slideLeftIn)
+        animated &&
+          (prevPage < page ? utils.slide_right_in : utils.slide_left_in)
       )}
     >
       <div className={styles.content}>

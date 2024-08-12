@@ -13,6 +13,7 @@ export default function GoogleLogin() {
   return (
     <>
       <button
+        type="button"
         className={cx(styles.login, styles.google)}
         onClick={onClickGoogleLogin}
       >

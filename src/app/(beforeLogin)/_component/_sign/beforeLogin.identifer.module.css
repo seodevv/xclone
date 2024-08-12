@@ -13,21 +13,21 @@
 .label.error {
   border-color: rgb(var(--error-rgb));
 }
-.label:focus-within {
+.label:focus-within:not(:has(.input:read-only)) {
   border-color: rgb(var(--primary-rgb));
   box-shadow: rgb(var(--primary-rgb)) 0px 0px 0px 1px;
 }
-.label:focus-within .placeholderText {
+.label:focus-within:not(:has(.input:read-only)) .placeholderText {
   padding-top: 8px;
   font-size: small;
   color: rgb(var(--primary-rgb));
   line-height: 16px;
 }
-.label.error:focus-within {
+.label.error:focus-within:not(:has(.input:read-only)) {
   border-color: rgb(var(--error-rgb));
   box-shadow: rgb(var(--error-rgb)) 0px 0px 0px 1px;
 }
-.label.error:focus-within .placeholderText {
+.label.error:focus-within:not(:has(.input:read-only)) .placeholderText {
   padding-top: 8px;
   font-size: small;
   color: rgb(var(--error-rgb));
@@ -101,7 +101,8 @@
   outline: none;
   resize: none;
 }
-.input:disabled {
+.input:disabled,
+.input:read-only {
   color: rgb(var(--link-rgb));
 }
 .disabled {

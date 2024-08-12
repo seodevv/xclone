@@ -17,6 +17,7 @@ export default function GithubLogin({ className, style }: Props) {
   return (
     <>
       <button
+        type="button"
         className={cx(styles.login, styles.github, className)}
         style={style}
         onClick={onClickGitHubLogin}

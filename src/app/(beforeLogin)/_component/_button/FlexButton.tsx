@@ -2,6 +2,7 @@ import styles from './beforeLogin.button.module.css';
 import { CSSProperties, MouseEventHandler } from 'react';
 import cx from 'classnames';
 import LoadingSpinner from '@/app/(afterLogin)/_component/loading/LoadingSpinner';
+import { useFormStatus } from 'react-dom';
 
 interface Props {
   className?: string;
@@ -26,6 +27,8 @@ export default function FlexButton({
   disabled = false,
   large,
 }: Props) {
+  const { pending } = useFormStatus();
+
   return (
     <button
       className={cx(
@@ -37,10 +40,10 @@ export default function FlexButton({
       style={style}
       type={type}
       onClick={onClick}
-      disabled={disabled}
+      disabled={disabled || (type === 'submit' && pending)}
     >
       <div className={cx(styles.btnText, large && styles.large)}>
-        {isLoading ? (
+        {isLoading || (type === 'submit' && pending) ? (
           <LoadingSpinner
             style={{ padding: 0 }}
             fill={theme === 'theme' ? 'reverse' : 'theme'}

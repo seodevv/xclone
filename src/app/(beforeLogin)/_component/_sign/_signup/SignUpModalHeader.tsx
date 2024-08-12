@@ -12,7 +12,6 @@ export default function SignUpModalHeader() {
   const router = useRouter();
   const {
     options: { page, isLoading, edit },
-    setEdit,
     prevPage,
   } = useSignUp();
 
@@ -21,11 +20,7 @@ export default function SignUpModalHeader() {
   };
 
   useEffect(() => {
-    document.documentElement.style.overflow = 'hidden';
     router.refresh();
-    return () => {
-      document.documentElement.style.overflow = '';
-    };
   }, [router]);
 
   if (edit) return null;

@@ -7,7 +7,13 @@ import cx from 'classnames';
 import SignModalTitle from '@/app/(beforeLogin)/_component/_sign/_signup/SIgnModalTitle';
 import PhotoButton from '@/app/(beforeLogin)/_component/_button/PhotoButton';
 import DEFAULT_PROFILE from '/public/default_profile.png';
-import { ChangeEventHandler, MouseEventHandler, useRef } from 'react';
+import {
+  ChangeEventHandler,
+  MouseEventHandler,
+  useEffect,
+  useRef,
+  useState,
+} from 'react';
 import useSignUp from '@/app/(beforeLogin)/_component/_sign/_signup/useSignUp';
 import PhotoEditor from '@/app/_component/_photo/PhotoEditor';
 import { getFileDataURL } from '@/app/_lib/common';
@@ -19,18 +25,23 @@ export default function SignUpPhaseC() {
     set,
     setEdit,
   } = useSignUp();
+  const [isUpload, setIsUpload] = useState(false);
   const fileRef = useRef<HTMLInputElement>(null);
   const title = 'Have a favorite selfie? Upload it now.';
 
   const onClickPhoto: MouseEventHandler<HTMLButtonElement> = () => {
     fileRef.current?.click();
+    setIsUpload(true);
   };
 
   const onChangeFile: ChangeEventHandler<HTMLInputElement> = async (e) => {
     const files = e.target.files;
     if (!files) return;
+    settingFile(files[0]);
+  };
 
-    const file = files[0];
+  const settingFile = async (file: File) => {
+    setIsUpload(false);
     if (file) {
       const dataUrl = await getFileDataURL(file);
       set({
@@ -46,8 +57,24 @@ export default function SignUpPhaseC() {
     }
   };
 
+  useEffect(() => {
+    const focusListener = () => {
+      if (fileRef.current?.files) {
+        settingFile(fileRef.current.files[0]);
+      }
+    };
+    if (isUpload) {
+      window.addEventListener('focus', focusListener);
+    }
+    return () => {
+      if (isUpload) {
+        window.removeEventListener('focus', focusListener);
+      }
+    };
+  }, [isUpload]);
+
   return (
-    <div className={cx(styles.slide, edit && utils.pa_0, styles.slideRightIn)}>
+    <div className={cx(styles.slide, edit && utils.pa_0, utils.slide_right_in)}>
       {!edit && (
         <div className={styles.content}>
           <SignModalTitle text="Pick a profile picture">

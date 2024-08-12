@@ -1,8 +1,8 @@
 'use client';
 
-import FlexButton from '@/app/(beforeLogin)/_component/_button/FlexButton';
 import styles from './beforeLogin.signup.module.css';
 import { MouseEventHandler } from 'react';
+import FlexButton from '@/app/(beforeLogin)/_component/_button/FlexButton';
 import useSignUp from '@/app/(beforeLogin)/_component/_sign/_signup/useSignUp';
 
 export default function SignUpButton() {

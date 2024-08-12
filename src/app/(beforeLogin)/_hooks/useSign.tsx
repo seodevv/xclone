@@ -30,11 +30,12 @@ const useSign = () => {
     return response.json();
   };
 
-  const login = async (id: string, password: string) => {
+  const login = async (id: string, password: string, redirect = false) => {
     const response = await signIn('credentials', {
       id,
       password,
-      redirect: false,
+      redirect: redirect,
+      callbackUrl: redirect ? '/home' : undefined,
     });
 
     return response;
