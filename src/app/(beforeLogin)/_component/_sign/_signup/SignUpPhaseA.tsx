@@ -7,7 +7,7 @@ import SignModalTitle from '@/app/(beforeLogin)/_component/_sign/_signup/SIgnMod
 import IdentifierInput from '@/app/(beforeLogin)/_component/_sign/IdentifierInput';
 import AlreadyAccount from '@/app/(beforeLogin)/_component/_sign/_signup/AlreadyAccount';
 import BirthSelector from '@/app/(beforeLogin)/_component/_sign/BirthSelector';
-import useSignUp from '@/app/(beforeLogin)/_component/_sign/_signup/useSignUp';
+import useSignUp from '@/app/(beforeLogin)/_hooks/useSignUp';
 
 export default function SignUpPhaseA() {
   const {

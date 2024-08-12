@@ -3,7 +3,7 @@
 import styles from './beforeLogin.signup.module.css';
 import CloseButton from '@/app/(beforeLogin)/_component/_button/CloseButton';
 import PrevButton from '@/app/(beforeLogin)/_component/_button/PrevButton';
-import useSignUp from '@/app/(beforeLogin)/_component/_sign/_signup/useSignUp';
+import useSignUp from '@/app/(beforeLogin)/_hooks/useSignUp';
 import XLogoSvg from '@/app/_svg/logo/XLogoSvg';
 import { useRouter } from 'next/navigation';
 import { useEffect } from 'react';

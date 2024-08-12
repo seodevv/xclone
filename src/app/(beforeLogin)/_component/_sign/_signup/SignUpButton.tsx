@@ -3,7 +3,7 @@
 import styles from './beforeLogin.signup.module.css';
 import { MouseEventHandler } from 'react';
 import FlexButton from '@/app/(beforeLogin)/_component/_button/FlexButton';
-import useSignUp from '@/app/(beforeLogin)/_component/_sign/_signup/useSignUp';
+import useSignUp from '@/app/(beforeLogin)/_hooks/useSignUp';
 
 export default function SignUpButton() {
   const { options, disabled, nextPage } = useSignUp();

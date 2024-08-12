@@ -5,8 +5,8 @@ import utils from '@/app/utility.module.css';
 import SignUpPhaseA from '@/app/(beforeLogin)/_component/_sign/_signup/SignUpPhaseA';
 import SignUpPhaseB from '@/app/(beforeLogin)/_component/_sign/_signup/SignUpPhaseB';
 import SignUpPhaseC from '@/app/(beforeLogin)/_component/_sign/_signup/SignUpPhaseC';
-import useSignUp from '@/app/(beforeLogin)/_component/_sign/_signup/useSignUp';
 import cx from 'classnames';
+import useSignUp from '@/app/(beforeLogin)/_hooks/useSignUp';
 
 export default function SignUpPhase() {
   const {

@@ -5,7 +5,7 @@ import utils from '@/app/utility.module.css';
 import cx from 'classnames';
 import SignModalTitle from '@/app/(beforeLogin)/_component/_sign/_signup/SIgnModalTitle';
 import IdentifierInput from '@/app/(beforeLogin)/_component/_sign/IdentifierInput';
-import useSignUp from '@/app/(beforeLogin)/_component/_sign/_signup/useSignUp';
+import useSignUp from '@/app/(beforeLogin)/_hooks/useSignUp';
 
 export default function SignUpPhaseB() {
   const {

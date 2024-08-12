@@ -14,9 +14,9 @@ import {
   useRef,
   useState,
 } from 'react';
-import useSignUp from '@/app/(beforeLogin)/_component/_sign/_signup/useSignUp';
 import PhotoEditor from '@/app/_component/_photo/PhotoEditor';
 import { getFileDataURL } from '@/app/_lib/common';
+import useSignUp from '@/app/(beforeLogin)/_hooks/useSignUp';
 
 export default function SignUpPhaseC() {
   const {
