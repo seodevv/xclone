@@ -32,6 +32,11 @@ interface Props {
   userId?: string;
   postId?: number;
   isPost?: boolean;
+  placeholder?: string;
+  minRows?: number;
+  maxRows?: number;
+  fontSize?: number;
+  lineHeight?: number;
 }
 
 export type MediaType =
@@ -43,6 +48,11 @@ export default function CommentForm({
   postId,
   session,
   isPost = false,
+  placeholder = 'Post your reply',
+  minRows = 1,
+  maxRows = 10,
+  fontSize = 20,
+  lineHeight = 24,
 }: Props) {
   const { alterMessage } = useAlterModal();
   const [active, setActive] = useState(isPost);
@@ -173,20 +183,23 @@ export default function CommentForm({
         onSubmit={onSubmitForm}
       >
         <div className={style.postUserSection}>
-          <div className={style.postUserImage}>
-            <MyProfile width={40} height={40} />
-          </div>
+          <MyProfile session={session} width={40} height={40} />
         </div>
         <div className={style.postInputSection}>
           <div className={style.postTextareaSection}>
             <ReactTextareaAutosize
               ref={contentRef}
               className={style.postContent}
-              maxRows={10}
-              minRows={1}
+              style={{
+                height: lineHeight + lineHeight * minRows,
+                fontSize: fontSize,
+                lineHeight: `${lineHeight}px`,
+              }}
+              minRows={minRows}
+              maxRows={maxRows}
               value={content}
               onChange={onChangeContent}
-              placeholder="Post your reply"
+              placeholder={placeholder}
               spellCheck={false}
               onFocus={() => {
                 setActive(true);

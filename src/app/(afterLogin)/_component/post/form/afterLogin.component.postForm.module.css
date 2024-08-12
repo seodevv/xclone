@@ -33,16 +33,21 @@
 .postForm {
   padding: 4px 16px 12px 16px;
   display: flex;
-  flex-flow: row nowrap;
-  align-items: center;
-  column-gap: 2px;
+  flex-direction: column;
   border-color: rgb(var(--border-start-rgb));
   border-bottom-width: 1px;
   border-bottom-style: solid;
   overflow-x: hidden;
 }
 
-.postForm.active {
+.postFormFlex {
+  display: flex;
+  flex-flow: row nowrap;
+  align-items: center;
+  column-gap: 2px;
+}
+
+.postFormFlex.active {
   align-items: flex-start;
 }
 

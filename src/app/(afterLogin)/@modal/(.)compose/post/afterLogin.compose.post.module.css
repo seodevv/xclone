@@ -1,0 +1,24 @@
+.background {
+  background: rgba(var(--background-modal-rgb), 0.4);
+}
+.modal {
+  position: relative;
+  top: 5%;
+  display: flex;
+  flex-direction: column;
+  min-width: 600px;
+  max-width: 80vw;
+  max-height: 90vh;
+  background: rgb(var(--background-start-rgb));
+  border-radius: 16px;
+  overflow-x: hidden;
+  overflow-y: hidden;
+}
+.compose {
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+  width: 100%;
+  max-width: 600px;
+}
+

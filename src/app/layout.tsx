@@ -2,6 +2,7 @@ import type { Metadata } from 'next';
 import { Inter } from 'next/font/google';
 import './globals.css';
 import AlterModalProvider from './_provider/AlterModalProvider';
+import PathRecordProvider from '@/app/_provider/PathRecordProvider';
 
 const inter = Inter({ subsets: ['latin'] });
 
@@ -21,7 +22,9 @@ export default function RootLayout({ children }: Props) {
   return (
     <html lang="en">
       <body className={inter.className}>
-        <AlterModalProvider>{children}</AlterModalProvider>
+        <PathRecordProvider>
+          <AlterModalProvider>{children}</AlterModalProvider>
+        </PathRecordProvider>
       </body>
     </html>
   );

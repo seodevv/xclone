@@ -158,7 +158,7 @@ export default function PhotoEditor({
           />
         </div>
       </div>
-      <div className={cx(utils.relative, utils.flexGlow_1)}>
+      <div className={cx(utils.relative, utils.flexGrow_1)}>
         <Cropper
           image={imageSrc}
           crop={crop}

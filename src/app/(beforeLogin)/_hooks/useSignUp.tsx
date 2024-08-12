@@ -109,7 +109,6 @@ export default function useSignUp() {
         setPage('next');
         break;
       case 2:
-        console.log('submit');
         const formData = new FormData();
         formData.append('id', id.state.value);
         formData.append('nickname', nickname.state.value);

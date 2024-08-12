@@ -9,7 +9,7 @@ interface Props {
 export default async function UserHeader({ username }: Props) {
   return (
     <div className={style.header}>
-      <BackButton />
+      <BackButton prevPath="/home" />
       <UserHeaderTitle username={username} />
     </div>
   );

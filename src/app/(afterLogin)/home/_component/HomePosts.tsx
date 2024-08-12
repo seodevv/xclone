@@ -5,6 +5,7 @@ import { HomeTabContext } from './HomeTabProvider';
 import Post from '@/app/(afterLogin)/_component/post/Post';
 import { useHomePostQuery } from '../_hook/useHomePostQuery';
 import PageLoading from '../../_component/loading/PageLoading';
+import NoPosts from '@/app/(afterLogin)/home/_component/NoPosts';
 
 export default function HomePosts() {
   const { tab } = useContext(HomeTabContext);
@@ -16,6 +17,10 @@ export default function HomePosts() {
     isFetchingNextPage,
     refetch,
   } = useHomePostQuery(tab === 'rec' ? 'recommends' : 'followings');
+
+  if (posts.pages.at(0)?.data.length === 0) {
+    return <NoPosts />;
+  }
 
   return (
     <>

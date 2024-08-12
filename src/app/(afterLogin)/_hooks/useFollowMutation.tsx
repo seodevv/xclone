@@ -79,7 +79,14 @@ const useFollowMutation = () =>
             ];
             shallow.data._count = {
               ...queryData.data._count,
-              Followers: queryData.data._count.Followers + 1,
+              Followers:
+                b === targetId
+                  ? queryData.data._count.Followers + 1
+                  : queryData.data._count.Followers,
+              Followings:
+                b === sourceId
+                  ? queryData.data._count.Followings + 1
+                  : queryData.data._count.Followings,
             };
           } else {
             shallow.data.Followers = queryData.data.Followers.filter(
@@ -88,12 +95,19 @@ const useFollowMutation = () =>
             shallow.data._count = {
               ...queryData.data._count,
               Followers:
-                queryData.data._count.Followers > 0
-                  ? queryData.data._count.Followers - 1
-                  : 0,
+                b === targetId
+                  ? queryData.data._count.Followers > 0
+                    ? queryData.data._count.Followers - 1
+                    : 0
+                  : queryData.data._count.Followers,
+              Followings:
+                b === sourceId
+                  ? queryData.data._count.Followings > 0
+                    ? queryData.data._count.Followings - 1
+                    : 0
+                  : queryData.data._count.Followings,
             };
           }
-
           queryClient.setQueryData(queryKey, shallow);
           rollbacks.push({ queryKey, queryData });
         }

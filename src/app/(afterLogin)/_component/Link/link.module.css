@@ -38,10 +38,10 @@
 .primaryLink {
   background: rgb(var(--primary-button-rgb));
 }
-.primaryLink:hover:enabled {
+.primaryLink:hover {
   background: rgba(var(--primary-button-rgb), 0.9);
 }
-.primaryLink:active:enabled {
+.primaryLink:active {
   background: rgba(var(--primary-button-rgb), 0.75);
   transition: none;
 }

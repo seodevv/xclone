@@ -5,6 +5,7 @@ import FoldProvider from './_provider/FoldProvider';
 import { getServerSession } from 'next-auth';
 import { authOptions } from '@/app/api/auth/[...nextauth]/route';
 import SinglePostHydrationBoundary from '@/app/(afterLogin)/[username]/status/[id]/_component/SinglePostHydrationBoundary';
+import HtmlOverflowHidden from '@/app/_component/_overflow/HtmlOverflowHidden';
 
 interface Props {
   params: { username: string; id: string; photoId: string };
@@ -16,6 +17,7 @@ export default async function PhotoPage({ params }: Props) {
   return (
     <SinglePostHydrationBoundary params={params}>
       <FoldProvider>
+        <HtmlOverflowHidden />
         <main className={style.PhotoModal}>
           <PhotoSection params={params} />
           <PostSection session={session} params={params} />

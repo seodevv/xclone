@@ -1,4 +1,10 @@
-export const generateImagePath = (image: string) => {
+import defaultProfile from '/public/default_profile.png';
+
+export const generateImagePath = (image?: string) => {
+  if (!image) {
+    return defaultProfile;
+  }
+
   const regex = /^http?s/;
   return regex.test(image)
     ? image

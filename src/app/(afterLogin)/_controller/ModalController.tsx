@@ -11,6 +11,7 @@ export default function Modalontroller({ children }: Props) {
   const split = pathname.split('/');
   if (
     (split[2] === 'status' && split[4] === 'photo' && !!split[5]) ||
+    (split[1] === 'compose' && split[2] === 'post') ||
     (split[1] === 'i' && split[2] === 'premium_sign_up')
   ) {
     return <>{children}</>;

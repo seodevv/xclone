@@ -2,12 +2,12 @@
 
 import styles from '../_style/photoModal.module.css';
 import { useSinglePostQuery } from '@/app/(afterLogin)/[username]/status/[id]/_hooks/useSinglePostQuery';
-import { useContext, useEffect } from 'react';
+import { useContext } from 'react';
 import { FoldContext } from '../_provider/FoldProvider';
 import Post from '@/app/(afterLogin)/_component/post/Post';
 import { Session } from 'next-auth';
-import CommentForm from '@/app/(afterLogin)/[username]/status/[id]/_component/CommentForm';
 import Comments from '@/app/(afterLogin)/[username]/status/[id]/_component/Comments';
+import PostForm from '@/app/(afterLogin)/_component/post/form/PostForm';
 
 interface Props {
   session: Session | null;
@@ -18,23 +18,15 @@ export default function PostSection({ session, params }: Props) {
   const { fold } = useContext(FoldContext);
   const { data: post } = useSinglePostQuery(params);
 
-  useEffect(() => {
-    document.body.style.overflow = 'hidden';
-    return () => {
-      document.body.style.overflow = '';
-    };
-  }, []);
-
   if (fold) return null;
 
   return (
     <section className={styles.postSection}>
       <Post post={post.data} noImage isSingle />
       {session && (
-        <CommentForm
+        <PostForm
           session={session}
-          userId={post.data.User.id}
-          postId={post.data.postId}
+          parent={{ postId: post.data.postId, userId: post.data.User.id }}
         />
       )}
       <Comments params={params} />

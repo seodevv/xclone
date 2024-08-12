@@ -49,8 +49,6 @@ const EmojiSelector = ({
 
   const onClickEmojiSelect = (emoji: typeof Emoji.Props) => {
     setState((prev) => {
-      // const a = prev.substring(0, lastSelection);
-      // const b = prev.substring(lastSelection);
       const a = splitEmoji(prev).splice(0, lastSelection).join('');
       const b = splitEmoji(prev).splice(lastSelection).join('');
       return a + emoji.native + b;
@@ -80,7 +78,6 @@ const EmojiSelector = ({
       y: _y,
     }));
   };
-
   const onClickOutSide = (e: Event) => {
     if (e.target === outsideRef.current) {
       selectorClose();
@@ -89,7 +86,6 @@ const EmojiSelector = ({
       }
     }
   };
-
   const selectorClose = () => {
     setFadeOut(true);
     setTimeout(() => {

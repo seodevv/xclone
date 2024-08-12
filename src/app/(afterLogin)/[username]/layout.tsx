@@ -18,7 +18,7 @@ interface Props {
   params: { username: string };
 }
 
-export default async function layout({ children, params }: Props) {
+export default async function UserLayout({ children, params }: Props) {
   const session = await getServerSession(authOptions);
   const queryClient = new QueryClient();
   await Promise.all([

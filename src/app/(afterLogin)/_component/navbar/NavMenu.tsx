@@ -58,7 +58,7 @@ export default function NavMenu({ session }: Props) {
         })}
       </ul>
       {session && (
-        <Link href="/compose/tweet" className={styles.tweet}>
+        <Link href="/compose/post" className={styles.tweet} scroll={false}>
           <span className={styles.post}>Post</span>
           <TweetSvg white />
         </Link>

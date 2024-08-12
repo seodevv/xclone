@@ -8,7 +8,7 @@ interface Props {
   className?: string;
   style?: CSSProperties;
   text: string;
-  type?: 'temporary' | 'primary';
+  type?: 'temporary' | 'primary' | 'primary_trans';
   onClick?: MouseEventHandler<HTMLButtonElement>;
 }
 
@@ -26,6 +26,7 @@ export default function TextButton({
         styles.textBtn,
         type === 'temporary' && styles.temporaryBtn,
         type === 'primary' && styles.primaryBtn,
+        type === 'primary_trans' && styles.primaryTransBtn,
         className
       )}
       style={style}

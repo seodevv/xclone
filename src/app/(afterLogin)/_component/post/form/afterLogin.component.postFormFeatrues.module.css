@@ -1,0 +1,58 @@
+.features {
+  padding-bottom: 8px;
+  display: flex;
+  align-items: center;
+}
+.feature {
+  margin: 4px 0 0 -8px;
+  display: flex;
+  align-items: center;
+  flex-flow: row nowrap;
+  flex-grow: 1;
+}
+.funcButton {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 34px;
+  height: 34px;
+  background: transparent;
+  border: none;
+  border-radius: 50%;
+  cursor: pointer;
+  transition: 200ms background-color ease-in;
+}
+.funcButton:hover:enabled {
+  background: rgba(var(--primary-rgb), 0.25);
+}
+.funcButton:active:enabled {
+  background: rgba(var(--primary-rgb), 0.5);
+}
+.funcButton:disabled {
+  opacity: 0.5;
+}
+.funcButton svg {
+  fill: rgb(29, 155, 240);
+}
+.actionButton {
+  margin-left: 12px;
+  padding: 0 16px;
+  height: 36px;
+  background-color: rgb(var(--primary-rgb));
+  border: none;
+  border-radius: 9999px;
+  font-size: 15px;
+  font-weight: 700;
+  color: #fff;
+  cursor: pointer;
+  transition: 100ms opacity ease-in;
+}
+.actionButton:disabled {
+  opacity: 0.5;
+}
+.actionButton:hover:enabled {
+  opacity: 0.9;
+}
+.actionButton:active:enabled {
+  opacity: 0.75;
+}

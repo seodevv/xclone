@@ -3,9 +3,9 @@
 import style from '../_style/singlePost.module.css';
 import { useSinglePostQuery } from '../_hooks/useSinglePostQuery';
 import { Session } from 'next-auth';
-import CommentForm from './CommentForm';
 import Comments from './Comments';
 import Post from '@/app/(afterLogin)/_component/post/Post';
+import PostForm from '@/app/(afterLogin)/_component/post/form/PostForm';
 
 interface Props {
   params: { username: string; id: string };
@@ -19,10 +19,9 @@ export default function SinglePost({ params, session }: Props) {
     <div className={style.main}>
       <Post post={post.data} isSingle={true} />
       {session && (
-        <CommentForm
+        <PostForm
           session={session}
-          userId={post.data.User.id}
-          postId={post.data.postId}
+          parent={{ postId: post.data.postId, userId: post.data.User.id }}
         />
       )}
       <Comments params={params} />

@@ -4,7 +4,7 @@ import cx from 'classnames';
 
 interface Props {
   value: number;
-  maxValue: number;
+  maxValue?: number;
   type?: 'butt' | 'round';
   width?: number;
   borderWidth?: number;
@@ -15,7 +15,7 @@ interface Props {
 
 export default function ProgressSvg({
   value,
-  maxValue,
+  maxValue = 280,
   type = 'butt',
   width = 45,
   borderWidth = 4,

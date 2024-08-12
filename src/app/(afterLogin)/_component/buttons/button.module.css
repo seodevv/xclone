@@ -8,6 +8,10 @@
   border: none;
   border-radius: 50%;
   background: rgba(0, 0, 0, 0.5);
+  border: 1px solid rgb(0, 0, 0, 0.5);
+  font-size: 15px;
+  font-weight: bold;
+  color: rgb(255, 255, 255);
   cursor: pointer;
   transition: 0.15s background-color ease-in;
 }
@@ -28,9 +32,9 @@
 }
 .textBtn span {
   margin-bottom: 1px;
-  font-size: 15px;
-  font-weight: bold;
-  color: rgb(var(--foreground-rgb));
+  font-size: inherit;
+  font-weight: inherit;
+  color: inherit;
 }
 .temporaryBtn {
   background: rgb(var(--background-start-rgb));
@@ -45,6 +49,18 @@
 .primaryBtn:active:enabled {
   background: rgba(var(--primary-button-rgb), 0.75);
   transition: none;
+}
+.primaryTransBtn {
+  background: transparent;
+  border: 1px solid transparent;
+  color: rgb(var(--primary-rgb));
+  font-weight: 600;
+}
+.primaryTransBtn:hover:enabled {
+  background: rgba(var(--primary-rgb), 0.1);
+}
+.primaryTransBtn:active:enabled {
+  background: rgba(var(--primary-rgb), 0.25);
 }
 
 /* BackButton */

@@ -1,0 +1,35 @@
+.noPost {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.content {
+  margin: 32px auto;
+  padding: 0 32px;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  max-width: 400px;
+}
+.title {
+  margin-bottom: 8px;
+  font-size: 31px;
+  font-weight: 800;
+  color: rgb(var(--foregorund-rgb));
+  line-height: 36px;
+}
+.sub {
+  margin-bottom: 28px;
+  font-size: 15px;
+  font-weight: 400;
+  color: rgb(var(--link-rgb));
+  line-height: 20px;
+}
+.link {
+  display: flex;
+  align-items: flex-start;
+}
+.linkBtn {
+  min-width: 52px;
+}

@@ -1,26 +1,22 @@
-import style from './_style/home.module.css';
-import CommentForm from '../[username]/status/[id]/_component/CommentForm';
 import { getServerSession } from 'next-auth';
 import { authOptions } from '@/app/api/auth/[...nextauth]/route';
-import HomeTab from './_component/HomeTab';
-import HomeTabProvider from './_component/HomeTabProvider';
 import HomePosts from './_component/HomePosts';
-import HomeHydrationBoundary from './_boundray/HomeHydrationBoundary';
+import HomeHydrationBoundary from '@/app/(afterLogin)/home/_boundray/HomeHydrationBoundary';
+import HomeRedirect from '@/app/(afterLogin)/home/_component/HomeRedirect';
 
-export default async function HomePage() {
+interface Props {
+  searchParams: { r?: string };
+}
+
+export default async function HomePage({ searchParams }: Props) {
   const session = await getServerSession(authOptions);
 
   if (!session) return null;
 
   return (
-    <main className={style.main}>
-      <HomeHydrationBoundary>
-        <HomeTabProvider>
-          <HomeTab />
-          <CommentForm session={session} isPost />
-          <HomePosts />
-        </HomeTabProvider>
-      </HomeHydrationBoundary>
-    </main>
+    <HomeHydrationBoundary>
+      <HomeRedirect redirect={searchParams.r} />
+      <HomePosts />
+    </HomeHydrationBoundary>
   );
 }
