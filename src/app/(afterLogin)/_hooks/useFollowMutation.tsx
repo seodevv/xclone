@@ -160,10 +160,19 @@ const useFollowMutation = () =>
       });
       return rollbacks;
     },
-    onSuccess: (response, { queryClient, targetId }) => {
+    onSuccess: (response, { queryClient, sourceId, targetId }) => {
       queryClient.invalidateQueries({
         queryKey: ['users', 'list', 'recommends'],
         refetchType: 'none',
+      });
+      queryClient.invalidateQueries({
+        queryKey: ['users', 'list', targetId, { type: 'follow' }],
+      });
+      queryClient.invalidateQueries({
+        queryKey: ['users', 'list', targetId, { type: 'verified_followers' }],
+      });
+      queryClient.invalidateQueries({
+        queryKey: ['users', 'list', sourceId, { type: 'following' }],
       });
     },
     onError: (error, { queryClient }, context?: Context) => {

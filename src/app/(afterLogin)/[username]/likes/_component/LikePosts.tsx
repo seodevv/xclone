@@ -6,8 +6,13 @@ import Post from '@/app/(afterLogin)/_component/post/Post';
 import LoadingSpinner from '@/app/(afterLogin)/_component/loading/LoadingSpinner';
 import DisConnection from '@/app/(afterLogin)/_component/error/DisConnection';
 import PageLoading from '@/app/(afterLogin)/_component/loading/PageLoading';
+import NoMedia from '@/app/(afterLogin)/[username]/_component/NoMedias';
 
-export default function LikePosts() {
+interface Props {
+  username: string;
+}
+
+export default function LikePosts({ username }: Props) {
   const {
     data: likePosts,
     isLoading,
@@ -19,6 +24,7 @@ export default function LikePosts() {
   } = useLikePostsQuery();
 
   if (likePosts) {
+    const isEmpty = likePosts.pages[0].data.length === 0;
     return (
       <section>
         {likePosts.pages.map((page, i) => (
@@ -28,6 +34,7 @@ export default function LikePosts() {
             ))}
           </Fragment>
         ))}
+        {isEmpty && <NoMedia type="like" username={username} />}
         <PageLoading
           hasNextPage={hasNextPage}
           isFetchingNextPage={isFetchingNextPage}

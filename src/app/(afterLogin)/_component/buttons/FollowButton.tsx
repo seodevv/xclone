@@ -55,6 +55,10 @@ export default function FollowButton({
     }
   };
 
+  if (session?.user?.email === user.id) {
+    return null;
+  }
+
   return (
     <button
       className={cx(

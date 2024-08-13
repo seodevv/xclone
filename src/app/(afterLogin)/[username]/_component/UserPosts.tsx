@@ -12,13 +12,19 @@ import PostMedia from '../../_component/post/body/PostMedia';
 import NoMedia from './NoMedias';
 import FollowRecommends from '../../_component/follow_recommends/FollowRecommends';
 import NoProfile from './_body/NoProfile';
+import { Session } from 'next-auth';
 
 interface Props {
+  session: Session | null;
   username: string;
   filter?: 'all' | 'reply' | 'media' | 'like';
 }
 
-export default function UserPosts({ username, filter = 'all' }: Props) {
+export default function UserPosts({
+  session,
+  username,
+  filter = 'all',
+}: Props) {
   const { data: user } = useUserQuery(username);
   const {
     data: posts,
@@ -33,7 +39,9 @@ export default function UserPosts({ username, filter = 'all' }: Props) {
   if (!user) return <NoProfile />;
 
   if (posts) {
+    const isMine = session?.user?.email === username;
     const isMedia = filter === 'media';
+    const isEmpty = posts.pages[0].data.length === 0;
     return (
       <div className={cx(styles.userPosts, isMedia && styles.userMedia)}>
         {posts.pages.map((page, i) =>
@@ -45,8 +53,10 @@ export default function UserPosts({ username, filter = 'all' }: Props) {
             )
           )
         )}
-        {isMedia && posts.pages.at(0)?.data.length === 0 && <NoMedia />}
-        {!isMedia && (
+        {isEmpty && (
+          <NoMedia type={filter} username={username} isMine={isMine} />
+        )}
+        {!isMedia && isMine && (
           <div className={styles.followRecommends} style={{ order: 5 }}>
             <FollowRecommends isDesc />
           </div>

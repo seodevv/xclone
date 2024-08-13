@@ -1,5 +1,6 @@
 /* UserPost */
 .userPosts {
+  margin-top: 2px;
   display: flex;
   flex-flow: column nowrap;
 }
@@ -19,6 +20,7 @@
 }
 .title {
   margin-bottom: 8px;
+  max-width: 350px;
   font-size: 31px;
   font-weight: 800;
   line-height: 36px;

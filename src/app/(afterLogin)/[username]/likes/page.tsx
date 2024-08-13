@@ -17,7 +17,7 @@ export default async function LikesPage({ params }: Props) {
     <LikeHydrationBoundary>
       <main className={styles.main}>
         <LikePrivateMessage />
-        <LikePosts />
+        <LikePosts username={params.username} />
       </main>
     </LikeHydrationBoundary>
   );
