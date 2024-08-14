@@ -36,9 +36,11 @@ export default function NavMenu({ session }: Props) {
             return null;
           }
           const active =
-            menu.link === 'profile'
-              ? segment === session?.user?.email
-              : segment === menu.link;
+            menu.link !== 'profile'
+              ? menu.link === 'explore'
+                ? segment && ['explore', 'search'].includes(segment)
+                : segment === menu.link
+              : segment === session?.user?.email;
           const link =
             menu.link === 'profile'
               ? `/${session?.user?.email}`

@@ -1,0 +1,40 @@
+.reactionBtn {
+  margin-right: 4px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: transparent;
+  border: none;
+  border-radius: 19px;
+  color: rgb(var(--link-rgb));
+  fill: rgb(var(--link-rgb));
+  outline: none;
+  cursor: pointer;
+}
+.reactionBtn > svg {
+  fill: inherit;
+}
+.reactionBtn > div {
+  color: inherit;
+}
+.reactionCount {
+  padding: 0 5px;
+  font-size: 13px;
+  font-weight: bold;
+}
+.theme {
+  color: rgb(var(--foreground-rgb));
+  fill: rgb(var(--foreground-rgb));
+}
+.primary {
+  color: rgb(var(--primary-rgb));
+  fill: rgb(var(--primary-rgb));
+}
+.secondary {
+  color: rgb(var(--secondary-rgb));
+  fill: rgb(var(--secondary-rgb));
+}
+.tertiary {
+  color: rgb(var(--tertiary-rgb));
+  fill: rgb(var(--tertiary-rgb));
+}

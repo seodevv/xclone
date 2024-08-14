@@ -107,17 +107,17 @@ const EmojiSelector = ({
         selectorClose();
       }
     };
-    if (active) {
+    if (active.flag) {
       window.addEventListener('scroll', scrollListener);
       window.addEventListener('keydown', keydownListener);
     }
     return () => {
-      if (active) {
+      if (active.flag) {
         window.removeEventListener('scroll', scrollListener);
         window.removeEventListener('keydown', keydownListener);
       }
     };
-  }, [active]);
+  }, [active.flag]);
 
   return (
     <div className={styles.emojiPicker}>

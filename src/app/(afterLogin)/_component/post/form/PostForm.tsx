@@ -91,14 +91,16 @@ export default function PostForm({
           if (typeof onSubmitEnd === 'function') {
             onSubmitEnd();
           }
-          setContent('');
-          setImages([]);
         },
-        onError: () => {
+        onError: (error, { content, media }) => {
           alterMessage('Upload failed. please try again.', 'error');
+          setContent(content);
+          setImages(media);
         },
       }
     );
+    setContent('');
+    setImages([]);
   };
   const onChangeContent: ChangeEventHandler<HTMLTextAreaElement> = (e) => {
     setActive(true);

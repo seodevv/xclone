@@ -6,9 +6,9 @@ import {
   QueryKey,
   useMutation,
 } from '@tanstack/react-query';
-import { MediaType } from '../[username]/status/[id]/_component/CommentForm';
 import { AdvancedPost } from '@/model/Post';
 import { Session } from 'next-auth';
+import { MediaType } from '@/app/(afterLogin)/_component/post/form/PostForm';
 
 interface MutationParams {
   queryClient: QueryClient;
@@ -175,6 +175,7 @@ const usePostMutation = () =>
           Hearts: 0,
           Comments: 0,
           Reposts: 0,
+          Views: 0,
         },
       };
 
@@ -193,7 +194,7 @@ const usePostMutation = () =>
       const context: {
         queryKey: QueryKey;
         queryData: InfiniteData<
-          { data: AdvancedPost[]; message: string },
+          { data: AdvancedPost[]; nextCursor?: number; message: string },
           number
         >;
       }[] = [];
@@ -201,7 +202,7 @@ const usePostMutation = () =>
         const queryData =
           queryClient.getQueryData<
             InfiniteData<
-              { data: AdvancedPost[]; nextCursor?: String; message: string },
+              { data: AdvancedPost[]; nextCursor?: number; message: string },
               number
             >
           >(queryKey);

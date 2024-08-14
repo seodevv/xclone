@@ -20,6 +20,7 @@ export interface AdvancedPost extends Post {
     Hearts: number;
     Reposts: number;
     Comments: number;
+    Views: number;
   };
   Parent?: {
     postId: Post['postId'];

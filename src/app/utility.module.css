@@ -568,6 +568,25 @@
   aspect-ratio: 1 / 1;
 }
 
+/* filter */
+.backdrop_blur_s {
+  backdrop-filter: blur(5px);
+}
+.backdrop_blur_m {
+  backdrop-filter: blur(8px);
+}
+.backdrop_blur_l {
+  backdrop-filter: blur(12px);
+}
+
+/* cursor */
+.cursor_none {
+  cursor: none;
+}
+.cursor_point {
+  cursor: pointer;
+}
+
 /* overflow */
 .of_hide {
   overflow: hidden;

@@ -1,5 +1,6 @@
 /* Post */
 .post {
+  position: relative;
   display: flex;
   flex-direction: column;
   padding: 12px 16px;
@@ -20,10 +21,34 @@
 .post.single:hover {
   background: unset;
 }
+.post.disabled:hover {
+  background: unset;
+  cursor: wait;
+}
 .postWrapper {
   display: flex;
   flex-direction: row;
 }
 .postWrapper.single {
   flex-direction: column;
+}
+.disabled {
+  opacity: 0.5;
+  overflow: hidden;
+}
+
+.maxHeight {
+  animation-name: maxHeight;
+  animation-timing-function: ease;
+  animation-duration: 1000ms;
+  animation-iteration-count: 1;
+}
+
+@keyframes maxHeight {
+  from {
+    max-height: 0;
+  }
+  to {
+    max-height: 1000px;
+  }
 }
