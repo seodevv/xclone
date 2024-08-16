@@ -130,7 +130,7 @@ export default function PhotoEditor({
         window.removeEventListener('mousemove', mouseMove);
       }
     };
-  }, [control.flag, control.zoom, setControl]);
+  }, [control.flag, control.zoom, setControl, sliderHandler]);
 
   useLayoutEffect(() => {
     setControl((prev) => {

@@ -1,10 +1,14 @@
 import HomePage from '../../home/page';
 import SoftNavigation from './_component/SoftNavigation';
 
-export default function PremiumSignUpPage() {
+interface Props {
+  searchParams: { r?: string };
+}
+
+export default function PremiumSignUpPage({ searchParams }: Props) {
   return (
     <>
-      <HomePage />
+      <HomePage searchParams={searchParams} />
       <SoftNavigation />
     </>
   );

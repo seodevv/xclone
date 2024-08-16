@@ -1,4 +1,4 @@
-import styles from '../_style/userPosts.module.css';
+import NoPost from '@/app/(afterLogin)/_component/post/NoPost';
 
 interface Props {
   type: 'all' | 'reply' | 'media' | 'like';
@@ -7,32 +7,44 @@ interface Props {
 }
 
 export default function NoMedia({ type, username, isMine = false }: Props) {
-  let title = `@${username} hasn\`t posted`;
-  let message = 'When they do, their posts will show up here.';
-  if (isMine) {
-    if (type === 'all' || type === 'reply') return null;
-  }
-
-  if (type === 'media' && isMine) {
-    title = 'Lights, camera ... attachments!';
-    message = 'When you post photos or videos, they will show up here.';
-  } else if (type === 'media' && !isMine) {
-    title += ' media';
-    message = 'Once they do, those posts will show up here.';
-  } else if (type === 'like') {
-    title = 'You don’t have any likes yet';
-    message =
-      'Tap the heart on any post to show it some love. When you do, it’ll show up here.';
+  switch (isMine) {
+    case true:
+      if (['all', 'reply'].includes(type)) {
+        return null;
+      }
+      if (type === 'media') {
+        return (
+          <NoPost
+            title="Lights, camera ... attachments!"
+            message="When you post photos or videos, they will show up here."
+          />
+        );
+      }
+      break;
+    case false:
+      if (type === 'media') {
+        return (
+          <NoPost
+            title={`@${username} hasn\`t posted media`}
+            message="Once they do, those posts will show up here."
+          />
+        );
+      }
+      if (type === 'like') {
+        return (
+          <NoPost
+            title="You don’t have any likes yet"
+            message="Tap the heart on any post to show it some love. When you do, it’ll show up here."
+          />
+        );
+      }
+      break;
   }
 
   return (
-    <div className={styles.noMedia}>
-      <div className={styles.title}>
-        <span>{title}</span>
-      </div>
-      <div className={styles.message}>
-        <span>{message}</span>
-      </div>
-    </div>
+    <NoPost
+      title={`@${username} hasn\`t posted`}
+      message="When they do, their posts will show up here."
+    />
   );
 }

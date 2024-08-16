@@ -1,7 +1,7 @@
 import styles from './beforeLogin.layout.module.css';
 import { ReactNode } from 'react';
 import { getServerSession } from 'next-auth';
-import { authOptions } from '../api/auth/[...nextauth]/route';
+import authOptions from '@/app/_lib/authOptions';
 import { redirect } from 'next/navigation';
 
 type Props = { children: ReactNode; modal: ReactNode };

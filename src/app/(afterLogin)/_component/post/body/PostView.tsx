@@ -6,12 +6,13 @@ import { unitConversion } from '@/app/_lib/common';
 interface Props {
   className?: string;
   style?: CSSProperties;
+  count?: number;
 }
 
-export default function PostView({ className, style }: Props) {
+export default function PostView({ className, style, count = 0 }: Props) {
   return (
     <span className={cx(styles.postView, className)} style={style}>
-      <span>{unitConversion(1234)}</span>
+      <span>{unitConversion(count)}</span>
       <span>Views</span>
     </span>
   );

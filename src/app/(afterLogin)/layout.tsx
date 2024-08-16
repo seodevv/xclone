@@ -1,7 +1,6 @@
 import style from './layout.module.css';
 import { ReactNode } from 'react';
 import { getServerSession } from 'next-auth';
-import { authOptions } from '../api/auth/[...nextauth]/route';
 import ReactQueryProvider from './_provider/ReactQueryProvider';
 import NextAuthProvider from '@/app/(afterLogin)/_provider/NextAuthProvider';
 import ViewportProvider from './_provider/ViewportProvider';
@@ -17,6 +16,7 @@ import SearchFilters from './_component/search/SearchFilters';
 import FollowRecommendsHydrationBoundary from './_boundary/FollowRecommendsHydrationBoundary';
 import TrendsHydrationBoundary from './_boundary/TrendsHydrationBoundary';
 import UnFollowProvider from './_provider/UnFollowProvider';
+import authOptions from '@/app/_lib/authOptions';
 
 interface Props {
   children: ReactNode;

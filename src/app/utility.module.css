@@ -446,19 +446,22 @@
 }
 
 /* width */
-.w_100.w_100 {
+.w_100p.w_100p {
   width: 100%;
 }
 .w_auto.w_auto {
   width: auto;
 }
-.w_min_100.w_min_100 {
+.w_min_100p.w_min_100p {
   min-width: 100%;
 }
 .w_min_auto.w_min_auto {
   min-width: auto;
 }
-.w_max_100.w_max_100 {
+.w_min_56 {
+  min-width: 56px;
+}
+.w_max_100p.w_max_100p {
   max-width: 100%;
 }
 .w_max_auto.w_max_auto {
@@ -466,11 +469,31 @@
 }
 
 /* height */
-.h_100.h_100 {
+.h_100p.h_100p {
   height: 100%;
 }
 .h_auto.h_auto {
   height: auto;
+}
+.h_53 {
+  height: 53px;
+}
+.h_min_32 {
+  height: 32px;
+}
+
+/* background */
+.bg_theme {
+  background: rgb(var(--background-start-rgb));
+}
+.bg_theme_a_65 {
+  background: rgba(var(--background-start-rgb), 0.65);
+}
+.bg_reverse {
+  background: rgb(var(--r-background-start-rgb));
+}
+.bg_reverse_a_65 {
+  background: rgba(var(--r-background-start-rgb), 0.65);
 }
 
 /* border */
@@ -649,5 +672,19 @@
     visibility: visible;
     opacity: 1;
     transform: translateX(0);
+  }
+}
+.maxHeight {
+  animation-name: maxHeight;
+  animation-timing-function: ease;
+  animation-duration: 1000ms;
+  animation-iteration-count: 1;
+}
+@keyframes maxHeight {
+  from {
+    max-height: 0;
+  }
+  to {
+    max-height: 1000px;
   }
 }

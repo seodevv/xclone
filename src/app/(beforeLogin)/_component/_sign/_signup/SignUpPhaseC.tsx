@@ -71,7 +71,7 @@ export default function SignUpPhaseC() {
         window.removeEventListener('focus', focusListener);
       }
     };
-  }, [isUpload]);
+  }, [isUpload, settingFile]);
 
   return (
     <div className={cx(styles.slide, edit && utils.pa_0, utils.slide_right_in)}>
@@ -86,7 +86,7 @@ export default function SignUpPhaseC() {
                 <div className={utils.pb_100}></div>
                 <div className={cx(utils.absolute, utils.t_r_b_l_0)}>
                   <Image
-                    className={cx(utils.w_100, utils.h_100, utils.obj_cover)}
+                    className={cx(utils.w_100p, utils.h_100p, utils.obj_cover)}
                     src={value.link ? value.link : DEFAULT_PROFILE}
                     alt="default_profile"
                     width={200}

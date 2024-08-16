@@ -1,0 +1,24 @@
+.header {
+  position: sticky;
+  top: 0;
+  z-index: 3;
+  display: flex;
+}
+.inner {
+  padding: 0 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-grow: 1;
+  height: 53px;
+  background: rgba(var(--background-start-rgb), 0.65);
+  backdrop-filter: blur(12px);
+  cursor: pointer;
+}
+.content {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  flex-grow: 1;
+  height: 100%;
+}

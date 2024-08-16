@@ -66,11 +66,14 @@ const DateSelector = forwardRef<IdentifierInputRef, Props>(
           disabled={disabled}
         >
           <option className={styles.option} value={0} disabled></option>
-          {data.map((v) => (
-            <option key={v} className={styles.option} value={v}>
-              {type === 'month' ? MONTH_EN[v - 1] : v}
-            </option>
-          ))}
+          {data.map((v) => {
+            if (typeof v !== 'number') return null;
+            return (
+              <option key={v} className={styles.option} value={v}>
+                {type === 'month' ? MONTH_EN[v - 1] : v}
+              </option>
+            );
+          })}
         </select>
         <DownArrowSvg className={styles.arrow} width={22.5} />
         {disabled && <div className={styles.disabled}></div>}
@@ -79,4 +82,5 @@ const DateSelector = forwardRef<IdentifierInputRef, Props>(
   }
 );
 
+DateSelector.displayName = 'DateSelector';
 export default DateSelector;

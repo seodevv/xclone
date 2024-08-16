@@ -22,7 +22,7 @@ export default function useViewport() {
     return () => {
       window.removeEventListener('resize', listener);
     };
-  }, [setViewport]);
+  }, [viewport.width, viewport.height, setViewport]);
 
   return viewport;
 }

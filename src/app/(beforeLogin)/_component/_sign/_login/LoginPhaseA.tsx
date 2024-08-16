@@ -14,7 +14,7 @@ import IdentifierInput from '@/app/(beforeLogin)/_component/_sign/IdentifierInpu
 import FlexButton from '@/app/(beforeLogin)/_component/_button/FlexButton';
 import NoAccount from '@/app/(beforeLogin)/_component/_sign/_login/NoAccount';
 import useAlterModal from '@/app/_hooks/useAlterModal';
-import AccountAction from '@/app/(beforeLogin)/_component/_sign/_login/AccountACtion';
+import AccountAction from '@/app/(beforeLogin)/_component/_sign/_login/AccountAction';
 
 export default function LoginPhaseA() {
   const { alterMessage } = useAlterModal();
@@ -65,7 +65,7 @@ export default function LoginPhaseA() {
     return () => {
       clearTimeout(timer);
     };
-  }, []);
+  }, [id.ref]);
 
   return (
     <div className={cx(styles.slide, options.animated && utils.slide_left_in)}>

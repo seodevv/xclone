@@ -10,7 +10,7 @@ export default function SearchNoResult({ q }: Props) {
   return (
     <section className={styles.noResult}>
       <div className={styles.query}>
-        <span>No results for "{result}"</span>
+        <span>{`No results for "${result}"`}</span>
       </div>
       <div className={styles.desc}>
         <span>

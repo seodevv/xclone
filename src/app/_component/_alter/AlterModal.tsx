@@ -28,11 +28,10 @@ export default function AlterModal() {
       return;
     }
 
-    let a, b: ReturnType<typeof setTimeout>;
-    a = setTimeout(() => {
+    const a = setTimeout(() => {
       setFadeOut(true);
     }, getDuration());
-    b = setTimeout(() => {
+    const b = setTimeout(() => {
       resetMessage();
     }, getDuration() + 300);
 
@@ -40,7 +39,7 @@ export default function AlterModal() {
       clearTimeout(a);
       clearTimeout(b);
     };
-  }, []);
+  }, [getDuration, resetMessage]);
 
   return (
     <div className={cx(styles.modalGround, fadeOut && styles.fadeOut)}>

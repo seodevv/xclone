@@ -10,9 +10,9 @@ import {
 } from 'react';
 import Gif, { TenorImage, Theme } from 'gif-picker-react';
 import cx from 'classnames';
-import { MediaType } from '../../[username]/status/[id]/_component/CommentForm';
 import useAlterModal from '@/app/_hooks/useAlterModal';
 import GifSvg from '@/app/_svg/tweet/GifSvg';
+import { MediaType } from '@/app/(afterLogin)/_component/post/form/PostForm';
 
 interface Props {
   className?: string;

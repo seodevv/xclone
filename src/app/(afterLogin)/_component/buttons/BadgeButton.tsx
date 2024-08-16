@@ -85,7 +85,7 @@ export default function BadgeButton({ badge, width = 20 }: Props) {
         return { ...prev, position: nextPosition, x: nextX, y: nextY };
       });
     }
-  }, [active.flag, setActive]);
+  }, [active.flag, setActive, viewWidth, viewHeight]);
 
   if (!badge) return null;
 

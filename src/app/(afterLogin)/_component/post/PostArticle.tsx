@@ -47,7 +47,7 @@ export default function PostArticle({
       className={cx(
         styles.post,
         isSingle && styles.single,
-        disabled && [styles.disabled, styles.maxHeight],
+        disabled && [styles.disabled, utils.maxHeight],
         className
       )}
       style={style}

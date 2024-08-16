@@ -1,5 +1,9 @@
-import HomePage from '../../home/page';
+import HomePage from '@/app/(afterLogin)/home/page';
 
-export default function SettingsProfilePage() {
-  return <HomePage />;
+interface Props {
+  searchParams: { r?: string };
+}
+
+export default function SettingsProfilePage({ searchParams }: Props) {
+  return <HomePage searchParams={searchParams} />;
 }

@@ -1,7 +1,7 @@
 'use client';
 
 import styles from './navMenu.module.css';
-import { useSelectedLayoutSegment } from 'next/navigation';
+import { usePathname, useSelectedLayoutSegment } from 'next/navigation';
 import Link from 'next/link';
 import { Session } from 'next-auth';
 import HomeSvg from '@/app/_svg/navbar/HomeSvg';
@@ -12,20 +12,52 @@ import SettingSvg from '@/app/_svg/navbar/SettingSvg';
 import TweetSvg from '@/app/_svg/navbar/TweetSvg';
 import cx from 'classnames';
 import { captialCase } from '@/app/_lib/common';
+import BookmarkSvg from '@/app/_svg/actionbuttons/BookmarkSvg';
 
 interface Props {
   session: Session | null;
 }
 
 export default function NavMenu({ session }: Props) {
-  const segment = useSelectedLayoutSegment();
+  const pathname = usePathname();
 
   const menus = [
-    { link: 'home', icon: <HomeSvg />, sessionRequired: true },
-    { link: 'explore', icon: <ExploreSvg />, sessionRequired: true },
-    { link: 'messages', icon: <MessageSvg />, sessionRequired: true },
-    { link: 'profile', icon: <ProfileSvg />, sessionRequired: true },
-    { link: 'settings', icon: <SettingSvg />, sessionRequired: false },
+    {
+      link: 'home',
+      active: ['/home'],
+      icon: <HomeSvg />,
+      sessionRequired: true,
+    },
+    {
+      link: 'explore',
+      active: ['/explore', '/search'],
+      icon: <ExploreSvg />,
+      sessionRequired: true,
+    },
+    {
+      link: 'messages',
+      active: ['/messages'],
+      icon: <MessageSvg />,
+      sessionRequired: true,
+    },
+    {
+      link: 'bookmarks',
+      active: ['/i/bookmarks'],
+      icon: <BookmarkSvg width={26} />,
+      sessionRequired: true,
+    },
+    {
+      link: 'profile',
+      active: [`/${session?.user?.email}`],
+      icon: <ProfileSvg />,
+      sessionRequired: true,
+    },
+    {
+      link: 'settings',
+      active: ['/settings'],
+      icon: <SettingSvg />,
+      sessionRequired: false,
+    },
   ];
 
   return (
@@ -35,15 +67,12 @@ export default function NavMenu({ session }: Props) {
           if (!session && menu.sessionRequired) {
             return null;
           }
-          const active =
-            menu.link !== 'profile'
-              ? menu.link === 'explore'
-                ? segment && ['explore', 'search'].includes(segment)
-                : segment === menu.link
-              : segment === session?.user?.email;
+          const active = menu.active.includes(pathname);
           const link =
             menu.link === 'profile'
               ? `/${session?.user?.email}`
+              : menu.link === 'bookmarks'
+              ? '/i/bookmarks'
               : `/${menu.link}`;
           return (
             <li key={menu.link}>

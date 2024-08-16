@@ -1,6 +1,6 @@
 import styles from './afterLogin.home.layout.module.css';
 import { getServerSession } from 'next-auth';
-import { authOptions } from '@/app/api/auth/[...nextauth]/route';
+import authOptions from '@/app/_lib/authOptions';
 import HomeTabProvider from '@/app/(afterLogin)/home/_component/HomeTabProvider';
 import HomeTab from '@/app/(afterLogin)/home/_component/HomeTab';
 import PostForm from '@/app/(afterLogin)/_component/post/form/PostForm';

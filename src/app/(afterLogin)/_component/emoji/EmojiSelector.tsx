@@ -117,7 +117,7 @@ const EmojiSelector = ({
         window.removeEventListener('keydown', keydownListener);
       }
     };
-  }, [active.flag]);
+  }, [active.flag, selectorClose]);
 
   return (
     <div className={styles.emojiPicker}>

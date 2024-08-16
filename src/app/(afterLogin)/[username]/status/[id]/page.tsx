@@ -1,5 +1,5 @@
 import { getServerSession } from 'next-auth';
-import { authOptions } from '@/app/api/auth/[...nextauth]/route';
+import authOptions from '@/app/_lib/authOptions';
 import SinglePost from './_component/SinglePost';
 import SinglePostHydrationBoundary from './_component/SinglePostHydrationBoundary';
 

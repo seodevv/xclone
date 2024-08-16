@@ -3,9 +3,9 @@ import PhotoSection from './_component/PhotoSection';
 import PostSection from './_component/PostSection';
 import FoldProvider from './_provider/FoldProvider';
 import { getServerSession } from 'next-auth';
-import { authOptions } from '@/app/api/auth/[...nextauth]/route';
 import SinglePostHydrationBoundary from '@/app/(afterLogin)/[username]/status/[id]/_component/SinglePostHydrationBoundary';
 import HtmlOverflowHidden from '@/app/_component/_overflow/HtmlOverflowHidden';
+import authOptions from '@/app/_lib/authOptions';
 
 interface Props {
   params: { username: string; id: string; photoId: string };

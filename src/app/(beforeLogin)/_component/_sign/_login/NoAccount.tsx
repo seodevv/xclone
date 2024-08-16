@@ -9,7 +9,7 @@ export default function NoAccount() {
 
   return (
     <div className={styles.noAccount}>
-      <span>Don't have an account?</span>
+      <span>Don&apos;t have an account?</span>
       <button className={styles.signUp} type="button" onClick={onClickSignUp}>
         SignUp
       </button>

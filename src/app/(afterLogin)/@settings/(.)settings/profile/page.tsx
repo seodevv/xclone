@@ -1,5 +1,5 @@
 import { getServerSession } from 'next-auth';
-import { authOptions } from '@/app/api/auth/[...nextauth]/route';
+import authOptions from '@/app/_lib/authOptions';
 import SettingsProfileSlotOutSide from './_component/SettingsProfileSlotOutSide';
 
 export default async function SettingsProfileSlot() {

@@ -66,7 +66,7 @@ export default function PostBody({
           <div className={styles.postDateView}>
             <PostDate date={post.createAt} isFull={true} />
             <span style={{ margin: '0 5px' }}>·</span>
-            <PostView />
+            <PostView count={post._count.Views} />
           </div>
           {session?.user?.email === post.User.id && (
             <div className={styles.engagement}>

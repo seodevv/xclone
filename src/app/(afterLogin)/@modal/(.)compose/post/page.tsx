@@ -4,8 +4,8 @@ import cx from 'classnames';
 import HtmlOverflowHidden from '@/app/_component/_overflow/HtmlOverflowHidden';
 import ComposePostHeader from '@/app/(afterLogin)/@modal/(.)compose/post/_component/ComposePostHeader';
 import { getServerSession } from 'next-auth';
-import { authOptions } from '@/app/api/auth/[...nextauth]/route';
 import ComposePostBody from '@/app/(afterLogin)/@modal/(.)compose/post/_component/ComposePostBody';
+import authOptions from '@/app/_lib/authOptions';
 
 export default async function ComposePostSlot() {
   const session = await getServerSession(authOptions);

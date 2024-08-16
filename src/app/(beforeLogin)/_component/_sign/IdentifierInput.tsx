@@ -222,4 +222,6 @@ const IdentifierInput = forwardRef<IdentifierInputRef, Props>(
   }
 );
 
+IdentifierInput.displayName = 'IdentifierInput';
+
 export default IdentifierInput;

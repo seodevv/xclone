@@ -1,7 +1,7 @@
 import styles from './_style/likes.module.css';
 import LikeHydrationBoundary from './_component/LikeHydrationBoundary';
 import { getServerSession } from 'next-auth';
-import { authOptions } from '@/app/api/auth/[...nextauth]/route';
+import authOptions from '@/app/_lib/authOptions';
 import LikePrivateMessage from './_component/LikePrivateMessage';
 import LikePosts from './_component/LikePosts';
 

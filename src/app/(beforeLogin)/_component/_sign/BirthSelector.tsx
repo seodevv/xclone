@@ -72,7 +72,7 @@ const BirthSelector = forwardRef<IdentifierInputRef, Props>(
           onSuccess(date);
         }
       }
-    }, [date]);
+    }, [date, onSuccess]);
 
     useImperativeHandle(ref, () => ({
       focus: () => {
@@ -121,4 +121,5 @@ const BirthSelector = forwardRef<IdentifierInputRef, Props>(
   }
 );
 
+BirthSelector.displayName = 'BirthSelector';
 export default BirthSelector;

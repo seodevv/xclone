@@ -37,18 +37,27 @@
   overflow: hidden;
 }
 
-.maxHeight {
-  animation-name: maxHeight;
-  animation-timing-function: ease;
-  animation-duration: 1000ms;
-  animation-iteration-count: 1;
+/* NoPost */
+.noPost {
+  margin: 32px 99px;
+  padding: 0 32px;
 }
-
-@keyframes maxHeight {
-  from {
-    max-height: 0;
-  }
-  to {
-    max-height: 1000px;
-  }
+.title {
+  margin-bottom: 8px;
+  max-width: 350px;
+  font-size: 31px;
+  font-weight: 800;
+  line-height: 36px;
+  color: rgb(var(--foreground-rgb));
+  word-break: keep-all;
+  word-wrap: break-word;
+}
+.message {
+  margin-bottom: 28px;
+  font-size: 15px;
+  font-weight: 400;
+  line-height: 20px;
+  color: rgb(var(--link-rgb));
+  word-break: keep-all;
+  word-wrap: break-word;
 }

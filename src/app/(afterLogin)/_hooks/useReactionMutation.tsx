@@ -16,7 +16,7 @@ interface RequiredSession {
 
 interface ReactionMutationParams {
   queryClient: QueryClient;
-  type: 'Hearts' | 'Reposts';
+  type: 'Hearts' | 'Reposts' | 'Bookmarks';
   method: 'post' | 'delete';
   post: AdvancedPost;
   session: RequiredSession;
@@ -140,7 +140,6 @@ const useReactionMutation = () =>
             if (!queryData) return;
 
             const shallow = { ...queryData };
-
             if (
               type === 'Reposts' &&
               (c === 'recommends' || c === session.email)
@@ -160,6 +159,7 @@ const useReactionMutation = () =>
                   Hearts: [],
                   Reposts: [],
                   Comments: [],
+                  Bookmarks: [],
                   _count: {
                     Hearts: 0,
                     Comments: 0,
@@ -197,6 +197,32 @@ const useReactionMutation = () =>
                     };
                     shallow.pages[i].data.splice(j, 1);
                   }
+                });
+              }
+            }
+
+            if (type === 'Bookmarks' && c === 'bookmarks') {
+              if (method === 'post') {
+                shallow.pages = [...shallow.pages];
+                shallow.pages[0] = {
+                  ...shallow.pages[0],
+                  data: [
+                    {
+                      ...post,
+                      Bookmarks: [...post.Bookmarks, { id: session.email }],
+                    },
+                    ...shallow.pages[0].data,
+                  ],
+                };
+              } else {
+                shallow.pages = [...shallow.pages];
+                shallow.pages.forEach((page, i) => {
+                  shallow.pages[i] = {
+                    ...shallow.pages[i],
+                    data: shallow.pages[i].data.filter(
+                      (p) => p.postId !== post.postId
+                    ),
+                  };
                 });
               }
             }

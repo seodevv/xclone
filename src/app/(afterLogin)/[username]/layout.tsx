@@ -1,7 +1,7 @@
 import style from './userLayout.module.css';
 import { ReactNode } from 'react';
 import { getServerSession } from 'next-auth';
-import { authOptions } from '@/app/api/auth/[...nextauth]/route';
+import authOptions from '@/app/_lib/authOptions';
 import UserProfile from './_component/_profile/UserProfile';
 import UserTabs from './_component/UserTabs';
 import {

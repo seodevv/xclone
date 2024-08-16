@@ -38,7 +38,7 @@ export default function ObserveElement({
     return () => {
       observer.disconnect();
     };
-  }, dependencies);
+  }, [...dependencies, callback, threshold]);
 
   return (
     <>

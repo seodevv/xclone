@@ -22,6 +22,17 @@ export default function useAlterModal() {
     return modal.type;
   }, [modal.type]);
 
+  const setDuration = useCallback(
+    (duration: number) => {
+      setModal((prev) => ({ ...prev, duration }));
+    },
+    [setModal]
+  );
+
+  const resetMessage = useCallback(() => {
+    setModal(initialAlterModalState.modal);
+  }, [setModal]);
+
   const alterMessage = useCallback(
     (
       message: Modal['message'],
@@ -38,19 +49,8 @@ export default function useAlterModal() {
         });
       });
     },
-    [setModal]
+    [resetMessage, setModal]
   );
-
-  const setDuration = useCallback(
-    (duration: number) => {
-      setModal((prev) => ({ ...prev, duration }));
-    },
-    [setModal]
-  );
-
-  const resetMessage = useCallback(() => {
-    setModal(initialAlterModalState.modal);
-  }, [setModal]);
 
   return {
     getMessage,

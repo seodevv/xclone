@@ -61,7 +61,7 @@ export default function SearchForm({
     if (q) {
       setSearch(decodeURIComponent(q));
     }
-  }, [searchParams]);
+  }, [q, setSearch]);
 
   return (
     <form

@@ -58,7 +58,7 @@ export default function LoginPhaseB() {
     return () => {
       clearTimeout(timer);
     };
-  }, []);
+  }, [password.ref]);
 
   return (
     <div className={cx(styles.slide, utils.slide_right_in)}>

@@ -8,8 +8,17 @@ interface Props {
   reset: () => void;
 }
 
+export const ERROR_STATUS = {
+  fetchError: 'fetch-error',
+  badRequest: 'bad-request',
+  unAuthorized: 'unAuthorized',
+  forbidden: 'forbidden',
+  notFound: 'not-found',
+  serverERror: 'server-error',
+};
+
 export default function Error({ error, reset }: Props) {
-  if (error.message === 'not-found') {
+  if (error.message === ERROR_STATUS.notFound) {
     return (
       <NotFound href="/search" type="post" alterMessage="this post not found" />
     );

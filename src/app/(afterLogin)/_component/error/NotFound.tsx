@@ -33,7 +33,7 @@ export default function NotFound(props: Props) {
       'error',
       3000
     );
-  }, []);
+  }, [alterMessage, props.alterMessage, message]);
 
   return (
     <section className={styles.notFound}>

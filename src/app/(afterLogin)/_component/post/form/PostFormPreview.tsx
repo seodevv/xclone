@@ -38,7 +38,7 @@ export default function PostFormPreview({ images, setImages }: Props) {
             className={cx(
               styles.previewImageBox,
               utils.fadeIn,
-              isSingle && [utils.mr_0, utils.ml_0, utils.w_100]
+              isSingle && [utils.mr_0, utils.ml_0, utils.w_100p]
             )}
             style={{ transform: translateX }}
           >
@@ -56,10 +56,12 @@ export default function PostFormPreview({ images, setImages }: Props) {
             {image.type === 'gif' && (
               <div className={styles.refer}>
                 <span>via</span>
-                <img
+                <Image
                   className={styles.brandLogo}
                   src="https://abs.twimg.com/a/1501527574/img/t1/icon_riffsy.png"
                   alt=""
+                  width={20}
+                  height={20}
                 />
                 <span className={utils.fw_bold}>TENOR</span>
               </div>

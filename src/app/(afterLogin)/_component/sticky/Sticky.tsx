@@ -53,7 +53,7 @@ export default function Sticky({ children }: Props) {
     return () => {
       window.removeEventListener('scroll', scrollListener);
     };
-  }, [height, pathname, setTop]);
+  }, [height, pathname, setTop, scrollListener]);
 
   return (
     <div
