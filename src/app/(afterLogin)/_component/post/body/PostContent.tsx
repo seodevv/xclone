@@ -1,36 +1,42 @@
 'use client';
 
 import styles from './postBody.module.css';
+import utils from '@/app/utility.module.css';
 import { CSSProperties, Fragment, useState } from 'react';
 import Link from 'next/link';
 import cx from 'classnames';
 import { AdvancedPost } from '@/model/Post';
+import { Mode } from '@/app/(afterLogin)/_component/post/Post';
 
 interface Props {
   className?: string;
   style?: CSSProperties;
+  mode?: Mode;
   postId: AdvancedPost['postId'];
   userId: AdvancedPost['userId'];
   content: AdvancedPost['content'];
-  isSingle?: boolean;
 }
 
 export default function PostContent({
   className,
   style,
+  mode,
   postId,
   userId,
   content,
-  isSingle,
 }: Props) {
   const splited = content.split(/\r\n|\r|\n/);
   const [more, setMore] = useState(
-    splited.length > 10 && !isSingle ? true : false
+    splited.length > 10 && mode !== 'single' ? true : false
   );
 
   return (
     <div
-      className={cx(styles.postContent, isSingle && styles.single, className)}
+      className={cx(
+        styles.postContent,
+        mode === 'single' && utils.mt_12,
+        className
+      )}
       style={style}
     >
       {splited.map((t, i) => {

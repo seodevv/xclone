@@ -1,0 +1,40 @@
+.info {
+  margin: 12px 12px 0 12px;
+  display: flex;
+  align-items: center;
+  font-size: 15px;
+}
+.nick {
+  margin-left: 4px;
+  display: flex;
+  align-items: center;
+  font-weight: bold;
+}
+.id,
+.dot {
+  margin-right: 4px;
+  color: rgb(var(--link-rgb));
+}
+.body {
+  display: flex;
+  flex-direction: column;
+}
+.body.short {
+  flex-direction: row;
+}
+.content {
+  margin: 0 12px;
+}
+.shortContent {
+  margin: 8px 12px 12px 12px;
+  flex: 8 1 0%;
+  order: 2;
+}
+.shortImage {
+  margin: 12px 0 12px 12px;
+  flex: 2 1 0%;
+  order: 1;
+  border: 1px solid rgb(var(--border-start-rgb));
+  border-radius: 16px;
+  overflow: hidden;
+}

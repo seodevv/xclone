@@ -14,7 +14,7 @@ interface Props {
   isSearch?: boolean;
   isVisible?: boolean;
   prevPath?: string;
-  onClick?: MouseEventHandler<HTMLButtonElement>;
+  onClick?: () => void;
 }
 
 export default function CloseButton({
@@ -35,6 +35,9 @@ export default function CloseButton({
         return;
       }
     }
+    if (typeof onClick === 'function') {
+      onClick();
+    }
     router.back();
   };
 
@@ -48,7 +51,7 @@ export default function CloseButton({
         className
       )}
       style={style}
-      onClick={onClick ? onClick : onClickDefault}
+      onClick={onClickDefault}
     >
       <XMarkSvg width={width} white />
     </button>

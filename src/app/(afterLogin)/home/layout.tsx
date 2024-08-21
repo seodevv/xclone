@@ -17,7 +17,11 @@ export default async function HomeLayout({ children }: Props) {
     <main className={styles.main}>
       <HomeTabProvider>
         <HomeTab />
-        <PostForm session={session} placeholder="What is happening?!" />
+        <PostForm
+          mode="post"
+          session={session}
+          placeholder="What is happening?!"
+        />
         {children}
       </HomeTabProvider>
     </main>

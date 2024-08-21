@@ -11,7 +11,7 @@ interface Props {
   params: { username: string; id: string; photoId: string };
 }
 
-export default async function PhotoPage({ params }: Props) {
+export default async function PhotoSlot({ params }: Props) {
   const session = await getServerSession(authOptions);
 
   return (

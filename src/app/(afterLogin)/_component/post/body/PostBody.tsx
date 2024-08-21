@@ -1,6 +1,8 @@
 'use client';
 
 import styles from './postBody.module.css';
+import utils from '@/app/utility.module.css';
+import cx from 'classnames';
 import Link from 'next/link';
 import PostReplyInfo from '@/app/(afterLogin)/_component/post/body/PostReplyInfo';
 import PostContent from '@/app/(afterLogin)/_component/post/body/PostContent';
@@ -10,61 +12,82 @@ import PostView from '@/app/(afterLogin)/_component/post/body/PostView';
 import ViewSvg from '@/app/_svg/actionbuttons/ViewSvg';
 import ActionButtons from '@/app/(afterLogin)/_component/post/body/ActionButtons';
 import { AdvancedPost } from '@/model/Post';
-import { usePathname } from 'next/navigation';
 import { useSession } from 'next-auth/react';
+import BadgeButton from '@/app/(afterLogin)/_component/buttons/BadgeButton';
+import { Mode } from '@/app/(afterLogin)/_component/post/Post';
+import { usePathname } from 'next/navigation';
+import PostQuote from '@/app/(afterLogin)/_component/post/_quote/PostQuote';
+import OptionButton from '@/app/(afterLogin)/_component/buttons/OptionButton';
 
 interface Props {
+  mode?: Mode;
   post: AdvancedPost;
-  isSingle?: boolean;
   noImage?: boolean;
+  noReact?: boolean;
 }
 
 export default function PostBody({
+  mode = 'post',
   post,
-  isSingle = false,
-  noImage = false,
+  noImage,
+  noReact,
 }: Props) {
+  const pathname = usePathname();
   const { data: session } = useSession();
-  const paths = usePathname().split('/');
-  const isComment = paths.at(2) === 'status';
+  const isPhoto = /\/.*\/status\/[0-9]+\/photo\/[0-9]+/.test(pathname);
 
   return (
     <div className={styles.postBody}>
-      {!isSingle && (
+      {mode !== 'single' && (
         <div className={styles.postMeta}>
           <Link
-            className={styles.postUserInfo}
+            className={cx(
+              styles.postUserInfo,
+              mode === 'compose' && utils.pointer_event_none
+            )}
             href={`/${post.User.id}`}
             onClick={(e) => e.stopPropagation()}
           >
-            <span>{post.User.nickname}</span>
+            <span>
+              {post.User.nickname}
+              <BadgeButton badge={post.User.verified} unClickable />
+            </span>
             <span>@{post.User.id}</span>
             <span>·</span>
           </Link>
-          <PostDate date={post.createAt} />
+          <PostDate mode={mode} date={post.createAt} />
         </div>
       )}
-      {post.Parent && !isComment && !isSingle && (
+      {post.Parent && !['single', 'comment', 'compose'].includes(mode) && (
         <PostReplyInfo id={post.Parent.User.id} />
       )}
       <PostContent
+        mode={mode}
         postId={post.postId}
         userId={post.User.id}
         content={post.content}
-        isSingle={isSingle}
       />
       {!noImage && (
         <PostImages
+          mode={mode}
           userId={post.User.id}
           postId={post.postId}
           images={post.images}
-          isSingle={isSingle}
         />
       )}
-      {isSingle && (
+      {post.Original && post.quote && (
+        <PostQuote
+          mode={
+            post.images.length === 0 || mode === 'single' ? 'long' : 'short'
+          }
+          post={post.Original}
+          noImage={isPhoto}
+        />
+      )}
+      {mode === 'single' && (
         <>
           <div className={styles.postDateView}>
-            <PostDate date={post.createAt} isFull={true} />
+            <PostDate mode={mode} date={post.createAt} isFull={true} />
             <span style={{ margin: '0 5px' }}>·</span>
             <PostView count={post._count.Views} />
           </div>
@@ -78,7 +101,7 @@ export default function PostBody({
           )}
         </>
       )}
-      <ActionButtons post={post} isSingle={isSingle} width={22.5} />
+      {!noReact && <ActionButtons mode={mode} post={post} width={22.5} />}
     </div>
   );
 }

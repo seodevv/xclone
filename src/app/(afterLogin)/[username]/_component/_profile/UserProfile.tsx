@@ -4,7 +4,6 @@ import style from './userProfile.module.css';
 import { useSelectedLayoutSegment } from 'next/navigation';
 import { Session } from 'next-auth';
 import { useUserQuery } from '../../_hooks/useUserQuery';
-import BadgeButton from '../../../_component/buttons/BadgeButton';
 import UserFollowInfo from './UserFollowInfo';
 import UserSince from './UserSince';
 import UserDesc from './UserDesc';

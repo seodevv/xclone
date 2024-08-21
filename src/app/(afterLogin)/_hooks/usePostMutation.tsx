@@ -17,6 +17,7 @@ interface MutationParams {
     postId: AdvancedPost['postId'];
     userId: AdvancedPost['User']['id'];
   };
+  repost?: AdvancedPost;
   content: string;
   media: MediaType[];
 }
@@ -25,6 +26,7 @@ const usePostMutation = () =>
   useMutation({
     mutationFn: async ({
       parent,
+      repost,
       content,
       media,
     }: MutationParams): Promise<{ data: AdvancedPost; message: string }> => {
@@ -49,6 +51,9 @@ const usePostMutation = () =>
           formData.append('images', m.file);
         }
       });
+      if (repost) {
+        formData.append('repostId', repost.postId.toString());
+      }
 
       const requestUrl = `${process.env.NEXT_PUBLIC_SERVER_URL}/api/posts${
         parent ? `/${parent.postId}/comments` : ''
@@ -65,7 +70,124 @@ const usePostMutation = () =>
       }
       return response.json();
     },
-    onSuccess: (response, { queryClient, session, parent }) => {
+    onMutate: ({ queryClient, session, parent, repost, content, media }) => {
+      const newPost: AdvancedPost = {
+        postId: -1,
+        userId: session.user?.email as string,
+        content,
+        images: media.map((m, i) => ({
+          imageId: i + 1,
+          link: m.link,
+          width: m.width,
+          height: m.height,
+        })),
+        createAt: new Date().toISOString(),
+        parentId: parent?.postId,
+        User: {
+          id: session.user?.email as string,
+          image: session.user?.image as string,
+          nickname: session.user?.name as string,
+        },
+        Hearts: [],
+        Reposts: [],
+        Comments: [],
+        Bookmarks: [],
+        _count: {
+          Hearts: 0,
+          Comments: 0,
+          Reposts: 0,
+          Bookmarks: 0,
+          Views: 0,
+        },
+        Original: repost,
+        originalId: repost?.postId,
+        quote: !!repost,
+      };
+
+      const queryCache = queryClient.getQueryCache();
+      // queryKeys is ['posts','list', *]
+      const queryKeys = queryCache
+        .getAll()
+        .map((q) => q.queryKey)
+        .filter((key) => key[0] === 'posts' && key[1] === 'list');
+      const context: {
+        queryKey: QueryKey;
+        queryData: InfiniteData<
+          { data: AdvancedPost[]; nextCursor?: number; message: string },
+          number
+        >;
+      }[] = [];
+      queryKeys.forEach((queryKey) => {
+        const [a, b, c, d] = queryKey;
+        const queryData =
+          queryClient.getQueryData<
+            InfiniteData<
+              { data: AdvancedPost[]; nextCursor?: number; message: string },
+              number
+            >
+          >(queryKey);
+        if (!queryData) return;
+
+        // queryKey is ['posts','list','comments', parent.postId]
+        // queryKey is ['posts','list','recommends']
+        // queryKey is ['posts','list', session.user.email]
+        // unshift new post
+        let shouldBeUpdate = false;
+        const shallow = { ...queryData };
+        if (
+          (c === 'comments' && d === parent?.postId.toString()) ||
+          c === 'recommends' ||
+          c === session.user?.email
+        ) {
+          shouldBeUpdate = true;
+          shallow.pages = [...shallow.pages];
+          shallow.pages[0] = { ...shallow.pages[0] };
+          shallow.pages[0].data = [newPost, ...shallow.pages[0].data];
+        }
+
+        if (parent || repost) {
+          shallow.pages.forEach((page, i) =>
+            page.data.forEach((p, j) => {
+              if (p.postId === parent?.postId) {
+                shouldBeUpdate = true;
+                shallow.pages = [...shallow.pages];
+                shallow.pages[i] = { ...shallow.pages[i] };
+                shallow.pages[i].data = [...shallow.pages[i].data];
+                shallow.pages[i].data[j] = {
+                  ...p,
+                  Comments: [
+                    ...p.Comments,
+                    { id: session.user?.email as string },
+                  ],
+                  _count: {
+                    ...p._count,
+                    Comments: p._count.Comments + 1,
+                  },
+                };
+              } else if (p.postId === repost?.postId) {
+                shouldBeUpdate = true;
+                shallow.pages = [...shallow.pages];
+                shallow.pages[i] = { ...shallow.pages[i] };
+                shallow.pages[i].data = [...shallow.pages[i].data];
+                shallow.pages[i].data[j] = {
+                  ...p,
+                  _count: {
+                    ...p._count,
+                    Reposts: p._count.Reposts + 1,
+                  },
+                };
+              }
+            })
+          );
+        }
+        if (shouldBeUpdate) {
+          queryClient.setQueryData(queryKey, shallow);
+          context.push({ queryKey, queryData: shallow });
+        }
+      });
+      return context;
+    },
+    onSuccess: (response, { queryClient, session, parent, repost }) => {
       const queryKeys = queryClient
         .getQueryCache()
         .getAll()
@@ -87,8 +209,10 @@ const usePostMutation = () =>
             if (optimisticPostIndex > -1) {
               const shallow = { ...queryData };
               shallow.pages = [...queryData.pages];
-              shallow.pages[i] = { ...queryData.pages[i] };
-              shallow.pages[i].data = [...queryData.pages[i].data];
+              shallow.pages[i] = {
+                ...queryData.pages[i],
+                data: [...queryData.pages[i].data],
+              };
               shallow.pages[i].data[optimisticPostIndex] = response.data;
               queryClient.setQueryData(queryKey, shallow);
             }
@@ -103,14 +227,21 @@ const usePostMutation = () =>
         });
         queryClient.invalidateQueries({
           queryKey: ['posts', 'list', parent.userId],
+          refetchType: 'none',
         });
         queryClient.invalidateQueries({
           queryKey: ['posts', parent.postId.toString()],
         });
+      }
+      if (repost) {
         queryClient.invalidateQueries({
-          queryKey: ['users', parent.userId],
+          queryKey: ['posts', repost.postId.toString()],
         });
       }
+      queryClient.invalidateQueries({
+        queryKey: ['posts', 'list', 'search'],
+        refetchType: 'none',
+      });
       queryClient.invalidateQueries({
         queryKey: ['posts', 'list', 'recommends'],
         refetchType: 'none',
@@ -121,9 +252,7 @@ const usePostMutation = () =>
       });
       queryClient.invalidateQueries({
         queryKey: ['posts', 'count', session.user?.email],
-      });
-      queryClient.invalidateQueries({
-        queryKey: ['users', session.user?.email],
+        refetchType: 'none',
       });
       queryClient.invalidateQueries({
         queryKey: ['hashtags', 'list'],
@@ -149,75 +278,6 @@ const usePostMutation = () =>
           queryClient.setQueryData(queryKey, queryData);
         });
       }
-    },
-    onMutate: ({ queryClient, session, parent, content, media }) => {
-      const newPost: AdvancedPost = {
-        postId: -1,
-        userId: session.user?.email as string,
-        content,
-        images: media.map((m, i) => ({
-          imageId: i + 1,
-          link: m.link,
-          width: m.width,
-          height: m.height,
-        })),
-        createAt: new Date().toISOString(),
-        parentId: parent?.postId,
-        User: {
-          id: session.user?.email as string,
-          image: session.user?.image as string,
-          nickname: session.user?.name as string,
-        },
-        Hearts: [],
-        Reposts: [],
-        Comments: [],
-        _count: {
-          Hearts: 0,
-          Comments: 0,
-          Reposts: 0,
-          Views: 0,
-        },
-      };
-
-      const queryCache = queryClient.getQueryCache();
-      const queryKeys = queryCache
-        .getAll()
-        .map((q) => q.queryKey)
-        .filter(
-          (key) =>
-            (key[0] === 'posts' &&
-              key[1] === 'list' &&
-              key[2] === 'comments' &&
-              key[3] === parent?.postId?.toString()) ||
-            (key[0] === 'posts' && key[1] === 'list' && key[2] === 'recommends')
-        );
-      const context: {
-        queryKey: QueryKey;
-        queryData: InfiniteData<
-          { data: AdvancedPost[]; nextCursor?: number; message: string },
-          number
-        >;
-      }[] = [];
-      queryKeys.forEach((queryKey) => {
-        const queryData =
-          queryClient.getQueryData<
-            InfiniteData<
-              { data: AdvancedPost[]; nextCursor?: number; message: string },
-              number
-            >
-          >(queryKey);
-        if (queryData) {
-          const shallow = { ...queryData };
-          shallow.pages = [...queryData.pages];
-          shallow.pages[0] = { ...queryData.pages[0] };
-          shallow.pages[0].data = [...queryData.pages[0].data];
-          shallow.pages[0].data.unshift(newPost);
-          queryClient.setQueryData(queryKey, shallow);
-
-          context.push({ queryKey, queryData });
-        }
-      });
-      return context;
     },
   });
 

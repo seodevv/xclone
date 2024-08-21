@@ -1,5 +1,5 @@
 import styles from './button.module.css';
-import { CSSProperties, MouseEventHandler } from 'react';
+import { CSSProperties, MouseEventHandler, useState } from 'react';
 import cx from 'classnames';
 import OptionSvg from '@/app/_svg/post/OptionSvg';
 
@@ -22,7 +22,7 @@ export default function OptionButton({
 }: Props) {
   return (
     <button
-      className={cx(styles.btn, className)}
+      className={cx(styles.btn, styles.optionBtn, className)}
       style={style}
       onClick={onClick}
       disabled={disabled}

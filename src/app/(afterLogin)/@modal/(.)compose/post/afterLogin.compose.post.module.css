@@ -1,6 +1,3 @@
-.background {
-  background: rgba(var(--background-modal-rgb), 0.4);
-}
 .modal {
   position: relative;
   top: 5%;

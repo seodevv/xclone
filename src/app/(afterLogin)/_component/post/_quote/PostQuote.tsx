@@ -1,0 +1,65 @@
+import styles from './postQuote.module.css';
+import utils from '@/app/utility.module.css';
+import cx from 'classnames';
+import PostArticle from '@/app/(afterLogin)/_component/post/PostArticle';
+import { AdvancedPost } from '@/model/Post';
+import OtherProfile from '@/app/(afterLogin)/_component/profile/OtherProfile';
+import BadgeButton from '@/app/(afterLogin)/_component/buttons/BadgeButton';
+import PostDate from '@/app/(afterLogin)/_component/post/body/PostDate';
+import PostContent from '@/app/(afterLogin)/_component/post/body/PostContent';
+import PostImages from '@/app/(afterLogin)/_component/post/body/PostImages';
+
+interface Props {
+  mode: 'short' | 'long';
+  post: AdvancedPost;
+  noImage?: boolean;
+  noEvent?: boolean;
+}
+
+export default function PostQuote({ mode, post, noImage, noEvent }: Props) {
+  return (
+    <PostArticle post={post} noEvent={noEvent} qoute>
+      <div className={cx(utils.d_flexColumn)}>
+        <div className={styles.info}>
+          <OtherProfile user={post.User} width={24} noevent />
+          <span className={styles.nick}>
+            {post.User.nickname}
+            <BadgeButton badge={post.User.verified} unClickable />
+          </span>
+          <span className={styles.id}>@{post.User.id}</span>
+          <span className={styles.dot}>·</span>
+          <PostDate date={post.createAt} noEvent />
+        </div>
+        <div className={cx(styles.body, mode === 'short' && styles.short)}>
+          <div
+            className={cx(
+              styles.content,
+              (noImage || post.images.length === 0) && utils.mb_12,
+              mode === 'short' && styles.shortContent
+            )}
+          >
+            <PostContent
+              postId={post.postId}
+              userId={post.User.id}
+              content={post.content}
+            />
+          </div>
+          {!noImage && post.images.length !== 0 && (
+            <div className={cx(mode === 'short' && styles.shortImage)}>
+              <PostImages
+                className={cx(
+                  [utils.w_max_none, utils.bd_none, utils.br_0],
+                  mode === 'short' && utils.mt_0
+                )}
+                userId={post.User.id}
+                postId={post.postId}
+                images={post.images}
+                short={mode === 'short'}
+              />
+            </div>
+          )}
+        </div>
+      </div>
+    </PostArticle>
+  );
+}

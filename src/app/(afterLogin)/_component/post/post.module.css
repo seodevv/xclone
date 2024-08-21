@@ -4,6 +4,7 @@
   display: flex;
   flex-direction: column;
   padding: 12px 16px;
+  background: rgb(var(--background-start-rgb));
   border-color: rgb(var(--border-start-rgb));
   border-bottom-width: 1px;
   border-bottom-style: solid;
@@ -14,16 +15,23 @@
 .post:hover {
   background-color: rgba(var(--button-hover-rgb), 0.05);
 }
-.post.single {
+.post.notHover {
   border-bottom: unset;
   cursor: unset;
 }
-.post.single:hover {
+.post.notHover:hover {
   background: unset;
 }
 .post.disabled:hover {
   background: unset;
   cursor: wait;
+}
+.post.quote {
+  margin: 4px 0;
+  padding: 0;
+  border: 1px solid rgb(var(--border-start-rgb));
+  border-radius: 16px;
+  overflow: hidden;
 }
 .postWrapper {
   display: flex;
@@ -32,9 +40,17 @@
 .postWrapper.single {
   flex-direction: column;
 }
+.postWrapper.quote {
+  margin: 12px;
+}
 .disabled {
   opacity: 0.5;
   overflow: hidden;
+}
+.options {
+  position: absolute;
+  top: 15px;
+  right: 15px;
 }
 
 /* NoPost */

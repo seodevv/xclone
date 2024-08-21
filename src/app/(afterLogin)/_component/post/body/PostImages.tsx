@@ -1,38 +1,49 @@
 'use client';
 
-import style from './media.module.css';
+import styles from './media.module.css';
+import utils from '@/app/utility.module.css';
 import Link from 'next/link';
 import Image from 'next/image';
 import cx from 'classnames';
 import { generateImagePath } from '@/app/_lib/common';
 import { AdvancedPost } from '@/model/Post';
+import { Mode } from '@/app/(afterLogin)/_component/post/Post';
 
 interface Props {
+  className?: string;
+  mode?: Mode;
   userId: AdvancedPost['User']['id'];
   postId: AdvancedPost['postId'];
   images: AdvancedPost['images'];
-  isSingle?: boolean;
+  short?: boolean;
 }
 export default function PostImages({
+  className,
+  mode = 'post',
   userId,
   postId,
   images,
-  isSingle = false,
+  short,
 }: Props) {
   if (!images || !images.length) return null;
 
   return (
     <div
       className={cx(
-        style.postImages,
-        style[`postImages-${images.length}`],
-        isSingle && style.single
+        styles.postImages,
+        styles[`postImages-${images.length}`],
+        mode === 'single' && styles.single,
+        short && styles.short,
+        className
       )}
     >
       {images.map((image, index) => {
         const isGif = image.link.endsWith('.gif');
         return (
           <Link
+            className={cx(
+              ['compose'].includes(mode) && utils.pointer_event_none
+            )}
             key={index}
             href={`/${userId}/status/${postId}/photo/${image.imageId}`}
             onClick={(e) => e.stopPropagation()}

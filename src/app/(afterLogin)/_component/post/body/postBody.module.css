@@ -8,14 +8,19 @@
   margin-bottom: 2px;
   display: flex;
   flex-direction: row;
+  align-items: center;
 }
 .postUserInfo {
+  display: flex;
+  align-items: center;
   color: rgb(var(--link-rgb));
 }
 .postUserInfo > span {
   margin-right: 5px;
 }
 .postUserInfo > span:first-child {
+  display: flex;
+  align-items: center;
   color: rgb(var(--foreground-rgb));
   font-weight: bold;
 }
@@ -66,9 +71,6 @@
   line-height: 24px;
   word-break: break-all;
 }
-.postContent.single {
-  margin-top: 12px;
-}
 .hashtag {
   color: rgb(var(--primary-rgb));
 }
@@ -86,6 +88,9 @@
 .postDate {
   color: rgb(var(--link-rgb));
   cursor: pointer;
+}
+.postDate.isCompose:hover {
+  text-decoration: unset;
 }
 .postDate:hover {
   text-decoration: underline;

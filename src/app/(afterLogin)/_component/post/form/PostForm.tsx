@@ -21,13 +21,17 @@ import useAlterModal from '@/app/_hooks/useAlterModal';
 import PostFormPreview from '@/app/(afterLogin)/_component/post/form/PostFormPreview';
 import ReplyInfo from '@/app/(afterLogin)/_component/post/form/ReplyInfo';
 import PostFormFeature from '@/app/(afterLogin)/_component/post/form/PostFormFeatures';
+import { AdvancedPost } from '@/model/Post';
+import PostQuote from '@/app/(afterLogin)/_component/post/_quote/PostQuote';
 
 interface Props {
   session: Session;
+  mode?: 'post' | 'comment' | 'compose';
   parent?: {
     postId: number;
     userId: string;
   };
+  repost?: AdvancedPost;
   placeholder?: string;
   minRows?: number;
   maxRows?: number;
@@ -42,7 +46,9 @@ export type MediaType =
 
 export default function PostForm({
   session,
+  mode = 'post',
   parent,
+  repost,
   placeholder = 'Post your reply',
   minRows = 1,
   maxRows = 10,
@@ -51,7 +57,7 @@ export default function PostForm({
   onSubmitEnd,
 }: Props) {
   const { alterMessage } = useAlterModal();
-  const [active, setActive] = useState(!parent);
+  const [active, setActive] = useState(mode !== 'comment');
   const [content, setContent] = useState('');
   const [lastSelection, setLastSelection] = useState(0);
   const [images, setImages] = useState<MediaType[]>([]);
@@ -84,14 +90,11 @@ export default function PostForm({
         session,
         content,
         media: images,
-        parent: parent,
+        parent,
+        repost,
       },
       {
-        onSuccess: () => {
-          if (typeof onSubmitEnd === 'function') {
-            onSubmitEnd();
-          }
-        },
+        onSuccess: () => {},
         onError: (error, { content, media }) => {
           alterMessage('Upload failed. please try again.', 'error');
           setContent(content);
@@ -99,8 +102,14 @@ export default function PostForm({
         },
       }
     );
+    if (typeof onSubmitEnd === 'function') {
+      onSubmitEnd();
+    }
     setContent('');
     setImages([]);
+    setTimeout(() => {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    });
   };
   const onChangeContent: ChangeEventHandler<HTMLTextAreaElement> = (e) => {
     setActive(true);
@@ -138,7 +147,11 @@ export default function PostForm({
                   fontSize: fontSize,
                   lineHeight: `${lineHeight}px`,
                 }}
-                minRows={minRows}
+                minRows={
+                  (content === '' && images.length !== 0) || repost
+                    ? 1
+                    : minRows
+                }
                 maxRows={maxRows}
                 value={content}
                 onChange={onChangeContent}
@@ -154,7 +167,14 @@ export default function PostForm({
               )}
             </div>
             <PostFormPreview images={images} setImages={setImages} />
-            {active && (
+            {repost && (
+              <PostQuote
+                mode={images.length === 0 ? 'long' : 'short'}
+                post={repost}
+                noEvent
+              />
+            )}
+            {active && mode !== 'compose' && (
               <PostFormFeature
                 isComment={!!parent}
                 images={images}
@@ -169,6 +189,19 @@ export default function PostForm({
             )}
           </div>
         </div>
+        {mode === 'compose' && (
+          <PostFormFeature
+            isComment={!!parent}
+            images={images}
+            setImages={setImages}
+            content={content}
+            maxContent={maxContent}
+            setContent={setContent}
+            lastSelection={lastSelection}
+            setLastSelection={setLastSelection}
+            onFocusEmoji={onFocusEmoji}
+          />
+        )}
       </form>
     </div>
   );

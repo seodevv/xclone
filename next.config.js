@@ -27,6 +27,10 @@ const nextConfig = {
         protocol: 'https',
         hostname: 'avatars.githubusercontent.com',
       },
+      {
+        protocol: 'https',
+        hostname: 'abs.twimg.com',
+      },
     ],
   },
   experimental: {

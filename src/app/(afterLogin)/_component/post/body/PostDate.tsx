@@ -1,9 +1,11 @@
 import styles from './postBody.module.css';
+import utils from '@/app/utility.module.css';
 import { CSSProperties } from 'react';
 import dayjs from 'dayjs';
 import relativeTime from 'dayjs/plugin/relativeTime';
 import cx from 'classnames';
 import { MONTH_EN } from '@/app/_lib/common';
+import { Mode } from '@/app/(afterLogin)/_component/post/Post';
 
 dayjs.locale('en');
 dayjs.extend(relativeTime);
@@ -21,17 +23,21 @@ const CONVERT_TIME = (date: Date) => {
 interface Props {
   className?: string;
   style?: CSSProperties;
+  mode?: Mode;
   date: string;
   based?: number;
   isFull?: boolean;
+  noEvent?: boolean;
 }
 
 export default function PostDate({
   className,
   style,
+  mode,
   date,
   based = 1000 * 60 * 60 * 24, // 24 hours
-  isFull = false,
+  isFull,
+  noEvent,
 }: Props) {
   const parsed = new Date(date);
   const isRelatived = Date.now() - parsed.getTime() <= based;
@@ -52,7 +58,14 @@ export default function PostDate({
   }
 
   return (
-    <span className={cx(styles.postDate, className)} style={style}>
+    <span
+      className={cx(
+        styles.postDate,
+        (mode === 'compose' || noEvent) && utils.pointer_event_none,
+        className
+      )}
+      style={style}
+    >
       {content}
     </span>
   );

@@ -1,46 +1,64 @@
 'use client';
 
 import styles from './post.module.css';
+import cx from 'classnames';
 import 'dayjs/locale/ko';
 import { useSession } from 'next-auth/react';
-import cx from 'classnames';
 import { AdvancedPost } from '@/model/Post';
 import PostArticle from '@/app/(afterLogin)/_component/post/PostArticle';
 import PostRepostInfo from './header/PostRepostInfo';
 import PostHeader from './header/PostHeader';
 import PostBody from './body/PostBody';
 import { CSSProperties } from 'react';
+import OptionButton from '@/app/(afterLogin)/_component/buttons/OptionButton';
 
+export type Mode = 'post' | 'single' | 'comment' | 'compose';
 interface Props {
   className?: string;
   style?: CSSProperties;
+  mode?: Mode;
   post: AdvancedPost;
-  isSingle?: boolean;
   noImage?: boolean;
+  noReact?: boolean;
+  noEvent?: boolean;
 }
 export default function Post({
   className,
   style,
+  mode = 'post',
   post,
-  isSingle = false,
-  noImage = false,
+  noImage,
+  noReact,
+  noEvent,
 }: Props) {
   const { data: session } = useSession();
-  const data = post.Original ? post.Original : post;
-  const isRepost = !!post.Original;
+  const data = post.Original && !post.quote ? post.Original : post;
+  const isRepost = !!post.Original && !post.quote;
 
   return (
     <PostArticle
       className={className}
       style={style}
+      mode={mode}
       post={data}
-      isSingle={isSingle}
+      noEvent={noEvent}
     >
       {isRepost && <PostRepostInfo session={session} userId={post.User.id} />}
-      <div className={cx(styles.postWrapper, isSingle && styles.single)}>
-        <PostHeader post={data} isSingle={isSingle} />
-        <PostBody post={data} isSingle={isSingle} noImage={noImage} />
+      <div
+        className={cx(styles.postWrapper, mode === 'single' && styles.single)}
+      >
+        <PostHeader mode={mode} post={data} />
+        <PostBody mode={mode} post={data} noImage={noImage} noReact={noReact} />
       </div>
+      {mode !== 'single' && (
+        <div className={styles.options}>
+          <OptionButton
+            onClick={(e) => {
+              e.stopPropagation();
+            }}
+          />
+        </div>
+      )}
     </PostArticle>
   );
 }

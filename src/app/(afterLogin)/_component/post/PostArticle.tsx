@@ -2,43 +2,40 @@
 
 import styles from './post.module.css';
 import utils from '@/app/utility.module.css';
-import {
-  CSSProperties,
-  MouseEventHandler,
-  ReactNode,
-  useEffect,
-  useLayoutEffect,
-  useRef,
-  useState,
-} from 'react';
+import { CSSProperties, MouseEventHandler, ReactNode } from 'react';
 import { useRouter } from 'next/navigation';
 import cx from 'classnames';
 import { AdvancedPost } from '@/model/Post';
 import LoadingSpinner from '@/app/(afterLogin)/_component/loading/LoadingSpinner';
+import { Mode } from '@/app/(afterLogin)/_component/post/Post';
+import OptionButton from '@/app/(afterLogin)/_component/buttons/OptionButton';
 
 interface Props {
   className?: string;
   style?: CSSProperties;
   children: ReactNode;
+  mode?: Mode;
   post: AdvancedPost;
-  isSingle?: boolean;
+  noEvent?: boolean;
+  qoute?: boolean;
 }
 
 export default function PostArticle({
   className,
   style,
   children,
+  mode = 'post',
   post,
-  isSingle = false,
+  noEvent,
+  qoute,
 }: Props) {
   const router = useRouter();
   const disabled = post.postId === -1;
 
-  const onClick: MouseEventHandler<HTMLButtonElement> = (e) => {
+  const onClickArticle: MouseEventHandler<HTMLButtonElement> = (e) => {
     e.preventDefault();
     e.stopPropagation();
-    if (isSingle) return;
-    if (disabled) return;
+    if (['single', 'compose'].includes(mode) || disabled) return;
     router.push(`/${post.User.id}/status/${post.postId}`);
   };
 
@@ -46,12 +43,14 @@ export default function PostArticle({
     <article
       className={cx(
         styles.post,
-        isSingle && styles.single,
+        ['single', 'compose'].includes(mode) && styles.notHover,
+        qoute && [styles.quote, utils.cursor_point],
         disabled && [styles.disabled, utils.maxHeight],
+        noEvent && utils.pointer_event_none,
         className
       )}
       style={style}
-      onClick={onClick}
+      onClick={onClickArticle}
     >
       {children}
       {disabled && (

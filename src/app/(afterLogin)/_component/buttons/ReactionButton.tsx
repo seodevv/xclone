@@ -4,7 +4,7 @@ import styles from './reaction.button.module.css';
 import utils from '@/app/utility.module.css';
 import cx from 'classnames';
 import HeartSvg from '@/app/_svg/actionbuttons/HeartSvg';
-import { MouseEventHandler, useState } from 'react';
+import { MouseEventHandler, useContext, useState } from 'react';
 import useReactionMutation from '@/app/(afterLogin)/_hooks/useReactionMutation';
 import { useQueryClient } from '@tanstack/react-query';
 import { useSession } from 'next-auth/react';
@@ -17,6 +17,8 @@ import { useRouter } from 'next/navigation';
 import BookmarkSvg from '@/app/_svg/actionbuttons/BookmarkSvg';
 import ShareSvg from '@/app/_svg/actionbuttons/ShareSvg';
 import useAlterModal from '@/app/_hooks/useAlterModal';
+import useComposeStore from '@/app/(afterLogin)/_store/ComposeStore';
+import { SubMenuContext } from '@/app/(afterLogin)/_provider/SubMenuProvider';
 
 interface Props {
   type: 'Comments' | 'Hearts' | 'Reposts' | 'Views' | 'Bookmarks' | 'Shares';
@@ -32,6 +34,11 @@ export default function ReactionButton({
   white = false,
 }: Props) {
   const router = useRouter();
+  const { menu, dispatchMenu } = useContext(SubMenuContext);
+  const { setCompose, resetCompose } = useComposeStore((state) => ({
+    setCompose: state.set,
+    resetCompose: state.reset,
+  }));
   const queryClient = useQueryClient();
   const { alterMessage } = useAlterModal();
   const { data: session } = useSession();
@@ -50,10 +57,28 @@ export default function ReactionButton({
 
     switch (type) {
       case 'Comments':
+        setCompose({ type: 'comment', post });
         router.push('/compose/post', { scroll: false });
         break;
-      case 'Hearts':
       case 'Reposts':
+        const { x, y } = e.currentTarget.getBoundingClientRect();
+        if (!menu.flag) {
+          setCompose({ type: 'quote', post });
+          dispatchMenu({
+            type: 'set',
+            payload: {
+              flag: true,
+              status: 'repost',
+              position: { x, y: y + window.scrollY },
+              post,
+            },
+          });
+        } else {
+          resetCompose();
+          dispatchMenu({ type: 'reset' });
+        }
+        break;
+      case 'Hearts':
       case 'Bookmarks':
         reactionMutation.mutate({
           type,
@@ -70,10 +95,10 @@ export default function ReactionButton({
           alterMessage(
             'Keep it up! The more posts you like, the better your timeline will be.'
           );
-        } else if (type === 'Bookmarks' && active) {
-          alterMessage('Removed from your Bookmarks');
         } else if (type === 'Bookmarks') {
-          alterMessage('Added to your Bookmarks');
+          alterMessage(
+            active ? 'Removed from your Bookmarks' : 'Added to your Bookmarks'
+          );
         }
         break;
       case 'Views':

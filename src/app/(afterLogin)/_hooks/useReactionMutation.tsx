@@ -16,7 +16,7 @@ interface RequiredSession {
 
 interface ReactionMutationParams {
   queryClient: QueryClient;
-  type: 'Hearts' | 'Reposts' | 'Bookmarks';
+  type: 'Comments' | 'Hearts' | 'Reposts' | 'Bookmarks';
   method: 'post' | 'delete';
   post: AdvancedPost;
   session: RequiredSession;
@@ -73,6 +73,7 @@ const useReactionMutation = () =>
 
         switch ([a, b].toString()) {
           case `posts,${post.postId}`: {
+            // queryKey is ['posts', postId, *]
             const queryData = queryClient.getQueryData<{
               data: AdvancedPost;
               message: string;
@@ -83,23 +84,21 @@ const useReactionMutation = () =>
             const already = shallow.data[type]
               .map((u) => u.id)
               .includes(session?.email);
+            // increase reaction
+            // type is 'Comments' | 'Reposts' | 'Hearts' | 'Bookmarks'
             if (method === 'post' && !already) {
               shallow.data = {
                 ...shallow.data,
-                [type]: [...queryData.data[type], { id: session.email }],
+                [type]: [...shallow.data[type], { id: session.email }],
                 _count: {
                   ...queryData.data._count,
-                  Hearts:
-                    type === 'Hearts'
-                      ? queryData.data._count.Hearts + 1
-                      : queryData.data._count.Hearts,
-                  Reposts:
-                    type === 'Reposts'
-                      ? queryData.data._count.Reposts + 1
-                      : queryData.data._count.Reposts,
+                  [type]: shallow.data._count[type] + 1,
                 },
               };
-            } else if (method === 'delete' && already) {
+            }
+            // decrease reaction
+            // type is 'Comments' | 'Reposts' | 'Hearts' | 'Bookmarks'
+            else if (method === 'delete' && already) {
               shallow.data = {
                 ...shallow.data,
                 [type]: queryData.data[type].filter(
@@ -107,18 +106,10 @@ const useReactionMutation = () =>
                 ),
                 _count: {
                   ...queryData.data._count,
-                  Hearts:
-                    type === 'Hearts'
-                      ? queryData.data._count.Hearts < 1
-                        ? 0
-                        : queryData.data._count.Hearts - 1
-                      : queryData.data._count.Hearts,
-                  Reposts:
-                    type === 'Reposts'
-                      ? queryData.data._count.Reposts < 1
-                        ? 0
-                        : queryData.data._count.Reposts - 1
-                      : queryData.data._count.Reposts,
+                  [type]:
+                    shallow.data._count[type] < 1
+                      ? 0
+                      : shallow.data._count[type] - 1,
                 },
               };
             }
@@ -127,6 +118,7 @@ const useReactionMutation = () =>
             break;
           }
           case 'posts,list': {
+            // queryKey is ['posts','list', *]
             const queryData = queryClient.getQueryData<
               InfiniteData<
                 {
@@ -140,67 +132,26 @@ const useReactionMutation = () =>
             if (!queryData) return;
 
             const shallow = { ...queryData };
-            if (
-              type === 'Reposts' &&
-              (c === 'recommends' || c === session.email)
-            ) {
-              if (method === 'post') {
-                const newPost: AdvancedPost = {
-                  postId: -1,
-                  userId: session.email,
-                  content: '',
-                  images: [],
-                  createAt: new Date().toISOString(),
-                  User: {
-                    id: session.email,
-                    image: session.image,
-                    nickname: session.name,
-                  },
-                  Hearts: [],
-                  Reposts: [],
-                  Comments: [],
-                  Bookmarks: [],
-                  _count: {
-                    Hearts: 0,
-                    Comments: 0,
-                    Reposts: 0,
-                    Views: 0,
-                  },
-                  originalId: post.postId,
-                  Original: {
-                    ...post,
-                    Reposts: [...post.Reposts, { id: session.email }],
-                    _count: {
-                      ...post._count,
-                      Reposts: post._count.Reposts + 1,
-                    },
-                  },
-                };
-                shallow.pages = [...shallow.pages];
-                shallow.pages[0] = {
-                  ...shallow.pages[0],
-                  data: [newPost, ...shallow.pages[0].data],
-                };
-              } else {
-                queryData.pages.forEach((page, i) => {
-                  const j = page.data.findIndex(
-                    (p) =>
-                      p.User.id === session.email &&
-                      p.Original?.postId === post.postId
-                  );
-
-                  if (j > -1) {
-                    shallow.pages = [...shallow.pages];
-                    shallow.pages[i] = {
-                      ...shallow.pages[i],
-                      data: [...shallow.pages[i].data],
-                    };
-                    shallow.pages[i].data.splice(j, 1);
-                  }
-                });
-              }
+            if (type === 'Reposts' && method === 'delete') {
+              queryData.pages.forEach((page, i) => {
+                const findPost = page.data.find(
+                  (p) =>
+                    p.Original?.postId === post.postId &&
+                    p.User.id === session.email &&
+                    !p.quote
+                );
+                if (findPost) {
+                  shallow.pages = [...shallow.pages];
+                  shallow.pages[i] = {
+                    ...page,
+                    data: page.data.filter((p) => p !== findPost),
+                  };
+                }
+              });
             }
 
+            // queryKey is ['posts','list','bookmarks']
+            // add/remove bookmark list
             if (type === 'Bookmarks' && c === 'bookmarks') {
               if (method === 'post') {
                 shallow.pages = [...shallow.pages];
@@ -229,33 +180,26 @@ const useReactionMutation = () =>
 
             shallow.pages.forEach((page, i) => {
               page.data.forEach((p, j) => {
+                // find the target through postId in the list
                 if (p.postId === post.postId) {
                   shallow.pages = [...shallow.pages];
                   shallow.pages[i] = { ...shallow.pages[i] };
                   shallow.pages[i].data = [...shallow.pages[i].data];
 
-                  const already = shallow.pages[i].data[j][type]
+                  const already = p[type]
                     .map((u) => u.id)
                     .includes(session.email);
+                  // update the target in the list
+                  // type is "Comments" | "Hearts" | "Reposts" | "Bookmarks"
                   switch (method) {
                     case 'post': {
                       if (!already) {
                         shallow.pages[i].data[j] = {
-                          ...shallow.pages[i].data[j],
-                          [type]: [
-                            ...shallow.pages[i].data[j][type],
-                            { id: session.email },
-                          ],
+                          ...p,
+                          [type]: [...p[type], { id: session.email }],
                           _count: {
-                            ...shallow.pages[i].data[j]._count,
-                            Hearts:
-                              type === 'Hearts'
-                                ? shallow.pages[i].data[j]._count.Hearts + 1
-                                : shallow.pages[i].data[j]._count.Hearts,
-                            Reposts:
-                              type === 'Reposts'
-                                ? shallow.pages[i].data[j]._count.Reposts + 1
-                                : shallow.pages[i].data[j]._count.Reposts,
+                            ...p._count,
+                            [type]: p._count[type] + 1,
                           },
                         };
                       }
@@ -264,31 +208,20 @@ const useReactionMutation = () =>
                     case 'delete': {
                       if (already) {
                         shallow.pages[i].data[j] = {
-                          ...shallow.pages[i].data[j],
-                          [type]: shallow.pages[i].data[j][type].filter(
-                            (u) => u.id !== session.email
-                          ),
+                          ...p,
+                          [type]: p[type].filter((u) => u.id !== session.email),
                           _count: {
-                            ...shallow.pages[i].data[j]._count,
-                            Hearts:
-                              type === 'Hearts'
-                                ? shallow.pages[i].data[j]._count.Hearts < 1
-                                  ? 0
-                                  : shallow.pages[i].data[j]._count.Hearts - 1
-                                : shallow.pages[i].data[j]._count.Hearts,
-                            Reposts:
-                              type === 'Reposts'
-                                ? shallow.pages[i].data[j]._count.Reposts < 1
-                                  ? 0
-                                  : shallow.pages[i].data[j]._count.Reposts - 1
-                                : shallow.pages[i].data[j]._count.Reposts,
+                            ...p._count,
+                            [type]: p._count[type] < 0 ? 0 : p._count[type] - 1,
                           },
                         };
                       }
                       break;
                     }
                   }
-                } else if (p.Original?.postId === post.postId) {
+                }
+                // find the repost target through postId in the list
+                else if (p.Original?.postId === post.postId) {
                   shallow.pages = [...shallow.pages];
                   shallow.pages[i] = { ...shallow.pages[i] };
                   shallow.pages[i].data = [...shallow.pages[i].data];
@@ -296,6 +229,8 @@ const useReactionMutation = () =>
                   const already = p.Original[type].some(
                     (u) => u.id === session.email
                   );
+                  // update the repost target in the list
+                  // type is "Comments" | "Hearts" | "Reposts" | "Bookmarks"
                   switch (method) {
                     case 'post': {
                       if (!already) {
@@ -309,14 +244,7 @@ const useReactionMutation = () =>
                             ],
                             _count: {
                               ...p.Original._count,
-                              Hearts:
-                                type === 'Hearts'
-                                  ? p.Original._count.Hearts + 1
-                                  : p.Original._count.Hearts,
-                              Reposts:
-                                type === 'Reposts'
-                                  ? p.Original._count.Reposts + 1
-                                  : p.Original._count.Reposts,
+                              [type]: p.Original._count[type],
                             },
                           },
                         };
@@ -334,18 +262,10 @@ const useReactionMutation = () =>
                             ),
                             _count: {
                               ...p.Original._count,
-                              Hearts:
-                                type === 'Hearts'
-                                  ? p.Original._count.Hearts < 1
-                                    ? 0
-                                    : p.Original._count.Hearts - 1
-                                  : p.Original._count.Hearts,
-                              Reposts:
-                                type === 'Reposts'
-                                  ? p.Original._count.Reposts < 1
-                                    ? 0
-                                    : p.Original._count.Reposts
-                                  : p.Original._count.Reposts,
+                              [type]:
+                                p.Original._count[type] < 1
+                                  ? 0
+                                  : p.Original._count[type] - 1,
                             },
                           },
                         };
@@ -403,6 +323,16 @@ const useReactionMutation = () =>
               queryClient.setQueryData(queryKey, shallow);
             });
           });
+        });
+      }
+      if (type === 'Reposts') {
+        queryClient.invalidateQueries({
+          queryKey: ['posts', 'list', 'recommends'],
+          refetchType: 'none',
+        });
+        queryClient.invalidateQueries({
+          queryKey: ['posts', 'list', session.email],
+          refetchType: 'none',
         });
       }
       if (type === 'Hearts') {

@@ -22,10 +22,11 @@ export default function PostSection({ session, params }: Props) {
 
   return (
     <section className={styles.postSection}>
-      <Post post={post.data} noImage isSingle />
+      <Post mode="single" post={post.data} noImage />
       {session && (
         <PostForm
           session={session}
+          mode="comment"
           parent={{ postId: post.data.postId, userId: post.data.User.id }}
         />
       )}

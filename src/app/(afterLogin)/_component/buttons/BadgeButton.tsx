@@ -1,7 +1,13 @@
 'use client';
 
 import styles from './button.module.css';
-import { MouseEventHandler, useLayoutEffect, useRef, useState } from 'react';
+import {
+  CSSProperties,
+  MouseEventHandler,
+  useLayoutEffect,
+  useRef,
+  useState,
+} from 'react';
 import cx from 'classnames';
 import BadgeSvg from '@/app/_svg/verified/BadgeSvg';
 import Link from 'next/link';
@@ -11,8 +17,10 @@ import { MONTH_EN } from '@/app/_lib/common';
 import useViewport from '../../_hooks/useViewport';
 
 interface Props {
+  style?: CSSProperties;
   badge?: User['verified'];
   width?: number;
+  unClickable?: boolean;
 }
 
 interface Active {
@@ -25,7 +33,12 @@ interface Active {
   y: number;
 }
 
-export default function BadgeButton({ badge, width = 20 }: Props) {
+export default function BadgeButton({
+  style,
+  badge,
+  width = 20,
+  unClickable,
+}: Props) {
   const { width: viewWidth, height: viewHeight } = useViewport();
   const [active, setActive] = useState<Active>({
     flag: false,
@@ -38,6 +51,7 @@ export default function BadgeButton({ badge, width = 20 }: Props) {
   const timeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null);
 
   const onClickBadge: MouseEventHandler<HTMLButtonElement> = (e) => {
+    if (unClickable) return;
     e.preventDefault();
     e.stopPropagation();
     setFadeOut(false);
@@ -105,7 +119,7 @@ export default function BadgeButton({ badge, width = 20 }: Props) {
   }
 
   return (
-    <div className={styles.badgeContainer}>
+    <div className={styles.badgeContainer} style={style}>
       <button
         className={styles.badgeBtn}
         style={{ width: width, height: width }}

@@ -13,6 +13,7 @@ import TweetSvg from '@/app/_svg/navbar/TweetSvg';
 import cx from 'classnames';
 import { captialCase } from '@/app/_lib/common';
 import BookmarkSvg from '@/app/_svg/actionbuttons/BookmarkSvg';
+import useComposeStore from '@/app/(afterLogin)/_store/ComposeStore';
 
 interface Props {
   session: Session | null;
@@ -20,7 +21,7 @@ interface Props {
 
 export default function NavMenu({ session }: Props) {
   const pathname = usePathname();
-
+  const reset = useComposeStore((state) => state.reset);
   const menus = [
     {
       link: 'home',
@@ -89,7 +90,12 @@ export default function NavMenu({ session }: Props) {
         })}
       </ul>
       {session && (
-        <Link href="/compose/post" className={styles.tweet} scroll={false}>
+        <Link
+          href="/compose/post"
+          className={styles.tweet}
+          scroll={false}
+          onClick={() => reset()}
+        >
           <span className={styles.post}>Post</span>
           <TweetSvg white />
         </Link>

@@ -3,33 +3,30 @@
   justify-content: center;
   align-items: center;
 }
-
 .profile {
   border-radius: '50%';
   overflow: hidden;
   object-fit: cover;
   transition: 0.15s opacity ease-in;
 }
-
 .profile:hover {
   opacity: 0.75;
 }
-
 .otherProfile {
   position: relative;
-  display: inline-block;
+  /* display: inline-block; */
   border-radius: 20px;
 }
-
 .otherProfile.isSingle {
   margin-right: 8px;
 }
-
+.otherProfile.isCompose {
+  pointer-events: none;
+}
 .otherProfile img {
   border-radius: 50%;
   transition: 200ms opacity ease-in;
 }
-
 .otherProfile:hover img {
   opacity: 0.75;
 }

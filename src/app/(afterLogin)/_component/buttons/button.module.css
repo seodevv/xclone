@@ -257,6 +257,18 @@
 .getPremium:hover {
   background: rgba(var(--button-hover-rgb), 0.9);
 }
+
+/* OptionButton */
+.optionBtn:hover:enabled {
+  background: rgba(var(--primary-rgb), 0.1);
+}
+.optionBtn:hover:enabled svg {
+  fill: rgb(var(--primary-rgb));
+}
+.optionBtn:active:enabled {
+  background: rgba(var(--primary-rgb), 0.2);
+}
+
 .fadeIn {
   animation-name: fade-in;
   animation-duration: 200ms;

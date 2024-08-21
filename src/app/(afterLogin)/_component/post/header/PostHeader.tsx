@@ -1,20 +1,25 @@
 import styles from './postHeader.module.css';
-import Link from 'next/link';
 import cx from 'classnames';
+import Link from 'next/link';
 import { AdvancedPost } from '@/model/Post';
 import OtherProfile from '../../profile/OtherProfile';
 import OptionButton from '../../buttons/OptionButton';
+import BadgeButton from '@/app/(afterLogin)/_component/buttons/BadgeButton';
+import { Mode } from '@/app/(afterLogin)/_component/post/Post';
 
 interface Props {
+  mode: Mode;
   post: AdvancedPost;
-  isSingle?: boolean;
 }
 
-export default function PostHeader({ post, isSingle }: Props) {
+export default function PostHeader({ mode, post }: Props) {
   return (
-    <div className={cx(styles.postUserSection, isSingle && styles.single)}>
-      <OtherProfile user={post.User} isSingle />
-      {isSingle && (
+    <div
+      className={cx(styles.postUserSection, mode === 'single' && styles.single)}
+    >
+      <OtherProfile mode={mode} user={post.User} />
+      {mode === 'compose' && <div className={styles.composeLine}></div>}
+      {mode === 'single' && (
         <>
           <div className={styles.postUserInfo}>
             <Link
@@ -22,7 +27,10 @@ export default function PostHeader({ post, isSingle }: Props) {
               className={styles.postMeta}
               onClick={(e) => e.stopPropagation()}
             >
-              <span className={styles.postUserName}>{post.User.nickname}</span>
+              <span className={styles.postUserName}>
+                {post.User.nickname}
+                <BadgeButton badge={post.User.verified} unClickable />
+              </span>
               <span className={styles.postUserId}>@{post.User.id}</span>
             </Link>
           </div>

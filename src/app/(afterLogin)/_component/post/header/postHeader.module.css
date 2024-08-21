@@ -30,12 +30,22 @@
 /* PostHeader */
 .postUserSection {
   margin-right: 12px;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
   width: 40px;
 }
 .postUserSection.single {
   display: flex;
   flex-flow: row nowrap;
   width: unset;
+}
+.composeLine {
+  margin-bottom: -30px;
+  flex-grow: 1;
+  width: 2px;
+  background: rgb(var(--border-start-rgb));
 }
 .postUserInfo {
   flex-grow: 1;
@@ -48,6 +58,8 @@
 }
 .postUserName {
   margin-right: 5px;
+  display: flex;
+  align-items: center;
   font-size: 15px;
   font-weight: bold;
 }

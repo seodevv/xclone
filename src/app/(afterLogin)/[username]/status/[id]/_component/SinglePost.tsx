@@ -35,10 +35,11 @@ export default function SinglePost({ params, session }: Props) {
 
   return (
     <div className={style.main}>
-      <Post post={post.data} isSingle={true} />
+      <Post mode="single" post={post.data} />
       {session && (
         <PostForm
           session={session}
+          mode="comment"
           parent={{ postId: post.data.postId, userId: post.data.User.id }}
         />
       )}

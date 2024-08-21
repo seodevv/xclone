@@ -32,12 +32,20 @@
 .postImages.single {
   max-width: unset;
 }
+.postImages.short {
+  border: none;
+  border-radius: 0;
+  grid-template-rows: 95px;
+}
 .postImages.single.postImages-1 {
   max-height: unset;
   grid-template-rows: unset;
 }
 .postImages.single img {
   max-height: unset;
+}
+.postImages-1.short img {
+  object-fit: cover;
 }
 
 /* PostMedia */
