@@ -10,7 +10,7 @@ import PostRepostInfo from './header/PostRepostInfo';
 import PostHeader from './header/PostHeader';
 import PostBody from './body/PostBody';
 import { CSSProperties } from 'react';
-import OptionButton from '@/app/(afterLogin)/_component/buttons/OptionButton';
+import PostOptions from '@/app/(afterLogin)/_component/post/header/PostOptions';
 
 export type Mode = 'post' | 'single' | 'comment' | 'compose';
 interface Props {
@@ -50,15 +50,7 @@ export default function Post({
         <PostHeader mode={mode} post={data} />
         <PostBody mode={mode} post={data} noImage={noImage} noReact={noReact} />
       </div>
-      {mode !== 'single' && (
-        <div className={styles.options}>
-          <OptionButton
-            onClick={(e) => {
-              e.stopPropagation();
-            }}
-          />
-        </div>
-      )}
+      <PostOptions mode={mode} post={data} />
     </PostArticle>
   );
 }

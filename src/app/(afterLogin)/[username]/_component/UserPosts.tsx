@@ -39,7 +39,7 @@ export default function UserPosts({
   if (!user) return <NoProfile />;
 
   if (posts) {
-    const isMine = session?.user?.email === username;
+    const isOwn = session?.user?.email === username;
     const isMedia = filter === 'media';
     const isEmpty = posts.pages[0].data.length === 0;
     return (
@@ -53,10 +53,8 @@ export default function UserPosts({
             )
           )
         )}
-        {isEmpty && (
-          <NoMedia type={filter} username={username} isMine={isMine} />
-        )}
-        {!isMedia && isMine && (
+        {isEmpty && <NoMedia type={filter} username={username} isOwn={isOwn} />}
+        {!isMedia && isOwn && (
           <div className={styles.followRecommends} style={{ order: 5 }}>
             <FollowRecommends isDesc />
           </div>

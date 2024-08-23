@@ -61,7 +61,7 @@ export default function ReactionButton({
         router.push('/compose/post', { scroll: false });
         break;
       case 'Reposts':
-        const { x, y } = e.currentTarget.getBoundingClientRect();
+        const { x, y, width, height } = e.currentTarget.getBoundingClientRect();
         if (!menu.flag) {
           setCompose({ type: 'quote', post });
           dispatchMenu({
@@ -69,7 +69,13 @@ export default function ReactionButton({
             payload: {
               flag: true,
               status: 'repost',
-              position: { x, y: y + window.scrollY },
+              position: {
+                x,
+                y: y + window.scrollY,
+                width,
+                height,
+                target: e.currentTarget,
+              },
               post,
             },
           });

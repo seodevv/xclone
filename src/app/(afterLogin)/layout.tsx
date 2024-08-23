@@ -21,13 +21,15 @@ import SubMenuProvider from '@/app/(afterLogin)/_provider/SubMenuProvider';
 
 interface Props {
   children: ReactNode;
-  modal: ReactNode;
-  settings: ReactNode;
+  modal?: ReactNode;
+  settings?: ReactNode;
+  i?: ReactNode;
 }
 export default async function AfterLoginLayout({
   children,
   modal,
   settings,
+  i,
 }: Props) {
   const session = await getServerSession(authOptions);
 
@@ -67,6 +69,7 @@ export default async function AfterLoginLayout({
                   </div>
                   <ModalController>{modal}</ModalController>
                   {settings}
+                  {i}
                 </div>
               </SubMenuProvider>
             </UnFollowProvider>

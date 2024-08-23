@@ -1,18 +1,18 @@
-import { useContext, useEffect } from 'react';
+import { useCallback, useContext, useEffect } from 'react';
 import { ViewportContext } from '../_provider/ViewportProvider';
 
 export default function useViewport() {
   const { viewport, setViewport } = useContext(ViewportContext);
 
-  const settingViewport = () => {
+  const settingViewport = useCallback(() => {
     setViewport({
       width: window.innerWidth,
       height: window.innerHeight,
     });
-  };
+  }, [setViewport]);
 
   useEffect(() => {
-    const listener = (e: UIEvent) => {
+    const listener = () => {
       settingViewport();
     };
     if (viewport.width === 0 && viewport.height === 0) {
@@ -22,7 +22,7 @@ export default function useViewport() {
     return () => {
       window.removeEventListener('resize', listener);
     };
-  }, [viewport.width, viewport.height, setViewport]);
+  }, [viewport.width, viewport.height, setViewport, settingViewport]);
 
   return viewport;
 }

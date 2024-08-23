@@ -23,7 +23,13 @@
   width: 100%;
   text-wrap: nowrap;
   cursor: pointer;
+  color: rgb(var(--foreground-rgb));
+  fill: rgb(var(--foreground-rgb));
   transition: 150ms background-color ease;
+}
+.menu.red {
+  color: rgb(var(--error-rgb));
+  fill: rgb(var(--error-rgb));
 }
 .menu:hover {
   background: rgba(var(--r-background-start-rgb), 0.1);
@@ -36,9 +42,12 @@
   display: flex;
   align-items: center;
 }
+.icon svg {
+  fill: inherit;
+}
 .title {
   font-size: 15px;
   font-weight: 700;
-  color: rgb(var(--foreground-start-rgb));
+  color: inherit;
   line-height: 20px;
 }

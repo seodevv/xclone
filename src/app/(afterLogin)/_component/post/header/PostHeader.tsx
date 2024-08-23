@@ -3,7 +3,6 @@ import cx from 'classnames';
 import Link from 'next/link';
 import { AdvancedPost } from '@/model/Post';
 import OtherProfile from '../../profile/OtherProfile';
-import OptionButton from '../../buttons/OptionButton';
 import BadgeButton from '@/app/(afterLogin)/_component/buttons/BadgeButton';
 import { Mode } from '@/app/(afterLogin)/_component/post/Post';
 
@@ -33,9 +32,6 @@ export default function PostHeader({ mode, post }: Props) {
               </span>
               <span className={styles.postUserId}>@{post.User.id}</span>
             </Link>
-          </div>
-          <div className={styles.postUserOption}>
-            <OptionButton />
           </div>
         </>
       )}

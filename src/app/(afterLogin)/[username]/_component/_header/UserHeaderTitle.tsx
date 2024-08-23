@@ -1,7 +1,7 @@
 'use client';
 
 import style from './userHeader.module.css';
-import { useSelectedLayoutSegment } from 'next/navigation';
+import { useSelectedLayoutSegments } from 'next/navigation';
 import { useUserQuery } from '../../_hooks/useUserQuery';
 import { useUserPostsCountQuery } from '../../_hooks/useUserPostsCountQuery';
 
@@ -10,36 +10,50 @@ interface Props {
 }
 
 export default function UserHeaderTitle({ username }: Props) {
-  const segment = useSelectedLayoutSegment();
+  const [a, b, c] = useSelectedLayoutSegments();
+
   const { data: user } = useUserQuery(username);
   const { data: count } = useUserPostsCountQuery({
     username,
-    filter:
-      segment === 'media' ? 'media' : segment === 'likes' ? 'likes' : 'all',
+    filter: a === 'media' ? 'media' : a === 'likes' ? 'likes' : 'all',
   });
 
   let title = 'Profile';
   let sub = '';
   if (user) {
     title = user.data.nickname;
-    switch (segment) {
-      case null:
+    switch (a) {
+      // /username
+      // /username/with_replies
+      case undefined:
       case 'with_replies':
         sub = `${count?.data || 0} posts`;
         break;
+      // /username/media
       case 'media':
         sub = `${count?.data || 0} photos & videos`;
         break;
+      // /username/likes
       case 'likes':
         sub = `${count?.data || 0} Like`;
         break;
+      // /username/verified_followers
+      // /username/followers
+      // /username/following
       case 'verified_followers':
       case 'followers':
       case 'following':
         sub = `@${user.data.id}`;
         break;
+      // /username/status/id
       case 'status':
         title = 'Post';
+        // /username/status/id/quotes
+        // /username/status/id/retweets
+        // /username/status/id/likes
+        if (['quotes', 'retweets', 'likes'].includes(c)) {
+          title = 'Post engagements';
+        }
         break;
     }
   }

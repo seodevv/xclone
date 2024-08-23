@@ -75,3 +75,10 @@
   align-items: center;
   justify-content: center;
 }
+
+/* PostOptions */
+.postOptions {
+  position: absolute;
+  top: 15px;
+  right: 15px;
+}

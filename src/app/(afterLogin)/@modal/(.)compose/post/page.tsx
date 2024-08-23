@@ -1,4 +1,4 @@
-import styles from './afterLogin.compose.post.module.css';
+import styles from './compose.post.module.css';
 import HtmlOverflowHidden from '@/app/_component/_overflow/HtmlOverflowHidden';
 import ComposePostHeader from '@/app/(afterLogin)/@modal/(.)compose/post/_component/ComposePostHeader';
 import { getServerSession } from 'next-auth';

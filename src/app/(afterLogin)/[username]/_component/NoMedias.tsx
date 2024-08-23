@@ -3,11 +3,11 @@ import NoPost from '@/app/(afterLogin)/_component/post/NoPost';
 interface Props {
   type: 'all' | 'reply' | 'media' | 'like';
   username: string;
-  isMine?: boolean;
+  isOwn?: boolean;
 }
 
-export default function NoMedia({ type, username, isMine = false }: Props) {
-  switch (isMine) {
+export default function NoMedia({ type, username, isOwn = false }: Props) {
+  switch (isOwn) {
     case true:
       if (['all', 'reply'].includes(type)) {
         return null;

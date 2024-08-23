@@ -292,7 +292,7 @@ const useReactionMutation = () =>
         });
       }
     },
-    onSuccess: (response, { queryClient, type, method, session }) => {
+    onSuccess: (response, { queryClient, type, method, post, session }) => {
       if (type === 'Reposts' && method === 'post' && response) {
         const queryCache = queryClient.getQueryCache();
         const queryKeys = queryCache.getAll().map((q) => q.queryKey);
@@ -334,10 +334,18 @@ const useReactionMutation = () =>
           queryKey: ['posts', 'list', session.email],
           refetchType: 'none',
         });
+        queryClient.invalidateQueries({
+          queryKey: ['users', 'list', 'retweets', post.postId],
+          refetchType: 'inactive',
+        });
       }
       if (type === 'Hearts') {
         queryClient.invalidateQueries({
           queryKey: ['posts', 'list', 'likes'],
+        });
+        queryClient.invalidateQueries({
+          queryKey: ['users', 'list', 'likes'],
+          refetchType: 'inactive',
         });
       }
       queryClient.invalidateQueries({

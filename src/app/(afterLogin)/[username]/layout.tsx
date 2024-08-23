@@ -12,6 +12,7 @@ import {
 import { getUser } from './_lib/getUser';
 import { getUserPostsCount } from './_lib/getUserPostsCount';
 import UserHeader from './_component/_header/UserHeader';
+import ViewTabs from '@/app/(afterLogin)/[username]/status/[id]/[view]/_component/ViewTabs';
 
 interface Props {
   children: ReactNode;
@@ -38,6 +39,7 @@ export default async function UserLayout({ children, params }: Props) {
     <HydrationBoundary state={dehydrateState}>
       <main className={style.main}>
         <UserHeader username={params.username} />
+        <ViewTabs session={session} username={params.username} />
         <section>
           <UserProfile session={session} username={params.username} />
           <UserTabs session={session} username={params.username} />

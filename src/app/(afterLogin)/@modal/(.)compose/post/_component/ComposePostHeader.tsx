@@ -1,6 +1,6 @@
 'use client';
 
-import styles from './afterLogin.compose.post.header.module.css';
+import styles from './compose.post.header.module.css';
 import utils from '@/app/utility.module.css';
 import CloseButton from '@/app/(afterLogin)/_component/buttons/CloseButton';
 import TextButton from '@/app/(afterLogin)/_component/buttons/TextButton';

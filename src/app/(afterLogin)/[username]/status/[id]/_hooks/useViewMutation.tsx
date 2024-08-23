@@ -1,4 +1,4 @@
-import { ERROR_STATUS } from '@/app/(afterLogin)/[username]/status/[id]/error';
+import { ERROR_STATUS } from '@/app/(afterLogin)/error';
 import { AdvancedPost, Post } from '@/model/Post';
 import { User } from '@/model/User';
 import {
@@ -50,6 +50,8 @@ const useViewMutation = ({
         throw new Error(ERROR_STATUS.notFound);
       } else if (response.status === 500) {
         throw new Error(ERROR_STATUS.serverERror);
+      } else {
+        throw new Error(ERROR_STATUS.fetchError);
       }
     },
     onMutate: ({ queryClient }) => {

@@ -1,22 +1,20 @@
 'use client';
 
-import { usePathname, useRouter } from 'next/navigation';
+import { useRouter, usePathname, useSearchParams } from 'next/navigation';
 import { useEffect } from 'react';
 
-interface Props {
-  redirect?: string;
-}
-
-export default function HomeRedirect({ redirect }: Props) {
+export default function HomeRedirect() {
   const router = useRouter();
   const pathname = usePathname();
+  const searchParams = useSearchParams();
 
   useEffect(() => {
+    const redirect = searchParams.get('r');
     if (redirect) {
       history.replaceState(null, '', pathname);
       router.push(`/${redirect.replaceAll(',', '/')}`, { scroll: false });
     }
-  }, [redirect]);
+  }, [searchParams, pathname, router]);
 
   return null;
 }

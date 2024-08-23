@@ -237,6 +237,10 @@ const usePostMutation = () =>
         queryClient.invalidateQueries({
           queryKey: ['posts', repost.postId.toString()],
         });
+        queryClient.invalidateQueries({
+          queryKey: ['posts', 'list', 'quotes', repost.postId],
+          refetchType: 'inactive',
+        });
       }
       queryClient.invalidateQueries({
         queryKey: ['posts', 'list', 'search'],

@@ -1,7 +1,7 @@
 'use client';
 
 import styles from './button.module.css';
-import { CSSProperties, MouseEventHandler, useContext } from 'react';
+import { CSSProperties, useContext } from 'react';
 import { useRouter } from 'next/navigation';
 import cx from 'classnames';
 import XMarkSvg from '@/app/_svg/tweet/XMarkSvg';

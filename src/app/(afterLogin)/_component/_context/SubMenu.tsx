@@ -1,8 +1,10 @@
-import { MouseEventHandler } from 'react';
+import { MouseEvent, MouseEventHandler } from 'react';
 import styles from './contextMenu.module.css';
+import cx from 'classnames';
 import Link from 'next/link';
 
 interface Props {
+  theme?: 'default' | 'red';
   svg?: React.ReactNode;
   title?: string;
   onClick?: () => void;
@@ -17,10 +19,18 @@ interface B extends Props {
 }
 
 export default function SubMenu(props: A | B) {
+  const onClickElement: MouseEventHandler<HTMLDivElement> = (e) => {
+    e.preventDefault();
+    e.stopPropagation();
+    if (typeof props.onClick === 'function') {
+      props.onClick();
+    }
+  };
+
   if (props.type === 'link') {
     return (
       <Link
-        className={styles.menu}
+        className={cx(styles.menu, props.theme === 'red' && styles.red)}
         href={props.href}
         scroll={props.scroll}
         onClick={(e) => {
@@ -36,15 +46,11 @@ export default function SubMenu(props: A | B) {
     );
   }
 
-  const onClickDiv: MouseEventHandler<HTMLDivElement> = (e) => {
-    e.stopPropagation();
-    if (typeof props.onClick === 'function') {
-      props.onClick();
-    }
-  };
-
   return (
-    <div className={styles.menu} onClick={onClickDiv}>
+    <div
+      className={cx(styles.menu, props.theme === 'red' && styles.red)}
+      onClick={onClickElement}
+    >
       <div className={styles.icon}>{props.svg}</div>
       <span className={styles.title}>{props.title}</span>
     </div>

@@ -47,10 +47,7 @@ export default function PostQuote({ mode, post, noImage, noEvent }: Props) {
           {!noImage && post.images.length !== 0 && (
             <div className={cx(mode === 'short' && styles.shortImage)}>
               <PostImages
-                className={cx(
-                  [utils.w_max_none, utils.bd_none, utils.br_0],
-                  mode === 'short' && utils.mt_0
-                )}
+                className={cx(styles.longImage, mode === 'short' && utils.mt_0)}
                 userId={post.User.id}
                 postId={post.postId}
                 images={post.images}

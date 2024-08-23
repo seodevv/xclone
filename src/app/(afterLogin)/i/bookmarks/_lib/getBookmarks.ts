@@ -1,4 +1,4 @@
-import { ERROR_STATUS } from '@/app/(afterLogin)/[username]/status/[id]/error';
+import { ERROR_STATUS } from '@/app/(afterLogin)/error';
 import { AdvancedPost } from '@/model/Post';
 
 interface Params {

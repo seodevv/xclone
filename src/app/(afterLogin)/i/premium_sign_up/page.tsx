@@ -1,15 +1,5 @@
-import HomePage from '../../home/page';
-import SoftNavigation from './_component/SoftNavigation';
+import { redirect } from 'next/navigation';
 
-interface Props {
-  searchParams: { r?: string };
-}
-
-export default function PremiumSignUpPage({ searchParams }: Props) {
-  return (
-    <>
-      <HomePage searchParams={searchParams} />
-      <SoftNavigation />
-    </>
-  );
+export default function PremiumSignUpPage() {
+  redirect('/home?r=i,premium_sign_up');
 }

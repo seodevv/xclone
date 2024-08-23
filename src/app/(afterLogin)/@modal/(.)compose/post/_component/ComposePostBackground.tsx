@@ -1,8 +1,10 @@
 'use client';
-import useComposeStore from '@/app/(afterLogin)/_store/ComposeStore';
-import { PathRecordContext } from '@/app/_provider/PathRecordProvider';
+
+import styles from './compose.post.background.module.css';
 import utils from '@/app/utility.module.css';
 import cx from 'classnames';
+import useComposeStore from '@/app/(afterLogin)/_store/ComposeStore';
+import { PathRecordContext } from '@/app/_provider/PathRecordProvider';
 import { useRouter } from 'next/navigation';
 import { MouseEventHandler, useContext } from 'react';
 
@@ -34,15 +36,7 @@ export default function ComposePostBackground({
 
   return (
     <main
-      className={cx(
-        utils.fixed,
-        utils.t_r_b_l_0,
-        utils.zIndex_xxxl,
-        utils.d_flexColumn,
-        utils.flex_alignCenter,
-        utils.bg_modal,
-        utils.fadeIn
-      )}
+      className={cx(styles.background, utils.fadeIn)}
       onClick={onClickBackground}
     >
       {children}
