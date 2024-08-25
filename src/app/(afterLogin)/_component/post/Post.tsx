@@ -11,6 +11,8 @@ import PostHeader from './header/PostHeader';
 import PostBody from './body/PostBody';
 import { CSSProperties } from 'react';
 import PostOptions from '@/app/(afterLogin)/_component/post/header/PostOptions';
+import PostPinned from '@/app/(afterLogin)/_component/post/header/PostPinned';
+import { usePathname } from 'next/navigation';
 
 export type Mode = 'post' | 'single' | 'comment' | 'compose';
 interface Props {
@@ -32,7 +34,9 @@ export default function Post({
   noEvent,
 }: Props) {
   const { data: session } = useSession();
+  const pathname = usePathname();
   const data = post.Original && !post.quote ? post.Original : post;
+  const isMyProfile = pathname === `/${session?.user?.email}`;
   const isRepost = !!post.Original && !post.quote;
 
   return (
@@ -44,6 +48,7 @@ export default function Post({
       noEvent={noEvent}
     >
       {isRepost && <PostRepostInfo session={session} userId={post.User.id} />}
+      {isMyProfile && post.pinned && <PostPinned />}
       <div
         className={cx(styles.postWrapper, mode === 'single' && styles.single)}
       >

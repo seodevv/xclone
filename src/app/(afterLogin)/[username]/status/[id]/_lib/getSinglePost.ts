@@ -1,4 +1,4 @@
-import { ERROR_STATUS } from '@/app/(afterLogin)/error';
+import { ERROR_STATUS, responseErrorHandler } from '@/app/_lib/error';
 import { AdvancedPost } from '@/model/Post';
 
 interface Params {
@@ -30,15 +30,5 @@ export const getSinglePost = async ({
     return response.json();
   }
 
-  if (response.status === 400) {
-    throw new Error(ERROR_STATUS.badRequest);
-  } else if (response.status === 403) {
-    throw new Error(ERROR_STATUS.unAuthorized);
-  } else if (response.status === 404) {
-    throw new Error(ERROR_STATUS.notFound);
-  } else if (response.status === 500) {
-    throw new Error(ERROR_STATUS.serverERror);
-  } else {
-    throw new Error(ERROR_STATUS.fetchError);
-  }
+  return responseErrorHandler(response);
 };

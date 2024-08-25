@@ -1,7 +1,7 @@
 'use client';
 
-import SubMenu from '@/app/(afterLogin)/_component/_context/SubMenu';
-import SubMenuWrapper from '@/app/(afterLogin)/_component/_context/SubMenuWrapper';
+import SubMenu from '@/app/(afterLogin)/_component/_subMenu/SubMenu';
+import SubMenuWrapper from '@/app/(afterLogin)/_component/_subMenu/SubMenuWrapper';
 import { SubMenuContext } from '@/app/(afterLogin)/_provider/SubMenuProvider';
 import ViewSvg from '@/app/_svg/actionbuttons/ViewSvg';
 import AnnounceSvg from '@/app/_svg/post/AnnounceSvg';

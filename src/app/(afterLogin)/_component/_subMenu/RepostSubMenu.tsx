@@ -7,8 +7,8 @@ import useReactionMutation from '@/app/(afterLogin)/_hooks/useReactionMutation';
 import { SubMenuContext } from '@/app/(afterLogin)/_provider/SubMenuProvider';
 import { useSession } from 'next-auth/react';
 import { useQueryClient } from '@tanstack/react-query';
-import SubMenu from '@/app/(afterLogin)/_component/_context/SubMenu';
-import SubMenuWrapper from '@/app/(afterLogin)/_component/_context/SubMenuWrapper';
+import SubMenu from '@/app/(afterLogin)/_component/_subMenu/SubMenu';
+import SubMenuWrapper from '@/app/(afterLogin)/_component/_subMenu/SubMenuWrapper';
 
 export default function RepostSubMenu() {
   const { data: session } = useSession();

@@ -1,11 +1,12 @@
 import IBackground from '@/app/(afterLogin)/@i/(.)i/_component/IBackground';
-import CloseButton from '@/app/(afterLogin)/_component/buttons/CloseButton';
+import IHeader from '@/app/(afterLogin)/@i/(.)i/_component/IHeader';
+import VerifiedChoose from '@/app/(afterLogin)/@i/(.)i/verified-choose/_component/VerifiedChoose';
 
 export default function IVerifiedChooseSlot() {
   return (
     <IBackground>
-      <CloseButton />
-      <h1>This is /i/verified-choose Slot</h1>
+      <IHeader kind="xmark" />
+      <VerifiedChoose />
     </IBackground>
   );
 }

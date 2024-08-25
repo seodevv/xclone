@@ -1,0 +1,70 @@
+.container {
+  padding-bottom: 48px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  flex-grow: 1;
+  width: 100%;
+}
+.inner {
+  margin: 32px;
+  display: flex;
+  flex-direction: column;
+  max-width: 400px;
+}
+.texts {
+  margin-bottom: 32px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+.title {
+  margin-bottom: 8px;
+  font-size: 26px;
+  font-weight: 800;
+  color: rgb(var(--foreground-rgb));
+  line-height: 32px;
+}
+.sub {
+  font-size: 15px;
+  font-weight: 400;
+  color: rgb(var(--link-rgb));
+  line-height: 20px;
+}
+.buttons {
+  width: 100%;
+}
+.alter {
+  margin-top: 32px;
+  padding: 12px 16px;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  max-width: 400px;
+  background: rgb(2, 17, 61);
+  border-radius: 8px;
+  font-size: 15px;
+  color: rgb(var(--foreground-rgb));
+}
+.message {
+  width: 100%;
+  font-weight: 700;
+  color: inherit;
+  word-break: keep-all;
+  word-wrap: break-word;
+}
+.link {
+  margin-top: 12px;
+  padding-bottom: 4px;
+  text-decoration: underline;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 2px;
+  font-size: 14px;
+  font-weight: 700;
+  color: inherit;
+  line-height: 16px;
+}
+.link:hover {
+  text-decoration-thickness: 2px;
+}

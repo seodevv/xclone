@@ -14,6 +14,7 @@ interface Props {
   isSearch?: boolean;
   isVisible?: boolean;
   prevPath?: string;
+  noBack?: boolean;
   onClick?: () => void;
 }
 
@@ -24,11 +25,13 @@ export default function CloseButton({
   isSearch,
   isVisible,
   prevPath,
+  noBack,
   onClick,
 }: Props) {
   const router = useRouter();
   const ctx = useContext(PathRecordContext);
   const onClickDefault = () => {
+    console.log(noBack);
     if (prevPath) {
       if (ctx.prevPath === ctx.path) {
         router.push(prevPath);
@@ -38,7 +41,7 @@ export default function CloseButton({
     if (typeof onClick === 'function') {
       onClick();
     }
-    router.back();
+    if (!noBack) router.back();
   };
 
   return (

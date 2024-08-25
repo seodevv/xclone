@@ -73,7 +73,7 @@ export default function PostFormPreview({ images, setImages }: Props) {
             )}
             <button
               type="button"
-              className={styles.previewCancle}
+              className={styles.previewCancel}
               onClick={() => {
                 setImages((prev) => {
                   const copy = [...prev];

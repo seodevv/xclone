@@ -10,6 +10,8 @@ export interface Post {
   parentId?: Post['postId'];
   originalId?: Post['postId'];
   quote?: boolean;
+  pinned?: boolean;
+  scope?: 'every' | 'follow' | 'verified' | 'only';
 }
 
 export interface AdvancedPost extends Post {

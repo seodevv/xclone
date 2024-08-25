@@ -12,7 +12,15 @@
   background: rgba(var(--background-modal-rgb), 0.4);
 }
 .modal {
-  padding: 12px;
+  width: 100%;
+  max-width: 600px;
   background: rgb(var(--background-start-rgb));
   border-radius: 16px;
+  overflow: hidden;
+}
+.smallModal {
+  padding: 32px;
+  display: flex;
+  flex-direction: column;
+  max-width: 320px;
 }

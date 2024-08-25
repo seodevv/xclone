@@ -14,6 +14,7 @@ interface Props {
   isLoading?: boolean;
   disabled?: boolean;
   large?: boolean;
+  medium?: boolean;
 }
 
 export default function FlexButton({
@@ -26,6 +27,7 @@ export default function FlexButton({
   isLoading = false,
   disabled = false,
   large,
+  medium,
 }: Props) {
   const { pending } = useFormStatus();
 
@@ -35,6 +37,7 @@ export default function FlexButton({
         styles.btn,
         styles[theme],
         large && styles.large,
+        medium && styles.medium,
         className
       )}
       style={style}

@@ -15,6 +15,9 @@
 .post:hover {
   background-color: rgba(var(--button-hover-rgb), 0.05);
 }
+.post:active {
+  background-color: rgba(var(--button-hover-rgb), 0.025);
+}
 .post.notHover {
   border-bottom: unset;
   cursor: unset;

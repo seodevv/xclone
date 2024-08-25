@@ -8,7 +8,6 @@ import cx from 'classnames';
 import { AdvancedPost } from '@/model/Post';
 import LoadingSpinner from '@/app/(afterLogin)/_component/loading/LoadingSpinner';
 import { Mode } from '@/app/(afterLogin)/_component/post/Post';
-import OptionButton from '@/app/(afterLogin)/_component/buttons/OptionButton';
 
 interface Props {
   className?: string;

@@ -82,3 +82,29 @@
   top: 15px;
   right: 15px;
 }
+
+/* PostPined */
+.postPinned {
+  margin-top: -6px;
+  margin-bottom: 6px;
+  padding-top: 2px;
+  display: flex;
+  align-items: center;
+}
+.pinned {
+  margin-right: 8px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  flex-basis: 40px;
+}
+.pinnedText {
+  padding-bottom: 2px;
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+  font-size: 13px;
+  font-weight: 700;
+  color: rgb(var(--link-rgb));
+  line-height: 16px;
+}

@@ -1,0 +1,75 @@
+.whoCanReply {
+  padding-top: 16px;
+  padding-bottom: 4px;
+  display: flex;
+  flex-direction: column;
+  width: 320px;
+  min-height: 30px;
+  max-height: 480px;
+}
+.description {
+  margin-bottom: 12px;
+  padding: 0 16px;
+  display: flex;
+  flex-direction: column;
+  word-break: keep-all;
+  word-wrap: break-word;
+}
+.title {
+  font-size: 15px;
+  font-weight: 700;
+  color: rgb(var(--foreground-rgb));
+  line-height: 20px;
+}
+.sub {
+  font-size: 15px;
+  font-weight: 400;
+  color: rgb(var(--link-rgb));
+  line-height: 20px;
+}
+.selector {
+  display: flex;
+  flex-direction: column;
+}
+.option {
+  padding: 12px 16px;
+  display: flex;
+  align-items: center;
+  width: 100%;
+  border-radius: 4px;
+  transition: 100ms background-color ease-in;
+  cursor: pointer;
+}
+.option:hover {
+  background: rgba(var(--button-hover-rgb), 0.1);
+}
+.option:active {
+  background: rgba(var(--button-hover-rgb), 0.05);
+  transition: none;
+}
+.icon {
+  margin-right: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  background: rgb(var(--primary-rgb));
+  border-radius: 9999px;
+}
+.scope {
+  flex-grow: 1;
+  font-size: 15px;
+  font-weight: 700;
+  color: rgb(var(--foreground-rgb));
+  line-height: 20px;
+}
+.checked {
+  margin-left: 20px;
+  display: flex;
+  align-self: center;
+  width: 20px;
+}
+.checked svg {
+  fill: rgb(var(--primary-rgb));
+}

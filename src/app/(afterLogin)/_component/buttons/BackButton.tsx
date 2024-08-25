@@ -12,6 +12,8 @@ interface Props {
   style?: CSSProperties;
   width?: number;
   prevPath?: string;
+  noBack?: boolean;
+  onClick?: () => void;
 }
 
 export default function BackButton({
@@ -19,25 +21,30 @@ export default function BackButton({
   style,
   width = 18,
   prevPath,
+  noBack,
+  onClick,
 }: Props) {
   const router = useRouter();
   const ctx = useContext(PathRecordContext);
 
-  const onClick = () => {
+  const onClickBack = () => {
     if (prevPath) {
       if (ctx.prevPath === ctx.path) {
         router.push(prevPath);
         return;
       }
     }
-    router.back();
+    if (typeof onClick === 'function') {
+      onClick();
+    }
+    if (!noBack) router.back();
   };
 
   return (
     <button
       className={cx(styles.btn, styles.backBtn, className)}
       style={style}
-      onClick={onClick}
+      onClick={onClickBack}
     >
       <LeftArrowSvg width={width} white />
     </button>

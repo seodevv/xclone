@@ -5,7 +5,7 @@ import LoadingSpinner from '@/app/(afterLogin)/_component/loading/LoadingSpinner
 import PageLoading from '@/app/(afterLogin)/_component/loading/PageLoading';
 import NoPost from '@/app/(afterLogin)/_component/post/NoPost';
 import Post from '@/app/(afterLogin)/_component/post/Post';
-import { ERROR_STATUS } from '@/app/(afterLogin)/error';
+import { ERROR_STATUS } from '@/app/_lib/error';
 
 interface Props {
   username: string;

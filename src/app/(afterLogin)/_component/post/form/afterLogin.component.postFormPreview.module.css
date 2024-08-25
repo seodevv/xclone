@@ -37,7 +37,7 @@
   height: 16px;
 }
 .previewEdit,
-.previewCancle,
+.previewCancel,
 .previewCarousel {
   margin: 8px 8px 0 0;
   position: absolute;
@@ -73,12 +73,12 @@
 .previewCarouselRight {
   right: 0;
 }
-.previewCancle:hover:enabled,
+.previewCancel:hover:enabled,
 .previewEdit:hover:enabled,
 .previewCarouselButton:hover:enabled {
   background: rgb(var(--foreground-rgb), 0.1);
 }
-.previewCancle:active:enabled,
+.previewCancel:active:enabled,
 .previewEdit:active:enabled,
 .previewCarouselButton:active:enabled {
   background: rgb(var(--foreground-rgb), 0.25);

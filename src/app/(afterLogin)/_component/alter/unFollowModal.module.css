@@ -68,15 +68,15 @@
 .unFollow:active:enabled {
   background: rgba(var(--r-background-start-rgb), 0.9);
 }
-.cancle {
+.cancel {
   margin-bottom: unset;
   background: rgb(var(--background-start-rgb));
   border: 1px solid rgb(var(--label-rgb));
   color: rgb(var(--foreground-rgb));
 }
-.cancle:hover:enabled {
+.cancel:hover:enabled {
   background: rgba(var(--button-hover-rgb), 0.1);
 }
-.cancle:active:enabled {
+.cancel:active:enabled {
   background: rgba(var(--button-hover-rgb), 0.2);
 }

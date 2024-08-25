@@ -1,12 +1,15 @@
 'use client';
 
-import PostSubMenu from '@/app/(afterLogin)/_component/_context/PostSubMenu';
-import RepostSubMenu from '@/app/(afterLogin)/_component/_context/RepostSubMenu';
+import HighlightModal from '@/app/(afterLogin)/_component/alter/HighlightModal';
+import RepostSubMenu from '@/app/(afterLogin)/_component/_subMenu/RepostSubMenu';
+import UnPinModal from '@/app/(afterLogin)/_component/alter/UnPinModal';
 import { AdvancedPost } from '@/model/Post';
 import { createContext, Dispatch, Reducer, useReducer } from 'react';
+import PostSubMenuSelector from '@/app/(afterLogin)/_component/_subMenu/PostSubMenuSelector';
+import WhoCanReply from '@/app/(afterLogin)/_component/_subMenu/WhoCanReply';
 
 interface State {
-  status: 'idle' | 'post' | 'repost';
+  status: 'idle' | 'post' | 'repost' | 'highlight' | 'unPin' | 'whoCanReply';
   flag: boolean;
   position: {
     x: number;
@@ -62,7 +65,10 @@ export default function SubMenuProvider({ children }: Props) {
     <SubMenuContext.Provider value={{ menu, dispatchMenu }}>
       {children}
       {menu.flag && menu.status === 'repost' && <RepostSubMenu />}
-      {menu.flag && menu.status === 'post' && <PostSubMenu />}
+      {menu.flag && menu.status === 'post' && <PostSubMenuSelector />}
+      {menu.flag && menu.status === 'highlight' && <HighlightModal />}
+      {menu.flag && menu.status === 'unPin' && <UnPinModal />}
+      {menu.flag && menu.status === 'whoCanReply' && <WhoCanReply />}
     </SubMenuContext.Provider>
   );
 }
