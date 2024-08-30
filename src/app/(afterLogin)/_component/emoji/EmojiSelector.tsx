@@ -9,6 +9,7 @@ import {
   Dispatch,
   MouseEventHandler,
   SetStateAction,
+  useCallback,
   useEffect,
   useRef,
   useState,
@@ -86,7 +87,7 @@ const EmojiSelector = ({
       }
     }
   };
-  const selectorClose = () => {
+  const selectorClose = useCallback(() => {
     setFadeOut(true);
     setTimeout(() => {
       setActive((prev) => ({ ...prev, flag: false }));
@@ -96,7 +97,7 @@ const EmojiSelector = ({
     if (typeof onFocus === 'function') {
       onFocus();
     }
-  };
+  }, [setFadeOut, setActive, onFocus]);
 
   useEffect(() => {
     const scrollListener = () => {

@@ -18,6 +18,7 @@ import TrendsHydrationBoundary from './_boundary/TrendsHydrationBoundary';
 import UnFollowProvider from './_provider/UnFollowProvider';
 import authOptions from '@/app/_lib/authOptions';
 import SubMenuProvider from '@/app/(afterLogin)/_provider/SubMenuProvider';
+import PopUpModal from '@/app/(afterLogin)/_component/_popup/PopUpModal';
 
 interface Props {
   children: ReactNode;
@@ -70,6 +71,7 @@ export default async function AfterLoginLayout({
                   <ModalController>{modal}</ModalController>
                   {settings}
                   {i}
+                  <PopUpModal />
                 </div>
               </SubMenuProvider>
             </UnFollowProvider>

@@ -1,0 +1,49 @@
+.absolute {
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+.relative {
+  position: relative;
+}
+.fixed {
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  z-index: 999;
+}
+.popup {
+  padding: 24px;
+  position: absolute;
+  z-index: 999;
+  display: flex;
+  flex-direction: column;
+  min-width: 260px;
+  max-width: 260px;
+  min-height: 30px;
+  max-height: 480px;
+  background: rgb(var(--background-start-rgb));
+  border-radius: 16px;
+  box-shadow: rgba(255, 255, 255, 0.2) 0px 0px 15px,
+    rgba(255, 255, 255, 0.15) 0px 0px 3px 1px;
+  overflow: hidden;
+}
+.popup.out {
+  visibility: hidden;
+  opacity: 0;
+}
+.title {
+  font-size: 23px;
+  font-weight: 500;
+  color: rgb(var(--font-theme-rgb));
+  line-height: 28px;
+}
+.description {
+  margin-top: 8px;
+  font-size: 15px;
+  font-weight: 400;
+  color: rgb(var(--link-rgb));
+  line-height: 20px;
+}

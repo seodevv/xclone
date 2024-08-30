@@ -5,8 +5,10 @@ import styles from './i.veirifedChoose.module.css';
 import cx from 'classnames';
 import FlexButton from '@/app/(beforeLogin)/_component/_button/FlexButton';
 import Link from 'next/link';
+import { useRouter } from 'next/navigation';
 
 export default function VerifiedChoose() {
+  const router = useRouter();
   const [check, setCheck] = useState<'individual' | 'organization'>(
     'individual'
   );
@@ -28,7 +30,13 @@ export default function VerifiedChoose() {
   ];
 
   const onClickType = (id: typeof check) => setCheck(id);
-  const onClickSubmit = () => {};
+  const onClickSubmit = () => {
+    if (check === 'individual') {
+      router.push('/i/premium_sign_up', { scroll: false });
+    } else if (check === 'organization') {
+      router.push('/i/verified-orgs-signup', { scroll: false });
+    }
+  };
 
   return (
     <div className={styles.verifiedChoose}>
@@ -61,6 +69,7 @@ export default function VerifiedChoose() {
         ))}
       </div>
       <FlexButton
+        theme="white"
         text="Subscribe"
         large
         style={{ margin: '32px 0 0 0' }}

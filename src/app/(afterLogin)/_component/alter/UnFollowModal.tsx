@@ -46,7 +46,7 @@ export default function UnFollowModal() {
   if (!modal.flag) return null;
 
   return (
-    <IBackground small onClick={onClickOutSide}>
+    <IBackground size="small" onClick={onClickOutSide}>
       <h1 className={styles.title}>Unfollow @{modal.targetId}?</h1>
       <div className={styles.desc}>
         <span>

@@ -15,7 +15,7 @@ export default function RedirectStatus({ params, referer }: Props) {
     if (!referer) {
       router.replace(`/${params.username}/status/${params.id}`);
     }
-  }, [referer, params.username, params.id]);
+  }, [router, referer, params.username, params.id]);
 
   return <></>;
 }

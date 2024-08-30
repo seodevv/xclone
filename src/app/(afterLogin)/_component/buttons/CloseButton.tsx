@@ -31,7 +31,6 @@ export default function CloseButton({
   const router = useRouter();
   const ctx = useContext(PathRecordContext);
   const onClickDefault = () => {
-    console.log(noBack);
     if (prevPath) {
       if (ctx.prevPath === ctx.path) {
         router.push(prevPath);

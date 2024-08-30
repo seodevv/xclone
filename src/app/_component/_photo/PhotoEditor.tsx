@@ -2,6 +2,7 @@ import styles from './photoEditor.module.css';
 import utils from '@/app/utility.module.css';
 import {
   MouseEventHandler,
+  useCallback,
   useEffect,
   useLayoutEffect,
   useRef,
@@ -93,25 +94,28 @@ export default function PhotoEditor({
     }
   };
 
-  const sliderHandler = (clientX: number) => {
-    if (!sliderRef.current) return;
-    const { offsetWidth } = sliderRef.current;
-    const { x } = sliderRef.current.getBoundingClientRect();
+  const sliderHandler = useCallback(
+    (clientX: number) => {
+      if (!sliderRef.current) return;
+      const { offsetWidth } = sliderRef.current;
+      const { x } = sliderRef.current.getBoundingClientRect();
 
-    const relativeX = clientX - x;
-    const per = relativeX / offsetWidth;
-    let grow = per;
-    let zoom = (control.zoom.max - control.zoom.min) * per + 1;
-    if (per < 0) {
-      grow = 0;
-      zoom = control.zoom.min;
-    } else if (per > 1) {
-      grow = 1;
-      zoom = control.zoom.max;
-    }
-    setZoom(zoom);
-    setControl((prev) => ({ ...prev, grow }));
-  };
+      const relativeX = clientX - x;
+      const per = relativeX / offsetWidth;
+      let grow = per;
+      let zoom = (control.zoom.max - control.zoom.min) * per + 1;
+      if (per < 0) {
+        grow = 0;
+        zoom = control.zoom.min;
+      } else if (per > 1) {
+        grow = 1;
+        zoom = control.zoom.max;
+      }
+      setZoom(zoom);
+      setControl((prev) => ({ ...prev, grow }));
+    },
+    [control.zoom, setZoom, setControl]
+  );
 
   useEffect(() => {
     const mouseUp = () => {

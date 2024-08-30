@@ -17,7 +17,7 @@ import BadgeButton from '@/app/(afterLogin)/_component/buttons/BadgeButton';
 import { Mode } from '@/app/(afterLogin)/_component/post/Post';
 import { usePathname } from 'next/navigation';
 import PostQuote from '@/app/(afterLogin)/_component/post/_quote/PostQuote';
-import OptionButton from '@/app/(afterLogin)/_component/buttons/OptionButton';
+import NoQuote from '@/app/(afterLogin)/_component/post/_quote/NoQuote';
 
 interface Props {
   mode?: Mode;
@@ -75,15 +75,18 @@ export default function PostBody({
           images={post.images}
         />
       )}
-      {post.Original && post.quote && (
-        <PostQuote
-          mode={
-            post.images.length === 0 || mode === 'single' ? 'long' : 'short'
-          }
-          post={post.Original}
-          noImage={isPhoto}
-        />
-      )}
+      {post.quote &&
+        (post.Original ? (
+          <PostQuote
+            mode={
+              post.images.length === 0 || mode === 'single' ? 'long' : 'short'
+            }
+            post={post.Original}
+            noImage={isPhoto}
+          />
+        ) : (
+          <NoQuote />
+        ))}
       {mode === 'single' && (
         <>
           <div className={styles.postDateView}>
@@ -101,7 +104,13 @@ export default function PostBody({
           )}
         </>
       )}
-      {!noReact && <ActionButtons mode={mode} post={post} width={22.5} />}
+      {!noReact && (
+        <ActionButtons
+          mode={mode}
+          post={post}
+          width={mode === 'single' ? 22.5 : 18.75}
+        />
+      )}
     </div>
   );
 }

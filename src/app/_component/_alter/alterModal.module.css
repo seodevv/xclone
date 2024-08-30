@@ -3,6 +3,7 @@
   position: fixed;
   left: 50%;
   bottom: 0;
+  z-index: 9999;
   transform: translateX(-50%);
   animation-name: fade-in;
   animation-duration: 300ms;

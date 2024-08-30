@@ -10,10 +10,10 @@
   background: rgba(0, 0, 0, 0.5);
   border: 1px solid rgb(0, 0, 0, 0.5);
   font-size: 15px;
-  font-weight: bold;
+  font-weight: 700;
   color: rgb(255, 255, 255);
   cursor: pointer;
-  transition: 0.15s background-color ease-in;
+  transition: 150ms background-color ease-in;
 }
 .btn:hover:enabled {
   background: rgba(var(--button-hover-rgb), 0.1);
@@ -36,31 +36,51 @@
   font-weight: inherit;
   color: inherit;
 }
-.temporaryBtn {
+.theme {
+  background: rgb(var(--r-background-start-rgb));
+  border: 1px solid rgb(var(--label-rgb));
+}
+.theme:hover:enabled {
+  background: rgba(var(--r-background-start-rgb), 0.9);
+}
+.theme:active:enabled {
+  background: rgba(var(--r-background-start-rgb), 0.8);
+}
+.reverse {
   background: rgb(var(--background-start-rgb));
   border: 1px solid rgb(var(--label-rgb));
 }
-.primaryBtn {
+.reverse:hover:enabled {
+  background: rgba(var(--background-start-rgb), 0.9);
+}
+.reverse:active:enabled {
+  background: rgba(var(--background-start-rgb), 0.8);
+}
+.primary {
   background: rgb(var(--primary-button-rgb));
 }
-.primaryBtn:hover:enabled {
+.primary:hover:enabled {
   background: rgba(var(--primary-button-rgb), 0.9);
 }
-.primaryBtn:active:enabled {
+.primary:active:enabled {
   background: rgba(var(--primary-button-rgb), 0.75);
-  transition: none;
 }
-.primaryTransBtn {
+.primary_reverse {
   background: transparent;
   border: 1px solid transparent;
   color: rgb(var(--primary-rgb));
   font-weight: 600;
 }
-.primaryTransBtn:hover:enabled {
+.primary_reverse:hover:enabled {
   background: rgba(var(--primary-rgb), 0.1);
 }
-.primaryTransBtn:active:enabled {
+.primary_reverse:active:enabled {
   background: rgba(var(--primary-rgb), 0.25);
+}
+.large {
+  padding: 0 32px;
+  min-width: 52px;
+  min-height: 52px;
 }
 
 /* BackButton */

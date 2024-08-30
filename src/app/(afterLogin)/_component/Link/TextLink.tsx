@@ -10,14 +10,16 @@ interface Props {
   style?: CSSProperties;
   text: string;
   href: string;
-  type?: 'temporary' | 'primary';
+  theme?: 'theme' | 'reverse' | 'primary' | 'primary_reverse';
+  size?: 'small' | 'medium' | 'large';
 }
 
 export default function TextLink({
   className,
   style,
   text,
-  type = 'primary',
+  theme = 'theme',
+  size = 'medium',
   href,
 }: Props) {
   return (
@@ -25,8 +27,8 @@ export default function TextLink({
       className={cx(
         styles.link,
         styles.textLink,
-        type === 'temporary' && styles.temporaryLink,
-        type === 'primary' && styles.primaryLink,
+        styles[theme],
+        styles[size],
         className
       )}
       style={style}

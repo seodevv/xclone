@@ -17,7 +17,7 @@ export default function ComposePostHeader() {
         </div>
         <div className={utils.flexGrow_1}></div>
         <div className={styles.draft}>
-          <TextButton text="Drafts" type="primary_trans" />
+          <TextButton theme="primary_reverse" text="Drafts" />
         </div>
       </div>
     </div>

@@ -33,7 +33,7 @@ export default function SearchBody({ searchParams }: Props) {
     if (pLoading || uLoading) {
       window.scrollTo(0, 0);
     }
-  }, [searchParams.f]);
+  }, [searchParams.f, pLoading, uLoading]);
 
   if (pLoading || uLoading) {
     return <LoadingSpinner />;

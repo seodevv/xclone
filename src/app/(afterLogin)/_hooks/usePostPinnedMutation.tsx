@@ -49,11 +49,13 @@ const usePostPinnedMutation = () =>
         return key.filter === 'all';
       };
       queryKeys.forEach((queryKey) => {
+        // ['posts', 'list', username, {filter: 'all'}]
         if (queryKey[2] === post.User.id && isKey(queryKey[3])) {
           const queryData =
             queryClient.getQueryData<InfiniteData<TData, number>>(queryKey);
           if (!queryData) return;
 
+          // add pin
           if (method === 'post') {
             const shallow = { ...queryData };
             queryData.pages.forEach((page, i) =>
@@ -74,13 +76,20 @@ const usePostPinnedMutation = () =>
             );
             queryClient.setQueryData(queryKey, shallow);
             context.push({ queryKey, queryData });
-          } else if (method === 'delete') {
+          }
+          // delete pin
+          else if (method === 'delete') {
             const flatten = queryData.pages
               .map((page) => page.data.map((p) => p))
               .flat();
-            const findPost = flatten.find((p) => p.postId === post.postId);
-            if (!findPost) return;
-            findPost.pinned = false;
+            const findPostIndex = flatten.findIndex(
+              (p) => p.postId === post.postId
+            );
+            if (findPostIndex === -1) return;
+            flatten[findPostIndex] = {
+              ...flatten[findPostIndex],
+              pinned: false,
+            };
 
             flatten.sort((a, b) => {
               if (a.pinned && !b.pinned) return -1;
@@ -147,10 +156,9 @@ const usePostPinnedMutation = () =>
 
       return context;
     },
-    onSuccess: (response, { queryClient, post }) => {
-      queryClient.invalidateQueries({
-        queryKey: ['posts', 'list', post.User.id, { filter: 'all' }],
-        refetchType: 'none',
+    onSuccess: (response, { queryClient, post }, context) => {
+      context.forEach(({ queryKey }) => {
+        queryClient.invalidateQueries({ queryKey, refetchType: 'none' });
       });
     },
     onError: (error, { queryClient }, context) => {

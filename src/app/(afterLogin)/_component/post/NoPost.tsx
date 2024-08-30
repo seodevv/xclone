@@ -12,10 +12,8 @@ export default function NoPost({ title, message, children }: Props) {
       <div className={styles.title}>
         <span>{title}</span>
       </div>
-      <div className={styles.message}>
-        {message && <span>{message}</span>}
-        {children}
-      </div>
+      <div className={styles.message}>{message && <span>{message}</span>}</div>
+      {children}
     </div>
   );
 }

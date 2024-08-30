@@ -7,7 +7,7 @@ export default function LikePrivateMessage() {
   return (
     <div className={styles.meesage}>
       <div className={styles.lock}>
-        <LockSvg width={18.75} white />
+        <LockSvg width={18.75} white active />
       </div>
       <div className={styles.text}>{text}</div>
     </div>

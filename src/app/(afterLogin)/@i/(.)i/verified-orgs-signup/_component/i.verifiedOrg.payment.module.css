@@ -1,0 +1,94 @@
+.payment {
+  display: flex;
+  flex-direction: column;
+}
+.period {
+  display: flex;
+  flex-direction: row;
+}
+.selector {
+  padding: 16px;
+  display: flex;
+  justify-content: space-between;
+  flex-grow: 1;
+  gap: 16px;
+  max-width: 50%;
+  background: rgb(var(--background-start-rgb));
+  border: 2px solid transparent;
+  border-radius: 12px;
+  box-shadow: rgba(255, 255, 255, 0.2) 0px 0px 15px,
+    rgba(255, 255, 255, 0.15) 0px 0px 3px 1px;
+  transition: 200ms background-color ease;
+  cursor: pointer;
+  overflow: hidden;
+}
+.selector:first-child {
+  margin-right: 20px;
+}
+.selector.select {
+  border-color: rgb(var(--primary-rgb));
+}
+.selector:hover {
+  background: rgb(22, 24, 28);
+}
+.selector:active {
+  background: rgba(18, 21, 23, 0.7);
+}
+.option {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+.sale {
+  margin-bottom: 4px;
+  padding: 0 4px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  align-self: flex-start;
+  justify-content: center;
+  height: 20px;
+  background: rgb(0, 37, 26);
+  border-radius: 9999px;
+  font-size: 11px;
+  font-weight: 700;
+  color: rgb(194, 241, 220);
+  line-height: 12px;
+}
+.per {
+  font-size: 17px;
+  font-weight: 700;
+  color: rgb(var(--font-theme-rgb));
+  line-height: 20px;
+}
+.sub {
+  margin-top: 2px;
+  font-size: 14px;
+  font-weight: 400;
+  color: rgb(var(--link-rgb));
+  line-height: 16px;
+}
+.bill {
+  margin-top: 16px;
+  font-size: 11px;
+  font-weight: 400;
+  color: rgb(var(--link-rgb));
+  line-height: 12px;
+}
+.link {
+  margin-left: 2px;
+  color: rgb(var(--primary-rgb));
+}
+.link:hover {
+  text-decoration: underline;
+}
+.information {
+  font-size: 11px;
+  font-weight: 400;
+  color: rgb(var(--link-rgb));
+  line-height: 12px;
+}
+.service {
+  color: rgb(var(--font-theme-rgb));
+  text-decoration: underline;
+}

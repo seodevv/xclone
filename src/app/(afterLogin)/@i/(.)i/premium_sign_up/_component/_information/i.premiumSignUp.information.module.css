@@ -1,0 +1,20 @@
+.information {
+  margin-top: 72px;
+  padding-bottom: 300px;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  max-width: 980px;
+}
+.title {
+  font-size: 26px;
+  font-weight: 700;
+  color: rgb(var(--foreground-rgb));
+  line-height: 32px;
+}
+.table {
+  margin-top: 32px;
+  display: flex;
+  flex-direction: column;
+}

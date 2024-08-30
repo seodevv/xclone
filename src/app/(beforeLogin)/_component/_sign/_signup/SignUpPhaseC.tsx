@@ -10,6 +10,7 @@ import DEFAULT_PROFILE from '/public/default_profile.png';
 import {
   ChangeEventHandler,
   MouseEventHandler,
+  useCallback,
   useEffect,
   useRef,
   useState,
@@ -40,22 +41,25 @@ export default function SignUpPhaseC() {
     settingFile(files[0]);
   };
 
-  const settingFile = async (file: File) => {
-    setIsUpload(false);
-    if (file) {
-      const dataUrl = await getFileDataURL(file);
-      set({
-        type: 'profile',
-        payload: { value: { file, link: dataUrl }, disabled: false },
-      });
-      setEdit(true);
-    } else {
-      set({
-        type: 'profile',
-        payload: { value: { file: null, link: '' }, disabled: true },
-      });
-    }
-  };
+  const settingFile = useCallback(
+    async (file: File) => {
+      setIsUpload(false);
+      if (file) {
+        const dataUrl = await getFileDataURL(file);
+        set({
+          type: 'profile',
+          payload: { value: { file, link: dataUrl }, disabled: false },
+        });
+        setEdit(true);
+      } else {
+        set({
+          type: 'profile',
+          payload: { value: { file: null, link: '' }, disabled: true },
+        });
+      }
+    },
+    [setIsUpload, set, setEdit]
+  );
 
   useEffect(() => {
     const focusListener = () => {

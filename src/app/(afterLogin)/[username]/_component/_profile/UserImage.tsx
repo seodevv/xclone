@@ -31,9 +31,9 @@ export default function UserImage({ session, user }: Props) {
         <div className={styles.userAction}>
           {isMyProfile ? (
             <TextLink
+              theme="reverse"
               text="Edit profile"
               href="/settings/profile"
-              type="temporary"
             />
           ) : (
             <>

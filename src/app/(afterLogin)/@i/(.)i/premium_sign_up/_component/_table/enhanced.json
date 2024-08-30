@@ -1,0 +1,81 @@
+{
+  "index": [
+    {
+      "id": "head",
+      "value": { "type": "text", "value": "Enhanced Experience" }
+    },
+    {
+      "id": "grok",
+      "value": {
+        "type": "text",
+        "value": "Grok 2 AI Assistant",
+        "inform": "Grok 2 is a leading AI assistant built into X that can help you answer questions, write code, do research, and generate images."
+      }
+    },
+    { "id": "ads", "value": { "type": "text", "value": "Ads" } },
+    { "id": "reply", "value": { "type": "text", "value": "Reply boost" } },
+    { "id": "edit", "value": { "type": "text", "value": "Edit post" } },
+    {
+      "id": "longer",
+      "value": { "type": "text", "value": "Longer posts" }
+    },
+    { "id": "undo", "value": { "type": "text", "value": "Undo post" } },
+    { "id": "top", "value": { "type": "text", "value": "Top Articles" } },
+    {
+      "id": "background",
+      "value": { "type": "text", "value": "Background video playback" }
+    },
+    {
+      "id": "download",
+      "value": { "type": "text", "value": "download videos" }
+    }
+  ],
+  "basic": {
+    "head": { "type": "text", "value": "Basic" },
+    "grok": { "type": "empty" },
+    "ads": {
+      "type": "text",
+      "value": "No reduction",
+      "inform": "See the full amount of ads in the For You and Following timelines."
+    },
+    "reply": { "type": "text", "value": "Smallest" },
+    "edit": { "type": "check" },
+    "longer": { "type": "check" },
+    "undo": { "type": "check" },
+    "top": { "type": "check" },
+    "background": { "type": "check" },
+    "download": { "type": "check" }
+  },
+  "premium": {
+    "head": { "type": "text", "value": "Premium" },
+    "grok": { "type": "check" },
+    "ads": {
+      "type": "text",
+      "value": "Half in For You & Following",
+      "inform": "See the full amount of ads in the For You and Following timelines."
+    },
+    "reply": { "type": "text", "value": "Larger" },
+    "edit": { "type": "check" },
+    "longer": { "type": "check" },
+    "undo": { "type": "check" },
+    "top": { "type": "check" },
+    "background": { "type": "check" },
+    "download": { "type": "check" }
+  },
+  "premiumPlus": {
+    "head": { "type": "text", "value": "Premium+" },
+    "grok": { "type": "check" },
+    "ads": {
+      "type": "text",
+      "value": "Fully ad-free",
+      "inform": "See the full amount of ads in the For You and Following timelines."
+    },
+    "reply": { "type": "text", "value": "Largest" },
+    "edit": { "type": "check" },
+    "longer": { "type": "check" },
+    "undo": { "type": "check" },
+    "top": { "type": "check" },
+    "background": { "type": "check" },
+    "download": { "type": "check" }
+  }
+}

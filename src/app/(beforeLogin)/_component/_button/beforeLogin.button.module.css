@@ -27,7 +27,7 @@
   transition: none;
 }
 .theme {
-  background: rgb(var(--foreground-rgb));
+  background: rgb(var(--r-background-start-rgb));
   color: rgb(var(--background-start-rgb));
 }
 .theme:hover:enabled {
@@ -36,10 +36,42 @@
 .reverse {
   background: rgb(var(--background-start-rgb));
   border: 1px solid rgb(var(--label-rgb));
-  color: rgb(var(--foreground-rgb));
+  color: rgb(var(--r-backgrond-start-rgb));
 }
 .reverse:hover:enabled {
   background: rgba(var(--r-background-start-rgb), 0.1);
+}
+.white {
+  background: rgba(255, 255, 255, 1);
+}
+.white:hover:enabled {
+  background: rgba(255, 255, 255, 0.9);
+}
+.white:active:enabled {
+  background: rgba(255, 255, 255, 0.8);
+  opacity: 1;
+}
+.red {
+  background: rgb(var(--error-rgb));
+  color: #fff;
+}
+.red:hover:enabled {
+  background: rgba(var(--error-rgb), 0.9);
+}
+.red:active:enabled {
+  background: rgba(var(--error-rgb), 0.8);
+  opacity: 1;
+}
+.primary {
+  background: rgb(var(--primary-rgb));
+  color: #fff;
+}
+.primary:hover:enabled {
+  background: rgba(var(--primary-rgb), 0.9);
+}
+.primary:active:enabled {
+  background: rgba(var(--primary-rgb), 0.8);
+  opacity: 1;
 }
 .btnText {
   font-size: 15px;

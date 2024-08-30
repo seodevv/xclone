@@ -27,6 +27,8 @@
 
   --private-rgb: 2, 17, 61;
 
+  --font-theme-rgb: var(--font-theme-rgb);
+
   --scroll-thumb: 62, 65, 68;
   --scroll-background: 22, 24, 28;
 

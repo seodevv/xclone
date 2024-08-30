@@ -1,0 +1,148 @@
+.footer {
+  padding: 16px;
+  position: fixed;
+  bottom: 0;
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  min-height: 100px;
+  background: rgba(var(--background-start-rgb), 0.95);
+  border-top: 1px solid rgb(var(--search-rgb));
+}
+.header {
+  padding: 0 16px;
+  display: none;
+  align-items: center;
+  width: 100%;
+  height: 53px;
+  background: rgba(var(--background-start-rgb), 0.65);
+  backdrop-filter: blur(12px);
+}
+.close {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: center;
+  min-width: 56px;
+}
+.grow {
+  flex-grow: 1;
+  height: 100%;
+}
+.inners {
+  display: flex;
+  flex-direction: row;
+}
+.inner {
+  display: flex;
+  flex-direction: column;
+  min-width: 225px;
+  max-width: 475px;
+}
+.inner:first-child {
+  margin-right: 16px;
+}
+.kind {
+  font-size: 20px;
+  font-weight: 400;
+  color: rgb(var(--foreground-rgb));
+  line-height: 24px;
+}
+.order {
+  display: flex;
+  flex-direction: column;
+}
+.sheet {
+  margin-top: 16px;
+  display: flex;
+  align-items: baseline;
+}
+.price {
+  font-size: 36px;
+  font-weight: 700;
+  color: rgb(var(--foreground-rgb));
+  line-height: 36px;
+}
+.per {
+  margin-left: 4px;
+  font-size: 15px;
+  font-weight: 400;
+  color: rgb(var(--foreground-rgb));
+  line-height: 20px;
+}
+.billed {
+  margin-top: 8px;
+  display: flex;
+  align-items: center;
+}
+.annually {
+  font-size: 15px;
+  font-weight: 400;
+  color: rgb(var(--foreground-rgb));
+  line-height: 20px;
+}
+.information {
+  margin: auto;
+  padding: 8px;
+  position: relative;
+  display: flex;
+  width: 100%;
+  border: 1px solid rgb(89, 93, 98);
+  border-radius: 8px;
+  font-size: 13px;
+  font-weight: 400;
+  color: rgb(182, 185, 188);
+  line-height: 16px;
+  word-break: break-all;
+  word-wrap: break-word;
+}
+.link {
+  margin-left: 4px;
+  color: rgb(var(--primary-rgb));
+  cursor: pointer;
+}
+.link:hover {
+  text-decoration: underline;
+}
+
+@media screen and (max-width: 704px) {
+  .background {
+    position: fixed;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(91, 112, 131, 0.4);
+  }
+  .header {
+    display: flex;
+  }
+  .footer {
+    padding: 0 0 48px 0;
+    position: relative;
+    flex-direction: column;
+    align-items: center;
+    border-radius: 32px;
+    max-width: 600px;
+    overflow: hidden;
+  }
+  .inners {
+    margin: 32px;
+    max-width: 400px;
+    display: flex;
+    flex-direction: column;
+  }
+}
+
+@media screen and (max-width: 600px) {
+  .background {
+    align-items: flex-end;
+  }
+  .footer {
+    border-bottom-left-radius: 0;
+    border-bottom-right-radius: 0;
+  }
+}

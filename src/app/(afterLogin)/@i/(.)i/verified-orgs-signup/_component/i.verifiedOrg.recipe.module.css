@@ -1,0 +1,62 @@
+.background {
+  flex-grow: 1;
+}
+.recipe {
+  margin-bottom: 16px;
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+  background: rgb(22, 24, 28);
+  border-radius: 16px;
+}
+.access {
+  margin-bottom: 8px;
+  font-size: 23px;
+  font-weight: 700;
+  color: rgb(var(--link-rgb));
+  line-height: 28px;
+}
+.title {
+  font-size: 34px;
+  font-weight: 700;
+  color: rgb(var(--font-theme-rgb));
+  line-height: 40px;
+}
+.description {
+  margin: 8px 0;
+  font-size: 15px;
+  font-weight: 500;
+  color: rgb(var(--font-theme-rgb));
+  line-height: 20px;
+}
+.list {
+  margin-bottom: 8px;
+  display: flex;
+  align-items: center;
+  font-size: 15px;
+  font-weight: 500;
+  color: rgb(var(--font-theme-rgb));
+  line-height: 20px;
+}
+.list > span:last-child {
+  margin-left: 8px;
+}
+.plus {
+  font-size: 15px;
+  font-weight: 500;
+  color: rgb(var(--font-theme-rgb));
+  line-height: 20px;
+}
+.full {
+}
+.highlight {
+  font-weight: 700;
+  text-decoration: underline;
+}
+.link {
+  margin-left: 4px;
+  color: rgb(var(--primary-rgb));
+}
+.link:hover {
+  text-decoration: underline;
+}

@@ -667,6 +667,22 @@
     opacity: 1;
   }
 }
+.fadeOut {
+  animation-name: fade-out;
+  animation-duration: 300ms;
+  animation-timing-function: ease-out;
+  animation-iteration-count: 1;
+}
+@keyframes fade-out {
+  from {
+    visibility: visible;
+    opacity: 1;
+  }
+  to {
+    visibility: hidden;
+    opacity: 0;
+  }
+}
 .slide_left_in {
   animation-name: slide-left-in;
   animation-duration: 300ms;

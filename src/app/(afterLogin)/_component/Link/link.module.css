@@ -31,17 +31,49 @@
   font-weight: bold;
   color: rgb(var(--foreground-rgb));
 }
-.temporaryLink {
+.theme {
+  background: rgb(var(--r-background-start-rgb));
+  border: 1px solid rgb(var(--label-rgb));
+}
+.theme:hover {
+  background: rgba(var(--r-background-start-rgb), 0.9);
+}
+.theme:active {
+  background: rgba(var(--r-background-start-rgb), 0.8);
+}
+.reverse {
   background: rgb(var(--background-start-rgb));
   border: 1px solid rgb(var(--label-rgb));
 }
-.primaryLink {
+.reverse:hover {
+  background: rgba(var(--background-start-rgb), 0.9);
+}
+.reverse:active {
+  background: rgba(var(--background-start-rgb), 0.8);
+}
+.primary {
   background: rgb(var(--primary-button-rgb));
 }
-.primaryLink:hover {
+.primary:hover {
   background: rgba(var(--primary-button-rgb), 0.9);
 }
-.primaryLink:active {
+.primary:active {
   background: rgba(var(--primary-button-rgb), 0.75);
-  transition: none;
+}
+.primary_reverse {
+  background: transparent;
+  border: 1px solid transparent;
+  color: rgb(var(--primary-rgb));
+  font-weight: 600;
+}
+.primary_reverse:hover {
+  background: rgba(var(--primary-rgb), 0.1);
+}
+.primary_reverse:active {
+  background: rgba(var(--primary-rgb), 0.25);
+}
+.large {
+  padding: 0 32px;
+  min-width: 52px;
+  min-height: 52px;
 }

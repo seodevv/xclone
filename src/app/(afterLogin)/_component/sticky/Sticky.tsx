@@ -1,7 +1,7 @@
 'use client';
 
 import styles from './sticky.module.css';
-import { ReactNode, useEffect, useRef, useState } from 'react';
+import { ReactNode, useCallback, useEffect, useRef, useState } from 'react';
 import useViewport from '../../_hooks/useViewport';
 import { usePathname } from 'next/navigation';
 import cx from 'classnames';
@@ -17,14 +17,17 @@ export default function Sticky({ children }: Props) {
   const ref = useRef<HTMLDivElement>(null);
   const lastScrollTop = useRef(0);
 
-  const calculateSticky = (init: number) => {
-    const offsetHeight = ref.current ? ref.current.offsetHeight : -(init * 2);
-    return height - offsetHeight - init > 0
-      ? init
-      : height - offsetHeight - init;
-  };
+  const calculateSticky = useCallback(
+    (init: number) => {
+      const offsetHeight = ref.current ? ref.current.offsetHeight : -(init * 2);
+      return height - offsetHeight - init > 0
+        ? init
+        : height - offsetHeight - init;
+    },
+    [height]
+  );
 
-  const scrollListener = () => {
+  const scrollListener = useCallback(() => {
     const init = ['/explore', '/search'].includes(pathname) ? 0 : 60;
     const scrollTop = window.scrollY;
     const diff = lastScrollTop.current - scrollTop;
@@ -45,7 +48,7 @@ export default function Sticky({ children }: Props) {
       });
     }
     lastScrollTop.current = scrollTop;
-  };
+  }, [pathname, setTop, calculateSticky]);
 
   useEffect(() => {
     scrollListener();

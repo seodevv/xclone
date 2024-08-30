@@ -8,7 +8,9 @@ interface Props {
   className?: string;
   style?: CSSProperties;
   text: string;
-  type?: 'temporary' | 'primary' | 'primary_trans';
+  theme?: 'theme' | 'reverse' | 'primary' | 'primary_reverse';
+  size?: 'small' | 'medium' | 'large';
+  disabled?: boolean;
   onClick?: MouseEventHandler<HTMLButtonElement>;
 }
 
@@ -16,7 +18,9 @@ export default function TextButton({
   className,
   style,
   text,
-  type = 'primary',
+  theme = 'primary',
+  size = 'medium',
+  disabled,
   onClick,
 }: Props) {
   return (
@@ -24,13 +28,13 @@ export default function TextButton({
       className={cx(
         styles.btn,
         styles.textBtn,
-        type === 'temporary' && styles.temporaryBtn,
-        type === 'primary' && styles.primaryBtn,
-        type === 'primary_trans' && styles.primaryTransBtn,
+        styles[theme],
+        styles[size],
         className
       )}
       style={style}
       onClick={onClick}
+      disabled={disabled}
     >
       <span>{text}</span>
     </button>

@@ -1,0 +1,43 @@
+{
+  "index": [
+    { "id": "head", "value": { "type": "text", "value": "Customization" } },
+    {
+      "id": "highlights",
+      "value": {
+        "type": "text",
+        "value": "Highlights tab",
+        "inform": "Highlight your best posts on your profile in a dedicated tab."
+      }
+    },
+    {
+      "id": "bookmark",
+      "value": { "type": "text", "value": "Bookmark folders" }
+    },
+    { "id": "icons", "value": { "type": "text", "value": "App icons" } },
+    {
+      "id": "customize",
+      "value": { "type": "text", "value": "Customize navigation" }
+    }
+  ],
+  "basic": {
+    "head": { "type": "text", "value": "Basic" },
+    "highlights": { "type": "check" },
+    "bookmark": { "type": "check" },
+    "icons": { "type": "check" },
+    "customize": { "type": "check" }
+  },
+  "premium": {
+    "head": { "type": "text", "value": "Basic" },
+    "highlights": { "type": "check" },
+    "bookmark": { "type": "check" },
+    "icons": { "type": "check" },
+    "customize": { "type": "check" }
+  },
+  "premiumPlus": {
+    "head": { "type": "text", "value": "Basic" },
+    "highlights": { "type": "check" },
+    "bookmark": { "type": "check" },
+    "icons": { "type": "check" },
+    "customize": { "type": "check" }
+  }
+}

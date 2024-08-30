@@ -44,7 +44,7 @@ export default function NotFound(props: Props) {
         {isButton(props) ? (
           <TextButton text="search" onClick={props.onClick} />
         ) : (
-          <TextLink text="search" href={props.href} />
+          <TextLink theme="primary" text="search" href={props.href} />
         )}
       </div>
     </section>

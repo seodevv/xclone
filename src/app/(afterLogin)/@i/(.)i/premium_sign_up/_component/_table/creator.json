@@ -1,0 +1,87 @@
+{
+  "index": [
+    { "id": "head", "value": { "type": "text", "value": "Creator Hub" } },
+    {
+      "id": "write",
+      "value": {
+        "type": "text",
+        "value": "Write Articles",
+        "inform": "Write and publish rich-text Articles directly on X (Web only)"
+      }
+    },
+    {
+      "id": "get",
+      "value": {
+        "type": "text",
+        "value": "Get paid to post",
+        "inform": "Get a share of the revenue generated from verified accounts’ organic impressions of ads displayed in replies to content you post on X."
+      }
+    },
+    {
+      "id": "creator",
+      "value": {
+        "type": "text",
+        "value": "Creator Subscriptions",
+        "inform": "Get paid a share of the revenue X earns from your most engaged followers with monthly subscriptions."
+      }
+    },
+    {
+      "id": "xpro",
+      "value": {
+        "type": "text",
+        "value": "X Pro",
+        "inform": "A powerful, real-time tool for people who live on X. Monitor multiple timelines on a single screen (web only)"
+      }
+    },
+    {
+      "id": "media",
+      "value": {
+        "type": "text",
+        "value": "Media Studio",
+        "inform": "Manage, measure and monetize your media on X (web only)"
+      }
+    },
+    {
+      "id": "analytics",
+      "value": {
+        "type": "text",
+        "value": "Analytics",
+        "inform": "Analyze your account metrics to understand how your account is performing"
+      }
+    },
+    {
+      "id": "post",
+      "value": { "type": "text", "value": "Post longer videos" }
+    }
+  ],
+  "basic": {
+    "head": { "type": "text", "value": "Basic" },
+    "write": { "type": "empty" },
+    "get": { "type": "empty" },
+    "creator": { "type": "empty" },
+    "xpro": { "type": "empty" },
+    "media": { "type": "empty" },
+    "analytics": { "type": "empty" },
+    "post": { "type": "check" }
+  },
+  "premium": {
+    "head": { "type": "text", "value": "Premium" },
+    "write": { "type": "empty" },
+    "get": { "type": "check" },
+    "creator": { "type": "check" },
+    "xpro": { "type": "check" },
+    "media": { "type": "check" },
+    "analytics": { "type": "check" },
+    "post": { "type": "check" }
+  },
+  "premiumPlus": {
+    "head": { "type": "text", "value": "Premium+" },
+    "write": { "type": "check" },
+    "get": { "type": "check" },
+    "creator": { "type": "check" },
+    "xpro": { "type": "check" },
+    "media": { "type": "check" },
+    "analytics": { "type": "check" },
+    "post": { "type": "check" }
+  }
+}

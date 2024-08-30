@@ -37,6 +37,9 @@ export default function PostSubMenuSession({ width = 18.75 }: Props) {
           type="div"
           title="Delete"
           svg={<DeleteSvg width={width} />}
+          onClick={() =>
+            dispatchMenu({ type: 'set', payload: { status: 'delete' } })
+          }
         />
         <SubMenu
           type="div"
@@ -87,7 +90,9 @@ export default function PostSubMenuSession({ width = 18.75 }: Props) {
           type="div"
           title="Embed post"
           svg={<EmbedSvg width={width} />}
-          onClick={() => alterMessage('This feature is in preparation.')}
+          onClick={() =>
+            alterMessage('This feature is in preparation.', 'warning')
+          }
         />
         <SubMenu
           type="div"

@@ -17,7 +17,7 @@ export default function NoPosts() {
             className={styles.linkBtn}
             href="/i/connect_people"
             text="Let`s go"
-            type="primary"
+            theme="primary"
             style={{
               paddingLeft: 32,
               paddingRight: 32,

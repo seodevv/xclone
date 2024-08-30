@@ -1,0 +1,21 @@
+.noQuote {
+  margin-top: 12px;
+  display: flex;
+  flex-grow: 1;
+}
+.inner {
+  padding: 12px 4px;
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+  justify-content: center;
+  background: rgb(22, 24, 28);
+  border-radius: 16px;
+}
+.unavailable {
+  margin: 0 12px;
+  font-size: 15px;
+  font-weight: 400;
+  color: rgb(var(--link-rgb));
+  line-height: 20px;
+}

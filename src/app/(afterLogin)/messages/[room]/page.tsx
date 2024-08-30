@@ -41,7 +41,7 @@ export default function RoomPage() {
         </div>
       </div>
       <Link href={user.nickname} className={style.userInfo}>
-        <img src={user.image} alt={user.id} />
+        {/* <img src={user.image} alt={user.id} /> */}
         <div>
           <b>{user.nickname}</b>
         </div>

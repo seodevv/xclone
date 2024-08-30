@@ -8,7 +8,7 @@ interface Props {
   className?: string;
   style?: CSSProperties;
   type?: 'button' | 'submit' | 'reset';
-  theme?: 'theme' | 'reverse';
+  theme?: 'theme' | 'reverse' | 'white' | 'red' | 'primary';
   text: string;
   onClick?: MouseEventHandler<HTMLButtonElement>;
   isLoading?: boolean;

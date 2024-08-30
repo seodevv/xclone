@@ -7,9 +7,17 @@ import { AdvancedPost } from '@/model/Post';
 import { createContext, Dispatch, Reducer, useReducer } from 'react';
 import PostSubMenuSelector from '@/app/(afterLogin)/_component/_subMenu/PostSubMenuSelector';
 import WhoCanReply from '@/app/(afterLogin)/_component/_subMenu/WhoCanReply';
+import UnPostModal from '@/app/(afterLogin)/_component/alter/UnPostModal';
 
 interface State {
-  status: 'idle' | 'post' | 'repost' | 'highlight' | 'unPin' | 'whoCanReply';
+  status:
+    | 'idle'
+    | 'post'
+    | 'repost'
+    | 'delete'
+    | 'highlight'
+    | 'unPin'
+    | 'whoCanReply';
   flag: boolean;
   position: {
     x: number;
@@ -66,6 +74,7 @@ export default function SubMenuProvider({ children }: Props) {
       {children}
       {menu.flag && menu.status === 'repost' && <RepostSubMenu />}
       {menu.flag && menu.status === 'post' && <PostSubMenuSelector />}
+      {menu.flag && menu.status === 'delete' && <UnPostModal />}
       {menu.flag && menu.status === 'highlight' && <HighlightModal />}
       {menu.flag && menu.status === 'unPin' && <UnPinModal />}
       {menu.flag && menu.status === 'whoCanReply' && <WhoCanReply />}

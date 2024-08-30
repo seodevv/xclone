@@ -33,7 +33,7 @@ export default function UnPinModal() {
   };
 
   return (
-    <IBackground small onClick={backSubMenu}>
+    <IBackground size="small" onClick={backSubMenu}>
       <div className={styles.title}>
         <span>Unpin post from profile?</span>
       </div>
@@ -43,7 +43,7 @@ export default function UnPinModal() {
         </span>
       </div>
       <div className={styles.buttons}>
-        <FlexButton text="Unpin" medium onClick={onClickUnPin} />
+        <FlexButton theme="white" text="Unpin" medium onClick={onClickUnPin} />
         <FlexButton
           theme="reverse"
           text="Cancel"

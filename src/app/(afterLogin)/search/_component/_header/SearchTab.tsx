@@ -43,7 +43,7 @@ export default function SearchTab() {
 
   useEffect(() => {
     setTab(f ? isTab(f) : 'top');
-  }, [searchParams]);
+  }, [f, setTab]);
 
   return (
     <nav className={style.tabs}>

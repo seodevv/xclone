@@ -8,7 +8,7 @@ import Link from 'next/link';
 interface Props {
   className?: string;
   style?: CSSProperties;
-  id: string;
+  id?: string;
 }
 
 export default function PostReplyInfo({ className, style, id }: Props) {

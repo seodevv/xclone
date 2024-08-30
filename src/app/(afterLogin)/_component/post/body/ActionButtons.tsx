@@ -7,7 +7,7 @@ import ReactionButton from '@/app/(afterLogin)/_component/buttons/ReactionButton
 import { Mode } from '@/app/(afterLogin)/_component/post/Post';
 
 type Props = {
-  mode: Mode;
+  mode?: Mode;
   post: AdvancedPost;
   isPhoto?: boolean;
   white?: boolean;
@@ -37,7 +37,7 @@ export default function ActionButtons({
         <ReactionButton type="Views" post={post} width={width} white={white} />
       )}
       <div className={style.doubleButton}>
-        {mode !== 'single' && !isPhoto && (
+        {mode !== 'single' && mode !== 'comment' && !isPhoto && (
           <ReactionButton
             type="Bookmarks"
             post={post}

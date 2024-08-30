@@ -1,0 +1,50 @@
+{
+  "index": [
+    {
+      "id": "head",
+      "value": { "type": "text", "value": "Verification & Security" }
+    },
+    {
+      "id": "checkmark",
+      "value": {
+        "type": "text",
+        "value": "Checkmark",
+        "inform": "Get a checkmark next to your name."
+      }
+    },
+    {
+      "id": "optional",
+      "value": {
+        "type": "text",
+        "value": "Optional ID verification",
+        "inform": "Receive a visible ID verification label and prioritized support from X services. ID verification is an optional feature and not required."
+      }
+    },
+    {
+      "id": "encrypted",
+      "value": {
+        "type": "text",
+        "value": "Encrypted direct messages",
+        "inform": "Premium subscribers can initiate encrypted direct messages with other premium accounts."
+      }
+    }
+  ],
+  "basic": {
+    "head": { "type": "text", "value": "Basic" },
+    "checkmark": { "type": "empty" },
+    "optional": { "type": "empty" },
+    "encrypted": { "type": "check" }
+  },
+  "premium": {
+    "head": { "type": "text", "value": "Premium" },
+    "checkmark": { "type": "check" },
+    "optional": { "type": "check" },
+    "encrypted": { "type": "check" }
+  },
+  "premiumPlus": {
+    "head": { "type": "text", "value": "Premium+" },
+    "checkmark": { "type": "check" },
+    "optional": { "type": "check" },
+    "encrypted": { "type": "check" }
+  }
+}

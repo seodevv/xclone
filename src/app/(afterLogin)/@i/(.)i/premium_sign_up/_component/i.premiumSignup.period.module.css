@@ -1,0 +1,49 @@
+.range {
+  margin-top: 16px;
+  padding: 2px;
+  display: flex;
+  background: rgb(32, 35, 39);
+  border-radius: 9999px;
+}
+.toggle {
+  padding: 4px 8px;
+  display: flex;
+  justify-content: space-between;
+  flex-grow: 1;
+  gap: 16px;
+  background: transparent;
+  border: 2px solid transparent;
+  border-radius: 9999px;
+  transition: 200ms background-color ease;
+  cursor: pointer;
+}
+.toggle.checked {
+  background: rgb(var(--background-start-rgb));
+}
+.option {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  flex: 1;
+}
+.label {
+  font-size: 15px;
+  font-weight: 700;
+  color: rgb(var(--foreground-rgb));
+  line-height: 20px;
+  cursor: pointer;
+}
+.best {
+  margin-left: 4px;
+  padding: 0 4px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  height: 20px;
+  background: rgb(0, 37, 26);
+  border-radius: 9999px;
+  font-size: 11px;
+  font-weight: 700;
+  color: rgb(194, 241, 220);
+  line-height: 12px;
+}
