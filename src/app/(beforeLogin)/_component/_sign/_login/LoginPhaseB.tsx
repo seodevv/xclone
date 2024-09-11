@@ -1,6 +1,5 @@
 'use client';
 
-import IdentifierInput from '@/app/(beforeLogin)/_component/_sign/IdentifierInput';
 import styles from './beforeLogin.login.module.css';
 import utils from '@/app/utility.module.css';
 import cx from 'classnames';
@@ -12,6 +11,7 @@ import { useFormState } from 'react-dom';
 import LoginAction from '@/app/(beforeLogin)/_component/_sign/_login/LoginAction';
 import useAlterModal from '@/app/_hooks/useAlterModal';
 import useSign from '@/app/(beforeLogin)/_hooks/useSign';
+import IdentifierInput from '@/app/_component/_input/IdentifierInput';
 
 export default function LoginPhaseB() {
   const sign = useSign();

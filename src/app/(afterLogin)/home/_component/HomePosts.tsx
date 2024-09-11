@@ -1,6 +1,6 @@
 'use client';
 
-import { Fragment, useContext } from 'react';
+import { useContext } from 'react';
 import { HomeTabContext } from './HomeTabProvider';
 import Post from '@/app/(afterLogin)/_component/post/Post';
 import { useHomePostQuery } from '../_hook/useHomePostQuery';
@@ -24,13 +24,11 @@ export default function HomePosts() {
 
   return (
     <>
-      {posts.pages.map((page, i) => (
-        <Fragment key={i}>
-          {page.data.map((p) => {
-            return <Post key={p.postId} post={p} />;
-          })}
-        </Fragment>
-      ))}
+      {posts.pages.map((page, i) =>
+        page.data.map((p) => {
+          return <Post key={p.postId} post={p} />;
+        })
+      )}
       <PageLoading
         hasNextPage={hasNextPage}
         isFetchingNextPage={isFetchingNextPage}

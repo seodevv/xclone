@@ -14,6 +14,22 @@ import cx from 'classnames';
 import { captialCase } from '@/app/_lib/common';
 import BookmarkSvg from '@/app/_svg/actionbuttons/BookmarkSvg';
 import useComposeStore from '@/app/(afterLogin)/_store/ComposeStore';
+import ListsSvg from '@/app/_svg/post/ListsSvg';
+
+interface Menu {
+  title:
+    | 'home'
+    | 'explore'
+    | 'messages'
+    | 'lists'
+    | 'bookmarks'
+    | 'profile'
+    | 'settings';
+  link: string;
+  active: string[];
+  icon: JSX.Element;
+  sessionRequired: boolean;
+}
 
 interface Props {
   session: Session | null;
@@ -22,41 +38,55 @@ interface Props {
 export default function NavMenu({ session }: Props) {
   const pathname = usePathname();
   const reset = useComposeStore((state) => state.reset);
-  const menus = [
+  const width = 26;
+  const menus: Menu[] = [
     {
-      link: 'home',
+      title: 'home',
+      link: '/home',
       active: ['/home'],
-      icon: <HomeSvg />,
+      icon: <HomeSvg width={width} />,
       sessionRequired: true,
     },
     {
-      link: 'explore',
+      title: 'explore',
+      link: '/explore',
       active: ['/explore', '/search'],
-      icon: <ExploreSvg />,
+      icon: <ExploreSvg width={width} />,
       sessionRequired: true,
     },
     {
-      link: 'messages',
+      title: 'messages',
+      link: '/messages',
       active: ['/messages'],
-      icon: <MessageSvg />,
+      icon: <MessageSvg width={width} />,
       sessionRequired: true,
     },
     {
-      link: 'bookmarks',
+      title: 'lists',
+      link: `/${session?.user?.email}/lists`,
+      active: [`/${session?.user?.email}/lists`],
+      icon: <ListsSvg width={width} />,
+      sessionRequired: true,
+    },
+    {
+      title: 'bookmarks',
+      link: '/i/bookmarks',
       active: ['/i/bookmarks'],
-      icon: <BookmarkSvg width={26} />,
+      icon: <BookmarkSvg width={width} />,
       sessionRequired: true,
     },
     {
-      link: 'profile',
+      title: 'profile',
+      link: `/${session?.user?.email}`,
       active: [`/${session?.user?.email}`],
-      icon: <ProfileSvg />,
+      icon: <ProfileSvg width={width} />,
       sessionRequired: true,
     },
     {
-      link: 'settings',
+      title: 'settings',
+      link: '/settings',
       active: ['/settings'],
-      icon: <SettingSvg />,
+      icon: <SettingSvg width={width} />,
       sessionRequired: false,
     },
   ];
@@ -69,19 +99,13 @@ export default function NavMenu({ session }: Props) {
             return null;
           }
           const active = menu.active.includes(pathname);
-          const link =
-            menu.link === 'profile'
-              ? `/${session?.user?.email}`
-              : menu.link === 'bookmarks'
-              ? '/i/bookmarks'
-              : `/${menu.link}`;
           return (
             <li key={menu.link}>
-              <Link href={link}>
+              <Link href={menu.link}>
                 <div className={styles.navPill}>
                   <menu.icon.type {...menu.icon.props} active={active} white />
                   <div className={cx(styles.navTitle, active && styles.bold)}>
-                    {captialCase(menu.link)}
+                    {captialCase(menu.title)}
                   </div>
                 </div>
               </Link>

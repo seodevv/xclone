@@ -1,0 +1,11 @@
+.divideLine {
+  display: flex;
+  align-items: center;
+  width: 100%;
+}
+.line {
+  margin: 4px 0;
+  flex-grow: 1;
+  background: rgb(var(--border-start-rgb));
+  height: 1px;
+}

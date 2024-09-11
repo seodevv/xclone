@@ -49,7 +49,12 @@ export default function UserPosts({
             isMedia ? (
               <PostMedia key={p.postId} post={p} />
             ) : (
-              <Post key={p.postId} post={p} style={{ order: 10 * i + j + 1 }} />
+              <Post
+                key={p.postId}
+                post={p}
+                style={{ order: 10 * i + j + 1 }}
+                hasPinned
+              />
             )
           )
         )}

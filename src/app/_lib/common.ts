@@ -1,8 +1,6 @@
-import defaultProfile from '/public/default_profile.png';
-
 export const generateImagePath = (image?: string) => {
   if (!image) {
-    return defaultProfile;
+    return `${process.env.NEXT_PUBLIC_SERVER_URL}/api/image/default_profile.png`;
   }
 
   const regex = /^http?s/;
@@ -134,3 +132,6 @@ export const delay = (duration: number) =>
       res(null);
     }, duration);
   });
+
+export const IMAGE_DEFAULT_PROFILE = generateImagePath('default_profile.png');
+export const IMAGE_DEFAULT_LISTS = generateImagePath('default_lists.png');

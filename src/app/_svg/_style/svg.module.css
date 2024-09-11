@@ -8,6 +8,11 @@
   color: #fff;
 }
 
+.inherit {
+  fill: inherit;
+  color: inherit;
+}
+
 .disable {
   opacity: 0.5;
 }

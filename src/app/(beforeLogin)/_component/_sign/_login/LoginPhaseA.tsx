@@ -10,11 +10,11 @@ import SignModalTitle from '@/app/(beforeLogin)/_component/_sign/_signup/SIgnMod
 import GoogleLogin from '@/app/(beforeLogin)/_component/_right/GoogleLogin';
 import GithubLogin from '@/app/(beforeLogin)/_component/_right/GithubLogin';
 import HorizontalRule from '@/app/(beforeLogin)/_component/_sign/HorizontalRule';
-import IdentifierInput from '@/app/(beforeLogin)/_component/_sign/IdentifierInput';
 import FlexButton from '@/app/(beforeLogin)/_component/_button/FlexButton';
 import NoAccount from '@/app/(beforeLogin)/_component/_sign/_login/NoAccount';
 import useAlterModal from '@/app/_hooks/useAlterModal';
 import AccountAction from '@/app/(beforeLogin)/_component/_sign/_login/AccountAction';
+import IdentifierInput from '@/app/_component/_input/IdentifierInput';
 
 export default function LoginPhaseA() {
   const { alterMessage } = useAlterModal();

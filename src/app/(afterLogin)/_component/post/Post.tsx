@@ -23,6 +23,7 @@ interface Props {
   noImage?: boolean;
   noReact?: boolean;
   noEvent?: boolean;
+  hasPinned?: boolean;
 }
 export default function Post({
   className,
@@ -32,11 +33,11 @@ export default function Post({
   noImage,
   noReact,
   noEvent,
+  hasPinned,
 }: Props) {
   const { data: session } = useSession();
   const pathname = usePathname();
   const data = post.Original && !post.quote ? post.Original : post;
-  const isMyProfile = pathname === `/${session?.user?.email}`;
   const isRepost = !!post.Original && !post.quote;
 
   return (
@@ -48,7 +49,7 @@ export default function Post({
       noEvent={noEvent}
     >
       {isRepost && <PostRepostInfo session={session} userId={post.User.id} />}
-      {isMyProfile && post.pinned && <PostPinned />}
+      {hasPinned && post.pinned && <PostPinned />}
       <div
         className={cx(styles.postWrapper, mode === 'single' && styles.single)}
       >

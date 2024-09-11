@@ -17,12 +17,16 @@ import CloseButton from '../buttons/CloseButton';
 interface Props {
   className?: string;
   style?: CSSProperties;
+  path?: '/search' | '/i/lists/search';
+  placeHolder?: string;
   autoFocus?: boolean;
 }
 
 export default function SearchForm({
   className,
   style,
+  path = '/search',
+  placeHolder = 'Search',
   autoFocus = false,
 }: Props) {
   const router = useRouter();
@@ -47,7 +51,7 @@ export default function SearchForm({
     if (search) {
       const writetableSearchParams = new URLSearchParams(searchParams);
       writetableSearchParams.set('q', encodeURIComponent(search));
-      router.push(`/search?${writetableSearchParams.toString()}`);
+      router.push(`${path}?${writetableSearchParams.toString()}`);
     }
   };
 
@@ -74,7 +78,7 @@ export default function SearchForm({
       <input
         ref={inputRef}
         type="text"
-        placeholder="Search"
+        placeholder={placeHolder}
         spellCheck={false}
         value={search}
         onChange={onChangeSearch}

@@ -22,6 +22,9 @@
   background: rgba(var(--button-hover-rgb), 0.2);
   transition: none;
 }
+.btn:disabled {
+  opacity: 0.5;
+}
 .textBtn {
   padding: 0 16px;
   width: unset;
@@ -39,6 +42,8 @@
 .theme {
   background: rgb(var(--r-background-start-rgb));
   border: 1px solid rgb(var(--label-rgb));
+  color: rgb(var(--background-start-rgb));
+  fill: rgb(var(--background-start-rgb));
 }
 .theme:hover:enabled {
   background: rgba(var(--r-background-start-rgb), 0.9);
@@ -58,6 +63,8 @@
 }
 .primary {
   background: rgb(var(--primary-button-rgb));
+  color: #fff;
+  fill: #fff;
 }
 .primary:hover:enabled {
   background: rgba(var(--primary-button-rgb), 0.9);
@@ -69,6 +76,7 @@
   background: transparent;
   border: 1px solid transparent;
   color: rgb(var(--primary-rgb));
+  fill: rgb(var(--primary-rgb));
   font-weight: 600;
 }
 .primary_reverse:hover:enabled {
@@ -76,6 +84,16 @@
 }
 .primary_reverse:active:enabled {
   background: rgba(var(--primary-rgb), 0.25);
+}
+.white {
+  background: rgb(255, 255, 255);
+  color: rgb(0, 0, 0);
+}
+.white:hover:enabled {
+  background: rgb(255, 255, 255, 0.9);
+}
+.white:active:enabled {
+  background: rgb(255, 255, 255, 0.8);
 }
 .large {
   padding: 0 32px;
@@ -289,6 +307,37 @@
   background: rgba(var(--primary-rgb), 0.2);
 }
 
+/* MemberButton */
+.memberBtn {
+  padding: 0 16px;
+  width: unset;
+  height: unset;
+  min-width: 32px;
+  min-height: 32px;
+  background: rgb(var(--r-background-start-rgb));
+  border: 1px solid transparent;
+  border-radius: 9999px;
+  color: rgb(var(--background-start-rgb));
+  font-size: 14px;
+}
+.memberBtn:hover:enabled {
+  background: rgba(var(--r-background-start-rgb), 0.9);
+}
+.memberBtn:active:enabled {
+  background: rgba(var(--r-background-start-rgb), 0.8);
+}
+.memberRemoveBtn {
+  background: rgb(var(--error-rgb));
+  color: #fff;
+}
+.memberRemoveBtn:hover:enabled {
+  background: rgb(220, 30, 41);
+}
+.memberRemoveBtn:active:enabled {
+  background: rgb(195, 26, 37);
+}
+
+/* Animation */
 .fadeIn {
   animation-name: fade-in;
   animation-duration: 200ms;

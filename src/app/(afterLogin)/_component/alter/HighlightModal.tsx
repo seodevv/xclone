@@ -44,7 +44,7 @@ export default function HighlightModal({}: Props) {
 
   return (
     <IBackground onClick={onClickClose}>
-      <IHeader kind="xmark" noBack onClick={onClickClose} />
+      <IHeader noBack onClick={onClickClose} />
       <div className={styles.container}>
         <div className={cx(styles.inner, alter && utils.mb_0)}>
           <div className={styles.texts}>

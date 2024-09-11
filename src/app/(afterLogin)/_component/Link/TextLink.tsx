@@ -10,8 +10,10 @@ interface Props {
   style?: CSSProperties;
   text: string;
   href: string;
-  theme?: 'theme' | 'reverse' | 'primary' | 'primary_reverse';
+  theme?: 'theme' | 'reverse' | 'primary' | 'primary_reverse' | 'white';
   size?: 'small' | 'medium' | 'large';
+  scroll?: boolean;
+  inline?: boolean;
 }
 
 export default function TextLink({
@@ -21,6 +23,8 @@ export default function TextLink({
   theme = 'theme',
   size = 'medium',
   href,
+  scroll = false,
+  inline,
 }: Props) {
   return (
     <Link
@@ -29,10 +33,12 @@ export default function TextLink({
         styles.textLink,
         styles[theme],
         styles[size],
+        inline && styles.inline,
         className
       )}
       style={style}
       href={href}
+      scroll={scroll}
     >
       <span>{text}</span>
     </Link>

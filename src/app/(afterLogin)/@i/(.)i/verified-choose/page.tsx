@@ -4,8 +4,8 @@ import VerifiedChoose from '@/app/(afterLogin)/@i/(.)i/verified-choose/_componen
 
 export default function IVerifiedChooseSlot() {
   return (
-    <IBackground>
-      <IHeader kind="xmark" />
+    <IBackground height="auto">
+      <IHeader />
       <VerifiedChoose />
     </IBackground>
   );

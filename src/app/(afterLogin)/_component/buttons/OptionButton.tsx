@@ -1,5 +1,5 @@
 import styles from './button.module.css';
-import { CSSProperties, MouseEventHandler, useState } from 'react';
+import { CSSProperties, MouseEventHandler } from 'react';
 import cx from 'classnames';
 import OptionSvg from '@/app/_svg/post/OptionSvg';
 

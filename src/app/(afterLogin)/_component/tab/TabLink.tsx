@@ -20,14 +20,11 @@ export default function TabLink({
   active,
 }: Props) {
   return (
-    <div className={cx(styles.tab, className)} style={style}>
-      <Link
-        className={cx(styles.navigation, active && styles.active)}
-        href={href}
-      >
+    <Link className={cx(styles.tab, className)} style={style} href={href}>
+      <div className={cx(styles.navigation, active && styles.active)}>
         <div className={styles.text}>{captialCase(text)}</div>
         <div className={styles.underline}></div>
-      </Link>
-    </div>
+      </div>
+    </Link>
   );
 }

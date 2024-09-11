@@ -8,6 +8,8 @@ import { createContext, Dispatch, Reducer, useReducer } from 'react';
 import PostSubMenuSelector from '@/app/(afterLogin)/_component/_subMenu/PostSubMenuSelector';
 import WhoCanReply from '@/app/(afterLogin)/_component/_subMenu/WhoCanReply';
 import UnPostModal from '@/app/(afterLogin)/_component/alter/UnPostModal';
+import SearchListsOptionsSubMenu from '@/app/(afterLogin)/_component/_subMenu/SearchListsOptionsSubMenu';
+import { AdvancedLists } from '@/model/Lists';
 
 interface State {
   status:
@@ -17,7 +19,8 @@ interface State {
     | 'delete'
     | 'highlight'
     | 'unPin'
-    | 'whoCanReply';
+    | 'whoCanReply'
+    | 'searchListsOption';
   flag: boolean;
   position: {
     x: number;
@@ -27,6 +30,7 @@ interface State {
     target?: HTMLButtonElement;
   };
   post?: AdvancedPost;
+  lists?: AdvancedLists;
 }
 type Action =
   | { type: 'set'; payload: Partial<State> }
@@ -78,6 +82,9 @@ export default function SubMenuProvider({ children }: Props) {
       {menu.flag && menu.status === 'highlight' && <HighlightModal />}
       {menu.flag && menu.status === 'unPin' && <UnPinModal />}
       {menu.flag && menu.status === 'whoCanReply' && <WhoCanReply />}
+      {menu.flag && menu.status === 'searchListsOption' && (
+        <SearchListsOptionsSubMenu />
+      )}
     </SubMenuContext.Provider>
   );
 }

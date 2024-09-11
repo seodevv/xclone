@@ -1,0 +1,46 @@
+.creator {
+  display: flex;
+  flex-direction: column;
+}
+.inputs {
+  padding: 0 16px;
+}
+.action {
+  padding: 12px 16px;
+  min-height: 48px;
+  background: transparent;
+  font-size: 15px;
+  font-weight: 400;
+  line-height: 20px;
+  transition-duration: 200ms;
+  transition-property: background-color;
+  cursor: pointer;
+}
+.manage {
+  border-top: 1px solid rgb(var(--border-start-rgb));
+  color: rgb(var(--font-theme-rgb));
+}
+.members {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.manage:hover {
+  background: rgba(var(--r-background-start-rgb), 0.1);
+}
+.manage:active {
+  background: rgba(var(--r-background-start-rgb), 0.15);
+}
+.delete {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid transparent;
+  color: rgb(var(--error-rgb));
+}
+.delete:hover:enabled {
+  background: rgba(var(--error-rgb), 0.1);
+}
+.delete:active:enabled {
+  background: rgba(var(--error-rgb), 0.2);
+}

@@ -6,6 +6,7 @@ import { useRouter } from 'next/navigation';
 import LeftArrowSvg from '@/app/_svg/arrow/LeftArrowSvg';
 import cx from 'classnames';
 import { PathRecordContext } from '@/app/_provider/PathRecordProvider';
+import useHistoryStore from '@/app/(afterLogin)/_store/HistoryStore';
 
 interface Props {
   className?: string;
@@ -26,6 +27,10 @@ export default function BackButton({
 }: Props) {
   const router = useRouter();
   const ctx = useContext(PathRecordContext);
+  const { stack, removeStack } = useHistoryStore((state) => ({
+    stack: state.stack,
+    removeStack: state.removeStack,
+  }));
 
   const onClickBack = () => {
     if (prevPath) {
@@ -37,6 +42,11 @@ export default function BackButton({
     if (typeof onClick === 'function') {
       onClick();
     }
+
+    if (stack < -1) {
+      removeStack();
+    }
+
     if (!noBack) router.back();
   };
 

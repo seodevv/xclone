@@ -1,0 +1,23 @@
+.container {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+}
+.createList {
+  padding: 12px 16px;
+  background: rgb(var(--background-start-rgb));
+  border-bottom: 1px solid rgb(var(--border-start-rgb));
+  font-size: 15px;
+  font-weight: 400;
+  color: rgb(var(--primary-rgb));
+  line-height: 20px;
+  transition-duration: 200ms;
+  transition-property: background-color, box-shadow;
+  cursor: pointer;
+}
+.createList:hover {
+  background: rgb(var(--scroll-background));
+}
+.createList:active {
+  background: rgba(var(--scroll-background), 0.8);
+}

@@ -11,7 +11,7 @@ import {
 import styles from './beforeLogin.selector.module.css';
 import DateSelector from './DateSelector';
 import { getLastDay } from '@/app/_lib/common';
-import { IdentifierInputRef } from './IdentifierInput';
+import { IdentifierInputRef } from '@/app/_component/_input/IdentifierInput';
 
 interface Props {
   defaultValue?: string;
@@ -72,7 +72,7 @@ const BirthSelector = forwardRef<IdentifierInputRef, Props>(
           onSuccess(date);
         }
       }
-    }, [date, onSuccess]);
+    }, [date]);
 
     useImperativeHandle(ref, () => ({
       focus: () => {

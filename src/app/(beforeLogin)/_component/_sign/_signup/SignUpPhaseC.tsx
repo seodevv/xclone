@@ -5,7 +5,6 @@ import utils from '@/app/utility.module.css';
 import Image from 'next/image';
 import cx from 'classnames';
 import SignModalTitle from '@/app/(beforeLogin)/_component/_sign/_signup/SIgnModalTitle';
-import PhotoButton from '@/app/(beforeLogin)/_component/_button/PhotoButton';
 import DEFAULT_PROFILE from '/public/default_profile.png';
 import {
   ChangeEventHandler,
@@ -18,6 +17,7 @@ import {
 import PhotoEditor from '@/app/_component/_photo/PhotoEditor';
 import { getFileDataURL } from '@/app/_lib/common';
 import useSignUp from '@/app/(beforeLogin)/_hooks/useSignUp';
+import PhotoButton from '@/app/_component/_button/PhotoButton';
 
 export default function SignUpPhaseC() {
   const {
@@ -138,6 +138,7 @@ export default function SignUpPhaseC() {
               type: 'profile',
               payload: { value: { file, link: dataUrl }, disabled: false },
             });
+            setEdit(false);
           }}
         />
       )}

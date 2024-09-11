@@ -101,6 +101,9 @@
 .closeBtn:hover:enabled {
   background: rgb(var(--border-start-rgb));
 }
+.closeBtn:active:enabled {
+  background: rgba(var(--border-start-rgb), 0.75);
+}
 .closeBtn:disabled {
   opacity: 0.5;
 }
@@ -113,22 +116,4 @@
 }
 .passwordBtn:hover {
   filter: drop-shadow(1px 1px 1px rgb(var(--foreground-rgb)));
-}
-
-/* PhotoButton */
-.photoBtn {
-  min-width: 44px;
-  min-height: 44px;
-  background: rgba(15, 20, 25, 0.75);
-  border: 1px solid transparent;
-  border-radius: 9999px;
-  outline: none;
-  transition: 200ms background-color ease;
-  cursor: pointer;
-}
-.photoBtn:hover:enabled {
-  background: rgba(39, 44, 48, 0.75);
-}
-.photoBtn:active:enabled {
-  background: rgba(63, 67, 71, 0.75);
 }

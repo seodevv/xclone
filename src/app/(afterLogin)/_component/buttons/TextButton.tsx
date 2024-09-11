@@ -8,7 +8,7 @@ interface Props {
   className?: string;
   style?: CSSProperties;
   text: string;
-  theme?: 'theme' | 'reverse' | 'primary' | 'primary_reverse';
+  theme?: 'theme' | 'reverse' | 'primary' | 'primary_reverse' | 'white';
   size?: 'small' | 'medium' | 'large';
   disabled?: boolean;
   onClick?: MouseEventHandler<HTMLButtonElement>;

@@ -7,6 +7,7 @@ interface Props {
   style?: CSSProperties;
   width?: number;
   white?: boolean;
+  inherit?: boolean;
 }
 
 export default function RefreshSvg({
@@ -14,10 +15,16 @@ export default function RefreshSvg({
   style,
   width = 20,
   white,
+  inherit,
 }: Props) {
   return (
     <svg
-      className={cx(styles.defaultSvg, white && styles.white, className)}
+      className={cx(
+        styles.defaultSvg,
+        white && styles.white,
+        inherit && styles.inherit,
+        className
+      )}
       style={style}
       width={width}
       viewBox="0 0 24 24"

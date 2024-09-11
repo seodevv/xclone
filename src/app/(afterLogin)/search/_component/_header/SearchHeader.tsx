@@ -1,10 +1,8 @@
-'use client';
-
 import styles from './searchHeader.module.css';
-import BackButton from '../../../_component/buttons/BackButton';
-import SearchForm from '../../../_component/search/SearchForm';
-import OptionButton from '../../../_component/buttons/OptionButton';
-import SearchTab from './SearchTab';
+import BackButton from '@/app/(afterLogin)/_component/buttons/BackButton';
+import SearchForm from '@/app/(afterLogin)/_component/search/SearchForm';
+import OptionButton from '@/app/(afterLogin)/_component/buttons/OptionButton';
+import SearchTab from '@/app/(afterLogin)/search/_component/_header/SearchTab';
 
 export default function SearchHeader() {
   return (

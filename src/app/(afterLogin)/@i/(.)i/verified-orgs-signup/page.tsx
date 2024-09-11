@@ -10,7 +10,7 @@ export default function IVerifiedOrgSignUpSlot() {
   return (
     <VerifiedOrgProvider>
       <IBackground overflow="auto">
-        <IHeader kind="xmark" title="Verified Organizations" />
+        <IHeader title="Verified Organizations" />
         <div className={styles.body}>
           <AccessSelector />
           <VerifiedOrgRecipe />

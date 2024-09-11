@@ -1,0 +1,21 @@
+.header {
+  padding: 0 16px;
+  position: sticky;
+  top: 0;
+  z-index: 1;
+  display: flex;
+  align-items: center;
+  flex-grow: 1;
+  height: 53px;
+  background: rgba(var(--background-start-rgb), 0.65);
+  backdrop-filter: blur(12px);
+  border: 1px solid transparent;
+  box-sizing: border-box;
+}
+.title {
+  font-size: 20px;
+  font-weight: 700;
+  color: rgb(var(--font-theme-rgb));
+  line-height: 24px;
+  cursor: default;
+}

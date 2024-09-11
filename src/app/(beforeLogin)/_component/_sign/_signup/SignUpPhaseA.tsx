@@ -4,10 +4,10 @@ import styles from './beforeLogin.signup.module.css';
 import utils from '@/app/utility.module.css';
 import cx from 'classnames';
 import SignModalTitle from '@/app/(beforeLogin)/_component/_sign/_signup/SIgnModalTitle';
-import IdentifierInput from '@/app/(beforeLogin)/_component/_sign/IdentifierInput';
 import AlreadyAccount from '@/app/(beforeLogin)/_component/_sign/_signup/AlreadyAccount';
 import BirthSelector from '@/app/(beforeLogin)/_component/_sign/BirthSelector';
 import useSignUp from '@/app/(beforeLogin)/_hooks/useSignUp';
+import IdentifierInput from '@/app/_component/_input/IdentifierInput';
 
 export default function SignUpPhaseA() {
   const {

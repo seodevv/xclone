@@ -9,16 +9,15 @@ import XLogo from './_component/XLogo';
 import FollowRecommendsSection from './_component/follow_recommends/FollowRecommendsSection';
 import RightSearchZone from '@/app/(afterLogin)/_component/search/RightSearchZone';
 import Logout from './_component/logout/Logout';
-import ModalController from './_controller/ModalController';
 import Sticky from './_component/sticky/Sticky';
 import TrendSection from './_component/trends/TrendSection';
 import SearchFilters from './_component/search/SearchFilters';
 import FollowRecommendsHydrationBoundary from './_boundary/FollowRecommendsHydrationBoundary';
 import TrendsHydrationBoundary from './_boundary/TrendsHydrationBoundary';
-import UnFollowProvider from './_provider/UnFollowProvider';
 import authOptions from '@/app/_lib/authOptions';
 import SubMenuProvider from '@/app/(afterLogin)/_provider/SubMenuProvider';
 import PopUpModal from '@/app/(afterLogin)/_component/_popup/PopUpModal';
+import ConfirmProvider from '@/app/(afterLogin)/_provider/ConfirmProvider';
 
 interface Props {
   children: ReactNode;
@@ -39,7 +38,7 @@ export default async function AfterLoginLayout({
       <NextAuthProvider>
         <ReactQueryProvider>
           <ViewportProvider>
-            <UnFollowProvider>
+            <ConfirmProvider>
               <SubMenuProvider>
                 <div className={style.container}>
                   <header className={style.leftSectionWrapper}>
@@ -68,13 +67,13 @@ export default async function AfterLoginLayout({
                       </section>
                     </div>
                   </div>
-                  <ModalController>{modal}</ModalController>
+                  {modal}
                   {settings}
                   {i}
                   <PopUpModal />
                 </div>
               </SubMenuProvider>
-            </UnFollowProvider>
+            </ConfirmProvider>
           </ViewportProvider>
         </ReactQueryProvider>
       </NextAuthProvider>

@@ -1,0 +1,16 @@
+.btn {
+  min-width: 44px;
+  min-height: 44px;
+  background: rgba(15, 20, 25, 0.75);
+  border: 1px solid transparent;
+  border-radius: 9999px;
+  outline: none;
+  transition: 200ms background-color ease;
+  cursor: pointer;
+}
+.btn:hover:enabled {
+  background: rgba(39, 44, 48, 0.75);
+}
+.btn:active:enabled {
+  background: rgba(63, 67, 71, 0.75);
+}

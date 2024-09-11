@@ -1,14 +1,14 @@
 'use client';
 
 import styles from './button.module.css';
-import { CSSProperties, MouseEventHandler, useState } from 'react';
+import { CSSProperties, MouseEventHandler, useContext, useState } from 'react';
 import { useSession } from 'next-auth/react';
 import cx from 'classnames';
 import { AdvancedUser } from '@/model/User';
 import useFollowMutation from '../../_hooks/useFollowMutation';
 import { useQueryClient } from '@tanstack/react-query';
 import useAlterModal from '@/app/_hooks/useAlterModal';
-import useUnFollowModal from '../../_hooks/useUnFollowModal';
+import { ConfirmContext } from '@/app/(afterLogin)/_provider/ConfirmProvider';
 
 interface Props {
   className?: string;
@@ -25,7 +25,7 @@ export default function FollowButton({
 }: Props) {
   const { data: session } = useSession();
   const { alterMessage } = useAlterModal();
-  const { alterModal } = useUnFollowModal();
+  const { dispatchModal } = useContext(ConfirmContext);
   const queryClient = useQueryClient();
   const followMutation = useFollowMutation();
   const [hover, setHover] = useState(false);
@@ -36,7 +36,10 @@ export default function FollowButton({
     e.stopPropagation();
     if (!session?.user?.email) return;
     if (isFollow) {
-      alterModal({ sourceId: session.user.email, targetId: user.id });
+      dispatchModal({
+        type: 'unFollow',
+        payload: { sourceId: session.user.email, targetId: user.id },
+      });
     } else {
       followMutation.mutate(
         {

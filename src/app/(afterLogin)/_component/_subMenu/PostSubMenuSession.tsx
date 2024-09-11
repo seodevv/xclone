@@ -1,3 +1,5 @@
+'use client';
+
 import { useContext } from 'react';
 import SubMenu from '@/app/(afterLogin)/_component/_subMenu/SubMenu';
 import SubMenuWrapper from '@/app/(afterLogin)/_component/_subMenu/SubMenuWrapper';
@@ -11,17 +13,21 @@ import HighlightSvg from '@/app/_svg/post/HighlightSvg';
 import ListsSvg from '@/app/_svg/post/ListsSvg';
 import PinedSvg from '@/app/_svg/post/PinedSvg';
 import useAlterModal from '@/app/_hooks/useAlterModal';
+import useListsStore from '@/app/(afterLogin)/_store/ListsStore';
+import { usePathname } from 'next/navigation';
 
 interface Props {
   width?: number;
 }
 
 export default function PostSubMenuSession({ width = 18.75 }: Props) {
+  const pathname = usePathname();
   const { alterMessage } = useAlterModal();
   const {
     menu: { post },
     dispatchMenu,
   } = useContext(SubMenuContext);
+  const setPostId = useListsStore((state) => state.setPostId);
 
   const closeMenu = () => {
     dispatchMenu({ type: 'reset' });
@@ -66,7 +72,11 @@ export default function PostSubMenuSession({ width = 18.75 }: Props) {
           href="/i/lists/add_member"
           title={`Add/remove @${post?.User.id} from Lists`}
           svg={<ListsSvg width={width} />}
-          onClick={closeMenu}
+          scroll={false}
+          onClick={() => {
+            setPostId(post.postId);
+            closeMenu();
+          }}
         />
         <SubMenu
           type="div"

@@ -22,7 +22,13 @@ export default function UserProfile({ session, username }: Props) {
 
   if (
     segment &&
-    ['verified_followers', 'followers', 'following', 'status'].includes(segment)
+    [
+      'verified_followers',
+      'followers',
+      'following',
+      'status',
+      'lists',
+    ].includes(segment)
   ) {
     return null;
   }

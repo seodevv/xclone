@@ -7,6 +7,10 @@
   border: none;
   border-radius: 50%;
   background: rgba(0, 0, 0, 0.5);
+  border: 1px solid rgb(0, 0, 0, 0.5);
+  font-size: 15px;
+  font-weight: 700;
+  color: rgb(255, 255, 255);
   cursor: pointer;
   transition: 0.15s background-color ease-in;
 }
@@ -27,13 +31,15 @@
 }
 .textLink span {
   margin-bottom: 1px;
-  font-size: 15px;
-  font-weight: bold;
-  color: rgb(var(--foreground-rgb));
+  font-size: inherit;
+  font-weight: inherit;
+  color: inherit;
 }
 .theme {
   background: rgb(var(--r-background-start-rgb));
   border: 1px solid rgb(var(--label-rgb));
+  color: rgb(var(--background-start-rgb));
+  fill: rgb(var(--background-start-rgb));
 }
 .theme:hover {
   background: rgba(var(--r-background-start-rgb), 0.9);
@@ -53,6 +59,8 @@
 }
 .primary {
   background: rgb(var(--primary-button-rgb));
+  color: #fff;
+  fill: #fff;
 }
 .primary:hover {
   background: rgba(var(--primary-button-rgb), 0.9);
@@ -64,6 +72,7 @@
   background: transparent;
   border: 1px solid transparent;
   color: rgb(var(--primary-rgb));
+  fill: rgb(var(--primary-rgb));
   font-weight: 600;
 }
 .primary_reverse:hover {
@@ -72,8 +81,21 @@
 .primary_reverse:active {
   background: rgba(var(--primary-rgb), 0.25);
 }
+.white {
+  background: rgb(255, 255, 255);
+  color: rgb(0, 0, 0);
+}
+.white:hover {
+  background: rgb(255, 255, 255, 0.9);
+}
+.white:active {
+  background: rgb(255, 255, 255, 0.8);
+}
 .large {
   padding: 0 32px;
   min-width: 52px;
   min-height: 52px;
+}
+.inline {
+  display: inline-flex;
 }

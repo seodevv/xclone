@@ -4,12 +4,14 @@ import style from './userHeader.module.css';
 import { useSelectedLayoutSegments } from 'next/navigation';
 import { useUserQuery } from '../../_hooks/useUserQuery';
 import { useUserPostsCountQuery } from '../../_hooks/useUserPostsCountQuery';
+import { useSession } from 'next-auth/react';
 
 interface Props {
   username: string;
 }
 
 export default function UserHeaderTitle({ username }: Props) {
+  const { data: session } = useSession();
   const [a, b, c] = useSelectedLayoutSegments();
 
   const { data: user } = useUserQuery(username);
@@ -55,7 +57,18 @@ export default function UserHeaderTitle({ username }: Props) {
           title = 'Post engagements';
         }
         break;
+      // /username/lists/memberships
+      case 'lists':
+        title = `Lists ${
+          session?.user?.email === username ? 'you' : 'they'
+        }'re on`;
+        sub = `@${username}`;
+        break;
     }
+  }
+
+  if (a === 'lists' && b === undefined) {
+    return null;
   }
 
   return (

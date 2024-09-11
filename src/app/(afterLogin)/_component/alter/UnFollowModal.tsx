@@ -1,27 +1,24 @@
 'use client';
 
-import styles from './unFollowModal.module.css';
-import { MouseEventHandler } from 'react';
-import cx from 'classnames';
 import useFollowMutation from '../../_hooks/useFollowMutation';
 import { useQueryClient } from '@tanstack/react-query';
 import useAlterModal from '@/app/_hooks/useAlterModal';
-import useUnFollowModal from '../../_hooks/useUnFollowModal';
-import IBackground from '@/app/(afterLogin)/@i/(.)i/_component/IBackground';
+import ConfirmModal from '@/app/(afterLogin)/_component/alter/ConfirmModal';
+import { useContext } from 'react';
+import { ConfirmContext } from '@/app/(afterLogin)/_provider/ConfirmProvider';
 
 export default function UnFollowModal() {
   const queryClient = useQueryClient();
   const followMutation = useFollowMutation();
-  const { getModal, resetModal } = useUnFollowModal();
+  const { modal, dispatchModal } = useContext(ConfirmContext);
   const { alterMessage } = useAlterModal();
-  const modal = getModal();
 
   const onClickOutSide = () => {
-    resetModal();
+    dispatchModal({ type: 'reset' });
   };
-  const onClickUnFollow: MouseEventHandler<HTMLButtonElement> = () => {
-    if (!modal.sourceId || !modal.targetId) {
-      resetModal();
+  const onClickUnFollow = () => {
+    if (!modal.unFollow?.sourceId || !modal.unFollow.targetId) {
+      dispatchModal({ type: 'reset' });
       alterMessage('Error. Please try again.', 'error');
       return;
     }
@@ -29,12 +26,12 @@ export default function UnFollowModal() {
       {
         queryClient,
         type: 'unfollow',
-        sourceId: modal.sourceId,
-        targetId: modal.targetId,
+        sourceId: modal.unFollow.sourceId,
+        targetId: modal.unFollow.targetId,
       },
       {
         onSettled: () => {
-          resetModal();
+          dispatchModal({ type: 'reset' });
         },
         onError: () => {
           alterMessage('Error. Please try again.', 'error');
@@ -43,33 +40,15 @@ export default function UnFollowModal() {
     );
   };
 
-  if (!modal.flag) return null;
-
   return (
-    <IBackground size="small" onClick={onClickOutSide}>
-      <h1 className={styles.title}>Unfollow @{modal.targetId}?</h1>
-      <div className={styles.desc}>
-        <span>
-          Their posts will no longer show up in your For You timeline. You can
-          still view their profile, unless their posts are protected.
-        </span>
-      </div>
-      <div className={styles.buttons}>
-        <button
-          className={cx(styles.button, styles.unFollow)}
-          type="button"
-          onClick={onClickUnFollow}
-        >
-          Unfollow
-        </button>
-        <button
-          className={cx(styles.button, styles.cancel)}
-          type="button"
-          onClick={() => resetModal()}
-        >
-          Cancel
-        </button>
-      </div>
-    </IBackground>
+    <ConfirmModal
+      title={`Unfollow @${modal.unFollow?.targetId}?`}
+      sub="Their posts will no longer show up in your For You timeline. You can still view their profile, unless their posts are protected."
+      btnText="UnFollow"
+      btnTheme="white"
+      onClickOutSide={onClickOutSide}
+      onClickConfirm={onClickUnFollow}
+      onClickCancle={onClickOutSide}
+    />
   );
 }

@@ -8,6 +8,7 @@ interface Props {
   width?: number;
   white?: boolean;
   active?: boolean;
+  inherit?: boolean;
 }
 
 export default function CheckSvg({
@@ -16,10 +17,16 @@ export default function CheckSvg({
   width = 16,
   white,
   active = false,
+  inherit,
 }: Props) {
   return (
     <svg
-      className={cx(styles.defaultSvg, white && styles.white, className)}
+      className={cx(
+        styles.defaultSvg,
+        white && styles.white,
+        inherit && styles.inherit,
+        className
+      )}
       style={style}
       width={width}
       viewBox="0 0 24 24"

@@ -15,7 +15,7 @@ import {
   useRef,
   useState,
 } from 'react';
-import { IdentifierInputRef } from './IdentifierInput';
+import { IdentifierInputRef } from '@/app/_component/_input/IdentifierInput';
 
 interface Props {
   type: 'year' | 'month' | 'day';

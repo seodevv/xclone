@@ -20,6 +20,10 @@ interface Props {
   imageSrc: string;
   fileName?: string;
   type?: string;
+  title?: string;
+  aspect?: number;
+  cropShape?: 'rect' | 'round';
+  objectFit?: 'contain' | 'cover' | 'horizontal-cover' | 'vertical-cover';
   onClose?: () => void;
   onComplete?: (dataUrl: string, file: File) => void;
 }
@@ -28,6 +32,10 @@ export default function PhotoEditor({
   imageSrc,
   fileName,
   type,
+  title = 'Edit media',
+  aspect = 1 / 1,
+  cropShape = 'round',
+  objectFit = 'horizontal-cover',
   onClose,
   onComplete,
 }: Props) {
@@ -80,9 +88,6 @@ export default function PhotoEditor({
       });
       if (cropped && typeof onComplete === 'function') {
         onComplete(cropped.dataUrl, cropped.file);
-        if (typeof onClose === 'function') {
-          onClose();
-        }
       }
     } catch (error) {
       alterMessage(
@@ -152,7 +157,7 @@ export default function PhotoEditor({
           <PrevButton onClick={onClickPrev} />
         </div>
         <div className={styles.title}>
-          <span>Edit media</span>
+          <span>{title}</span>
         </div>
         <div>
           <FlexButton
@@ -168,9 +173,9 @@ export default function PhotoEditor({
           crop={crop}
           zoom={zoom}
           rotation={rotation}
-          aspect={1 / 1}
-          cropShape="round"
-          objectFit="horizontal-cover"
+          aspect={aspect}
+          cropShape={cropShape}
+          objectFit={objectFit}
           showGrid={false}
           onCropChange={setCrop}
           onZoomChange={onChangeZoom}
