@@ -16,6 +16,7 @@ interface Props {
   height?: 'auto';
   overflow?: 'auto';
   onClick?: () => void;
+  noHidden?: boolean;
 }
 
 export default function IBackground({
@@ -26,6 +27,7 @@ export default function IBackground({
   height,
   overflow,
   onClick,
+  noHidden,
 }: Props) {
   const router = useRouter();
   const searchParams = useSearchParams();
@@ -71,7 +73,7 @@ export default function IBackground({
       onMouseDown={onMouseDown}
       onMouseUp={onMouseUp}
     >
-      <HtmlOverflowHidden />
+      <HtmlOverflowHidden noHidden={noHidden} />
       <div
         className={cx(
           styles.modal,

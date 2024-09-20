@@ -20,7 +20,6 @@ interface Props {
     maxLength?: number;
     regex?: RegExp;
     required?: boolean;
-    allowEmpty?: boolean;
     message?: string;
   };
   minRow?: number;
@@ -78,7 +77,7 @@ const IdentifierTextarea = forwardRef<IdentifiertextareaRef, Props>(
         return !result;
       }
 
-      const { minLength, maxLength, regex, allowEmpty, required } = validate;
+      const { minLength, maxLength, regex, required } = validate;
       if (minLength && str.length < minLength) {
         errorHandler(`Make sure it’s ${minLength} characters or more.`);
       } else if (maxLength && str.length > maxLength) {

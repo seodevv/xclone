@@ -7,6 +7,7 @@ interface Props {
   theme?: 'default' | 'red';
   svg?: React.ReactNode;
   title?: string;
+  sub?: string;
   onClick?: () => void;
 }
 interface A extends Props {
@@ -41,7 +42,10 @@ export default function SubMenu(props: A | B) {
         }}
       >
         <div className={styles.icon}>{props.svg}</div>
-        <span className={styles.title}>{props.title}</span>
+        <div className={styles.desc}>
+          <span className={styles.title}>{props.title}</span>
+          {props.sub && <span className={styles.sub}>{props.sub}</span>}
+        </div>
       </Link>
     );
   }
@@ -52,7 +56,16 @@ export default function SubMenu(props: A | B) {
       onClick={onClickElement}
     >
       <div className={styles.icon}>{props.svg}</div>
-      <span className={styles.title}>{props.title}</span>
+      <div className={styles.desc}>
+        <div className={styles.title}>
+          <span>{props.title}</span>
+        </div>
+        {props.sub && (
+          <div className={styles.sub}>
+            <span>{props.sub}</span>
+          </div>
+        )}
+      </div>
     </div>
   );
 }

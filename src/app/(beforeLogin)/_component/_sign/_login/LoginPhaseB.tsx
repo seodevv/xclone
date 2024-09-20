@@ -82,7 +82,7 @@ export default function LoginPhaseB() {
             type="password"
             name="password"
             placeholder="Please enter your Password."
-            validate={{ allowEmpty: true }}
+            validate={{ allowBlank: true }}
             disabled={options.isLoading}
             onSuccess={(value) => {
               dispatch({

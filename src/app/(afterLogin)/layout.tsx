@@ -46,7 +46,7 @@ export default async function AfterLoginLayout({
                       <div className={style.leftSectionFixed}>
                         <XLogo session={session} />
                         <NavMenu session={session} />
-                        <Logout session={session} />
+                        <Logout />
                       </div>
                     </section>
                   </header>

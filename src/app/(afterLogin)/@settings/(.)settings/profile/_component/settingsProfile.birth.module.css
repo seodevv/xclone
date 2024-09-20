@@ -1,0 +1,52 @@
+.birth {
+  padding: 12px 16px;
+  display: flex;
+  flex-direction: column;
+}
+.date {
+  display: flex;
+}
+.edit {
+  background: transparent;
+  border: none;
+  cursor: pointer;
+}
+.birthInfo {
+  margin: 4px 0;
+}
+.href {
+  color: rgb(var(--primary-rgb));
+}
+.href:hover {
+  text-decoration: underline;
+}
+.see {
+  margin: 16px 0;
+  display: flex;
+  flex-direction: column;
+}
+.selector {
+  margin: 16px 0;
+}
+.delete {
+  display: flex;
+  flex-direction: column;
+}
+.deleteBtn {
+  padding: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 48px;
+  background: transparent;
+  border: none;
+  transition-duration: 200ms;
+  transition-property: background-color;
+  cursor: pointer;
+}
+.deleteBtn:hover:enabled {
+  background: rgba(var(--error-rgb), 0.1);
+}
+.deleteBtn:active:enabled {
+  background: rgba(var(--error-rgb), 0.2);
+}

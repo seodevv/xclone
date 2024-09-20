@@ -38,6 +38,11 @@ const authOptions: NextAuthOptions = {
       if (account && ['google', 'github'].includes(account.provider)) {
         token.email = user.id;
       }
+      if (trigger === 'update' && session !== null) {
+        const { name, image } = session as { name: string; image: string };
+        token.name = name;
+        token.picture = image;
+      }
       return token;
     },
     async session({ token, session, newSession, user }) {

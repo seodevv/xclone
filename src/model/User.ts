@@ -3,6 +3,13 @@ interface Verified {
   date: string;
 }
 
+export interface Birth {
+  date: string;
+  scope: {
+    month: 'public' | 'follower' | 'following' | 'each' | 'only';
+    year: 'public' | 'follower' | 'following' | 'each' | 'only';
+  };
+}
 export interface User {
   id: string;
   password: string;
@@ -10,6 +17,8 @@ export interface User {
   image: string;
   banner?: string;
   desc?: string;
+  birth?: Birth;
+  location?: string;
   refer?: string;
   verified?: Verified;
   regist: string;

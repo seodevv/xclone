@@ -1,27 +1,8 @@
-.background {
-  position: absolute;
-  top: 0;
-  left: 0;
-  z-index: 99;
-}
-.context_menu {
-  position: absolute;
-  display: flex;
-  flex-direction: column;
-  background: rgb(var(--background-start-rgb));
-  border-radius: 12px;
-  box-shadow: rgba(255, 255, 255, 0.2) 0px 0px 15px,
-    rgba(255, 255, 255, 0.15) 0px 0px 3px 1px;
-  overflow: hidden;
-}
-
-/* ContextMenu */
 .menu {
   padding: 12px 16px;
   display: flex;
   align-items: center;
   width: 100%;
-  text-wrap: nowrap;
   cursor: pointer;
   color: rgb(var(--foreground-rgb));
   fill: rgb(var(--foreground-rgb));
@@ -45,9 +26,28 @@
 .icon svg {
   fill: inherit;
 }
+.desc {
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+  flex-shrink: 1;
+}
 .title {
   font-size: 15px;
   font-weight: 700;
   color: inherit;
   line-height: 20px;
+  word-break: keep-all;
+  word-wrap: break-word;
+  white-space: pre-wrap;
+  text-wrap: nowrap;
+}
+.sub {
+  font-size: 14px;
+  font-weight: 400;
+  color: rgb(var(--link-rgb));
+  line-height: 16px;
+  word-break: keep-all;
+  word-wrap: break-word;
+  white-space: pre-wrap;
 }

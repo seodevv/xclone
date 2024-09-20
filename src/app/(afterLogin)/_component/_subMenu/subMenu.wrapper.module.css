@@ -1,0 +1,17 @@
+.background {
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 99;
+}
+.context_menu {
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  max-width: 384px;
+  background: rgb(var(--background-start-rgb));
+  border-radius: 12px;
+  box-shadow: rgba(255, 255, 255, 0.2) 0px 0px 15px,
+    rgba(255, 255, 255, 0.15) 0px 0px 3px 1px;
+  overflow: hidden;
+}

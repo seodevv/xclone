@@ -1,0 +1,54 @@
+.theme {
+  color: rgb(var(--font-theme-rgb));
+}
+.gray {
+  color: rgb(var(--link-rgb));
+}
+.primary {
+  color: rgb(var(--primary-rgb));
+}
+.error {
+  color: rgb(var(--error-rgb));
+}
+.xs {
+  font-size: 13px;
+  line-height: 16px;
+}
+.s {
+  font-size: 14px;
+  line-height: 16px;
+}
+.m {
+  font-size: 15px;
+  line-height: 20px;
+}
+.l {
+  font-size: 17px;
+  line-height: 20px;
+}
+.xl {
+  font-size: 20px;
+  line-height: 24px;
+}
+
+.light {
+  font-weight: 200;
+}
+.normal {
+  font-weight: 400;
+}
+.bold {
+  font-weight: 700;
+}
+.boldest {
+  font-weight: 800;
+}
+.display {
+  display: block;
+}
+.inline-block {
+  display: inline-block;
+}
+.inline {
+  display: inline;
+}

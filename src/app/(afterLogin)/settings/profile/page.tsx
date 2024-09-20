@@ -1,9 +1,5 @@
-import HomePage from '@/app/(afterLogin)/home/page';
+import { redirect } from 'next/navigation';
 
-interface Props {
-  searchParams: { r?: string };
-}
-
-export default function SettingsProfilePage({ searchParams }: Props) {
-  return <HomePage searchParams={searchParams} />;
+export default function SettingsProfilePage() {
+  redirect('/home?r=settings,profile');
 }

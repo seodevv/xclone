@@ -1,0 +1,21 @@
+.content {
+  padding-bottom: 64px;
+  display: flex;
+  flex-direction: column;
+}
+.inputs {
+  padding: 0 16px;
+}
+.link {
+  padding: 12px 16px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: rgb(var(--background-start-rgb));
+  transition-duration: 200ms;
+  transition-property: background-color;
+  cursor: pointer;
+}
+.link:hover {
+  background: rgb(22, 24, 28);
+}

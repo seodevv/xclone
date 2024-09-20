@@ -9,10 +9,11 @@ interface Props {
   title: string;
   sub: string;
   btnText: string;
-  btnTheme: 'theme' | 'reverse' | 'white' | 'red' | 'primary';
+  btnTheme?: 'theme' | 'reverse' | 'white' | 'red' | 'primary';
   onClickOutSide?: () => void;
   onClickConfirm: MouseEventHandler<HTMLButtonElement>;
   onClickCancle: () => void;
+  noHidden?: boolean;
 }
 
 export default function ConfirmModal({
@@ -23,9 +24,10 @@ export default function ConfirmModal({
   onClickOutSide,
   onClickConfirm,
   onClickCancle,
+  noHidden,
 }: Props) {
   return (
-    <IBackground size="small" onClick={onClickOutSide}>
+    <IBackground size="small" onClick={onClickOutSide} noHidden={noHidden}>
       <div className={styles.title}>
         <span>{title}</span>
       </div>

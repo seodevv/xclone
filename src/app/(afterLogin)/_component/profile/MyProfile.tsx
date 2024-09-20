@@ -5,15 +5,16 @@ import utils from '@/app/utility.module.css';
 import cx from 'classnames';
 import Image from 'next/image';
 import { generateImagePath } from '@/app/_lib/common';
-import { Session } from 'next-auth';
+import { useSession } from 'next-auth/react';
 
 interface Props {
-  session: Session;
   width?: number;
   height?: number;
 }
 
-export default function MyProfile({ session, width = 45, height = 45 }: Props) {
+export default function MyProfile({ width = 45, height = 45 }: Props) {
+  const { data: session } = useSession();
+
   if (!session || !session.user || !session.user.image) {
     return null;
   }

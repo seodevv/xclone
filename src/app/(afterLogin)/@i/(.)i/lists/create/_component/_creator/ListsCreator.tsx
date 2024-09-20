@@ -44,8 +44,14 @@ export default function ListsCreator() {
       <div className={styles.inputs}>
         <IdentifierInput
           placeholder="Name"
-          defaultValue={mode === 'edit' && lists ? lists.name : state.name}
-          validate={{ allowEmpty: true, maxLength: 25 }}
+          defaultValue={
+            state.name
+              ? state.name
+              : mode === 'edit' && lists
+              ? lists.name
+              : state.name
+          }
+          validate={{ allowBlank: true, maxLength: 25 }}
           onSuccess={(value) => onSuccessHandler('setName', value)}
           onError={onErrorHandler}
         />
@@ -54,7 +60,11 @@ export default function ListsCreator() {
         <IdentifierTextarea
           placeholder="Description"
           defaultValue={
-            mode === 'edit' && lists ? lists.description : state.description
+            state.description
+              ? state.description
+              : mode === 'edit' && lists
+              ? lists.description
+              : state.description
           }
           validate={{ maxLength: 100 }}
           minRow={3}

@@ -13,7 +13,6 @@ import { useState } from 'react';
 import useListsFollowMutation from '@/app/(afterLogin)/@i/(.)i/lists/_hooks/useListsFollowMutation';
 import { useQueryClient } from '@tanstack/react-query';
 import useListsStore from '@/app/(afterLogin)/_store/ListsStore';
-import { usePathname } from 'next/navigation';
 
 interface Props {
   session: Session;
@@ -27,7 +26,6 @@ export default function SingleLists({ session, listId }: Props) {
     isError,
     error,
   } = useGetSingleListsQuery(listId);
-  const pathname = usePathname();
   const queryClient = useQueryClient();
   const listsFollowMutation = useListsFollowMutation();
   const [hover, setHover] = useState(false);

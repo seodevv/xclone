@@ -20,6 +20,7 @@ export interface AdvancedLists extends Lists {
   User: SafeUser;
   Member: UserId[];
   Follower: UserId[];
+  UnShow: UserId[];
   Posts: Post['postId'][];
   Pinned: boolean;
 }

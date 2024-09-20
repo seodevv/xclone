@@ -12,8 +12,11 @@ interface Props {
 
 export default function ComposePostBody({ session }: Props) {
   const router = useRouter();
-  const post = useComposeStore((state) => state.post);
-  const type = useComposeStore((state) => state.type);
+  const { post, type, defaultValue } = useComposeStore((state) => ({
+    post: state.post,
+    type: state.type,
+    defaultValue: state.defaultValue,
+  }));
 
   return (
     <div>
@@ -30,6 +33,7 @@ export default function ComposePostBody({ session }: Props) {
         }
         repost={type === 'quote' ? post : undefined}
         placeholder="What is hanppening?!"
+        defaultValue={defaultValue}
         minRows={3}
         onSubmitEnd={() => {
           router.back();

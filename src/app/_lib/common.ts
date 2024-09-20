@@ -1,9 +1,11 @@
+import { InfiniteData } from '@tanstack/react-query';
+
 export const generateImagePath = (image?: string) => {
   if (!image) {
     return `${process.env.NEXT_PUBLIC_SERVER_URL}/api/image/default_profile.png`;
   }
 
-  const regex = /^http?s/;
+  const regex = /^http?s|^data:image/;
   return regex.test(image)
     ? image
     : `${process.env.NEXT_PUBLIC_SERVER_URL}/api/image/${image}`;
@@ -132,6 +134,14 @@ export const delay = (duration: number) =>
       res(null);
     }, duration);
   });
+
+export function isSingleData<T, K>(
+  data:
+    | { data: T; message: string }
+    | InfiniteData<{ data: T[]; nextCursor?: K; message: string }, K>
+): data is { data: T; message: string } {
+  return Object.hasOwn(data, 'data');
+}
 
 export const IMAGE_DEFAULT_PROFILE = generateImagePath('default_profile.png');
 export const IMAGE_DEFAULT_LISTS = generateImagePath('default_lists.png');

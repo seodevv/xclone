@@ -7,6 +7,7 @@ const useGetListsRecommends = () =>
     queryFn: getListsRecommends,
     initialPageParam: 0,
     getNextPageParam: (lastPage) => lastPage.nextCursor,
+    maxPages: 3,
   });
 
 export default useGetListsRecommends;

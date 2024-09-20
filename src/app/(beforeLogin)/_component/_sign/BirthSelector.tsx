@@ -27,9 +27,9 @@ const BirthSelector = forwardRef<IdentifierInputRef, Props>(
   ({ defaultValue, onSuccess, disabled }, ref) => {
     const [date, setDate] = useState(new Date(defaultValue || Date.now()));
     const status = useRef<Status>({
-      a: { disabled: false, ref: useRef<IdentifierInputRef>(null) },
-      b: { disabled: false, ref: useRef<IdentifierInputRef>(null) },
-      c: { disabled: false, ref: useRef<IdentifierInputRef>(null) },
+      a: { disabled: !!defaultValue, ref: useRef<IdentifierInputRef>(null) },
+      b: { disabled: !!defaultValue, ref: useRef<IdentifierInputRef>(null) },
+      c: { disabled: !!defaultValue, ref: useRef<IdentifierInputRef>(null) },
     });
 
     const checkDate = ({

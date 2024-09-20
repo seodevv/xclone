@@ -1,19 +1,30 @@
+import styles from '../_style/svg.module.css';
+import cx from 'classnames';
 import { CSSProperties } from 'react';
 
 interface Props {
   className?: string;
   style?: CSSProperties;
   width?: number;
+  white?: boolean;
+  inherit?: boolean;
 }
 
 export default function ReferenceSvg({
   className,
   style,
   width = 18.75,
+  white,
+  inherit,
 }: Props) {
   return (
     <svg
-      className={className}
+      className={cx(
+        styles.defaultSvg,
+        white && styles.white,
+        inherit && styles.inherit,
+        className
+      )}
       style={style}
       width={width}
       viewBox="0 0 24 24"

@@ -22,6 +22,7 @@ export default async function ListsSuggestedHydrationBoundary({
     queryKey: ['lists', 'list', 'recommends'],
     queryFn: getListsRecommends,
     initialPageParam: 0,
+    maxPages: 3,
   });
   const dehydrateState = dehydrate(queryClient);
 

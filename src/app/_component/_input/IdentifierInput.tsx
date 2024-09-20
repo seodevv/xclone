@@ -23,12 +23,14 @@ interface Props {
     regex?: RegExp;
     required?: boolean;
     allowEmpty?: boolean;
+    allowBlank?: boolean;
     message?: string;
   };
   disabled?: boolean;
   readOnly?: boolean;
   passwordHide?: boolean;
   noTab?: boolean;
+  onChange?: (value: string) => void;
   onEnter?: () => void;
   onSuccess?: (value: string) => void;
   onError?: () => void;
@@ -51,6 +53,7 @@ const IdentifierInput = forwardRef<IdentifierInputRef, Props>(
       readOnly = false,
       passwordHide,
       noTab,
+      onChange,
       onEnter,
       onSuccess,
       onError,
@@ -80,17 +83,20 @@ const IdentifierInput = forwardRef<IdentifierInputRef, Props>(
         return !result;
       }
 
-      const { minLength, maxLength, regex, allowEmpty, required } = validate;
+      const { minLength, maxLength, regex, allowEmpty, allowBlank, required } =
+        validate;
       const blank = /\s/;
-      if (type !== 'password' && allowEmpty && str.startsWith(' ')) {
+      if (type !== 'password' && str.startsWith(' ')) {
         errorHandler('Input cannot begin with a space.');
-      } else if (!allowEmpty && blank.test(str)) {
+      } else if (!allowEmpty && str === '') {
         errorHandler('Input cannot contain empty spaces.');
+      } else if (!allowBlank && blank.test(str)) {
+        errorHandler('Input cannot contain blank spaces.');
       } else if (minLength && str.length < minLength) {
         errorHandler(`Make sure it’s ${minLength} characters or more.`);
       } else if (maxLength && str.length > maxLength) {
         errorHandler(`Make sure it’s ${maxLength} characters or less.`);
-      } else if (regex && !regex.test(str)) {
+      } else if (regex && !regex.test(str) && str !== '') {
         errorHandler(validate.message || 'This is not a valid input.');
       } else if (required && !str) {
         errorHandler(validate.message || 'Please enter your input.');
@@ -115,6 +121,10 @@ const IdentifierInput = forwardRef<IdentifierInputRef, Props>(
       if (timerRef.current) clearTimeout(timerRef.current);
 
       setState(e.target.value);
+
+      if (typeof onChange === 'function') {
+        onChange(e.target.value);
+      }
 
       if (e.target.value) {
         setHighlight(true);

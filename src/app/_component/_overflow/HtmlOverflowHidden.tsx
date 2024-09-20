@@ -2,12 +2,20 @@
 
 import { useEffect } from 'react';
 
-export default function HtmlOverflowHidden() {
+interface Props {
+  noHidden?: boolean;
+}
+
+export default function HtmlOverflowHidden({ noHidden }: Props) {
   useEffect(() => {
-    document.documentElement.style.overflow = 'hidden';
+    if (!noHidden) {
+      document.documentElement.style.overflow = 'hidden';
+    }
 
     return () => {
-      document.documentElement.style.overflow = '';
+      if (!noHidden) {
+        document.documentElement.style.overflow = '';
+      }
     };
   }, []);
 

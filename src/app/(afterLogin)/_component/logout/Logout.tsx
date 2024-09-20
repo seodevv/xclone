@@ -1,21 +1,35 @@
-import style from './logout.module.css';
-import { Session } from 'next-auth';
+'use client';
+
+import styles from './logout.module.css';
 import Image from 'next/image';
 import { generateImagePath } from '@/app/_lib/common';
-import LogoutButton from './LogoutButton';
+import { signOut, useSession } from 'next-auth/react';
+import { useRouter } from 'next/navigation';
 
-interface Props {
-  session: Session | null;
-}
+export default function Logout() {
+  const router = useRouter();
+  const { data: session } = useSession();
+  const onClickLogout = async () => {
+    try {
+      await signOut({ redirect: false });
+      await fetch(`${process.env.NEXT_PUBLIC_SERVER_URL}/api/logout`, {
+        method: 'post',
+        credentials: 'include',
+      });
+      router.push('/');
+      router.refresh();
+    } catch (error) {
+      console.error(error);
+    }
+  };
 
-export default async function Logout({ session }: Props) {
   if (!session || !session.user) {
     return null;
   }
 
   return (
-    <LogoutButton>
-      <div className={style.logOutUserImage}>
+    <button className={styles.logOutButton} onClick={onClickLogout}>
+      <div className={styles.logOutUserImage}>
         {session.user.image && (
           <Image
             src={generateImagePath(session.user.image)}
@@ -25,10 +39,10 @@ export default async function Logout({ session }: Props) {
           />
         )}
       </div>
-      <div className={style.logOutUserName}>
+      <div className={styles.logOutUserName}>
         <div>{session.user.name}</div>
         <div>@{session.user.email}</div>
       </div>
-    </LogoutButton>
+    </button>
   );
 }

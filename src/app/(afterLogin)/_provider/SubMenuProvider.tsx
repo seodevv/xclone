@@ -10,6 +10,8 @@ import WhoCanReply from '@/app/(afterLogin)/_component/_subMenu/WhoCanReply';
 import UnPostModal from '@/app/(afterLogin)/_component/alter/UnPostModal';
 import SearchListsOptionsSubMenu from '@/app/(afterLogin)/_component/_subMenu/SearchListsOptionsSubMenu';
 import { AdvancedLists } from '@/model/Lists';
+import ListsShareSubMenu from '@/app/(afterLogin)/_component/_subMenu/ListsShareSubMenu';
+import ListsShowSubMenu from '@/app/(afterLogin)/_component/_subMenu/ListsShowSubMenu';
 
 interface State {
   status:
@@ -20,7 +22,9 @@ interface State {
     | 'highlight'
     | 'unPin'
     | 'whoCanReply'
-    | 'searchListsOption';
+    | 'searchListsOption'
+    | 'listsShare'
+    | 'listsShow';
   flag: boolean;
   position: {
     x: number;
@@ -84,6 +88,10 @@ export default function SubMenuProvider({ children }: Props) {
       {menu.flag && menu.status === 'whoCanReply' && <WhoCanReply />}
       {menu.flag && menu.status === 'searchListsOption' && (
         <SearchListsOptionsSubMenu />
+      )}
+      {menu.flag && menu.status === 'listsShare' && <ListsShareSubMenu />}
+      {menu.flag && menu.status === 'listsShow' && menu.lists && (
+        <ListsShowSubMenu lists={menu.lists} />
       )}
     </SubMenuContext.Provider>
   );

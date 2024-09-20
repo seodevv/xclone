@@ -55,6 +55,7 @@ export default function UnListsModal() {
       onClickOutSide={closeModal}
       onClickConfirm={unListHandler}
       onClickCancle={closeModal}
+      noHidden
     />
   );
 }

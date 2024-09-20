@@ -1,0 +1,71 @@
+.selector {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  flex-wrap: nowrap;
+  flex-grow: 1;
+  background: rgb(var(--background-start-rgb));
+  border: 1px solid rgb(var(--border-start-rgb));
+  border-radius: 4px;
+}
+.selector:focus-within {
+  border: 1px solid rgb(var(--primary-rgb));
+  box-shadow: rgb(var(--primary-rgb)) 0 0 0 1px;
+}
+.selector:focus-within .label {
+  color: rgb(var(--primary-rgb));
+}
+.selector:focus-within .arrow {
+  fill: rgb(var(--primary-rgb));
+}
+.label {
+  padding: 8px;
+  position: absolute;
+}
+.select {
+  margin-top: 16px;
+  padding: 12px 8px 8px 8px;
+  position: relative;
+  z-index: 1;
+  background: transparent;
+  border: none;
+  outline: none;
+  font-size: 17px;
+  color: rgb(var(--foreground-rgb));
+  line-height: 20px;
+  cursor: pointer;
+  appearance: none;
+}
+.select::-webkit-scrollbar {
+  width: 14px;
+}
+.select::-webkit-scrollbar-track {
+  background: rgb(var(--scroll-background));
+}
+.select::-webkit-scrollbar-thumb {
+  background: rgb(var(--scroll-thumb));
+}
+.option {
+  background: rgb(var(--background-start-rgb));
+  font-size: inherit;
+  color: rgb(var(--link-rgb));
+  line-height: inherit;
+}
+.arrow {
+  position: absolute;
+  top: 50%;
+  right: 12px;
+  display: inline-block;
+  margin-top: -0.75em;
+  height: 1.5em;
+  cursor: pointer;
+}
+.disabled {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  background: rgb(var(--search-rgb));
+  opacity: 0.5;
+}

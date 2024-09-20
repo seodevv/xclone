@@ -33,6 +33,7 @@ interface Props {
   };
   repost?: AdvancedPost;
   placeholder?: string;
+  defaultValue?: string;
   minRows?: number;
   maxRows?: number;
   fontSize?: number;
@@ -50,6 +51,7 @@ export default function PostForm({
   parent,
   repost,
   placeholder = 'Post your reply',
+  defaultValue = '',
   minRows = 1,
   maxRows = 10,
   fontSize = 20,
@@ -58,7 +60,7 @@ export default function PostForm({
 }: Props) {
   const { alterMessage } = useAlterModal();
   const [active, setActive] = useState(mode !== 'comment');
-  const [content, setContent] = useState('');
+  const [content, setContent] = useState(defaultValue);
   const [lastSelection, setLastSelection] = useState(0);
   const [images, setImages] = useState<MediaType[]>([]);
   const contentRef = useRef<HTMLTextAreaElement>(null);
@@ -135,7 +137,7 @@ export default function PostForm({
       <form className={cx(styles.postForm)} onSubmit={onSubmitForm}>
         <div className={cx(styles.postFormFlex, active && styles.active)}>
           <div className={styles.postUserSection}>
-            <MyProfile session={session} width={40} height={40} />
+            <MyProfile width={40} height={40} />
           </div>
           <div className={styles.postInputSection}>
             <div className={styles.postTextareaSection}>

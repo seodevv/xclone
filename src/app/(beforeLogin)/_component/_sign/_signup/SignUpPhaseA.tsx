@@ -57,7 +57,7 @@ export default function SignUpPhaseA() {
             maxLength: 24,
             required: true,
             message: 'What’s your nickname?',
-            allowEmpty: true,
+            allowBlank: true,
           }}
           onSuccess={(value) => {
             set({
