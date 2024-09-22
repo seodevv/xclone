@@ -5,7 +5,7 @@ import { useEffect, useRef } from 'react';
 
 export default function AddHistoryStack() {
   const addStack = useHistoryStore((state) => state.addStack);
-  const { stack, enable, resetEnable } = useHistoryStore((state) => ({
+  const { enable, resetEnable } = useHistoryStore((state) => ({
     stack: state.stack,
     enable: state.enable,
     resetEnable: state.resetEnable,

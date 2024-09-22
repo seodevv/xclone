@@ -26,12 +26,7 @@ export default function RepostSubMenu() {
         svg={<RepostSvg width={18.75} white />}
         title={isReposted ? 'Undo repost' : 'Repost'}
         onClick={() => {
-          if (
-            !menu.post ||
-            !session?.user?.email ||
-            !session.user.image ||
-            !session.user.name
-          ) {
+          if (!menu.post || !session?.user?.email) {
             return;
           }
 
@@ -39,11 +34,7 @@ export default function RepostSubMenu() {
             type: 'Reposts',
             method: isReposted ? 'delete' : 'post',
             post: menu.post,
-            session: {
-              email: session.user.email,
-              image: session.user.image,
-              name: session.user.name,
-            },
+            sessionId: session.user.email,
             queryClient,
           });
           dispatchMenu({ type: 'reset' });

@@ -50,7 +50,7 @@ export default function PostBody({
           >
             <span>
               {post.User.nickname}
-              <BadgeButton badge={post.User.verified} unClickable />
+              <BadgeButton verified={post.User.verified} unClickable />
             </span>
             <span>@{post.User.id}</span>
             <span>·</span>

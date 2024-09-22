@@ -78,6 +78,10 @@ export default function SubsribeSelector() {
           state.period === 'annual'
             ? (scribe.price.origin * salesRate) / 12
             : scribe.price.origin / 12;
+
+        if (state.mode === 'verified' && scribe.subscribe === 'basic') {
+          return null;
+        }
         return (
           <div
             key={scribe.subscribe}

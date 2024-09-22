@@ -1,4 +1,4 @@
-interface Verified {
+export interface Verified {
   type: 'blue' | 'gold' | 'gray';
   date: string;
 }
@@ -32,6 +32,7 @@ export interface SafeUser
   extends Pick<User, 'id' | 'nickname' | 'image' | 'verified'> {}
 export interface AdvancedUser extends Omit<User, 'password'> {
   Followers: UserId[];
+  Followings: UserId[];
   _count: {
     Followers: number;
     Followings: number;

@@ -1,4 +1,4 @@
-import styles from './post.module.css';
+import styles from './noPost.module.css';
 
 interface Props {
   title: string;

@@ -9,11 +9,13 @@ import PremiumFooter from '@/app/(afterLogin)/@i/(.)i/premium_sign_up/_component
 import PeriodSelector from '@/app/(afterLogin)/@i/(.)i/premium_sign_up/_component/PeriodSelector';
 import SubsribeSelector from '@/app/(afterLogin)/@i/(.)i/premium_sign_up/_component/SubscribeSelector';
 import PremiumInformation from '@/app/(afterLogin)/@i/(.)i/premium_sign_up/_component/_information/PremiumInformation';
+import AddHistoryStack from '@/app/(afterLogin)/@i/(.)i/_component/AddHistoryStack';
 
 export default function IPremiumSignUpSlot() {
   return (
     <PremiumSignUpProvider>
       <main className={cx(styles.background, utils.fadeIn)}>
+        <AddHistoryStack />
         <HtmlOverflowHidden />
         <div className={styles.inner}>
           <div className={styles.body}>

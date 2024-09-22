@@ -1,0 +1,22 @@
+.additional {
+  margin-right: 8px;
+  display: flex;
+  align-items: center;
+  font-size: 15px;
+  font-weight: 400;
+  line-height: 16px;
+}
+.div {
+  color: rgb(var(--link-rgb));
+}
+.link {
+  color: rgb(var(--link-primary-rgb));
+}
+.link:hover > span {
+  text-decoration: underline;
+}
+.svg {
+  margin-right: 4px;
+  display: flex;
+  align-items: center;
+}

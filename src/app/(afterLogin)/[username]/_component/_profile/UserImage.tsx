@@ -1,4 +1,5 @@
-import styles from './userProfile.module.css';
+import styles from './userImage.module.css';
+import cx from 'classnames';
 import Image from 'next/image';
 import { generateImagePath } from '@/app/_lib/common';
 import { Session } from 'next-auth';
@@ -6,6 +7,7 @@ import { AdvancedUser } from '@/model/User';
 import FollowButton from '@/app/(afterLogin)/_component/buttons/FollowButton';
 import TextLink from '@/app/(afterLogin)/_component/Link/TextLink';
 import MessageButton from '@/app/(afterLogin)/_component/buttons/MessageButton';
+import Link from 'next/link';
 
 interface Props {
   session?: Session | null;
@@ -17,18 +19,27 @@ export default function UserImage({ session, user }: Props) {
 
   return (
     <div className={styles.userImage}>
-      <div className={styles.imageBox}>
-        {user && (
-          <Image
-            src={generateImagePath(user.image)}
-            alt={user.id}
-            width={145}
-            height={145}
-          />
-        )}
-      </div>
+      <Link
+        className={styles.imageBox}
+        href={`${user?.id}/photo`}
+        scroll={false}
+      >
+        <div className={styles.pad}></div>
+        <div className={styles.absolute}>
+          {user && (
+            <Image
+              className={styles.image}
+              src={generateImagePath(user.image)}
+              alt={user.id}
+              width={145}
+              height={145}
+            />
+          )}
+        </div>
+        <div className={cx(styles.absolute, styles.effect)}></div>
+      </Link>
       {user && (
-        <div className={styles.userAction}>
+        <div className={styles.flex}>
           {isMyProfile ? (
             <TextLink
               theme="reverse"

@@ -1,6 +1,7 @@
 'use client';
 
 import styles from './button.module.css';
+import cx from 'classnames';
 import {
   CSSProperties,
   MouseEventHandler,
@@ -8,17 +9,17 @@ import {
   useRef,
   useState,
 } from 'react';
-import cx from 'classnames';
 import BadgeSvg from '@/app/_svg/verified/BadgeSvg';
 import Link from 'next/link';
 import CalendarSvg from '@/app/_svg/profile/CalendarSvg';
-import { User } from '@/model/User';
+import { Verified } from '@/model/User';
 import { MONTH_EN } from '@/app/_lib/common';
 import useViewport from '../../_hooks/useViewport';
 
 interface Props {
+  className?: string;
   style?: CSSProperties;
-  badge?: User['verified'];
+  verified?: Verified;
   width?: number;
   unClickable?: boolean;
 }
@@ -34,8 +35,9 @@ interface Active {
 }
 
 export default function BadgeButton({
+  className,
   style,
-  badge,
+  verified,
   width = 20,
   unClickable,
 }: Props) {
@@ -101,10 +103,10 @@ export default function BadgeButton({
     }
   }, [active.flag, setActive, viewWidth, viewHeight]);
 
-  if (!badge) return null;
+  if (!verified) return null;
 
   let message;
-  switch (badge.type) {
+  switch (verified.type) {
     case 'blue':
       message = 'This account is verified.';
       break;
@@ -119,14 +121,14 @@ export default function BadgeButton({
   }
 
   return (
-    <div className={styles.badgeContainer} style={style}>
+    <div className={cx(styles.badgeContainer, className)} style={style}>
       <button
         className={styles.badgeBtn}
         style={{ width: width, height: width }}
         type="button"
         onClick={onClickBadge}
       >
-        <BadgeSvg type={badge.type} width={width} />
+        <BadgeSvg type={verified.type} width={width} />
       </button>
       {active.flag && (
         <div
@@ -152,7 +154,7 @@ export default function BadgeButton({
             </div>
             <div className={styles.badgeType}>
               <BadgeSvg
-                type={badge.type}
+                type={verified.type}
                 width={22}
                 style={{ margin: 0, minWidth: 22 }}
               />
@@ -173,11 +175,15 @@ export default function BadgeButton({
               <CalendarSvg width={22} white />
               <span>
                 {`Verified since ${
-                  MONTH_EN[new Date(badge.date).getMonth()]
-                } ${new Date(badge.date).getFullYear()}.`}
+                  MONTH_EN[new Date(verified.date).getMonth()]
+                } ${new Date(verified.date).getFullYear()}.`}
               </span>
             </div>
-            <Link href={'#'} className={styles.getPremium}>
+            <Link
+              className={styles.getPremium}
+              href="/i/premium_sign_up"
+              scroll={false}
+            >
               <span>Upgrade to get verified</span>
             </Link>
           </div>

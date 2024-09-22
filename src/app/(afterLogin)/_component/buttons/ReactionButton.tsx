@@ -52,8 +52,7 @@ export default function ReactionButton({
   const reactionMutation = useReactionMutation();
   const onClickReaction: MouseEventHandler<HTMLButtonElement> = (e) => {
     e.stopPropagation();
-    if (!session?.user?.email || !session.user.name || !session.user.image)
-      return;
+    if (!session?.user?.email) return;
 
     switch (type) {
       case 'Comments':
@@ -91,11 +90,7 @@ export default function ReactionButton({
           queryClient,
           method: active ? 'delete' : 'post',
           post: post,
-          session: {
-            email: session.user.email,
-            name: session.user.name,
-            image: session.user.image,
-          },
+          sessionId: session.user.email,
         });
         if (type === 'Hearts' && !active) {
           alterMessage(

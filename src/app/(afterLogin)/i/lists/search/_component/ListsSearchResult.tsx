@@ -27,19 +27,15 @@ export default function ListsSearchResult({ searchParams }: Props) {
   if (searchLists) {
     if (searchLists.pages[0].data.length === 0) {
       return (
-        <NoPost
-          title={`No Lists matched "${q}"`}
-          message="Why not create one?"
-          children={
-            <TextLink
-              href="/i/lists/create"
-              text="Create new List"
-              theme="white"
-              size="large"
-              inline
-            />
-          }
-        />
+        <NoPost title={`No Lists matched "${q}"`} message="Why not create one?">
+          <TextLink
+            href="/i/lists/create"
+            text="Create new List"
+            theme="white"
+            size="large"
+            inline
+          />
+        </NoPost>
       );
     }
 

@@ -1,8 +1,16 @@
 'use client';
 
-import { createContext, Dispatch, Reducer, useReducer } from 'react';
+import { useSearchParams } from 'next/navigation';
+import {
+  createContext,
+  Dispatch,
+  Reducer,
+  useLayoutEffect,
+  useReducer,
+} from 'react';
 
 const initialState: State = {
+  mode: 'all',
   period: 'annual',
   subscribe: {
     id: 'premium',
@@ -13,6 +21,8 @@ const initialState: State = {
 
 const reducer: Reducer<State, Action> = (state, action) => {
   switch (action.type) {
+    case 'setMode':
+      return { ...state, mode: action.payload };
     case 'setPeriod':
       return { ...state, period: action.payload };
     case 'setSubscribe':
@@ -38,6 +48,14 @@ interface Props {
 
 export default function PremiumSignUpProvider({ children }: Props) {
   const [state, dispatch] = useReducer(reducer, initialState);
+  const searchParams = useSearchParams();
+
+  useLayoutEffect(() => {
+    const type = searchParams.get('type');
+    if (type) {
+      dispatch({ type: 'setMode', payload: 'verified' });
+    }
+  }, [searchParams]);
 
   return (
     <PremiumSignUpContext.Provider value={{ state, dispatch }}>
@@ -47,6 +65,7 @@ export default function PremiumSignUpProvider({ children }: Props) {
 }
 
 interface State {
+  mode: 'all' | 'verified';
   period: 'annual' | 'monthly';
   subscribe: {
     id: 'basic' | 'premium' | 'premium+';
@@ -56,6 +75,7 @@ interface State {
 }
 
 type Action =
+  | { type: 'setMode'; payload: State['mode'] }
   | {
       type: 'setPeriod';
       payload: State['period'];

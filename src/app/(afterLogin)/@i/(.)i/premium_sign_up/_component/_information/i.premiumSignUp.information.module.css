@@ -13,8 +13,3 @@
   color: rgb(var(--foreground-rgb));
   line-height: 32px;
 }
-.table {
-  margin-top: 32px;
-  display: flex;
-  flex-direction: column;
-}

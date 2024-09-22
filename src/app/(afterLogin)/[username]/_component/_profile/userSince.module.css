@@ -1,0 +1,29 @@
+.userSince {
+  margin-bottom: 12px;
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 4px;
+  font-size: 15px;
+}
+.since {
+  margin-right: 8px;
+  display: flex;
+  align-items: center;
+  color: rgb(var(--link-rgb));
+}
+.link {
+  margin-right: 8px;
+  display: flex;
+  align-items: center;
+  color: rgb(var(--link-primary-rgb));
+  line-height: 12px;
+}
+.link:hover > span {
+  text-decoration: underline;
+}
+.svg {
+  margin-right: 4px;
+  display: flex;
+  align-items: center;
+}

@@ -16,16 +16,10 @@ export default function PremiumInformation() {
       <div className={styles.title}>
         <span>Compare tiers & features</span>
       </div>
-      <PremiumInformationTable
-        className={styles.table}
-        table={enhanced_experience}
-      />
-      <PremiumInformationTable className={styles.table} table={creator_hub} />
-      <PremiumInformationTable
-        className={styles.table}
-        table={verification_security}
-      />
-      <PremiumInformationTable className={styles.table} table={customization} />
+      <PremiumInformationTable table={enhanced_experience} />
+      <PremiumInformationTable table={creator_hub} />
+      <PremiumInformationTable table={verification_security} />
+      <PremiumInformationTable table={customization} />
     </div>
   );
 }

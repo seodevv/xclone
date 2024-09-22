@@ -24,7 +24,7 @@ export default function PostQuote({ mode, post, noImage, noEvent }: Props) {
           <OtherProfile user={post.User} width={24} noevent />
           <span className={styles.nick}>
             {post.User.nickname}
-            <BadgeButton badge={post.User.verified} unClickable />
+            <BadgeButton verified={post.User.verified} unClickable />
           </span>
           <span className={styles.id}>@{post.User.id}</span>
           <span className={styles.dot}>·</span>

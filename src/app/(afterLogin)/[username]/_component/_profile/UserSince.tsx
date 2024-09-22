@@ -1,34 +1,40 @@
-import styles from './userProfile.module.css';
-import CalendarSvg from '@/app/_svg/profile/CalendarSvg';
+import styles from './userSince.module.css';
 import { MONTH_EN } from '@/app/_lib/common';
-import Link from 'next/link';
-import ReferenceSvg from '@/app/_svg/profile/ReferenceSvg';
+import { AdvancedUser, Birth } from '@/model/User';
+import UserBirth from '@/app/(afterLogin)/[username]/_component/_profile/UserBirth';
+import { Session } from 'next-auth';
+import UserAdditional from '@/app/(afterLogin)/[username]/_component/_profile/UserAdditional';
 
 interface Props {
-  refer?: string;
-  regist?: string;
+  session: Session | null;
+  user?: AdvancedUser;
 }
 
-export default function UserSince({ refer, regist }: Props) {
-  if (!refer && !regist) return null;
+export default function UserSince({ session, user }: Props) {
+  if (!user) return;
 
   return (
     <div className={styles.userSince}>
-      {refer && (
-        <Link href={refer} target="_blank" className={styles.refer}>
-          <ReferenceSvg className={styles.referSvg} />
-          <span>{refer}</span>
-        </Link>
+      {user.location && (
+        <UserAdditional type="div" icon="location" text={user.location} />
       )}
-      {regist && (
-        <span className={styles.registDate}>
-          <CalendarSvg className={styles.calendar} />
-          <span>
-            {`Joined ${MONTH_EN[new Date(regist).getMonth()]} ${new Date(
-              regist
-            ).getFullYear()}`}
-          </span>
-        </span>
+      {user.refer && (
+        <UserAdditional
+          type="link"
+          href={user.refer}
+          icon="refer"
+          text={user.refer}
+        />
+      )}
+      {user.birth && <UserBirth sessionId={session?.user?.email} user={user} />}
+      {user.regist && (
+        <UserAdditional
+          type="div"
+          icon="calendar"
+          text={`Joined ${
+            MONTH_EN[new Date(user.regist).getMonth()]
+          } ${new Date(user.regist).getFullYear()}`}
+        />
       )}
     </div>
   );

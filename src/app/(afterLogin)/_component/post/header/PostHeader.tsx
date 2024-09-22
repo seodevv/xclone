@@ -28,7 +28,7 @@ export default function PostHeader({ mode, post }: Props) {
             >
               <span className={styles.postUserName}>
                 {post.User.nickname}
-                <BadgeButton badge={post.User.verified} unClickable />
+                <BadgeButton verified={post.User.verified} unClickable />
               </span>
               <span className={styles.postUserId}>@{post.User.id}</span>
             </Link>

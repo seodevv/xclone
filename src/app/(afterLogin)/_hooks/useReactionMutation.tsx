@@ -8,18 +8,12 @@ import {
   useMutation,
 } from '@tanstack/react-query';
 
-interface RequiredSession {
-  email: string;
-  name: string;
-  image: string;
-}
-
 interface ReactionMutationParams {
   queryClient: QueryClient;
   type: 'Comments' | 'Hearts' | 'Reposts' | 'Bookmarks';
   method: 'post' | 'delete';
   post: AdvancedPost;
-  session: RequiredSession;
+  sessionId: string;
 }
 
 const useReactionMutation = () =>
@@ -55,7 +49,7 @@ const useReactionMutation = () =>
 
       return response.json();
     },
-    onMutate: ({ queryClient, type, method, post, session }) => {
+    onMutate: ({ queryClient, type, method, post, sessionId }) => {
       const queryCache = queryClient.getQueryCache();
       const queryKeys = queryCache.getAll().map((q) => q.queryKey);
 
@@ -83,13 +77,13 @@ const useReactionMutation = () =>
             const shallow = { ...queryData };
             const already = shallow.data[type]
               .map((u) => u.id)
-              .includes(session?.email);
+              .includes(sessionId);
             // increase reaction
             // type is 'Comments' | 'Reposts' | 'Hearts' | 'Bookmarks'
             if (method === 'post' && !already) {
               shallow.data = {
                 ...shallow.data,
-                [type]: [...shallow.data[type], { id: session.email }],
+                [type]: [...shallow.data[type], { id: sessionId }],
                 _count: {
                   ...queryData.data._count,
                   [type]: shallow.data._count[type] + 1,
@@ -101,9 +95,7 @@ const useReactionMutation = () =>
             else if (method === 'delete' && already) {
               shallow.data = {
                 ...shallow.data,
-                [type]: queryData.data[type].filter(
-                  (u) => u.id !== session.email
-                ),
+                [type]: queryData.data[type].filter((u) => u.id !== sessionId),
                 _count: {
                   ...queryData.data._count,
                   [type]:
@@ -137,7 +129,7 @@ const useReactionMutation = () =>
                 const findPost = page.data.find(
                   (p) =>
                     p.Original?.postId === post.postId &&
-                    p.User.id === session.email &&
+                    p.User.id === sessionId &&
                     !p.quote
                 );
                 if (findPost) {
@@ -160,7 +152,7 @@ const useReactionMutation = () =>
                   data: [
                     {
                       ...post,
-                      Bookmarks: [...post.Bookmarks, { id: session.email }],
+                      Bookmarks: [...post.Bookmarks, { id: sessionId }],
                     },
                     ...shallow.pages[0].data,
                   ],
@@ -186,9 +178,7 @@ const useReactionMutation = () =>
                   shallow.pages[i] = { ...shallow.pages[i] };
                   shallow.pages[i].data = [...shallow.pages[i].data];
 
-                  const already = p[type]
-                    .map((u) => u.id)
-                    .includes(session.email);
+                  const already = p[type].map((u) => u.id).includes(sessionId);
                   // update the target in the list
                   // type is "Comments" | "Hearts" | "Reposts" | "Bookmarks"
                   switch (method) {
@@ -196,7 +186,7 @@ const useReactionMutation = () =>
                       if (!already) {
                         shallow.pages[i].data[j] = {
                           ...p,
-                          [type]: [...p[type], { id: session.email }],
+                          [type]: [...p[type], { id: sessionId }],
                           _count: {
                             ...p._count,
                             [type]: p._count[type] + 1,
@@ -209,7 +199,7 @@ const useReactionMutation = () =>
                       if (already) {
                         shallow.pages[i].data[j] = {
                           ...p,
-                          [type]: p[type].filter((u) => u.id !== session.email),
+                          [type]: p[type].filter((u) => u.id !== sessionId),
                           _count: {
                             ...p._count,
                             [type]: p._count[type] < 0 ? 0 : p._count[type] - 1,
@@ -227,7 +217,7 @@ const useReactionMutation = () =>
                   shallow.pages[i].data = [...shallow.pages[i].data];
 
                   const already = p.Original[type].some(
-                    (u) => u.id === session.email
+                    (u) => u.id === sessionId
                   );
                   // update the repost target in the list
                   // type is "Comments" | "Hearts" | "Reposts" | "Bookmarks"
@@ -238,10 +228,7 @@ const useReactionMutation = () =>
                           ...shallow.pages[i].data[j],
                           Original: {
                             ...p.Original,
-                            [type]: [
-                              ...p.Original[type],
-                              { id: session.email },
-                            ],
+                            [type]: [...p.Original[type], { id: sessionId }],
                             _count: {
                               ...p.Original._count,
                               [type]: p.Original._count[type],
@@ -258,7 +245,7 @@ const useReactionMutation = () =>
                           Original: {
                             ...p.Original,
                             [type]: p.Original[type].filter(
-                              (u) => u.id !== session.email
+                              (u) => u.id !== sessionId
                             ),
                             _count: {
                               ...p.Original._count,
@@ -292,7 +279,7 @@ const useReactionMutation = () =>
         });
       }
     },
-    onSuccess: (response, { queryClient, type, method, post, session }) => {
+    onSuccess: (response, { queryClient, type, method, post, sessionId }) => {
       if (type === 'Reposts' && method === 'post' && response) {
         const queryCache = queryClient.getQueryCache();
         const queryKeys = queryCache.getAll().map((q) => q.queryKey);
@@ -301,7 +288,7 @@ const useReactionMutation = () =>
           const [a, b, c] = queryKey;
           if (a !== 'posts') return;
           if (b !== 'list') return;
-          if (c !== 'recommends' && c !== session.email) return;
+          if (c !== 'recommends' && c !== sessionId) return;
 
           const queryData =
             queryClient.getQueryData<
@@ -331,7 +318,7 @@ const useReactionMutation = () =>
           refetchType: 'none',
         });
         queryClient.invalidateQueries({
-          queryKey: ['posts', 'list', session.email],
+          queryKey: ['posts', 'list', sessionId],
           refetchType: 'none',
         });
         queryClient.invalidateQueries({

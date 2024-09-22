@@ -16,7 +16,11 @@ export default function PremiumTitle() {
       <div className={styles.organizations}>
         <span>
           &#40;For organizations,
-          <Link href="/i/verified-orgs-signup" className={styles.signup}>
+          <Link
+            href="/i/verified-orgs-signup"
+            className={styles.signup}
+            scroll={false}
+          >
             sign up here
           </Link>
           &#41;

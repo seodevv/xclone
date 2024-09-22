@@ -6,12 +6,12 @@ import {
 } from '@tanstack/react-query';
 
 interface Props {
-  sessionId: string;
+  username: string;
   children: React.ReactNode;
 }
 
 export default async function SingleUserHydrationBoundary({
-  sessionId,
+  username,
   children,
 }: Props) {
   const queryClient = new QueryClient();
@@ -19,7 +19,7 @@ export default async function SingleUserHydrationBoundary({
     queries: { staleTime: 5 * 60 * 1000 },
   });
   await queryClient.prefetchQuery({
-    queryKey: ['users', sessionId],
+    queryKey: ['users', username],
     queryFn: getUser,
   });
   const dehydrateState = dehydrate(queryClient);

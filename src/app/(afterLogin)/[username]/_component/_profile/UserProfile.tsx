@@ -1,6 +1,6 @@
 'use client';
 
-import style from './userProfile.module.css';
+import styles from './userProfile.module.css';
 import { useSelectedLayoutSegment } from 'next/navigation';
 import { Session } from 'next-auth';
 import { useUserQuery } from '../../_hooks/useUserQuery';
@@ -35,13 +35,17 @@ export default function UserProfile({ session, username }: Props) {
 
   return (
     <>
-      <UserBanner banner={user?.data.banner} />
-      <div className={style.information}>
+      <UserBanner username={username} banner={user?.data.banner} />
+      <div className={styles.information}>
         <UserImage session={session} user={user?.data} />
-        <div className={style.userText}>
-          <UserIdentifier username={username} user={user?.data} />
+        <div className={styles.userText}>
+          <UserIdentifier
+            sessionId={session?.user?.email}
+            username={username}
+            user={user?.data}
+          />
           <UserDesc desc={user?.data.desc} />
-          <UserSince refer={user?.data.refer} regist={user?.data.regist} />
+          <UserSince session={session} user={user?.data} />
           <UserFollowInfo user={user?.data} />
         </div>
       </div>

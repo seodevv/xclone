@@ -24,6 +24,9 @@
   align-items: center;
   width: 25%;
 }
+.verifiedItem {
+  width: 33.3333%;
+}
 .inform {
   margin-left: 4px;
   display: flex;
@@ -49,6 +52,9 @@
   }
   .item {
     width: 33.33%;
+  }
+  .verifiedItem {
+    width: 50%;
   }
   .item:first-child {
     padding-bottom: 8px;

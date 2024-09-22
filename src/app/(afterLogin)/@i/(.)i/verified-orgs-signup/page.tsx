@@ -1,3 +1,4 @@
+import AddHistoryStack from '@/app/(afterLogin)/@i/(.)i/_component/AddHistoryStack';
 import styles from './i.verifiedOrg.page.module.css';
 import IBackground from '@/app/(afterLogin)/@i/(.)i/_component/IBackground';
 import IHeader from '@/app/(afterLogin)/@i/(.)i/_component/IHeader';
@@ -10,6 +11,7 @@ export default function IVerifiedOrgSignUpSlot() {
   return (
     <VerifiedOrgProvider>
       <IBackground overflow="auto">
+        <AddHistoryStack />
         <IHeader title="Verified Organizations" />
         <div className={styles.body}>
           <AccessSelector />

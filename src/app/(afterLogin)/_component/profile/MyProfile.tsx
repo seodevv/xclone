@@ -15,7 +15,7 @@ interface Props {
 export default function MyProfile({ width = 45, height = 45 }: Props) {
   const { data: session } = useSession();
 
-  if (!session || !session.user || !session.user.image) {
+  if (!session || !session.user?.image) {
     return null;
   }
 
@@ -24,7 +24,7 @@ export default function MyProfile({ width = 45, height = 45 }: Props) {
       <Image
         className={styles.profile}
         src={generateImagePath(session.user.image)}
-        alt={session.user.email as string}
+        alt={session.user.image}
         width={width}
         height={width}
         style={{

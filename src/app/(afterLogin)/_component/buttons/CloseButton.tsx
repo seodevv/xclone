@@ -1,7 +1,7 @@
 'use client';
 
 import styles from './button.module.css';
-import { CSSProperties, useContext } from 'react';
+import { CSSProperties, MouseEventHandler, useContext } from 'react';
 import { useRouter } from 'next/navigation';
 import cx from 'classnames';
 import XMarkSvg from '@/app/_svg/tweet/XMarkSvg';
@@ -33,7 +33,9 @@ export default function CloseButton({
   const ctx = useContext(PathRecordContext);
   const resetStack = useHistoryStore((state) => state.resetStack);
 
-  const onClickDefault = () => {
+  const onClickDefault: MouseEventHandler<HTMLButtonElement> = (e) => {
+    e.preventDefault();
+    e.stopPropagation();
     if (prevPath) {
       if (ctx.prevPath === ctx.path) {
         router.push(prevPath);
