@@ -43,11 +43,11 @@ export default function ListsMember({ filter, lists, member }: Props) {
             <div className={styles.userNick}>
               <span>{member.nickname}</span>
             </div>
-            <div className={styles.userId}>
+            <div className={styles.userid}>
               <span>@{member.id}</span>
             </div>
           </Link>
-          {filter === 'members' && lists.userId === session?.user?.email ? (
+          {filter === 'members' && lists.userid === session?.user?.email ? (
             <MemberButton lists={lists} user={member} />
           ) : (
             <FollowButton user={member} />

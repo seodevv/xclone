@@ -18,6 +18,8 @@ import authOptions from '@/app/_lib/authOptions';
 import SubMenuProvider from '@/app/(afterLogin)/_provider/SubMenuProvider';
 import PopUpModal from '@/app/(afterLogin)/_component/_popup/PopUpModal';
 import ConfirmProvider from '@/app/(afterLogin)/_provider/ConfirmProvider';
+import RightSectionController from '@/app/(afterLogin)/_component/_layout/RightSectionController';
+import MainSectionController from '@/app/(afterLogin)/_component/_layout/MainSectionController';
 
 interface Props {
   children: ReactNode;
@@ -52,8 +54,8 @@ export default async function AfterLoginLayout({
                   </header>
                   <div className={style.rightSectionWrapper}>
                     <div className={style.rightSectionInner}>
-                      <main className={style.main}>{children}</main>
-                      <section className={style.rightSection}>
+                      <MainSectionController>{children}</MainSectionController>
+                      <RightSectionController>
                         <RightSearchZone />
                         <Sticky>
                           <SearchFilters />
@@ -64,7 +66,7 @@ export default async function AfterLoginLayout({
                             <FollowRecommendsSection />
                           </FollowRecommendsHydrationBoundary>
                         </Sticky>
-                      </section>
+                      </RightSectionController>
                     </div>
                   </div>
                   {modal}

@@ -37,7 +37,7 @@ export default function ViewQuotes({ username, id, view }: Props) {
     return (
       <div>
         {quotes.pages.map((page) =>
-          page.data.map((p) => <Post key={p.postId} post={p} />)
+          page.data.map((p) => <Post key={p.postid} post={p} />)
         )}
         <PageLoading
           hasNextPage={hasNextPage}

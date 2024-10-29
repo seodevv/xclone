@@ -12,16 +12,16 @@ import { Mode } from '@/app/(afterLogin)/_component/post/Post';
 interface Props {
   className?: string;
   mode?: Mode;
-  userId: AdvancedPost['User']['id'];
-  postId: AdvancedPost['postId'];
+  userid: AdvancedPost['userid'];
+  postid: AdvancedPost['postid'];
   images: AdvancedPost['images'];
   short?: boolean;
 }
 export default function PostImages({
   className,
   mode = 'post',
-  userId,
-  postId,
+  userid,
+  postid,
   images,
   short,
 }: Props) {
@@ -45,7 +45,7 @@ export default function PostImages({
               ['compose'].includes(mode) && utils.pointer_event_none
             )}
             key={index}
-            href={`/${userId}/status/${postId}/photo/${image.imageId}`}
+            href={`/${userid}/status/${postid}/photo/${image.imageId}`}
             onClick={(e) => e.stopPropagation()}
             scroll={false}
           >

@@ -48,8 +48,8 @@ export default function Lists({
     listsPinnedMutation.mutate({
       queryClient,
       method: lists.Pinned ? 'delete' : 'post',
-      listId: lists.id,
-      userId: lists.userId,
+      listid: lists.id,
+      userid: lists.userid,
     });
   };
 
@@ -66,7 +66,7 @@ export default function Lists({
       queryClient,
       method: isFollow ? 'delete' : 'post',
       lists,
-      sessionId: session.user.email,
+      sessionid: session.user.email,
     });
   };
 

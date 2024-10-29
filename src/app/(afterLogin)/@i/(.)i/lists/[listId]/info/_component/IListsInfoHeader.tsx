@@ -1,6 +1,6 @@
 'use client';
 
-import useListsUpdateMutation from '@/app/(afterLogin)/@i/(.)i/lists/[listId]/_hooks/useListsUpdateMutation';
+import useListsUpdateMutation from '@/app/(afterLogin)/@i/(.)i/lists/[listid]/_hooks/useListsUpdateMutation';
 import IListHeader from '@/app/(afterLogin)/@i/(.)i/lists/_component/IListHeader';
 import { IListsContext } from '@/app/(afterLogin)/@i/(.)i/lists/create/_provider/IListsProvider';
 import useListsStore from '@/app/(afterLogin)/_store/ListsStore';
@@ -44,7 +44,7 @@ export default function IListsInfoHeader() {
     listsUpdateMutation.mutate(
       {
         queryClient,
-        listId: lists.id,
+        listid: lists.id,
         name,
         description,
         make,

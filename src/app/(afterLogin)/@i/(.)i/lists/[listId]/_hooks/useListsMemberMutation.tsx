@@ -12,7 +12,7 @@ interface MutationParams {
   queryClient: QueryClient;
   method: 'post' | 'delete';
   optimistic: boolean;
-  listId: AdvancedLists['id'];
+  listid: AdvancedLists['id'];
   member: AdvancedUser;
 }
 
@@ -20,10 +20,10 @@ const useListsMemberMutation = () =>
   useMutation({
     mutationFn: async ({
       method,
-      listId,
+      listid,
       member,
     }: MutationParams): Promise<{ data: AdvancedLists; message: string }> => {
-      const requestUrl = `${process.env.NEXT_PUBLIC_SERVER_URL}/api/lists/${listId}/member`;
+      const requestUrl = `${process.env.NEXT_PUBLIC_SERVER_URL}/api/lists/${listid}/member`;
       const requestOptions: RequestInit = {
         method,
         body: JSON.stringify({
@@ -42,7 +42,7 @@ const useListsMemberMutation = () =>
 
       return responseErrorHandler(response);
     },
-    onMutate: ({ queryClient, method, optimistic, listId, member }) => {
+    onMutate: ({ queryClient, method, optimistic, listid, member }) => {
       const queryKeys = queryClient
         .getQueryCache()
         .getAll()
@@ -53,7 +53,7 @@ const useListsMemberMutation = () =>
             (key[0] === 'users' &&
               key[1] === 'list' &&
               key[2] === 'lists' &&
-              key[3] === listId)
+              key[3] === listid)
         );
       const context: {
         queryKey: QueryKey;
@@ -65,7 +65,7 @@ const useListsMemberMutation = () =>
 
       queryKeys.forEach((queryKey) => {
         switch (queryKey[0]) {
-          // queryKey is ['users','list','lists',listId]
+          // queryKey is ['users','list','lists',listid]
           case 'users': {
             // only optimistic
             if (!optimistic) return;
@@ -125,7 +125,7 @@ const useListsMemberMutation = () =>
             } else {
               queryData.pages.forEach((page, i) =>
                 page.data.forEach((l, j) => {
-                  if (l.id !== listId) return;
+                  if (l.id !== listid) return;
                   const shallow = {
                     ...queryData,
                     pages: [...queryData.pages],
@@ -152,7 +152,7 @@ const useListsMemberMutation = () =>
       });
       return context;
     },
-    onSuccess: (response, { queryClient, optimistic, listId }, context) => {
+    onSuccess: (response, { queryClient, optimistic, listid }, context) => {
       context.forEach(({ queryKey }) => {
         queryClient.invalidateQueries({
           queryKey,
@@ -161,12 +161,12 @@ const useListsMemberMutation = () =>
       });
       if (!optimistic) {
         queryClient.invalidateQueries({
-          queryKey: ['users', 'list', 'lists', listId.toString()],
+          queryKey: ['users', 'list', 'lists', listid.toString()],
           refetchType: 'none',
         });
       }
       queryClient.invalidateQueries({
-        queryKey: ['posts', 'list', 'lists', listId.toString()],
+        queryKey: ['posts', 'list', 'lists', listid.toString()],
         refetchType: 'none',
       });
     },

@@ -1,15 +1,13 @@
-import { SafeUser, User } from './User';
+import { SafeUser } from './User';
 
-export interface Room {
-  room: string;
-  receiverId: User['id'];
-  senderId: User['id'];
-  createdAt: Date;
-  content?: string;
-  lastAt?: Date;
-}
-
-export interface AdvancedRoom extends Room {
+export interface AdvancedRooms {
+  id: string;
+  receiverid: string;
+  senderid: string;
+  createat: Date;
+  lastmessageid: number | null;
   Receiver: SafeUser;
   Sender: SafeUser;
+  content: string | null;
+  lastat: Date | null;
 }

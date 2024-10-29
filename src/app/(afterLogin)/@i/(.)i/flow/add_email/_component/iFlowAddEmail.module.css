@@ -1,0 +1,32 @@
+.column {
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+}
+.body {
+  padding: 0 80px;
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+}
+.title {
+  margin: 20px 0;
+}
+.title > div {
+  margin-top: 8px;
+}
+.title > div:first {
+  margin-top: 0;
+}
+.selector {
+  margin-top: 20px;
+}
+.link {
+  color: rgb(var(--primary-rgb));
+}
+.link:hover {
+  text-decoration: underline;
+}
+.footer {
+  padding: 0 80px;
+}

@@ -1,10 +1,10 @@
-import { Room } from './Room';
-import { User } from './User';
+import { SafeUser } from './User';
 
-export interface Message {
-  messageId: number;
-  room: Room['room'];
-  senderId: User['id'];
+export interface AdvancedMessages {
+  id: number;
+  roomid: string;
+  senderid: string;
   content: string;
-  createdAt: Date;
+  createat: Date;
+  Sender: SafeUser;
 }

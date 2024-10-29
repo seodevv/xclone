@@ -30,8 +30,8 @@ export default function UnListsModal() {
     unListsMutation.mutate(
       {
         queryClient,
-        listId: modal.unLists.id,
-        sessionId: session.user.email,
+        listid: modal.unLists.id,
+        sessionid: session.user.email,
       },
       {
         onSuccess: () => {

@@ -6,10 +6,10 @@ import Link from 'next/link';
 
 interface Props {
   session: Session | null;
-  userId: AdvancedPost['User']['id'];
+  userid: AdvancedPost['User']['id'];
 }
 
-export default function PostRepostInfo({ session, userId }: Props) {
+export default function PostRepostInfo({ session, userid }: Props) {
   if (!session) return null;
 
   return (
@@ -19,11 +19,11 @@ export default function PostRepostInfo({ session, userId }: Props) {
           <RepostSvg width={16} />
         </div>
         <Link
-          href={`/${userId}`}
+          href={`/${userid}`}
           className={styles.repostInfo}
           onClick={(e) => e.stopPropagation()}
         >
-          <span>{session?.user?.email === userId ? 'You' : userId}</span>
+          <span>{session?.user?.email === userid ? 'You' : userid}</span>
           <span>reposted</span>
         </Link>
       </div>

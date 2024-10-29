@@ -6,7 +6,7 @@ import { CSSProperties, MouseEventHandler } from 'react';
 import { AdvancedUser } from '@/model/User';
 import { AdvancedLists } from '@/model/Lists';
 import { useQueryClient } from '@tanstack/react-query';
-import useListsMemberMutation from '@/app/(afterLogin)/@i/(.)i/lists/[listId]/_hooks/useListsMemberMutation';
+import useListsMemberMutation from '@/app/(afterLogin)/@i/(.)i/lists/[listid]/_hooks/useListsMemberMutation';
 
 interface Props {
   className?: string;
@@ -35,7 +35,7 @@ export default function MemberButton({
       queryClient,
       optimistic: false,
       method: isMember ? 'delete' : 'post',
-      listId: lists.id,
+      listid: lists.id,
       member: user,
     });
   };

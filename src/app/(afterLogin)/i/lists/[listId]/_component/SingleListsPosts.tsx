@@ -4,13 +4,13 @@ import DisConnection from '@/app/(afterLogin)/_component/error/DisConnection';
 import PageLoading from '@/app/(afterLogin)/_component/loading/PageLoading';
 import NoPost from '@/app/(afterLogin)/_component/post/NoPost';
 import Post from '@/app/(afterLogin)/_component/post/Post';
-import useGetSingleListsPostsQuery from '@/app/(afterLogin)/i/lists/[listId]/_hooks/useGetSingleListsPostsQuery';
+import useGetSingleListsPostsQuery from '@/app/(afterLogin)/i/lists/[listid]/_hooks/useGetSingleListsPostsQuery';
 
 interface Props {
-  listId: string;
+  listid: string;
 }
 
-export default function SingleListsPosts({ listId }: Props) {
+export default function SingleListsPosts({ listid }: Props) {
   const {
     data: posts,
     hasNextPage,
@@ -18,7 +18,7 @@ export default function SingleListsPosts({ listId }: Props) {
     isError,
     fetchNextPage,
     refetch,
-  } = useGetSingleListsPostsQuery(listId);
+  } = useGetSingleListsPostsQuery(listid);
 
   if (posts) {
     if (posts.pages[0].data?.length === 0) {
@@ -34,7 +34,7 @@ export default function SingleListsPosts({ listId }: Props) {
     return (
       <div>
         {posts.pages.map((page) =>
-          page.data?.map((p) => <Post key={p.postId} post={p} />)
+          page.data?.map((p) => <Post key={p.postid} post={p} />)
         )}
         <PageLoading
           hasNextPage={hasNextPage}

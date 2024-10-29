@@ -1,0 +1,40 @@
+.list {
+  display: flex;
+  flex-direction: column;
+}
+.link {
+  padding: 12px 16px;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  min-height: 48px;
+  background: transparent;
+  transition-duration: 200ms;
+  transition-property: background-color;
+  cursor: pointer;
+}
+.link:hover {
+  background: rgb(22, 24, 28);
+}
+.link.active {
+  background: rgb(22, 24, 28);
+}
+.inner {
+  display: flex;
+}
+.text {
+  flex-grow: 1;
+}
+.svg {
+  margin-left: 12px;
+}
+.select {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  z-index: 1;
+  border-right: 2px solid rgb(var(--primary-rgb));
+}

@@ -1,0 +1,12 @@
+.sub {
+  display: flex;
+  flex-direction: column;
+}
+.content {
+  margin-bottom: 64px;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  max-width: 600px;
+  background: transparent;
+}

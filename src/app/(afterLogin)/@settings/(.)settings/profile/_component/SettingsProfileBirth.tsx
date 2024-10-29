@@ -4,7 +4,7 @@ import styles from './settingsProfile.birth.module.css';
 import Text from '@/app/_component/_text/Text';
 import Link from 'next/link';
 import BirthSelector from '@/app/(beforeLogin)/_component/_sign/BirthSelector';
-import IdentierSelector from '@/app/_component/_input/IdentifierSelector';
+import IdentifierSelector from '@/app/_component/_input/IdentifierSelector';
 import { Dispatch, SetStateAction, useContext, useState } from 'react';
 import { ConfirmContext } from '@/app/(afterLogin)/_provider/ConfirmProvider';
 import { MONTH_EN } from '@/app/_lib/common';
@@ -113,12 +113,12 @@ export default function SettingsProfileBirth({
     birthDeleteMutation.mutate(
       {
         queryClient: queryClient,
-        sessionId: session.user.email,
+        sessionid: session.user.email,
       },
       {
         onSuccess: () => {
           setEdit(false);
-          setProfile((prev) => ({ ...prev, birth: undefined }));
+          setProfile((prev) => ({ ...prev, birth: null }));
         },
         onError: () => {
           alterMessage('Something is wrong. please try again.');
@@ -184,7 +184,7 @@ export default function SettingsProfileBirth({
               </Link>
             </Text>
             <div className={styles.selector}>
-              <IdentierSelector
+              <IdentifierSelector
                 placeholder="Month and day"
                 defaultValue={input.scope.month}
                 data={[
@@ -198,7 +198,7 @@ export default function SettingsProfileBirth({
               />
             </div>
             <div className={styles.selector}>
-              <IdentierSelector
+              <IdentifierSelector
                 placeholder="Year"
                 defaultValue={input.scope.year}
                 data={[

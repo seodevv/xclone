@@ -4,7 +4,7 @@ import { isSingleData } from '@/app/_lib/common';
 import { responseErrorHandler } from '@/app/_lib/error';
 import { AdvancedLists } from '@/model/Lists';
 import { AdvancedPost } from '@/model/Post';
-import { AdvancedUser, User } from '@/model/User';
+import { AdvancedUser } from '@/model/User';
 import {
   InfiniteData,
   QueryClient,
@@ -14,7 +14,7 @@ import {
 
 interface MutationParams {
   queryClient: QueryClient;
-  sessionId: User['id'];
+  sessionid: AdvancedUser['id'];
   profile: Omit<ISettingsProfile, 'editor'>;
   updated: ISettingsProfileOptions['updated'];
 }
@@ -29,13 +29,13 @@ const useUpdateProfileMutation = () =>
       if (typeof profile.nickname !== 'undefined' && updated.nickname) {
         formData.append('nickname', profile.nickname);
       }
-      if (typeof profile.desc !== 'undefined' && updated.desc) {
+      if (profile.desc && updated.desc) {
         formData.append('desc', profile.desc);
       }
-      if (typeof profile.location !== 'undefined' && updated.location) {
+      if (profile.location && updated.location) {
         formData.append('location', profile.location);
       }
-      if (typeof profile.refer !== 'undefined' && updated.refer) {
+      if (profile.refer && updated.refer) {
         formData.append('refer', profile.refer);
       }
       if (typeof profile.birth !== 'undefined' && updated.birth) {
@@ -63,7 +63,7 @@ const useUpdateProfileMutation = () =>
 
       return responseErrorHandler(response);
     },
-    onMutate: ({ queryClient, sessionId, profile, updated }) => {
+    onMutate: ({ queryClient, sessionid, profile, updated }) => {
       // queryKey
       // ['posts', *]
       // ['users', *]
@@ -99,7 +99,7 @@ const useUpdateProfileMutation = () =>
                 ...queryData,
               };
               let shouldBeUpdate = false;
-              if (shallow.data.User.id === sessionId) {
+              if (shallow.data.User.id === sessionid) {
                 shouldBeUpdate = true;
                 shallow.data = {
                   ...shallow.data,
@@ -115,7 +115,7 @@ const useUpdateProfileMutation = () =>
                   },
                 };
               }
-              if (shallow.data.Parent?.User.id === sessionId) {
+              if (shallow.data.Parent?.User.id === sessionid) {
                 shouldBeUpdate = true;
                 shallow.data = {
                   ...shallow.data,
@@ -134,7 +134,7 @@ const useUpdateProfileMutation = () =>
                   },
                 };
               }
-              if (shallow.data.Original?.User.id === sessionId) {
+              if (shallow.data.Original?.User.id === sessionid) {
                 shouldBeUpdate = true;
                 shallow.data = {
                   ...shallow.data,
@@ -167,9 +167,9 @@ const useUpdateProfileMutation = () =>
               queryData.pages.forEach((page, i) =>
                 page.data.forEach((p, j) => {
                   if (
-                    p.User.id !== sessionId &&
-                    p.Parent?.User.id !== sessionId &&
-                    p.Original?.User.id !== sessionId
+                    p.User.id !== sessionid &&
+                    p.Parent?.User.id !== sessionid &&
+                    p.Original?.User.id !== sessionid
                   ) {
                     return;
                   }
@@ -181,7 +181,7 @@ const useUpdateProfileMutation = () =>
                   shallow.pages[i].data[j] = {
                     ...p,
                   };
-                  if (p.User.id === sessionId) {
+                  if (p.User.id === sessionid) {
                     shouldBeUpdated = true;
                     shallow.pages[i].data[j].User = {
                       ...p.User,
@@ -194,7 +194,7 @@ const useUpdateProfileMutation = () =>
                           : p.User.image,
                     };
                   }
-                  if (p.Parent?.User.id === sessionId) {
+                  if (p.Parent?.User.id === sessionid) {
                     shouldBeUpdated = true;
                     shallow.pages[i].data[j].Parent = {
                       ...p.Parent,
@@ -210,7 +210,7 @@ const useUpdateProfileMutation = () =>
                       },
                     };
                   }
-                  if (p.Original?.User.id === sessionId) {
+                  if (p.Original?.User.id === sessionid) {
                     shouldBeUpdated = true;
                     shallow.pages[i].data[j].Original = {
                       ...p.Original,
@@ -242,7 +242,7 @@ const useUpdateProfileMutation = () =>
             if (!queryData) return;
 
             if (isSingleData(queryData)) {
-              if (queryData.data.id !== sessionId) return;
+              if (queryData.data.id !== sessionid) return;
 
               const shallow: TData<AdvancedUser> = {
                 ...queryData,
@@ -251,20 +251,34 @@ const useUpdateProfileMutation = () =>
                   nickname: updated.nickname
                     ? profile.nickname
                     : queryData.data.nickname,
-                  desc: updated.desc ? profile.desc : queryData.data.desc,
+                  desc: updated.desc
+                    ? typeof profile.desc !== 'undefined'
+                      ? profile.desc
+                      : null
+                    : queryData.data.desc,
                   location: updated.location
-                    ? profile.location
+                    ? typeof profile.location !== 'undefined'
+                      ? profile.location
+                      : null
                     : queryData.data.location,
-                  refer: updated.refer ? profile.refer : queryData.data.refer,
-                  birth: updated.birth ? profile.birth : queryData.data.birth,
+                  refer: updated.refer
+                    ? typeof profile.refer !== 'undefined'
+                      ? profile.refer
+                      : null
+                    : queryData.data.refer,
+                  birth: updated.birth
+                    ? typeof profile.birth !== 'undefined'
+                      ? profile.birth
+                      : null
+                    : queryData.data.birth,
                   image:
                     updated.image && profile.image?.link
                       ? profile.image.link
                       : queryData.data.image,
                   banner: updated.banner
-                    ? profile.banner?.link
+                    ? typeof profile.banner?.link !== 'undefined'
                       ? profile.banner.link
-                      : undefined
+                      : null
                     : queryData.data.banner,
                 },
               };
@@ -280,7 +294,7 @@ const useUpdateProfileMutation = () =>
 
               queryData.pages.forEach((page, i) =>
                 page.data.forEach((u, j) => {
-                  if (u.id !== sessionId) return;
+                  if (u.id !== sessionid) return;
                   shouldBeUpdated = true;
                   shallow.pages[i] = {
                     ...page,
@@ -289,18 +303,34 @@ const useUpdateProfileMutation = () =>
                   shallow.pages[i].data[j] = {
                     ...u,
                     nickname: updated.nickname ? profile.nickname : u.nickname,
-                    desc: updated.desc ? profile.desc : u.desc,
-                    location: updated.location ? profile.location : u.location,
-                    refer: updated.refer ? profile.refer : u.refer,
-                    birth: updated.birth ? profile.birth : u.birth,
+                    desc: updated.desc
+                      ? typeof profile.desc !== 'undefined'
+                        ? profile.desc
+                        : null
+                      : u.desc,
+                    location: updated.location
+                      ? typeof profile.location !== 'undefined'
+                        ? profile.location
+                        : null
+                      : u.location,
+                    refer: updated.refer
+                      ? typeof profile.refer !== 'undefined'
+                        ? profile.refer
+                        : null
+                      : u.refer,
+                    birth: updated.birth
+                      ? typeof profile.birth !== 'undefined'
+                        ? profile.birth
+                        : null
+                      : u.birth,
                     image:
                       updated.image && profile.image?.link
                         ? profile.image.link
                         : u.image,
                     banner: updated.banner
-                      ? profile.banner?.link
+                      ? typeof profile.banner?.link !== 'undefined'
                         ? profile.banner.link
-                        : undefined
+                        : null
                       : u.banner,
                   };
                 })
@@ -321,7 +351,7 @@ const useUpdateProfileMutation = () =>
             if (!queryData) return;
 
             if (isSingleData(queryData)) {
-              if (queryData.data.User.id !== sessionId) return;
+              if (queryData.data.User.id !== sessionid) return;
               const shallow: TData<AdvancedLists> = {
                 ...queryData,
                 data: {
@@ -348,7 +378,7 @@ const useUpdateProfileMutation = () =>
               let shouldBeUpdated = false;
               queryData.pages.forEach((page, i) =>
                 page.data.forEach((l, j) => {
-                  if (l.User.id !== sessionId) return;
+                  if (l.User.id !== sessionid) return;
                   shouldBeUpdated = true;
                   shallow.pages[i] = {
                     ...page,
@@ -381,7 +411,7 @@ const useUpdateProfileMutation = () =>
       });
       return context;
     },
-    onSuccess: (response, { queryClient, sessionId }, context) => {
+    onSuccess: (response, { queryClient, sessionid }, context) => {
       context.forEach(({ queryKey }) => {
         const image = response.data.image;
         const banner = response.data.banner;
@@ -393,12 +423,12 @@ const useUpdateProfileMutation = () =>
             if (!queryData) return;
 
             if (isSingleData(queryData)) {
-              if (queryData.data.User.id !== sessionId) return;
+              if (queryData.data.User.id !== sessionid) return;
               const shallow: TData<AdvancedPost> = {
                 ...queryData,
               };
               let shouldBeUpdate = false;
-              if (shallow.data.User.id === sessionId) {
+              if (shallow.data.User.id === sessionid) {
                 shouldBeUpdate = true;
                 shallow.data = {
                   ...shallow.data,
@@ -408,7 +438,7 @@ const useUpdateProfileMutation = () =>
                   },
                 };
               }
-              if (shallow.data.Parent?.User.id === sessionId) {
+              if (shallow.data.Parent?.User.id === sessionid) {
                 shouldBeUpdate = true;
                 shallow.data = {
                   ...shallow.data,
@@ -421,7 +451,7 @@ const useUpdateProfileMutation = () =>
                   },
                 };
               }
-              if (shallow.data.Original?.User.id === sessionId) {
+              if (shallow.data.Original?.User.id === sessionid) {
                 shouldBeUpdate = true;
                 shallow.data = {
                   ...shallow.data,
@@ -446,9 +476,9 @@ const useUpdateProfileMutation = () =>
               queryData.pages.forEach((page, i) =>
                 page.data.forEach((p, j) => {
                   if (
-                    p.User.id !== sessionId &&
-                    p.Parent?.User.id !== sessionId &&
-                    p.Original?.User.id !== sessionId
+                    p.User.id !== sessionid &&
+                    p.Parent?.User.id !== sessionid &&
+                    p.Original?.User.id !== sessionid
                   ) {
                     return;
                   }
@@ -460,14 +490,14 @@ const useUpdateProfileMutation = () =>
                   shallow.pages[i].data[j] = {
                     ...p,
                   };
-                  if (p.User.id === sessionId) {
+                  if (p.User.id === sessionid) {
                     shouldBeUpdated = true;
                     shallow.pages[i].data[j].User = {
                       ...p.User,
                       image,
                     };
                   }
-                  if (p.Parent?.User.id === sessionId) {
+                  if (p.Parent?.User.id === sessionid) {
                     shouldBeUpdated = true;
                     shallow.pages[i].data[j].Parent = {
                       ...p.Parent,
@@ -477,7 +507,7 @@ const useUpdateProfileMutation = () =>
                       },
                     };
                   }
-                  if (p.Original?.User.id === sessionId) {
+                  if (p.Original?.User.id === sessionid) {
                     shouldBeUpdated = true;
                     shallow.pages[i].data[j].Original = {
                       ...p.Original,
@@ -502,7 +532,7 @@ const useUpdateProfileMutation = () =>
             if (!queryData) return;
 
             if (isSingleData(queryData)) {
-              if (queryData.data.id !== sessionId) return;
+              if (queryData.data.id !== sessionid) return;
 
               const shallow: TData<AdvancedUser> = {
                 ...queryData,
@@ -523,7 +553,7 @@ const useUpdateProfileMutation = () =>
 
               queryData.pages.forEach((page, i) =>
                 page.data.forEach((u, j) => {
-                  if (u.id !== sessionId) return;
+                  if (u.id !== sessionid) return;
                   shouldBeUpdated = true;
                   shallow.pages[i] = {
                     ...page,
@@ -551,7 +581,7 @@ const useUpdateProfileMutation = () =>
             if (!queryData) return;
 
             if (isSingleData(queryData)) {
-              if (queryData.data.User.id !== sessionId) return;
+              if (queryData.data.User.id !== sessionid) return;
               const shallow: TData<AdvancedLists> = {
                 ...queryData,
                 data: {
@@ -571,7 +601,7 @@ const useUpdateProfileMutation = () =>
               let shouldBeUpdated = false;
               queryData.pages.forEach((page, i) =>
                 page.data.forEach((l, j) => {
-                  if (l.User.id !== sessionId) return;
+                  if (l.User.id !== sessionid) return;
                   shouldBeUpdated = true;
                   shallow.pages[i] = {
                     ...page,

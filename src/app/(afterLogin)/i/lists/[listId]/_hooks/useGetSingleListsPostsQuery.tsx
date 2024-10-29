@@ -1,9 +1,9 @@
-import getSingleListsPosts from '@/app/(afterLogin)/i/lists/[listId]/_lib/getSingleLIstsPosts';
+import getSingleListsPosts from '@/app/(afterLogin)/i/lists/[listid]/_lib/getSingleLIstsPosts';
 import { useInfiniteQuery } from '@tanstack/react-query';
 
-const useGetSingleListsPostsQuery = (listId: string) =>
+const useGetSingleListsPostsQuery = (listid: string) =>
   useInfiniteQuery({
-    queryKey: ['posts', 'list', 'lists', listId],
+    queryKey: ['posts', 'list', 'lists', listid],
     queryFn: getSingleListsPosts,
     initialPageParam: 0,
     getNextPageParam: (lastPage) => lastPage.nextCursor,

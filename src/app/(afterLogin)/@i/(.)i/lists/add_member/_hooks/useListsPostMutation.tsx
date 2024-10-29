@@ -13,22 +13,22 @@ import {
 interface MutationParams {
   queryClient: QueryClient;
   method: 'post' | 'delete';
-  listId: AdvancedLists['id'];
-  postId: AdvancedPost['postId'];
+  listid: AdvancedLists['id'];
+  postid: AdvancedPost['postid'];
 }
 
 const useListsPostMutation = () =>
   useMutation({
     mutationFn: async ({
       method,
-      listId,
-      postId,
+      listid,
+      postid,
     }: MutationParams): Promise<{ data: AdvancedLists; message: string }> => {
-      const requestUrl = `${process.env.NEXT_PUBLIC_SERVER_URL}/api/lists/${listId}/post`;
+      const requestUrl = `${process.env.NEXT_PUBLIC_SERVER_URL}/api/lists/${listid}/post`;
       const requestOptions: RequestInit = {
         method,
         body: JSON.stringify({
-          postId,
+          postid,
         }),
         credentials: 'include',
         headers: {
@@ -44,7 +44,7 @@ const useListsPostMutation = () =>
 
       return responseErrorHandler(response);
     },
-    onMutate: ({ queryClient, method, listId, postId }) => {
+    onMutate: ({ queryClient, method, listid, postid }) => {
       const queryKeys = queryClient
         .getQueryCache()
         .getAll()
@@ -63,7 +63,7 @@ const useListsPostMutation = () =>
 
         queryData.pages.forEach((page, i) =>
           page.data.forEach((l, j) => {
-            if (l.id !== listId) return;
+            if (l.id !== listid) return;
             const shallow = { ...queryData, pages: [...queryData.pages] };
             shallow.pages[i] = {
               ...shallow.pages[i],
@@ -72,12 +72,12 @@ const useListsPostMutation = () =>
             if (method === 'post') {
               shallow.pages[i].data[j] = {
                 ...l,
-                Posts: [...l.Posts, postId],
+                Posts: [...l.Posts, postid],
               };
             } else if (method === 'delete') {
               shallow.pages[i].data[j] = {
                 ...l,
-                Posts: l.Posts.filter((n) => n !== postId),
+                Posts: l.Posts.filter((n) => n !== postid),
               };
             }
             queryClient.setQueryData(queryKey, shallow);

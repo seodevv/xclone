@@ -19,7 +19,7 @@ export default async function HomeHydrationBoundary({ children }: Props) {
   });
   await Promise.all([
     queryClient.prefetchInfiniteQuery({
-      queryKey: ['posts', 'list', 'recommends'],
+      queryKey: ['posts', 'list', 'recommends', { filter: 'all' as const }],
       queryFn: getPostRecommends,
       initialPageParam: 0,
     }),

@@ -14,7 +14,7 @@ export default async function ExplorePage() {
         </div>
       </div>
       <TrendsHydrationBoundary>
-        <Trends />
+        <Trends showTitle={false} />
       </TrendsHydrationBoundary>
     </main>
   );

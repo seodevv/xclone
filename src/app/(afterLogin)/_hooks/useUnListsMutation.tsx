@@ -1,20 +1,20 @@
 import { responseErrorHandler } from '@/app/_lib/error';
 import { AdvancedLists } from '@/model/Lists';
-import { User } from '@/model/User';
+import { AdvancedUser } from '@/model/User';
 import { QueryClient, useMutation } from '@tanstack/react-query';
 
 interface MutationParams {
   queryClient: QueryClient;
-  listId: AdvancedLists['id'];
-  sessionId: User['id'];
+  listid: AdvancedLists['id'];
+  sessionid: AdvancedUser['id'];
 }
 
 const useUnListsMutation = () =>
   useMutation({
     mutationFn: async ({
-      listId,
+      listid,
     }: MutationParams): Promise<{ message: string }> => {
-      const requestUrl = `${process.env.NEXT_PUBLIC_SERVER_URL}/api/lists/${listId}`;
+      const requestUrl = `${process.env.NEXT_PUBLIC_SERVER_URL}/api/lists/${listid}`;
       const requestOptions: RequestInit = {
         method: 'DELETE',
         credentials: 'include',
@@ -27,17 +27,17 @@ const useUnListsMutation = () =>
 
       return responseErrorHandler(response);
     },
-    onSuccess: (data, { queryClient, listId, sessionId }) => {
+    onSuccess: (data, { queryClient, listid, sessionid }) => {
       queryClient.invalidateQueries({
-        queryKey: ['lists', listId.toString()],
+        queryKey: ['lists', listid.toString()],
         refetchType: 'none',
       });
       queryClient.invalidateQueries({
-        queryKey: ['lists', 'list', sessionId],
+        queryKey: ['lists', 'list', sessionid],
         refetchType: 'none',
       });
       queryClient.invalidateQueries({
-        queryKey: ['posts', 'list', 'lists', listId.toString()],
+        queryKey: ['posts', 'list', 'lists', listid.toString()],
         refetchType: 'none',
       });
     },

@@ -1,5 +1,5 @@
-import Test from '@/app/(afterLogin)/i/bookmarks/_component/Test';
+import { redirect } from 'next/navigation';
 
 export default function SettingsPage() {
-  return <>This is SettingsPage</>;
+  redirect('/settings/account');
 }

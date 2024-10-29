@@ -7,7 +7,7 @@ interface Params {
 }
 
 const getSingleListsPosts = async ({
-  queryKey: [, , , listId],
+  queryKey: [, , , listid],
   pageParam,
 }: Params): Promise<{
   data?: AdvancedPost[];
@@ -18,7 +18,7 @@ const getSingleListsPosts = async ({
   const nextHeader = isServer ? await import('next/headers') : undefined;
   const requestUrl = `${
     isServer ? process.env.SERVER_URL : process.env.NEXT_PUBLIC_SERVER_URL
-  }/api/lists/${listId}/posts?cursor=${pageParam}`;
+  }/api/lists/${listid}/posts?cursor=${pageParam}`;
   const requestOptions: RequestInit = {
     method: 'GET',
     credentials: 'include',
@@ -26,7 +26,7 @@ const getSingleListsPosts = async ({
       ? { Cookie: nextHeader.cookies().toString() }
       : undefined,
     next: {
-      tags: ['posts', 'list', 'lists', listId],
+      tags: ['posts', 'list', 'lists', listid],
     },
     cache: 'no-store',
   };

@@ -30,7 +30,7 @@ export default function LikePosts({ username }: Props) {
         {likePosts.pages.map((page, i) => (
           <Fragment key={i}>
             {page.data.map((p) => (
-              <Post key={p.postId} post={p} />
+              <Post key={p.postid} post={p} />
             ))}
           </Fragment>
         ))}

@@ -40,7 +40,7 @@ export default function UserProfile({ session, username }: Props) {
         <UserImage session={session} user={user?.data} />
         <div className={styles.userText}>
           <UserIdentifier
-            sessionId={session?.user?.email}
+            sessionid={session?.user?.email}
             username={username}
             user={user?.data}
           />

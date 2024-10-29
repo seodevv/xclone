@@ -8,30 +8,36 @@ import { Birth } from '@/model/User';
 import { useEffect, useRef, useState } from 'react';
 
 interface Props {
-  sessionId: string;
+  sessionid: string;
 }
 
 export interface ISettingsProfile {
   nickname: string;
-  desc?: string;
-  location?: string;
-  refer?: string;
-  birth?: Birth;
-  image?: {
+  desc: string | null;
+  location: string | null;
+  refer: string | null;
+  birth: Birth | null;
+  image: {
     link: string;
     file?: File;
-  };
-  banner?: {
+  } | null;
+  banner: {
     link: string;
     file?: File;
-  };
+  } | null;
   editor: 'idle' | 'banner' | 'image';
 }
 
-export default function SettingsProfile({ sessionId }: Props) {
-  const { data: user } = useUserQuery(sessionId);
+export default function SettingsProfile({ sessionid }: Props) {
+  const { data: user } = useUserQuery(sessionid);
   const [profile, setProfile] = useState<ISettingsProfile>({
     nickname: '',
+    desc: null,
+    location: null,
+    refer: null,
+    birth: null,
+    image: null,
+    banner: null,
     editor: 'idle',
   });
   const initialSet = useRef(false);
@@ -55,9 +61,9 @@ export default function SettingsProfile({ sessionId }: Props) {
         setProfile((prev) => ({
           ...prev,
           nickname: user.data.nickname,
-          desc: user.data.desc || '',
-          location: user.data.location || '',
-          refer: user.data.refer || '',
+          desc: user.data.desc,
+          location: user.data.location,
+          refer: user.data.refer,
           birth: user.data.birth,
           image: {
             link: user.data.image,
@@ -66,7 +72,7 @@ export default function SettingsProfile({ sessionId }: Props) {
             ? {
                 link: user.data.banner,
               }
-            : undefined,
+            : null,
         }));
         initialSet.current = true;
       }

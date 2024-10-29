@@ -1,9 +1,10 @@
 import { Fragment } from 'react';
 import styles from './userDesc.module.css';
 import Link from 'next/link';
+import { AdvancedUser } from '@/model/User';
 
 interface Props {
-  desc?: string;
+  desc?: AdvancedUser['desc'];
 }
 
 export default function UserDesc({ desc }: Props) {

@@ -1,13 +1,13 @@
-import SingleListsBody from '@/app/(afterLogin)/i/lists/[listId]/_component/SingleListsBody';
+import SingleListsBody from '@/app/(afterLogin)/i/lists/[listid]/_component/SingleListsBody';
 
 interface Props {
-  params: { listId: string };
+  params: { listid: string };
 }
 
 export default function IListsIdPage({ params }: Props) {
   return (
     <main>
-      <SingleListsBody listId={params.listId} />
+      <SingleListsBody listid={params.listid} />
     </main>
   );
 }

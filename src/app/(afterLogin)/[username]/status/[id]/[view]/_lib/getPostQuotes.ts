@@ -8,7 +8,7 @@ interface Params {
 }
 
 const getPostQuotes = async ({
-  queryKey: [, , , postId, options],
+  queryKey: [, , , postid, options],
   pageParam,
 }: Params): Promise<{
   data: AdvancedPost[];
@@ -16,8 +16,8 @@ const getPostQuotes = async ({
   message: string;
 }> => {
   if (
-    typeof postId !== 'string' ||
-    !REGEX_NUMBER_ONLY.test(postId) ||
+    typeof postid !== 'string' ||
+    !REGEX_NUMBER_ONLY.test(postid) ||
     typeof options !== 'object'
   ) {
     throw new Error(ERROR_STATUS.badRequest);
@@ -26,7 +26,7 @@ const getPostQuotes = async ({
   const nextHeader = isServer ? await import('next/headers') : undefined;
   const requestUrl = `${
     isServer ? process.env.SERVER_URL : process.env.NEXT_PUBLIC_SERVER_URL
-  }/api/posts/${postId}/engagements?userId=${options.username}&filter=${
+  }/api/posts/${postid}/engagements?userid=${options.username}&filter=${
     options.filter
   }&cursor=${pageParam}`;
   const requestOptions: RequestInit = {
@@ -36,7 +36,7 @@ const getPostQuotes = async ({
       ? { Cookie: nextHeader.cookies().toString() }
       : undefined,
     next: {
-      tags: ['posts', 'list', 'quotes', postId, JSON.stringify(options)],
+      tags: ['posts', 'list', 'quotes', postid, JSON.stringify(options)],
     },
     cache: 'no-store',
   };

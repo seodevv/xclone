@@ -1,6 +1,6 @@
 import { responseErrorHandler } from '@/app/_lib/error';
 import { AdvancedLists } from '@/model/Lists';
-import { User } from '@/model/User';
+import { AdvancedUser } from '@/model/User';
 import {
   InfiniteData,
   QueryClient,
@@ -11,23 +11,23 @@ import {
 interface MutationParams {
   queryClient: QueryClient;
   method: 'post' | 'delete';
-  listId: AdvancedLists['id'];
-  userId: AdvancedLists['userId'];
-  sessionId: User['id'];
+  listid: AdvancedLists['id'];
+  userid: AdvancedLists['userid'];
+  sessionid: AdvancedUser['id'];
 }
 
 const useListsUnShowMutation = () =>
   useMutation({
     mutationFn: async ({
       method,
-      listId,
-      userId,
+      listid,
+      userid,
     }: MutationParams): Promise<{ data: AdvancedLists; message: string }> => {
-      const requestUrl = `${process.env.NEXT_PUBLIC_SERVER_URL}/api/lists/${listId}/unshow`;
+      const requestUrl = `${process.env.NEXT_PUBLIC_SERVER_URL}/api/lists/${listid}/unshow`;
       const requestOptions: RequestInit = {
         method,
         body: JSON.stringify({
-          userId,
+          userid,
         }),
         credentials: 'include',
         headers: {
@@ -42,7 +42,7 @@ const useListsUnShowMutation = () =>
 
       return responseErrorHandler(response);
     },
-    onMutate: ({ queryClient, method, listId, sessionId }) => {
+    onMutate: ({ queryClient, method, listid, sessionid }) => {
       const queryKeys = queryClient
         .getQueryCache()
         .getAll()
@@ -62,15 +62,15 @@ const useListsUnShowMutation = () =>
         if (!queryData) return;
 
         if (isSingle(queryData)) {
-          if (queryData.data.id !== listId) return;
+          if (queryData.data.id !== listid) return;
           const shallow: TData<AdvancedLists> = {
             ...queryData,
             data: {
               ...queryData.data,
               UnShow:
                 method === 'post'
-                  ? [...queryData.data.UnShow, { id: sessionId }]
-                  : queryData.data.UnShow.filter((u) => u.id !== sessionId),
+                  ? [...queryData.data.UnShow, { id: sessionid }]
+                  : queryData.data.UnShow.filter((u) => u.id !== sessionid),
             },
           };
           queryClient.setQueryData(queryKey, shallow);
@@ -83,7 +83,7 @@ const useListsUnShowMutation = () =>
           let shouldBeUpdate = false;
           queryData.pages.forEach((page, i) =>
             page.data.forEach((l, j) => {
-              if (l.id !== listId) return;
+              if (l.id !== listid) return;
               shouldBeUpdate = true;
               shallow.pages[i] = {
                 ...page,
@@ -93,8 +93,8 @@ const useListsUnShowMutation = () =>
                 ...l,
                 UnShow:
                   method === 'post'
-                    ? [...l.UnShow, { id: sessionId }]
-                    : l.UnShow.filter((u) => u.id !== sessionId),
+                    ? [...l.UnShow, { id: sessionid }]
+                    : l.UnShow.filter((u) => u.id !== sessionid),
               };
             })
           );

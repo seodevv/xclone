@@ -90,7 +90,7 @@ export default function ReactionButton({
           queryClient,
           method: active ? 'delete' : 'post',
           post: post,
-          sessionId: session.user.email,
+          sessionid: session.user.email,
         });
         if (type === 'Hearts' && !active) {
           alterMessage(

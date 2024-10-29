@@ -1,5 +1,5 @@
-import getListsMember from '@/app/(afterLogin)/@i/(.)i/lists/[listId]/_lib/getListsMember';
-import getSingleLists from '@/app/(afterLogin)/i/lists/[listId]/_lib/getSingleLists';
+import getListsMember from '@/app/(afterLogin)/@i/(.)i/lists/[listid]/_lib/getListsMember';
+import getSingleLists from '@/app/(afterLogin)/i/lists/[listid]/_lib/getSingleLists';
 import {
   dehydrate,
   HydrationBoundary,
@@ -7,13 +7,13 @@ import {
 } from '@tanstack/react-query';
 
 interface Props {
-  listId: string;
+  listid: string;
   filter: 'members' | 'followers';
   children?: React.ReactNode;
 }
 
 export default async function ListsMemberHydrationBoundary({
-  listId,
+  listid,
   filter,
   children,
 }: Props) {
@@ -25,12 +25,12 @@ export default async function ListsMemberHydrationBoundary({
   });
   await Promise.all([
     queryClient.prefetchInfiniteQuery({
-      queryKey: ['users', 'list', 'lists', listId, { filter }],
+      queryKey: ['users', 'list', 'lists', listid, { filter }],
       queryFn: getListsMember,
       initialPageParam: '',
     }),
     queryClient.prefetchQuery({
-      queryKey: ['lists', listId],
+      queryKey: ['lists', listid],
       queryFn: getSingleLists,
     }),
   ]);

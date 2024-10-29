@@ -11,7 +11,7 @@ import {
   useRef,
   useState,
 } from 'react';
-import { SuggestedContext } from '@/app/(afterLogin)/@i/(.)i/lists/[listId]/members/suggested/_provider/SuggestedProvider';
+import { SuggestedContext } from '@/app/(afterLogin)/@i/(.)i/lists/[listid]/members/suggested/_provider/SuggestedProvider';
 
 export default function SuggestedSearchBar() {
   const [input, setInput] = useState('');

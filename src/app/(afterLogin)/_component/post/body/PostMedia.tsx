@@ -22,7 +22,7 @@ export default function PostMedia({ post, row = 3, gap = 2 }: Props) {
 
   return (
     <Link
-      href={`/${post.User.id}/status/${post.postId}/photo/${first.imageId}`}
+      href={`/${post.User.id}/status/${post.postid}/photo/${first.imageId}`}
       className={styles.postMedia}
       style={{ width: `calc(${100 / row}% - ${gap}px)` }}
       onMouseOver={() => {

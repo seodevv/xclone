@@ -2,7 +2,7 @@
 
 import styles from './postBody.module.css';
 import utils from '@/app/utility.module.css';
-import { CSSProperties, Fragment, useState } from 'react';
+import { CSSProperties, useState } from 'react';
 import Link from 'next/link';
 import cx from 'classnames';
 import { AdvancedPost } from '@/model/Post';
@@ -13,8 +13,8 @@ interface Props {
   className?: string;
   style?: CSSProperties;
   mode?: Mode;
-  postId: AdvancedPost['postId'];
-  userId: AdvancedPost['userId'];
+  postid: AdvancedPost['postid'];
+  userid: AdvancedPost['userid'];
   content: AdvancedPost['content'];
 }
 
@@ -22,8 +22,8 @@ export default function PostContent({
   className,
   style,
   mode,
-  postId,
-  userId,
+  postid,
+  userid,
   content,
 }: Props) {
   const splited = content.split(/\r\n|\r|\n/);
@@ -44,44 +44,10 @@ export default function PostContent({
         if (more && i >= 10) return null;
 
         return <AnalysisText key={i} text={t} />;
-        // const regex = /#[^\s#)\]]+/g;
-        // const matched = t.match(regex);
-        // if (matched) {
-        //   let lastIndex = 0;
-        //   return (
-        //     <div key={i}>
-        //       {matched.map((m, i) => {
-        //         const index = t.indexOf(m, lastIndex);
-        //         const a = t.substring(lastIndex, index);
-        //         const b = t.substring(index, index + m.length);
-        //         lastIndex = index + m.length;
-        //         return (
-        //           <Fragment key={i}>
-        //             <span>{a}</span>
-        //             <Link
-        //               href={`/search?q=${encodeURIComponent(b)}`}
-        //               className={styles.hashtag}
-        //               onClick={(e) => e.stopPropagation()}
-        //             >
-        //               {b}
-        //             </Link>
-        //           </Fragment>
-        //         );
-        //       })}
-        //     </div>
-        //   );
-        // }
-
-        // return (
-        //   <div key={i}>
-        //     {t}
-        //     {more && i === 9 && '...'}
-        //   </div>
-        // );
       })}
       {more && (
         <Link
-          href={`/${userId}/status/${postId}`}
+          href={`/${userid}/status/${postid}`}
           className={styles.contentMore}
           onClick={(e) => e.stopPropagation()}
         >

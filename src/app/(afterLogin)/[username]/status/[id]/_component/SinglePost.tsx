@@ -19,8 +19,8 @@ export default function SinglePost({ params, session }: Props) {
   const { data: post } = useSinglePostQuery(params);
   const queryClient = useQueryClient();
   const viewMutation = useViewMutation({
-    userId: params.username,
-    postId: ~~params.id,
+    userid: params.username,
+    postid: ~~params.id,
   });
   const mountRef = useRef(false);
 
@@ -40,7 +40,7 @@ export default function SinglePost({ params, session }: Props) {
         <PostForm
           session={session}
           mode="comment"
-          parent={{ postId: post.data.postId, userId: post.data.User.id }}
+          parent={{ postid: post.data.postid, userid: post.data.User.id }}
         />
       )}
       <Comments params={params} />

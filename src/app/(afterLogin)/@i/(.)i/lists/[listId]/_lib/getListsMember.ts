@@ -7,21 +7,21 @@ interface Params {
 }
 
 const getListsMember = async ({
-  queryKey: [, , , listId, options],
+  queryKey: [, , , listid, options],
   pageParam,
 }: Params): Promise<{
   data: AdvancedUser[];
   nextCursor?: string;
   message: string;
 }> => {
-  if (typeof listId !== 'string' || typeof options !== 'object') {
+  if (typeof listid !== 'string' || typeof options !== 'object') {
     throw new Error(ERROR_STATUS.badRequest);
   }
   const isServer = typeof window === 'undefined';
   const nextHeader = isServer ? await import('next/headers') : undefined;
   const requestUrl = `${
     isServer ? process.env.SERVER_URL : process.env.NEXT_PUBLIC_SERVER_URL
-  }/api/lists/${listId}/${
+  }/api/lists/${listid}/${
     options.filter === 'members' ? 'member' : 'follow'
   }?cursor=${pageParam}`;
   const requestOptions: RequestInit = {
@@ -35,7 +35,7 @@ const getListsMember = async ({
         'users',
         'list',
         'lists',
-        listId,
+        listid,
         JSON.stringify({ filter: options.filter }),
       ],
     },

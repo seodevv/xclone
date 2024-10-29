@@ -26,7 +26,7 @@ export default function HomePosts() {
     <>
       {posts.pages.map((page, i) =>
         page.data.map((p) => {
-          return <Post key={p.postId} post={p} />;
+          return <Post key={p.postid} post={p} />;
         })
       )}
       <PageLoading

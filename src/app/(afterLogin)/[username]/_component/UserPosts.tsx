@@ -47,10 +47,10 @@ export default function UserPosts({
         {posts.pages.map((page, i) =>
           page.data.map((p, j) =>
             isMedia ? (
-              <PostMedia key={p.postId} post={p} />
+              <PostMedia key={p.postid} post={p} />
             ) : (
               <Post
-                key={p.postId}
+                key={p.postid}
                 post={p}
                 style={{ order: 10 * i + j + 1 }}
                 hasPinned

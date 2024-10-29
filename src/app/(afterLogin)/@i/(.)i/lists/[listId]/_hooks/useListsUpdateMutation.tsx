@@ -9,9 +9,9 @@ import {
 
 interface MutationParams {
   queryClient: QueryClient;
-  listId: AdvancedLists['id'];
-  name?: string;
-  description?: string;
+  listid: AdvancedLists['id'];
+  name?: AdvancedLists['name'];
+  description?: AdvancedLists['description'];
   banner?: {
     file: File;
     link: string;
@@ -20,14 +20,14 @@ interface MutationParams {
     file: File;
     link: string;
   };
-  make?: 'private' | 'public';
+  make?: AdvancedLists['make'];
   def?: boolean;
 }
 
 const useListsUpdateMutation = () =>
   useMutation({
     mutationFn: async ({
-      listId,
+      listid,
       name,
       description,
       make,
@@ -39,7 +39,7 @@ const useListsUpdateMutation = () =>
       if (typeof name !== 'undefined') {
         formData.append('name', name);
       }
-      if (typeof description !== 'undefined') {
+      if (description) {
         formData.append('description', description);
       }
       if (typeof make !== 'undefined') {
@@ -70,7 +70,7 @@ const useListsUpdateMutation = () =>
         );
       }
 
-      const requestUrl = `${process.env.NEXT_PUBLIC_SERVER_URL}/api/lists/${listId}/edit`;
+      const requestUrl = `${process.env.NEXT_PUBLIC_SERVER_URL}/api/lists/${listid}/edit`;
       const requestOptions: RequestInit = {
         method: 'POST',
         body: formData,
@@ -86,7 +86,7 @@ const useListsUpdateMutation = () =>
     },
     onMutate: ({
       queryClient,
-      listId,
+      listid,
       name,
       description,
       make,
@@ -113,7 +113,7 @@ const useListsUpdateMutation = () =>
         if (!queryData) return;
 
         if (isSingle(queryData)) {
-          if (queryData.data.id !== listId) return;
+          if (queryData.data.id !== listid) return;
           const shallow: TData<AdvancedLists> = {
             ...queryData,
             data: {
@@ -147,7 +147,7 @@ const useListsUpdateMutation = () =>
 
           queryData.pages.forEach((page, i) =>
             page.data.forEach((l, j) => {
-              if (l.id !== listId) return;
+              if (l.id !== listid) return;
               shouldBeUpdate = true;
               shallow.pages[i] = {
                 ...page,
@@ -179,7 +179,7 @@ const useListsUpdateMutation = () =>
       });
       return context;
     },
-    onSuccess: (response, { queryClient, listId }, context) => {
+    onSuccess: (response, { queryClient, listid }, context) => {
       context.forEach(({ queryKey }) => {
         queryClient.invalidateQueries({
           queryKey,
@@ -192,7 +192,7 @@ const useListsUpdateMutation = () =>
         if (!queryData) return;
 
         if (isSingle(queryData)) {
-          if (queryData.data.id !== listId) return;
+          if (queryData.data.id !== listid) return;
           const shallow: TData<AdvancedLists> = {
             ...queryData,
             data: response.data,
@@ -206,7 +206,7 @@ const useListsUpdateMutation = () =>
           let shouldBeUpdate = false;
           queryData.pages.forEach((page, i) =>
             page.data.forEach((l, j) => {
-              if (l.id !== listId) return;
+              if (l.id !== listid) return;
               shouldBeUpdate = true;
               shallow.pages[i] = {
                 ...page,

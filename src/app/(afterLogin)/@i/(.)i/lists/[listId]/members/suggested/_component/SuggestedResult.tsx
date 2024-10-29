@@ -1,9 +1,9 @@
 'use client';
 
-import SuggestedMember from '@/app/(afterLogin)/@i/(.)i/lists/[listId]/members/suggested/_component/SuggestedMember';
+import SuggestedMember from '@/app/(afterLogin)/@i/(.)i/lists/[listid]/members/suggested/_component/SuggestedMember';
 import styles from './suggested.result.module.css';
-import useGetSuggestedQuery from '@/app/(afterLogin)/@i/(.)i/lists/[listId]/members/suggested/_hooks/useGetSuggestedQuery';
-import { SuggestedContext } from '@/app/(afterLogin)/@i/(.)i/lists/[listId]/members/suggested/_provider/SuggestedProvider';
+import useGetSuggestedQuery from '@/app/(afterLogin)/@i/(.)i/lists/[listid]/members/suggested/_hooks/useGetSuggestedQuery';
+import { SuggestedContext } from '@/app/(afterLogin)/@i/(.)i/lists/[listid]/members/suggested/_provider/SuggestedProvider';
 import NoPost from '@/app/(afterLogin)/_component/post/NoPost';
 import { useContext, useEffect, useRef, useState } from 'react';
 import { AdvancedLists } from '@/model/Lists';

@@ -3,17 +3,17 @@ import { AdvancedPost } from '@/model/Post';
 import { create } from 'zustand';
 
 const initialState = {
-  postId: undefined,
+  postid: undefined,
   lists: undefined,
   suggested: false,
 };
 
 interface ListsState {
-  postId?: AdvancedPost['postId'];
+  postid?: AdvancedPost['postid'];
   lists?: AdvancedLists;
   suggested: boolean;
   prevPath?: string;
-  setPostId: (postId: AdvancedPost['postId']) => void;
+  setPostId: (postid: AdvancedPost['postid']) => void;
   setLists: (lists: AdvancedLists) => void;
   setSuggested: (suggested: boolean) => void;
   reset: () => void;
@@ -21,7 +21,7 @@ interface ListsState {
 
 const useListsStore = create<ListsState>()((set) => ({
   suggested: false,
-  setPostId: (postId) => set((state) => ({ postId })),
+  setPostId: (postid) => set((state) => ({ postid })),
   setLists: (lists) => set((state) => ({ lists })),
   setSuggested: (suggested) => set((state) => ({ suggested })),
   reset: () => set((state) => initialState),

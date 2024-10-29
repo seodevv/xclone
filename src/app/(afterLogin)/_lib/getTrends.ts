@@ -1,7 +1,8 @@
-import { Tags } from '@/model/Hashtag';
+import { HashTags } from '@/model/Hashtag';
 
 export const getTrends = async (): Promise<{
-  data: Tags[];
+  data: HashTags[];
+  nextCursor?: number;
   message: string;
 }> => {
   const isServer = typeof window === 'undefined';

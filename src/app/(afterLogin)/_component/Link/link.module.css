@@ -99,3 +99,40 @@
 .inline {
   display: inline-flex;
 }
+.transparent {
+  background: transparent;
+}
+
+/* SettingsLink */
+.settingsLink {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 34px;
+  height: 34px;
+  background: transparent;
+  border: none;
+  border-radius: 50%;
+  transition-property: background-color;
+  transition-duration: 200ms;
+  cursor: pointer;
+}
+.settingsLink:hover {
+  background: rgba(var(--button-hover-rgb), 0.15);
+}
+.settingsLink:active {
+  background: rgba(var(--button-hover-rgb), 0.3);
+}
+
+/* FlexLink */
+.flexLink {
+  padding: 16px;
+  display: flex;
+  justify-content: center;
+  transition-duration: 200ms;
+  transition-property: background-color;
+  cursor: pointer;
+}
+.flexLink:hover {
+  background: rgb(var(--primary-rgb), 0.1);
+}

@@ -35,8 +35,8 @@ export default function UserLists({
     refetch,
   } = useGetUserListsQuery({ username, filter });
 
-  const onClickLists = (listId: AdvancedLists['id']) => {
-    router.push(`/i/lists/${listId}`);
+  const onClickLists = (listid: AdvancedLists['id']) => {
+    router.push(`/i/lists/${listid}`);
   };
 
   if (lists) {

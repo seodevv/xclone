@@ -6,16 +6,16 @@ import { captialCase } from '@/app/_lib/common';
 import { usePathname } from 'next/navigation';
 
 interface Props {
-  listId: string;
+  listid: string;
 }
 
-export default function ListsMembersTab({ listId }: Props) {
+export default function ListsMembersTab({ listid }: Props) {
   const suggested = useListsStore((state) => state.suggested);
   const pathname = usePathname();
 
   const tabs = [
-    { id: 'members', link: `/i/lists/${listId}/members` },
-    { id: 'suggested', link: `/i/lists/${listId}/members/suggested` },
+    { id: 'members', link: `/i/lists/${listid}/members` },
+    { id: 'suggested', link: `/i/lists/${listid}/members/suggested` },
   ];
 
   if (!suggested) return null;

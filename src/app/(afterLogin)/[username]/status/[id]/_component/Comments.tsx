@@ -31,7 +31,7 @@ export default function Comments({ params }: Props) {
           return (
             <Fragment key={i}>
               {page.data.map((p) => (
-                <Post mode="comment" key={p.postId} post={p} />
+                <Post mode="comment" key={p.postid} post={p} />
               ))}
             </Fragment>
           );

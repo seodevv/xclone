@@ -1,21 +1,23 @@
-import { PostImage } from './PostImage';
 import { SafeUser, UserId } from './User';
 
-export interface Post {
-  postId: number;
-  userId: string;
+export interface AdvancedPost {
+  postid: number;
+  userid: string;
   content: string;
   images: PostImage[];
-  createAt: string;
-  parentId?: Post['postId'];
-  originalId?: Post['postId'];
-  quote?: boolean;
-  pinned?: boolean;
-  scope?: 'every' | 'follow' | 'verified' | 'only';
-}
-
-export interface AdvancedPost extends Post {
+  createat: string;
+  parentid: number | null;
+  originalid: number | null;
+  quote: boolean;
+  pinned: boolean;
+  scope: 'every' | 'follow' | 'verified' | 'only';
   User: SafeUser;
+  Parent: {
+    postid: number;
+    User: SafeUser;
+    images: PostImage[];
+  } | null;
+  Original: AdvancedPost | null;
   Hearts: UserId[];
   Reposts: UserId[];
   Comments: UserId[];
@@ -27,10 +29,11 @@ export interface AdvancedPost extends Post {
     Bookmarks: number;
     Views: number;
   };
-  Parent?: {
-    postId: Post['postId'];
-    User: SafeUser;
-    images: PostImage[];
-  };
-  Original?: AdvancedPost;
+}
+
+export interface PostImage {
+  link: string;
+  imageId: number;
+  width: number;
+  height: number;
 }

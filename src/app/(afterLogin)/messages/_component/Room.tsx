@@ -16,13 +16,13 @@ export default function Room() {
     id: 'hero',
     nickname: '영웅',
     Messages: [
-      { roomId: 123, content: '안녕하세요.', createdAt: new Date() },
-      { roomId: 123, content: '안녕히가세요.', createdAt: new Date() },
+      { roomid: 123, content: '안녕하세요.', createdAt: new Date() },
+      { roomid: 123, content: '안녕히가세요.', createdAt: new Date() },
     ],
   };
 
   const onClick = () => {
-    router.push(`/messages/${user.Messages.at(-1)?.roomId}`);
+    router.push(`/messages/${user.Messages.at(-1)?.roomid}`);
   };
 
   return (

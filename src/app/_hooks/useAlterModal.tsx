@@ -52,6 +52,18 @@ export default function useAlterModal() {
     [resetMessage, setModal]
   );
 
+  const sendPrepareMessage = useCallback(() => {
+    resetMessage();
+    setTimeout(() => {
+      setModal({
+        show: true,
+        message: 'This feature is in preparation.',
+        duration: 2000,
+        type: 'warning',
+      });
+    });
+  }, [resetMessage]);
+
   return {
     getMessage,
     getDuration,
@@ -59,5 +71,6 @@ export default function useAlterModal() {
     alterMessage,
     setDuration,
     resetMessage,
+    sendPrepareMessage,
   };
 }

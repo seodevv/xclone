@@ -1,10 +1,12 @@
 import { AdvancedUser } from '@/model/User';
 
 interface Params {
+  queryKey: string[];
   pageParam: string;
 }
 
 export const getFollowRecommends = async ({
+  queryKey: [, , , mode],
   pageParam,
 }: Params): Promise<{
   data: AdvancedUser[];
@@ -16,7 +18,9 @@ export const getFollowRecommends = async ({
 
   const requestUrl = `${
     isServer ? process.env.SERVER_URL : process.env.NEXT_PUBLIC_SERVER_URL
-  }/api/users/followRecommends?cursor=${pageParam}`;
+  }/api/users/followRecommends?cursor=${pageParam}${
+    typeof mode !== 'undefined' ? '&mode=creator' : ''
+  }`;
   const requestOptions: RequestInit = {
     method: 'GET',
     credentials: 'include',

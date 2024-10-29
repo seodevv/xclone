@@ -54,9 +54,11 @@ const reducer: Reducer<State, Action> = (state, action) => {
 export const ConfirmContext = createContext<{
   modal: State;
   dispatchModal: Dispatch<Action>;
+  reset: () => void;
 }>({
   modal: initialState,
   dispatchModal: () => {},
+  reset: () => {},
 });
 
 interface Props {
@@ -65,8 +67,13 @@ interface Props {
 
 export default function ConfirmProvider({ children }: Props) {
   const [modal, dispatchModal] = useReducer(reducer, initialState);
+
+  const reset = () => {
+    dispatchModal({ type: 'reset' });
+  };
+
   return (
-    <ConfirmContext.Provider value={{ modal, dispatchModal }}>
+    <ConfirmContext.Provider value={{ modal, dispatchModal, reset }}>
       {children}
       {modal.flag && modal.type === 'unFollow' && <UnFollowModal />}
       {modal.flag && modal.type === 'unLists' && <UnListsModal />}

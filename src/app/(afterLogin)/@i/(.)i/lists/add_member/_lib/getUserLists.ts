@@ -7,21 +7,21 @@ interface Params {
 }
 
 const getUserLists = async ({
-  queryKey: [, , userId, options],
+  queryKey: [, , userid, options],
   pageParam,
 }: Params): Promise<{
   data: AdvancedLists[];
   nextCursor?: number;
   message: string;
 }> => {
-  if (!userId || typeof userId !== 'string' || typeof options !== 'object') {
+  if (!userid || typeof userid !== 'string' || typeof options !== 'object') {
     throw new Error(ERROR_STATUS.badRequest);
   }
   const isServer = typeof window === 'undefined';
   const nextHeader = isServer ? await import('next/headers') : undefined;
   const requestUrl = `${
     isServer ? process.env.SERVER_URL : process.env.NEXT_PUBLIC_SERVER_URL
-  }/api/users/${userId}/lists?cursor=${pageParam}&filter=${options.filter}`;
+  }/api/users/${userid}/lists?cursor=${pageParam}&filter=${options.filter}`;
   const requestOptions: RequestInit = {
     method: 'GET',
     credentials: 'include',
@@ -31,7 +31,7 @@ const getUserLists = async ({
         }
       : undefined,
     next: {
-      tags: ['lists', 'list', userId],
+      tags: ['lists', 'list', userid],
     },
     cache: 'no-store',
   };

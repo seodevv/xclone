@@ -33,7 +33,10 @@ const useComposeStore = create<ComposeState>()(
           set((state) => ({ type: 'idle', post: undefined, defaultValue: '' }));
         },
       }),
-      { name: 'compose-storage' }
+      {
+        name: 'compose-storage',
+        // storage: createJSONStorage(() => sessionStorage),
+      }
     ),
     { enabled: process.env.NODE_ENV === 'development' }
   )

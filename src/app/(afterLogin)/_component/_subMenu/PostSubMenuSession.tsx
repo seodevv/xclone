@@ -74,7 +74,7 @@ export default function PostSubMenuSession({ width = 18.75 }: Props) {
           svg={<ListsSvg width={width} />}
           scroll={false}
           onClick={() => {
-            setPostId(post.postId);
+            setPostId(post.postid);
             closeMenu();
           }}
         />
@@ -91,7 +91,7 @@ export default function PostSubMenuSession({ width = 18.75 }: Props) {
         />
         <SubMenu
           type="link"
-          href={`/${post.User.id}/status/${post.postId}/quotes`}
+          href={`/${post.User.id}/status/${post.postid}/quotes`}
           title="View post engagements"
           svg={<ViewSvg width={width} />}
           onClick={closeMenu}

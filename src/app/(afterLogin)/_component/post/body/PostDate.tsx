@@ -24,7 +24,7 @@ interface Props {
   className?: string;
   style?: CSSProperties;
   mode?: Mode;
-  date: string;
+  date: string | Date;
   based?: number;
   isFull?: boolean;
   noEvent?: boolean;

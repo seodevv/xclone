@@ -1,38 +1,26 @@
-import { Post } from '@/model/Post';
-import { SafeUser, User, UserId } from '@/model/User';
+import { SafeUser, UserId } from '@/model/User';
 
-export interface ListsRaw {
+export interface AdvancedLists {
   id: number;
-  userId: User['id'];
+  userid: string;
   name: string;
-  description: string;
+  description: string | null;
   banner: string;
   thumbnail: string;
-  make: string;
-  createAt: Date;
-}
-
-export interface Lists extends ListsRaw {
   make: 'private' | 'public';
-}
-
-export interface AdvancedLists extends Lists {
+  createat: string;
   User: SafeUser;
   Member: UserId[];
   Follower: UserId[];
   UnShow: UserId[];
-  Posts: Post['postId'][];
+  Posts: number[];
   Pinned: boolean;
 }
 
-export interface ListsDetailRaw {
+export interface ListsDetail {
   id: number;
-  listId: Lists['id'];
-  type: string;
-  userId: User['id'];
-  postId?: Post['postId'];
-}
-
-export interface ListsDetail extends ListsDetailRaw {
-  type: 'member' | 'post' | 'follower';
+  listid: number;
+  type: 'member' | 'post' | 'unpost' | 'follower' | 'pinned' | 'unshow';
+  userid: string;
+  postid: number | null;
 }

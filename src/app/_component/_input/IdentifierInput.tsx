@@ -5,12 +5,15 @@ import {
   KeyboardEventHandler,
   MouseEventHandler,
   useImperativeHandle,
+  useLayoutEffect,
   useRef,
   useState,
 } from 'react';
 import cx from 'classnames';
 import { useFormStatus } from 'react-dom';
 import PasswordButton from '@/app/(beforeLogin)/_component/_button/PasswordButton';
+import Text from '@/app/_component/_text/Text';
+import Link from 'next/link';
 
 interface Props {
   type?: 'text' | 'password';
@@ -30,6 +33,8 @@ interface Props {
   readOnly?: boolean;
   passwordHide?: boolean;
   noTab?: boolean;
+  forgot?: boolean;
+  autoFocus?: boolean;
   onChange?: (value: string) => void;
   onEnter?: () => void;
   onSuccess?: (value: string) => void;
@@ -39,6 +44,8 @@ interface Props {
 export interface IdentifierInputRef {
   focus: () => void;
   blur: () => void;
+  error: ({ flag, message }: { flag: boolean; message?: string }) => void;
+  setValue: (value: string) => void;
 }
 
 const IdentifierInput = forwardRef<IdentifierInputRef, Props>(
@@ -53,6 +60,8 @@ const IdentifierInput = forwardRef<IdentifierInputRef, Props>(
       readOnly = false,
       passwordHide,
       noTab,
+      forgot = false,
+      autoFocus,
       onChange,
       onEnter,
       onSuccess,
@@ -61,7 +70,7 @@ const IdentifierInput = forwardRef<IdentifierInputRef, Props>(
     ref
   ) => {
     const { pending } = useFormStatus();
-    const [state, setState] = useState<string>(defaultValue || '');
+    const [state, setState] = useState<string>('');
     const [focus, setFocus] = useState(false);
     const [highlight, setHighlight] = useState<boolean>(
       !!(disabled || defaultValue)
@@ -166,7 +175,23 @@ const IdentifierInput = forwardRef<IdentifierInputRef, Props>(
       blur: () => {
         inputRef.current?.blur();
       },
+      error: ({ flag, message }) => {
+        setError({
+          flag,
+          message: typeof message !== 'undefined' ? message : '',
+        });
+      },
+      setValue: (value) => {
+        setState(value);
+        setHighlight(true);
+      },
     }));
+
+    useLayoutEffect(() => {
+      if (defaultValue) {
+        setState(defaultValue);
+      }
+    }, [defaultValue]);
 
     return (
       <div className={styles.identifier}>
@@ -201,6 +226,7 @@ const IdentifierInput = forwardRef<IdentifierInputRef, Props>(
                   readOnly={readOnly || pending}
                   spellCheck={false}
                   autoComplete="off"
+                  autoFocus={autoFocus}
                   tabIndex={noTab ? -1 : undefined}
                   onFocus={() => {
                     setFocus(true);
@@ -226,6 +252,18 @@ const IdentifierInput = forwardRef<IdentifierInputRef, Props>(
             <div className={styles.disabled}></div>
           )}
         </label>
+        {forgot && (
+          <div className={styles.forgot}>
+            <Link href="/i/flow/password_reset">
+              <Text
+                text="Forgot password?"
+                theme="primary"
+                size="xs"
+                bold="bold"
+              />
+            </Link>
+          </div>
+        )}
         {error.flag && (
           <div className={cx(styles.errorMessage, styles.fadeIn)}>
             {error.message}

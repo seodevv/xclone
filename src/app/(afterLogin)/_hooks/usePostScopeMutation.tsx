@@ -19,7 +19,7 @@ const usePostScopeMutation = () =>
       post,
       scope,
     }: MutationParam): Promise<{ data: AdvancedPost; message: string }> => {
-      const requestUrl = `${process.env.NEXT_PUBLIC_SERVER_URL}/api/posts/${post.postId}/scope`;
+      const requestUrl = `${process.env.NEXT_PUBLIC_SERVER_URL}/api/posts/${post.postid}/scope`;
       const requestOptions: RequestInit = {
         method: 'POST',
         body: JSON.stringify({
@@ -53,8 +53,8 @@ const usePostScopeMutation = () =>
       }[] = [];
 
       queryKeys.forEach((queryKey) => {
-        // ['posts', post.postId]
-        if (queryKey[1] === post.postId.toString()) {
+        // ['posts', post.postid]
+        if (queryKey[1] === post.postid.toString()) {
           const queryData =
             queryClient.getQueryData<TData<AdvancedPost>>(queryKey);
           if (!queryData) return;
@@ -73,7 +73,7 @@ const usePostScopeMutation = () =>
 
           queryData.pages.forEach((page, i) =>
             page.data.forEach((p, j) => {
-              if (p.postId === post.postId) {
+              if (p.postid === post.postid) {
                 const shallow = { ...queryData, page: [...queryData.pages] };
                 shallow.pages[i] = {
                   ...shallow.pages[i],
@@ -85,7 +85,7 @@ const usePostScopeMutation = () =>
                 };
                 queryClient.setQueryData(queryKey, shallow);
                 context.push({ queryKey, queryData });
-              } else if (p.Original?.postId === post.postId) {
+              } else if (p.Original?.postid === post.postid) {
                 const shallow = { ...queryData, page: [...queryData.pages] };
                 shallow.pages[i] = {
                   ...shallow.pages[i],

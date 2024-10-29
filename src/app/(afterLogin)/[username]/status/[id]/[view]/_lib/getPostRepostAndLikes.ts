@@ -3,7 +3,7 @@ import { REGEX_NUMBER_ONLY } from '@/app/_lib/regex';
 import { AdvancedUser } from '@/model/User';
 
 interface Params {
-  queryKey: (string | { postId: string; username: string })[];
+  queryKey: (string | { postid: string; username: string })[];
   pageParam: string;
 }
 
@@ -18,7 +18,7 @@ const getPostRepostAndLikes = async ({
   if (
     typeof filter !== 'string' ||
     typeof options !== 'object' ||
-    !REGEX_NUMBER_ONLY.test(options.postId)
+    !REGEX_NUMBER_ONLY.test(options.postid)
   ) {
     throw new Error(ERROR_STATUS.badRequest);
   }
@@ -26,7 +26,7 @@ const getPostRepostAndLikes = async ({
   const nextHeader = isServer ? await import('next/headers') : undefined;
   const requestUrl = `${
     isServer ? process.env.SERVER_URL : process.env.NEXT_PUBLIC_SERVER_URL
-  }/api/posts/${options.postId}/engagements?userId=${
+  }/api/posts/${options.postid}/engagements?userid=${
     options.username
   }&filter=${filter}&cursor=${pageParam}`;
   const requestOptions: RequestInit = {

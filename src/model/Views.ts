@@ -1,10 +1,8 @@
-import { Post } from '@/model/Post';
-
 export interface Views {
-  postId: Post['postId'];
+  postid: number;
   impressions: number;
   engagements: number;
-  detailExpands: number;
-  newFollowers: number;
-  profileVisit: number;
+  detailexpands: number;
+  newfollowers: number;
+  profilevisit: number;
 }

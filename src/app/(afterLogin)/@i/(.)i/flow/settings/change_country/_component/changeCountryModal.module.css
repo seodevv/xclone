@@ -1,0 +1,30 @@
+.modal {
+  padding: 48px 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  flex-grow: 1;
+}
+.logo {
+  margin: 16px 0;
+  display: flex;
+  justify-content: center;
+  width: 100%;
+}
+.content {
+  margin: 32px;
+  max-width: 400px;
+}
+.inform {
+  margin-bottom: 32px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+.title {
+  margin-bottom: 8px;
+}
+.buttons {
+  display: flex;
+  flex-direction: column;
+}

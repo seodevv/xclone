@@ -13,7 +13,7 @@ interface ReactionMutationParams {
   type: 'Comments' | 'Hearts' | 'Reposts' | 'Bookmarks';
   method: 'post' | 'delete';
   post: AdvancedPost;
-  sessionId: string;
+  sessionid: string;
 }
 
 const useReactionMutation = () =>
@@ -30,7 +30,7 @@ const useReactionMutation = () =>
       | undefined
     > => {
       const requestUrl = `${process.env.NEXT_PUBLIC_SERVER_URL}/api/posts/${
-        post.postId
+        post.postid
       }/${type.toLowerCase()}`;
       const requestOptions: RequestInit = {
         method,
@@ -49,7 +49,7 @@ const useReactionMutation = () =>
 
       return response.json();
     },
-    onMutate: ({ queryClient, type, method, post, sessionId }) => {
+    onMutate: ({ queryClient, type, method, post, sessionid }) => {
       const queryCache = queryClient.getQueryCache();
       const queryKeys = queryCache.getAll().map((q) => q.queryKey);
 
@@ -66,8 +66,8 @@ const useReactionMutation = () =>
         const [a, b, c] = queryKey;
 
         switch ([a, b].toString()) {
-          case `posts,${post.postId}`: {
-            // queryKey is ['posts', postId, *]
+          case `posts,${post.postid}`: {
+            // queryKey is ['posts', postid, *]
             const queryData = queryClient.getQueryData<{
               data: AdvancedPost;
               message: string;
@@ -77,13 +77,13 @@ const useReactionMutation = () =>
             const shallow = { ...queryData };
             const already = shallow.data[type]
               .map((u) => u.id)
-              .includes(sessionId);
+              .includes(sessionid);
             // increase reaction
             // type is 'Comments' | 'Reposts' | 'Hearts' | 'Bookmarks'
             if (method === 'post' && !already) {
               shallow.data = {
                 ...shallow.data,
-                [type]: [...shallow.data[type], { id: sessionId }],
+                [type]: [...shallow.data[type], { id: sessionid }],
                 _count: {
                   ...queryData.data._count,
                   [type]: shallow.data._count[type] + 1,
@@ -95,7 +95,7 @@ const useReactionMutation = () =>
             else if (method === 'delete' && already) {
               shallow.data = {
                 ...shallow.data,
-                [type]: queryData.data[type].filter((u) => u.id !== sessionId),
+                [type]: queryData.data[type].filter((u) => u.id !== sessionid),
                 _count: {
                   ...queryData.data._count,
                   [type]:
@@ -128,8 +128,8 @@ const useReactionMutation = () =>
               queryData.pages.forEach((page, i) => {
                 const findPost = page.data.find(
                   (p) =>
-                    p.Original?.postId === post.postId &&
-                    p.User.id === sessionId &&
+                    p.Original?.postid === post.postid &&
+                    p.User.id === sessionid &&
                     !p.quote
                 );
                 if (findPost) {
@@ -152,7 +152,7 @@ const useReactionMutation = () =>
                   data: [
                     {
                       ...post,
-                      Bookmarks: [...post.Bookmarks, { id: sessionId }],
+                      Bookmarks: [...post.Bookmarks, { id: sessionid }],
                     },
                     ...shallow.pages[0].data,
                   ],
@@ -163,7 +163,7 @@ const useReactionMutation = () =>
                   shallow.pages[i] = {
                     ...shallow.pages[i],
                     data: shallow.pages[i].data.filter(
-                      (p) => p.postId !== post.postId
+                      (p) => p.postid !== post.postid
                     ),
                   };
                 });
@@ -172,13 +172,13 @@ const useReactionMutation = () =>
 
             shallow.pages.forEach((page, i) => {
               page.data.forEach((p, j) => {
-                // find the target through postId in the list
-                if (p.postId === post.postId) {
+                // find the target through postid in the list
+                if (p.postid === post.postid) {
                   shallow.pages = [...shallow.pages];
                   shallow.pages[i] = { ...shallow.pages[i] };
                   shallow.pages[i].data = [...shallow.pages[i].data];
 
-                  const already = p[type].map((u) => u.id).includes(sessionId);
+                  const already = p[type].map((u) => u.id).includes(sessionid);
                   // update the target in the list
                   // type is "Comments" | "Hearts" | "Reposts" | "Bookmarks"
                   switch (method) {
@@ -186,7 +186,7 @@ const useReactionMutation = () =>
                       if (!already) {
                         shallow.pages[i].data[j] = {
                           ...p,
-                          [type]: [...p[type], { id: sessionId }],
+                          [type]: [...p[type], { id: sessionid }],
                           _count: {
                             ...p._count,
                             [type]: p._count[type] + 1,
@@ -199,7 +199,7 @@ const useReactionMutation = () =>
                       if (already) {
                         shallow.pages[i].data[j] = {
                           ...p,
-                          [type]: p[type].filter((u) => u.id !== sessionId),
+                          [type]: p[type].filter((u) => u.id !== sessionid),
                           _count: {
                             ...p._count,
                             [type]: p._count[type] < 0 ? 0 : p._count[type] - 1,
@@ -210,14 +210,14 @@ const useReactionMutation = () =>
                     }
                   }
                 }
-                // find the repost target through postId in the list
-                else if (p.Original?.postId === post.postId) {
+                // find the repost target through postid in the list
+                else if (p.Original?.postid === post.postid) {
                   shallow.pages = [...shallow.pages];
                   shallow.pages[i] = { ...shallow.pages[i] };
                   shallow.pages[i].data = [...shallow.pages[i].data];
 
                   const already = p.Original[type].some(
-                    (u) => u.id === sessionId
+                    (u) => u.id === sessionid
                   );
                   // update the repost target in the list
                   // type is "Comments" | "Hearts" | "Reposts" | "Bookmarks"
@@ -228,7 +228,7 @@ const useReactionMutation = () =>
                           ...shallow.pages[i].data[j],
                           Original: {
                             ...p.Original,
-                            [type]: [...p.Original[type], { id: sessionId }],
+                            [type]: [...p.Original[type], { id: sessionid }],
                             _count: {
                               ...p.Original._count,
                               [type]: p.Original._count[type],
@@ -245,7 +245,7 @@ const useReactionMutation = () =>
                           Original: {
                             ...p.Original,
                             [type]: p.Original[type].filter(
-                              (u) => u.id !== sessionId
+                              (u) => u.id !== sessionid
                             ),
                             _count: {
                               ...p.Original._count,
@@ -279,7 +279,7 @@ const useReactionMutation = () =>
         });
       }
     },
-    onSuccess: (response, { queryClient, type, method, post, sessionId }) => {
+    onSuccess: (response, { queryClient, type, method, post, sessionid }) => {
       if (type === 'Reposts' && method === 'post' && response) {
         const queryCache = queryClient.getQueryCache();
         const queryKeys = queryCache.getAll().map((q) => q.queryKey);
@@ -288,7 +288,7 @@ const useReactionMutation = () =>
           const [a, b, c] = queryKey;
           if (a !== 'posts') return;
           if (b !== 'list') return;
-          if (c !== 'recommends' && c !== sessionId) return;
+          if (c !== 'recommends' && c !== sessionid) return;
 
           const queryData =
             queryClient.getQueryData<
@@ -299,7 +299,7 @@ const useReactionMutation = () =>
             >(queryKey);
           queryData?.pages.forEach((page, i) => {
             page.data.forEach((post, j) => {
-              if (post.postId !== -1) return;
+              if (post.postid !== -1) return;
 
               const { data } = response;
               const shallow = { ...queryData };
@@ -318,11 +318,11 @@ const useReactionMutation = () =>
           refetchType: 'none',
         });
         queryClient.invalidateQueries({
-          queryKey: ['posts', 'list', sessionId],
+          queryKey: ['posts', 'list', sessionid],
           refetchType: 'none',
         });
         queryClient.invalidateQueries({
-          queryKey: ['users', 'list', 'retweets', post.postId],
+          queryKey: ['users', 'list', 'retweets', post.postid],
           refetchType: 'inactive',
         });
       }

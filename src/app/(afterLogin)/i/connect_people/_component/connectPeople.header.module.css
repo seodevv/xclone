@@ -1,0 +1,28 @@
+.setting {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 34px;
+  height: 34px;
+  background: transparent;
+  border: none;
+  border-radius: 50%;
+  transition-property: background-color;
+  transition-duration: 200ms;
+  cursor: pointer;
+}
+.setting:hover:enabled {
+  background: rgba(var(--button-hover-rgb), 0.1);
+}
+.setting:active:enabled {
+  background: rgba(var(--button-hover-rgb), 0.2);
+}
+.tabs {
+  margin-bottom: 8px;
+  display: flex;
+  height: 53px;
+  border-bottom-width: 1px;
+  border-bottom-style: solid;
+  border-bottom-color: rgb(var(--border-start-rgb));
+  font-size: 15px;
+}

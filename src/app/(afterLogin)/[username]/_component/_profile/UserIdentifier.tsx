@@ -1,4 +1,4 @@
-import styles from './userIdentifier.module.css';
+import styles from './useridentifier.module.css';
 import { AdvancedUser } from '@/model/User';
 import BadgeButton from '@/app/(afterLogin)/_component/buttons/BadgeButton';
 import Link from 'next/link';
@@ -6,12 +6,12 @@ import BadgeSvg from '@/app/_svg/verified/BadgeSvg';
 import Text from '@/app/_component/_text/Text';
 
 interface Props {
-  sessionId?: string | null;
+  sessionid?: string | null;
   username: string;
   user?: AdvancedUser;
 }
 
-export default function UserIdentifier({ sessionId, username, user }: Props) {
+export default function UserIdentifier({ sessionid, username, user }: Props) {
   return (
     <div className={styles.container}>
       <div className={styles.identifier}>
@@ -19,9 +19,9 @@ export default function UserIdentifier({ sessionId, username, user }: Props) {
           <div>{user ? user.nickname : '@' + decodeURIComponent(username)}</div>
           <BadgeButton verified={user?.verified} />
         </div>
-        {user && <div className={styles.userId}>@{user.id} </div>}
+        {user && <div className={styles.userid}>@{user.id} </div>}
       </div>
-      {sessionId === username && !user?.verified && (
+      {sessionid === username && !user?.verified && (
         <div className={styles.verified}>
           <Link
             className={styles.link}

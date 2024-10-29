@@ -1,8 +1,8 @@
 import AddHistoryStack from '@/app/(afterLogin)/@i/(.)i/_component/AddHistoryStack';
-import ListsUserList from '@/app/(afterLogin)/@i/(.)i/lists/[listId]/_component/ListsUserList';
+import ListsUserList from '@/app/(afterLogin)/@i/(.)i/lists/[listid]/_component/ListsUserList';
 
 interface Props {
-  params: { listId: string };
+  params: { listid: string };
 }
 
 export default function IListsMemberSlot({ params }: Props) {
@@ -11,7 +11,7 @@ export default function IListsMemberSlot({ params }: Props) {
   return (
     <>
       <AddHistoryStack />
-      <ListsUserList listId={params.listId} filter={filter} />
+      <ListsUserList listid={params.listid} filter={filter} />
     </>
   );
 }

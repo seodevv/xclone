@@ -38,9 +38,9 @@ export default function ListsShowSubMenu({ lists }: Props) {
       {
         queryClient,
         method,
-        listId: lists.id,
-        userId: lists.userId,
-        sessionId: session.user.email,
+        listid: lists.id,
+        userid: lists.userid,
+        sessionid: session.user.email,
       },
       {
         onSuccess: () => {

@@ -38,7 +38,7 @@ export default async function ViewHydrationBoundary({
     case 'retweets':
     case 'likes':
       await queryClient.prefetchInfiniteQuery({
-        queryKey: ['users', 'list', view, { postId: id, username }],
+        queryKey: ['users', 'list', view, { postid: id, username }],
         queryFn: getPostRepostAndLikes,
         initialPageParam: '',
       });

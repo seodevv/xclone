@@ -9,12 +9,14 @@ import { generateImagePath } from '@/app/_lib/common';
 import { AdvancedUser } from '@/model/User';
 import FollowButton from '@/app/(afterLogin)/_component/buttons/FollowButton';
 import BadgeSvg from '@/app/_svg/verified/BadgeSvg';
+import SubscribeButton from '@/app/(afterLogin)/_component/buttons/SubscribeButton';
 
 interface Props {
   className?: string;
   style?: CSSProperties;
   user: AdvancedUser;
   isDesc?: boolean;
+  isSubscribe?: boolean;
 }
 
 export default function FollowRecommend({
@@ -22,6 +24,7 @@ export default function FollowRecommend({
   style,
   user,
   isDesc,
+  isSubscribe,
 }: Props) {
   return (
     <Link
@@ -46,7 +49,11 @@ export default function FollowRecommend({
             </div>
             <div className={styles.identifier}>@{user.id}</div>
           </div>
-          <FollowButton user={user} />
+          {!!user.verified && isSubscribe ? (
+            <SubscribeButton />
+          ) : (
+            <FollowButton user={user} />
+          )}
         </div>
         {isDesc && user.desc && (
           <div className={styles.description}>{user.desc}</div>

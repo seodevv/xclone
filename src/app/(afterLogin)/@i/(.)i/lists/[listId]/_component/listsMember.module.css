@@ -45,7 +45,7 @@
 .identity:hover .userNick {
   text-decoration: underline;
 }
-.userId {
+.userid {
   color: rgb(var(--link-rgb));
 }
 .informBottom {

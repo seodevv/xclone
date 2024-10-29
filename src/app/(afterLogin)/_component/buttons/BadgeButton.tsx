@@ -19,7 +19,7 @@ import useViewport from '../../_hooks/useViewport';
 interface Props {
   className?: string;
   style?: CSSProperties;
-  verified?: Verified;
+  verified?: Verified | null;
   width?: number;
   unClickable?: boolean;
 }

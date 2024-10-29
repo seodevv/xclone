@@ -17,15 +17,15 @@ export default function RoomPage() {
   };
   const messages = [
     {
-      messageId: 1,
-      roomId: 123,
+      messageid: 1,
+      roomid: 123,
       id: 'zerohch0',
       content: '안녕하세요.',
       createdAt: new Date(),
     },
     {
-      messageId: 2,
-      roomId: 123,
+      messageid: 2,
+      roomid: 123,
       id: 'hero',
       content: '안녕히가세요.',
       createdAt: new Date(),
@@ -53,7 +53,7 @@ export default function RoomPage() {
             // 내 메시지면
             return (
               <div
-                key={m.messageId}
+                key={m.messageid}
                 className={cx(style.message, style.myMessage)}
               >
                 <div className={style.content}>{m.content}</div>
@@ -65,7 +65,7 @@ export default function RoomPage() {
           }
           return (
             <div
-              key={m.messageId}
+              key={m.messageid}
               className={cx(style.message, style.yourMessage)}
             >
               <div className={style.content}>{m.content}</div>

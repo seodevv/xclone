@@ -1,12 +1,12 @@
 'use client';
 
 import { responseErrorHandler } from '@/app/_lib/error';
-import { AdvancedUser, User } from '@/model/User';
+import { AdvancedUser } from '@/model/User';
 import { QueryClient, QueryKey, useMutation } from '@tanstack/react-query';
 
 interface MutationParams {
   queryClient: QueryClient;
-  sessionId: User['id'];
+  sessionid: AdvancedUser['id'];
 }
 
 const useDeleteUserBirth = () =>
@@ -28,13 +28,13 @@ const useDeleteUserBirth = () =>
 
       return responseErrorHandler(response);
     },
-    onMutate: ({ queryClient, sessionId }) => {
-      // queryKey is ['users', sessionId]
+    onMutate: ({ queryClient, sessionid }) => {
+      // queryKey is ['users', sessionid]
       const queryKeys = queryClient
         .getQueryCache()
         .getAll()
         .map((c) => c.queryKey)
-        .filter((key) => key[0] === 'users' && key[1] === sessionId);
+        .filter((key) => key[0] === 'users' && key[1] === sessionid);
 
       const context: {
         queryKey: QueryKey;
@@ -50,7 +50,7 @@ const useDeleteUserBirth = () =>
           ...queryData,
           data: {
             ...queryData.data,
-            birth: undefined,
+            birth: null,
           },
         };
         queryClient.setQueryData(queryKey, shallow);
@@ -58,9 +58,9 @@ const useDeleteUserBirth = () =>
       });
       return context;
     },
-    onSuccess: (data, { queryClient, sessionId }, context) => {
+    onSuccess: (data, { queryClient, sessionid }, context) => {
       queryClient.invalidateQueries({
-        queryKey: ['users', sessionId],
+        queryKey: ['users', sessionid],
       });
     },
     onError: (erorr, { queryClient }, context) => {

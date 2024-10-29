@@ -14,8 +14,8 @@ interface MutationParams {
   queryClient: QueryClient;
   session: Session;
   parent?: {
-    postId: AdvancedPost['postId'];
-    userId: AdvancedPost['User']['id'];
+    postid: AdvancedPost['postid'];
+    userid: AdvancedPost['userid'];
   };
   repost?: AdvancedPost;
   content: string;
@@ -52,11 +52,11 @@ const usePostMutation = () =>
         }
       });
       if (repost) {
-        formData.append('repostId', repost.postId.toString());
+        formData.append('repostid', repost.postid.toString());
       }
 
       const requestUrl = `${process.env.NEXT_PUBLIC_SERVER_URL}/api/posts${
-        parent ? `/${parent.postId}/comments` : ''
+        parent ? `/${parent.postid}/comments` : ''
       }`;
       const requestOptions: RequestInit = {
         method: 'POST',
@@ -72,8 +72,8 @@ const usePostMutation = () =>
     },
     onMutate: ({ queryClient, session, parent, repost, content, media }) => {
       const newPost: AdvancedPost = {
-        postId: -1,
-        userId: session.user?.email as string,
+        postid: -1,
+        userid: session.user?.email as string,
         content,
         images: media.map((m, i) => ({
           imageId: i + 1,
@@ -81,12 +81,14 @@ const usePostMutation = () =>
           width: m.width,
           height: m.height,
         })),
-        createAt: new Date().toISOString(),
-        parentId: parent?.postId,
+        createat: new Date().toISOString(),
+        parentid: typeof parent !== 'undefined' ? parent.postid : null,
+        Parent: null,
         User: {
           id: session.user?.email as string,
           image: session.user?.image as string,
           nickname: session.user?.name as string,
+          verified: null,
         },
         Hearts: [],
         Reposts: [],
@@ -99,9 +101,11 @@ const usePostMutation = () =>
           Bookmarks: 0,
           Views: 0,
         },
-        Original: repost,
-        originalId: repost?.postId,
+        Original: typeof repost !== 'undefined' ? repost : null,
+        originalid: typeof repost !== 'undefined' ? repost.postid : null,
         quote: !!repost,
+        pinned: false,
+        scope: 'every',
       };
 
       const queryCache = queryClient.getQueryCache();
@@ -128,14 +132,14 @@ const usePostMutation = () =>
           >(queryKey);
         if (!queryData) return;
 
-        // queryKey is ['posts','list','comments', parent.postId]
+        // queryKey is ['posts','list','comments', parent.postid]
         // queryKey is ['posts','list','recommends']
         // queryKey is ['posts','list', session.user.email]
         // unshift new post
         let shouldBeUpdate = false;
         const shallow = { ...queryData };
         if (
-          (c === 'comments' && d === parent?.postId.toString()) ||
+          (c === 'comments' && d === parent?.postid.toString()) ||
           c === 'recommends' ||
           c === session.user?.email
         ) {
@@ -148,7 +152,7 @@ const usePostMutation = () =>
         if (parent || repost) {
           shallow.pages.forEach((page, i) =>
             page.data.forEach((p, j) => {
-              if (p.postId === parent?.postId) {
+              if (p.postid === parent?.postid) {
                 shouldBeUpdate = true;
                 shallow.pages = [...shallow.pages];
                 shallow.pages[i] = { ...shallow.pages[i] };
@@ -164,7 +168,7 @@ const usePostMutation = () =>
                     Comments: p._count.Comments + 1,
                   },
                 };
-              } else if (p.postId === repost?.postId) {
+              } else if (p.postid === repost?.postid) {
                 shouldBeUpdate = true;
                 shallow.pages = [...shallow.pages];
                 shallow.pages[i] = { ...shallow.pages[i] };
@@ -204,7 +208,7 @@ const usePostMutation = () =>
         if (queryData) {
           queryData.pages.forEach((page, i) => {
             const optimisticPostIndex = page.data.findIndex(
-              (p) => p.postId === -1
+              (p) => p.postid === -1
             );
             if (optimisticPostIndex > -1) {
               const shallow = { ...queryData };
@@ -222,23 +226,23 @@ const usePostMutation = () =>
 
       if (parent) {
         queryClient.invalidateQueries({
-          queryKey: ['posts', 'list', 'comments', parent.postId.toString()],
+          queryKey: ['posts', 'list', 'comments', parent.postid.toString()],
           refetchType: 'none',
         });
         queryClient.invalidateQueries({
-          queryKey: ['posts', 'list', parent.userId],
+          queryKey: ['posts', 'list', parent.userid],
           refetchType: 'none',
         });
         queryClient.invalidateQueries({
-          queryKey: ['posts', parent.postId.toString()],
+          queryKey: ['posts', parent.postid.toString()],
         });
       }
       if (repost) {
         queryClient.invalidateQueries({
-          queryKey: ['posts', repost.postId.toString()],
+          queryKey: ['posts', repost.postid.toString()],
         });
         queryClient.invalidateQueries({
-          queryKey: ['posts', 'list', 'quotes', repost.postId],
+          queryKey: ['posts', 'list', 'quotes', repost.postid],
           refetchType: 'inactive',
         });
       }

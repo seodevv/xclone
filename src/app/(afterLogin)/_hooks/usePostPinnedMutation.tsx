@@ -19,7 +19,7 @@ const usePostPinnedMutation = () =>
       method,
       post,
     }: Variables): Promise<{ data: AdvancedPost; message: string }> => {
-      const requestUrl = `${process.env.NEXT_PUBLIC_SERVER_URL}/api/posts/${post.postId}/pinned`;
+      const requestUrl = `${process.env.NEXT_PUBLIC_SERVER_URL}/api/posts/${post.postid}/pinned`;
       const requestOptions: RequestInit = {
         method,
         credentials: 'include',
@@ -60,7 +60,7 @@ const usePostPinnedMutation = () =>
             const shallow = { ...queryData };
             queryData.pages.forEach((page, i) =>
               page.data.forEach((p, j) => {
-                if (p.postId !== post.postId) return;
+                if (p.postid !== post.postid) return;
 
                 shallow.pages = [...shallow.pages];
                 shallow.pages[i] = { ...shallow.pages[i] };
@@ -71,7 +71,7 @@ const usePostPinnedMutation = () =>
                 shallow.pageParams[i] =
                   i === 0
                     ? 0
-                    : (shallow.pages[i].data.at(-1)?.postId as number);
+                    : (shallow.pages[i].data.at(-1)?.postid as number);
               })
             );
             queryClient.setQueryData(queryKey, shallow);
@@ -83,7 +83,7 @@ const usePostPinnedMutation = () =>
               .map((page) => page.data.map((p) => p))
               .flat();
             const findPostIndex = flatten.findIndex(
-              (p) => p.postId === post.postId
+              (p) => p.postid === post.postid
             );
             if (findPostIndex === -1) return;
             flatten[findPostIndex] = {
@@ -94,7 +94,7 @@ const usePostPinnedMutation = () =>
             flatten.sort((a, b) => {
               if (a.pinned && !b.pinned) return -1;
               if (!a.pinned && b.pinned) return 1;
-              return a.createAt > b.createAt ? -1 : 1;
+              return a.createat > b.createat ? -1 : 1;
             });
             const shallow = { ...queryData };
             queryData.pages.forEach((page, i) => {
@@ -107,7 +107,7 @@ const usePostPinnedMutation = () =>
                 i === 0
                   ? 0
                   : (flatten.slice(10 * i, 10 * (i + 1)).at(-1)
-                      ?.postId as number);
+                      ?.postid as number);
             });
 
             queryClient.setQueryData(queryKey, shallow);
@@ -122,7 +122,7 @@ const usePostPinnedMutation = () =>
           let shouldBeUpdate = false;
           queryData.pages.forEach((page, i) =>
             page.data.forEach((p, j) => {
-              if (p.postId === post.postId) {
+              if (p.postid === post.postid) {
                 shouldBeUpdate = true;
                 shallow.pages = [...shallow.pages];
                 shallow.pages[i] = { ...shallow.pages[i] };
@@ -131,7 +131,7 @@ const usePostPinnedMutation = () =>
                   ...p,
                   pinned: method === 'post' ? true : false,
                 };
-              } else if (p.Original?.postId === post.postId) {
+              } else if (p.Original?.postid === post.postid) {
                 shouldBeUpdate = true;
                 shallow.pages = [...shallow.pages];
                 shallow.pages[i] = { ...shallow.pages[i] };

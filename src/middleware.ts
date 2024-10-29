@@ -1,6 +1,4 @@
-import { AdvancedUser } from '@/model/User';
-import { decode, encode, getToken } from 'next-auth/jwt';
-import { cookies } from 'next/headers';
+import { getToken } from 'next-auth/jwt';
 import { NextRequest, NextResponse } from 'next/server';
 
 export async function middleware(req: NextRequest) {

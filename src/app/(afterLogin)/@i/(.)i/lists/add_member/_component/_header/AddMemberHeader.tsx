@@ -11,29 +11,29 @@ import { useContext } from 'react';
 export default function AddMemberHeader() {
   const router = useRouter();
   const { state } = useContext(AddMemberContext);
-  const postId = useListsStore((state) => state.postId);
+  const postid = useListsStore((state) => state.postid);
   const queryClient = useQueryClient();
   const postMutation = useListsPostMutation();
 
   const onClickSave = () => {
     if (state.disabled) return;
-    if (!postId) return;
+    if (!postid) return;
 
-    state.included.forEach((listId) => {
+    state.included.forEach((listid) => {
       postMutation.mutate({
         queryClient,
         method: 'post',
-        listId,
-        postId,
+        listid,
+        postid,
       });
     });
 
-    state.excluded.forEach((listId) => {
+    state.excluded.forEach((listid) => {
       postMutation.mutate({
         queryClient,
         method: 'delete',
-        listId,
-        postId,
+        listid,
+        postid,
       });
     });
 

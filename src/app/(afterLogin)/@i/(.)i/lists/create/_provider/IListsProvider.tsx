@@ -114,9 +114,9 @@ export default function IListsProvider({ mode = 'idle', children }: Props) {
 
 interface State {
   phase: 'create' | 'banner' | 'thumbnail';
-  name: string;
-  description: string;
-  make: 'private' | 'public';
+  name: AdvancedLists['name'];
+  description: AdvancedLists['description'];
+  make: AdvancedLists['make'];
   image: {
     link: string;
     origin?: {

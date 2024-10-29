@@ -6,7 +6,7 @@ interface Props {
   className?: string;
   style?: CSSProperties;
   theme?: 'theme' | 'gray' | 'primary' | 'error';
-  size?: 'xs' | 's' | 'm' | 'l' | 'xl';
+  size?: 'xs' | 's' | 'm' | 'l' | 'xl' | 'xxl' | 'xxxl';
   bold?: 'light' | 'normal' | 'bold' | 'boldest';
   text?: string;
   display?: 'display' | 'inline-block' | 'inline';

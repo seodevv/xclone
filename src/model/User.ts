@@ -1,36 +1,31 @@
-export interface Verified {
-  type: 'blue' | 'gold' | 'gray';
-  date: string;
-}
-
-export interface Birth {
+export type Birth = {
   date: string;
   scope: {
     month: 'public' | 'follower' | 'following' | 'each' | 'only';
     year: 'public' | 'follower' | 'following' | 'each' | 'only';
   };
-}
-export interface User {
-  id: string;
-  password: string;
-  nickname: string;
-  image: string;
-  banner?: string;
-  desc?: string;
-  birth?: Birth;
-  location?: string;
-  refer?: string;
-  verified?: Verified;
-  regist: string;
-}
+};
+
+export type Verified = {
+  type: 'blue' | 'gold' | 'gray';
+  date: Date;
+};
 
 export interface UserId {
-  id: User['id'];
+  id: AdvancedUser['id'];
 }
 
-export interface SafeUser
-  extends Pick<User, 'id' | 'nickname' | 'image' | 'verified'> {}
-export interface AdvancedUser extends Omit<User, 'password'> {
+export interface AdvancedUser {
+  id: string;
+  nickname: string;
+  image: string;
+  banner: string | null;
+  desc: string | null;
+  location: string | null;
+  birth: Birth | null;
+  verified: Verified | null;
+  refer: string | null;
+  regist: string;
   Followers: UserId[];
   Followings: UserId[];
   _count: {
@@ -38,3 +33,6 @@ export interface AdvancedUser extends Omit<User, 'password'> {
     Followings: number;
   };
 }
+
+export interface SafeUser
+  extends Pick<AdvancedUser, 'id' | 'nickname' | 'image' | 'verified'> {}

@@ -27,7 +27,7 @@ export default function PostSection({ session, params }: Props) {
         <PostForm
           session={session}
           mode="comment"
-          parent={{ postId: post.data.postId, userId: post.data.User.id }}
+          parent={{ postid: post.data.postid, userid: post.data.User.id }}
         />
       )}
       <Comments params={params} />

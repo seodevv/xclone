@@ -1,15 +1,15 @@
 'use client';
 
-import SuggestedResult from '@/app/(afterLogin)/@i/(.)i/lists/[listId]/members/suggested/_component/SuggestedResult';
-import SuggestedSearchBar from '@/app/(afterLogin)/@i/(.)i/lists/[listId]/members/suggested/_component/SuggestedSearchBar';
-import useGetSingleListsQuery from '@/app/(afterLogin)/i/lists/[listId]/_hooks/useGetSingleListsQuery';
+import SuggestedResult from '@/app/(afterLogin)/@i/(.)i/lists/[listid]/members/suggested/_component/SuggestedResult';
+import SuggestedSearchBar from '@/app/(afterLogin)/@i/(.)i/lists/[listid]/members/suggested/_component/SuggestedSearchBar';
+import useGetSingleListsQuery from '@/app/(afterLogin)/i/lists/[listid]/_hooks/useGetSingleListsQuery';
 
 interface Props {
-  listId: string;
+  listid: string;
 }
 
-export default function SuggestedSearch({ listId }: Props) {
-  const { data: lists, isError, error } = useGetSingleListsQuery(listId);
+export default function SuggestedSearch({ listid }: Props) {
+  const { data: lists, isError, error } = useGetSingleListsQuery(listid);
 
   if (lists) {
     return (

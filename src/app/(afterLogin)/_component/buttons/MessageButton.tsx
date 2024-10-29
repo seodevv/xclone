@@ -18,7 +18,7 @@ export default function MessageButton({
 }: Props) {
   return (
     <button
-      className={cx(styles.btn, className)}
+      className={cx(styles.btn, styles.messageBtn, className)}
       style={style}
       onClick={onClick}
     >

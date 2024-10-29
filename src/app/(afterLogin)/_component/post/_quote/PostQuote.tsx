@@ -28,7 +28,7 @@ export default function PostQuote({ mode, post, noImage, noEvent }: Props) {
           </span>
           <span className={styles.id}>@{post.User.id}</span>
           <span className={styles.dot}>·</span>
-          <PostDate date={post.createAt} noEvent />
+          <PostDate date={post.createat} noEvent />
         </div>
         <div className={cx(styles.body, mode === 'short' && styles.short)}>
           <div
@@ -39,8 +39,8 @@ export default function PostQuote({ mode, post, noImage, noEvent }: Props) {
             )}
           >
             <PostContent
-              postId={post.postId}
-              userId={post.User.id}
+              postid={post.postid}
+              userid={post.User.id}
               content={post.content}
             />
           </div>
@@ -48,8 +48,8 @@ export default function PostQuote({ mode, post, noImage, noEvent }: Props) {
             <div className={cx(mode === 'short' && styles.shortImage)}>
               <PostImages
                 className={cx(styles.longImage, mode === 'short' && utils.mt_0)}
-                userId={post.User.id}
-                postId={post.postId}
+                userid={post.User.id}
+                postid={post.postid}
                 images={post.images}
                 short={mode === 'short'}
               />

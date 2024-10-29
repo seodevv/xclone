@@ -1,4 +1,4 @@
-import { AdvancedUser, User } from '@/model/User';
+import { AdvancedUser } from '@/model/User';
 import {
   InfiniteData,
   QueryClient,
@@ -9,8 +9,8 @@ import {
 interface MutationParams {
   queryClient: QueryClient;
   type: 'follow' | 'unfollow';
-  sourceId: User['id'];
-  targetId: User['id'];
+  sourceId: AdvancedUser['id'];
+  targetId: AdvancedUser['id'];
 }
 
 interface TData {

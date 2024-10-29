@@ -48,10 +48,10 @@ export default function BookmarkPosts() {
               .includes(state.search.toLowerCase()) ||
             p.content.toLowerCase().includes(state.search.toLowerCase());
           length = active ? length + 1 : length;
-          return active ? <Post key={p.postId} post={p} /> : null;
+          return active ? <Post key={p.postid} post={p} /> : null;
         }
 
-        return <Post key={p.postId} post={p} />;
+        return <Post key={p.postid} post={p} />;
       })
     );
 

@@ -32,9 +32,9 @@ export default function SearchPosts({ searchParams }: Props) {
         {searchPosts.pages.map((page, i) =>
           page.data.map((p) =>
             isMedia ? (
-              <PostMedia key={p.postId} post={p} />
+              <PostMedia key={p.postid} post={p} />
             ) : (
-              <Post key={p.postId} post={p} />
+              <Post key={p.postid} post={p} />
             )
           )
         )}

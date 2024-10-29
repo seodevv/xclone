@@ -1,0 +1,53 @@
+.label {
+  margin-top: 12px;
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  cursor: pointer;
+}
+.radioLabel {
+  margin-top: 0;
+  padding: 4px 0;
+}
+.inform {
+  padding-right: 12px;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+.checkBox,
+.radioBox {
+  display: flex;
+  flex-direction: column;
+}
+.box {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  flex-grow: 1;
+  gap: 8px;
+}
+.inner {
+  margin: -8px;
+  padding: 8px;
+  border-radius: 9999px;
+  transition-duration: 200ms;
+  transition-property: background-color;
+}
+.border {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 20px;
+  height: 20px;
+  background: rgba(var(--background-start-rgb), 1);
+  border: 2px solid rgb(var(--link-rgb));
+  border-radius: 4px;
+}
+.circle {
+  border-radius: 50%;
+}
+.border.active {
+  background: rgb(var(--primary-rgb));
+  border-color: rgb(var(--primary-rgb));
+}

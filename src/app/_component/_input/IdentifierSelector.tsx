@@ -23,7 +23,7 @@ interface IdentifierRef {
   blur: () => void;
 }
 
-const IdentierSelector = forwardRef<IdentifierRef, Props>(
+const IdentifierSelector = forwardRef<IdentifierRef, Props>(
   (
     { data = [], placeholder, defaultValue, hasDefault, disabled, onChange },
     ref
@@ -73,5 +73,5 @@ const IdentierSelector = forwardRef<IdentifierRef, Props>(
   }
 );
 
-IdentierSelector.displayName = 'IdentierSelector';
-export default IdentierSelector;
+IdentifierSelector.displayName = 'IdentifierSelector';
+export default IdentifierSelector;

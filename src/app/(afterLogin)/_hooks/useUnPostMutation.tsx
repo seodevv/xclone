@@ -17,7 +17,7 @@ interface MutationParams {
 const useUnPostMutation = () =>
   useMutation({
     mutationFn: async ({ post }: MutationParams) => {
-      const requestUrl = `${process.env.NEXT_PUBLIC_SERVER_URL}/api/posts/${post.postId}`;
+      const requestUrl = `${process.env.NEXT_PUBLIC_SERVER_URL}/api/posts/${post.postid}`;
       const requestOptions: RequestInit = {
         method: 'DELETE',
         credentials: 'include',
@@ -53,20 +53,20 @@ const useUnPostMutation = () =>
         let shouldBeUpdate = false;
         queryData.pages.forEach((page, i) =>
           page.data.forEach((p, j) => {
-            if (p.postId === post.postId) {
+            if (p.postid === post.postid) {
               shouldBeUpdate = true;
               shallow.pages[i] = {
                 ...shallow.pages[i],
                 data: shallow.pages[i].data.filter(
-                  (p) => p.postId !== post.postId
+                  (p) => p.postid !== post.postid
                 ),
               };
-            } else if (!p.quote && p.Original?.postId === post.postId) {
+            } else if (!p.quote && p.Original?.postid === post.postid) {
               shouldBeUpdate = true;
               shallow.pages[i] = {
                 ...shallow.pages[i],
                 data: shallow.pages[i].data.filter(
-                  (p) => p.quote || p.Original?.postId !== post.postId
+                  (p) => p.quote || p.Original?.postid !== post.postid
                 ),
               };
             }

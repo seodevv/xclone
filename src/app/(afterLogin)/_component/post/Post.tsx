@@ -48,7 +48,7 @@ export default function Post({
       post={data}
       noEvent={noEvent}
     >
-      {isRepost && <PostRepostInfo session={session} userId={post.User.id} />}
+      {isRepost && <PostRepostInfo session={session} userid={post.User.id} />}
       {hasPinned && post.pinned && <PostPinned />}
       <div
         className={cx(styles.postWrapper, mode === 'single' && styles.single)}

@@ -3,7 +3,7 @@
 import styles from './singleLists.module.css';
 import cx from 'classnames';
 import Image from 'next/image';
-import useGetSingleListsQuery from '@/app/(afterLogin)/i/lists/[listId]/_hooks/useGetSingleListsQuery';
+import useGetSingleListsQuery from '@/app/(afterLogin)/i/lists/[listid]/_hooks/useGetSingleListsQuery';
 import LoadingSpinner from '@/app/(afterLogin)/_component/loading/LoadingSpinner';
 import { generateImagePath, unitConversion } from '@/app/_lib/common';
 import LockSvg from '@/app/_svg/profile/LockSvg';
@@ -16,16 +16,16 @@ import useListsStore from '@/app/(afterLogin)/_store/ListsStore';
 
 interface Props {
   session: Session;
-  listId: string;
+  listid: string;
 }
 
-export default function SingleLists({ session, listId }: Props) {
+export default function SingleLists({ session, listid }: Props) {
   const {
     data: lists,
     isLoading,
     isError,
     error,
-  } = useGetSingleListsQuery(listId);
+  } = useGetSingleListsQuery(listid);
   const queryClient = useQueryClient();
   const listsFollowMutation = useListsFollowMutation();
   const [hover, setHover] = useState(false);
@@ -46,7 +46,7 @@ export default function SingleLists({ session, listId }: Props) {
         queryClient,
         method: isFollow ? 'delete' : 'post',
         lists: lists.data,
-        sessionId: session.user.email,
+        sessionid: session.user.email,
       });
     };
 
@@ -70,14 +70,15 @@ export default function SingleLists({ session, listId }: Props) {
             {lists.data.make === 'private' && <LockSvg white active />}
           </div>
           <div className={styles.description}>
-            {lists.data.description.split(/\r|\n|\r\n/).map((text, i) => (
-              <span key={i}>{text}</span>
-            ))}
+            {lists.data.description &&
+              lists.data.description
+                .split(/\r|\n|\r\n/)
+                .map((text, i) => <span key={i}>{text}</span>)}
           </div>
           <div className={styles.user}>
             <Link
               className={styles.userLink}
-              href={`/${lists.data.userId}`}
+              href={`/${lists.data.userid}`}
               scroll={false}
             >
               <div className={styles.userProfile}>
@@ -91,7 +92,7 @@ export default function SingleLists({ session, listId }: Props) {
               <div className={styles.userNick}>
                 <span>{lists.data.User.nickname}</span>
               </div>
-              <div className={styles.userIdentity}>
+              <div className={styles.useridentity}>
                 <span>@{lists.data.User.id}</span>
               </div>
             </Link>
@@ -124,7 +125,7 @@ export default function SingleLists({ session, listId }: Props) {
             </div>
           </div>
           <div className={styles.actions}>
-            {session.user?.email === lists.data.userId ? (
+            {session.user?.email === lists.data.userid ? (
               <Link
                 className={cx(styles.action, styles.edit)}
                 href={`/i/lists/${lists.data.id}/info`}

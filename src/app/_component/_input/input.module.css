@@ -123,6 +123,15 @@
   line-height: 16px;
   overflow: hidden;
 }
+.forgot {
+  padding: 4px 8px 0 8px;
+  display: flex;
+}
+.forgot:hover {
+  text-decoration: underline;
+  text-decoration-color: rgb(var(--primary-rgb));
+}
+
 .fadeIn {
   animation-name: fade-in;
   animation-duration: 0.1s;

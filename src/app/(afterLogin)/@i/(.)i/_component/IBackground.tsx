@@ -4,9 +4,10 @@ import styles from './i.background.module.css';
 import utils from '@/app/utility.module.css';
 import cx from 'classnames';
 import HtmlOverflowHidden from '@/app/_component/_overflow/HtmlOverflowHidden';
-import { CSSProperties, MouseEventHandler, useRef } from 'react';
+import { CSSProperties, MouseEventHandler, useContext, useRef } from 'react';
 import { useRouter, useSearchParams } from 'next/navigation';
 import useHistoryStore from '@/app/(afterLogin)/_store/HistoryStore';
+import { PathRecordContext } from '@/app/_provider/PathRecordProvider';
 
 interface Props {
   className?: string;
@@ -15,6 +16,7 @@ interface Props {
   size?: 'small' | 'medium' | 'large';
   height?: 'auto';
   overflow?: 'auto';
+  prevPath?: string;
   onClick?: () => void;
   noHidden?: boolean;
 }
@@ -26,12 +28,14 @@ export default function IBackground({
   size = 'medium',
   height,
   overflow,
+  prevPath = '/home',
   onClick,
   noHidden,
 }: Props) {
   const router = useRouter();
   const searchParams = useSearchParams();
   const from = searchParams.get('from');
+  const ctx = useContext(PathRecordContext);
   const record = useRef({ flag: false, timestamp: 0 });
   const { stack, resetStack } = useHistoryStore((state) => ({
     stack: state.stack,
@@ -52,6 +56,11 @@ export default function IBackground({
     if (e.target !== e.currentTarget) return;
     if (!record.current.flag) return;
     // if (Date.now() - record.current.timestamp > 500) return;
+
+    if (prevPath && ctx.prevPath === ctx.path) {
+      router.push(prevPath);
+      return;
+    }
 
     if (typeof onClick === 'function') {
       return onClick();

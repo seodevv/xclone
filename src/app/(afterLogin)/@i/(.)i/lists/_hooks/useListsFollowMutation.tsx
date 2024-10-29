@@ -12,7 +12,7 @@ import {
 interface MutationParams {
   queryClient: QueryClient;
   method: 'post' | 'delete';
-  sessionId: string;
+  sessionid: string;
   lists: AdvancedLists;
 }
 
@@ -32,7 +32,7 @@ const useListsFollowMutation = () =>
 
       return responseErrorHandler(response);
     },
-    onMutate: ({ queryClient, method, sessionId, lists }) => {
+    onMutate: ({ queryClient, method, sessionid, lists }) => {
       const queryKeys = queryClient
         .getQueryCache()
         .getAll()
@@ -64,8 +64,8 @@ const useListsFollowMutation = () =>
               ...queryData.data,
               Follower:
                 method === 'post'
-                  ? [...queryData.data.Follower, { id: sessionId }]
-                  : queryData.data.Follower.filter((f) => f.id !== sessionId),
+                  ? [...queryData.data.Follower, { id: sessionid }]
+                  : queryData.data.Follower.filter((f) => f.id !== sessionid),
             },
           };
           queryClient.setQueryData(queryKey, shallow);
@@ -80,10 +80,10 @@ const useListsFollowMutation = () =>
           const filterIsAll = (key: any) => {
             return key.filter === 'all';
           };
-          // queryKey is ['lists', 'list', sessionId, {filter: 'all'}]
+          // queryKey is ['lists', 'list', sessionid, {filter: 'all'}]
           if (
             queryKey[1] === 'list' &&
-            queryKey[2] === sessionId &&
+            queryKey[2] === sessionid &&
             filterIsAll(queryKey[3])
           ) {
             shouldBeUpdate = true;
@@ -115,8 +115,8 @@ const useListsFollowMutation = () =>
                 ...l,
                 Follower:
                   method === 'post'
-                    ? [...l.Follower, { id: sessionId }]
-                    : l.Follower.filter((f) => f.id !== sessionId),
+                    ? [...l.Follower, { id: sessionid }]
+                    : l.Follower.filter((f) => f.id !== sessionid),
               };
             })
           );

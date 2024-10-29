@@ -12,10 +12,11 @@ interface Props {
 
 export default async function TrendsHydrationBoundary({ children }: Props) {
   const queryClient = new QueryClient();
-  await queryClient.prefetchQuery({
+  await queryClient.prefetchInfiniteQuery({
     queryKey: ['hashtags', 'list'],
     queryFn: getTrends,
     staleTime: 1 * 60 * 1000,
+    initialPageParam: 0,
   });
   const dehydrateState = dehydrate(queryClient);
 

@@ -55,7 +55,7 @@ export default function PostBody({
             <span>@{post.User.id}</span>
             <span>·</span>
           </Link>
-          <PostDate mode={mode} date={post.createAt} />
+          <PostDate mode={mode} date={post.createat} />
         </div>
       )}
       {post.Parent && !['single', 'comment', 'compose'].includes(mode) && (
@@ -63,15 +63,15 @@ export default function PostBody({
       )}
       <PostContent
         mode={mode}
-        postId={post.postId}
-        userId={post.User.id}
+        postid={post.postid}
+        userid={post.User.id}
         content={post.content}
       />
       {!noImage && (
         <PostImages
           mode={mode}
-          userId={post.User.id}
-          postId={post.postId}
+          userid={post.User.id}
+          postid={post.postid}
           images={post.images}
         />
       )}
@@ -90,13 +90,13 @@ export default function PostBody({
       {mode === 'single' && (
         <>
           <div className={styles.postDateView}>
-            <PostDate mode={mode} date={post.createAt} isFull={true} />
+            <PostDate mode={mode} date={post.createat} isFull={true} />
             <span style={{ margin: '0 5px' }}>·</span>
             <PostView count={post._count.Views} />
           </div>
           {session?.user?.email === post.User.id && (
             <div className={styles.engagement}>
-              <Link href={`${post.postId}/quotes`}>
+              <Link href={`${post.postid}/quotes`}>
                 <ViewSvg width={18.75} />
                 <span>View post engagements</span>
               </Link>

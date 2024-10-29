@@ -12,18 +12,18 @@ import {
 interface MutationParams {
   queryClient: QueryClient;
   method: 'post' | 'delete';
-  listId: AdvancedLists['id'];
-  userId: AdvancedLists['userId'];
+  listid: AdvancedLists['id'];
+  userid: AdvancedLists['userid'];
 }
 
 const useListsPinnedMutation = () =>
   useMutation({
-    mutationFn: async ({ method, listId, userId }: MutationParams) => {
-      const requestUrl = `${process.env.NEXT_PUBLIC_SERVER_URL}/api/lists/${listId}/pinned`;
+    mutationFn: async ({ method, listid, userid }: MutationParams) => {
+      const requestUrl = `${process.env.NEXT_PUBLIC_SERVER_URL}/api/lists/${listid}/pinned`;
       const requestOptions: RequestInit = {
         method,
         body: JSON.stringify({
-          userId,
+          userid,
         }),
         credentials: 'include',
         headers: {
@@ -37,7 +37,7 @@ const useListsPinnedMutation = () =>
 
       return responseErrorHandler(response);
     },
-    onMutate: ({ queryClient, method, listId }) => {
+    onMutate: ({ queryClient, method, listid }) => {
       const queryKeys = queryClient
         .getQueryCache()
         .getAll()
@@ -57,7 +57,7 @@ const useListsPinnedMutation = () =>
         const flatten = queryData.pages
           .map((page) => page.data.map((l) => l))
           .flat();
-        const findListsIndex = flatten.findIndex((l) => l.id === listId);
+        const findListsIndex = flatten.findIndex((l) => l.id === listid);
         if (findListsIndex === -1) return;
 
         flatten[findListsIndex] = {
@@ -68,7 +68,7 @@ const useListsPinnedMutation = () =>
         flatten.sort((a, b) => {
           if (a.Pinned && !b.Pinned) return -1;
           if (!a.Pinned && b.Pinned) return 1;
-          return a.createAt > b.createAt ? -1 : 1;
+          return a.createat > b.createat ? -1 : 1;
         });
 
         const shallow = { ...queryData, pages: [...queryData.pages] };

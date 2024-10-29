@@ -1,5 +1,6 @@
 /* default settings */
 .btn {
+  position: relative;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -100,6 +101,14 @@
   min-width: 52px;
   min-height: 52px;
 }
+.loading {
+  position: absolute;
+  cursor: default;
+}
+.invisible {
+  visibility: hidden;
+  opacity: 0;
+}
 
 /* BackButton */
 .backBtn {
@@ -126,13 +135,15 @@
   background: rgba(var(--foreground-rgb), 0.75);
   transition: none;
 }
-.isFollow {
+.isFollow,
+.isSubscribe {
   min-width: 104px;
   background: rgb(var(--background-start-rgb));
   border: 1px solid rgb(var(--label-rgb));
   color: rgb(var(--foreground-rgb));
 }
-.isFollow:hover:enabled {
+.isFollow:hover:enabled,
+.isSubscribe.btn:hover:enabled {
   border-color: rgb(103, 7, 15);
   background: rgba(244, 33, 46, 0.1);
   color: rgb(244, 33, 46);
@@ -335,6 +346,18 @@
 }
 .memberRemoveBtn:active:enabled {
   background: rgb(195, 26, 37);
+}
+
+/* MessageButton */
+.messageBtn {
+  background: rgb(var(--background-start-rgb));
+  border: 1px solid rgb(var(--label-rgb));
+}
+.messageBtn:hover:enabled {
+  background: rgba(var(--r-background-start-rgb), 0.15);
+}
+.messageBtn:active:enabled {
+  background: rgba(var(--r-background-start-rgb), 0.3);
 }
 
 /* Animation */

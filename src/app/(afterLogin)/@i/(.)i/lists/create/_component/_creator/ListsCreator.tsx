@@ -63,8 +63,8 @@ export default function ListsCreator() {
             state.description
               ? state.description
               : mode === 'edit' && lists
-              ? lists.description
-              : state.description
+              ? lists.description || undefined
+              : state.description || undefined
           }
           validate={{ maxLength: 100 }}
           minRow={3}

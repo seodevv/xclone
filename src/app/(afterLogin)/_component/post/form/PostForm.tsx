@@ -28,8 +28,8 @@ interface Props {
   session: Session;
   mode?: 'post' | 'comment' | 'compose';
   parent?: {
-    postId: number;
-    userId: string;
+    postid: number;
+    userid: string;
   };
   repost?: AdvancedPost;
   placeholder?: string;
@@ -133,7 +133,7 @@ export default function PostForm({
 
   return (
     <div style={active ? { marginTop: '-5px' } : {}}>
-      <ReplyInfo userId={parent?.userId} active={active} />
+      <ReplyInfo userid={parent?.userid} active={active} />
       <form className={cx(styles.postForm)} onSubmit={onSubmitForm}>
         <div className={cx(styles.postFormFlex, active && styles.active)}>
           <div className={styles.postUserSection}>

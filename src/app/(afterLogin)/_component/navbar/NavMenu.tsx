@@ -15,6 +15,8 @@ import { captialCase } from '@/app/_lib/common';
 import BookmarkSvg from '@/app/_svg/actionbuttons/BookmarkSvg';
 import useComposeStore from '@/app/(afterLogin)/_store/ComposeStore';
 import ListsSvg from '@/app/_svg/post/ListsSvg';
+import XLogoSvg from '@/app/_svg/logo/XLogoSvg';
+import BusinessSvg from '@/app/_svg/navbar/BusinessSvg';
 
 interface Menu {
   title:
@@ -23,7 +25,9 @@ interface Menu {
     | 'messages'
     | 'lists'
     | 'bookmarks'
+    | 'premium'
     | 'profile'
+    | 'business'
     | 'settings';
   link: string;
   active: string[];
@@ -76,6 +80,20 @@ export default function NavMenu({ session }: Props) {
       sessionRequired: true,
     },
     {
+      title: 'premium',
+      link: '/i/premium_sign_up',
+      active: ['/i/premium_sign_up'],
+      icon: <XLogoSvg width={width} />,
+      sessionRequired: true,
+    },
+    {
+      title: 'business',
+      link: '/i/verified-orgs-signup',
+      active: ['/i/verified-orgs-signup'],
+      icon: <BusinessSvg width={width} />,
+      sessionRequired: true,
+    },
+    {
       title: 'profile',
       link: `/${session?.user?.email}`,
       active: [`/${session?.user?.email}`],
@@ -100,8 +118,8 @@ export default function NavMenu({ session }: Props) {
           }
           const active = menu.active.includes(pathname);
           return (
-            <li key={menu.link}>
-              <Link href={menu.link}>
+            <li key={menu.link} className={styles.navList}>
+              <Link href={menu.link} scroll={false}>
                 <div className={styles.navPill}>
                   <menu.icon.type {...menu.icon.props} active={active} white />
                   <div className={cx(styles.navTitle, active && styles.bold)}>

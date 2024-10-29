@@ -1,0 +1,6 @@
+.link {
+  color: rgb(var(--primary-rgb));
+}
+.link:hover {
+  text-decoration: underline;
+}

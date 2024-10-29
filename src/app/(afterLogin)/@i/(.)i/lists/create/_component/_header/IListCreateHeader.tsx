@@ -38,6 +38,7 @@ export default function IListCreateHeader({ session }: Props) {
           id: session.user?.email as string,
           nickname: session.user?.name as string,
           image: session.user?.image as string,
+          verified: null,
         },
         name: state.name,
         description: state.description,
@@ -47,9 +48,9 @@ export default function IListCreateHeader({ session }: Props) {
       },
       {
         onSuccess(response) {
-          const listId = response.data.id;
+          const listid = response.data.id;
           setSuggested(true);
-          router.push(`/i/lists/${listId}/members/suggested`);
+          router.push(`/i/lists/${listid}/members/suggested`);
         },
         onError: (error) => {
           console.error(error);

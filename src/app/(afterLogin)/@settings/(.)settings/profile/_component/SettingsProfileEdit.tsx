@@ -83,7 +83,7 @@ export default function SettingsProfileEdit({
     updateProfileMutation.mutate(
       {
         queryClient,
-        sessionId: session.user.email,
+        sessionid: session.user.email,
         profile,
         updated: options.updated,
       },
@@ -145,13 +145,12 @@ export default function SettingsProfileEdit({
     if (!user) return;
 
     if (user.banner === profile.banner?.link) {
-      setProfile((prev) => ({ ...prev, banner: undefined }));
+      setProfile((prev) => ({ ...prev, banner: null }));
       setOptions((prev) => ({ ...prev, clear: true }));
     } else {
       setProfile((prev) => ({
         ...prev,
-        banner:
-          user.banner && !options.clear ? { link: user.banner } : undefined,
+        banner: user.banner && !options.clear ? { link: user.banner } : null,
       }));
     }
   };
@@ -239,7 +238,7 @@ export default function SettingsProfileEdit({
         <div className={styles.inputs}>
           <IdentifierTextarea
             placeholder="Bio"
-            defaultValue={profile.desc ? profile.desc : user.desc}
+            defaultValue={profile.desc ? profile.desc : user.desc || undefined}
             validate={{ maxLength: 180 }}
             minRow={3}
             onSuccess={(value) =>
@@ -250,7 +249,9 @@ export default function SettingsProfileEdit({
         <div className={styles.inputs}>
           <IdentifierInput
             placeholder="Location"
-            defaultValue={profile.location ? profile.location : user.location}
+            defaultValue={
+              profile.location ? profile.location : user.location || undefined
+            }
             validate={{ allowEmpty: true, allowBlank: true, maxLength: 30 }}
             onSuccess={(value) => {
               setProfile((prev) => ({ ...prev, location: value }));
@@ -262,7 +263,9 @@ export default function SettingsProfileEdit({
         <div className={styles.inputs}>
           <IdentifierInput
             placeholder="Website"
-            defaultValue={profile.refer ? profile.refer : user.refer}
+            defaultValue={
+              profile.refer ? profile.refer : user.refer || undefined
+            }
             validate={{
               allowEmpty: true,
               maxLength: 100,

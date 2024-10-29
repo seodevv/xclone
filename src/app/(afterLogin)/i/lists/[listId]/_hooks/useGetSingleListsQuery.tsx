@@ -1,11 +1,11 @@
 'use client';
 
-import getSingleLists from '@/app/(afterLogin)/i/lists/[listId]/_lib/getSingleLists';
+import getSingleLists from '@/app/(afterLogin)/i/lists/[listid]/_lib/getSingleLists';
 import { useQuery } from '@tanstack/react-query';
 
-const useGetSingleListsQuery = (listId: string) =>
+const useGetSingleListsQuery = (listid: string) =>
   useQuery({
-    queryKey: ['lists', listId],
+    queryKey: ['lists', listid],
     queryFn: getSingleLists,
   });
 

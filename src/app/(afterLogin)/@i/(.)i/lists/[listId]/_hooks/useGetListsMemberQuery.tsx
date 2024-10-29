@@ -1,16 +1,16 @@
 'use client';
 
-import getListsMember from '@/app/(afterLogin)/@i/(.)i/lists/[listId]/_lib/getListsMember';
+import getListsMember from '@/app/(afterLogin)/@i/(.)i/lists/[listid]/_lib/getListsMember';
 import { useInfiniteQuery } from '@tanstack/react-query';
 
 interface Params {
-  listId: string;
+  listid: string;
   filter: 'members' | 'followers';
 }
 
-const useGetListsMemberQuery = ({ listId, filter }: Params) =>
+const useGetListsMemberQuery = ({ listid, filter }: Params) =>
   useInfiniteQuery({
-    queryKey: ['users', 'list', 'lists', listId, { filter }],
+    queryKey: ['users', 'list', 'lists', listid, { filter }],
     queryFn: getListsMember,
     initialPageParam: '',
     getNextPageParam: (lastPage) => lastPage.nextCursor,

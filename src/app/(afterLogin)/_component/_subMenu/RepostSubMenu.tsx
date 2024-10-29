@@ -34,7 +34,7 @@ export default function RepostSubMenu() {
             type: 'Reposts',
             method: isReposted ? 'delete' : 'post',
             post: menu.post,
-            sessionId: session.user.email,
+            sessionid: session.user.email,
             queryClient,
           });
           dispatchMenu({ type: 'reset' });

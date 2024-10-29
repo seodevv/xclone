@@ -1,10 +1,10 @@
 import styles from './suggested.page.module.css';
-import SuggestedProvider from '@/app/(afterLogin)/@i/(.)i/lists/[listId]/members/suggested/_provider/SuggestedProvider';
-import SuggestedSearch from '@/app/(afterLogin)/@i/(.)i/lists/[listId]/members/suggested/_component/SuggestedSearch';
+import SuggestedProvider from '@/app/(afterLogin)/@i/(.)i/lists/[listid]/members/suggested/_provider/SuggestedProvider';
+import SuggestedSearch from '@/app/(afterLogin)/@i/(.)i/lists/[listid]/members/suggested/_component/SuggestedSearch';
 import AddHistoryStack from '@/app/(afterLogin)/@i/(.)i/_component/AddHistoryStack';
 
 interface Props {
-  params: { listId: string };
+  params: { listid: string };
 }
 
 export default function IListsMembersSuggestedSlot({ params }: Props) {
@@ -12,7 +12,7 @@ export default function IListsMembersSuggestedSlot({ params }: Props) {
     <SuggestedProvider>
       <AddHistoryStack />
       <main className={styles.search}>
-        <SuggestedSearch listId={params.listId} />
+        <SuggestedSearch listid={params.listid} />
       </main>
     </SuggestedProvider>
   );

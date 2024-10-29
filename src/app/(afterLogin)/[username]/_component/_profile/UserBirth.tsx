@@ -4,18 +4,18 @@ import { AdvancedUser } from '@/model/User';
 import { MONTH_EN } from '@/app/_lib/common';
 
 interface Props {
-  sessionId?: string | null;
+  sessionid?: string | null;
   user: AdvancedUser;
 }
 
-export default function UserBirth({ sessionId, user }: Props) {
+export default function UserBirth({ sessionid, user }: Props) {
   if (!user.birth) return;
 
   const date = new Date(user.birth.date);
   const scope = user.birth.scope;
-  const isOwn = sessionId === user.id;
-  const isFollower = user.Followers.some((u) => u.id === sessionId);
-  const isFollowing = user.Followings.some((u) => u.id === sessionId);
+  const isOwn = sessionid === user.id;
+  const isFollower = user.Followers.some((u) => u.id === sessionid);
+  const isFollowing = user.Followings.some((u) => u.id === sessionid);
 
   const month =
     scope.month === 'public' ||

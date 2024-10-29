@@ -1,6 +1,6 @@
 'use client';
 
-import ListsError from '@/app/(afterLogin)/i/lists/[listId]/error';
+import ListsError from '@/app/(afterLogin)/i/lists/[listid]/error';
 
 interface Props {
   error: Error & { digest?: string };

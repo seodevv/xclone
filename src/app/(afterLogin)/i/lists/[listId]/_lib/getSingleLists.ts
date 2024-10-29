@@ -6,13 +6,13 @@ interface Params {
 }
 
 const getSingleLists = async ({
-  queryKey: [, listId],
+  queryKey: [, listid],
 }: Params): Promise<{ data: AdvancedLists; message: string }> => {
   const isServer = typeof window === 'undefined';
   const nextHeader = isServer ? await import('next/headers') : undefined;
   const requestUrl = `${
     isServer ? process.env.SERVER_URL : process.env.NEXT_PUBLIC_SERVER_URL
-  }/api/lists/${listId}`;
+  }/api/lists/${listid}`;
   const requestOptions: RequestInit = {
     method: 'GET',
     credentials: 'include',
@@ -20,7 +20,7 @@ const getSingleLists = async ({
       ? { Cookie: nextHeader.cookies().toString() }
       : undefined,
     next: {
-      tags: ['lists', listId],
+      tags: ['lists', listid],
     },
     cache: 'no-store',
   };

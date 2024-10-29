@@ -12,9 +12,9 @@ import {
 interface MutationParams {
   queryClient: QueryClient;
   session: SafeUser;
-  name: string;
-  description: string;
-  make: 'public' | 'private';
+  name: AdvancedLists['name'];
+  description: AdvancedLists['description'];
+  make: AdvancedLists['make'];
   banner?: { link: string; file: File };
   thumbnail?: { link: string; file: File };
 }
@@ -30,7 +30,10 @@ const useAddListsMutation = () =>
     }: MutationParams): Promise<{ data: AdvancedLists; message: string }> => {
       const formData = new FormData();
       formData.append('name', name);
-      formData.append('description', description);
+      if (description) {
+        formData.append('description', description);
+      }
+
       formData.append('make', make);
       if (typeof banner !== 'undefined' && typeof thumbnail !== 'undefined') {
         formData.append('banner', banner.file);
@@ -103,17 +106,18 @@ const useAddListsMutation = () =>
 
         const newLists: AdvancedLists = {
           id: -1,
-          userId: session.id,
+          userid: session.id,
           User: session,
           name,
           description,
           banner: banner?.link || IMAGE_DEFAULT_LISTS,
           thumbnail: thumbnail?.link || banner?.link || IMAGE_DEFAULT_LISTS,
           make,
-          createAt: new Date(),
+          createat: new Date().toISOString(),
           Member: [],
           Follower: [],
           Posts: [],
+          UnShow: [],
           Pinned: false,
         };
 

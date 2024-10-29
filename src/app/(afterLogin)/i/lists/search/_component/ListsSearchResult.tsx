@@ -5,7 +5,7 @@ import TextLink from '@/app/(afterLogin)/_component/Link/TextLink';
 import LoadingSpinner from '@/app/(afterLogin)/_component/loading/LoadingSpinner';
 import PageLoading from '@/app/(afterLogin)/_component/loading/PageLoading';
 import NoPost from '@/app/(afterLogin)/_component/post/NoPost';
-import useGetListsSearchQuery from '@/app/(afterLogin)/i/lists/search/useGetListsSearchQuery';
+import useGetListsSearchQuery from '@/app/(afterLogin)/i/lists/search/_hooks/useGetListsSearchQuery';
 
 interface Props {
   searchParams: { q?: string };

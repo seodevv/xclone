@@ -1,0 +1,36 @@
+/* MainSectionController */
+.main {
+  width: 100%;
+  max-width: 600px;
+  min-height: 100dvh;
+  border-right-style: solid;
+  border-right-width: 1px;
+  border-color: rgb(var(--border-start-rgb));
+}
+
+@media screen and (max-width: 672px) {
+  .main {
+    border: none;
+  }
+}
+
+/* RightSectionController */
+.rightSection {
+  margin-right: 70px;
+  display: flex;
+  flex-flow: column nowrap;
+  width: 350px;
+  height: 100%;
+}
+
+@media all and (max-width: 1110px) {
+  .rightSection {
+    width: 290px;
+  }
+}
+
+@media all and (max-width: 1020px) {
+  .rightSection {
+    display: none;
+  }
+}

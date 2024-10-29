@@ -49,7 +49,7 @@ export default function FlexButton({
         {isLoading || (type === 'submit' && pending) ? (
           <LoadingSpinner
             style={{ padding: 0 }}
-            fill={theme === 'theme' ? 'reverse' : 'theme'}
+            fill={theme === 'theme' || theme === 'white' ? 'reverse' : 'theme'}
           />
         ) : (
           <span>{text}</span>

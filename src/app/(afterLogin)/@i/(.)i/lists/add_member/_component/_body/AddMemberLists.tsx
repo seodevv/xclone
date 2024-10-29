@@ -29,7 +29,7 @@ export default function AddMemberLists({ username, filter }: Props) {
     refetch,
   } = useGetUserListsQuery({ username, filter });
   const { state, dispatch } = useContext(AddMemberContext);
-  const postId = useListsStore((state) => state.postId);
+  const postid = useListsStore((state) => state.postid);
 
   const onClickLists = (id: AdvancedLists['id']) => {
     dispatch({
@@ -39,16 +39,16 @@ export default function AddMemberLists({ username, filter }: Props) {
   };
 
   useEffect(() => {
-    if (lists && postId) {
+    if (lists && postid) {
       lists.pages.forEach((page) =>
         page.data.forEach((lists) => {
-          if (lists.Posts.includes(postId)) {
+          if (lists.Posts.includes(postid)) {
             dispatch({ type: 'setInitial', payload: lists.id });
           }
         })
       );
     }
-  }, [lists, postId, dispatch]);
+  }, [lists, postid, dispatch]);
 
   if (lists) {
     if (lists.pages[0].data?.length === 0) {

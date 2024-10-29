@@ -9,7 +9,7 @@ interface Params {
 
 const usePostRepostsAndLikesQuery = ({ username, id, view }: Params) =>
   useInfiniteQuery({
-    queryKey: ['users', 'list', view, { username, postId: id }],
+    queryKey: ['users', 'list', view, { username, postid: id }],
     queryFn: getPostRepostAndLikes,
     initialPageParam: '',
     getNextPageParam: (lastPage) => lastPage.nextCursor,

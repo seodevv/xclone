@@ -1,9 +1,9 @@
 import { redirect } from 'next/navigation';
 
 interface Props {
-  params: { listId: string };
+  params: { listid: string };
 }
 
 export default function IListsFollowersPage({ params }: Props) {
-  redirect(`/home?r=i,lists,${params.listId},followers`);
+  redirect(`/home?r=i,lists,${params.listid},followers`);
 }

@@ -29,13 +29,13 @@ export default function PostArticle({
   qoute,
 }: Props) {
   const router = useRouter();
-  const disabled = post.postId === -1;
+  const disabled = post.postid === -1;
 
   const onClickArticle: MouseEventHandler<HTMLButtonElement> = (e) => {
     e.preventDefault();
     e.stopPropagation();
     if (['single', 'compose'].includes(mode) || disabled) return;
-    router.push(`/${post.User.id}/status/${post.postId}`);
+    router.push(`/${post.User.id}/status/${post.postid}`);
   };
 
   return (

@@ -54,7 +54,7 @@ export default function PostSubMenuOther({ width = 18.75 }: Props) {
       />
       <SubMenu
         type="link"
-        href={`/${menu.post?.User.id}/status/${menu.post?.postId}/quotes`}
+        href={`/${menu.post?.User.id}/status/${menu.post?.postid}/quotes`}
         title="View post engagements"
         svg={<ViewSvg width={width} />}
         onClick={closeMenu}

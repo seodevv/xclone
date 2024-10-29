@@ -1,6 +1,6 @@
 import styles from './userSince.module.css';
 import { MONTH_EN } from '@/app/_lib/common';
-import { AdvancedUser, Birth } from '@/model/User';
+import { AdvancedUser } from '@/model/User';
 import UserBirth from '@/app/(afterLogin)/[username]/_component/_profile/UserBirth';
 import { Session } from 'next-auth';
 import UserAdditional from '@/app/(afterLogin)/[username]/_component/_profile/UserAdditional';
@@ -26,7 +26,7 @@ export default function UserSince({ session, user }: Props) {
           text={user.refer}
         />
       )}
-      {user.birth && <UserBirth sessionId={session?.user?.email} user={user} />}
+      {user.birth && <UserBirth sessionid={session?.user?.email} user={user} />}
       {user.regist && (
         <UserAdditional
           type="div"

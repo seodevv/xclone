@@ -28,7 +28,7 @@ export default function ComposePostBody({ session }: Props) {
         mode="compose"
         parent={
           type === 'comment' && post
-            ? { postId: post.postId, userId: post.User.id }
+            ? { postid: post.postid, userid: post.User.id }
             : undefined
         }
         repost={type === 'quote' ? post : undefined}

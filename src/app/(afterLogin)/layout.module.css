@@ -76,22 +76,6 @@
   justify-content: space-between;
   width: 1050px;
 }
-.rightSection {
-  margin-right: 70px;
-  display: flex;
-  flex-flow: column nowrap;
-  width: 350px;
-  height: 100%;
-}
-
-.main {
-  width: 100%;
-  max-width: 600px;
-  min-height: 100dvh;
-  border-right-style: solid;
-  border-right-width: 1px;
-  border-color: rgb(var(--border-start-rgb));
-}
 
 /* viewport 가 1300 px 이하일 경우 */
 /* NavBar 가 아이콘만 표시되고 가운데 정렬 된다. */
@@ -107,9 +91,6 @@
 /* viewport 가 1110 px 이하일 경우 */
 /* rightSection 의 width 를 줄인다. */
 @media all and (max-width: 1110px) {
-  .rightSection {
-    width: 290px;
-  }
   .rightSectionInner {
     width: 990px;
   }
@@ -127,9 +108,6 @@
   .rightSectionWrapper {
     max-width: 600px;
   }
-  .rightSection {
-    display: none;
-  }
   .rightSectionInner {
     max-width: 600px;
     width: 100%;
@@ -141,12 +119,6 @@
 @media screen and (max-width: 720px) {
   .leftSection {
     width: 72px;
-  }
-}
-
-@media screen and (max-width: 672px) {
-  .main {
-    border: none;
   }
 }
 

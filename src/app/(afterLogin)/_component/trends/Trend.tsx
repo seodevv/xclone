@@ -2,12 +2,12 @@
 
 import style from './trendSection.module.css';
 import Link from 'next/link';
-import { Tags } from '@/model/Hashtag';
 import { unitConversion } from '@/app/_lib/common';
+import { HashTags } from '@/model/Hashtag';
 
 interface Props {
-  tag: Tags;
-  index?: number;
+  tag: HashTags;
+  index: number;
 }
 
 export default function Trend({ tag, index }: Props) {
@@ -19,6 +19,7 @@ export default function Trend({ tag, index }: Props) {
     <Link
       href={`/search?q=${encodeURIComponent(content)}`}
       className={style.trend}
+      style={{ order: index + 1 }}
     >
       <div className={style.count}>{indexing}</div>
       <div className={style.title}>{content}</div>

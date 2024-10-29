@@ -1,6 +1,6 @@
 import { ERROR_STATUS, responseErrorHandler } from '@/app/_lib/error';
-import { AdvancedPost, Post } from '@/model/Post';
-import { User } from '@/model/User';
+import { AdvancedPost } from '@/model/Post';
+import { AdvancedUser } from '@/model/User';
 import {
   InfiniteData,
   QueryClient,
@@ -13,22 +13,22 @@ interface ViewMutationParams {
 }
 
 const useViewMutation = ({
-  userId,
-  postId,
+  userid,
+  postid,
 }: {
-  userId: User['id'];
-  postId: Post['postId'];
+  userid: AdvancedUser['id'];
+  postid: AdvancedPost['postid'];
 }) =>
   useMutation({
     mutationFn: async ({}: ViewMutationParams) => {
-      if (postId < 1) {
+      if (postid < 1) {
         throw new Error(ERROR_STATUS.badRequest);
       }
 
-      const requestUrl = `${process.env.NEXT_PUBLIC_SERVER_URL}/api/posts/${postId}/views`;
+      const requestUrl = `${process.env.NEXT_PUBLIC_SERVER_URL}/api/posts/${postid}/views`;
       const requestOptions: RequestInit = {
         method: 'POST',
-        body: JSON.stringify({ userId }),
+        body: JSON.stringify({ userid }),
         credentials: 'include',
         headers: {
           'Content-Type': 'application/json',
@@ -57,7 +57,7 @@ const useViewMutation = ({
         const [a, b] = queryKey;
 
         switch ([a, b].toString()) {
-          case `posts,${postId}`: {
+          case `posts,${postid}`: {
             const queryData =
               queryClient.getQueryData<TData<AdvancedPost>>(queryKey);
             if (!queryData) return;
@@ -86,7 +86,7 @@ const useViewMutation = ({
 
               queryData.pages.forEach((page, i) =>
                 page.data.forEach((p, j) => {
-                  if (p.postId === postId) {
+                  if (p.postid === postid) {
                     const shallow = { ...queryData };
                     shallow.pages = [...shallow.pages];
                     shallow.pages[i] = { ...shallow.pages[i] };
@@ -100,7 +100,7 @@ const useViewMutation = ({
                     };
                     queryClient.setQueryData(queryKey, shallow);
                     context.push({ queryKey, queryData });
-                  } else if (p.Original?.postId === postId) {
+                  } else if (p.Original?.postid === postid) {
                     const shallow = { ...queryData };
                     shallow.pages = [...shallow.pages];
                     shallow.pages[i] = { ...shallow.pages[i] };

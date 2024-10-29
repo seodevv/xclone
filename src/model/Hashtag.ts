@@ -1,17 +1,7 @@
-interface Default {
+export interface HashTags {
   id: number;
+  type: 'tag' | 'word';
   title: string;
   count: number;
-}
-
-export interface Tag extends Default {
-  type: 'tag';
-}
-
-export interface Word extends Default {
-  type: 'word';
-  position: number;
   weight: number;
 }
-
-export type Tags = Tag | Word;

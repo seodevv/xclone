@@ -5,15 +5,15 @@ import { MouseEventHandler, useContext } from 'react';
 import BackButton from '@/app/(afterLogin)/_component/buttons/BackButton';
 import ShareSvg from '@/app/_svg/actionbuttons/ShareSvg';
 import OptionSvg from '@/app/_svg/post/OptionSvg';
-import useGetSingleListsQuery from '@/app/(afterLogin)/i/lists/[listId]/_hooks/useGetSingleListsQuery';
+import useGetSingleListsQuery from '@/app/(afterLogin)/i/lists/[listid]/_hooks/useGetSingleListsQuery';
 import { SubMenuContext } from '@/app/(afterLogin)/_provider/SubMenuProvider';
 
 interface Props {
-  listId: string;
+  listid: string;
 }
 
-export default function SingleListsHeader({ listId }: Props) {
-  const { data: lists } = useGetSingleListsQuery(listId);
+export default function SingleListsHeader({ listid }: Props) {
+  const { data: lists } = useGetSingleListsQuery(listid);
   const { dispatchMenu } = useContext(SubMenuContext);
 
   const onClickShare: MouseEventHandler<HTMLButtonElement> = (e) => {
@@ -72,7 +72,7 @@ export default function SingleListsHeader({ listId }: Props) {
                 <span>{lists?.data.name}</span>
               </div>
               <div className={styles.sub}>
-                <span>@{lists?.data.userId}</span>
+                <span>@{lists?.data.userid}</span>
               </div>
             </div>
             <div className={styles.options}>

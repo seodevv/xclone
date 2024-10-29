@@ -1,18 +1,18 @@
 'use client';
 
-import useGetSingleListsQuery from '@/app/(afterLogin)/i/lists/[listId]/_hooks/useGetSingleListsQuery';
 import NoPost from '@/app/(afterLogin)/_component/post/NoPost';
-import useGetListsMemberQuery from '@/app/(afterLogin)/@i/(.)i/lists/[listId]/_hooks/useGetListsMemberQuery';
-import ListsMember from '@/app/(afterLogin)/@i/(.)i/lists/[listId]/_component/ListsMember';
+import ListsMember from '@/app/(afterLogin)/@i/(.)i/lists/[listid]/_component/ListsMember';
+import useGetListsMemberQuery from '@/app/(afterLogin)/@i/(.)i/lists/[listid]/_hooks/useGetListsMemberQuery';
+import useGetSingleListsQuery from '@/app/(afterLogin)/i/lists/[listid]/_hooks/useGetSingleListsQuery';
 
 interface Props {
-  listId: string;
+  listid: string;
   filter: 'members' | 'followers';
 }
 
-export default function ListsUserList({ listId, filter }: Props) {
-  const { data: members } = useGetListsMemberQuery({ listId, filter });
-  const { data: lists, isError, error } = useGetSingleListsQuery(listId);
+export default function ListsUserList({ listid, filter }: Props) {
+  const { data: members } = useGetListsMemberQuery({ listid, filter });
+  const { data: lists, isError, error } = useGetSingleListsQuery(listid);
 
   if (members) {
     if (members.pages[0].data.length === 0) {

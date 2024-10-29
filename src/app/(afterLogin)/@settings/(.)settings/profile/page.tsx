@@ -13,7 +13,7 @@ export default async function SettingsProfileSlot() {
     <SingleUserHydrationBoundary username={session.user.email}>
       <IBackground overflow="auto">
         <HtmlOverflowHidden />
-        <SettingsProfile sessionId={session.user.email} />
+        <SettingsProfile sessionid={session.user.email} />
       </IBackground>
     </SingleUserHydrationBoundary>
   );

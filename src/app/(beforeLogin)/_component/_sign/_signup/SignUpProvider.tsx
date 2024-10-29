@@ -1,5 +1,6 @@
 'use client';
 
+import { IdentifierInputRef } from '@/app/_component/_input/IdentifierInput';
 import {
   createContext,
   Dispatch,
@@ -12,7 +13,7 @@ import {
 interface State<T> {
   value: T;
   disabled: boolean;
-  ref?: RefObject<ImperativeInputRef>;
+  ref?: RefObject<IdentifierInputRef>;
 }
 
 interface ContextState<T> {
@@ -82,22 +83,22 @@ export default function SignUpProvider({ children }: Props) {
   const [id, setId] = useState<State<string>>({
     value: '',
     disabled: true,
-    ref: useRef<HTMLInputElement>(null),
+    ref: useRef<IdentifierInputRef>(null),
   });
   const [nickname, setNickname] = useState<State<string>>({
     value: '',
     disabled: true,
-    ref: useRef<HTMLInputElement>(null),
+    ref: useRef<IdentifierInputRef>(null),
   });
   const [birth, setBirth] = useState<State<string>>({
     value: '',
     disabled: true,
-    ref: useRef<HTMLInputElement>(null),
+    ref: useRef<IdentifierInputRef>(null),
   });
   const [password, setPassword] = useState<State<string>>({
     value: '',
     disabled: true,
-    ref: useRef<HTMLInputElement>(null),
+    ref: useRef<IdentifierInputRef>(null),
   });
   const [profile, setProfile] = useState<State<Profile>>({
     value: {

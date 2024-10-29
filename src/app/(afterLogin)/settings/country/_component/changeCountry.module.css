@@ -1,0 +1,12 @@
+.margin {
+  margin: 20px;
+}
+.text {
+  padding: 2px 8px 0 8px;
+}
+.link {
+  color: rgb(var(--primary-rgb));
+}
+.link:hover {
+  text-decoration: underline;
+}

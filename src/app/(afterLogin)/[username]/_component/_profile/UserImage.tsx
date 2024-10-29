@@ -48,7 +48,7 @@ export default function UserImage({ session, user }: Props) {
             />
           ) : (
             <>
-              <MessageButton />
+              <MessageButton className={styles.mr_4} />
               <FollowButton user={user} />
             </>
           )}

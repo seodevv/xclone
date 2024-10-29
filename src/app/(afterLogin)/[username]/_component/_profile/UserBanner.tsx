@@ -3,10 +3,11 @@ import cx from 'classnames';
 import Image from 'next/image';
 import { generateImagePath } from '@/app/_lib/common';
 import Link from 'next/link';
+import { AdvancedUser } from '@/model/User';
 
 interface Props {
   username: string;
-  banner?: string;
+  banner?: AdvancedUser['banner'];
 }
 
 export default function UserBanner({ username, banner }: Props) {
@@ -34,10 +35,10 @@ function UserBannerWrapper({
   children,
 }: {
   username: string;
-  banner?: string;
+  banner?: AdvancedUser['banner'];
   children: React.ReactNode;
 }) {
-  if (typeof banner !== 'undefined') {
+  if (banner) {
     return (
       <Link
         className={styles.banner}

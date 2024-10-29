@@ -1,12 +1,12 @@
 /* FollowRecommendsSection */
 .followRecommendSection {
   margin: 12px 0;
-  order: 2;
+  order: 0;
   border: 1px solid rgb(var(--border-start-rgb));
   border-radius: 16px;
 }
-.firstOrder {
-  order: 0;
+.lastOrder {
+  order: 2;
 }
 
 /* FollowRecommends */

@@ -26,8 +26,8 @@ export default function ListsRecommends({ more }: Props) {
     refetch,
   } = useGetListsRecommends();
 
-  const onClickLists = (listId: AdvancedLists['id']) => {
-    router.push(`/i/lists/${listId}`);
+  const onClickLists = (listid: AdvancedLists['id']) => {
+    router.push(`/i/lists/${listid}`);
   };
 
   if (listsRecommends) {

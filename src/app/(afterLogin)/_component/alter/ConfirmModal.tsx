@@ -26,8 +26,16 @@ export default function ConfirmModal({
   onClickCancle,
   noHidden,
 }: Props) {
+  const onClickBackground = () => {
+    if (typeof onClickOutSide === 'function') {
+      onClickOutSide();
+    } else if (typeof onClickCancle === 'function') {
+      onClickCancle();
+    }
+  };
+
   return (
-    <IBackground size="small" onClick={onClickOutSide} noHidden={noHidden}>
+    <IBackground size="small" onClick={onClickBackground} noHidden={noHidden}>
       <div className={styles.title}>
         <span>{title}</span>
       </div>
