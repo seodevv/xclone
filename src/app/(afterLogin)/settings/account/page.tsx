@@ -5,8 +5,13 @@ import SettingsSubMenu, {
 import KeySvg from '@/app/_svg/_settings/KeySvg';
 import DownloadSvg from '@/app/_svg/_settings/DownloadSvg';
 import DeactivateSvg from '@/app/_svg/_settings/DeactivateSvg';
-import SettingSubWrapper from '@/app/(afterLogin)/settings/_component/SettingSubWrapper';
+import SettingsSubWrapper from '@/app/(afterLogin)/settings/_component/SettingsSubWrapper';
 import SettingsInform from '@/app/(afterLogin)/settings/_component/SettingsInform';
+import { Metadata } from 'next';
+
+export const metadata: Metadata = {
+  title: 'Your Account / X',
+};
 
 export default function SettingsAccountPage() {
   const header = 'Your Account';
@@ -49,7 +54,7 @@ export default function SettingsAccountPage() {
   ];
 
   return (
-    <SettingSubWrapper header={header}>
+    <SettingsSubWrapper header={header}>
       <SettingsInform inform={inform} />
       {subMenus.map((sub) => (
         <SettingsSubMenu
@@ -62,6 +67,6 @@ export default function SettingsAccountPage() {
           external={sub.external}
         />
       ))}
-    </SettingSubWrapper>
+    </SettingsSubWrapper>
   );
 }

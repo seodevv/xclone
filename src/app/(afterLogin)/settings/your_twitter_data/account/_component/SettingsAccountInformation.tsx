@@ -1,4 +1,8 @@
-import { SettingsLocalStore } from '@/app/(afterLogin)/_store/SettingsLocalStore';
+'use client';
+
+import useSettingsLocalStore, {
+  SettingsLocalStore,
+} from '@/app/(afterLogin)/_store/SettingsLocalStore';
 import styles from './settingsAccount.information.module.css';
 import SettingsSubMenu, {
   ISettingsSubMenu,
@@ -7,6 +11,8 @@ import DivideLine from '@/app/_component/_util/DivideLine';
 import { MONTH_EN } from '@/app/_lib/common';
 import { AdvancedUser } from '@/model/User';
 import Link from 'next/link';
+import { useState } from 'react';
+import SettingsAccountAutomation from '@/app/(afterLogin)/settings/your_twitter_data/account/_component/SettingsAccountAutomation';
 
 interface Props {
   user: AdvancedUser;
@@ -14,6 +20,9 @@ interface Props {
 }
 
 export default function SettingsAccountInformation({ user, gender }: Props) {
+  const [automation, setAutomation] = useState(false);
+  const country = useSettingsLocalStore((state) => state.country);
+
   const first: ISettingsSubMenu[] = [
     {
       id: 0,
@@ -90,7 +99,7 @@ export default function SettingsAccountInformation({ user, gender }: Props) {
       type: 'link',
       href: '/settings/country',
       title: 'Country',
-      sub: 'South Korea',
+      sub: country ? country : 'South Korea',
     },
     {
       id: 7,
@@ -155,62 +164,55 @@ export default function SettingsAccountInformation({ user, gender }: Props) {
     },
     {
       id: 11,
-      type: 'link',
-      href: '/settings/your_twitter_data/account',
+      type: 'button',
       title: 'Automation',
       sub: 'Manage your automated account.',
+      onClick: () => {
+        setAutomation(true);
+      },
     },
   ];
 
   return (
     <>
       {first.map((m) => (
-        <SettingsSubMenu
-          key={m.id}
-          type={m.type}
-          href={m.href}
-          title={m.title}
-          sub={m.sub}
-          select={m.select}
-          arrow={m.arrow}
-        />
+        <SubMenu key={m.id} m={m} />
       ))}
       <DivideLine />
       {second.map((m) => (
-        <SettingsSubMenu
-          key={m.id}
-          type={m.type}
-          href={m.href}
-          title={m.title}
-          sub={m.sub}
-          select={m.select}
-          arrow={m.arrow}
-        />
+        <SubMenu key={m.id} m={m} />
       ))}
       <DivideLine />
       {third.map((m) => (
-        <SettingsSubMenu
-          key={m.id}
-          type={m.type}
-          href={m.href}
-          title={m.title}
-          sub={m.sub}
-          select={m.select}
-          arrow={m.arrow}
-        />
+        <SubMenu key={m.id} m={m} />
       ))}
       <DivideLine />
       {fourth.map((m) => (
-        <SettingsSubMenu
-          key={m.id}
-          type={m.type}
-          href={m.href}
-          title={m.title}
-          sub={m.sub}
-          select={m.select}
-          arrow={m.arrow}
-        />
+        <SubMenu key={m.id} m={m} />
       ))}
+      {automation && (
+        <SettingsAccountAutomation
+          active={automation}
+          unActive={() => setAutomation(false)}
+        />
+      )}
     </>
+  );
+}
+
+function SubMenu({ m }: { m: ISettingsSubMenu }) {
+  return (
+    <SettingsSubMenu
+      key={m.id}
+      type={m.type}
+      href={m.href}
+      svg={m.svg}
+      title={m.title}
+      sub={m.sub}
+      external={m.external}
+      select={m.select}
+      arrow={m.arrow}
+      onClick={m.onClick}
+    />
   );
 }

@@ -1,5 +1,5 @@
 import SettingsInform from '@/app/(afterLogin)/settings/_component/SettingsInform';
-import SettingSubWrapper from '@/app/(afterLogin)/settings/_component/SettingSubWrapper';
+import SettingsSubWrapper from '@/app/(afterLogin)/settings/_component/SettingsSubWrapper';
 import AdditionalLanguages from '@/app/(afterLogin)/settings/languages/_component/AdditionalLanguages';
 import DisplayLanguage from '@/app/(afterLogin)/settings/languages/_component/DisplayLanguage';
 import KnowLanguages from '@/app/(afterLogin)/settings/languages/_component/KnowLanguages';
@@ -13,7 +13,7 @@ export default function SettingsLanguagesPage() {
   const inform =
     'Manage which languages are used to personalize your X experience.';
   return (
-    <SettingSubWrapper
+    <SettingsSubWrapper
       header={header}
       noBack={false}
       prevPath="/settings/account"
@@ -22,6 +22,6 @@ export default function SettingsLanguagesPage() {
       <DisplayLanguage />
       <AdditionalLanguages />
       <KnowLanguages />
-    </SettingSubWrapper>
+    </SettingsSubWrapper>
   );
 }

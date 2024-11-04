@@ -1,0 +1,10 @@
+.desktop {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 48px;
+  height: 48px;
+  background: transparent;
+  border-radius: 50%;
+  border: 1px solid rgb(42, 45, 48);
+}

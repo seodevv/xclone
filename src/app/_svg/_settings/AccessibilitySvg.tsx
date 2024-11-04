@@ -12,7 +12,7 @@ interface Props {
 export default function AccessibilitySvg({
   className,
   style,
-  width = 18.75,
+  width = 20,
   white,
 }: Props) {
   return (

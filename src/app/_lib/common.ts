@@ -11,6 +11,17 @@ export const generateImagePath = (image: string) => {
     : `${process.env.NEXT_PUBLIC_SERVER_URL}/api/image/${image}`;
 };
 
+export const generateRandomString = (length: number) => {
+  const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz';
+  let result = '';
+  const characterLength = characters.length;
+  for (let i = 0; i < length; i++) {
+    result += characters.charAt(Math.floor(Math.random() * characterLength));
+  }
+
+  return result;
+};
+
 export const translateKorean = (message: string) => {
   switch (message) {
     case 'invalid_id':

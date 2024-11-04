@@ -8,6 +8,7 @@ import useHistoryStore from '@/app/(afterLogin)/_store/HistoryStore';
 interface Props {
   type?: 'auto' | 'back';
   title?: string;
+  prevPath?: string;
   noBack?: boolean;
   noBtn?: boolean;
   onClick?: () => void;
@@ -17,6 +18,7 @@ interface Props {
 export default function IHeader({
   type = 'auto',
   title,
+  prevPath = '/home',
   noBack,
   noBtn,
   onClick,
@@ -31,14 +33,14 @@ export default function IHeader({
           <div className={styles.back}>
             {stack < -1 || type === 'back' ? (
               <BackButton
-                prevPath="/home"
+                prevPath={prevPath}
                 width={20}
                 noBack={noBack}
                 onClick={onClick}
               />
             ) : (
               <CloseButton
-                prevPath="/home"
+                prevPath={prevPath}
                 width={20}
                 noBack={noBack}
                 onClick={onClick}

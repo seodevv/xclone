@@ -32,6 +32,7 @@ export default function SettingsMenu({
       className={cx(styles.link, active && styles.active)}
       href={path}
       target={!noTarget && external ? '_blank' : undefined}
+      scroll={false}
     >
       <div className={styles.inner}>
         <Text className={styles.text} text={text} />

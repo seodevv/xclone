@@ -1,0 +1,70 @@
+.label {
+  margin: 0 16px;
+  padding: 16px 0;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  cursor: pointer;
+}
+.top {
+  padding-bottom: 4px;
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+}
+.toggle {
+  position: relative;
+  width: 40px;
+  height: 20px;
+  user-select: none;
+}
+.bar {
+  margin: auto;
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 70%;
+  background: rgb(147, 147, 147);
+  border-radius: 10px;
+  transition-duration: 100ms;
+}
+.bar.checked {
+  background: rgb(107, 201, 251);
+}
+.circle {
+  margin-left: 0;
+  position: relative;
+  left: 0;
+  display: flex;
+  flex-direction: column;
+  align-self: flex-start;
+  width: 20px;
+  height: 20px;
+  background: rgb(250, 250, 250);
+  border-radius: 100%;
+  box-shadow: rgba(0, 0, 0, 0.5) 0px 1px 3px;
+  transition-duration: 100ms;
+  transform: translateZ(0px);
+}
+.circle.checked {
+  margin-left: -20px;
+  left: 100%;
+  background: rgb(29, 155, 240);
+}
+.input {
+  margin: 0;
+  padding: 0;
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  user-select: none;
+  appearance: none;
+  cursor: inherit;
+}

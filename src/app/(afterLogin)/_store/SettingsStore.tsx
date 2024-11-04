@@ -5,7 +5,7 @@ import { createJSONStorage, devtools, persist } from 'zustand/middleware';
 interface SettingsStore {
   verified: boolean;
   user?: AdvancedUser;
-  setVerified: (user: AdvancedUser) => void;
+  setVerified: () => void;
   reset: () => void;
 }
 
@@ -14,7 +14,7 @@ const useSettingsSessionStore = create<SettingsStore>()(
     persist(
       (set) => ({
         verified: false,
-        setVerified: (user) => set(() => ({ verified: true, user })),
+        setVerified: () => set(() => ({ verified: true })),
         reset: () =>
           set(() => ({
             verified: false,

@@ -2,7 +2,7 @@ import SettingsInform from '@/app/(afterLogin)/settings/_component/SettingsInfor
 import SettingsSubMenu, {
   ISettingsSubMenu,
 } from '@/app/(afterLogin)/settings/_component/SettingsSubMenu';
-import SettingSubWrapper from '@/app/(afterLogin)/settings/_component/SettingSubWrapper';
+import SettingsSubWrapper from '@/app/(afterLogin)/settings/_component/SettingsSubWrapper';
 import AccessibilitySvg from '@/app/_svg/_settings/AccessibilitySvg';
 import ShortcutsSvg from '@/app/_svg/_settings/ShortcutsSvg';
 import ViewSvg from '@/app/_svg/actionbuttons/ViewSvg';
@@ -54,7 +54,7 @@ export default function SettingsAccessibilityPage() {
     },
   ];
   return (
-    <SettingSubWrapper header={header}>
+    <SettingsSubWrapper header={header}>
       <SettingsInform inform={inform} />
       {subMenus.map((m) => (
         <SettingsSubMenu
@@ -68,6 +68,6 @@ export default function SettingsAccessibilityPage() {
           onClick={m.onClick}
         />
       ))}
-    </SettingSubWrapper>
+    </SettingsSubWrapper>
   );
 }

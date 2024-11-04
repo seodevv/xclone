@@ -1,3 +1,5 @@
+'use client';
+
 import styles from './beforeLogin.button.module.css';
 import { CSSProperties, MouseEventHandler } from 'react';
 import cx from 'classnames';
@@ -8,13 +10,21 @@ interface Props {
   className?: string;
   style?: CSSProperties;
   type?: 'button' | 'submit' | 'reset';
-  theme?: 'theme' | 'reverse' | 'white' | 'red' | 'primary';
+  theme?:
+    | 'theme'
+    | 'reverse'
+    | 'white'
+    | 'red'
+    | 'primary'
+    | 'secondary'
+    | 'transparent';
   text: string;
   onClick?: MouseEventHandler<HTMLButtonElement>;
   isLoading?: boolean;
   disabled?: boolean;
   large?: boolean;
   medium?: boolean;
+  underline?: boolean;
 }
 
 export default function FlexButton({
@@ -28,6 +38,7 @@ export default function FlexButton({
   disabled = false,
   large,
   medium,
+  underline,
 }: Props) {
   const { pending } = useFormStatus();
 
@@ -52,7 +63,7 @@ export default function FlexButton({
             fill={theme === 'theme' || theme === 'white' ? 'reverse' : 'theme'}
           />
         ) : (
-          <span>{text}</span>
+          <span className={cx(underline && styles.underline)}>{text}</span>
         )}
       </div>
     </button>

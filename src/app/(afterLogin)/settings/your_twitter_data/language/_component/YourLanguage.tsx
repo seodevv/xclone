@@ -23,7 +23,7 @@ export default function YourLanguage() {
         </Text>
         <DivideLine />
         <Text className={cx(utils.p_basic, utils.pt_0)}>
-          <IdentifierCheckBox title="Korean" />
+          <IdentifierCheckBox title="Korean" defaultValue={true} />
         </Text>
       </div>
     </div>

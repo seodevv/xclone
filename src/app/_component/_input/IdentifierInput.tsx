@@ -35,10 +35,12 @@ interface Props {
   noTab?: boolean;
   forgot?: boolean;
   autoFocus?: boolean;
+  withForgot?: boolean;
   onChange?: (value: string) => void;
   onEnter?: () => void;
   onSuccess?: (value: string) => void;
   onError?: () => void;
+  noPad?: boolean;
 }
 
 export interface IdentifierInputRef {
@@ -62,10 +64,12 @@ const IdentifierInput = forwardRef<IdentifierInputRef, Props>(
       noTab,
       forgot = false,
       autoFocus,
+      withForgot = false,
       onChange,
       onEnter,
       onSuccess,
       onError,
+      noPad,
     },
     ref
   ) => {
@@ -188,13 +192,13 @@ const IdentifierInput = forwardRef<IdentifierInputRef, Props>(
     }));
 
     useLayoutEffect(() => {
-      if (defaultValue) {
+      if (typeof defaultValue !== 'undefined') {
         setState(defaultValue);
       }
     }, [defaultValue]);
 
     return (
-      <div className={styles.identifier}>
+      <div className={cx(styles.identifier, noPad && styles.noPad)}>
         <label className={cx(styles.label, error.flag && styles.error)}>
           <div className={styles.labelColumnFlex}>
             <div className={styles.placeholder}>
@@ -268,6 +272,13 @@ const IdentifierInput = forwardRef<IdentifierInputRef, Props>(
           <div className={cx(styles.errorMessage, styles.fadeIn)}>
             {error.message}
           </div>
+        )}
+        {withForgot && (
+          <Link className={styles.forgot} href="/i/flow/password_reset">
+            <Text theme="primary" size="xs" link>
+              Forgot password?
+            </Text>
+          </Link>
         )}
       </div>
     );

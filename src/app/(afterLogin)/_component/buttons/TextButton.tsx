@@ -10,7 +10,7 @@ interface Props {
   style?: CSSProperties;
   type?: 'submit' | 'reset' | 'button';
   text: string;
-  theme?: 'theme' | 'reverse' | 'primary' | 'primary_reverse' | 'white';
+  theme?: 'theme' | 'reverse' | 'primary' | 'primary_reverse' | 'white' | 'red';
   size?: 'small' | 'medium' | 'large';
   loading?: boolean;
   disabled?: boolean;

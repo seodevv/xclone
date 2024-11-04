@@ -6,7 +6,7 @@ import DivideLine from '@/app/_component/_util/DivideLine';
 import TextButton from '@/app/(afterLogin)/_component/buttons/TextButton';
 import IdentifierRadioBox from '@/app/_component/_input/IdentifierRadioBox';
 import useSettingsLocalStore, {
-  GenderSelector,
+  genderSelector,
   SettingsLocalStore,
 } from '@/app/(afterLogin)/_store/SettingsLocalStore';
 import IdentifierInput from '@/app/_component/_input/IdentifierInput';
@@ -14,14 +14,14 @@ import { FormEventHandler, useLayoutEffect, useState } from 'react';
 import { useRouter } from 'next/navigation';
 import useAlterModal from '@/app/_hooks/useAlterModal';
 
-export default function YourGenderSelector() {
+export default function YourgenderSelector() {
   const router = useRouter();
   const { alterMessage } = useAlterModal();
   const [temp, setTemp] = useState<SettingsLocalStore['gender']>({
     type: 'female',
     other: '',
   });
-  const { gender, setGender } = useSettingsLocalStore(GenderSelector);
+  const { gender, setGender } = useSettingsLocalStore(genderSelector);
   const radios = [
     { id: 'female', title: 'Female' },
     { id: 'male', title: 'Male' },

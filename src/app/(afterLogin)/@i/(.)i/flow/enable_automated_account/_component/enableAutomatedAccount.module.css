@@ -1,0 +1,22 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+  width: 100%;
+  max-width: 600px;
+}
+.body {
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+  overflow: auto;
+}
+.padding {
+  padding: 0 80px;
+}
+.title {
+  margin: 20px 0;
+}
+.footer {
+  padding: 0 80px;
+}

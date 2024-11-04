@@ -1,0 +1,62 @@
+.listBox {
+  padding-top: 16px;
+  padding-right: 28px;
+  list-style: none;
+  row-gap: 15px;
+}
+.list {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  flex-grow: 1;
+  min-height: 48px;
+}
+.padding_big {
+  padding: 12px 32px;
+}
+.padding_middle {
+}
+.padding_small {
+  padding: 0;
+}
+.start {
+  align-items: flex-start;
+}
+.center {
+  align-items: center;
+}
+.end {
+  align-items: flex-end;
+}
+.order {
+  justify-content: center;
+}
+.circle {
+  margin-right: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgb(var(--button-hover-rgb));
+  border-radius: 9999px;
+}
+.big {
+  width: 48px;
+  height: 48px;
+}
+.middle {
+  width: 38px;
+  height: 38px;
+}
+.small {
+  margin-right: 32px;
+  width: 28px;
+  height: 28px;
+}
+.text {
+  align-self: center;
+  flex-grow: 1;
+}
+.flex_column {
+  display: flex;
+  flex-direction: column;
+}

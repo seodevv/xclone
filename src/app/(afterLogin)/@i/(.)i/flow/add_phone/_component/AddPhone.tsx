@@ -39,7 +39,7 @@ export default function AddPhone() {
     <form className={styles.column} onSubmit={onSubmitPhone}>
       <div className={styles.body}>
         <div className={styles.title}>
-          <Text text={head} size="xxxl" bold="bold" />
+          <Text text={head} size="xxxxl" bold="bold" />
           <Text text={sub} theme="gray" />
         </div>
         <div className={styles.selector}>

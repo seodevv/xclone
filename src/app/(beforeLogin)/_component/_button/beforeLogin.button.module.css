@@ -73,6 +73,18 @@
   background: rgba(var(--primary-rgb), 0.8);
   opacity: 1;
 }
+.secondary {
+  background: rgb(0, 201, 209);
+  border: 1px solid rgb(83, 100, 113);
+  color: #fff;
+}
+.secondary:hover:enabled {
+  background: rgb(0, 181, 188);
+}
+.secondary:active:enabled {
+  background: rgb(0, 161, 167);
+  opacity: 1;
+}
 .btnText {
   font-size: 15px;
   font-weight: 700;
@@ -84,6 +96,23 @@
 }
 .btnText.medium {
   font-size: 15px;
+}
+.transparent {
+  background: transparent;
+  border: 1px solid transparent;
+  color: rgb(var(--font-theme-rgb));
+}
+.transparent:hover:enabled {
+  background: rgba(239, 243, 244, 0.1);
+}
+.transparent:active:enabled {
+  background: rgba(239, 243, 244, 0.2);
+  opacity: 1;
+}
+.underline {
+  text-decoration: underline;
+  text-decoration-thickness: 2px;
+  text-underline-offset: 5px;
 }
 
 /* CloseBtn */

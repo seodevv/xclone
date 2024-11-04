@@ -8,7 +8,7 @@ interface Props {
   children?: React.ReactNode;
 }
 
-export default function SettingSubWrapper({
+export default function SettingsSubWrapper({
   header,
   noBack = true,
   prevPath,

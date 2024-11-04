@@ -13,17 +13,21 @@ import { AdvancedUser } from '@/model/User';
 import useBackRouter from '@/app/(afterLogin)/_hooks/useBackPrevPath';
 
 interface Props {
+  title?: string;
+  sub?: string;
   onSuccess?: (user: AdvancedUser) => void;
 }
 
-export default function VerifyPassword({ onSuccess }: Props) {
+export default function VerifyPassword({
+  title = 'Verify your password',
+  sub = 'Re-enter your X password to continue.',
+  onSuccess,
+}: Props) {
   const backRouter = useBackRouter();
   const { alterMessage } = useAlterModal();
   const [password, setPassword] = useState('');
   const [loading, setLoading] = useState(false);
   const passwordRef = useRef<IdentifierInputRef>(null);
-  const head = 'Verify your password';
-  const sub = 'Re-enter your X password to continue.';
 
   const confirmMutation = useConfirmPassword();
   const onSubmitForm: FormEventHandler<HTMLFormElement> = (e) => {
@@ -59,8 +63,10 @@ export default function VerifyPassword({ onSuccess }: Props) {
   return (
     <form className={styles.column} onSubmit={onSubmitForm}>
       <div className={styles.head}>
-        <Text text={head} size="xxxl" bold="bold" />
-        <Text className={styles.sub} text={sub} theme="gray" />
+        <div className={styles.margin}>
+          <Text text={title} size="xxxxl" bold="bold" />
+          <Text className={styles.sub} text={sub} theme="gray" />
+        </div>
         <IdentifierInput
           ref={passwordRef}
           type="password"

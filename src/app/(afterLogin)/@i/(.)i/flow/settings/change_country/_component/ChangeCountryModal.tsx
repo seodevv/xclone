@@ -4,14 +4,24 @@ import XLogoSvg from '@/app/_svg/logo/XLogoSvg';
 import styles from './changeCountryModal.module.css';
 import Text from '@/app/_component/_text/Text';
 import FlexButton from '@/app/(beforeLogin)/_component/_button/FlexButton';
-import { useRouter } from 'next/navigation';
+import { useRouter, useSearchParams } from 'next/navigation';
 import useAlterModal from '@/app/_hooks/useAlterModal';
+import useSettingsLocalStore from '@/app/(afterLogin)/_store/SettingsLocalStore';
 
 export default function ChangeCountryModal() {
   const router = useRouter();
+  const searchParams = useSearchParams();
   const { alterMessage } = useAlterModal();
+  const setCountry = useSettingsLocalStore((state) => state.setCountry);
   const onClickChange = () => {
-    alterMessage('This feature is in preparation.', 'warning');
+    const country = searchParams.get('country');
+    if (country) {
+      setCountry(country);
+      alterMessage('Country updated');
+      router.back();
+    } else {
+      alterMessage('Something is wrong. please try again', 'error');
+    }
   };
   const onClickCancel = () => {
     router.back();
@@ -24,7 +34,7 @@ export default function ChangeCountryModal() {
       </div>
       <div className={styles.content}>
         <div className={styles.inform}>
-          <Text className={styles.title} size="xxl" bold="bold">
+          <Text className={styles.title} size="xxxl" bold="bold">
             Change country?
           </Text>
           <Text theme="gray">

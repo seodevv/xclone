@@ -1,0 +1,159 @@
+.body {
+  padding: 48px 16px 144px 16px;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  flex-grow: 1;
+  width: 100%;
+  height: 100%;
+}
+.inner {
+  width: 920px;
+  display: flex;
+  flex-direction: column;
+}
+.text {
+  margin-bottom: 80px;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+.title {
+  margin-bottom: 8px;
+}
+.sub {
+  margin-bottom: 36px;
+}
+.getPremium {
+  display: flex;
+  flex-direction: column;
+  align-self: center;
+  width: min-content;
+}
+.hyper {
+  padding: 0 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 52px;
+  min-height: 52px;
+  background: rgb(239, 243, 244);
+  border: 1px solid transparent;
+  border-radius: 9999px;
+  transition-duration: 200ms;
+  transition-property: background-color;
+  white-space: nowrap;
+  cursor: pointer;
+}
+.hyper:hover {
+  background: rgb(215, 219, 220);
+}
+.steps {
+  margin: 16px 0;
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 56px;
+}
+.item {
+  display: flex;
+  flex-direction: column;
+  width: 432px;
+}
+.inform {
+  height: 50px;
+}
+.desc {
+  margin-top: 16px;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+.imageBox {
+  position: relative;
+  box-shadow: rgba(136, 153, 166, 0.15) 0px 20px 50px;
+  border: 1px solid rgb(32, 35, 39);
+  border-radius: 12px;
+  overflow: hidden;
+}
+.pad {
+  padding-bottom: 50%;
+  width: 100%;
+}
+.absolute {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+}
+.image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.more {
+  margin-top: 8px;
+  padding: 12px;
+  display: flex;
+  justify-content: space-between;
+  min-height: 48px;
+  transition-duration: 200ms;
+  transition-property: background-color;
+  cursor: pointer;
+}
+.more:hover {
+  background: rgb(22, 24, 28);
+}
+.more:active {
+  background: rgb(18, 21, 23, 0.7);
+}
+.footer {
+  margin-top: 32px;
+  margin-bottom: 144px;
+}
+.link {
+  color: rgb(var(--primary-rgb));
+}
+.link:hover {
+  text-decoration: underline;
+}
+
+@media screen and (max-width: 1100px) {
+  .inner {
+    width: 850px;
+  }
+  .item {
+    width: 397px;
+  }
+}
+
+@media screen and (max-width: 1020px) {
+  .inner {
+    width: 568px;
+  }
+  .item {
+    width: 100%;
+  }
+  .text {
+    margin-bottom: 40px;
+  }
+  .sub {
+    margin-bottom: 0;
+  }
+  .getPremium {
+    position: fixed;
+    left: 50%;
+    bottom: 5%;
+    z-index: 3;
+    transform: translateX(-50%);
+  }
+}
+
+@media screen and (max-width: 720px) {
+  .inner {
+    width: 100%;
+  }
+}

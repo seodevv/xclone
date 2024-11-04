@@ -3,6 +3,9 @@
   padding: 12px 0;
   width: 100%;
 }
+.noPad {
+  padding: 0;
+}
 .label {
   position: relative;
   display: flex;

@@ -15,6 +15,7 @@ interface Props {
   name: string;
   defaultValue?: string;
   onChange?: (value: string) => void;
+  noPad?: boolean;
 }
 
 export default function IdentifierRadioBox({
@@ -22,6 +23,7 @@ export default function IdentifierRadioBox({
   name,
   defaultValue,
   onChange,
+  noPad = false,
 }: Props) {
   const [check, setCheck] = useState('');
 
@@ -39,7 +41,7 @@ export default function IdentifierRadioBox({
   }, [defaultValue]);
 
   return (
-    <div className={utils.p_basic}>
+    <div className={cx(!noPad && utils.p_basic)}>
       {data.map((v) => (
         <label
           key={v.id}

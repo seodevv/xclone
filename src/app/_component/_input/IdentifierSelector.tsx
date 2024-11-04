@@ -4,7 +4,9 @@ import {
   ChangeEventHandler,
   forwardRef,
   useImperativeHandle,
+  useLayoutEffect,
   useRef,
+  useState,
 } from 'react';
 import Text from '@/app/_component/_text/Text';
 import DownArrowSvg from '@/app/_svg/arrow/DownArrowSvg';
@@ -28,9 +30,11 @@ const IdentifierSelector = forwardRef<IdentifierRef, Props>(
     { data = [], placeholder, defaultValue, hasDefault, disabled, onChange },
     ref
   ) => {
+    const [select, setSelect] = useState('');
     const selectRef = useRef<HTMLSelectElement>(null);
 
     const onChangeSelect: ChangeEventHandler<HTMLSelectElement> = (e) => {
+      // setSelect(e.target.value);
       if (typeof onChange === 'function') {
         onChange(e.target.value);
       }
@@ -47,6 +51,12 @@ const IdentifierSelector = forwardRef<IdentifierRef, Props>(
       };
     });
 
+    useLayoutEffect(() => {
+      if (typeof defaultValue !== 'undefined') {
+        setSelect(defaultValue.toString());
+      }
+    }, [defaultValue]);
+
     return (
       <div className={stylse.selector}>
         <label className={stylse.label}>
@@ -55,8 +65,9 @@ const IdentifierSelector = forwardRef<IdentifierRef, Props>(
         <select
           ref={selectRef}
           className={stylse.select}
+          value={select}
           onChange={onChangeSelect}
-          defaultValue={defaultValue}
+          // defaultValue={defaultValue}
           disabled={disabled}
         >
           {hasDefault && <option className={stylse.option} value=""></option>}

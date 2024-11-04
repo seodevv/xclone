@@ -11,6 +11,7 @@
 }
 .inner {
   padding: 0 16px;
+  position: relative;
   display: flex;
   align-items: center;
   flex-grow: 1;
@@ -18,8 +19,11 @@
   max-width: 600px;
 }
 .back {
+  position: absolute;
+  top: 50%;
   display: flex;
   min-width: 56px;
+  transform: translateY(-50%);
 }
 .title {
   position: relative;

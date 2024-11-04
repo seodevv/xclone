@@ -1,0 +1,58 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+  height: 75%;
+  min-height: 480px;
+  max-height: 700px;
+  overflow-y: auto;
+}
+.clip {
+  padding-bottom: 80px;
+  width: 100%;
+  background: rgb(0, 201, 209);
+  clip-path: ellipse(100% 100% at 38% 0%);
+}
+.clipInner {
+  padding: 50px 32px 0 32px;
+}
+.column {
+  display: flex;
+  flex-direction: column;
+}
+.article {
+  padding: 48px 36px 0 36px;
+}
+.imageBox {
+  margin-top: 48px;
+  display: flex;
+  align-content: center;
+  justify-content: center;
+  background: rgb(2, 32, 35);
+}
+.image {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  max-width: 327px;
+}
+.image img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+.FAQ {
+  padding: 8px 36px 0 36px;
+}
+.link {
+  font-weight: bold;
+  color: rgb(var(--font-theme-rgb));
+  text-decoration: underline;
+}
+.link:hover {
+  text-decoration-thickness: 2px;
+}
+.gotit {
+  padding: 48px 36px 36px 36px;
+  width: 100%;
+}

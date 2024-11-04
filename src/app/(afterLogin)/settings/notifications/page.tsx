@@ -2,7 +2,7 @@ import SettingsInform from '@/app/(afterLogin)/settings/_component/SettingsInfor
 import SettingsSubMenu, {
   ISettingsSubMenu,
 } from '@/app/(afterLogin)/settings/_component/SettingsSubMenu';
-import SettingSubWrapper from '@/app/(afterLogin)/settings/_component/SettingSubWrapper';
+import SettingsSubWrapper from '@/app/(afterLogin)/settings/_component/SettingsSubWrapper';
 import FiltersSvg from '@/app/_svg/_settings/FiltersSvg';
 import PreferencesSvg from '@/app/_svg/_settings/PreferencesSvg';
 
@@ -29,7 +29,7 @@ export default function SettingsNotificationsPage() {
     },
   ];
   return (
-    <SettingSubWrapper header={header}>
+    <SettingsSubWrapper header={header}>
       <SettingsInform inform={inform} />
       {subMenus.map((m) => (
         <SettingsSubMenu
@@ -43,6 +43,6 @@ export default function SettingsNotificationsPage() {
           onClick={m.onClick}
         />
       ))}
-    </SettingSubWrapper>
+    </SettingsSubWrapper>
   );
 }

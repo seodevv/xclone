@@ -1,4 +1,4 @@
-import SettingSubWrapper from '@/app/(afterLogin)/settings/_component/SettingSubWrapper';
+import SettingsSubWrapper from '@/app/(afterLogin)/settings/_component/SettingsSubWrapper';
 import YourLanguage from '@/app/(afterLogin)/settings/your_twitter_data/language/_component/YourLanguage';
 
 export const metadata = {
@@ -8,12 +8,12 @@ export const metadata = {
 export default function SettingsYourLanguagePage() {
   const header = 'Language';
   return (
-    <SettingSubWrapper
+    <SettingsSubWrapper
       header={header}
       noBack={false}
       prevPath="/settings/account"
     >
       <YourLanguage />
-    </SettingSubWrapper>
+    </SettingsSubWrapper>
   );
 }

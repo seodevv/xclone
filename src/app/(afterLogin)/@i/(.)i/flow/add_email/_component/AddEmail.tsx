@@ -47,7 +47,7 @@ export default function AddEmail() {
     <form className={styles.column} onSubmit={onSubmitEmail}>
       <div className={styles.body}>
         <div className={styles.title}>
-          <Text size="xxxl" bold="bold">
+          <Text size="xxxxl" bold="bold">
             Change Email
           </Text>
           <Text theme="gray">

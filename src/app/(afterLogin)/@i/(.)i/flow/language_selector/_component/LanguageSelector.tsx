@@ -36,7 +36,7 @@ export default function LanguageSelector() {
     <form className={styles.form} onSubmit={onSubmitForm}>
       <div className={styles.container}>
         <div className={styles.inform}>
-          <Text size="xxxl" bold="bold">
+          <Text size="xxxxl" bold="bold">
             {title}
           </Text>
           <Text className={styles.sub} theme="gray">

@@ -2,11 +2,16 @@ import SettingsInform from '@/app/(afterLogin)/settings/_component/SettingsInfor
 import SettingsSubMenu, {
   ISettingsSubMenu,
 } from '@/app/(afterLogin)/settings/_component/SettingsSubMenu';
-import SettingSubWrapper from '@/app/(afterLogin)/settings/_component/SettingSubWrapper';
+import SettingsSubWrapper from '@/app/(afterLogin)/settings/_component/SettingsSubWrapper';
 import ConnectedSvg from '@/app/_svg/_settings/ConnectedSvg';
 import DelegateSvg from '@/app/_svg/_settings/DelegateSvg';
 import SessionsSvg from '@/app/_svg/_settings/SessionsSvg';
 import LockSvg from '@/app/_svg/profile/LockSvg';
+import { Metadata } from 'next';
+
+export const metadata: Metadata = {
+  title: 'Security and account access / XClone',
+};
 
 export default function SettingsSecurityPage() {
   const header = 'Security and account access';
@@ -48,7 +53,7 @@ export default function SettingsSecurityPage() {
     },
   ];
   return (
-    <SettingSubWrapper header={header}>
+    <SettingsSubWrapper header={header}>
       <SettingsInform inform={inform} />
       {subMenus.map((sub) => (
         <SettingsSubMenu
@@ -62,6 +67,6 @@ export default function SettingsSecurityPage() {
           onClick={sub.onClick}
         />
       ))}
-    </SettingSubWrapper>
+    </SettingsSubWrapper>
   );
 }

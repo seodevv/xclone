@@ -10,6 +10,11 @@ import PeriodSelector from '@/app/(afterLogin)/@i/(.)i/premium_sign_up/_componen
 import SubsribeSelector from '@/app/(afterLogin)/@i/(.)i/premium_sign_up/_component/SubscribeSelector';
 import PremiumInformation from '@/app/(afterLogin)/@i/(.)i/premium_sign_up/_component/_information/PremiumInformation';
 import AddHistoryStack from '@/app/(afterLogin)/@i/(.)i/_component/AddHistoryStack';
+import { Metadata } from 'next';
+
+export const metadata: Metadata = {
+  title: 'Creator Subscriptions / XClone',
+};
 
 export default function IPremiumSignUpSlot() {
   return (

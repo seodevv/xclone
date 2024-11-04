@@ -1,3 +1,5 @@
+'use client';
+
 import styles from './checkbox.module.css';
 import cx from 'classnames';
 import Text from '@/app/_component/_text/Text';
@@ -15,6 +17,7 @@ export interface ICheckBox {
   title: string | JSX.Element;
   sub?: string | JSX.Element;
   defaultVlaue?: boolean;
+  disable?: boolean;
   onCheck?: (
     check: boolean,
     setCheck: Dispatch<SetStateAction<boolean>>
@@ -23,12 +26,14 @@ export interface ICheckBox {
     check: boolean,
     setCheck: Dispatch<SetStateAction<boolean>>
   ) => void;
+  onChange?: (check: boolean) => void;
 }
 
 interface Props {
   title: string | JSX.Element;
   sub?: string | JSX.Element;
   defaultValue?: boolean;
+  disable?: boolean;
   onCheck?: (
     check: boolean,
     setCheck: Dispatch<SetStateAction<boolean>>
@@ -44,6 +49,7 @@ export default function IdentifierCheckBox({
   title,
   sub,
   defaultValue,
+  disable,
   onCheck,
   onUnCheck,
   onChange,
@@ -53,6 +59,8 @@ export default function IdentifierCheckBox({
   const onClickCheckBox: MouseEventHandler<HTMLDivElement> = (e) => {
     e.preventDefault();
     e.stopPropagation();
+    if (disable) return;
+
     if (typeof onChange === 'function') {
       onChange(!check);
     }
@@ -73,7 +81,7 @@ export default function IdentifierCheckBox({
   }, [defaultValue]);
 
   return (
-    <label className={styles.label}>
+    <label className={cx(styles.label, disable && styles.disable)}>
       <div className={styles.inform}>
         <Text>{title}</Text>
         <Text size="xs" theme="gray">

@@ -4,12 +4,12 @@ import IdentifierSelector from '@/app/_component/_input/IdentifierSelector';
 import styles from './changeCountry.module.css';
 import Text from '@/app/_component/_text/Text';
 import Link from 'next/link';
-import { useState } from 'react';
 import { useRouter } from 'next/navigation';
+import useSettingsLocalStore from '@/app/(afterLogin)/_store/SettingsLocalStore';
 
 export default function ChangeCountry() {
   const router = useRouter();
-  const [country, setCountry] = useState('South Korea');
+  const country = useSettingsLocalStore((state) => state.country);
   const data: { id: string; value: string | number }[] = [
     { id: 'France', value: 'France' },
     { id: 'Germany', value: 'Germany' },
@@ -19,7 +19,9 @@ export default function ChangeCountry() {
     { id: 'United States', value: 'United States' },
   ];
   const onChangeSelector = (value: string) => {
-    router.push('/i/flow/settings/change_country');
+    router.push(`/i/flow/settings/change_country?country=${value}`, {
+      scroll: false,
+    });
   };
 
   return (

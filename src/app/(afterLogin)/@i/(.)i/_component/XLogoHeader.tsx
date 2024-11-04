@@ -1,10 +1,15 @@
 import styles from './xLogoHeader.module.css';
 import XLogoSvg from '@/app/_svg/logo/XLogoSvg';
 
-export default function XLogoHeader() {
+interface Props {
+  width?: number;
+  fill?: string;
+}
+
+export default function XLogoHeader({ width = 32, fill }: Props) {
   return (
     <div className={styles.logo}>
-      <XLogoSvg width={32} />
+      <XLogoSvg width={width} fill={fill} />
     </div>
   );
 }

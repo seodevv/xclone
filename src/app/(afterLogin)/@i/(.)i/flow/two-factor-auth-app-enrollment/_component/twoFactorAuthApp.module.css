@@ -1,0 +1,40 @@
+.flex_column {
+  display: flex;
+  flex-direction: column;
+}
+.container {
+  flex-grow: 1;
+  max-width: 600px;
+  max-height: 600px;
+  overflow: auto;
+}
+.body {
+  padding: 0 80px;
+  flex-grow: 1;
+}
+.imageBox {
+  margin: 0 -80px;
+  position: relative;
+}
+.pad {
+  padding-top: 36%;
+  width: 100%;
+}
+.absolute {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+}
+.image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.title {
+  margin: 20px 0;
+}
+.footer {
+  padding: 0 80px;
+}

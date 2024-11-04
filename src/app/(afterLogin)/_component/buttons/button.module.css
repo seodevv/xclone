@@ -96,6 +96,18 @@
 .white:active:enabled {
   background: rgb(255, 255, 255, 0.8);
 }
+.red {
+  background: rgb(244, 33, 46);
+  color: #fff;
+}
+.red:hover:enabled {
+  background: rgb(220, 30, 41);
+}
+.red:active:enabled {
+  background: rgb(195, 26, 37);
+}
+.red {
+}
 .large {
   padding: 0 32px;
   min-width: 52px;
@@ -358,6 +370,76 @@
 }
 .messageBtn:active:enabled {
   background: rgba(var(--r-background-start-rgb), 0.3);
+}
+
+/* TransitionButton */
+.transitionBtn {
+  padding: 16px;
+  display: flex;
+  align-items: center;
+  flex-grow: 1;
+  width: 100%;
+  min-height: 48px;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  transition-duration: 200ms;
+  transition-property: background-color;
+}
+.transit_theme {
+  color: rgb(var(--font-theme-rgb));
+}
+.transit_theme:hover {
+  background: rgba(var(--font-theme-rgb), 0.1);
+}
+.transit_theme:active {
+  background: rgba(var(--font-theme-rgb), 0.2);
+}
+.transit_gray {
+  color: rgb(var(--link-rgb));
+}
+.transit_gray:hover {
+  background: rgba(var(--link-rgb), 0.1);
+}
+.transit_gray:active {
+  background: rgba(var(--link-rgb), 0.2);
+}
+.transit_primary {
+  color: rgb(var(--primary-rgb));
+}
+.transit_primary:hover {
+  background: rgba(var(--primary-rgb), 0.1);
+}
+.transit_primary:active {
+  background: rgba(var(--primary-rgb), 0.2);
+}
+.transit_error {
+  color: rgb(var(--error-rgb));
+}
+.transit_error:hover {
+  background: rgba(var(--error-rgb), 0.1);
+}
+.transit_error:active {
+  background: rgba(var(--error-rgb), 0.2);
+}
+.transit_black {
+  background: rgb(var(--r-background-start-rgb));
+  color: rgb(var(--background-start-rgb));
+}
+.transit_black:hover {
+  background: rgba(var(--r-background-start-rgb), 0.9);
+}
+.transit_black:active {
+  background: rgba(var(--r-background-start-rgb), 0.8);
+}
+.align_left {
+  justify-content: flex-start;
+}
+.align_center {
+  justify-content: center;
+}
+.align_right {
+  justify-content: flex-end;
 }
 
 /* Animation */
