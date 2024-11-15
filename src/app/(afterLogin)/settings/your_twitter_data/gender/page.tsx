@@ -1,8 +1,8 @@
 import utils from '@/app/utility.module.css';
 import SettingsSubWrapper from '@/app/(afterLogin)/settings/_component/SettingsSubWrapper';
 import Text from '@/app/_component/_text/Text';
-import YourgenderSelector from '@/app/(afterLogin)/settings/your_twitter_data/gender/_component/YourgenderSelector';
 import { Metadata } from 'next';
+import YourgenderSelector from '@/app/(afterLogin)/settings/your_twitter_data/gender/_component/YourGenderSelector';
 
 export const metadata: Metadata = {
   title: 'Gender / XClone',

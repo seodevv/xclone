@@ -11,23 +11,30 @@ export interface IRadioBox {
 }
 
 interface Props {
+  title?: string;
+  sub?: string | JSX.Element;
   data: IRadioBox[];
   name: string;
   defaultValue?: string;
+  disable?: boolean;
   onChange?: (value: string) => void;
   noPad?: boolean;
 }
 
 export default function IdentifierRadioBox({
+  title,
+  sub,
   data,
   name,
   defaultValue,
+  disable,
   onChange,
   noPad = false,
 }: Props) {
   const [check, setCheck] = useState('');
 
   const onChangeInput = (value: string) => {
+    if (disable) return;
     setCheck(value);
     if (typeof onChange !== 'undefined') {
       onChange(value);
@@ -42,10 +49,27 @@ export default function IdentifierRadioBox({
 
   return (
     <div className={cx(!noPad && utils.p_basic)}>
+      {title && (
+        <Text
+          className={cx(utils.pt_12, utils.pb_4, disable && styles.disable)}
+          bold="bold"
+        >
+          {title}
+        </Text>
+      )}
+      {sub && (
+        <Text size="xs" theme="gray">
+          {sub}
+        </Text>
+      )}
       {data.map((v) => (
         <label
           key={v.id}
-          className={cx(styles.label, styles.radioLabel)}
+          className={cx(
+            styles.label,
+            styles.radioLabel,
+            disable && styles.disable
+          )}
           htmlFor={v.id}
         >
           <div className={styles.inform}>
@@ -58,7 +82,8 @@ export default function IdentifierRadioBox({
                   className={cx(
                     styles.border,
                     styles.circle,
-                    check === v.id && styles.active
+                    check === v.id && styles.active,
+                    disable && styles.disable
                   )}
                 >
                   {check === v.id && <CheckSvg width={20} white />}

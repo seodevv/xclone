@@ -4,6 +4,11 @@ import SettingsPrivacyActivity from '@/app/(afterLogin)/settings/privacy_and_saf
 import SettingsPrivacyMore from '@/app/(afterLogin)/settings/privacy_and_safety/_component/SettingsPrivacyMore';
 import SettingsPrivacyPersonalization from '@/app/(afterLogin)/settings/privacy_and_safety/_component/SettingsPrivacyPersonalization';
 import DivideLine from '@/app/_component/_util/DivideLine';
+import { Metadata } from 'next';
+
+export const metadata: Metadata = {
+  title: 'Privacy and safety / XClone',
+};
 
 export default function SettingsPrivacyPage() {
   const header = 'Privacy and safety';

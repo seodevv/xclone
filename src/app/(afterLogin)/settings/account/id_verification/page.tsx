@@ -1,6 +1,11 @@
 import SettingsInform from '@/app/(afterLogin)/settings/_component/SettingsInform';
 import SettingsSubWrapper from '@/app/(afterLogin)/settings/_component/SettingsSubWrapper';
 import IdVerification from '@/app/(afterLogin)/settings/account/id_verification/_component/IdVericiation';
+import { Metadata } from 'next';
+
+export const metadata: Metadata = {
+  title: 'ID verification / XClone',
+};
 
 export default function SettingsIdVerificationPage() {
   const header = 'ID verification';

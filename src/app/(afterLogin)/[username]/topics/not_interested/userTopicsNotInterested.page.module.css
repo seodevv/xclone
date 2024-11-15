@@ -1,0 +1,12 @@
+.container {
+  margin: 32px auto;
+  padding: 0 32px;
+  display: flex;
+  flex-direction: column;
+  align-self: center;
+  max-width: 400px;
+}
+.flex_column {
+  display: flex;
+  flex-direction: column;
+}

@@ -14,6 +14,10 @@ export default function UserHeader({ username }: Props) {
   const [a, b] = useSelectedLayoutSegments();
   const isSearchHeader = a === 'lists' && b === undefined;
 
+  if (a === 'topics') {
+    return null;
+  }
+
   return (
     <div className={styles.header}>
       <BackButton prevPath="/home" />

@@ -8,6 +8,7 @@ interface Props {
   width?: number;
   white?: boolean;
   fill?: string;
+  inherit?: boolean;
 }
 
 export default function MuteSvg({
@@ -16,10 +17,16 @@ export default function MuteSvg({
   width = 18.75,
   white,
   fill,
+  inherit,
 }: Props) {
   return (
     <svg
-      className={cx(styles.defaultSvg, white && styles.white, className)}
+      className={cx(
+        styles.defaultSvg,
+        white && styles.white,
+        inherit && styles.inherit,
+        className
+      )}
       style={style}
       width={width}
       viewBox="0 0 24 24"

@@ -28,6 +28,7 @@ export default function UserProfile({ session, username }: Props) {
       'following',
       'status',
       'lists',
+      'topics',
     ].includes(segment)
   ) {
     return null;

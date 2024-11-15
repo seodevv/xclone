@@ -1,6 +1,7 @@
 'use client';
 
 import styles from './i.header.module.css';
+import cx from 'classnames';
 import CloseButton from '@/app/(afterLogin)/_component/buttons/CloseButton';
 import BackButton from '@/app/(afterLogin)/_component/buttons/BackButton';
 import useHistoryStore from '@/app/(afterLogin)/_store/HistoryStore';
@@ -13,6 +14,8 @@ interface Props {
   noBtn?: boolean;
   onClick?: () => void;
   children?: React.ReactNode;
+  align?: 'left' | 'center' | 'right';
+  noMax?: boolean;
 }
 
 export default function IHeader({
@@ -23,12 +26,14 @@ export default function IHeader({
   noBtn,
   onClick,
   children,
+  align = 'center',
+  noMax,
 }: Props) {
   const stack = useHistoryStore((state) => state.stack);
 
   return (
     <div className={styles.header}>
-      <div className={styles.inner}>
+      <div className={cx(styles.inner, noMax && styles.noMax)}>
         {!noBtn && (
           <div className={styles.back}>
             {stack < -1 || type === 'back' ? (
@@ -50,7 +55,7 @@ export default function IHeader({
         )}
         {title && (
           <div className={styles.title}>
-            <div className={styles.text}>
+            <div className={cx(styles.text, styles[`text_${align}`])}>
               <span>{title}</span>
             </div>
           </div>

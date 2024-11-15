@@ -1,3 +1,5 @@
+'use client';
+
 import Text from '@/app/_component/_text/Text';
 import styles from './button.module.css';
 import cx from 'classnames';

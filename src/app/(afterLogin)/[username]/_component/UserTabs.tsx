@@ -30,7 +30,12 @@ export default function UserTabs({ session, username }: Props) {
   ];
   const likeTab = { text: 'Likes', segment: 'likes' };
 
-  if (segment === 'status' || segment === 'lists' || !user) {
+  if (
+    segment === 'status' ||
+    segment === 'lists' ||
+    segment === 'topics' ||
+    !user
+  ) {
     return null;
   }
 

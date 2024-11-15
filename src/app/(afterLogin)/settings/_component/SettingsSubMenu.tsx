@@ -39,6 +39,7 @@ export default function SettingsSubMenu(props: Props) {
         className={cx(styles.link, props.select === 'none' && styles.none)}
         href={props.href as string}
         target={props.external ? '_blank' : undefined}
+        scroll={false}
       >
         {props.svg && (
           <div className={styles.icon}>

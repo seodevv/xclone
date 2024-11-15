@@ -45,6 +45,8 @@
 .badge {
   margin-left: 2px;
 }
+
+/* color */
 .blue {
   fill: rgb(var(--primary-rgb));
 }
@@ -53,4 +55,19 @@
 }
 .gray {
   fill: #829aab;
+}
+.yellow {
+  fill: rgb(255, 212, 0);
+}
+.pink {
+  fill: rgb(249, 24, 128);
+}
+.purple {
+  fill: rgb(120, 86, 255);
+}
+.orange {
+  fill: rgb(255, 122, 0);
+}
+.green {
+  fill: rgb(0, 186, 124);
 }

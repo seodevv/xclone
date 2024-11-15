@@ -8,6 +8,11 @@ import ShortcutsSvg from '@/app/_svg/_settings/ShortcutsSvg';
 import ViewSvg from '@/app/_svg/actionbuttons/ViewSvg';
 import GlobalSvg from '@/app/_svg/post/GlobalSvg';
 import EditSvg from '@/app/_svg/tweet/EditSvg';
+import { Metadata } from 'next';
+
+export const metadata: Metadata = {
+  title: 'Accessibility, display and languages / XClone',
+};
 
 export default function SettingsAccessibilityPage() {
   const header = 'Accessibility, display and languages';

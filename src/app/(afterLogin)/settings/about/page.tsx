@@ -3,6 +3,11 @@ import SettingsSubWrapper from '@/app/(afterLogin)/settings/_component/SettingsS
 import SettingsAboutLegal from '@/app/(afterLogin)/settings/about/_component/SettingsAboutLegal';
 import SettingsAboutMiscellaneous from '@/app/(afterLogin)/settings/about/_component/SettingsAboutMiscellaneous';
 import SettingsAboutReleaseNotes from '@/app/(afterLogin)/settings/about/_component/SettingsAboutReleaseNotes';
+import { Metadata } from 'next';
+
+export const metadata: Metadata = {
+  title: 'Addional resources / XClone',
+};
 
 export default function SettingsAboutPage() {
   const header = 'Additional resources';

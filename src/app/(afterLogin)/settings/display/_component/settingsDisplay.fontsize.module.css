@@ -1,0 +1,92 @@
+.fontSize {
+  padding: 15px;
+  display: flex;
+  align-items: center;
+}
+.bar {
+  margin: 0 19px;
+  display: flex;
+  align-items: center;
+  flex-grow: 1;
+  height: 19px;
+  cursor: pointer;
+}
+.inner {
+  position: relative;
+  display: flex;
+  align-items: center;
+  flex-grow: 1;
+  height: 4px;
+  background-color: rgb(142, 205, 248);
+  border-radius: 8px;
+}
+.space {
+  flex-grow: 0;
+  opacity: 0;
+}
+.progress {
+  display: flex;
+  flex-direction: column;
+  align-self: stretch;
+  background: rgb(var(--primary-rgb));
+  border-radius: 8px;
+}
+.progress_ex_small {
+  flex-grow: 0;
+}
+.progress_small {
+  flex-grow: 0.25;
+}
+.progress_default {
+  flex-grow: 0.5;
+}
+.progress_large {
+  flex-grow: 0.75;
+}
+.progress_ex_large {
+  flex-grow: 1;
+}
+.steps {
+  margin-left: -8px;
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  background: transparent;
+  border: none;
+  border-radius: 9999px;
+  outline: none;
+  transition-duration: 200ms;
+  transition-property: background-color;
+  cursor: pointer;
+}
+.step_ex_small {
+  left: calc(0% + 0px);
+}
+.step_small {
+  left: calc(25% - 4px);
+}
+.step_default {
+  left: calc(50% - 8px);
+}
+.step_large {
+  left: calc(75% - 12px);
+}
+.step_ex_large {
+  left: calc(100% - 16px);
+}
+.circle {
+  width: 12px;
+  height: 12px;
+  background: rgb(var(--primary-rgb));
+  border-radius: 9999px;
+  box-shadow: rgba(255, 255, 255, 0.2) 0px 0px 7px,
+    rgba(255, 255, 255, 0.15) 0px 1px 3px 1px;
+}
+.circle.active {
+  width: 16px;
+  height: 16px;
+}

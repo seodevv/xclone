@@ -68,8 +68,8 @@
 /* PostContent */
 .postContent {
   font-size: 15px;
-  line-height: 24px;
-  word-break: break-all;
+  line-height: 20px;
+  word-break: break-word;
 }
 .hashtag {
   color: rgb(var(--primary-rgb));

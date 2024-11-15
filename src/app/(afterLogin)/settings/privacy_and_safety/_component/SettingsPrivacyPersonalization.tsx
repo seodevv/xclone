@@ -14,7 +14,7 @@ export default function SettingsPrivacyPersonalization() {
     {
       id: 0,
       type: 'link',
-      href: '/settings/',
+      href: '/settings/ads_preferences',
       svg: <AdsSvg />,
       title: 'Ads preferences',
       sub: 'Manage your ads experience on X.',

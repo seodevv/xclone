@@ -1,8 +1,15 @@
 'use client';
 
 import styles from './toggle.module.css';
+import utils from '@/app/utility.module.css';
 import cx from 'classnames';
-import { ChangeEventHandler, useLayoutEffect, useState } from 'react';
+import {
+  ChangeEventHandler,
+  Dispatch,
+  SetStateAction,
+  useLayoutEffect,
+  useState,
+} from 'react';
 
 import Text from '@/app/_component/_text/Text';
 
@@ -11,26 +18,40 @@ export interface IToggle {
   title: string | JSX.Element;
   sub?: string | JSX.Element;
   defaultValue?: boolean;
-}
-
-interface Props {
-  title: string | JSX.Element;
-  sub?: string | JSX.Element;
-  defaultValue?: boolean;
+  onToggleOn?: (
+    check: boolean,
+    setCheck: Dispatch<SetStateAction<boolean>>
+  ) => void;
+  onToogleOff?: (
+    check: boolean,
+    setCheck: Dispatch<SetStateAction<boolean>>
+  ) => void;
   onChange?: (value: boolean) => void;
 }
+
+type Props = Omit<IToggle, 'id'>;
 
 export default function IdentifierToggle({
   title,
   sub,
   defaultValue,
+  onToggleOn,
+  onToogleOff,
   onChange,
 }: Props) {
   const [check, setCheck] = useState(false);
   const onChangeCheck: ChangeEventHandler<HTMLInputElement> = (e) => {
-    setCheck(e.target.checked);
+    const checked = e.target.checked;
     if (typeof onChange === 'function') {
-      onChange(e.target.checked);
+      onChange(checked);
+    }
+
+    if (checked && typeof onToggleOn === 'function') {
+      onToggleOn(checked, setCheck);
+    } else if (!checked && typeof onToogleOff === 'function') {
+      onToogleOff(checked, setCheck);
+    } else {
+      setCheck(e.target.checked);
     }
   };
 
@@ -56,7 +77,7 @@ export default function IdentifierToggle({
           />
         </div>
       </div>
-      <Text theme="gray" size="xs">
+      <Text className={utils.pt_4} theme="gray" size="xs">
         {sub}
       </Text>
     </label>

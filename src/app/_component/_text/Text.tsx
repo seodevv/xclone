@@ -5,13 +5,25 @@ import { CSSProperties } from 'react';
 interface Props {
   className?: string;
   style?: CSSProperties;
-  theme?: 'theme' | 'gray' | 'primary' | 'error' | 'black';
-  size?: 'xs' | 's' | 'm' | 'l' | 'xl' | 'xxl' | 'xxxl' | 'xxxxl' | 'fs_34';
+  theme?: 'theme' | 'gray' | 'primary' | 'error' | 'black' | 'green';
+  size?:
+    | 'xs'
+    | 's'
+    | 'm'
+    | 'l'
+    | 'xl'
+    | 'xxl'
+    | 'xxxl'
+    | 'xxxxl'
+    | 'fs_12'
+    | 'fs_19'
+    | 'fs_34';
   bold?: 'light' | 'normal' | 'bold' | 'boldest' | 'fw_500';
   align?: 'left' | 'center' | 'right';
   text?: string;
   display?: 'display' | 'inline-block' | 'inline';
   link?: boolean;
+  pad?: boolean;
   children?: React.ReactNode;
 }
 
@@ -25,6 +37,7 @@ export default function Text({
   text,
   display = 'display',
   link,
+  pad,
   children,
 }: Props) {
   return (
@@ -36,6 +49,7 @@ export default function Text({
         styles[`align_${align}`],
         styles[display],
         link && styles.link,
+        pad && styles.pad,
         className
       )}
       style={style}

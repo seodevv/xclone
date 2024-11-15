@@ -12,6 +12,7 @@
   background: rgba(var(--background-modal-rgb), 0.4);
 }
 .modal {
+  position: relative;
   display: flex;
   flex-direction: column;
   width: 100%;
@@ -28,6 +29,11 @@
 }
 .medium {
   min-height: 650px;
+}
+.large {
+  width: unset;
+  min-width: 600px;
+  max-width: 80vw;
 }
 .auto {
   overflow: auto;

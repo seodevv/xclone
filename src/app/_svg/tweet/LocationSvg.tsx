@@ -6,12 +6,18 @@ interface Props {
   className?: HTMLAttributes<HTMLOrSVGElement>['className'];
   style?: CSSProperties;
   width?: number;
+  white?: boolean;
 }
 
-export default function LocationSvg({ className, style, width = 20 }: Props) {
+export default function LocationSvg({
+  className,
+  style,
+  width = 20,
+  white,
+}: Props) {
   return (
     <svg
-      className={cx(styles.defaultSvg, className)}
+      className={cx(styles.defaultSvg, white && styles.white, className)}
       style={style}
       width={width}
       viewBox="0 0 24 24"

@@ -18,6 +18,9 @@
   width: 100%;
   max-width: 600px;
 }
+.inner.noMax {
+  max-width: unset;
+}
 .back {
   position: absolute;
   top: 50%;
@@ -35,13 +38,21 @@
   height: 100%;
 }
 .text {
-  margin-left: -48px;
   display: flex;
-  justify-content: center;
   font-size: 20px;
   font-weight: 700;
   color: rgb(var(--font-theme-rgb));
   line-height: 24px;
+}
+.text_left {
+  margin-left: 48px;
+  justify-content: flex-start;
+}
+.text_center {
+  justify-content: center;
+}
+.text_right {
+  justify-content: flex-end;
 }
 
 @media screen and (max-width: 704px) {

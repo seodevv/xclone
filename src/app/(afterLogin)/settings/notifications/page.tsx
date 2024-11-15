@@ -5,6 +5,11 @@ import SettingsSubMenu, {
 import SettingsSubWrapper from '@/app/(afterLogin)/settings/_component/SettingsSubWrapper';
 import FiltersSvg from '@/app/_svg/_settings/FiltersSvg';
 import PreferencesSvg from '@/app/_svg/_settings/PreferencesSvg';
+import { Metadata } from 'next';
+
+export const metadata: Metadata = {
+  title: 'Notifications / XClone',
+};
 
 export default function SettingsNotificationsPage() {
   const header = 'Notifications';

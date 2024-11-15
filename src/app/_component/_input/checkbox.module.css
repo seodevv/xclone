@@ -1,9 +1,15 @@
 .label {
-  margin-top: 12px;
+  /* margin-top: 12px; */
   display: flex;
   justify-content: space-between;
   width: 100%;
   cursor: pointer;
+}
+.margin {
+  margin-top: 12px;
+}
+.padding {
+  padding: 16px;
 }
 .radioLabel {
   margin-top: 0;
@@ -50,6 +56,10 @@
 .border.active {
   background: rgb(var(--primary-rgb));
   border-color: rgb(var(--primary-rgb));
+}
+.border.disable {
+  background: rgb(62, 65, 68);
+  border-color: rgb(62, 65, 68);
 }
 .disable {
   opacity: 0.5;
