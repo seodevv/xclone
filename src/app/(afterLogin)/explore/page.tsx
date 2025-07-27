@@ -3,6 +3,11 @@ import SearchForm from '@/app/(afterLogin)/_component/search/SearchForm';
 import Trends from '../_component/trends/Trends';
 import TrendsHydrationBoundary from '../_boundary/TrendsHydrationBoundary';
 import SettingButton from '../_component/buttons/SettingButton';
+import { Metadata } from 'next';
+
+export const metadata: Metadata = {
+  title: 'Explore / XClone',
+};
 
 export default async function ExplorePage() {
   return (

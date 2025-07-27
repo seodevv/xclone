@@ -4,14 +4,25 @@ import cx from 'classnames';
 
 interface Props {
   className?: HTMLAttributes<HTMLOrSVGElement>['className'];
+  theme?: 'default' | 'white' | 'primary';
   style?: CSSProperties;
   width?: number;
 }
 
-export default function GifSvg({ className, style, width = 20 }: Props) {
+export default function GifSvg({
+  className,
+  theme = 'default',
+  style,
+  width = 20,
+}: Props) {
   return (
     <svg
-      className={cx(styles.defaultSvg, className)}
+      className={cx(
+        theme === 'default' && styles.defaultSvg,
+        theme === 'white' && styles.white,
+        theme === 'primary' && styles.primary,
+        className
+      )}
       style={style}
       width={width}
       viewBox="0 0 24 24"

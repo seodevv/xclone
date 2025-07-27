@@ -4,8 +4,11 @@ import styles from './toggle.module.css';
 import utils from '@/app/utility.module.css';
 import cx from 'classnames';
 import {
+  ChangeEvent,
   ChangeEventHandler,
   Dispatch,
+  MouseEvent,
+  MouseEventHandler,
   SetStateAction,
   useLayoutEffect,
   useState,
@@ -20,11 +23,13 @@ export interface IToggle {
   defaultValue?: boolean;
   onToggleOn?: (
     check: boolean,
-    setCheck: Dispatch<SetStateAction<boolean>>
+    setCheck: Dispatch<SetStateAction<boolean>>,
+    event: ChangeEvent<HTMLInputElement>
   ) => void;
   onToogleOff?: (
     check: boolean,
-    setCheck: Dispatch<SetStateAction<boolean>>
+    setCheck: Dispatch<SetStateAction<boolean>>,
+    event: ChangeEvent<HTMLInputElement>
   ) => void;
   onChange?: (value: boolean) => void;
 }
@@ -40,6 +45,7 @@ export default function IdentifierToggle({
   onChange,
 }: Props) {
   const [check, setCheck] = useState(false);
+
   const onChangeCheck: ChangeEventHandler<HTMLInputElement> = (e) => {
     const checked = e.target.checked;
     if (typeof onChange === 'function') {
@@ -47,9 +53,9 @@ export default function IdentifierToggle({
     }
 
     if (checked && typeof onToggleOn === 'function') {
-      onToggleOn(checked, setCheck);
+      onToggleOn(checked, setCheck, e);
     } else if (!checked && typeof onToogleOff === 'function') {
-      onToogleOff(checked, setCheck);
+      onToogleOff(checked, setCheck, e);
     } else {
       setCheck(e.target.checked);
     }
@@ -71,7 +77,6 @@ export default function IdentifierToggle({
           <input
             className={styles.input}
             type="checkbox"
-            hidden
             checked={check}
             onChange={onChangeCheck}
           />

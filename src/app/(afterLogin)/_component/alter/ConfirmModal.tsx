@@ -36,9 +36,11 @@ export default function ConfirmModal({
 
   return (
     <IBackground size="small" onClick={onClickBackground} noHidden={noHidden}>
-      <div className={styles.title}>
-        <span>{title}</span>
-      </div>
+      {title !== '' && (
+        <div className={styles.title}>
+          <span>{title}</span>
+        </div>
+      )}
       <div className={styles.desc}>
         <span>{sub}</span>
       </div>

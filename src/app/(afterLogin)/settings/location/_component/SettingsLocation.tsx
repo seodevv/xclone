@@ -13,10 +13,8 @@ import useAlterModal from '@/app/_hooks/useAlterModal';
 
 export default function SettingsLocation() {
   const { sendPrepareMessage } = useAlterModal();
-  const { dispatchModal, reset } = useContext(ConfirmContext);
+  const { dispatchModal, close } = useContext(ConfirmContext);
   const { location, setLocation } = useSettingsLocalStore(locationSelector);
-
-  console.log(location);
 
   const onCheck = (
     check: boolean,
@@ -50,11 +48,11 @@ export default function SettingsLocation() {
         btnText: 'Delete',
         btnTheme: 'red',
         onClickCancle: () => {
-          reset();
+          close();
         },
         onClickConfirm: () => {
           sendPrepareMessage();
-          reset();
+          close();
         },
       },
     });

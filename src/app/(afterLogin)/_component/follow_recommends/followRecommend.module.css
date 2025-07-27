@@ -44,9 +44,14 @@
   padding: 12px 16px;
   min-height: 66px;
   display: flex;
+  transition-duration: 200ms;
+  transition-property: background-color;
 }
 .container:hover:not(:has(button:hover)) {
   background: rgba(var(--foreground-rgb), 0.1);
+}
+.container:active:not(:has(button:hover)) {
+  background: rgba(var(--foreground-rgb), 0.2);
 }
 .userLogo {
   width: 40px;
@@ -64,6 +69,12 @@
 }
 .flex {
   display: flex;
+}
+.alignCenter {
+  align-items: center;
+}
+.justBetween {
+  justify-content: space-between;
 }
 .grow {
   flex-grow: 1;
@@ -90,4 +101,7 @@
   word-break: break-all;
   word-wrap: break-word;
   overflow: hidden;
+}
+.cursor {
+  cursor: pointer;
 }

@@ -15,7 +15,7 @@ import { useContext } from 'react';
 
 export default function SettingsYourLocation() {
   const { location, setLocation } = useSettingsLocalStore(locationSelector);
-  const { dispatchModal, reset } = useContext(ConfirmContext);
+  const { dispatchModal, close } = useContext(ConfirmContext);
 
   const onClickRemove = () => {
     dispatchModal({
@@ -26,10 +26,10 @@ export default function SettingsYourLocation() {
         btnText: 'Remove',
         btnTheme: 'red',
         onClickCancle: () => {
-          reset();
+          close();
         },
         onClickConfirm: () => {
-          reset();
+          close();
           setLocation({ history: [] });
         },
       },

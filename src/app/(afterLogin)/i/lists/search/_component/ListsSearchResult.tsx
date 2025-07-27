@@ -45,6 +45,7 @@ export default function ListsSearchResult({ searchParams }: Props) {
           page.data.map((l) => <Lists key={l.id} lists={l} follow />)
         )}
         <PageLoading
+          type="next"
           hasNextPage={hasNextPage}
           isFetchingNextPage={isFetchingNextPage}
           isError={isError}

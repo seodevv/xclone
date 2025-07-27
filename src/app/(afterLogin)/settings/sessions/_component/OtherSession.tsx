@@ -11,7 +11,7 @@ import useAlterModal from '@/app/_hooks/useAlterModal';
 
 export default function OtherSession() {
   const { sendPrepareMessage } = useAlterModal();
-  const { dispatchModal, reset } = useContext(ConfirmContext);
+  const { dispatchModal, close } = useContext(ConfirmContext);
 
   const onClickLogOut = () => {
     dispatchModal({
@@ -22,10 +22,10 @@ export default function OtherSession() {
         btnText: 'Log out',
         onClickConfirm: () => {
           sendPrepareMessage();
-          reset();
+          close();
         },
         onClickCancle: () => {
-          reset();
+          close();
         },
       },
     });

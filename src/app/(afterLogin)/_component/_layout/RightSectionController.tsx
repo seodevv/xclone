@@ -12,6 +12,7 @@ export default function RightSectionController({ children }: Props) {
   const [a, b] = segments;
 
   if (a === 'settings') return null;
+  if (a === 'messages') return null;
 
   return <section className={styles.rightSection}>{children}</section>;
 }

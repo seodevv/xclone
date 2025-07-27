@@ -7,6 +7,7 @@ import NewListsSvg from '@/app/_svg/lists/NewListsSvg';
 import OptionButton from '@/app/(afterLogin)/_component/buttons/OptionButton';
 import { MouseEventHandler, useContext } from 'react';
 import { SubMenuContext } from '@/app/(afterLogin)/_provider/SubMenuProvider';
+import { useSession } from 'next-auth/react';
 
 interface Props {
   q?: string;
@@ -15,18 +16,22 @@ interface Props {
 
 export default function ListsSearchBar({ q, options }: Props) {
   const { dispatchMenu } = useContext(SubMenuContext);
+  const { data: session } = useSession();
 
   const onClickSearchListsOptions: MouseEventHandler<HTMLButtonElement> = (
     e
   ) => {
     e.preventDefault();
     e.stopPropagation();
+
+    if (!session?.user?.email) return;
+
     const { x, y, width, height } = e.currentTarget.getBoundingClientRect();
     dispatchMenu({
       type: 'set',
       payload: {
         flag: true,
-        status: 'searchListsOption',
+        status: { type: 'lists_search', sessionid: session.user.email },
         position: {
           x,
           y,

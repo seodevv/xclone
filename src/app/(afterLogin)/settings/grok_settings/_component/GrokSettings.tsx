@@ -11,7 +11,7 @@ import { useContext } from 'react';
 import { ConfirmContext } from '@/app/(afterLogin)/_provider/ConfirmProvider';
 
 export default function GrokSettings() {
-  const { dispatchModal, reset } = useContext(ConfirmContext);
+  const { dispatchModal, close } = useContext(ConfirmContext);
   const { grok, setGrok } = useSettingsLocalStore(GrokSelector);
   const onClickDeleteConversation = () => {
     dispatchModal({
@@ -22,10 +22,10 @@ export default function GrokSettings() {
         btnText: 'Delete',
         btnTheme: 'theme',
         onClickCancle: () => {
-          reset();
+          close();
         },
         onClickConfirm: () => {
-          reset();
+          close();
         },
       },
     });

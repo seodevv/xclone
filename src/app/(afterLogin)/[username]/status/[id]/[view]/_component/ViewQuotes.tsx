@@ -40,6 +40,7 @@ export default function ViewQuotes({ username, id, view }: Props) {
           page.data.map((p) => <Post key={p.postid} post={p} />)
         )}
         <PageLoading
+          type="next"
           hasNextPage={hasNextPage}
           isFetchingNextPage={isFetchingNextPage}
           isError={isError}

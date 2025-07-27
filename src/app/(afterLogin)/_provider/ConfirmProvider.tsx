@@ -47,18 +47,18 @@ const reducer: Reducer<State, Action> = (state, action) => {
         noHidden: true,
       };
     case 'reset':
-      return { ...initialState };
+      return initialState;
   }
 };
 
 export const ConfirmContext = createContext<{
   modal: State;
   dispatchModal: Dispatch<Action>;
-  reset: () => void;
+  close: () => void;
 }>({
   modal: initialState,
   dispatchModal: () => {},
-  reset: () => {},
+  close: () => {},
 });
 
 interface Props {
@@ -68,12 +68,10 @@ interface Props {
 export default function ConfirmProvider({ children }: Props) {
   const [modal, dispatchModal] = useReducer(reducer, initialState);
 
-  const reset = () => {
-    dispatchModal({ type: 'reset' });
-  };
+  const close = () => dispatchModal({ type: 'reset' });
 
   return (
-    <ConfirmContext.Provider value={{ modal, dispatchModal, reset }}>
+    <ConfirmContext.Provider value={{ modal, dispatchModal, close }}>
       {children}
       {modal.flag && modal.type === 'unFollow' && <UnFollowModal />}
       {modal.flag && modal.type === 'unLists' && <UnListsModal />}

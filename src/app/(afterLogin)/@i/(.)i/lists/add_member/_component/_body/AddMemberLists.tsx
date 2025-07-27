@@ -71,6 +71,7 @@ export default function AddMemberLists({ username, filter }: Props) {
           ))
         )}
         <PageLoading
+          type="next"
           hasNextPage={hasNextPage}
           isFetchingNextPage={isFetchingNextPage}
           isError={isError}

@@ -5,21 +5,26 @@ import cx from 'classnames';
 interface Props {
   className?: HTMLAttributes<HTMLOrSVGElement>['className'];
   style?: CSSProperties;
+  theme?: 'default' | 'primary' | 'white';
   width?: number;
-  white?: boolean;
   fill?: string;
 }
 
 export default function DeleteSvg({
   className,
   style,
+  theme = 'default',
   width = 18.75,
-  white,
   fill,
 }: Props) {
   return (
     <svg
-      className={cx(styles.defaultSvg, white && styles.white, className)}
+      className={cx(
+        theme === 'default' && styles.defaultSvg,
+        theme === 'primary' && styles.primary,
+        theme === 'white' && styles.white,
+        className
+      )}
       style={style}
       width={width}
       viewBox="0 0 24 24"

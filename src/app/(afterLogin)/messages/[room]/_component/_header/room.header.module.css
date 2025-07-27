@@ -1,0 +1,88 @@
+.sticky {
+  position: sticky;
+  top: 0;
+  z-index: 2;
+}
+.background {
+  height: 53px;
+  background-color: rgba(0, 0, 0, 0.65);
+  backdrop-filter: blur(12px);
+}
+.header {
+  padding: 0 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 53px;
+  max-width: 600px;
+}
+.info {
+  display: flex;
+  flex-direction: column;
+  flex-shrink: 1;
+  flex-grow: 1;
+  justify-content: center;
+  height: 100%;
+}
+.profile {
+  margin-right: 8px;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  flex-basis: 32px;
+  flex-grow: 0;
+  justify-content: center;
+}
+.pad {
+  padding-bottom: 100%;
+  width: 100%;
+}
+.absolute {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+}
+.profile {
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  overflow: hidden;
+}
+.nickname {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  flex-basis: 0px;
+  flex-grow: 1;
+}
+.detail {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  align-self: stretch;
+  justify-content: center;
+  min-width: 56px;
+  min-height: 32px;
+}
+.detailLink {
+  margin-right: -5px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-width: 36px;
+  min-height: 36px;
+  background-color: transparent;
+  border: none;
+  border-radius: 9999px;
+  cursor: pointer;
+}
+.detailLink:hover {
+  background-color: rgba(var(--button-hover-rgb), 0.1);
+}
+.detailLink:active {
+  background-color: rgba(var(--button-hover-rgb), 0.2);
+}

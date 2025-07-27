@@ -16,7 +16,7 @@ import Link from 'next/link';
 import { useContext } from 'react';
 
 export default function SettingsDelegate() {
-  const { dispatchModal, reset } = useContext(ConfirmContext);
+  const { dispatchModal, close } = useContext(ConfirmContext);
   const { delegate, setDelegate } = useSettingsLocalStore(delegateSelector);
   const subMenus: ISettingsSubMenu[] = [
     {
@@ -44,11 +44,11 @@ export default function SettingsDelegate() {
         btnText: 'Don’t allow',
         btnTheme: 'red',
         onClickCancle: () => {
-          reset();
+          close();
         },
         onClickConfirm: () => {
           setDelegate('none');
-          reset();
+          close();
         },
       },
     });

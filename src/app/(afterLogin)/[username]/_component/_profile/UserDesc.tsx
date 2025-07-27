@@ -1,19 +1,21 @@
 import { Fragment } from 'react';
 import styles from './userDesc.module.css';
+import cx from 'classnames';
 import Link from 'next/link';
 import { AdvancedUser } from '@/model/User';
 
 interface Props {
   desc?: AdvancedUser['desc'];
+  align?: 'left' | 'center' | 'right';
 }
 
-export default function UserDesc({ desc }: Props) {
+export default function UserDesc({ desc, align = 'left' }: Props) {
   if (!desc) return null;
 
   const split = desc.split(/\r\n|\r|\n/);
 
   return (
-    <div className={styles.description}>
+    <div className={cx(styles.description, styles[`textAlign_${align}`])}>
       {split.map((t, i) => (
         <AnalysisText key={i} text={t} />
       ))}
@@ -54,7 +56,12 @@ export function AnalysisText({ text }: { text: string }) {
         return (
           <Fragment key={i}>
             <span>{text.substring(prevIndex, index)}</span>
-            <Link className={styles.link} href={href} target={target}>
+            <Link
+              className={styles.link}
+              href={href}
+              target={target}
+              onClick={(e) => e.stopPropagation()}
+            >
               {matched}
             </Link>
           </Fragment>

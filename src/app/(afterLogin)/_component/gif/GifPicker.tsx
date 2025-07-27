@@ -16,11 +16,21 @@ import { MediaType } from '@/app/(afterLogin)/_component/post/form/PostForm';
 
 interface Props {
   className?: string;
-  setState?: Dispatch<SetStateAction<MediaType[]>>;
+  theme?: 'default' | 'white' | 'primary';
+  width?: number;
+  // setState?: Dispatch<SetStateAction<MediaType[]>>;
+  onSuccess?: (gif: TenorImage) => void;
   disabled?: boolean;
 }
 
-export default function GifPicker({ className, setState, disabled }: Props) {
+export default function GifPicker({
+  className,
+  theme = 'default',
+  width = 20,
+  // setState,
+  onSuccess,
+  disabled,
+}: Props) {
   const { alterMessage } = useAlterModal();
   const [active, setActive] = useState(false);
   const [fadeOut, setFadeOut] = useState(false);
@@ -40,18 +50,21 @@ export default function GifPicker({ className, setState, disabled }: Props) {
   };
 
   const onClickGif = (gif: TenorImage) => {
-    if (typeof setState === 'function') {
-      setState((prev) => {
-        if (prev.length === 4) {
-          alterMessage('Please choose up to 4 photos, videos, or GIFs.');
-          return prev;
-        }
-        return [
-          ...prev,
-          { type: 'gif', link: gif.url, width: gif.width, height: gif.height },
-        ];
-      });
+    if (typeof onSuccess === 'function') {
+      onSuccess(gif);
     }
+    // if (typeof setState === 'function') {
+    //   setState((prev) => {
+    //     if (prev.length === 4) {
+    //       alterMessage('Please choose up to 4 photos, videos, or GIFs.');
+    //       return prev;
+    //     }
+    //     return [
+    //       ...prev,
+    //       { type: 'gif', link: gif.url, width: gif.width, height: gif.height },
+    //     ];
+    //   });
+    // }
     setActive(false);
   };
 
@@ -90,7 +103,7 @@ export default function GifPicker({ className, setState, disabled }: Props) {
         onClick={onClickActive}
         disabled={disabled}
       >
-        <GifSvg />
+        <GifSvg theme={theme} width={width} />
       </button>
       {active && (
         <div

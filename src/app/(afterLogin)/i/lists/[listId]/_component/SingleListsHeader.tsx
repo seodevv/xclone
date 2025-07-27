@@ -24,7 +24,7 @@ export default function SingleListsHeader({ listid }: Props) {
       type: 'set',
       payload: {
         flag: true,
-        status: 'listsShare',
+        status: { type: 'lists_share' },
         position: {
           x,
           y,
@@ -46,8 +46,7 @@ export default function SingleListsHeader({ listid }: Props) {
       type: 'set',
       payload: {
         flag: true,
-        status: 'listsShow',
-        lists: lists.data,
+        status: { type: 'lists_show', lists: lists.data },
         position: {
           x,
           y,
@@ -81,7 +80,7 @@ export default function SingleListsHeader({ listid }: Props) {
                   <ShareSvg width={20} white />
                 </button>
                 <button className={styles.button} onClick={onClickOption}>
-                  <OptionSvg width={20} white />
+                  <OptionSvg theme="white" width={20} />
                 </button>
               </div>
             </div>

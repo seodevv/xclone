@@ -15,7 +15,7 @@ import { useContext } from 'react';
 export default function ListsShareSubMenu() {
   const router = useRouter();
   const { alterMessage } = useAlterModal();
-  const { dispatchMenu } = useContext(SubMenuContext);
+  const { close } = useContext(SubMenuContext);
   const setDefaultValue = useComposeStore((state) => state.setDefaultValue);
 
   const onClickPostList = () => {
@@ -24,7 +24,7 @@ export default function ListsShareSubMenu() {
     const location = window.location.toString();
     setDefaultValue(location + ' ');
     router.push('/compose/post', { scroll: false });
-    dispatchMenu({ type: 'reset' });
+    close();
   };
 
   const onClickDirectMessage = () => {
@@ -46,7 +46,7 @@ export default function ListsShareSubMenu() {
       document.body.removeChild(textArea);
     }
 
-    dispatchMenu({ type: 'reset' });
+    close();
     alterMessage('Copied to clipboard');
   };
 
@@ -62,7 +62,7 @@ export default function ListsShareSubMenu() {
     };
     navigator.share(data);
 
-    dispatchMenu({ type: 'reset' });
+    close();
   };
 
   return (

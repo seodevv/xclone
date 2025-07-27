@@ -5,19 +5,24 @@ import cx from 'classnames';
 interface Props {
   className?: string;
   style?: CSSProperties;
+  theme?: 'default' | 'primary' | 'white';
   width?: number;
-  white?: boolean;
 }
 
 export default function XMarkSvg({
   className,
   style,
+  theme = 'default',
   width = 18,
-  white,
 }: Props) {
   return (
     <svg
-      className={cx(styles.defaultSvg, white && styles.white, className)}
+      className={cx(
+        theme === 'default' && styles.defaultSvg,
+        theme === 'primary' && styles.primary,
+        theme === 'white' && styles.white,
+        className
+      )}
       style={style}
       width={width}
       viewBox="0 0 24 24"

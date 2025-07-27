@@ -6,9 +6,7 @@ import data from '@emoji-mart/data';
 import Picker from '@emoji-mart/react';
 import { Emoji } from 'emoji-mart';
 import {
-  Dispatch,
   MouseEventHandler,
-  SetStateAction,
   useCallback,
   useEffect,
   useRef,
@@ -16,13 +14,15 @@ import {
 } from 'react';
 import cx from 'classnames';
 import useViewport from '../../_hooks/useViewport';
-import { splitEmoji } from '@/app/_lib/common';
+import OptionSvg from '@/app/_svg/post/OptionSvg';
+
+export type EmojiProps = typeof Emoji.Props;
 
 interface Props {
   className?: string;
-  setState: Dispatch<SetStateAction<string>>;
-  lastSelection: number;
-  setLastSelection: Dispatch<SetStateAction<number>>;
+  type?: 'emoji' | 'option';
+  theme?: 'default' | 'white' | 'primary';
+  onSuccess?: (emoji: EmojiProps, close: () => void) => void;
   onFocus?: () => void;
   emojiButtonSize?: number;
   emojiSize?: number;
@@ -30,9 +30,9 @@ interface Props {
 
 const EmojiSelector = ({
   className,
-  setState,
-  lastSelection,
-  setLastSelection,
+  type = 'emoji',
+  theme = 'default',
+  onSuccess,
   onFocus,
   emojiButtonSize = 38,
   emojiSize = 20,
@@ -48,13 +48,10 @@ const EmojiSelector = ({
   const btnRef = useRef<HTMLButtonElement>(null);
   const outsideRef = useRef<HTMLDivElement>(null);
 
-  const onClickEmojiSelect = (emoji: typeof Emoji.Props) => {
-    setState((prev) => {
-      const a = splitEmoji(prev).splice(0, lastSelection).join('');
-      const b = splitEmoji(prev).splice(lastSelection).join('');
-      return a + emoji.native + b;
-    });
-    setLastSelection((prev) => prev + 1);
+  const onClickEmojiSelect = (emoji: EmojiProps) => {
+    if (typeof onSuccess === 'function') {
+      onSuccess(emoji, selectorClose);
+    }
   };
 
   const onClickActive: MouseEventHandler<HTMLButtonElement> = (e) => {
@@ -128,7 +125,8 @@ const EmojiSelector = ({
         className={className}
         onClick={onClickActive}
       >
-        <EmojiSvg />
+        {type === 'emoji' && <EmojiSvg theme={theme} width={20} />}
+        {type === 'option' && <OptionSvg theme={theme} width={20} />}
       </button>
       {active.flag && (
         <div ref={outsideRef} className={styles.emojiOutside}>

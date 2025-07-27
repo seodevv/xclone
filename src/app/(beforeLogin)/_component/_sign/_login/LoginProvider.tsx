@@ -1,5 +1,6 @@
 'use client';
 
+import { IdentifierInputRef } from '@/app/_component/_input/IdentifierInput';
 import {
   createContext,
   Dispatch,
@@ -91,7 +92,7 @@ export default function LoginProvider({ children }: Props) {
       ...initialState,
       state: {
         ...initialState.state,
-        ref: useRef<ImperativeRef>(null),
+        ref: useRef<IdentifierInputRef>(null),
       },
     },
     initializer
@@ -108,14 +109,10 @@ interface ILoginContext {
   state: ReducerState<State>;
   dispatch: Dispatch<Action>;
 }
-interface ImperativeRef {
-  focus: () => void;
-  blur: () => void;
-}
 interface State {
   value: string;
   disabled: boolean;
-  ref?: RefObject<ImperativeRef>;
+  ref?: RefObject<IdentifierInputRef>;
 }
 interface Options {
   prevPage: number;

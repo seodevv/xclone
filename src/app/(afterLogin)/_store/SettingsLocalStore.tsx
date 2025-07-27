@@ -1,3 +1,4 @@
+import { AdvancedUser } from '@/model/User';
 import { create } from 'zustand';
 import { devtools, persist } from 'zustand/middleware';
 
@@ -129,6 +130,11 @@ export interface SettingsLocalStore {
     saver: boolean;
     autoplay: 'cellular' | 'never';
   };
+  conversationInfo: {
+    id: AdvancedUser['id'];
+    snooze: '1h' | '8h' | '1w' | 'forever';
+    timestamp: Date;
+  }[];
   setProtectPost: (value: boolean) => void;
   setProtectVideo: (value: boolean) => void;
   setCountry: (value: string) => void;
@@ -190,6 +196,17 @@ export interface SettingsLocalStore {
   ) => void;
   setDisplay: (value: Partial<SettingsLocalStore['display']>) => void;
   setData: (value: Partial<SettingsLocalStore['data']>) => void;
+  setConversationInfo: (
+    value:
+      | {
+          type: 'add';
+          payload: SettingsLocalStore['conversationInfo'][0];
+        }
+      | {
+          type: 'delete';
+          payload: Pick<SettingsLocalStore['conversationInfo'][0], 'id'>;
+        }
+  ) => void;
 }
 
 const useSettingsLocalStore = create<SettingsLocalStore>()(
@@ -318,6 +335,7 @@ const useSettingsLocalStore = create<SettingsLocalStore>()(
           saver: false,
           autoplay: 'cellular',
         },
+        conversationInfo: [],
         setProtectPost: (protectPost) => set(() => ({ protectPost })),
         setProtectVideo: (protectVideo) => set(() => ({ protectVideo })),
         setCountry: (country) => set(() => ({ country })),
@@ -490,6 +508,38 @@ const useSettingsLocalStore = create<SettingsLocalStore>()(
               ...value,
             },
           })),
+        setConversationInfo: ({ type, payload }) =>
+          set((state) => {
+            switch (type) {
+              case 'add': {
+                const findIndex = state.conversationInfo.findIndex(
+                  (c) => c.id === payload.id
+                );
+                if (findIndex > -1) {
+                  const copy: SettingsLocalStore['conversationInfo'] = [
+                    ...state.conversationInfo,
+                  ];
+                  copy[findIndex] = {
+                    ...state.conversationInfo[findIndex],
+                    snooze: payload.snooze,
+                    timestamp: payload.timestamp,
+                  };
+                  return { conversationInfo: copy };
+                } else {
+                  return {
+                    conversationInfo: [...state.conversationInfo, payload],
+                  };
+                }
+              }
+              case 'delete': {
+                return {
+                  conversationInfo: state.conversationInfo.filter(
+                    (c) => c.id !== payload.id
+                  ),
+                };
+              }
+            }
+          }),
       }),
       {
         name: 'settings-local-store',
@@ -613,6 +663,10 @@ export const DisplaySelector = (state: SettingsLocalStore) => ({
 export const DataSelector = (state: SettingsLocalStore) => ({
   data: state.data,
   setData: state.setData,
+});
+export const ConversationInfoSelector = (state: SettingsLocalStore) => ({
+  conversationInfo: state.conversationInfo,
+  setConverstationInfo: state.setConversationInfo,
 });
 
 export default useSettingsLocalStore;

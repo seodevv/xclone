@@ -67,7 +67,7 @@ export default function ReactionButton({
             type: 'set',
             payload: {
               flag: true,
-              status: 'repost',
+              status: { type: 'repost', post, sessionid: session.user.email },
               position: {
                 x,
                 y: y + window.scrollY,
@@ -75,7 +75,6 @@ export default function ReactionButton({
                 height,
                 target: e.currentTarget,
               },
-              post,
             },
           });
         } else {

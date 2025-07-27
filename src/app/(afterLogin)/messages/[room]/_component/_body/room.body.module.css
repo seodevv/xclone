@@ -1,0 +1,38 @@
+.body {
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+  width: 100%;
+  max-width: 600px;
+}
+.message {
+  margin-top: -53px;
+  padding-top: 53px;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+  height: 100%;
+  background-color: rgb(var(--background-start-rgb));
+  overflow-x: hidden;
+}
+.content {
+  margin-top: -53px;
+  padding-top: 53px;
+  display: flex;
+  flex-direction: column;
+  flex-basis: 1px;
+  flex-grow: 1;
+  height: 100%;
+  background-color: rgb(var(--background-start-rgb));
+  overflow-x: hidden;
+}
+.pad {
+  margin: 0 auto;
+  padding: 0 16px;
+  width: 100%;
+}
+.minHeight {
+  min-height: 698px;
+}

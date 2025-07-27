@@ -2,18 +2,19 @@
 
 import PostSubMenuOther from '@/app/(afterLogin)/_component/_subMenu/PostSubMenuOther';
 import PostSubMenuSession from '@/app/(afterLogin)/_component/_subMenu/PostSubMenuSession';
-import { SubMenuContext } from '@/app/(afterLogin)/_provider/SubMenuProvider';
-import { useSession } from 'next-auth/react';
-import { useContext } from 'react';
+import { AdvancedPost } from '@/model/Post';
 
-export default function PostSubMenuSelector() {
-  const { data: session } = useSession();
-  const { menu } = useContext(SubMenuContext);
-  const isOwn = session?.user?.email === menu.post?.User.id;
+interface Props {
+  post: AdvancedPost;
+  sessionid: string;
+}
+
+export default function PostSubMenuSelector({ post, sessionid }: Props) {
+  const isOwn = sessionid === post.userid;
 
   if (isOwn) {
-    return <PostSubMenuSession />;
+    return <PostSubMenuSession post={post} sessionid={sessionid} />;
   }
 
-  return <PostSubMenuOther />;
+  return <PostSubMenuOther post={post} />;
 }

@@ -65,6 +65,7 @@ export default function UserPosts({
           </div>
         )}
         <PageLoading
+          type="next"
           hasNextPage={hasNextPage}
           isFetchingNextPage={isFetchingNextPage}
           isError={isError}

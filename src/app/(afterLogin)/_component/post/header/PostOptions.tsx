@@ -7,6 +7,7 @@ import { Mode } from '@/app/(afterLogin)/_component/post/Post';
 import { MouseEventHandler, useContext } from 'react';
 import { AdvancedPost } from '@/model/Post';
 import { SubMenuContext } from '@/app/(afterLogin)/_provider/SubMenuProvider';
+import { useSession } from 'next-auth/react';
 
 interface Props {
   mode?: Mode;
@@ -15,16 +16,20 @@ interface Props {
 
 export default function PostOptions({ mode, post }: Props) {
   const { dispatchMenu } = useContext(SubMenuContext);
+  const { data: session } = useSession();
 
   const onClickOption: MouseEventHandler<HTMLButtonElement> = (e) => {
     e.preventDefault();
     e.stopPropagation();
+
+    if (!session?.user?.email) return;
+
     const { x, y, width, height } = e.currentTarget.getBoundingClientRect();
     dispatchMenu({
       type: 'set',
       payload: {
         flag: true,
-        status: 'post',
+        status: { type: 'post', post, sessionid: session.user.email },
         position: {
           x,
           y: y + window.scrollY,
@@ -32,7 +37,6 @@ export default function PostOptions({ mode, post }: Props) {
           height,
           target: e.currentTarget,
         },
-        post,
       },
     });
   };

@@ -1,0 +1,14 @@
+.selectedUser {
+  max-width: calc(100% - 16px);
+  min-height: 32px;
+}
+.selectButton:hover {
+  background: rgba(29, 155, 240, 0.1);
+}
+.selectButton:active {
+  background: rgba(29, 155, 240, 0.2);
+}
+.profile {
+  width: 24px;
+  height: 24px;
+}

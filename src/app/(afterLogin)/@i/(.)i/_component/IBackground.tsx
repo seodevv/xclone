@@ -8,29 +8,34 @@ import { CSSProperties, MouseEventHandler, useContext, useRef } from 'react';
 import { useRouter, useSearchParams } from 'next/navigation';
 import useHistoryStore from '@/app/(afterLogin)/_store/HistoryStore';
 import { PathRecordContext } from '@/app/_provider/PathRecordProvider';
+import XMarkSvg from '@/app/_svg/tweet/XMarkSvg';
 
 interface Props {
   className?: string;
   style?: CSSProperties;
   children?: React.ReactNode;
-  size?: 'small' | 'medium' | 'large';
+  color?: 'default' | 'none';
+  size?: 'small' | 'medium' | 'large' | 'none';
   height?: 'auto';
   overflow?: 'auto';
   prevPath?: string;
   onClick?: () => void;
   noHidden?: boolean;
+  xmark?: boolean;
 }
 
 export default function IBackground({
   className,
   style,
   children,
+  color = 'default',
   size = 'medium',
   height,
   overflow,
   prevPath = '/home',
   onClick,
   noHidden,
+  xmark,
 }: Props) {
   const router = useRouter();
   const searchParams = useSearchParams();
@@ -57,13 +62,21 @@ export default function IBackground({
     if (!record.current.flag) return;
     // if (Date.now() - record.current.timestamp > 500) return;
 
+    routerBack();
+  };
+
+  const onClickXmark = () => {
+    routerBack();
+  };
+
+  const routerBack = () => {
+    if (typeof onClick === 'function') {
+      return onClick();
+    }
+
     if (prevPath && ctx.prevPath === ctx.path) {
       router.push(prevPath);
       return;
-    }
-
-    if (typeof onClick === 'function') {
-      return onClick();
     }
 
     if (stack < 0) {
@@ -77,15 +90,50 @@ export default function IBackground({
 
   return (
     <main
-      className={cx(styles.background, !from && utils.fadeIn, className)}
+      className={cx(
+        styles.background,
+        color === 'default' && styles.bg_default,
+        !from && utils.fadeIn,
+        className
+      )}
       style={style}
       onMouseDown={onMouseDown}
       onMouseUp={onMouseUp}
     >
+      {xmark && (
+        <div
+          className={cx(
+            utils.pa_12,
+            utils.absolute,
+            utils.t_l_0,
+            utils.zIndex_xxxl,
+            utils.cursor_point
+          )}
+        >
+          <button
+            className={cx(
+              utils.w_min_36,
+              utils.h_min_36,
+              utils.bg_gray_a_75,
+              utils.hover_bg_gray_a_75,
+              utils.active_bg_gray_a_75,
+              utils.backdrop_blur_s,
+              utils.bd_none,
+              utils.br_9999,
+              utils.transit_basic,
+              utils.cursor_point
+            )}
+            onClick={onClickXmark}
+          >
+            <XMarkSvg theme="white" width={20} />
+          </button>
+        </div>
+      )}
       <HtmlOverflowHidden noHidden={noHidden} />
       <div
         className={cx(
-          styles.modal,
+          utils.d_flexColumn,
+          size !== 'none' && styles.modal,
           styles[size],
           styles[`height-${height}`],
           overflow === 'auto' && styles.auto

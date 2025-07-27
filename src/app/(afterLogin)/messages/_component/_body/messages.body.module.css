@@ -1,0 +1,24 @@
+.options {
+  top: 8px;
+  right: 8px;
+}
+.option {
+  fill: rgb(var(--link-rgb));
+}
+.option:hover {
+  background-color: rgba(29, 155, 240, 0.1);
+  fill: rgb(var(--link-primary-rgb));
+}
+.option:active {
+  background-color: rgba(29, 155, 240, 0.2);
+}
+
+.active {
+  background-color: rgb(32, 35, 39);
+}
+.mouseOver {
+  background-color: rgba(var(--link-primary-rgb), 0.1);
+}
+.mouseOver_2 {
+  background-color: rgb(22, 24, 28);
+}

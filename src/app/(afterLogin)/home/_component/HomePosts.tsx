@@ -30,6 +30,7 @@ export default function HomePosts() {
         })
       )}
       <PageLoading
+        type="next"
         hasNextPage={hasNextPage}
         isFetchingNextPage={isFetchingNextPage}
         isError={isError}

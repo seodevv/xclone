@@ -6,18 +6,24 @@ import { useQueryClient } from '@tanstack/react-query';
 import { useContext } from 'react';
 import useAlterModal from '@/app/_hooks/useAlterModal';
 import ConfirmModal from '@/app/(afterLogin)/_component/alter/ConfirmModal';
+import { AdvancedPost } from '@/model/Post';
 
-export default function UnPostModal() {
+interface Props {
+  post: AdvancedPost;
+  sessionid: string;
+}
+
+export default function UnPostModal({ post, sessionid }: Props) {
   const { alterMessage } = useAlterModal();
   const queryClient = useQueryClient();
   const unPostMutation = useUnPostMutation();
-  const {
-    menu: { post },
-    dispatchMenu,
-  } = useContext(SubMenuContext);
+  const { dispatchMenu, close } = useContext(SubMenuContext);
 
   const closeModal = () => {
-    dispatchMenu({ type: 'set', payload: { status: 'post' } });
+    dispatchMenu({
+      type: 'set',
+      payload: { status: { type: 'post', post, sessionid } },
+    });
   };
 
   const unPostHandler = () => {
@@ -31,7 +37,7 @@ export default function UnPostModal() {
       {
         onSuccess: () => {
           alterMessage('Your post was deleted');
-          dispatchMenu({ type: 'reset' });
+          close();
         },
         onError: (error) => {
           console.error(error);

@@ -36,6 +36,7 @@ export default function LikePosts({ username }: Props) {
         ))}
         {isEmpty && <NoMedia type="like" username={username} />}
         <PageLoading
+          type="next"
           hasNextPage={hasNextPage}
           isFetchingNextPage={isFetchingNextPage}
           isError={isError}

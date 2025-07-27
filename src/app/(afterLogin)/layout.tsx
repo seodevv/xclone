@@ -20,6 +20,7 @@ import PopUpModal from '@/app/(afterLogin)/_component/_popup/PopUpModal';
 import ConfirmProvider from '@/app/(afterLogin)/_provider/ConfirmProvider';
 import RightSectionController from '@/app/(afterLogin)/_component/_layout/RightSectionController';
 import MainSectionController from '@/app/(afterLogin)/_component/_layout/MainSectionController';
+import RoomsNotificationsBoundary from '@/app/(afterLogin)/_boundary/RoomsNotificationsBoundary';
 
 interface Props {
   children: ReactNode;
@@ -41,13 +42,15 @@ export default async function AfterLoginLayout({
         <ReactQueryProvider>
           <ViewportProvider>
             <ConfirmProvider>
-              <SubMenuProvider>
+              <SubMenuProvider session={session}>
                 <div className={style.container}>
                   <header className={style.leftSectionWrapper}>
                     <section className={style.leftSection}>
                       <div className={style.leftSectionFixed}>
                         <XLogo session={session} />
-                        <NavMenu session={session} />
+                        <RoomsNotificationsBoundary>
+                          <NavMenu session={session} />
+                        </RoomsNotificationsBoundary>
                         <Logout />
                       </div>
                     </section>

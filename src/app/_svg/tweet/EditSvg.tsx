@@ -5,19 +5,25 @@ import cx from 'classnames';
 interface Props {
   className?: string;
   style?: CSSProperties;
+  theme?: 'default' | 'white' | 'primary' | 'inherit';
   width?: number;
-  white?: boolean;
 }
 
 export default function EditSvg({
   className,
   style,
+  theme = 'default',
   width = 18,
-  white,
 }: Props) {
   return (
     <svg
-      className={cx(styles.defaultSvg, white && styles.white, className)}
+      className={cx(
+        theme === 'default' && styles.defaultSvg,
+        theme === 'white' && styles.white,
+        theme === 'primary' && styles.primary,
+        theme === 'inherit' && styles.inherit,
+        className
+      )}
       style={style}
       width={width}
       viewBox="0 0 24 24"

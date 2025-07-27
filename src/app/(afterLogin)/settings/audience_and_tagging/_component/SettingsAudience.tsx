@@ -34,7 +34,7 @@ export default function SettingsAudience() {
           </Link>
         </>
       ),
-      defaultVlaue: protectPost,
+      defaultValue: protectPost,
       onCheck: (check) => {
         confirmModal.dispatchModal({
           type: 'setCustom',
@@ -43,11 +43,11 @@ export default function SettingsAudience() {
             sub: 'This will make them visible only to your X followers.',
             btnText: 'Protect',
             onClickCancle: () => {
-              confirmModal.reset();
+              confirmModal.close();
             },
             onClickConfirm: () => {
               setProtectPost(check);
-              confirmModal.reset();
+              confirmModal.close();
             },
           },
         });
@@ -69,7 +69,7 @@ export default function SettingsAudience() {
           </Link>
         </>
       ),
-      defaultVlaue: protectVideo,
+      defaultValue: protectVideo,
       onCheck: (check) => {
         setProtectVideo(check);
       },
@@ -94,7 +94,7 @@ export default function SettingsAudience() {
           <IdentifierCheckBox
             title={checkBox.title}
             sub={checkBox.sub}
-            defaultValue={checkBox.defaultVlaue}
+            defaultValue={checkBox.defaultValue}
             onCheck={checkBox.onCheck}
             onUnCheck={checkBox.onUnCheck}
           />

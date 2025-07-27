@@ -26,7 +26,7 @@ export default function ListsShowSubMenu({ lists }: Props) {
     ? `Top posts from this List may show up in your For you timeline.`
     : `Top posts from this List will no longer show up in your For you timeline.`;
 
-  const { dispatchMenu } = useContext(SubMenuContext);
+  const { close } = useContext(SubMenuContext);
   const { alterMessage } = useAlterModal();
   const queryClient = useQueryClient();
   const listsUnShowMutation = useListsUnShowMutation();
@@ -49,7 +49,7 @@ export default function ListsShowSubMenu({ lists }: Props) {
               ? 'Top posts from this List will no longer show up in For you.'
               : 'Top posts from this List may now show up in For you.'
           );
-          dispatchMenu({ type: 'reset' });
+          close();
         },
         onError: () => {
           alterMessage('something is wrong. please try again.');

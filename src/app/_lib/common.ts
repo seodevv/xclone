@@ -120,6 +120,16 @@ export const getLastDay = (date: Date) => {
   return temp.getDate();
 };
 
+export const DAY_EN = [
+  'Sunday',
+  'Monday',
+  'Tuesday',
+  'Wednesday',
+  'Thursday',
+  'Friday',
+  'Saturday',
+];
+
 export const MONTH_EN = [
   'January',
   'February',
@@ -156,3 +166,81 @@ export function isSingleData<T, K>(
 
 export const IMAGE_DEFAULT_PROFILE = generateImagePath('default_profile.png');
 export const IMAGE_DEFAULT_LISTS = generateImagePath('default_lists.png');
+
+export function generateStringToNumberHash(str: string) {
+  let hash = 0;
+  let chr;
+  if (str.length === 0) return hash;
+  for (let i = 0; i < str.length; i++) {
+    chr = str.charCodeAt(i);
+    hash = (hash << 5) - hash + chr;
+    hash |= 0; // Convert to 32bit integer
+  }
+
+  if (hash < 0) return Math.abs(hash);
+  return hash;
+}
+
+export const hashString = (str: string) => {
+  const salt = 'secret';
+  const textToChars = (text: string) =>
+    text.split('').map((c) => c.charCodeAt(0));
+  const byteHex = (n: number) => ('0' + Number(n).toString(16)).substr(-2);
+  const applySaltToChar = (code: number) =>
+    textToChars(salt).reduce((a, b) => a ^ b, code);
+
+  return str
+    .split('')
+    .map((v) => v.charCodeAt(0))
+    .map(applySaltToChar)
+    .map(byteHex)
+    .join('');
+};
+
+export const unHashString = (encoded: string) => {
+  const salt = 'secret';
+  const textToChars = (text: string) =>
+    text.split('').map((c) => c.charCodeAt(0));
+  const applySaltToChar = (code: number) =>
+    textToChars(salt).reduce((a, b) => a ^ b, code);
+
+  return encoded
+    .match(/.{1,2}/g)!
+    .map((hex) => parseInt(hex, 16))
+    .map(applySaltToChar)
+    .map((charCode) => String.fromCharCode(charCode))
+    .join('');
+};
+
+export const encryptRoomId = (senderId: string, receiverId: string) => {
+  const a = hashString(senderId);
+  const b = hashString(receiverId);
+  return [a, b].sort().join('-');
+};
+
+export const decryptRoomId = ({
+  userId,
+  roomId,
+}: {
+  userId: string;
+  roomId: string;
+}) => {
+  const [a, b] = roomId.split('-');
+  const u1 = unHashString(a);
+  const u2 = unHashString(b);
+  const receiverId = userId === u1 ? u2 : u1;
+  return receiverId;
+};
+
+export function dataURLtoFile(dataurl: string, filename: string) {
+  let arr = dataurl.split(',');
+  let mime = arr[0].match(/:(.*?);/)?.at(1);
+  let bstr = atob(arr[arr.length - 1]);
+  let n = bstr.length;
+  let u8arr = new Uint8Array(n);
+
+  while (n--) {
+    u8arr[n] = bstr.charCodeAt(n);
+  }
+  return new File([u8arr], filename, { type: mime });
+}

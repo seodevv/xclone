@@ -1,5 +1,6 @@
 import IBackground from '@/app/(afterLogin)/@i/(.)i/_component/IBackground';
 import IHeader from '@/app/(afterLogin)/@i/(.)i/_component/IHeader';
+import XLogoHeader from '@/app/(afterLogin)/@i/(.)i/_component/XLogoHeader';
 import IFlowVerifyAccountController from '@/app/(afterLogin)/@i/(.)i/flow/verify_account_ownership/_component/IFlowVerifyAccountController';
 import MyProfileHydrationBoundary from '@/app/(afterLogin)/_boundary/MyProfileHydrationBoundary';
 import { Metadata } from 'next';
@@ -13,7 +14,9 @@ export default function IFlowVerifyAccountSlot() {
   return (
     <MyProfileHydrationBoundary>
       <IBackground prevPath={prevPath}>
-        <IHeader prevPath={prevPath} noBtn />
+        <IHeader prevPath={prevPath} noBtn>
+          <XLogoHeader />
+        </IHeader>
         <IFlowVerifyAccountController />
       </IBackground>
     </MyProfileHydrationBoundary>

@@ -11,7 +11,7 @@ import SettingsVerifyPassword from '@/app/(afterLogin)/settings/_component/Setti
 
 export default function SettingsContactsDashboard() {
   const [verified, setVerified] = useState(false);
-  const { dispatchModal, reset } = useContext(ConfirmContext);
+  const { dispatchModal, close } = useContext(ConfirmContext);
   const inform = (
     <>
       These are the contacts that you have imported from your mobile devices.
@@ -39,10 +39,10 @@ export default function SettingsContactsDashboard() {
         btnText: 'Remove',
         btnTheme: 'red',
         onClickCancle: () => {
-          reset();
+          close();
         },
         onClickConfirm: () => {
-          reset();
+          close();
         },
       },
     });

@@ -12,17 +12,19 @@ import ListsSvg from '@/app/_svg/post/ListsSvg';
 import MuteSvg from '@/app/_svg/post/MuteSvg';
 import NotInterestedSvg from '@/app/_svg/post/NotInterestedSvg';
 import ReportSvg from '@/app/_svg/post/ReportSvg';
+import { AdvancedPost } from '@/model/Post';
 import { useContext } from 'react';
 
 interface Props {
+  post: AdvancedPost;
   width?: number;
 }
 
-export default function PostSubMenuOther({ width = 18.75 }: Props) {
-  const { menu, dispatchMenu } = useContext(SubMenuContext);
+export default function PostSubMenuOther({ post, width = 18.75 }: Props) {
+  const { close } = useContext(SubMenuContext);
 
   const closeMenu = () => {
-    dispatchMenu({ type: 'reset' });
+    close();
   };
 
   return (
@@ -54,7 +56,7 @@ export default function PostSubMenuOther({ width = 18.75 }: Props) {
       />
       <SubMenu
         type="link"
-        href={`/${menu.post?.User.id}/status/${menu.post?.postid}/quotes`}
+        href={`/${post.userid}/status/${post.postid}/quotes`}
         title="View post engagements"
         svg={<ViewSvg width={width} />}
         onClick={closeMenu}

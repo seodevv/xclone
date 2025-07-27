@@ -13,6 +13,8 @@ import {
 interface Props {
   className?: string;
   style?: CSSProperties;
+  theme?: 'default' | 'white' | 'primary';
+  width?: number;
   onChange?: ChangeEventHandler<HTMLInputElement>;
   disabled?: boolean;
 }
@@ -22,7 +24,7 @@ export interface FileRef {
 }
 
 const FileUploader = forwardRef<FileRef, Props>(
-  ({ className, onChange, style, disabled }, ref) => {
+  ({ className, style, theme, width = 20, onChange, disabled }, ref) => {
     const imageRef = useRef<HTMLInputElement>(null);
 
     const onClickUpload: MouseEventHandler<HTMLButtonElement> = (e) => {
@@ -58,7 +60,7 @@ const FileUploader = forwardRef<FileRef, Props>(
           onClick={onClickUpload}
           disabled={disabled}
         >
-          <FileSvg />
+          <FileSvg theme={theme} width={width} />
         </button>
       </div>
     );

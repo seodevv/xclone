@@ -48,6 +48,7 @@ export default function ListsRecommends({ more }: Props) {
         {more && <RecommendsMore />}
         {!more && (
           <PageLoading
+            type="next"
             hasNextPage={hasNextPage}
             isFetchingNextPage={isFetchingNextPage}
             isError={isError}

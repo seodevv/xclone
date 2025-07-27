@@ -5,6 +5,7 @@ import { SubMenuContext } from '@/app/(afterLogin)/_provider/SubMenuProvider';
 import utils from '@/app/utility.module.css';
 import cx from 'classnames';
 import {
+  CSSProperties,
   MouseEventHandler,
   useContext,
   useLayoutEffect,
@@ -14,11 +15,26 @@ import {
 import useViewport from '@/app/(afterLogin)/_hooks/useViewport';
 
 interface Props {
-  position?: 'left' | 'center' | 'right';
+  className?: string;
+  style?: CSSProperties;
+  direction?: 'row' | 'column';
+  position?:
+    | 'left'
+    | 'center'
+    | 'right'
+    | 'top-left'
+    | 'top-center'
+    | 'top-right'
+    | 'bottom-left'
+    | 'bottom-center'
+    | 'bottom-right';
   children?: React.ReactNode;
 }
 
 export default function SubMenuWrapper({
+  className,
+  style,
+  direction = 'column',
   position = 'center',
   children,
 }: Props) {
@@ -28,6 +44,7 @@ export default function SubMenuWrapper({
       position: { x, y, width, height, target },
     },
     dispatchMenu,
+    close,
   } = useContext(SubMenuContext);
   const [client, setClient] = useState({ width: 0, height: 0 });
   const [over, setOver] = useState({ x: false, y: false });
@@ -36,16 +53,35 @@ export default function SubMenuWrapper({
   let minusX = client.width - width;
   switch (position) {
     case 'center':
+    case 'top-center':
+    case 'bottom-center':
       minusX = minusX / 2;
       break;
+
     case 'right':
+    case 'top-right':
+    case 'bottom-right':
       minusX = 0;
+      break;
+  }
+
+  let minusY = 0;
+  switch (position) {
+    case 'top-left':
+    case 'top-center':
+    case 'top-right':
+      minusY = client.height;
+      break;
+    case 'bottom-left':
+    case 'bottom-center':
+    case 'bottom-right':
+      minusY = -height;
       break;
   }
 
   const onClickOutSide: MouseEventHandler<HTMLDivElement> = (e) => {
     if (e.target === e.currentTarget) {
-      dispatchMenu({ type: 'reset' });
+      close();
     }
   };
 
@@ -76,7 +112,7 @@ export default function SubMenuWrapper({
   }, [viewWidth, viewHeight, dispatchMenu, target, client.height]);
 
   return (
-    <div className={styles.background}>
+    <div className={cx(styles.background)}>
       <div
         className={cx(utils.fixed, utils.t_r_b_l_0)}
         onClick={onClickOutSide}
@@ -89,12 +125,21 @@ export default function SubMenuWrapper({
             over.y ? utils.fadeIn : utils.maxHeight
           )}
           style={{
-            top: y,
+            top: y - minusY,
             left: x - minusX,
           }}
         >
           <div className={utils.relative}>
-            <div ref={menuRef}>{children}</div>
+            <div
+              ref={menuRef}
+              className={cx(
+                direction === 'row' ? utils.d_flexRow : utils.d_flexColumn,
+                className
+              )}
+              style={style}
+            >
+              {children}
+            </div>
           </div>
         </div>
       </div>

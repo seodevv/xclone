@@ -1,10 +1,12 @@
 'use client';
 
+import utils from '@/app/utility.module.css';
+import cx from 'classnames';
 import HighlightModal from '@/app/(afterLogin)/_component/alter/HighlightModal';
 import RepostSubMenu from '@/app/(afterLogin)/_component/_subMenu/RepostSubMenu';
 import UnPinModal from '@/app/(afterLogin)/_component/alter/UnPinModal';
 import { AdvancedPost } from '@/model/Post';
-import { createContext, Dispatch, Reducer, useReducer } from 'react';
+import { createContext, Dispatch, Reducer, useReducer, useState } from 'react';
 import PostSubMenuSelector from '@/app/(afterLogin)/_component/_subMenu/PostSubMenuSelector';
 import WhoCanReply from '@/app/(afterLogin)/_component/_subMenu/WhoCanReply';
 import UnPostModal from '@/app/(afterLogin)/_component/alter/UnPostModal';
@@ -12,29 +14,58 @@ import SearchListsOptionsSubMenu from '@/app/(afterLogin)/_component/_subMenu/Se
 import { AdvancedLists } from '@/model/Lists';
 import ListsShareSubMenu from '@/app/(afterLogin)/_component/_subMenu/ListsShareSubMenu';
 import ListsShowSubMenu from '@/app/(afterLogin)/_component/_subMenu/ListsShowSubMenu';
+import RoomSubMenu from '@/app/(afterLogin)/_component/_subMenu/RoomSubMenu';
+import { AdvancedMessages } from '@/model/Message';
+import { Session } from 'next-auth';
+import MessageReactionEditSubMenu from '@/app/(afterLogin)/_component/_subMenu/MessageReactionEditSubMenu';
+import MessageOptionSubMenu from '@/app/(afterLogin)/_component/_subMenu/MessageOptionSubMenu';
+import MessageReactionInfoSubMenu from '@/app/(afterLogin)/_component/_subMenu/MessageReactionInfoSubMenu';
 
 interface State {
   status:
-    | 'idle'
-    | 'post'
-    | 'repost'
-    | 'delete'
-    | 'highlight'
-    | 'unPin'
-    | 'whoCanReply'
-    | 'searchListsOption'
-    | 'listsShare'
-    | 'listsShow';
+    | {
+        type: 'idle';
+      }
+    | {
+        type:
+          | 'post'
+          | 'delete'
+          | 'repost'
+          | 'highlight'
+          | 'unPin'
+          | 'whoCanReply';
+        post: AdvancedPost;
+        sessionid: string;
+      }
+    | { type: 'lists_search'; sessionid: string }
+    | { type: 'lists_share' }
+    | { type: 'lists_show'; lists: AdvancedLists }
+    | { type: 'room' }
+    | { type: 'message_option'; message: AdvancedMessages }
+    | {
+        type: 'message_reaction_add';
+        message: AdvancedMessages;
+        sessionid: string;
+        callback: (emoji: string, selected: boolean) => void;
+      }
+    | {
+        type: 'message_reaction_info';
+        message: AdvancedMessages;
+        sessionid: string;
+        callback: (reaction: AdvancedMessages['React'][0]) => void;
+      }
+    | {
+        type: 'message_notification';
+        callback: (time: '1h' | '8h' | '1w' | 'forever') => void;
+      };
   flag: boolean;
   position: {
     x: number;
     y: number;
     width: number;
     height: number;
-    target?: HTMLButtonElement;
+    target?: Element;
   };
-  post?: AdvancedPost;
-  lists?: AdvancedLists;
 }
 type Action =
   | { type: 'set'; payload: Partial<State> }
@@ -43,10 +74,12 @@ type Action =
 interface ISubMenuContext {
   menu: State;
   dispatchMenu: Dispatch<Action>;
+  close: () => void;
+  hide: (flag: boolean) => void;
 }
 
 const initialState: State = {
-  status: 'idle',
+  status: { type: 'idle' },
   flag: false,
   position: {
     x: 0,
@@ -68,31 +101,99 @@ const reducer: Reducer<State, Action> = (state, action) => {
 export const SubMenuContext = createContext<ISubMenuContext>({
   menu: initialState,
   dispatchMenu: () => {},
+  close: () => {},
+  hide: () => {},
 });
 
 interface Props {
   children: React.ReactNode;
+  session: Session | null;
 }
 
 export default function SubMenuProvider({ children }: Props) {
   const [menu, dispatchMenu] = useReducer(reducer, initialState);
+  const [visible, setVisible] = useState(true);
+
+  const close = () => {
+    dispatchMenu({ type: 'reset' });
+    setVisible(true);
+  };
+
+  const hide = (flag: boolean) => {
+    setVisible(!flag);
+  };
 
   return (
-    <SubMenuContext.Provider value={{ menu, dispatchMenu }}>
+    <SubMenuContext.Provider value={{ menu, dispatchMenu, close, hide }}>
       {children}
-      {menu.flag && menu.status === 'repost' && <RepostSubMenu />}
-      {menu.flag && menu.status === 'post' && <PostSubMenuSelector />}
-      {menu.flag && menu.status === 'delete' && <UnPostModal />}
-      {menu.flag && menu.status === 'highlight' && <HighlightModal />}
-      {menu.flag && menu.status === 'unPin' && <UnPinModal />}
-      {menu.flag && menu.status === 'whoCanReply' && <WhoCanReply />}
-      {menu.flag && menu.status === 'searchListsOption' && (
-        <SearchListsOptionsSubMenu />
-      )}
-      {menu.flag && menu.status === 'listsShare' && <ListsShareSubMenu />}
-      {menu.flag && menu.status === 'listsShow' && menu.lists && (
-        <ListsShowSubMenu lists={menu.lists} />
-      )}
+      <nav
+        className={cx(
+          visible ? utils.visible : utils.invisible,
+          visible ? utils.opacity_1 : utils.opacity_0,
+          utils.transit_visibility
+        )}
+      >
+        {menu.flag && menu.status.type === 'post' && (
+          <PostSubMenuSelector
+            post={menu.status.post}
+            sessionid={menu.status.sessionid}
+          />
+        )}
+        {menu.flag && menu.status.type === 'repost' && (
+          <RepostSubMenu
+            post={menu.status.post}
+            sessionid={menu.status.sessionid}
+          />
+        )}
+        {menu.flag && menu.status.type === 'delete' && (
+          <UnPostModal
+            post={menu.status.post}
+            sessionid={menu.status.sessionid}
+          />
+        )}
+        {menu.flag && menu.status.type === 'highlight' && (
+          <HighlightModal
+            post={menu.status.post}
+            sessionid={menu.status.sessionid}
+          />
+        )}
+        {menu.flag && menu.status.type === 'unPin' && (
+          <UnPinModal
+            post={menu.status.post}
+            sessionid={menu.status.sessionid}
+          />
+        )}
+        {menu.flag && menu.status.type === 'whoCanReply' && (
+          <WhoCanReply post={menu.status.post} />
+        )}
+        {menu.flag && menu.status.type === 'lists_search' && (
+          <SearchListsOptionsSubMenu sessionid={menu.status.sessionid} />
+        )}
+        {menu.flag && menu.status.type === 'lists_share' && (
+          <ListsShareSubMenu />
+        )}
+        {menu.flag && menu.status.type === 'lists_show' && (
+          <ListsShowSubMenu lists={menu.status.lists} />
+        )}
+        {menu.flag && menu.status.type === 'room' && <RoomSubMenu />}
+        {menu.flag && menu.status.type === 'message_reaction_add' && (
+          <MessageReactionEditSubMenu
+            message={menu.status.message}
+            sessionid={menu.status.sessionid}
+            callback={menu.status.callback}
+          />
+        )}
+        {menu.flag && menu.status.type === 'message_option' && (
+          <MessageOptionSubMenu message={menu.status.message} />
+        )}
+        {menu.flag && menu.status.type === 'message_reaction_info' && (
+          <MessageReactionInfoSubMenu
+            message={menu.status.message}
+            sessionid={menu.status.sessionid}
+            callback={menu.status.callback}
+          />
+        )}
+      </nav>
     </SubMenuContext.Provider>
   );
 }

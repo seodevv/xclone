@@ -1,18 +1,19 @@
-import style from './_style/message.module.css';
-import Room from '@/app/(afterLogin)/messages/_component/Room';
+import styles from './messages.page.module.css';
+import NoMessages from '@/app/(afterLogin)/messages/_component/NoMessages';
+import { Metadata } from 'next';
 
-export default function MessagePage() {
+export const metadata: Metadata = {
+  title: 'Messages / XClone',
+};
+
+export default function MessagesPage() {
   return (
-    <main className={style.main}>
-      <div className={style.header}>
-        <h2>Message</h2>
-      </div>
-      {/* <Room />
-      <Room />
-      <Room />
-      <Room />
-      <Room />
-      <Room /> */}
-    </main>
+    <div className={styles.container}>
+      <NoMessages
+        title="Select a message"
+        sub="Choose from your existing conversations, start a new one, or just keep swimming."
+        linkText="New message"
+      />
+    </div>
   );
 }

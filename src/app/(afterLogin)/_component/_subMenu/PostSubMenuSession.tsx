@@ -14,26 +14,58 @@ import ListsSvg from '@/app/_svg/post/ListsSvg';
 import PinedSvg from '@/app/_svg/post/PinedSvg';
 import useAlterModal from '@/app/_hooks/useAlterModal';
 import useListsStore from '@/app/(afterLogin)/_store/ListsStore';
-import { usePathname } from 'next/navigation';
+import { AdvancedPost } from '@/model/Post';
 
 interface Props {
   width?: number;
+  post: AdvancedPost;
+  sessionid: string;
 }
 
-export default function PostSubMenuSession({ width = 18.75 }: Props) {
-  const pathname = usePathname();
-  const { alterMessage } = useAlterModal();
-  const {
-    menu: { post },
-    dispatchMenu,
-  } = useContext(SubMenuContext);
+export default function PostSubMenuSession({
+  width = 18.75,
+  post,
+  sessionid,
+}: Props) {
+  const { sendPrepareMessage } = useAlterModal();
+  const { dispatchMenu, close } = useContext(SubMenuContext);
   const setPostId = useListsStore((state) => state.setPostId);
 
   const closeMenu = () => {
-    dispatchMenu({ type: 'reset' });
+    close();
   };
-
-  if (!post) return null;
+  const onClickDelete = () => {
+    dispatchMenu({
+      type: 'set',
+      payload: { status: { type: 'delete', post, sessionid } },
+    });
+  };
+  const onClickPinned = () => {
+    if (!post.pinned) {
+      dispatchMenu({
+        type: 'set',
+        payload: { status: { type: 'highlight', post, sessionid } },
+      });
+    } else {
+      dispatchMenu({
+        type: 'set',
+        payload: { status: { type: 'unPin', post, sessionid } },
+      });
+    }
+  };
+  const onClickAddMember = () => {
+    setPostId(post.postid);
+    closeMenu();
+  };
+  const onClickWhoCanReply = () => {
+    dispatchMenu({
+      type: 'set',
+      payload: { status: { type: 'whoCanReply', post, sessionid } },
+    });
+  };
+  const onClickEmbedPost = () => {
+    sendPrepareMessage();
+  };
 
   return (
     <>
@@ -43,21 +75,13 @@ export default function PostSubMenuSession({ width = 18.75 }: Props) {
           type="div"
           title="Delete"
           svg={<DeleteSvg width={width} />}
-          onClick={() =>
-            dispatchMenu({ type: 'set', payload: { status: 'delete' } })
-          }
+          onClick={onClickDelete}
         />
         <SubMenu
           type="div"
           title={`${post.pinned ? 'UnPin' : 'Pin'} to your profile`}
           svg={<PinedSvg width={width} />}
-          onClick={() => {
-            if (!post.pinned) {
-              dispatchMenu({ type: 'set', payload: { status: 'highlight' } });
-            } else {
-              dispatchMenu({ type: 'set', payload: { status: 'unPin' } });
-            }
-          }}
+          onClick={onClickPinned}
         />
         <SubMenu
           type="link"
@@ -70,24 +94,16 @@ export default function PostSubMenuSession({ width = 18.75 }: Props) {
         <SubMenu
           type="link"
           href="/i/lists/add_member"
-          title={`Add/remove @${post?.User.id} from Lists`}
+          title={`Add/remove @${post.userid} from Lists`}
           svg={<ListsSvg width={width} />}
           scroll={false}
-          onClick={() => {
-            setPostId(post.postid);
-            closeMenu();
-          }}
+          onClick={onClickAddMember}
         />
         <SubMenu
           type="div"
           title="Change who can reply"
           svg={<ChatSvg width={width} />}
-          onClick={() =>
-            dispatchMenu({
-              type: 'set',
-              payload: { status: 'whoCanReply' },
-            })
-          }
+          onClick={onClickWhoCanReply}
         />
         <SubMenu
           type="link"
@@ -100,9 +116,7 @@ export default function PostSubMenuSession({ width = 18.75 }: Props) {
           type="div"
           title="Embed post"
           svg={<EmbedSvg width={width} />}
-          onClick={() =>
-            alterMessage('This feature is in preparation.', 'warning')
-          }
+          onClick={onClickEmbedPost}
         />
         <SubMenu
           type="div"

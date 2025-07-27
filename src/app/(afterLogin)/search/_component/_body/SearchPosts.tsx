@@ -39,6 +39,7 @@ export default function SearchPosts({ searchParams }: Props) {
           )
         )}
         <PageLoading
+          type="next"
           hasNextPage={hasNextPage}
           isFetchingNextPage={isFetchingNextPage}
           isError={isError}

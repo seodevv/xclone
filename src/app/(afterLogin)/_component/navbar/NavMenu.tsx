@@ -1,6 +1,8 @@
 'use client';
 
 import styles from './navMenu.module.css';
+import utils from '@/app/utility.module.css';
+import cx from 'classnames';
 import { usePathname, useSelectedLayoutSegment } from 'next/navigation';
 import Link from 'next/link';
 import { Session } from 'next-auth';
@@ -10,13 +12,14 @@ import MessageSvg from '@/app/_svg/navbar/MessageSvg';
 import ProfileSvg from '@/app/_svg/navbar/ProfileSvg';
 import SettingSvg from '@/app/_svg/navbar/SettingSvg';
 import TweetSvg from '@/app/_svg/navbar/TweetSvg';
-import cx from 'classnames';
 import { captialCase } from '@/app/_lib/common';
 import BookmarkSvg from '@/app/_svg/actionbuttons/BookmarkSvg';
 import useComposeStore from '@/app/(afterLogin)/_store/ComposeStore';
 import ListsSvg from '@/app/_svg/post/ListsSvg';
 import XLogoSvg from '@/app/_svg/logo/XLogoSvg';
 import BusinessSvg from '@/app/_svg/navbar/BusinessSvg';
+import Text from '@/app/_component/_text/Text';
+import NavMessagesBadge from '@/app/(afterLogin)/_component/navbar/NavMessagesBadge';
 
 interface Menu {
   title:
@@ -30,7 +33,7 @@ interface Menu {
     | 'business'
     | 'settings';
   link: string;
-  active: string[];
+  active: string[] | string;
   icon: JSX.Element;
   sessionRequired: boolean;
 }
@@ -61,7 +64,7 @@ export default function NavMenu({ session }: Props) {
     {
       title: 'messages',
       link: '/messages',
-      active: ['/messages'],
+      active: '/messages',
       icon: <MessageSvg width={width} />,
       sessionRequired: true,
     },
@@ -103,7 +106,7 @@ export default function NavMenu({ session }: Props) {
     {
       title: 'settings',
       link: '/settings',
-      active: ['/settings'],
+      active: '/settings',
       icon: <SettingSvg width={width} />,
       sessionRequired: false,
     },
@@ -116,12 +119,29 @@ export default function NavMenu({ session }: Props) {
           if (!session && menu.sessionRequired) {
             return null;
           }
-          const active = menu.active.includes(pathname);
+          const active = Array.isArray(menu.active)
+            ? menu.active.includes(pathname)
+            : typeof menu.active === 'string'
+            ? pathname.includes(menu.active)
+            : false;
           return (
             <li key={menu.link} className={styles.navList}>
-              <Link href={menu.link} scroll={false}>
+              <Link className={utils.relative} href={menu.link} scroll={false}>
                 <div className={styles.navPill}>
-                  <menu.icon.type {...menu.icon.props} active={active} white />
+                  <div
+                    className={cx(
+                      utils.relative,
+                      utils.d_flexRow,
+                      utils.flex_alignCenter
+                    )}
+                  >
+                    <menu.icon.type
+                      {...menu.icon.props}
+                      active={active}
+                      white
+                    />
+                    {menu.title === 'messages' && <NavMessagesBadge />}
+                  </div>
                   <div className={cx(styles.navTitle, active && styles.bold)}>
                     {captialCase(menu.title)}
                   </div>

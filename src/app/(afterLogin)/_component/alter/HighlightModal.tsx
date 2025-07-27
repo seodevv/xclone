@@ -12,11 +12,15 @@ import { useContext, useState } from 'react';
 import usePostPinnedMutation from '@/app/(afterLogin)/_hooks/usePostPinnedMutation';
 import { useQueryClient } from '@tanstack/react-query';
 import useAlterModal from '@/app/_hooks/useAlterModal';
+import { AdvancedPost } from '@/model/Post';
 
-interface Props {}
+interface Props {
+  post: AdvancedPost;
+  sessionid: string;
+}
 
-export default function HighlightModal({}: Props) {
-  const { menu, dispatchMenu } = useContext(SubMenuContext);
+export default function HighlightModal({ post, sessionid }: Props) {
+  const { dispatchMenu, close } = useContext(SubMenuContext);
   const [alter, setAlter] = useState(false);
   const queryClient = useQueryClient();
   const pinMutation = usePostPinnedMutation();
@@ -26,20 +30,20 @@ export default function HighlightModal({}: Props) {
     setAlter(true);
   };
   const onClickPin = () => {
-    const post = menu.post;
-    if (!post) return;
-
     pinMutation.mutate({
       method: 'post',
       post,
       queryClient,
     });
 
-    dispatchMenu({ type: 'reset' });
     alterMessage('Your post was pinned to your profile.');
+    close();
   };
   const onClickClose = () => {
-    dispatchMenu({ type: 'set', payload: { status: 'post' } });
+    dispatchMenu({
+      type: 'set',
+      payload: { status: { type: 'post', post, sessionid } },
+    });
   };
 
   return (
@@ -90,9 +94,7 @@ export default function HighlightModal({}: Props) {
                 href="/i/verified-choose"
                 scroll={false}
                 className={styles.link}
-                onClick={() => {
-                  dispatchMenu({ type: 'reset' });
-                }}
+                onClick={() => close()}
               >
                 Get Verified
               </Link>

@@ -6,28 +6,35 @@ import usePostPinnedMutation from '@/app/(afterLogin)/_hooks/usePostPinnedMutati
 import { useQueryClient } from '@tanstack/react-query';
 import useAlterModal from '@/app/_hooks/useAlterModal';
 import ConfirmModal from '@/app/(afterLogin)/_component/alter/ConfirmModal';
+import { AdvancedPost } from '@/model/Post';
 
-export default function UnPinModal() {
-  const { menu, dispatchMenu } = useContext(SubMenuContext);
+interface Props {
+  post: AdvancedPost;
+  sessionid: string;
+}
+
+export default function UnPinModal({ post, sessionid }: Props) {
+  const { dispatchMenu, close } = useContext(SubMenuContext);
   const { alterMessage } = useAlterModal();
   const unPinMutation = usePostPinnedMutation();
   const queryClient = useQueryClient();
 
   const backSubMenu = () => {
-    dispatchMenu({ type: 'set', payload: { status: 'post' } });
+    dispatchMenu({
+      type: 'set',
+      payload: { status: { type: 'post', post, sessionid } },
+    });
   };
 
   const onClickUnPin = () => {
-    if (!menu.post) return;
-
     unPinMutation.mutate({
       method: 'delete',
-      post: menu.post,
+      post,
       queryClient,
     });
 
-    dispatchMenu({ type: 'reset' });
     alterMessage('Your post was unpinned from your profile');
+    close();
   };
 
   return (

@@ -36,6 +36,7 @@ export default function UserFollowContent({ username, type }: Props) {
           page.data?.map((u) => <FollowRecommend key={u.id} user={u} isDesc />)
         )}
         <PageLoading
+          type="next"
           hasNextPage={hasNextPage}
           isFetchingNextPage={isFetchingNextPage}
           isError={isError}

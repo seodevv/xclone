@@ -1,0 +1,34 @@
+.container {
+  margin: 30px auto;
+  padding: 0 30px;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  max-width: 380px;
+}
+.title {
+  margin-bottom: 8px;
+}
+.sub {
+  margin-bottom: 27px;
+}
+.link {
+  margin: 0;
+  padding: 0 30px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  align-self: flex-start;
+  justify-content: center;
+  min-width: 49px;
+  min-height: 49px;
+  background: rgb(29, 155, 240);
+  border: 1px solid transparent;
+  border-radius: 9999px;
+  transition-duration: 200ms;
+  transition-property: background-color;
+  cursor: pointer;
+}
+.link {
+  background: rgb(26, 140, 216);
+}

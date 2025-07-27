@@ -9,19 +9,20 @@ interface SettingsStore {
   reset: () => void;
 }
 
+const inistialState = {
+  verified: false,
+  user: undefined,
+  protectPost: false,
+  protectVideo: false,
+};
+
 const useSettingsSessionStore = create<SettingsStore>()(
   devtools(
     persist(
       (set) => ({
         verified: false,
         setVerified: () => set(() => ({ verified: true })),
-        reset: () =>
-          set(() => ({
-            verified: false,
-            user: undefined,
-            protectPost: false,
-            protectVideo: false,
-          })),
+        reset: () => set(() => inistialState),
       }),
       {
         name: 'settings-store',

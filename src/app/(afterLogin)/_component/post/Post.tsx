@@ -12,7 +12,6 @@ import PostBody from './body/PostBody';
 import { CSSProperties } from 'react';
 import PostOptions from '@/app/(afterLogin)/_component/post/header/PostOptions';
 import PostPinned from '@/app/(afterLogin)/_component/post/header/PostPinned';
-import { usePathname } from 'next/navigation';
 
 export type Mode = 'post' | 'single' | 'comment' | 'compose';
 interface Props {
@@ -36,7 +35,6 @@ export default function Post({
   hasPinned,
 }: Props) {
   const { data: session } = useSession();
-  const pathname = usePathname();
   const data = post.Original && !post.quote ? post.Original : post;
   const isRepost = !!post.Original && !post.quote;
 

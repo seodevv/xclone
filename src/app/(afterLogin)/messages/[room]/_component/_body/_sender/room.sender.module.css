@@ -1,0 +1,17 @@
+.sender {
+  display: flex;
+  flex-direction: column;
+  background-color: rgb(var(--background-start-rgb));
+  border-top-color: rgb(var(--border-start-rgb));
+  border-top-width: 1px;
+  border-top-style: solid;
+}
+.progress {
+  height: 0.2rem;
+}
+.bg {
+  background: rgb(32, 35, 39);
+}
+.reply {
+  border-left: 4px solid rgb(214, 217, 219);
+}

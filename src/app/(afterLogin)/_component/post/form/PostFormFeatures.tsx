@@ -14,12 +14,15 @@ import FileUploader, {
   FileRef,
 } from '@/app/(afterLogin)/_component/upload/FileUploader';
 import GifPicker from '@/app/(afterLogin)/_component/gif/GifPicker';
-import EmojiSelector from '@/app/(afterLogin)/_component/emoji/EmojiSelector';
+import EmojiSelector, {
+  EmojiProps,
+} from '@/app/(afterLogin)/_component/emoji/EmojiSelector';
 import LocationSvg from '@/app/_svg/tweet/LocationSvg';
 import ProgressSvg from '@/app/_svg/tweet/ProgressSvg';
 import { MediaType } from '@/app/(afterLogin)/_component/post/form/PostForm';
 import useAlterModal from '@/app/_hooks/useAlterModal';
-import { getFileDataURL, getImageMeta } from '@/app/_lib/common';
+import { getFileDataURL, getImageMeta, splitEmoji } from '@/app/_lib/common';
+import { TenorImage } from 'gif-picker-react';
 
 interface Props {
   isComment?: boolean;
@@ -93,6 +96,29 @@ export default function PostFormFeature({
     }
     fileRef.current?.reset();
   };
+  const onSuccessGif = (gif: TenorImage) => {
+    if (typeof setImages === 'function') {
+      setImages((prev) => {
+        if (prev.length === 4) {
+          alterMessage('Please choose up to 4 photos, videos, or GIFs.');
+          return prev;
+        }
+        return [
+          ...prev,
+          { type: 'gif', link: gif.url, width: gif.width, height: gif.height },
+        ];
+      });
+    }
+  };
+  const onSuccessEmoji = (emoji: EmojiProps) => {
+    setContent((prev) => {
+      const a = splitEmoji(prev).splice(0, lastSelection).join('');
+      const b = splitEmoji(prev).splice(lastSelection).join('');
+      return a + emoji.native + b;
+    });
+    setLastSelection((prev) => prev + 1);
+  };
+
   const onClickLocation: MouseEventHandler<HTMLButtonElement> = (e) => {
     e.preventDefault();
     e.stopPropagation();
@@ -109,14 +135,12 @@ export default function PostFormFeature({
         />
         <GifPicker
           className={styles.funcButton}
-          setState={setImages}
+          onSuccess={onSuccessGif}
           disabled={images.length === 4}
         />
         <EmojiSelector
           className={styles.funcButton}
-          setState={setContent}
-          lastSelection={lastSelection}
-          setLastSelection={setLastSelection}
+          onSuccess={onSuccessEmoji}
           onFocus={onFocusEmoji}
         />
         <button

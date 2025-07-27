@@ -46,6 +46,25 @@
 .tweet svg {
   display: none;
 }
+.badge {
+  position: absolute;
+  top: -6px;
+  right: -4px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-width: 18px;
+  height: 18px;
+  background-color: rgb(29, 155, 240);
+  border: 1px solid rgb(0, 0, 0);
+  border-radius: 9999px;
+  color: rgb(255, 255, 255);
+  font-size: 11px;
+  font-weight: 400;
+  line-height: 12px;
+  word-wrap: break-word;
+}
 
 @media all and (max-width: 1300px) {
   .tweet {
@@ -64,7 +83,7 @@
 }
 
 @media all and (max-width: 1300px) {
-  .navPill > div {
+  .navTitle {
     display: none;
   }
 }

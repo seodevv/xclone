@@ -3,6 +3,7 @@
 import styles from './loading.module.css';
 import {
   FetchNextPageOptions,
+  FetchPreviousPageOptions,
   InfiniteData,
   InfiniteQueryObserverResult,
   QueryObserverResult,
@@ -12,7 +13,23 @@ import ObserveElement from '../observer/ObserveElement';
 import LoadingSpinner from './LoadingSpinner';
 import DisConnection from '../error/DisConnection';
 
-interface Props<TData> {
+interface PreviousProps<TData> {
+  type: 'previous';
+  hasPreviousPage: boolean;
+  isFetchingPreviousPage?: boolean;
+  isError?: boolean;
+  fetchPreviousPage: (
+    options?: FetchPreviousPageOptions
+  ) => Promise<
+    InfiniteQueryObserverResult<InfiniteData<TData, unknown>, Error>
+  >;
+  refetch: (
+    options?: RefetchOptions
+  ) => Promise<QueryObserverResult<InfiniteData<TData, unknown>, Error>>;
+}
+
+interface NextProps<TData> {
+  type: 'next';
   hasNextPage: boolean;
   isFetchingNextPage?: boolean;
   isError?: boolean;
@@ -26,29 +43,52 @@ interface Props<TData> {
   ) => Promise<QueryObserverResult<InfiniteData<TData, unknown>, Error>>;
 }
 
-export default function PageLoading<TData>({
-  hasNextPage,
-  isFetchingNextPage,
-  isError,
-  fetchNextPage,
-  refetch,
-}: Props<TData>) {
+export default function PageLoading<TData>(
+  props: NextProps<TData> | PreviousProps<TData>
+) {
+  const isPrev = props.type === 'previous';
+  const isNext = props.type === 'next';
+
   return (
     <>
-      {isFetchingNextPage && (
+      {isNext && props.isFetchingNextPage && (
         <LoadingSpinner className={styles.pageLoadingSpinner} />
       )}
       <ObserveElement
         callback={() => {
-          if (!isError && !isFetchingNextPage && hasNextPage) {
-            fetchNextPage();
+          if (
+            isPrev &&
+            !props.isError &&
+            !props.isFetchingPreviousPage &&
+            props.hasPreviousPage
+          ) {
+            props.fetchPreviousPage();
+          } else if (
+            isNext &&
+            !props.isError &&
+            !props.isFetchingNextPage &&
+            props.hasNextPage
+          ) {
+            props.fetchNextPage();
           }
         }}
-        dependencies={[hasNextPage, isFetchingNextPage, isError, fetchNextPage]}
-        isFetching={isFetchingNextPage}
-        active={hasNextPage && !isError}
+        dependencies={[
+          isPrev ? props.hasPreviousPage : props.hasNextPage,
+          isPrev ? props.isFetchingPreviousPage : props.isFetchingNextPage,
+          props.isError,
+          isPrev ? props.fetchPreviousPage : props.fetchNextPage,
+        ]}
+        isFetching={
+          isPrev ? props.isFetchingPreviousPage : props.isFetchingNextPage
+        }
+        active={
+          isPrev ? props.hasPreviousPage : props.hasNextPage && !props.isError
+        }
       />
-      {isError && <DisConnection onClick={() => refetch()} />}
+      {props.isError && <DisConnection onClick={() => props.refetch()} />}
+      {isPrev && props.isFetchingPreviousPage && (
+        <LoadingSpinner className={styles.pageLoadingSpinner} />
+      )}
     </>
   );
 }

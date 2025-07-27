@@ -44,6 +44,7 @@ export default function ConnectPeople({ is_creator_only }: Props) {
           ))
         )}
         <PageLoading
+          type="next"
           hasNextPage={hasNextPage}
           isFetchingNextPage={isFetchingNextPage}
           isError={isError}

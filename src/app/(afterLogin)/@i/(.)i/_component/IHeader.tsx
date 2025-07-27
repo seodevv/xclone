@@ -5,10 +5,13 @@ import cx from 'classnames';
 import CloseButton from '@/app/(afterLogin)/_component/buttons/CloseButton';
 import BackButton from '@/app/(afterLogin)/_component/buttons/BackButton';
 import useHistoryStore from '@/app/(afterLogin)/_store/HistoryStore';
+import Text from '@/app/_component/_text/Text';
+import AddHistoryStack from '@/app/(afterLogin)/@i/(.)i/_component/AddHistoryStack';
 
 interface Props {
   type?: 'auto' | 'back';
   title?: string;
+  sub?: string;
   prevPath?: string;
   noBack?: boolean;
   noBtn?: boolean;
@@ -21,6 +24,7 @@ interface Props {
 export default function IHeader({
   type = 'auto',
   title,
+  sub,
   prevPath = '/home',
   noBack,
   noBtn,
@@ -58,6 +62,11 @@ export default function IHeader({
             <div className={cx(styles.text, styles[`text_${align}`])}>
               <span>{title}</span>
             </div>
+            {sub && (
+              <div className={cx(styles.sub, styles[`text_${align}`])}>
+                <span>{sub}</span>
+              </div>
+            )}
           </div>
         )}
         {children}

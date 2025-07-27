@@ -67,6 +67,7 @@ export default function UserLists({
           ))
         )}
         <PageLoading
+          type="next"
           hasNextPage={hasNextPage}
           isFetchingNextPage={isFetchingNextPage}
           isError={isError}

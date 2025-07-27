@@ -41,7 +41,18 @@ export interface VerifyPasswordRef {
 }
 
 const VerifyPassword = forwardRef<VerifyPasswordRef, Props>(
-  ({ title, sub, onSuccess, onChange, noBtn, btnText, btnTheme }, ref) => {
+  (
+    {
+      title = 'Verify your password',
+      sub = 'Re-enter your X password to continue.',
+      onSuccess,
+      onChange,
+      noBtn,
+      btnText,
+      btnTheme,
+    },
+    ref
+  ) => {
     const backRouter = useBackRouter();
     const { alterMessage } = useAlterModal();
     const [password, setPassword] = useState('');
@@ -74,7 +85,10 @@ const VerifyPassword = forwardRef<VerifyPasswordRef, Props>(
             alterMessage('Wrong password!');
             setPassword('');
             passwordRef.current?.focus();
-            passwordRef.current?.setValue('');
+            if (typeof passwordRef.current?.setValue === 'function') {
+              passwordRef.current.setValue('');
+            }
+
             setLoading(false);
           },
         }

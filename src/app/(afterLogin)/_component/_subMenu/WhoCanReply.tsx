@@ -11,6 +11,7 @@ import { SubMenuContext } from '@/app/(afterLogin)/_provider/SubMenuProvider';
 import usePostScopeMutation from '@/app/(afterLogin)/_hooks/usePostScopeMutation';
 import { useQueryClient } from '@tanstack/react-query';
 import useAlterModal from '@/app/_hooks/useAlterModal';
+import { AdvancedPost } from '@/model/Post';
 
 interface Options {
   id: number;
@@ -19,12 +20,13 @@ interface Options {
   svg: React.ReactNode;
 }
 
-export default function WhoCanReply() {
+interface Props {
+  post: AdvancedPost;
+}
+
+export default function WhoCanReply({ post }: Props) {
   const { alterMessage } = useAlterModal();
-  const {
-    menu: { post },
-    dispatchMenu,
-  } = useContext(SubMenuContext);
+  const { close } = useContext(SubMenuContext);
 
   const options: Options[] = [
     {
@@ -56,8 +58,6 @@ export default function WhoCanReply() {
   const queryClient = useQueryClient();
   const scopeMutation = usePostScopeMutation();
   const scopeHandler = (scope: Options['active']) => {
-    if (!post) return;
-
     scopeMutation.mutate({
       queryClient,
       post,
@@ -79,7 +79,7 @@ export default function WhoCanReply() {
         break;
     }
 
-    dispatchMenu({ type: 'reset' });
+    close();
   };
 
   return (

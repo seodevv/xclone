@@ -71,6 +71,7 @@ export default function BookmarkPosts() {
       <div>
         {content}
         <PageLoading
+          type="next"
           hasNextPage={hasNextPage}
           isFetchingNextPage={isFetchingNextPage}
           isError={isError}

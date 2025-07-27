@@ -6,20 +6,30 @@ interface Props {
   className?: HTMLAttributes<HTMLOrSVGElement>['className'];
   style?: CSSProperties;
   width?: number;
+  height?: number;
   white?: boolean;
+  inherit?: boolean;
 }
 
 export default function SearchSvg({
   className,
   style,
   width = 20,
+  height,
   white,
+  inherit,
 }: Props) {
   return (
     <svg
-      className={cx(styles.defaultSvg, white && styles.white, className)}
+      className={cx(
+        styles.defaultSvg,
+        white && styles.white,
+        inherit && styles.inherit,
+        className
+      )}
       style={style}
       width={width}
+      height={height ? height : width}
       viewBox="0 0 24 24"
       aria-hidden="true"
     >

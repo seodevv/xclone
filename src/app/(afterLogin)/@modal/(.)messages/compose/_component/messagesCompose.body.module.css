@@ -1,0 +1,28 @@
+.search {
+  cursor: text;
+}
+.svg {
+  position: relative;
+  display: inline-block;
+  min-width: 30px;
+}
+.gray {
+  fill: rgb(var(--link-rgb));
+}
+.primary {
+  fill: rgb(var(--primary-rgb));
+}
+.input {
+  padding: 11px;
+  flex-grow: 1;
+  width: 100%;
+  background: transparent;
+  border: none;
+  outline: none;
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 19px;
+  color: rgb(var(--font-theme-rgb));
+  resize: none;
+  appearance: none;
+}

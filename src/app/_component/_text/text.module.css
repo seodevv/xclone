@@ -16,6 +16,13 @@
 .green {
   color: rgb(0, 186, 124);
 }
+.pink {
+  color: rgb(249, 24, 128);
+}
+.fs_11 {
+  font-size: 11px;
+  line-height: 12px;
+}
 .xs {
   font-size: 13px;
   line-height: 16px;
@@ -56,9 +63,17 @@
   font-size: 19px;
   line-height: 23px;
 }
+.fs_29 {
+  font-size: 29px;
+  line-height: 34px;
+}
 .fs_34 {
   font-size: 34px;
   line-height: 40px;
+}
+.fs_37 {
+  font-size: 37px;
+  line-height: 46px;
 }
 
 .light {
@@ -87,6 +102,37 @@
   text-align: right;
 }
 
+.wordBreak_break_all {
+  word-break: break-all;
+}
+.wordBreak_keep_all {
+  word-break: keep-all;
+}
+.wordBreak_normal {
+  word-break: normal;
+}
+
+.wordWrap_break_word {
+  word-wrap: break-word;
+}
+.wordWrap_normal {
+  word-wrap: normal;
+}
+
+.whiteSpace_nowrap {
+  white-space: nowrap;
+}
+.whiteSpace_normal {
+  white-space: normal;
+}
+
+.textOf_clip {
+  text-overflow: clip;
+}
+.textOf_ellipsis {
+  text-overflow: ellipsis;
+}
+
 .display {
   display: block;
 }
@@ -101,4 +147,15 @@
 }
 .pad {
   padding: 12px 16px;
+}
+
+.hover_underline:hover {
+  text-decoration: underline;
+}
+
+.of_auto {
+  overflow: auto;
+}
+.of_hide {
+  overflow: hidden;
 }

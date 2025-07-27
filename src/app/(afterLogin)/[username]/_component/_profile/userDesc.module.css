@@ -7,3 +7,12 @@
 .link:hover {
   text-decoration: underline;
 }
+.textAlign_left {
+  text-align: left;
+}
+.textAlign_center {
+  text-align: center;
+}
+.textAlign_right {
+  text-align: right;
+}
