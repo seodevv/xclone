@@ -4,6 +4,7 @@ import RoomBody from '@/app/(afterLogin)/messages/[room]/_component/_body/RoomBo
 import { Metadata, ResolvingMetadata } from 'next';
 import { cookies } from 'next/headers';
 import { AdvancedRooms } from '@/model/Room';
+import { decryptRoomId } from '@/app/_lib/common';
 
 export async function generateMetadata(
   { params: { room: roomId } }: Props,
@@ -55,5 +56,14 @@ export default async function RoomPage({ params: { room } }: Props) {
 
   if (!session?.user?.email) return null;
 
-  return <RoomBody sessionId={session.user.email} roomId={room} />;
+  const { senderid, receiverid } = decryptRoomId({
+    userId: session.user.email,
+    roomId: room,
+  });
+
+  if (senderid !== session.user.email || receiverid === null) {
+    return null;
+  }
+
+  return <RoomBody roomId={room} receiverid={receiverid} />;
 }

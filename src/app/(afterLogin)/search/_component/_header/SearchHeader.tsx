@@ -9,12 +9,9 @@ export default function SearchHeader() {
     <section className={styles.header}>
       <div className={styles.form}>
         <BackButton />
-        <SearchForm
-          className={styles.bar}
-          style={{ margin: 0, height: '100%' }}
-        />
+        <SearchForm className={styles.bar} />
         <div className={styles.options}>
-          <OptionButton white />
+          <OptionButton />
         </div>
       </div>
       <SearchTab />

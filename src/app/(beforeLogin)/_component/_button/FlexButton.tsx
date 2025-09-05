@@ -17,7 +17,8 @@ interface Props {
     | 'red'
     | 'primary'
     | 'secondary'
-    | 'transparent';
+    | 'transparent'
+    | 'disabled';
   text: string;
   onClick?: MouseEventHandler<HTMLButtonElement>;
   isLoading?: boolean;
@@ -25,6 +26,7 @@ interface Props {
   large?: boolean;
   medium?: boolean;
   underline?: boolean;
+  grow?: boolean;
 }
 
 export default function FlexButton({
@@ -39,6 +41,7 @@ export default function FlexButton({
   large,
   medium,
   underline,
+  grow,
 }: Props) {
   const { pending } = useFormStatus();
 
@@ -49,6 +52,7 @@ export default function FlexButton({
         styles[theme],
         large && styles.large,
         medium && styles.medium,
+        grow && styles.grow,
         className
       )}
       style={style}

@@ -66,6 +66,12 @@ export default function PostSubMenuSession({
   const onClickEmbedPost = () => {
     sendPrepareMessage();
   };
+  const onClickViewPostAnalytics = () => {
+    sendPrepareMessage();
+  };
+  const onClickRequestCommunityNote = () => {
+    sendPrepareMessage();
+  };
 
   return (
     <>
@@ -122,11 +128,13 @@ export default function PostSubMenuSession({
           type="div"
           title="View post analytics"
           svg={<ViewSvg width={width} />}
+          onClick={onClickViewPostAnalytics}
         />
         <SubMenu
           type="div"
           title="Request Community Note"
           svg={<AnnounceSvg width={width} />}
+          onClick={onClickRequestCommunityNote}
         />
       </SubMenuWrapper>
     </>

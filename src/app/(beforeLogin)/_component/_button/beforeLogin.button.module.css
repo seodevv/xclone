@@ -26,13 +26,18 @@
   opacity: 0.75;
   transition: none;
 }
+
+.grow {
+  flex-grow: 1;
+}
 .theme {
   background: rgb(var(--r-background-start-rgb));
   color: rgb(var(--background-start-rgb));
 }
 .theme:hover:enabled {
-  background: rgb(215, 219, 220);
+  background-color: rgb(39, 44, 48);
 }
+
 .reverse {
   background: rgb(var(--background-start-rgb));
   border: 1px solid rgb(var(--label-rgb));
@@ -145,4 +150,10 @@
 }
 .passwordBtn:hover {
   filter: drop-shadow(1px 1px 1px rgb(var(--foreground-rgb)));
+}
+
+@media (prefers-color-scheme: dark) {
+  .theme:hover:enabled {
+    background-color: rgb(215, 219, 220);
+  }
 }

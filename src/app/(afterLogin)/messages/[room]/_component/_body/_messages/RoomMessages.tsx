@@ -1,9 +1,10 @@
 'use client';
 
 import useGetRoomMessages from '@/app/(afterLogin)/messages/[room]/_lib/useGetRoomMessages';
-import { useState } from 'react';
+import { useContext, useLayoutEffect, useRef, useState } from 'react';
 import PageLoading from '@/app/(afterLogin)/_component/loading/PageLoading';
 import RoomMessage from '@/app/(afterLogin)/messages/[room]/_component/_body/_messages/RoomMessage';
+import { MessagesScrollContext } from '@/app/(afterLogin)/messages/[room]/_provider/MessagesScrollProvider';
 
 interface Props {
   sessionId: string;
@@ -36,6 +37,21 @@ export default function RoomMessages({ sessionId, roomId }: Props) {
       !message.seen &&
       !message.Disable.find((u) => u.id === sessionId)
   );
+
+  const prevHeightRef = useRef(9);
+  const { scrollRef } = useContext(MessagesScrollContext);
+  useLayoutEffect(() => {
+    if (isFetchingPreviousPage) {
+      if (scrollRef?.current) {
+        prevHeightRef.current = scrollRef.current.scrollHeight;
+      }
+    } else {
+      if (scrollRef?.current) {
+        const newHeight = scrollRef.current.scrollHeight;
+        scrollRef.current.scrollTop = newHeight - prevHeightRef.current;
+      }
+    }
+  }, [isFetchingPreviousPage]);
 
   return (
     <>

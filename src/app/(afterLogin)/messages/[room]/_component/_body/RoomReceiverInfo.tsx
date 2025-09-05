@@ -11,17 +11,17 @@ import UserDesc from '@/app/(afterLogin)/[username]/_component/_profile/UserDesc
 import useGetRoomMessages from '@/app/(afterLogin)/messages/[room]/_lib/useGetRoomMessages';
 
 interface Props {
-  receiverId: string;
+  receiverid: string;
   sessionId: string;
   roomId: string;
 }
 
 export default function RoomReceiverInfo({
-  receiverId,
+  receiverid,
   sessionId,
   roomId,
 }: Props) {
-  const { data: user } = useUserQuery(receiverId);
+  const { data: user } = useUserQuery(receiverid);
   const { data: rooms, hasPreviousPage } = useGetRoomMessages({
     sessionId,
     roomId: roomId,

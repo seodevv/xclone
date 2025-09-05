@@ -42,13 +42,7 @@ export default function PasswordReset() {
         </div>
       </div>
       <div className={styles.footer}>
-        <FlexButton
-          type="submit"
-          theme="white"
-          text="Next"
-          disabled={input === ''}
-          large
-        />
+        <FlexButton type="submit" text="Next" disabled={input === ''} large />
       </div>
     </form>
   );

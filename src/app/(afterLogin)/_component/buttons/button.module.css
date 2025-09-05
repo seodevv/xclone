@@ -1,6 +1,5 @@
 /* default settings */
 .btn {
-  position: relative;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -8,8 +7,9 @@
   height: 34px;
   border: none;
   border-radius: 50%;
-  background: rgba(0, 0, 0, 0.5);
-  border: 1px solid rgb(0, 0, 0, 0.5);
+  background: transparent;
+  /* background: rgba(var(--background-start-rgb)); */
+  border: 1px solid transparent;
   font-size: 15px;
   font-weight: 700;
   color: rgb(255, 255, 255);
@@ -17,14 +17,19 @@
   transition: 150ms background-color ease-in;
 }
 .btn:hover:enabled {
-  background: rgba(var(--button-hover-rgb), 0.1);
+  background-color: rgba(15, 20, 25, 0.1);
 }
 .btn:active:enabled {
-  background: rgba(var(--button-hover-rgb), 0.2);
-  transition: none;
+  background-color: rgba(15, 20, 25, 0.2);
 }
 .btn:disabled {
   opacity: 0.5;
+}
+.relative {
+  position: relative;
+}
+.absolute {
+  position: absolute;
 }
 .textBtn {
   padding: 0 16px;
@@ -139,13 +144,13 @@
   font-size: 14px;
   font-weight: bold;
   color: rgb(var(--background-start-rgb));
+  transition: 200ms background-color linear;
 }
 .followBtn:hover:enabled {
-  background: rgba(var(--foreground-rgb), 0.9);
+  background-color: rgb(39, 44, 48);
 }
 .followBtn:active:enabled {
-  background: rgba(var(--foreground-rgb), 0.75);
-  transition: none;
+  background-color: rgba(63, 67, 71);
 }
 .isFollow,
 .isSubscribe {
@@ -478,5 +483,26 @@
     opacity: 0;
     transform: translateY(10px);
     filter: blur(15px);
+  }
+}
+
+@media (prefers-color-scheme: dark) {
+  .btn:hover:enabled {
+    background-color: rgba(var(--button-hover-rgb), 0.1);
+  }
+  .btn:active:enabled {
+    background-color: rgba(var(--button-hover-rgb), 0.2);
+    transition: none;
+  }
+  .followBtn:hover:enabled {
+    background-color: rgb(215, 219, 220);
+  }
+  .followBtn:active:enabled {
+    background-color: rgb(191, 194, 195);
+    transition: none;
+  }
+  .isFollow:hover:enabled,
+  .isSubscribe.btn:hover:enabled {
+    background-color: rgba(244, 33, 46, 0.1);
   }
 }

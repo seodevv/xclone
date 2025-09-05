@@ -32,7 +32,7 @@ export default function ViewRepostsAndLikes({ username, id, view }: Props) {
     if (users.pages[0].data.length === 0) {
       return (
         <NoPost
-          title={view === 'retweets' ? 'No Reposts yest' : 'No Likes yet'}
+          title={view === 'retweets' ? 'No Reposts yet' : 'No Likes yet'}
           message={
             view === 'retweets'
               ? 'Share someone else’s post on your timeline by reposting it. When you do, it’ll show up here.'

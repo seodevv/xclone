@@ -11,9 +11,12 @@
   max-width: 384px;
   background: rgb(var(--background-start-rgb));
   border-radius: 12px;
-  box-shadow: rgba(255, 255, 255, 0.2) 0px 0px 15px,
-    rgba(255, 255, 255, 0.15) 0px 0px 3px 1px;
+  box-shadow: rgba(101, 119, 134, 0.2) 0px 0px 15px,
+    rgba(101, 119, 134, 0.15) 0px 0px 3px 1px;
   overflow: hidden;
+}
+.nav {
+  min-width: 318px;
 }
 .visible {
   visibility: visible;
@@ -22,4 +25,11 @@
 .invisible {
   visibility: hidden;
   opacity: 0;
+}
+
+@media (prefers-color-scheme: dark) {
+  .context_menu {
+    box-shadow: rgba(255, 255, 255, 0.2) 0px 0px 15px,
+      rgba(255, 255, 255, 0.15) 0px 0px 3px 1px;
+  }
 }

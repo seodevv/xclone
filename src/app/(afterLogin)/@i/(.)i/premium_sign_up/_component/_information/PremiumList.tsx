@@ -59,14 +59,14 @@ export default function PremiumList({ type, value }: Props) {
             )}
           >
             {v.type === 'text' && <span>{v.value}</span>}
-            {v.type === 'check' && <CheckSvg width={21.25} white />}
+            {v.type === 'check' && <CheckSvg width={21.25} theme="theme" />}
             {v.inform && (
               <button
                 type="button"
                 className={styles.inform}
                 onClick={(e) => onClickInform(e, v.inform)}
               >
-                <InformSvg />
+                <InformSvg theme="theme" />
               </button>
             )}
           </div>

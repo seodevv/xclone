@@ -22,7 +22,7 @@ export default function PrevButton({
       style={style}
       onClick={onClick}
     >
-      <LeftArrowSvg width={width} white />
+      <LeftArrowSvg width={width} theme="theme" />
     </button>
   );
 }

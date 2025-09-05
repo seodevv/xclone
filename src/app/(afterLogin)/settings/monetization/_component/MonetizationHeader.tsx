@@ -13,7 +13,7 @@ export default function MonetizationHeader() {
           href="https://help.x.com/using-x/x-premium-faq#item2"
           target="_blank"
         >
-          <HelpSvg white />
+          <HelpSvg theme="theme" />
         </Link>
       </div>
     </div>

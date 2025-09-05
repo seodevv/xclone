@@ -22,7 +22,7 @@ export default function NextButton({
       style={style}
       onClick={onClick}
     >
-      <RightArrowSvg width={width} white />
+      <RightArrowSvg width={width} theme="theme" />
     </button>
   );
 }

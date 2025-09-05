@@ -42,7 +42,8 @@
   flex-direction: column;
   width: 100%;
   max-width: 400px;
-  background: rgb(2, 17, 61);
+  background: rgb(253, 238, 189);
+  /* background: rgb(2, 17, 61); */
   border-radius: 8px;
   font-size: 15px;
   color: rgb(var(--foreground-rgb));
@@ -67,4 +68,10 @@
 }
 .link:hover {
   text-decoration-thickness: 2px;
+}
+
+@media (prefers-color-scheme: dark) {
+  .alter {
+    background-color: rgb(2, 17, 61);
+  }
 }

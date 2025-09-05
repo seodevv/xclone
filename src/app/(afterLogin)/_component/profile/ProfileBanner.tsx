@@ -50,7 +50,8 @@ export default function ProfileBanner({
       <div className={styles.inner}>
         <div className={styles.relative}>
           <div className={styles.pad}></div>
-          <div className={styles.absolute}>
+          <div className={cx(styles.absolute, styles.background)}></div>
+          <div className={cx(styles.absolute, styles.opacity)}>
             {imageSrc && (
               <Image
                 className={styles.image}

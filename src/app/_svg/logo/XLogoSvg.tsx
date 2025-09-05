@@ -1,3 +1,5 @@
+import styles from '../_style/svg.module.css';
+import cx from 'classnames';
 import { CSSProperties } from 'react';
 
 interface Props {
@@ -5,6 +7,7 @@ interface Props {
   style?: CSSProperties;
   width?: number;
   fill?: string;
+  theme?: 'default' | 'theme' | 'white';
 }
 
 export default function XLogoSvg({
@@ -12,10 +15,16 @@ export default function XLogoSvg({
   style,
   width = 50,
   fill = '#fff',
+  theme = 'default',
 }: Props) {
   return (
     <svg
-      className={className}
+      className={cx(
+        theme === 'default' && styles.defaultSvg,
+        theme === 'theme' && styles.theme,
+        theme === 'white' && styles.white,
+        className
+      )}
       style={style}
       width={width}
       viewBox="0 0 24 24"

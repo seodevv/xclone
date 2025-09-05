@@ -2,10 +2,22 @@ import styles from './text.module.css';
 import cx from 'classnames';
 import { CSSProperties } from 'react';
 
+export type TextTheme =
+  | 'theme'
+  | 'reverse'
+  | 'gray'
+  | 'primary'
+  | 'error'
+  | 'black'
+  | 'green'
+  | 'pink';
+
+export type TextBold = 'light' | 'normal' | 'bold' | 'boldest' | 'fw_500';
+
 interface Props {
   className?: string;
   style?: CSSProperties;
-  theme?: 'theme' | 'gray' | 'primary' | 'error' | 'black' | 'green' | 'pink';
+  theme?: TextTheme;
   size?:
     | 'xs'
     | 's'
@@ -21,18 +33,20 @@ interface Props {
     | 'fs_29'
     | 'fs_34'
     | 'fs_37';
-  bold?: 'light' | 'normal' | 'bold' | 'boldest' | 'fw_500';
+  bold?: TextBold;
   align?: 'left' | 'center' | 'right';
   wordBreak?: 'break-all' | 'keep-all' | 'normal';
   wordWrap?: 'break-word' | 'normal';
   whiteSpace?: 'nowrap' | 'normal';
   overflow?: 'clip' | 'ellipsis';
   text?: string;
-  display?: 'display' | 'inline-block' | 'inline';
+  display?: 'block' | 'inline-block' | 'inline' | 'flex';
   hover?: 'underline' | 'none';
   link?: boolean;
   pad?: boolean;
   of?: 'auto' | 'hide';
+  highlight?: boolean;
+  onClick?: () => void;
   children?: React.ReactNode;
 }
 
@@ -48,11 +62,13 @@ export default function Text({
   whiteSpace = 'normal',
   overflow = 'clip',
   text,
-  display = 'display',
+  display = 'block',
   hover = 'none',
   link,
   pad,
   of = 'hide',
+  highlight,
+  onClick,
   children,
 }: Props) {
   return (
@@ -71,9 +87,11 @@ export default function Text({
         hover !== 'none' && styles[`hover_${hover}`],
         link && styles.link,
         pad && styles.pad,
+        highlight && styles.highlight,
         className
       )}
       style={style}
+      onClick={onClick}
     >
       {text}
       {children}

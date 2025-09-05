@@ -16,7 +16,7 @@ export default function RightSearchZone() {
         width: 'inherit',
       }}
     >
-      <SearchForm style={{ position: 'fixed', zIndex: 2 }} />
+      <SearchForm style={{ marginTop: '5px', position: 'fixed', zIndex: 2 }} />
       <div
         style={{
           position: 'fixed',

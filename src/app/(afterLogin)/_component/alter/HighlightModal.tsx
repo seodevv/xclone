@@ -10,7 +10,6 @@ import FlexButton from '@/app/(beforeLogin)/_component/_button/FlexButton';
 import Link from 'next/link';
 import { useContext, useState } from 'react';
 import usePostPinnedMutation from '@/app/(afterLogin)/_hooks/usePostPinnedMutation';
-import { useQueryClient } from '@tanstack/react-query';
 import useAlterModal from '@/app/_hooks/useAlterModal';
 import { AdvancedPost } from '@/model/Post';
 
@@ -22,7 +21,6 @@ interface Props {
 export default function HighlightModal({ post, sessionid }: Props) {
   const { dispatchMenu, close } = useContext(SubMenuContext);
   const [alter, setAlter] = useState(false);
-  const queryClient = useQueryClient();
   const pinMutation = usePostPinnedMutation();
   const { alterMessage } = useAlterModal();
 
@@ -32,8 +30,8 @@ export default function HighlightModal({ post, sessionid }: Props) {
   const onClickPin = () => {
     pinMutation.mutate({
       method: 'post',
-      post,
-      queryClient,
+      postid: post.postid,
+      sessionid,
     });
 
     alterMessage('Your post was pinned to your profile.');

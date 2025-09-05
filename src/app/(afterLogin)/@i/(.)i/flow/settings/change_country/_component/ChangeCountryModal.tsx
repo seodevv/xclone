@@ -45,7 +45,7 @@ export default function ChangeCountryModal() {
         <div>
           <FlexButton
             text="Change"
-            theme="white"
+            theme="theme"
             large
             style={{ margin: 0 }}
             onClick={onClickChange}

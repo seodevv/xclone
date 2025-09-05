@@ -9,7 +9,7 @@
 .label {
   position: relative;
   display: flex;
-  border: 1px solid rgb(var(--border-start-rgb));
+  border: 1px solid rgb(var(--border-input-rgb));
   border-radius: 4px;
   transition: 200ms all ease-in;
 }

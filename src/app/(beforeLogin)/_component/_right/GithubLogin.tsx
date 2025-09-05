@@ -22,7 +22,7 @@ export default function GithubLogin({ className, style }: Props) {
         style={style}
         onClick={onClickGitHubLogin}
       >
-        <GithubSvg white />
+        <GithubSvg width={25} />
         <span>Sign up with Github</span>
       </button>
     </>

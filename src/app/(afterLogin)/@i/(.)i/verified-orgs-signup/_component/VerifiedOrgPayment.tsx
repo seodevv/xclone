@@ -90,7 +90,6 @@ export default function VerifiedOrgPayment() {
       </div>
       <div>
         <FlexButton
-          theme="white"
           text="Subscribe & Pay"
           style={{ margin: '16px 0' }}
           onClick={() => {

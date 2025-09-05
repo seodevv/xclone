@@ -69,7 +69,6 @@ export default function VerifiedChoose() {
         ))}
       </div>
       <FlexButton
-        theme="white"
         text="Subscribe"
         large
         style={{ margin: '32px 0 0 0' }}

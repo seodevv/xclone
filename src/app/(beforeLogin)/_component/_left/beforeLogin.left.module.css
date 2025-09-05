@@ -30,7 +30,14 @@
   fill: rgb(var(--foreground-rgb));
   color: rgb(var(--foreground-rgb));
   box-sizing: unset;
+  transition: 300ms filter linear;
 }
 .XLogo:hover {
-  filter: drop-shadow(5px 5px 15px #fff);
+  filter: drop-shadow(5px 5px 15px rgb(0, 0, 0));
+}
+
+@media (prefers-color-scheme: dark) {
+  .XLogo:hover {
+    filter: drop-shadow(5px 5px 15px rgb(255, 255, 255));
+  }
 }

@@ -1,12 +1,12 @@
-import { CSSProperties } from 'react';
 import styles from '../_style/svg.module.css';
 import cx from 'classnames';
+import { CSSProperties } from 'react';
 
 interface Props {
   className?: string;
   style?: CSSProperties;
-  theme?: 'default' | 'primary' | 'white';
   width?: number;
+  theme?: 'default' | 'primary' | 'theme' | 'reverse' | 'white';
 }
 
 export default function XMarkSvg({
@@ -20,6 +20,8 @@ export default function XMarkSvg({
       className={cx(
         theme === 'default' && styles.defaultSvg,
         theme === 'primary' && styles.primary,
+        theme === 'theme' && styles.theme,
+        theme === 'reverse' && styles.reverse,
         theme === 'white' && styles.white,
         className
       )}

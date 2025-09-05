@@ -38,7 +38,7 @@
   justify-content: center;
   min-width: 52px;
   min-height: 52px;
-  background: rgb(239, 243, 244);
+  background: rgb(15, 20, 25);
   border: 1px solid transparent;
   border-radius: 9999px;
   transition-duration: 200ms;
@@ -47,7 +47,7 @@
   cursor: pointer;
 }
 .hyper:hover {
-  background: rgb(215, 219, 220);
+  background: rgb(39, 44, 48);
 }
 .steps {
   margin: 16px 0;
@@ -155,5 +155,14 @@
 @media screen and (max-width: 720px) {
   .inner {
     width: 100%;
+  }
+}
+
+@media (prefers-color-scheme: dark) {
+  .hyper {
+    background: rgb(239, 243, 244);
+  }
+  .hyper:hover {
+    background: rgb(215, 219, 220);
   }
 }

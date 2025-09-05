@@ -1,5 +1,10 @@
 import { AdvancedUser, SafeUser, UserId } from './User';
 
+export interface Snooze {
+  type: '1h' | '8h' | '1w' | 'forever';
+  createat: string;
+}
+
 export interface AdvancedRooms {
   status?: 'temp';
   id: string;
@@ -7,14 +12,16 @@ export interface AdvancedRooms {
   Receiver: SafeUser;
   senderid: string;
   Sender: SafeUser;
-  createat: Date;
+  createat: string;
   lastmessageid: number | null;
   lastmessagesenderid: string | null;
   type: 'gif' | 'image' | null;
   content: string | null;
-  lastat: Date | null;
+  lastat: string | null;
   sent: { id: AdvancedUser['id']; count: number }[];
-  Disabled: UserId[];
+  Disabled: boolean;
+  Pinned: boolean;
+  Snooze: Snooze | null;
 }
 
 export type RoomsNotifications = {

@@ -74,13 +74,7 @@ export default function LanguageSelector() {
         )}
       </div>
       <div className={styles.button}>
-        <FlexButton
-          className={styles.done}
-          type="submit"
-          theme="white"
-          text="Done"
-          large
-        />
+        <FlexButton className={styles.done} type="submit" text="Done" large />
       </div>
     </form>
   );

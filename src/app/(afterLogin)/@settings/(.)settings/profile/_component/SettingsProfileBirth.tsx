@@ -226,7 +226,7 @@ export default function SettingsProfileBirth({
         </>
       ) : (
         <Text
-          size="xl"
+          size="m"
           text={
             user.birth?.date
               ? `${MONTH_EN[new Date(user.birth.date).getMonth()]} ${new Date(

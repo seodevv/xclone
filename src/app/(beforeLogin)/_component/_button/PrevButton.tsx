@@ -28,7 +28,7 @@ export default function PrevButton({
       onClick={onClick}
       disabled={disabled}
     >
-      <LeftArrowSvg width={width} white />
+      <LeftArrowSvg width={width} theme="theme" />
     </button>
   );
 }

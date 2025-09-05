@@ -4,7 +4,13 @@ import SearchSvg from '@/app/_svg/search/SearchSvg';
 import styles from './messagesCompose.body.module.css';
 import utils from '@/app/utility.module.css';
 import cx from 'classnames';
-import { useContext, useEffect, useRef, useState } from 'react';
+import {
+  ChangeEventHandler,
+  useContext,
+  useEffect,
+  useRef,
+  useState,
+} from 'react';
 import { MessagesComposeContext } from '@/app/(afterLogin)/@modal/(.)messages/compose/_provider/MessagesComposeProvider';
 
 export default function MessagesComposeSearch() {
@@ -15,6 +21,20 @@ export default function MessagesComposeSearch() {
   const timer = useRef<ReturnType<typeof setTimeout> | null>(null);
   const inputRef = useRef<HTMLInputElement>(null);
   const users = getUsers();
+
+  const onChangeInput: ChangeEventHandler<HTMLInputElement> = (e) => {
+    setSearch(e.target.value);
+    setEnabled(false);
+
+    if (timer.current) {
+      clearTimeout(timer.current);
+    }
+    if (e.target.value !== '') {
+      timer.current = setTimeout(() => {
+        setEnabled(true);
+      }, 300);
+    }
+  };
 
   useEffect(() => {
     inputRef.current?.focus();
@@ -46,19 +66,7 @@ export default function MessagesComposeSearch() {
             placeholder="Search people"
             value={search}
             autoFocus
-            onChange={(e) => {
-              setSearch(e.target.value);
-              setEnabled(false);
-
-              if (timer.current) {
-                clearTimeout(timer.current);
-              }
-              if (e.target.value !== '') {
-                timer.current = setTimeout(() => {
-                  setEnabled(true);
-                }, 200);
-              }
-            }}
+            onChange={onChangeInput}
             onFocus={() => setFocus(true)}
             onBlur={() => setFocus(false)}
           />

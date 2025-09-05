@@ -15,10 +15,10 @@
   cursor: pointer;
 }
 .link:hover {
-  background: rgb(22, 24, 28);
+  background: rgba(247, 249, 249, 1);
 }
 .link.active {
-  background: rgb(22, 24, 28);
+  background: rgba(247, 249, 249, 1);
 }
 .inner {
   display: flex;
@@ -37,4 +37,13 @@
   left: 0;
   z-index: 1;
   border-right: 2px solid rgb(var(--primary-rgb));
+}
+
+@media (prefers-color-scheme: dark) {
+  .link:hover {
+    background: rgb(22, 24, 28);
+  }
+  .link.active {
+    background: rgb(22, 24, 28);
+  }
 }

@@ -15,7 +15,7 @@ import {
   useRef,
   useState,
 } from 'react';
-import { IdentifierInputRef } from '@/app/_component/_input/IdentifierInput';
+import { BirthRef } from '@/app/(beforeLogin)/_component/_sign/BirthSelector';
 
 interface Props {
   type: 'year' | 'month' | 'day';
@@ -25,7 +25,7 @@ interface Props {
   disabled?: boolean;
 }
 
-const DateSelector = forwardRef<IdentifierInputRef, Props>(
+const DateSelector = forwardRef<BirthRef, Props>(
   ({ type, defaultValue, date = new Date(), callback, disabled }, ref) => {
     const [value, setValue] = useState(defaultValue || 0);
     const selectRef = useRef<HTMLSelectElement>(null);

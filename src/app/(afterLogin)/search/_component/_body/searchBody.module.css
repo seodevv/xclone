@@ -19,11 +19,11 @@
   transition: 100ms all ease-in;
 }
 .viewAll:hover {
-  background: rgba(var(--button-hover-rgb), 0.1);
+  background: rgba(0, 0, 0, 0.03);
   text-decoration: underline;
 }
 .viewAll:active {
-  background: transparent;
+  background: rgba(0, 0, 0, 0.06);
   transition: none;
 }
 
@@ -69,4 +69,15 @@
   display: flex;
   flex-flow: row wrap;
   gap: 3px;
+}
+
+@media (prefers-color-scheme: dark) {
+  .viewAll:hover {
+    background: rgba(var(--button-hover-rgb), 0.1);
+    text-decoration: underline;
+  }
+  .viewAll:active {
+    background: transparent;
+    transition: none;
+  }
 }

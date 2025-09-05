@@ -5,13 +5,14 @@ import utils from '@/app/utility.module.css';
 import cx from 'classnames';
 import { AdvancedRooms } from '@/model/Room';
 import { useRouter, useSelectedLayoutSegment } from 'next/navigation';
-import { MouseEventHandler, useState } from 'react';
+import { MouseEventHandler, useContext, useState } from 'react';
 import dayjs from 'dayjs';
 import relativeTime from 'dayjs/plugin/relativeTime';
 import OtherProfile from '@/app/(afterLogin)/_component/profile/OtherProfile';
 import MessagesRoomInformation from '@/app/(afterLogin)/messages/_component/_body/MessagesRoomInformation';
 import MessagesRoomNotification from '@/app/(afterLogin)/messages/_component/_body/MessagesRoomNotification';
 import MessagesRoomOption from '@/app/(afterLogin)/messages/_component/_body/MessagesRoomOption';
+import { MessagesSearchContext } from '@/app/(afterLogin)/messages/_component/_body/_search/_provider/MessagesSearchProvider';
 
 dayjs.locale('en');
 dayjs.extend(relativeTime);
@@ -25,7 +26,7 @@ export default function MessagesRoom({ sessionId, room }: Props) {
   const segment = useSelectedLayoutSegment();
   const router = useRouter();
   const [mouseOver, setMouseOver] = useState(false);
-  const active = segment === room.id;
+  const roomActive = segment === room.id;
   const receiver = room.senderid === sessionId ? room.Receiver : room.Sender;
 
   const onClickMessage: MouseEventHandler<HTMLDivElement> = (e) => {
@@ -34,6 +35,11 @@ export default function MessagesRoom({ sessionId, room }: Props) {
     router.push(`/messages/${room.id}`);
   };
 
+  const { active: searchActive } = useContext(MessagesSearchContext);
+
+  if (room.Disabled) return null;
+  if (searchActive) return null;
+
   return (
     <div
       className={cx(utils.relative, utils.d_flexColumn, utils.cursor_point)}
@@ -41,7 +47,7 @@ export default function MessagesRoom({ sessionId, room }: Props) {
       onMouseOver={() => setMouseOver(true)}
       onMouseLeave={() => setMouseOver(false)}
     >
-      {active && (
+      {roomActive && (
         <div
           className={cx(
             utils.absolute,
@@ -66,7 +72,7 @@ export default function MessagesRoom({ sessionId, room }: Props) {
             utils.transit_basic,
             utils.cursor_point,
             mouseOver && styles.mouseOver_2,
-            active && styles.active
+            roomActive && styles.active
           )}
         >
           <div className={utils.d_flexRow}>
@@ -102,12 +108,13 @@ export default function MessagesRoom({ sessionId, room }: Props) {
                     at: room.lastat,
                     content: room.content,
                   }}
+                  Snooze={room.Snooze}
                 />
                 <MessagesRoomNotification
                   sessionId={sessionId}
                   sent={room.sent}
                 />
-                <MessagesRoomOption active={mouseOver} />
+                <MessagesRoomOption room={room} active={mouseOver} />
               </div>
             </div>
           </div>

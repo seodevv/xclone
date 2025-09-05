@@ -104,6 +104,24 @@ export default function useMessagesQueryData({ sessionId }: Params) {
     );
   }
 
+  function updateSeen({ roomid }: { roomid: AdvancedMessages['roomid'] }) {
+    const queryKey: MessageQueryKey = ['messages', 'list', sessionId, roomid];
+    const queryData = queryClient.getQueryData<MessageQueryData>(queryKey);
+    if (typeof queryData === 'undefined') return;
+
+    const shallow: MessageQueryData = {
+      ...queryData,
+      pages: [...queryData.pages],
+    };
+    shallow.pages.forEach((page, i) => {
+      shallow.pages[i] = {
+        ...queryData.pages[i],
+        data: page.data.map((message) => ({ ...message, seen: true })),
+      };
+    });
+    queryClient.setQueryData(queryKey, shallow);
+  }
+
   function deleteMessage({
     roomId,
     target: { messageId },
@@ -142,6 +160,7 @@ export default function useMessagesQueryData({ sessionId }: Params) {
     getMessage,
     addMessage,
     updateMessage,
+    updateSeen,
     deleteMessage,
   };
 }

@@ -6,20 +6,25 @@ interface Props {
   className?: HTMLAttributes<HTMLOrSVGElement>['className'];
   style?: CSSProperties;
   width?: number;
-  white?: boolean;
   active?: boolean;
+  theme?: 'default' | 'theme' | 'white';
 }
 
 export default function BookmarkSvg({
   className,
   style,
   width = 22.5,
-  white,
   active = false,
+  theme = 'default',
 }: Props) {
   return (
     <svg
-      className={cx(styles.defaultSvg, white && styles.white, className)}
+      className={cx(
+        theme === 'default' && styles.defaultSvg,
+        theme === 'theme' && styles.theme,
+        theme === 'white' && styles.white,
+        className
+      )}
       style={style}
       width={width}
       viewBox="0 0 24 24"

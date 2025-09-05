@@ -132,7 +132,7 @@ function SuggestButton({
   onClick?: MouseEventHandler<HTMLButtonElement>;
 }) {
   return (
-    <button className={styles.item} onClick={onClick}>
+    <button className={styles.item} onClick={onClick} type="button">
       <Text text={text} theme="primary" />
     </button>
   );

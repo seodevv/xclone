@@ -17,7 +17,7 @@ import AccountAction from '@/app/(beforeLogin)/_component/_sign/_login/AccountAc
 import IdentifierInput from '@/app/_component/_input/IdentifierInput';
 
 export default function LoginPhaseA() {
-  const { alterMessage } = useAlterModal();
+  const { alterMessage, sendPrepareMessage } = useAlterModal();
   const { state, dispatch } = useContext(LoginContext);
   const { id, options } = state;
   const [response, formAction] = useFormState(AccountAction, {
@@ -99,7 +99,13 @@ export default function LoginPhaseA() {
             isLoading={options.isLoading}
             disabled={id.disabled || options.isLoading}
           />
-          <FlexButton theme="reverse" text="Forgot password?" />
+          <FlexButton
+            theme="reverse"
+            text="Forgot password?"
+            onClick={() => {
+              sendPrepareMessage();
+            }}
+          />
           <NoAccount />
         </div>
       </form>

@@ -1,6 +1,9 @@
 .theme {
   color: rgb(var(--font-theme-rgb));
 }
+.reverse {
+  color: rgb(var(--font-reverse-rgb));
+}
 .gray {
   color: rgb(var(--link-rgb));
 }
@@ -133,7 +136,7 @@
   text-overflow: ellipsis;
 }
 
-.display {
+.block {
   display: block;
 }
 .inline-block {
@@ -141,6 +144,9 @@
 }
 .inline {
   display: inline;
+}
+.flex {
+  display: flex;
 }
 .link:hover {
   text-decoration: underline;
@@ -158,4 +164,7 @@
 }
 .of_hide {
   overflow: hidden;
+}
+.highlight {
+  background-color: rgba(255, 212, 0, 1);
 }

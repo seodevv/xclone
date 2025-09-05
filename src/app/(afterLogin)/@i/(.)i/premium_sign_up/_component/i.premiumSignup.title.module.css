@@ -12,16 +12,11 @@
   color: rgb(var(--foreground-rgb));
   line-height: 55px;
 }
-.sub {
-  font-size: 17px;
-  font-weight: 400;
-  color: rgb(182, 185, 188);
-  line-height: 24px;
-}
+.sub,
 .organizations {
   font-size: 17px;
   font-weight: 400;
-  color: rgb(182, 185, 188);
+  color: rgb(55, 67, 77);
   line-height: 24px;
 }
 .signup {
@@ -31,4 +26,11 @@
   text-decoration: underline;
   text-decoration-thickness: 2px;
   cursor: pointer;
+}
+
+@media (prefers-color-scheme: dark) {
+  .sub,
+  .organizations {
+    color: rgb(182, 185, 188);
+  }
 }

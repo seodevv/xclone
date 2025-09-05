@@ -22,7 +22,7 @@ export default function RightFoldButton({
       style={style}
       onClick={onClick}
     >
-      <RightDoubleArrowSvg width={width} white />
+      <RightDoubleArrowSvg width={width} />
     </button>
   );
 }

@@ -8,7 +8,6 @@ interface Props {
   type?: 'butt' | 'round';
   width?: number;
   borderWidth?: number;
-  backgroundColor?: string;
   progressColor?: string;
   className?: string;
 }
@@ -19,7 +18,6 @@ export default function ProgressSvg({
   type = 'butt',
   width = 45,
   borderWidth = 4,
-  backgroundColor = '#2F3336',
   progressColor = '#1D9BF0',
   className,
 }: Props) {
@@ -62,11 +60,11 @@ export default function ProgressSvg({
       {value > 0 && (
         <>
           <circle
+            className={styles.stroke}
             r={r}
             cx={c}
             cy={c}
             fill="transparent"
-            stroke={backgroundColor}
             strokeWidth={progress >= 0.9 ? borderWidth - 1 : borderWidth}
             strokeDasharray={`${d}px`}
             strokeDashoffset="0"

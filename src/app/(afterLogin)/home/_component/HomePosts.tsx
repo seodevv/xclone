@@ -18,17 +18,17 @@ export default function HomePosts() {
     refetch,
   } = useHomePostQuery(tab === 'rec' ? 'recommends' : 'followings');
 
-  if (posts.pages.at(0)?.data.length === 0) {
+  const flatten = posts.pages.map((page) => page.data).flat();
+
+  if (flatten.length === 0) {
     return <NoPosts />;
   }
 
   return (
     <>
-      {posts.pages.map((page, i) =>
-        page.data.map((p) => {
-          return <Post key={p.postid} post={p} />;
-        })
-      )}
+      {flatten.map((p) => {
+        return <Post key={p.postid} post={p} />;
+      })}
       <PageLoading
         type="next"
         hasNextPage={hasNextPage}

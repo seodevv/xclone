@@ -22,7 +22,7 @@ export default function LeftFoldButton({
       style={style}
       onClick={onClick}
     >
-      <LeftDoubleArrowSvg width={width} white />
+      <LeftDoubleArrowSvg width={width} />
     </button>
   );
 }

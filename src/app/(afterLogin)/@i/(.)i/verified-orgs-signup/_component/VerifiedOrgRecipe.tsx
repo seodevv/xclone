@@ -51,7 +51,7 @@ export default function VerifiedOrgRecipe() {
           <div key={v.value} className={styles.list}>
             <span>
               {v.type === 'check' ? (
-                <CheckSvg width={18.75} white />
+                <CheckSvg width={18.75} theme="theme" />
               ) : (
                 <LockSvg width={18.75} />
               )}

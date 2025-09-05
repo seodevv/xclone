@@ -6,12 +6,14 @@ import cx from 'classnames';
 import { SubMenuContext } from '@/app/(afterLogin)/_provider/SubMenuProvider';
 import { MouseEventHandler, useContext } from 'react';
 import OptionSvg from '@/app/_svg/post/OptionSvg';
+import { AdvancedRooms } from '@/model/Room';
 
 interface Props {
+  room: AdvancedRooms;
   active?: boolean;
 }
 
-export default function MessagesRoomOption({ active }: Props) {
+export default function MessagesRoomOption({ room, active }: Props) {
   const { dispatchMenu: setSubMenu } = useContext(SubMenuContext);
 
   const onClickOption: MouseEventHandler<HTMLButtonElement> = (e) => {
@@ -22,7 +24,7 @@ export default function MessagesRoomOption({ active }: Props) {
       type: 'set',
       payload: {
         flag: true,
-        status: 'room',
+        status: { type: 'room', room },
         position: {
           x,
           y,

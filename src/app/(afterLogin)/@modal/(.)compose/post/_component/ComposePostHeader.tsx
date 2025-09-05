@@ -5,8 +5,10 @@ import utils from '@/app/utility.module.css';
 import CloseButton from '@/app/(afterLogin)/_component/buttons/CloseButton';
 import TextButton from '@/app/(afterLogin)/_component/buttons/TextButton';
 import useComposeStore from '@/app/(afterLogin)/_store/ComposeStore';
+import useAlterModal from '@/app/_hooks/useAlterModal';
 
 export default function ComposePostHeader() {
+  const { sendPrepareMessage } = useAlterModal();
   const reset = useComposeStore((state) => state.reset);
 
   return (
@@ -17,7 +19,11 @@ export default function ComposePostHeader() {
         </div>
         <div className={utils.flexGrow_1}></div>
         <div className={styles.draft}>
-          <TextButton theme="primary_reverse" text="Drafts" />
+          <TextButton
+            theme="primary_reverse"
+            text="Drafts"
+            onClick={sendPrepareMessage}
+          />
         </div>
       </div>
     </div>

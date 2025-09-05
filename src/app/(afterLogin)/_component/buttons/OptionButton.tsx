@@ -7,7 +7,6 @@ interface Props {
   className?: string;
   style?: CSSProperties;
   width?: number;
-  white?: boolean;
   onClick?: MouseEventHandler<HTMLButtonElement>;
   disabled?: boolean;
 }
@@ -16,7 +15,6 @@ export default function OptionButton({
   className,
   style,
   width = 20,
-  white,
   onClick,
   disabled,
 }: Props) {
@@ -27,7 +25,7 @@ export default function OptionButton({
       onClick={onClick}
       disabled={disabled}
     >
-      <OptionSvg width={width} white={white} />
+      <OptionSvg width={width} />
     </button>
   );
 }

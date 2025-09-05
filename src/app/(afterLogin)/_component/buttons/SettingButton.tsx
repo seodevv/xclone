@@ -22,7 +22,7 @@ export default function SettingButton({
       style={style}
       onClick={onClick}
     >
-      <SettingSvg width={width} white />
+      <SettingSvg width={width} theme="theme" />
     </button>
   );
 }

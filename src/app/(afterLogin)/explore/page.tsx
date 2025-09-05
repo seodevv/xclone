@@ -4,6 +4,7 @@ import Trends from '../_component/trends/Trends';
 import TrendsHydrationBoundary from '../_boundary/TrendsHydrationBoundary';
 import SettingButton from '../_component/buttons/SettingButton';
 import { Metadata } from 'next';
+import useAlterModal from '@/app/_hooks/useAlterModal';
 
 export const metadata: Metadata = {
   title: 'Explore / XClone',

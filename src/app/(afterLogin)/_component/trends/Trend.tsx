@@ -17,8 +17,8 @@ export default function Trend({ tag, index }: Props) {
 
   return (
     <Link
-      href={`/search?q=${encodeURIComponent(content)}`}
       className={style.trend}
+      href={`/search?q=${encodeURIComponent(content)}`}
       style={{ order: index + 1 }}
     >
       <div className={style.count}>{indexing}</div>

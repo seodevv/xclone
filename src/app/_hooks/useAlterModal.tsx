@@ -64,6 +64,18 @@ export default function useAlterModal() {
     });
   }, [resetMessage]);
 
+  const sendErrorMessage = useCallback(() => {
+    resetMessage();
+    setTimeout(() => {
+      setModal({
+        show: true,
+        message: 'Something is wrong. Please try again',
+        duration: 2000,
+        type: 'error',
+      });
+    });
+  }, [resetMessage]);
+
   return {
     getMessage,
     getDuration,
@@ -72,5 +84,6 @@ export default function useAlterModal() {
     setDuration,
     resetMessage,
     sendPrepareMessage,
+    sendErrorMessage,
   };
 }

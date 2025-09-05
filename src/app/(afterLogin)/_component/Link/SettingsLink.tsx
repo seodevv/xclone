@@ -9,7 +9,6 @@ interface Props {
   style?: CSSProperties;
   href: string;
   width?: number;
-  white?: boolean;
 }
 
 export default function SettingsLink({
@@ -17,7 +16,6 @@ export default function SettingsLink({
   style,
   href,
   width = 20,
-  white = true,
 }: Props) {
   return (
     <Link
@@ -25,7 +23,7 @@ export default function SettingsLink({
       style={style}
       href={href}
     >
-      <SettingSvg width={width} white={white} />
+      <SettingSvg width={width} theme="theme" />
     </Link>
   );
 }

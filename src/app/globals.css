@@ -6,12 +6,16 @@
     'Fira Mono', 'Droid Sans Mono', 'Courier New', monospace;
 
   --foreground-rgb: 0, 0, 0;
-  --background-start-rgb: 214, 219, 220;
+  --foreground-reverse-rgb: 255, 255, 255;
+
+  --background-start-rgb: 255, 255, 255;
   --background-end-rgb: 255, 255, 255;
   --r-background-start-rgb: 0, 0, 0;
   --background-modal-rgb: 91, 112, 131;
 
-  --border-start-rgb: 47, 51, 54;
+  --border-start-rgb: 239, 243, 244;
+  --border-input-rgb: 207, 217, 222;
+
   --primary-button-rgb: 26, 140, 216;
   --button-hover-rgb: 239, 243, 244;
   --label-rgb: 83, 100, 113;
@@ -28,10 +32,11 @@
 
   --private-rgb: 2, 17, 61;
 
-  --font-theme-rgb: 231, 233, 234;
+  --font-theme-rgb: 15, 20, 25;
+  --font-reverse-rgb: 231, 233, 234;
 
-  --scroll-thumb: 62, 65, 68;
-  --scroll-background: 22, 24, 28;
+  --scroll-thumb: 185, 202, 211;
+  --scroll-background: 247, 249, 249;
 
   --primary-glow: conic-gradient(
     from 180deg at 50% 50%,
@@ -67,15 +72,25 @@
 @media (prefers-color-scheme: dark) {
   :root {
     --foreground-rgb: 255, 255, 255;
+    --foreground-reverse-rgb: 0, 0, 0;
+
     --background-start-rgb: 0, 0, 0;
     --background-end-rgb: 0, 0, 0;
-    --r-background-start-rgb: 214, 219, 220;
+    --r-background-start-rgb: 239, 243, 244;
 
     --border-start-rgb: 47, 51, 54;
+    --border-input-rgb: 51, 54, 57;
+
     --primary-button-rgb: 26, 140, 216;
     --label-rgb: 83, 100, 113;
     --link-rgb: 113, 118, 123;
     --search-rgb: 32, 35, 39;
+
+    --font-theme-rgb: 231, 233, 234;
+    --font-reverse-rgb: 15, 20, 25;
+
+    --scroll-thumb: 62, 65, 68;
+    --scroll-background: 22, 24, 28;
 
     --primary-glow: radial-gradient(rgba(1, 65, 255, 0.4), rgba(1, 65, 255, 0));
     --secondary-glow: linear-gradient(

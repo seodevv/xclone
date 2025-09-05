@@ -17,6 +17,7 @@ interface Props {
   color?: 'default' | 'none';
   size?: 'small' | 'medium' | 'large' | 'none';
   height?: 'auto';
+  maxHeight?: '90dvh';
   overflow?: 'auto';
   prevPath?: string;
   onClick?: () => void;
@@ -31,6 +32,7 @@ export default function IBackground({
   color = 'default',
   size = 'medium',
   height,
+  maxHeight,
   overflow,
   prevPath = '/home',
   onClick,
@@ -125,7 +127,7 @@ export default function IBackground({
             )}
             onClick={onClickXmark}
           >
-            <XMarkSvg theme="white" width={20} />
+            <XMarkSvg width={20} />
           </button>
         </div>
       )}
@@ -136,6 +138,7 @@ export default function IBackground({
           size !== 'none' && styles.modal,
           styles[size],
           styles[`height-${height}`],
+          styles[`maxHeight_${maxHeight}`],
           overflow === 'auto' && styles.auto
         )}
       >

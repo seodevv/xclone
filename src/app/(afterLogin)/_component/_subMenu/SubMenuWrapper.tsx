@@ -28,6 +28,7 @@ interface Props {
     | 'bottom-left'
     | 'bottom-center'
     | 'bottom-right';
+  nav?: boolean;
   children?: React.ReactNode;
 }
 
@@ -36,6 +37,7 @@ export default function SubMenuWrapper({
   style,
   direction = 'column',
   position = 'center',
+  nav,
   children,
 }: Props) {
   const { width: viewWidth, height: viewHeight } = useViewport();
@@ -122,7 +124,8 @@ export default function SubMenuWrapper({
           className={cx(
             styles.context_menu,
             utils.absolute,
-            over.y ? utils.fadeIn : utils.maxHeight
+            over.y ? utils.fadeIn : utils.maxHeight,
+            nav && styles.nav
           )}
           style={{
             top: y - minusY,

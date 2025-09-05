@@ -9,9 +9,9 @@ interface Props {
 export default function NextAuthProvider({ children }: Props) {
   return (
     <SessionProvider
-      // basePath="/"
-      // refetchInterval={5 * 60}
-      refetchOnWindowFocus={true}
+    // basePath="/"
+    // refetchInterval={5 * 60}
+    // refetchOnWindowFocus={true}
     >
       {children}
     </SessionProvider>

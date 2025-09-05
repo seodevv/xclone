@@ -11,11 +11,11 @@ interface Props {
 
 export default function InstantRoomControll({ sessionId, roomid }: Props) {
   const { data: room } = useGetRoom(roomid);
-  const { addRooms } = useRoomsQueryData({ sessionId });
+  const { addRoom } = useRoomsQueryData({ sessionId });
 
   useLayoutEffect(() => {
     if (typeof room !== 'undefined') {
-      addRooms({ payload: room.data });
+      addRoom({ payload: room.data });
     }
   }, [room]);
 

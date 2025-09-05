@@ -132,10 +132,9 @@ const VerifyPassword = forwardRef<VerifyPasswordRef, Props>(
             <FlexButton
               type="submit"
               text={btnText ? btnText : password === '' ? 'Cancel' : 'Next'}
-              theme={
-                btnTheme ? btnTheme : password === '' ? 'reverse' : 'white'
-              }
+              theme={btnTheme ? btnTheme : 'theme'}
               disabled={loading}
+              isLoading={loading}
               large
             />
           </div>

@@ -1,5 +1,4 @@
 import { getUser } from '@/app/(afterLogin)/[username]/_lib/getUser';
-import { decryptRoomId } from '@/app/_lib/common';
 import {
   dehydrate,
   HydrationBoundary,
@@ -8,16 +7,13 @@ import {
 
 interface Props {
   children?: React.ReactNode;
-  sessionid: string;
-  roomid: string;
+  receiverid: string;
 }
 
 export default async function RoomReceiverHydrationBoundary({
   children,
-  sessionid,
-  roomid,
+  receiverid,
 }: Props) {
-  const receiverId = decryptRoomId({ userId: sessionid, roomId: roomid });
   const queryClient = new QueryClient();
   queryClient.setDefaultOptions({
     queries: {
@@ -26,7 +22,7 @@ export default async function RoomReceiverHydrationBoundary({
   });
   await Promise.all([
     queryClient.prefetchQuery({
-      queryKey: ['users', receiverId],
+      queryKey: ['users', receiverid],
       queryFn: getUser,
     }),
   ]);

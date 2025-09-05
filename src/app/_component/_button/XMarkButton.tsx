@@ -28,7 +28,7 @@ export default function XMarkButton({
       onClick={onClick}
       disabled={disabled}
     >
-      <XMarkSvg width={width} white />
+      <XMarkSvg width={width} theme="white" />
     </button>
   );
 }

@@ -1,25 +1,29 @@
+'use client';
+
 import { responseErrorHandler } from '@/app/_lib/error';
 import { AdvancedPost } from '@/model/Post';
 import {
   InfiniteData,
-  QueryClient,
   QueryKey,
   useMutation,
+  useQueryClient,
 } from '@tanstack/react-query';
 
 interface Variables {
   method: 'post' | 'delete';
-  post: AdvancedPost;
-  queryClient: QueryClient;
+  postid: AdvancedPost['postid'];
+  sessionid: string;
 }
 
-const usePostPinnedMutation = () =>
-  useMutation({
+const usePostPinnedMutation = () => {
+  const queryClient = useQueryClient();
+
+  return useMutation({
     mutationFn: async ({
       method,
-      post,
+      postid,
     }: Variables): Promise<{ data: AdvancedPost; message: string }> => {
-      const requestUrl = `${process.env.NEXT_PUBLIC_SERVER_URL}/api/posts/${post.postid}/pinned`;
+      const requestUrl = `${process.env.NEXT_PUBLIC_SERVER_URL}/api/posts/${postid}/pinned`;
       const requestOptions: RequestInit = {
         method,
         credentials: 'include',
@@ -33,34 +37,53 @@ const usePostPinnedMutation = () =>
 
       return responseErrorHandler(response);
     },
-    onMutate: ({ method, post, queryClient }) => {
+    onMutate: ({ method, postid }) => {
+      type SingleData = {
+        data: AdvancedPost;
+        message: string;
+      };
+      type ListData = InfiniteData<
+        { data: AdvancedPost[]; message: string },
+        number
+      >;
+      function isSingleData(
+        queryData: SingleData | ListData
+      ): queryData is SingleData {
+        return queryData.hasOwnProperty('data');
+      }
+
       const queryKeys = queryClient
         .getQueryCache()
         .getAll()
         .map((q) => q.queryKey)
-        .filter((key) => key[0] === 'posts' && key[1] === 'list');
-
-      const context: {
+        .filter((key) => key[0] === 'posts' && key[1] !== 'count');
+      const rollbacks: {
         queryKey: QueryKey;
-        queryData: InfiniteData<TData, number>;
+        queryData: SingleData | ListData;
       }[] = [];
 
-      const isKey = (key: any) => {
-        return key.filter === 'all';
-      };
       queryKeys.forEach((queryKey) => {
-        // ['posts', 'list', username, {filter: 'all'}]
-        if (queryKey[2] === post.User.id && isKey(queryKey[3])) {
-          const queryData =
-            queryClient.getQueryData<InfiniteData<TData, number>>(queryKey);
-          if (!queryData) return;
+        const queryData = queryClient.getQueryData<SingleData | ListData>(
+          queryKey
+        );
+        if (typeof queryData === 'undefined') return;
 
-          // add pin
+        if (isSingleData(queryData)) {
+          const shallow: SingleData = {
+            ...queryData,
+            data: {
+              ...queryData.data,
+              pinned: method === 'post' ? true : false,
+            },
+          };
+          queryClient.setQueryData(queryKey, shallow);
+          rollbacks.push({ queryKey, queryData });
+        } else {
           if (method === 'post') {
             const shallow = { ...queryData };
             queryData.pages.forEach((page, i) =>
               page.data.forEach((p, j) => {
-                if (p.postid !== post.postid) return;
+                if (p.postid !== postid) return;
 
                 shallow.pages = [...shallow.pages];
                 shallow.pages[i] = { ...shallow.pages[i] };
@@ -75,16 +98,14 @@ const usePostPinnedMutation = () =>
               })
             );
             queryClient.setQueryData(queryKey, shallow);
-            context.push({ queryKey, queryData });
+            rollbacks.push({ queryKey, queryData });
           }
           // delete pin
           else if (method === 'delete') {
             const flatten = queryData.pages
               .map((page) => page.data.map((p) => p))
               .flat();
-            const findPostIndex = flatten.findIndex(
-              (p) => p.postid === post.postid
-            );
+            const findPostIndex = flatten.findIndex((p) => p.postid === postid);
             if (findPostIndex === -1) return;
             flatten[findPostIndex] = {
               ...flatten[findPostIndex],
@@ -111,64 +132,28 @@ const usePostPinnedMutation = () =>
             });
 
             queryClient.setQueryData(queryKey, shallow);
-            context.push({ queryKey, queryData });
-          }
-        } else {
-          const queryData =
-            queryClient.getQueryData<InfiniteData<TData, number>>(queryKey);
-          if (!queryData) return;
-
-          const shallow = { ...queryData };
-          let shouldBeUpdate = false;
-          queryData.pages.forEach((page, i) =>
-            page.data.forEach((p, j) => {
-              if (p.postid === post.postid) {
-                shouldBeUpdate = true;
-                shallow.pages = [...shallow.pages];
-                shallow.pages[i] = { ...shallow.pages[i] };
-                shallow.pages[i].data = [...shallow.pages[i].data];
-                shallow.pages[i].data[j] = {
-                  ...p,
-                  pinned: method === 'post' ? true : false,
-                };
-              } else if (p.Original?.postid === post.postid) {
-                shouldBeUpdate = true;
-                shallow.pages = [...shallow.pages];
-                shallow.pages[i] = { ...shallow.pages[i] };
-                shallow.pages[i].data = [...shallow.pages[i].data];
-                shallow.pages[i].data[j] = {
-                  ...p,
-                  Original: {
-                    ...p.Original,
-                    pinned: method === 'post' ? true : false,
-                  },
-                };
-              }
-            })
-          );
-
-          if (shouldBeUpdate) {
-            queryClient.setQueryData(queryKey, shallow);
-            context.push({ queryKey, queryData });
+            rollbacks.push({ queryKey, queryData });
           }
         }
       });
 
-      return context;
+      return rollbacks;
     },
-    onSuccess: (response, { queryClient, post }, context) => {
-      context.forEach(({ queryKey }) => {
+    onSuccess: (response, _, rollbacks) => {
+      rollbacks.forEach(({ queryKey }) => {
         queryClient.invalidateQueries({ queryKey, refetchType: 'none' });
       });
     },
-    onError: (error, { queryClient }, context) => {
-      if (context) {
-        context.forEach(({ queryKey, queryData }) => {
+    onError: (error, _, rollbacks) => {
+      console.error(error);
+      if (typeof rollbacks !== 'undefined') {
+        rollbacks.forEach(({ queryKey, queryData }) => {
           queryClient.setQueryData(queryKey, queryData);
         });
       }
     },
   });
+};
 
 interface TData {
   data: AdvancedPost[];

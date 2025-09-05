@@ -51,7 +51,7 @@ export default function WhoCanReply({ post }: Props) {
       id: 3,
       text: 'only you',
       active: 'only',
-      svg: <ProfileSvg width={20} white />,
+      svg: <ProfileSvg width={20} theme="theme" />,
     },
   ];
 

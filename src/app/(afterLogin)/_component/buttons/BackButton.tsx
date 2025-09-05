@@ -56,7 +56,7 @@ export default function BackButton({
       style={style}
       onClick={onClickBack}
     >
-      <LeftArrowSvg width={width} white />
+      <LeftArrowSvg width={width} theme="theme" />
     </button>
   );
 }

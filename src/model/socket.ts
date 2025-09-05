@@ -7,6 +7,7 @@ import { AdvancedRooms } from '@/model/Room';
 export interface ServerToClientEvents {
   message: (data: { room?: AdvancedRooms; message?: AdvancedMessages }) => void;
   reaction: (data: { message?: AdvancedMessages }) => void;
+  focus: (data: { roomid: AdvancedRooms['id'] }) => void;
 }
 
 // Client to Server
@@ -30,6 +31,7 @@ export interface ClientToServerEvents {
     },
     callback: (data: AdvancedMessages | undefined) => void
   ) => void;
+  focus: (data: { roomid: AdvancedRooms['id'] }, callback: () => void) => void;
 }
 
 interface Gif {

@@ -17,7 +17,7 @@ export default function GoogleLogin() {
         className={cx(styles.login, styles.google)}
         onClick={onClickGoogleLogin}
       >
-        <GoogleSvg className={styles.googleSvg} />
+        <GoogleSvg className={styles.googleSvg} width={25} />
         <span>Sign up with Google</span>
       </button>
     </>

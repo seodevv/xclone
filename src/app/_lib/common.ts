@@ -198,18 +198,24 @@ export const hashString = (str: string) => {
 };
 
 export const unHashString = (encoded: string) => {
+  if (typeof encoded === 'undefined') return null;
+
   const salt = 'secret';
   const textToChars = (text: string) =>
     text.split('').map((c) => c.charCodeAt(0));
   const applySaltToChar = (code: number) =>
     textToChars(salt).reduce((a, b) => a ^ b, code);
 
-  return encoded
-    .match(/.{1,2}/g)!
-    .map((hex) => parseInt(hex, 16))
-    .map(applySaltToChar)
-    .map((charCode) => String.fromCharCode(charCode))
-    .join('');
+  const match = encoded.match(/.{1,2}/g);
+  if (match) {
+    return match
+      .map((hex) => parseInt(hex, 16))
+      .map(applySaltToChar)
+      .map((charCode) => String.fromCharCode(charCode))
+      .join('');
+  }
+
+  return null;
 };
 
 export const encryptRoomId = (senderId: string, receiverId: string) => {
@@ -228,8 +234,11 @@ export const decryptRoomId = ({
   const [a, b] = roomId.split('-');
   const u1 = unHashString(a);
   const u2 = unHashString(b);
-  const receiverId = userId === u1 ? u2 : u1;
-  return receiverId;
+
+  return {
+    senderid: userId === u1 ? u1 : u2,
+    receiverid: userId === u1 ? u2 : u1,
+  };
 };
 
 export function dataURLtoFile(dataurl: string, filename: string) {

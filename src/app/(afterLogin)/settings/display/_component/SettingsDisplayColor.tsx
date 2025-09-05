@@ -39,7 +39,7 @@ export default function SettingsDisplayColor() {
             </div>
             {display.color === v.id && (
               <div className={styles.check}>
-                <CheckSvg width={25} white />
+                <CheckSvg width={25} theme="theme" />
               </div>
             )}
           </button>

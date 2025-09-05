@@ -11,7 +11,6 @@ import {
 import styles from './beforeLogin.selector.module.css';
 import DateSelector from './DateSelector';
 import { getLastDay } from '@/app/_lib/common';
-import { IdentifierInputRef } from '@/app/_component/_input/IdentifierInput';
 
 interface Props {
   defaultValue?: string;
@@ -19,17 +18,22 @@ interface Props {
   disabled?: boolean;
 }
 
+export type BirthRef = {
+  focus: () => void;
+  blur: () => void;
+};
+
 interface Status {
-  [key: string]: { disabled: boolean; ref: RefObject<IdentifierInputRef> };
+  [key: string]: { disabled: boolean; ref: RefObject<BirthRef> };
 }
 
-const BirthSelector = forwardRef<IdentifierInputRef, Props>(
+const BirthSelector = forwardRef<BirthRef, Props>(
   ({ defaultValue, onSuccess, disabled }, ref) => {
     const [date, setDate] = useState(new Date(defaultValue || Date.now()));
     const status = useRef<Status>({
-      a: { disabled: !!defaultValue, ref: useRef<IdentifierInputRef>(null) },
-      b: { disabled: !!defaultValue, ref: useRef<IdentifierInputRef>(null) },
-      c: { disabled: !!defaultValue, ref: useRef<IdentifierInputRef>(null) },
+      a: { disabled: !!defaultValue, ref: useRef<BirthRef>(null) },
+      b: { disabled: !!defaultValue, ref: useRef<BirthRef>(null) },
+      c: { disabled: !!defaultValue, ref: useRef<BirthRef>(null) },
     });
 
     const checkDate = ({

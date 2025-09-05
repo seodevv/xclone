@@ -29,7 +29,7 @@ export default function PageHeader({
       {!noBack && <BackButton prevPath={prevPath} />}
       {title && (
         <div className={styles.title}>
-          <Text text={title} size="xl" bold="bold" />
+          <Text text={title} theme="theme" size="xl" bold="bold" />
           {sub && <Text text={sub} theme="gray" size="xs" />}
         </div>
       )}

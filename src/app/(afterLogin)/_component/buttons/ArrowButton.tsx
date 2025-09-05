@@ -22,9 +22,9 @@ export default function ArrowButton({
   return (
     <button className={className} style={style} onClick={onClick}>
       {type === 'left' ? (
-        <LeftArrowSvg width={width} white />
+        <LeftArrowSvg width={width} theme="theme" />
       ) : (
-        <RightArrowSvg width={width} white />
+        <RightArrowSvg width={width} theme="theme" />
       )}
     </button>
   );

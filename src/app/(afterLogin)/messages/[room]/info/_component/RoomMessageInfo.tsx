@@ -6,15 +6,12 @@ import TransitionTextButton from '@/app/(afterLogin)/_component/buttons/Transiti
 import LoadingSpinner from '@/app/(afterLogin)/_component/loading/LoadingSpinner';
 import OtherProfile from '@/app/(afterLogin)/_component/profile/OtherProfile';
 import { ConfirmContext } from '@/app/(afterLogin)/_provider/ConfirmProvider';
-import { SubMenuContext } from '@/app/(afterLogin)/_provider/SubMenuProvider';
-import useSettingsLocalStore, {
-  ConversationInfoSelector,
-} from '@/app/(afterLogin)/_store/SettingsLocalStore';
-import IdentifierToggle from '@/app/_component/_input/IdentifierToggle';
+import RoomMessageInfoNotifications from '@/app/(afterLogin)/messages/[room]/info/_component/RoomMessageInfoNotifications';
+import useGetRoom from '@/app/(afterLogin)/messages/_hooks/useGetRoom';
+import useRoomDisableMutation from '@/app/(afterLogin)/messages/_hooks/useRoomDisableMutation';
 import Text from '@/app/_component/_text/Text';
 import DivideLine from '@/app/_component/_util/DivideLine';
 import useAlterModal from '@/app/_hooks/useAlterModal';
-import { decryptRoomId } from '@/app/_lib/common';
 import utils from '@/app/utility.module.css';
 import cx from 'classnames';
 import Link from 'next/link';
@@ -22,23 +19,57 @@ import { useRouter } from 'next/navigation';
 import { useContext } from 'react';
 
 interface Props {
-  sessionId: string;
-  roomId: string;
+  roomid: string;
+  sessionid: string;
+  receiverid: string;
 }
 
-export default function RoomMessageInfo({ sessionId, roomId }: Props) {
+export default function RoomMessageInfo({
+  roomid,
+  sessionid,
+  receiverid,
+}: Props) {
   const router = useRouter();
-  const targetUserId = decryptRoomId({ userId: sessionId, roomId });
-  const { data: user } = useUserQuery(targetUserId);
-  const { dispatchMenu } = useContext(SubMenuContext);
-  const { conversationInfo, setConverstationInfo } = useSettingsLocalStore(
-    ConversationInfoSelector
-  );
+  const { data: user } = useUserQuery(receiverid);
+  const { data: room } = useGetRoom(roomid);
   const { dispatchModal, close } = useContext(ConfirmContext);
-  const { sendPrepareMessage } = useAlterModal();
+  const { sendPrepareMessage, sendErrorMessage } = useAlterModal();
 
-  if (typeof user !== 'undefined') {
-    const isFollower = !!user.data.Followings.find((u) => u.id === sessionId);
+  const disableMutation = useRoomDisableMutation();
+  const onClickLeave = () => {
+    dispatchModal({
+      type: 'setCustom',
+      payload: {
+        title: 'Leave conversation?',
+        sub: 'This conversation will be deleted from your inbox. Other people in the conversation will still be able to see it.',
+        btnText: 'Leave',
+        btnTheme: 'red',
+        onClickCancle: () => {
+          close();
+        },
+        onClickConfirm: () => {
+          disableMutation.mutate(
+            {
+              sessionid,
+              roomid,
+            },
+            {
+              onSettled: () => {
+                close();
+                router.push('/messages');
+              },
+              onError: () => {
+                sendErrorMessage();
+              },
+            }
+          );
+        },
+      },
+    });
+  };
+
+  if (typeof user !== 'undefined' && typeof room !== 'undefined') {
+    const isFollower = !!user.data.Followings.find((u) => u.id === sessionid);
 
     return (
       <div
@@ -129,66 +160,11 @@ export default function RoomMessageInfo({ sessionId, roomId }: Props) {
             </div>
           </div>
         </div>
-        <div className={utils.d_flexColumn}>
-          <DivideLine />
-          <Text
-            className={cx(
-              utils.ptb_12,
-              utils.prl_16,
-              utils.d_flexColumn,
-              utils.flex_justiBetween
-            )}
-            text="Notifications"
-            size="xl"
-            bold="bold"
-            theme="theme"
-          />
-          <IdentifierToggle
-            title={`Snooze notifications from ${user.data.nickname}`}
-            defaultValue={!!conversationInfo.find((c) => c.id === user.data.id)}
-            onToggleOn={(check, setCheck, event) => {
-              const { x, y, width, height } =
-                event.currentTarget.getBoundingClientRect();
-              dispatchMenu({
-                type: 'set',
-                payload: {
-                  flag: true,
-                  status: {
-                    type: 'message',
-                    detail: 'notification',
-                    callback: (value) => {
-                      dispatchMenu({ type: 'reset' });
-                      setCheck(true);
-                      setConverstationInfo({
-                        type: 'add',
-                        payload: {
-                          id: user.data.id,
-                          snooze: value,
-                          timestamp: new Date(),
-                        },
-                      });
-                    },
-                  },
-                  position: {
-                    x,
-                    y,
-                    width,
-                    height,
-                    target: event.currentTarget,
-                  },
-                },
-              });
-            }}
-            onToogleOff={(check, setCheck) => {
-              dispatchMenu({ type: 'reset' });
-              setCheck(false);
-              setConverstationInfo({
-                type: 'delete',
-                payload: { id: user.data.id },
-              });
-            }}
-          />
-        </div>
+        <RoomMessageInfoNotifications
+          nickname={user.data.nickname}
+          roomid={room.data.id}
+          Snooze={room.data.Snooze}
+        />
         <div className={utils.d_flexColumn}>
           <DivideLine />
           <TransitionTextButton
@@ -236,19 +212,7 @@ export default function RoomMessageInfo({ sessionId, roomId }: Props) {
             type="button"
             text="Leave conversation"
             theme="error"
-            onClick={() => {
-              dispatchModal({
-                type: 'setCustom',
-                payload: {
-                  title: 'Leave conversation?',
-                  sub: 'This conversation will be deleted from your inbox. Other people in the conversation will still be able to see it.',
-                  btnText: 'Leave',
-                  btnTheme: 'red',
-                  onClickCancle: () => close(),
-                  onClickConfirm: () => {},
-                },
-              });
-            }}
+            onClick={onClickLeave}
           />
         </div>
       </div>

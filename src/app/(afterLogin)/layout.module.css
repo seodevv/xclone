@@ -28,6 +28,8 @@
   border-right-style: solid;
   border-right-width: 1px;
   border-color: rgb(var(--border-start-rgb));
+  overflow-x: hidden;
+  overflow-y: auto;
 }
 
 .leftSectionFixed nav {
@@ -40,14 +42,22 @@
 .logo {
   margin-top: 2px;
   display: inline-block;
-  height: 56px;
+  min-width: 52px;
+  min-height: 52px;
   background: transparent;
   border: none;
+  border-radius: 9999px;
+  transition: 200ms background-color ease-in;
   cursor: pointer;
 }
-
 .logo:hover {
-  filter: drop-shadow(5px 5px 15px #fff);
+  background: rgba(15, 20, 25, 0.1);
+}
+
+@media (prefers-color-scheme: dark) {
+  .logo:hover {
+    background-color: rgba(239, 243, 244, 0.1);
+  }
 }
 
 .XLogo {

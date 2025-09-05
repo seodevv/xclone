@@ -31,7 +31,6 @@ export default function ListsSearchResult({ searchParams }: Props) {
           <TextLink
             href="/i/lists/create"
             text="Create new List"
-            theme="white"
             size="large"
             inline
           />

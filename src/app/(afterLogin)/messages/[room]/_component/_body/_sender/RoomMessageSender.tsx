@@ -43,6 +43,7 @@ export default function RoomMessageSender({ roomId }: Props) {
   const onChangeMessage: ChangeEventHandler<HTMLTextAreaElement> = (e) => {
     setMessage(e.target.value);
   };
+
   const onKeyDownMessage: KeyboardEventHandler<HTMLTextAreaElement> = (e) => {
     if (!e.shiftKey && e.key === 'Enter') {
       e.preventDefault();
@@ -50,6 +51,12 @@ export default function RoomMessageSender({ roomId }: Props) {
       return;
     }
   };
+
+  const { sendFocus } = useContext(WebSocketContext);
+  const onFocusTextarea = () => {
+    sendFocus({ roomid: roomId });
+  };
+
   const onBlurMessage: FocusEventHandler<HTMLTextAreaElement> = (e) => {
     const prevContent = message.substring(0, e.target.selectionStart);
     setLastSelection(splitEmoji(prevContent).length);
@@ -85,25 +92,11 @@ export default function RoomMessageSender({ roomId }: Props) {
     }
   };
 
-  const onFocusWindow = () => {
-    console.log('onFocusWindow');
-  };
-  const onFocusTextarea = () => {
-    console.log('onFocusTextarea');
-  };
-
   useEffect(() => {
     if (reply) {
       messageRef.current?.focus();
     }
   }, [reply]);
-
-  useEffect(() => {
-    window.addEventListener('focus', onFocusWindow);
-    return () => {
-      window.removeEventListener('focus', onFocusWindow);
-    };
-  }, []);
 
   return (
     <aside className={styles.sender}>
@@ -186,8 +179,8 @@ export default function RoomMessageSender({ roomId }: Props) {
                 value={message}
                 onChange={onChangeMessage}
                 onKeyDown={onKeyDownMessage}
-                onBlur={onBlurMessage}
                 onFocus={onFocusTextarea}
+                onBlur={onBlurMessage}
               />
             </div>
           </div>
@@ -201,8 +194,8 @@ export default function RoomMessageSender({ roomId }: Props) {
               utils.w_min_36,
               utils.h_min_36,
               utils.bg_trans,
-              message !== '' && media && utils.hover_bg_primary,
-              message !== '' && media && utils.active_bg_primary,
+              message !== '' && media && utils.hover_bg_primary_a_1,
+              message !== '' && media && utils.active_bg_primary_a_2,
               utils.bd_1_solid_trans,
               utils.br_9999,
               utils.outline_none,

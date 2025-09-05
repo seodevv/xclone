@@ -57,7 +57,11 @@ export default function PhotoSection({ params }: Props) {
             />
           ))}
         </div>
-        <CloseButton className={styles.photoClose} width={20} />
+        <CloseButton
+          className={styles.photoClose}
+          width={20}
+          position="absolute"
+        />
         {hasPrev && (
           <PrevButton
             className={styles.photoPrev}

@@ -1,8 +1,8 @@
 'use client';
 
-import useRoomNotificationMutation from '@/app/(afterLogin)/messages/[room]/_hooks/useRoomNotificationMutation';
+import { WebSocketContext } from '@/app/(afterLogin)/messages/[room]/_provider/WebSocketProvider';
 import useRoomsQueryData from '@/app/(afterLogin)/messages/_hooks/useRoomsQueryData';
-import { useEffect, useRef } from 'react';
+import { useContext, useEffect, useRef } from 'react';
 
 interface Props {
   sessionid: string;
@@ -10,19 +10,20 @@ interface Props {
 }
 
 export default function RoomNotificationUpdater({ sessionid, roomid }: Props) {
-  const { mutate: notificationUpdate } = useRoomNotificationMutation(sessionid);
-  const { updateRoomNotifications } = useRoomsQueryData({
+  const { updateNotification, updateRoomNotifications } = useRoomsQueryData({
     sessionId: sessionid,
   });
+  const { sendFocus } = useContext(WebSocketContext);
   const onceRef = useRef<boolean>(false);
 
   useEffect(() => {
     if (!onceRef.current) {
-      notificationUpdate({ roomid });
+      sendFocus({ roomid });
+      updateNotification({ roomid });
       updateRoomNotifications({ type: 'remove', roomid });
       onceRef.current = true;
     }
-  }, [notificationUpdate]);
+  }, []);
 
   return null;
 }

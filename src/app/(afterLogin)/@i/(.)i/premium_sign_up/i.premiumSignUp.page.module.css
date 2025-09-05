@@ -32,10 +32,9 @@
   top: -300px;
   width: 100%;
   min-height: 650px;
-  background: radial-gradient(
-    56.1514% 56.1514% at 49.972% 38.959%,
-    rgb(39, 54, 73) 0%,
-    rgb(0, 0, 0) 100%
+  background-image: linear-gradient(
+    rgba(86, 172, 231, 0.52) 0%,
+    rgb(255, 255, 255) 100%
   );
 }
 .close {
@@ -58,5 +57,15 @@
 @media screen and (max-width: 704px) {
   .inner {
     min-width: unset;
+  }
+}
+
+@media (prefers-color-scheme: dark) {
+  .gradient {
+    background-image: radial-gradient(
+      56.1514% 56.1514% at 49.972% 38.959%,
+      rgb(39, 54, 73) 0%,
+      rgb(0, 0, 0) 100%
+    );
   }
 }

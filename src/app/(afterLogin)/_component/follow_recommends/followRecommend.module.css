@@ -4,6 +4,7 @@
   order: 0;
   border: 1px solid rgb(var(--border-start-rgb));
   border-radius: 16px;
+  overflow: hidden;
 }
 .lastOrder {
   order: 2;
@@ -22,7 +23,10 @@
   color: rgb(var(--primary-rgb));
 }
 .more:hover {
-  background: rgba(var(--foreground-rgb), 0.1);
+  background-color: rgba(0, 0, 0, 0.03);
+}
+.more:active {
+  background-color: rgba(0, 0, 0, 0.06);
 }
 .error {
   padding: 20px 12px;
@@ -47,11 +51,11 @@
   transition-duration: 200ms;
   transition-property: background-color;
 }
-.container:hover:not(:has(button:hover)) {
-  background: rgba(var(--foreground-rgb), 0.1);
+.container:hover {
+  background-color: rgba(0, 0, 0, 0.03);
 }
-.container:active:not(:has(button:hover)) {
-  background: rgba(var(--foreground-rgb), 0.2);
+.container:active {
+  background-color: rgba(0, 0, 0, 0.06);
 }
 .userLogo {
   width: 40px;
@@ -104,4 +108,15 @@
 }
 .cursor {
   cursor: pointer;
+}
+
+@media (prefers-color-scheme: dark) {
+  .container:hover,
+  .more:hover {
+    background-color: rgba(var(--foreground-rgb), 0.1);
+  }
+  .container:active,
+  .more:active {
+    background-color: rgba(var(--foreground-rgb), 0.2);
+  }
 }

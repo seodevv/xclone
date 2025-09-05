@@ -1,12 +1,14 @@
 .search {
-  margin-top: 6px;
-  margin-bottom: 12px;
+  /* margin-top: 6px;
+  margin-bottom: 12px; */
   display: flex;
   align-items: center;
   width: inherit;
   height: 42px;
-  background-color: rgb(var(--search-rgb));
-  border: 2px solid transparent;
+  background-color: transparent;
+  border-width: 1px;
+  border-style: solid;
+  border-color: rgba(207, 217, 222);
   border-radius: 21px;
   overflow: hidden;
   transition: 100ms all ease-in;
@@ -38,4 +40,11 @@
 
 .searchFocus {
   background: rgb(var(--background-start-rgb));
+}
+
+@media (prefers-color-scheme: dark) {
+  .search {
+    background-color: rgb(var(--search-rgb));
+    border-color: transparent;
+  }
 }

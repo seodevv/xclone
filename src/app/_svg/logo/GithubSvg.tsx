@@ -6,18 +6,12 @@ interface Props {
   className?: string;
   style?: CSSProperties;
   width?: number;
-  white?: boolean;
 }
 
-export default function GithubSvg({
-  className,
-  style,
-  width = 30,
-  white,
-}: Props) {
+export default function GithubSvg({ className, style, width = 30 }: Props) {
   return (
     <svg
-      className={cx(white && styles.white, className)}
+      className={cx(styles.inherit, className)}
       style={style}
       width={width}
       version="1.1"

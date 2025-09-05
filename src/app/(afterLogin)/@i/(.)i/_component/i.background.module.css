@@ -21,7 +21,7 @@
   max-width: 600px;
   background: rgb(var(--background-start-rgb));
   border-radius: 16px;
-  overflow: hidden;
+  overflow: auto;
 }
 .small {
   padding: 32px;
@@ -42,6 +42,9 @@
 }
 .height-auto {
   min-height: auto;
+}
+.maxHeight_90dvh {
+  max-height: 90dvh;
 }
 
 @media screen and (max-width: 704px) {

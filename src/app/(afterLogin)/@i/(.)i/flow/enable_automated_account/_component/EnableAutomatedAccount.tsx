@@ -35,13 +35,7 @@ export default function EnableAutomatedAccount() {
         </div>
       </div>
       <div className={styles.footer}>
-        <FlexButton
-          type="submit"
-          theme="white"
-          text="Next"
-          large
-          disabled={input === ''}
-        />
+        <FlexButton type="submit" text="Next" large disabled={input === ''} />
       </div>
     </form>
   );

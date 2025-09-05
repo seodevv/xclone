@@ -6,20 +6,25 @@ interface Props {
   className?: HTMLAttributes<HTMLOrSVGElement>['className'];
   style?: CSSProperties;
   width?: number;
-  white?: boolean;
   fill?: string;
+  theme?: 'default' | 'theme' | 'white';
 }
 
 export default function InformSvg({
   className,
   style,
   width = 16,
-  white,
   fill,
+  theme = 'default',
 }: Props) {
   return (
     <svg
-      className={cx(styles.defaultSvg, white && styles.white, className)}
+      className={cx(
+        theme === 'default' && styles.defaultSvg,
+        theme === 'theme' && styles.theme,
+        theme === 'white' && styles.white,
+        className
+      )}
       style={style}
       width={width}
       viewBox="0 0 24 24"

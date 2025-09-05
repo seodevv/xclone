@@ -121,7 +121,13 @@ export default function MonetizationBody() {
               href="/i/premium_sign_up?type=verified"
               scroll={false}
             >
-              <Text className={styles.t} theme="black" bold="bold" size="l">
+              <Text
+                className={styles.t}
+                theme="reverse"
+                bold="bold"
+                size="l"
+                whiteSpace="nowrap"
+              >
                 Become a Premium Creator
               </Text>
             </Link>

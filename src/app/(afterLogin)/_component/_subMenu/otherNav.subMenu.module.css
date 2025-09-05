@@ -1,0 +1,27 @@
+.lists {
+  display: none;
+}
+.premium {
+  display: none;
+}
+.bookmarks {
+  display: none;
+}
+
+@media all and (max-height: 764px) {
+  .bookmarks {
+    display: flex;
+  }
+}
+
+@media all and (max-height: 724px) {
+  .premium {
+    display: flex;
+  }
+}
+
+@media all and (max-height: 684px) {
+  .lists {
+    display: flex;
+  }
+}

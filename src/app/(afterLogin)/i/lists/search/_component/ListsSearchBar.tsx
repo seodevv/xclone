@@ -57,7 +57,7 @@ export default function ListsSearchBar({ q, options }: Props) {
           <Link className={styles.create} href="/i/lists/create" scroll={false}>
             <NewListsSvg width={20} white />
           </Link>
-          <OptionButton white onClick={onClickSearchListsOptions} />
+          <OptionButton onClick={onClickSearchListsOptions} />
         </div>
       )}
     </div>

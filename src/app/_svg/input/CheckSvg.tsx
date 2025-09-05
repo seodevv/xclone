@@ -6,24 +6,26 @@ interface Props {
   className?: string;
   style?: CSSProperties;
   width?: number;
-  white?: boolean;
   active?: boolean;
   inherit?: boolean;
+  theme?: 'default' | 'theme' | 'reverse' | 'white';
 }
 
 export default function CheckSvg({
   className,
   style,
   width = 16,
-  white,
   active = false,
   inherit,
+  theme = 'default',
 }: Props) {
   return (
     <svg
       className={cx(
-        styles.defaultSvg,
-        white && styles.white,
+        theme === 'default' && styles.defaultSvg,
+        theme === 'theme' && styles.theme,
+        theme === 'reverse' && styles.reverse,
+        theme === 'white' && styles.white,
         inherit && styles.inherit,
         className
       )}

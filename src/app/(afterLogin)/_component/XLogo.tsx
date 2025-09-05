@@ -11,7 +11,7 @@ export default function XLogo({ session }: Props) {
   return (
     <Link className={style.logo} href={session ? '/home' : '/'}>
       <div className={style.logoPill}>
-        <XLogoSvg width={30} className={style.XLogo} />
+        <XLogoSvg theme="theme" width={30} className={style.XLogo} />
       </div>
     </Link>
   );

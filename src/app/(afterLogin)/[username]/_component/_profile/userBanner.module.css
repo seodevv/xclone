@@ -7,7 +7,7 @@
   width: 100%;
 }
 .imageBox {
-  background: rgb(51, 54, 57);
+  background: rgb(207, 217, 222);
 }
 .image {
   width: 100%;
@@ -24,4 +24,10 @@
   bottom: 0;
   left: 0;
   z-index: -1;
+}
+
+@media (prefers-color-scheme: dark) {
+  .imageBox {
+    background-color: rgb(51, 54, 57);
+  }
 }

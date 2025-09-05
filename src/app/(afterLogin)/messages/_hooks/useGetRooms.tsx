@@ -6,5 +6,4 @@ const useGetRooms = (username: string) =>
     queryKey: ['rooms', 'list', username],
     queryFn: getRooms,
   });
-
 export default useGetRooms;

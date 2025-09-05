@@ -5,7 +5,7 @@
   flex-wrap: nowrap;
   flex-grow: 1;
   background: rgb(var(--background-start-rgb));
-  border: 1px solid rgb(var(--border-start-rgb));
+  border: 1px solid rgb(var(--border-input-rgb));
   border-radius: 4px;
 }
 .selector:focus-within {

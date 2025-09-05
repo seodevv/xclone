@@ -15,10 +15,10 @@
 }
 .link:hover,
 .button:hover {
-  background: rgb(22, 24, 28);
+  background: rgba(247, 249, 249, 1);
 }
 .button:active {
-  background: rgba(18, 21, 23, 0.7);
+  background: rgba(237, 239, 239, 1);
 }
 .icon {
   margin-right: 16px;
@@ -48,4 +48,14 @@
 }
 .none:active {
   background: transparent;
+}
+
+@media (prefers-color-scheme: dark) {
+  .link:hover,
+  .button:hover {
+    background: rgb(22, 24, 28);
+  }
+  .button:active {
+    background: rgba(18, 21, 23, 0.7);
+  }
 }

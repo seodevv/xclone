@@ -20,12 +20,18 @@ import { Session } from 'next-auth';
 import MessageReactionEditSubMenu from '@/app/(afterLogin)/_component/_subMenu/MessageReactionEditSubMenu';
 import MessageOptionSubMenu from '@/app/(afterLogin)/_component/_subMenu/MessageOptionSubMenu';
 import MessageReactionInfoSubMenu from '@/app/(afterLogin)/_component/_subMenu/MessageReactionInfoSubMenu';
+import MessageInfoNotificationSubMenu from '@/app/(afterLogin)/_component/_subMenu/MessageInfoNotificationSubMenu';
+import OtherNavSubMenu from '@/app/(afterLogin)/_component/_subMenu/OtherNavSubMenu';
+import SignSubMenu from '@/app/(afterLogin)/_component/_subMenu/SignSubMenu';
+import { AdvancedRooms } from '@/model/Room';
 
 interface State {
   status:
     | {
         type: 'idle';
       }
+    | { type: 'nav' }
+    | { type: 'sign' }
     | {
         type:
           | 'post'
@@ -40,7 +46,7 @@ interface State {
     | { type: 'lists_search'; sessionid: string }
     | { type: 'lists_share' }
     | { type: 'lists_show'; lists: AdvancedLists }
-    | { type: 'room' }
+    | { type: 'room'; room: AdvancedRooms }
     | { type: 'message_option'; message: AdvancedMessages }
     | {
         type: 'message_reaction_add';
@@ -133,6 +139,8 @@ export default function SubMenuProvider({ children }: Props) {
           utils.transit_visibility
         )}
       >
+        {menu.flag && menu.status.type === 'nav' && <OtherNavSubMenu />}
+        {menu.flag && menu.status.type === 'sign' && <SignSubMenu />}
         {menu.flag && menu.status.type === 'post' && (
           <PostSubMenuSelector
             post={menu.status.post}
@@ -175,7 +183,9 @@ export default function SubMenuProvider({ children }: Props) {
         {menu.flag && menu.status.type === 'lists_show' && (
           <ListsShowSubMenu lists={menu.status.lists} />
         )}
-        {menu.flag && menu.status.type === 'room' && <RoomSubMenu />}
+        {menu.flag && menu.status.type === 'room' && (
+          <RoomSubMenu room={menu.status.room} />
+        )}
         {menu.flag && menu.status.type === 'message_reaction_add' && (
           <MessageReactionEditSubMenu
             message={menu.status.message}
@@ -192,6 +202,9 @@ export default function SubMenuProvider({ children }: Props) {
             sessionid={menu.status.sessionid}
             callback={menu.status.callback}
           />
+        )}
+        {menu.flag && menu.status.type === 'message_notification' && (
+          <MessageInfoNotificationSubMenu callback={menu.status.callback} />
         )}
       </nav>
     </SubMenuContext.Provider>

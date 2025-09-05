@@ -9,35 +9,46 @@ interface Params {
 
 export default function useRoomsQueryData({ sessionId }: Params) {
   const queryClient = useQueryClient();
-  const queryKey: RoomsQueryKey = ['rooms', 'list', sessionId];
-
-  type RoomsQueryKey = ['rooms', 'list', typeof sessionId];
-  type RoomsQueryData = {
+  type SingleQueryData = {
+    data: AdvancedRooms;
+    message: string;
+  };
+  type ListQueryData = {
     data: AdvancedRooms[];
     message: string;
   };
+  function isSingleQueryData(
+    queryData: SingleQueryData | ListQueryData
+  ): queryData is SingleQueryData {
+    return !Array.isArray(queryData.data);
+  }
 
   function getRoom({
     roomid,
   }: {
     roomid: AdvancedRooms['id'];
   }): AdvancedRooms | undefined {
-    const queryData = queryClient.getQueryData<RoomsQueryData>(queryKey);
+    const queryData = queryClient.getQueryData<ListQueryData>([
+      'rooms',
+      'list',
+      sessionId,
+    ]);
     return queryData?.data.find((r) => r.id === roomid);
   }
 
-  function addRooms({ payload }: { payload: AdvancedRooms }) {
-    const queryData = queryClient.getQueryData<RoomsQueryData>(queryKey);
+  function addRoom({ payload }: { payload: AdvancedRooms }) {
+    const queryKey = ['rooms', 'list', sessionId];
+    const queryData = queryClient.getQueryData<ListQueryData>(queryKey);
     if (typeof queryData !== 'undefined') {
       if (!!queryData.data.find((r) => r.id === payload.id)) return;
-      const shallow: RoomsQueryData = {
+      const shallow: ListQueryData = {
         ...queryData,
         data: [...queryData.data],
       };
       shallow.data.unshift(payload);
       queryClient.setQueryData(queryKey, shallow);
     } else {
-      const newQueryData: RoomsQueryData = {
+      const newQueryData: ListQueryData = {
         data: [payload],
         message: 'ok',
       };
@@ -45,7 +56,7 @@ export default function useRoomsQueryData({ sessionId }: Params) {
     }
   }
 
-  function updateRooms({
+  function updateRoom({
     target: { id, payload },
   }: {
     target: {
@@ -53,27 +64,47 @@ export default function useRoomsQueryData({ sessionId }: Params) {
       payload: Partial<AdvancedRooms>;
     };
   }) {
-    const queryData = queryClient.getQueryData<RoomsQueryData>(queryKey);
-    if (typeof queryData !== 'undefined') {
-      queryData.data.forEach((room, i) => {
-        if (room.id !== id) return;
-        const shallow: RoomsQueryData = {
+    const queryKeys = [
+      ['rooms', id],
+      ['rooms', 'list', sessionId],
+    ];
+
+    queryKeys.forEach((queryKey) => {
+      const queryData = queryClient.getQueryData<
+        SingleQueryData | ListQueryData
+      >(queryKey);
+      if (typeof queryData === 'undefined') return;
+
+      if (isSingleQueryData(queryData)) {
+        const shallow: SingleQueryData = {
           ...queryData,
-          data: [...queryData.data],
-        };
-        shallow.data[i] = {
-          ...queryData.data[i],
-          ...payload,
+          data: {
+            ...queryData.data,
+            ...payload,
+          },
         };
         queryClient.setQueryData(queryKey, shallow);
-      });
-    }
+      } else {
+        queryData.data.forEach((room, i) => {
+          if (room.id !== id) return;
+          const shallow: ListQueryData = {
+            ...queryData,
+            data: [...queryData.data],
+          };
+          shallow.data[i] = {
+            ...queryData.data[i],
+            ...payload,
+          };
+          queryClient.setQueryData(queryKey, shallow);
+        });
+      }
+    });
   }
 
   function updateNotification({ roomid }: { roomid: string }) {
     const room = getRoom({ roomid });
     if (typeof room !== 'undefined') {
-      updateRooms({
+      updateRoom({
         target: {
           id: room.id,
           payload: {
@@ -120,8 +151,8 @@ export default function useRoomsQueryData({ sessionId }: Params) {
 
   return {
     getRoom,
-    addRooms,
-    updateRooms,
+    addRoom,
+    updateRoom,
     updateNotification,
     updateRoomNotifications,
   };

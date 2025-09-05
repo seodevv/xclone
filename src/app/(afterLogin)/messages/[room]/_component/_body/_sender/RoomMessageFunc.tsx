@@ -86,8 +86,8 @@ export default function RoomMessageFunc({
     utils.outline_none,
     utils.transit_basic,
     utils.ma_0,
-    utils.hover_bg_primary,
-    utils.active_bg_primary,
+    utils.hover_bg_primary_a_1,
+    utils.active_bg_primary_a_2,
     utils.cursor_point
   );
 

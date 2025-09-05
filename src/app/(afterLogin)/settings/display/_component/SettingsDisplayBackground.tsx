@@ -46,7 +46,9 @@ export default function SettingsDisplayBackground() {
                   display.background === v.id && styles.active
                 )}
               >
-                {display.background === v.id && <CheckSvg width={16} white />}
+                {display.background === v.id && (
+                  <CheckSvg width={16} theme="theme" />
+                )}
               </div>
             </div>
             <div className={styles.text}>

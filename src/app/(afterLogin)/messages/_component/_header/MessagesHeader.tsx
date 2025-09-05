@@ -11,7 +11,7 @@ export default function MessagesHeader() {
         <PageHeader title="Messages" noBack>
           <div className={styles.options}>
             <Link className={styles.link} href={'/messages/settings'}>
-              <SettingSvg width={19} white />
+              <SettingSvg width={19} theme="theme" />
             </Link>
             <Link className={styles.link} href={'/messages/compose'}>
               <AddMessageSvg width={19} white />

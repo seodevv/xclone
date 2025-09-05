@@ -65,6 +65,9 @@
 .mt_16.mt_16 {
   margin-top: 16px;
 }
+.mt_20 {
+  margin-top: 20px;
+}
 .mt_30.mt_30 {
   margin-top: 30px;
 }
@@ -171,6 +174,26 @@
   margin-top: 4px;
   margin-bottom: 4px;
 }
+.mtb_8 {
+  margin-top: 8px;
+  margin-bottom: 8px;
+}
+.mtb_20 {
+  margin-top: 20px;
+  margin-bottom: 20px;
+}
+.mtb_24 {
+  margin-top: 24px;
+  margin-bottom: 24px;
+}
+.mtb_32 {
+  margin-top: 32px;
+  margin-bottom: 32px;
+}
+.mrl_auto {
+  margin-right: auto;
+  margin-left: auto;
+}
 .mrl_4 {
   margin-right: 4px;
   margin-left: 4px;
@@ -178,6 +201,10 @@
 .mrl_12 {
   margin-right: 12px;
   margin-left: 12px;
+}
+.mrl_32 {
+  margin-right: 32px;
+  margin-left: 32px;
 }
 
 /* padding */
@@ -216,6 +243,9 @@
 }
 .pa_20.pa_20 {
   padding: 20px;
+}
+.pt_m_16 {
+  padding-top: -16px;
 }
 .pt_0.pt_0 {
   padding-top: 0;
@@ -328,6 +358,9 @@
 .pb_48.pb_48 {
   padding-bottom: 48px;
 }
+.pb_50p {
+  padding-bottom: 50%;
+}
 .pb_100.pb_100 {
   padding-bottom: 100%;
 }
@@ -395,6 +428,10 @@
   padding-top: 12px;
   padding-bottom: 12px;
 }
+.ptb_16 {
+  padding-top: 16px;
+  padding-bottom: 16px;
+}
 .ptb_20 {
   padding-top: 20px;
   padding-bottom: 20px;
@@ -410,6 +447,14 @@
 .prl_16 {
   padding-right: 16px;
   padding-left: 16px;
+}
+.prl_32 {
+  padding-right: 32px;
+  padding-left: 32px;
+}
+.prl_80 {
+  padding-right: 80px;
+  padding-left: 80px;
 }
 
 /* position */
@@ -643,6 +688,9 @@
 .w_auto.w_auto {
   width: auto;
 }
+.w_0 {
+  width: 0px;
+}
 .w_10 {
   width: 10px;
 }
@@ -685,6 +733,9 @@
 .w_min_auto.w_min_auto {
   min-width: auto;
 }
+.w_min_52 {
+  min-width: 52px;
+}
 .w_min_56 {
   min-width: 56px;
 }
@@ -693,6 +744,9 @@
 }
 .w_max_320 {
   max-width: 320px;
+}
+.w_max_400 {
+  max-width: 400px;
 }
 .w_max_600 {
   max-width: 600px;
@@ -740,6 +794,9 @@
 }
 .h_min_36 {
   min-height: 36px;
+}
+.h_min_52 {
+  min-height: 52px;
 }
 .h_min_56 {
   min-height: 56px;
@@ -899,6 +956,9 @@
 }
 .br_4 {
   border-radius: 4px;
+}
+.br_12 {
+  border-radius: 12px;
 }
 .br_16.br_16 {
   border-radius: 16px;
@@ -1114,6 +1174,9 @@
   background-color: rgba(239, 243, 244, 0.1);
 }
 .hover_bg_primary:hover {
+  background-color: rgb(26, 140, 216);
+}
+.hover_bg_primary_a_1:hover {
   background-color: rgba(29, 155, 240, 0.1);
 }
 .hover_underline:hover {
@@ -1134,6 +1197,9 @@
   background-color: rgba(239, 243, 244, 0.2);
 }
 .active_bg_primary:active {
+  background-color: rgb(23, 130, 192);
+}
+.active_bg_primary_a_2:active {
   background-color: rgba(29, 155, 240, 0.2);
 }
 

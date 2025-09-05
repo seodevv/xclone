@@ -171,7 +171,7 @@ export default function SettingsYourInterests() {
   return (
     <div>
       {interests.map((v) => (
-        <div className={utils.p_basic}>
+        <div key={v.id} className={utils.p_basic}>
           <IdentifierCheckBox title={v.title} defaultValue={v.defaultValue} />
         </div>
       ))}

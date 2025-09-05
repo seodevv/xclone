@@ -85,6 +85,7 @@ export default function PremiumFooter() {
               </div>
               <div className={styles.inner}>
                 <FlexButton
+                  style={{ minHeight: '53px' }}
                   theme="primary"
                   text="Subscribe & Pay"
                   onClick={() =>

@@ -25,7 +25,7 @@ export default function ListsCreatorOptions() {
         </div>
         <div className={styles.private}>
           <div className={cx(styles.checkBox, checked && styles.checked)}>
-            {checked && <CheckSvg white />}
+            {checked && <CheckSvg theme="theme" />}
           </div>
         </div>
         <input

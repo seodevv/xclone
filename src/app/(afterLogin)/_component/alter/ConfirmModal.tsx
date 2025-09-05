@@ -20,7 +20,7 @@ export default function ConfirmModal({
   title,
   sub,
   btnText,
-  btnTheme = 'white',
+  btnTheme = 'theme',
   onClickOutSide,
   onClickConfirm,
   onClickCancle,

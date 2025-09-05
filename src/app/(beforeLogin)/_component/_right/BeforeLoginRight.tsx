@@ -1,4 +1,5 @@
 import styles from './beforeLogin.right.module.css';
+import cx from 'classnames';
 import Link from 'next/link';
 import GithubLogin from './GithubLogin';
 import GoogleLogin from './GoogleLogin';
@@ -14,7 +15,11 @@ export default function BeforeLoginRight() {
           <GoogleLogin />
           <GithubLogin style={{ marginTop: 15 }} />
           <p className={styles.or}>or</p>
-          <Link href="/i/flow/signup" className={styles.login} scroll={false}>
+          <Link
+            href="/i/flow/signup"
+            className={cx(styles.login, styles.create)}
+            scroll={false}
+          >
             Create account
           </Link>
           <p className={styles.info}>

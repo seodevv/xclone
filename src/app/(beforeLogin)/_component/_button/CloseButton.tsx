@@ -27,7 +27,7 @@ export default function CloseButton({ width = 20, disabled }: Props) {
         type="button"
         disabled={disabled}
       >
-        <XMarkSvg width={width} white />
+        <XMarkSvg width={width} />
       </button>
     </>
   );

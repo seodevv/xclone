@@ -41,7 +41,6 @@ export default function ListsSuggestedDescription({ type }: Props) {
             <TextLink
               text="Get Started"
               href="/i/lists/create"
-              theme="white"
               size="large"
               inline
             />

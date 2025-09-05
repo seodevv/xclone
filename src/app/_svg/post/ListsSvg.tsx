@@ -6,22 +6,27 @@ interface Props {
   className?: HTMLAttributes<HTMLOrSVGElement>['className'];
   style?: CSSProperties;
   width?: number;
-  white?: boolean;
   fill?: string;
   active?: boolean;
+  theme?: 'default' | 'theme' | 'white';
 }
 
 export default function ListsSvg({
   className,
   style,
   width = 18.75,
-  white,
   fill,
   active,
+  theme = 'default',
 }: Props) {
   return (
     <svg
-      className={cx(styles.defaultSvg, white && styles.white, className)}
+      className={cx(
+        theme === 'default' && styles.defaultSvg,
+        theme === 'theme' && styles.theme,
+        theme === 'white' && styles.white,
+        className
+      )}
       style={style}
       width={width}
       viewBox="0 0 24 24"

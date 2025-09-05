@@ -289,7 +289,11 @@ export default function SettingsProfileEdit({
             setProfile((prev) => ({ ...prev, birth: user.birth }));
           }}
         />
-        <Link className={styles.link} href="/i/flow/convert_to_professional">
+        <Link
+          className={styles.link}
+          href="/i/flow/convert_to_professional"
+          scroll={false}
+        >
           <Text size="xl" text="Switch to profiessional" />
           <div>
             <GreatherArrowSvg />

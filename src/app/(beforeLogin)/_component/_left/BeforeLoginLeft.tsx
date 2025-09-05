@@ -5,7 +5,7 @@ export default function BeforeLoginLeft() {
   return (
     <div className={styles.left}>
       <div className={styles.leftInner}>
-        <XLogoSvg className={styles.XLogo} width={600} />
+        <XLogoSvg className={styles.XLogo} width={600} theme="theme" />
       </div>
     </div>
   );

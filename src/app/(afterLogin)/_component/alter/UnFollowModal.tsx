@@ -45,7 +45,7 @@ export default function UnFollowModal() {
       title={`Unfollow @${modal.unFollow?.targetId}?`}
       sub="Their posts will no longer show up in your For You timeline. You can still view their profile, unless their posts are protected."
       btnText="UnFollow"
-      btnTheme="white"
+      btnTheme="theme"
       onClickOutSide={onClickOutSide}
       onClickConfirm={onClickUnFollow}
       onClickCancle={onClickOutSide}

@@ -7,7 +7,10 @@
   border: none;
   border-radius: 50%;
   background: rgba(0, 0, 0, 0.5);
-  border: 1px solid rgb(0, 0, 0, 0.5);
+  border-width: 1px;
+  border-style: solid;
+  border-color: transparent;
+  /* border: 1px solid rgb(0, 0, 0, 0.5); */
   font-size: 15px;
   font-weight: 700;
   color: rgb(255, 255, 255);
@@ -50,12 +53,13 @@
 .reverse {
   background: rgb(var(--background-start-rgb));
   border: 1px solid rgb(var(--label-rgb));
+  color: rgb(var(--r-background-start-rgb));
 }
 .reverse:hover {
-  background: rgba(var(--background-start-rgb), 0.9);
+  background: rgba(var(--r-background-start-rgb), 0.1);
 }
 .reverse:active {
-  background: rgba(var(--background-start-rgb), 0.8);
+  background: rgba(var(--r-background-start-rgb), 0.2);
 }
 .primary {
   background: rgb(var(--primary-button-rgb));

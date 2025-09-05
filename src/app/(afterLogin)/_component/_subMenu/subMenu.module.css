@@ -13,10 +13,10 @@
   fill: rgb(var(--error-rgb));
 }
 .menu:hover {
-  background: rgba(var(--r-background-start-rgb), 0.1);
+  background-color: rgba(237, 237, 237, 1);
 }
 .menu:active {
-  background: rgba(var(--r-background-start-rgb), 0.2);
+  background-color: rgba(229, 229, 229, 1);
 }
 .icon {
   padding-right: 12px;
@@ -42,6 +42,9 @@
   white-space: pre-wrap;
   text-wrap: nowrap;
 }
+.big {
+  font-size: 20px;
+}
 .sub {
   font-size: 14px;
   font-weight: 400;
@@ -50,4 +53,13 @@
   word-break: keep-all;
   word-wrap: break-word;
   white-space: pre-wrap;
+}
+
+@media (prefers-color-scheme: dark) {
+  .menu:hover {
+    background: rgba(var(--r-background-start-rgb), 0.1);
+  }
+  .menu:active {
+    background: rgba(var(--r-background-start-rgb), 0.2);
+  }
 }

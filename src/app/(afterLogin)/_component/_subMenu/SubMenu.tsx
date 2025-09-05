@@ -4,11 +4,13 @@ import { MouseEventHandler } from 'react';
 import Link from 'next/link';
 
 interface Props {
+  className?: string;
   theme?: 'default' | 'red';
   svg?: React.ReactNode;
   title?: string;
   sub?: string;
   onClick?: () => void;
+  nav?: boolean;
 }
 interface A extends Props {
   type: 'link';
@@ -31,7 +33,11 @@ export default function SubMenu(props: A | B) {
   if (props.type === 'link') {
     return (
       <Link
-        className={cx(styles.menu, props.theme === 'red' && styles.red)}
+        className={cx(
+          styles.menu,
+          props.theme === 'red' && styles.red,
+          props.className
+        )}
         href={props.href}
         scroll={props.scroll}
         onClick={(e) => {
@@ -43,7 +49,9 @@ export default function SubMenu(props: A | B) {
       >
         <div className={styles.icon}>{props.svg}</div>
         <div className={styles.desc}>
-          <span className={styles.title}>{props.title}</span>
+          <span className={cx(styles.title, props.nav && styles.big)}>
+            {props.title}
+          </span>
           {props.sub && <span className={styles.sub}>{props.sub}</span>}
         </div>
       </Link>
@@ -52,12 +60,16 @@ export default function SubMenu(props: A | B) {
 
   return (
     <div
-      className={cx(styles.menu, props.theme === 'red' && styles.red)}
+      className={cx(
+        styles.menu,
+        props.theme === 'red' && styles.red,
+        props.className
+      )}
       onClick={onClickElement}
     >
       <div className={styles.icon}>{props.svg}</div>
       <div className={styles.desc}>
-        <div className={styles.title}>
+        <div className={cx(styles.title, props.nav && styles.big)}>
           <span>{props.title}</span>
         </div>
         {props.sub && (

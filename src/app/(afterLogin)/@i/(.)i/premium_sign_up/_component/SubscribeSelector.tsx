@@ -91,7 +91,7 @@ export default function SubsribeSelector() {
             <div className={styles.content}>
               <div className={styles.circle}>
                 <div className={cx(styles.whether, isActive && styles.select)}>
-                  {isActive && <CheckSvg width={20} white />}
+                  {isActive && <CheckSvg width={20} theme="theme" />}
                 </div>
               </div>
               <div className={styles.title}>
@@ -123,7 +123,6 @@ export default function SubsribeSelector() {
                 </div>
                 <FlexButton
                   className={styles.scribeBtn}
-                  theme="white"
                   text="Subscribe"
                   onClick={() =>
                     onClickScribeBtn(scribe.subscribe, scribe.price)
@@ -141,7 +140,7 @@ export default function SubsribeSelector() {
                   {scribe.list.map((item, i) => (
                     <div key={i} className={styles.item}>
                       <span>
-                        <CheckSvg width={18.75} white />
+                        <CheckSvg width={18.75} theme="theme" />
                         {item}
                       </span>
                     </div>

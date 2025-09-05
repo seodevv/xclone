@@ -5,6 +5,8 @@ import dayjs from 'dayjs';
 import relativeTime from 'dayjs/plugin/relativeTime';
 import { SafeUser } from '@/model/User';
 import { AdvancedRooms } from '@/model/Room';
+import { snoozeHandler } from '@/app/(afterLogin)/messages/[room]/info/_component/RoomMessageInfoNotifications';
+import AlarmSvg from '@/app/_svg/post/AlarmSvg';
 
 dayjs.locale('en');
 dayjs.extend(relativeTime);
@@ -16,12 +18,14 @@ interface Props {
     at: AdvancedRooms['lastat'];
     content: AdvancedRooms['content'];
   };
+  Snooze: AdvancedRooms['Snooze'];
   active?: boolean;
 }
 
 export default function MessagesRoomInformation({
   receiver,
   lastMessage,
+  Snooze,
   active,
 }: Props) {
   return (
@@ -84,6 +88,9 @@ export default function MessagesRoomInformation({
               {dayjs(lastMessage.at).fromNow(true)}
             </Text>
           </div>
+        )}
+        {snoozeHandler(Snooze).active && (
+          <AlarmSvg className={cx(utils.pl_6)} type={'off'} width={16} />
         )}
       </div>
       <div

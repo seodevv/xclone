@@ -3,14 +3,13 @@
 import styles from './navMenu.module.css';
 import utils from '@/app/utility.module.css';
 import cx from 'classnames';
-import { usePathname, useSelectedLayoutSegment } from 'next/navigation';
+import { usePathname } from 'next/navigation';
 import Link from 'next/link';
 import { Session } from 'next-auth';
 import HomeSvg from '@/app/_svg/navbar/HomeSvg';
 import ExploreSvg from '@/app/_svg/navbar/ExploreSvg';
 import MessageSvg from '@/app/_svg/navbar/MessageSvg';
 import ProfileSvg from '@/app/_svg/navbar/ProfileSvg';
-import SettingSvg from '@/app/_svg/navbar/SettingSvg';
 import TweetSvg from '@/app/_svg/navbar/TweetSvg';
 import { captialCase } from '@/app/_lib/common';
 import BookmarkSvg from '@/app/_svg/actionbuttons/BookmarkSvg';
@@ -18,8 +17,10 @@ import useComposeStore from '@/app/(afterLogin)/_store/ComposeStore';
 import ListsSvg from '@/app/_svg/post/ListsSvg';
 import XLogoSvg from '@/app/_svg/logo/XLogoSvg';
 import BusinessSvg from '@/app/_svg/navbar/BusinessSvg';
-import Text from '@/app/_component/_text/Text';
 import NavMessagesBadge from '@/app/(afterLogin)/_component/navbar/NavMessagesBadge';
+import OtherMenuSvg from '@/app/_svg/navbar/OtherMenuSvg';
+import { useContext } from 'react';
+import { SubMenuContext } from '@/app/(afterLogin)/_provider/SubMenuProvider';
 
 interface Menu {
   title:
@@ -45,6 +46,7 @@ interface Props {
 export default function NavMenu({ session }: Props) {
   const pathname = usePathname();
   const reset = useComposeStore((state) => state.reset);
+  const { dispatchMenu } = useContext(SubMenuContext);
   const width = 26;
   const menus: Menu[] = [
     {
@@ -103,13 +105,6 @@ export default function NavMenu({ session }: Props) {
       icon: <ProfileSvg width={width} />,
       sessionRequired: true,
     },
-    {
-      title: 'settings',
-      link: '/settings',
-      active: '/settings',
-      icon: <SettingSvg width={width} />,
-      sessionRequired: false,
-    },
   ];
 
   return (
@@ -125,7 +120,10 @@ export default function NavMenu({ session }: Props) {
             ? pathname.includes(menu.active)
             : false;
           return (
-            <li key={menu.link} className={styles.navList}>
+            <li
+              key={menu.link}
+              className={cx(styles.navList, styles[menu.title])}
+            >
               <Link className={utils.relative} href={menu.link} scroll={false}>
                 <div className={styles.navPill}>
                   <div
@@ -138,7 +136,8 @@ export default function NavMenu({ session }: Props) {
                     <menu.icon.type
                       {...menu.icon.props}
                       active={active}
-                      white
+                      theme="theme"
+                      // white
                     />
                     {menu.title === 'messages' && <NavMessagesBadge />}
                   </div>
@@ -150,6 +149,49 @@ export default function NavMenu({ session }: Props) {
             </li>
           );
         })}
+        <li className={styles.navList}>
+          <button
+            className={cx(
+              utils.relative,
+              utils.bg_trans,
+              utils.bd_none,
+              utils.cursor_point
+            )}
+            onClick={(e) => {
+              const { x, y, width, height } =
+                e.currentTarget.getBoundingClientRect();
+              dispatchMenu({
+                type: 'set',
+                payload: {
+                  flag: true,
+                  position: {
+                    x,
+                    y,
+                    width,
+                    height,
+                    target: e.currentTarget,
+                  },
+                  status: {
+                    type: 'nav',
+                  },
+                },
+              });
+            }}
+          >
+            <div className={styles.navPill}>
+              <div
+                className={cx(
+                  utils.relative,
+                  utils.d_flexRow,
+                  utils.flex_alignCenter
+                )}
+              >
+                <OtherMenuSvg theme="theme" width={26} />
+              </div>
+              <div className={cx(styles.navTitle)}>More</div>
+            </div>
+          </button>
+        </li>
       </ul>
       {session && (
         <Link

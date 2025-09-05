@@ -86,7 +86,7 @@ export default function IdentifierRadioBox({
                     disable && styles.disable
                   )}
                 >
-                  {check === v.id && <CheckSvg width={20} white />}
+                  {check === v.id && <CheckSvg width={20} theme="white" />}
                 </div>
               </div>
               <input

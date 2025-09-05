@@ -6,18 +6,23 @@ interface Props {
   className?: string;
   style?: CSSProperties;
   width?: number;
-  white?: boolean;
+  theme?: 'default' | 'theme' | 'white';
 }
 
 export default function RightArrowSvg({
   className,
   style,
   width = 24,
-  white,
+  theme = 'default',
 }: Props) {
   return (
     <svg
-      className={cx(styles.defaultSvg, white && styles.white, className)}
+      className={cx(
+        theme === 'default' && styles.defaultSvg,
+        theme === 'theme' && styles.theme,
+        theme === 'white' && styles.white,
+        className
+      )}
       style={style}
       width={width}
       viewBox="0 0 24 24"

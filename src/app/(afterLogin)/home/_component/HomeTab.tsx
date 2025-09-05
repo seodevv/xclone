@@ -1,5 +1,8 @@
 'use client';
+
 import styles from '../_style/tab.module.css';
+import utils from '@/app/utility.module.css';
+import cx from 'classnames';
 import { useContext } from 'react';
 import { HomeTabContext } from './HomeTabProvider';
 
@@ -20,11 +23,11 @@ export default function HomeTab() {
       </div>
       <div className={styles.homeTab}>
         <div onClick={onClickRec}>
-          For you
+          <span className={cx(tab === 'rec' && utils.fw_bold)}>For you</span>
           <div className={styles.tabIndicator} hidden={tab === 'fol'}></div>
         </div>
         <div onClick={onClickFol}>
-          Following
+          <span className={cx(tab === 'fol' && utils.fw_bold)}>Following</span>
           <div className={styles.tabIndicator} hidden={tab === 'rec'}></div>
         </div>
       </div>

@@ -1,3 +1,11 @@
+/* theme */
+.theme {
+  fill: rgb(var(--foreground-rgb));
+}
+.reverse {
+  fill: rgb(var(--foreground-reverse-rgb));
+}
+
 .defaultSvg {
   fill: rgb(var(--link-rgb));
   color: rgb(var(--link-rgb));
@@ -26,18 +34,23 @@
   transform: rotate(-90deg);
   transition: 300ms transform ease-in;
 }
-
 .progress > circle {
   transition: 300ms all ease-in;
 }
-
 .progress.scaleUp {
   transform: rotate(-90deg) scale(1.5);
 }
-
 .progress.hidden > circle {
   visibility: hidden;
   opacity: 0;
+}
+.stroke {
+  stroke: #eff3f4;
+}
+@media (prefers-color-scheme: dark) {
+  .stroke {
+    stroke: #2f3336;
+  }
 }
 
 .progressText {

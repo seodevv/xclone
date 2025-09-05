@@ -16,6 +16,7 @@ interface Props {
   isVisible?: boolean;
   prevPath?: string;
   noBack?: boolean;
+  position?: 'relative' | 'absolute';
   onClick?: () => void;
 }
 
@@ -27,6 +28,7 @@ export default function CloseButton({
   isVisible,
   prevPath,
   noBack,
+  position = 'relative',
   onClick,
 }: Props) {
   const router = useRouter();
@@ -56,12 +58,13 @@ export default function CloseButton({
         styles.btn,
         isSearch && styles.searchBtn,
         isVisible && styles.visible,
+        styles[position],
         className
       )}
       style={style}
       onClick={onClickDefault}
     >
-      <XMarkSvg width={width} white />
+      <XMarkSvg width={width} />
     </button>
   );
 }

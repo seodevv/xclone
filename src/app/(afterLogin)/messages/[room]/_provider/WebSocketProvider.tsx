@@ -35,6 +35,7 @@ type EmitReactionArgs = Required<
 > & {
   session: SafeUser;
 };
+type EmitFocusArgs = FirstArgument<ClientToServerEvents['focus']>;
 
 interface Status {
   flag: 'idle' | 'new';
@@ -48,6 +49,7 @@ const initialContext = {
   },
   sendMessage: (): Promise<void> => new Promise((res) => res()),
   sendReaction: (): Promise<void> => new Promise((res) => res()),
+  sendFocus: () => {},
 };
 
 export const WebSocketContext = createContext<{
@@ -60,6 +62,7 @@ export const WebSocketContext = createContext<{
     data: EmitReactionArgs,
     fn?: (err?: Error, data?: AdvancedMessages) => void
   ) => Promise<void>;
+  sendFocus: (data: EmitFocusArgs, fn?: (err?: Error) => void) => void;
 }>(initialContext);
 
 interface CustomSocket
@@ -77,12 +80,13 @@ interface Props {
 export default function WebSocketProvider({ children, sessionId }: Props) {
   const { alterMessage } = useAlterModal();
   const { info, setScroll } = useContext(MessagesScrollContext);
-  const { updateRooms, updateRoomNotifications } = useRoomsQueryData({
+  const { updateRoom, updateRoomNotifications } = useRoomsQueryData({
     sessionId,
   });
-  const { getMessage, addMessage, updateMessage } = useMessagesQueryData({
-    sessionId,
-  });
+  const { getMessage, addMessage, updateMessage, updateSeen } =
+    useMessagesQueryData({
+      sessionId,
+    });
   const [socket] = useState<CustomSocket>(
     io(`${process.env.NEXT_PUBLIC_SERVER_URL}/messages`, {
       autoConnect: false,
@@ -126,6 +130,9 @@ export default function WebSocketProvider({ children, sessionId }: Props) {
           });
         }
       });
+      socket.on('focus', ({ roomid }) => {
+        updateSeen({ roomid });
+      });
 
       socket.connect();
     });
@@ -148,7 +155,7 @@ export default function WebSocketProvider({ children, sessionId }: Props) {
 
       if (typeof room !== 'undefined') {
         const isActive = pathname.includes(room.id);
-        updateRooms({
+        updateRoom({
           target: {
             id: room.id,
             payload: {
@@ -164,6 +171,7 @@ export default function WebSocketProvider({ children, sessionId }: Props) {
                     return u;
                   })
                 : room.sent,
+              Disabled: false,
             },
           },
         });
@@ -254,14 +262,14 @@ export default function WebSocketProvider({ children, sessionId }: Props) {
                 payload: data,
               },
             });
-            updateRooms({
+            updateRoom({
               target: {
                 id: data.roomid,
                 payload: {
                   lastmessageid: data.id,
                   type: data.Media ? data.Media.type : null,
                   content: data.content,
-                  lastat: new Date(data.createat),
+                  lastat: data.createat,
                 },
               },
             });
@@ -373,6 +381,16 @@ export default function WebSocketProvider({ children, sessionId }: Props) {
     }
   }
 
+  function sendFocus({ roomid }: FirstArgument<ClientToServerEvents['focus']>) {
+    if (navigator.onLine) {
+      socket.timeout(1000).emit('focus', { roomid }, (err) => {
+        if (err) {
+          console.error(err);
+        }
+      });
+    }
+  }
+
   useEffect(() => {
     if (!processRef.current) {
       connectSocket();
@@ -390,7 +408,9 @@ export default function WebSocketProvider({ children, sessionId }: Props) {
   }, [socket, info]);
 
   return (
-    <WebSocketContext.Provider value={{ status, sendMessage, sendReaction }}>
+    <WebSocketContext.Provider
+      value={{ status, sendMessage, sendReaction, sendFocus }}
+    >
       {children}
     </WebSocketContext.Provider>
   );

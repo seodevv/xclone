@@ -7,6 +7,7 @@ interface Props {
   sub?: string;
   href?: string;
   linkText?: string;
+  noLink?: boolean;
 }
 
 export default function NoMessages({
@@ -14,6 +15,7 @@ export default function NoMessages({
   sub = 'Drop a line, share posts and more with private conversations between you and others on X.',
   href = '/messages/compose',
   linkText = 'Write a message',
+  noLink,
 }: Props) {
   return (
     <div className={styles.container}>
@@ -23,11 +25,13 @@ export default function NoMessages({
       <Text className={styles.sub} theme="gray">
         {sub}
       </Text>
-      <Link className={styles.link} href={href} scroll={false}>
-        <Text size="s" bold="bold">
-          {linkText}
-        </Text>
-      </Link>
+      {!noLink && (
+        <Link className={styles.link} href={href} scroll={false}>
+          <Text size="s" bold="bold">
+            {linkText}
+          </Text>
+        </Link>
+      )}
     </div>
   );
 }

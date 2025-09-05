@@ -68,7 +68,7 @@ export default function PostFormPreview({ images, setImages }: Props) {
             )}
             {image.type === 'image' && (
               <button type="button" className={styles.previewEdit}>
-                <EditSvg white />
+                <EditSvg />
               </button>
             )}
             <button
@@ -83,7 +83,7 @@ export default function PostFormPreview({ images, setImages }: Props) {
                 if (images.length < 4) setCurrent('prev');
               }}
             >
-              <XMarkSvg white />
+              <XMarkSvg />
             </button>
           </div>
         ))}
@@ -96,7 +96,7 @@ export default function PostFormPreview({ images, setImages }: Props) {
               className={cx(styles.previewCarousel, styles.previewCarouselLeft)}
               onClick={() => setCurrent('prev')}
             >
-              <LeftArrowSvg width={20} white />
+              <LeftArrowSvg width={20} theme="theme" />
             </button>
           ) : (
             <button
@@ -107,7 +107,7 @@ export default function PostFormPreview({ images, setImages }: Props) {
               )}
               onClick={() => setCurrent('next')}
             >
-              <RightArrowSvg width={20} white />
+              <RightArrowSvg width={20} theme="theme" />
             </button>
           )}
         </>

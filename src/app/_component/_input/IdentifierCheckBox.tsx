@@ -96,7 +96,7 @@ export default function IdentifierCheckBox({
                 disable && styles.disable
               )}
             >
-              {check && <CheckSvg width={20} white />}
+              {check && <CheckSvg width={20} theme="white" />}
             </div>
           </div>
           <input hidden />
