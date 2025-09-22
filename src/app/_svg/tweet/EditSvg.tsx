@@ -5,7 +5,7 @@ import cx from 'classnames';
 interface Props {
   className?: string;
   style?: CSSProperties;
-  theme?: 'default' | 'white' | 'primary' | 'inherit';
+  theme?: 'default' | 'theme' | 'reverse' | 'white' | 'primary' | 'inherit';
   width?: number;
 }
 
@@ -19,6 +19,8 @@ export default function EditSvg({
     <svg
       className={cx(
         theme === 'default' && styles.defaultSvg,
+        theme === 'theme' && styles.theme,
+        theme === 'reverse' && styles.reverse,
         theme === 'white' && styles.white,
         theme === 'primary' && styles.primary,
         theme === 'inherit' && styles.inherit,

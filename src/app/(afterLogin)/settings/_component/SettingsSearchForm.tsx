@@ -3,7 +3,13 @@
 import SearchSvg from '@/app/_svg/search/SearchSvg';
 import styles from './settings.search.module.css';
 import ArrowButton from '@/app/(afterLogin)/_component/buttons/ArrowButton';
-import { ChangeEventHandler, MouseEventHandler, useRef, useState } from 'react';
+import {
+  ChangeEventHandler,
+  FormEventHandler,
+  MouseEventHandler,
+  useRef,
+  useState,
+} from 'react';
 import ClearSvg from '@/app/_svg/search/ClearSvg';
 
 export default function SettingsSearchForm() {
@@ -13,6 +19,10 @@ export default function SettingsSearchForm() {
     focus: false,
   });
   const searchRef = useRef<HTMLInputElement>(null);
+
+  const onSubmitForm: FormEventHandler<HTMLFormElement> = (e) => {
+    e.preventDefault();
+  };
 
   const onClickBack: MouseEventHandler<HTMLButtonElement> = (e) => {
     e.stopPropagation();
@@ -28,7 +38,7 @@ export default function SettingsSearchForm() {
   };
 
   return (
-    <form className={styles.form} onSubmit={(e) => e.preventDefault()}>
+    <form className={styles.form} onSubmit={onSubmitForm}>
       {search.clear && (
         <ArrowButton className={styles.back} onClick={onClickBack} />
       )}

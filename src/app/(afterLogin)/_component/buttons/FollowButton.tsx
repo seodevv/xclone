@@ -9,6 +9,7 @@ import useFollowMutation from '../../_hooks/useFollowMutation';
 import { useQueryClient } from '@tanstack/react-query';
 import useAlterModal from '@/app/_hooks/useAlterModal';
 import { ConfirmContext } from '@/app/(afterLogin)/_provider/ConfirmProvider';
+import { useRouter } from 'next/navigation';
 
 interface Props {
   className?: string;
@@ -23,6 +24,7 @@ export default function FollowButton({
   user,
   disabled,
 }: Props) {
+  const router = useRouter();
   const { data: session } = useSession();
   const { alterMessage } = useAlterModal();
   const { dispatchModal } = useContext(ConfirmContext);
@@ -34,7 +36,10 @@ export default function FollowButton({
   const onClickFollow: MouseEventHandler<HTMLButtonElement> = (e) => {
     e.preventDefault();
     e.stopPropagation();
-    if (!session?.user?.email) return;
+    if (!session?.user?.email) {
+      router.push('/i/flow/login');
+      return;
+    }
     if (isFollow) {
       dispatchModal({
         type: 'unFollow',

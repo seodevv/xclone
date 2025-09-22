@@ -2,29 +2,60 @@
 
 import OptionButton from '@/app/(afterLogin)/_component/buttons/OptionButton';
 import OtherProfile from '@/app/(afterLogin)/_component/profile/OtherProfile';
+import { SubMenuContext } from '@/app/(afterLogin)/_provider/SubMenuProvider';
 import { AdvancedMessagesAddRooms } from '@/app/(afterLogin)/messages/_lib/getMessagesSearch';
 import Text from '@/app/_component/_text/Text';
 import ImageContainer from '@/app/_component/_util/ImageContainer';
 import { MONTH_EN } from '@/app/_lib/common';
 import BadgeSvg from '@/app/_svg/verified/BadgeSvg';
 import utils from '@/app/utility.module.css';
+import { AdvancedRooms } from '@/model/Room';
 import { SafeUser } from '@/model/User';
 import cx from 'classnames';
 import { useSession } from 'next-auth/react';
-import { useState } from 'react';
+import { useRouter } from 'next/navigation';
+import { MouseEventHandler, useContext, useState } from 'react';
 
 interface Props {
   input: string;
   message: AdvancedMessagesAddRooms;
+  room: AdvancedRooms;
 }
 
-export default function Message({ input, message }: Props) {
-  const [hover, setHover] = useState(false);
+export default function Message({ input, message, room }: Props) {
+  const router = useRouter();
   const { data: session } = useSession();
+  const [hover, setHover] = useState(false);
+  const { dispatchMenu } = useContext(SubMenuContext);
+
   const target =
     session?.user?.email === message.Room.senderid
       ? message.Room.Receiver
       : message.Room.Sender;
+
+  const onClickOption: MouseEventHandler<HTMLButtonElement> = (e) => {
+    e.preventDefault();
+    e.stopPropagation();
+
+    const { x, y, width, height } = e.currentTarget.getBoundingClientRect();
+    dispatchMenu({
+      type: 'set',
+      payload: {
+        flag: true,
+        status: {
+          type: 'room',
+          room,
+        },
+        position: {
+          x,
+          y,
+          width,
+          height,
+          target: e.currentTarget,
+        },
+      },
+    });
+  };
 
   const cxRowCenterBetween = cx(
     utils.d_flexRow,
@@ -40,6 +71,9 @@ export default function Message({ input, message }: Props) {
       )}
       onMouseEnter={() => setHover(true)}
       onMouseLeave={() => setHover(false)}
+      onClick={() => {
+        router.push(`/messages/${message.roomid}`);
+      }}
     >
       <div
         className={cx(
@@ -65,11 +99,7 @@ export default function Message({ input, message }: Props) {
                       utils.of_hide
                     )}
                   >
-                    <OptionButton
-                      onClick={(e) => {
-                        e.stopPropagation();
-                      }}
-                    />
+                    <OptionButton onClick={onClickOption} />
                   </div>
                 </div>
               </div>

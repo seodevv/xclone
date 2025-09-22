@@ -23,7 +23,7 @@ export default async function UserFollowHydrationBoundary({
   await queryClient.prefetchInfiniteQuery({
     queryKey: ['users', 'list', username, { type }],
     queryFn: getFollowList,
-    initialPageParam: '',
+    initialPageParam: 0,
   });
   const dehydrateState = dehydrate(queryClient);
   return (

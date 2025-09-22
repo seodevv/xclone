@@ -15,7 +15,7 @@ interface Props {
 export default function SuggestedResult({ lists }: Props) {
   const { search } = useContext(SuggestedContext);
   const { data: searchUserList, isFetching } = useGetSuggestedQuery({
-    searchParams: { q: search },
+    searchParams: { q: search, self: 'on' },
     enabled: search !== '',
   });
   const [progress, setProgress] = useState({

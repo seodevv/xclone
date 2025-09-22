@@ -1,6 +1,7 @@
 'use client';
 
 import { IdentifierInputRef } from '@/app/_component/_input/IdentifierInput';
+import { usePathname } from 'next/navigation';
 import {
   createContext,
   Dispatch,

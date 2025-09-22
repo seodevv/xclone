@@ -12,10 +12,12 @@ import LoginAction from '@/app/(beforeLogin)/_component/_sign/_login/LoginAction
 import useAlterModal from '@/app/_hooks/useAlterModal';
 import useSign from '@/app/(beforeLogin)/_hooks/useSign';
 import IdentifierInput from '@/app/_component/_input/IdentifierInput';
+import { useRouter } from 'next/navigation';
 
 export default function LoginPhaseB() {
+  const router = useRouter();
   const sign = useSign();
-  const { alterMessage } = useAlterModal();
+  const { alterMessage, sendPrepareMessage } = useAlterModal();
   const { state, dispatch } = useContext(LoginContext);
   const { id, password, options } = state;
   const [response, onSubmit] = useFormState(LoginAction, {
@@ -103,7 +105,14 @@ export default function LoginPhaseB() {
             isLoading={options.isLoading}
             disabled={password.disabled || options.isLoading}
           />
-          <FlexButton theme="reverse" text="Forgot password?" />
+          <FlexButton
+            theme="reverse"
+            text="Forgot password?"
+            onClick={() => {
+              router.push('/i/flow/password_reset');
+              // sendPrepareMessage();
+            }}
+          />
           <NoAccount />
         </div>
       </form>

@@ -4,7 +4,7 @@
   min-height: 100dvh;
   border-right: 1px solid rgb(var(--border-start-rgb));
 }
-.middle {
+/* .middle {
   flex: 1;
   width: 100%;
   max-width: 600px;
@@ -17,9 +17,15 @@
   justify-content: flex-start;
   background: transparent;
   width: 100%;
-}
+} */
 .right {
   width: 100%;
   max-width: 600px;
   overflow: hidden;
 }
+
+/* @media all and (max-width: 1024px) {
+  .middle {
+    display: none;
+  }
+} */

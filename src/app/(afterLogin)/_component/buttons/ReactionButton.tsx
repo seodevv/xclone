@@ -52,15 +52,18 @@ export default function ReactionButton({
   const reactionMutation = useReactionMutation();
   const onClickReaction: MouseEventHandler<HTMLButtonElement> = (e) => {
     e.stopPropagation();
-    if (!session?.user?.email) return;
+    if (!session?.user?.email) {
+      router.push('/i/flow/login');
+      return;
+    }
 
+    const { x, y, width, height } = e.currentTarget.getBoundingClientRect();
     switch (type) {
       case 'Comments':
         setCompose({ type: 'comment', post });
         router.push('/compose/post', { scroll: false });
         break;
       case 'Reposts':
-        const { x, y, width, height } = e.currentTarget.getBoundingClientRect();
         if (!menu.flag) {
           setCompose({ type: 'quote', post });
           dispatchMenu({
@@ -104,6 +107,24 @@ export default function ReactionButton({
       case 'Views':
         break;
       case 'Shares':
+        dispatchMenu({
+          type: 'set',
+          payload: {
+            flag: true,
+            position: {
+              x,
+              y,
+              width,
+              height,
+              target: e.currentTarget,
+            },
+            status: {
+              type: 'share',
+              post,
+              sessionid: session.user.email,
+            },
+          },
+        });
         break;
     }
   };

@@ -30,5 +30,11 @@
   transition-property: background-color;
 }
 .link:hover {
-  background: rgba(239, 243, 244, 0.1);
+  background: rgba(15, 20, 25, 0.1);
+}
+
+@media (prefers-color-scheme: dark) {
+  .link:hover {
+    background: rgba(239, 243, 244, 0.1);
+  }
 }

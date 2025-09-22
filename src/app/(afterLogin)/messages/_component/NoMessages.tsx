@@ -27,7 +27,7 @@ export default function NoMessages({
       </Text>
       {!noLink && (
         <Link className={styles.link} href={href} scroll={false}>
-          <Text size="s" bold="bold">
+          <Text theme="white" size="s" bold="bold">
             {linkText}
           </Text>
         </Link>

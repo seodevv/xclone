@@ -75,7 +75,7 @@ export default function ListsShareSubMenu() {
       />
       <SubMenu
         type="div"
-        svg={<MessageSvg width={18.75} white />}
+        svg={<MessageSvg width={18.75} theme="theme" />}
         title="Send via Direct Message"
         onClick={onClickDirectMessage}
       />
@@ -87,7 +87,7 @@ export default function ListsShareSubMenu() {
       />
       <SubMenu
         type="div"
-        svg={<ShareSvg width={18.75} white />}
+        svg={<ShareSvg width={18.75} theme="theme" />}
         title="Share List"
         onClick={onClickShare}
       />

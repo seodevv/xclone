@@ -2,7 +2,7 @@ import { ERROR_STATUS, responseErrorHandler } from '@/app/_lib/error';
 import { AdvancedLists } from '@/model/Lists';
 
 interface Params {
-  queryKey: (string | { q?: string })[];
+  queryKey: (string | { q?: string; f?: string; pf?: string; lf?: string })[];
   pageParam: number;
 }
 

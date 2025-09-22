@@ -5,6 +5,7 @@ import { CSSProperties } from 'react';
 export type TextTheme =
   | 'theme'
   | 'reverse'
+  | 'white'
   | 'gray'
   | 'primary'
   | 'error'

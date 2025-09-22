@@ -1,6 +1,6 @@
 import utils from '@/app/utility.module.css';
-import { AdvancedRooms } from '@/model/Room';
 import cx from 'classnames';
+import { AdvancedRooms } from '@/model/Room';
 
 interface Props {
   sessionId: string;
@@ -30,7 +30,7 @@ export default function MessagesRoomNotification({ sessionId, sent }: Props) {
           utils.w_10,
           utils.h_10,
           utils.bg_primary,
-          utils.bd_1_solid_black,
+          utils.bd_1_solid_theme,
           utils.br_9999
         )}
         style={{ top: '-1px', right: '1px' }}

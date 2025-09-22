@@ -61,7 +61,7 @@ export default function UserLists({
             <Lists
               key={l.id}
               lists={l}
-              pinned={pinned}
+              pinned={session?.user?.email === username ? pinned : false}
               onClick={() => onClickLists(l.id)}
             />
           ))

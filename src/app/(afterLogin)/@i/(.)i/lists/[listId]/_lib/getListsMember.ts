@@ -3,7 +3,7 @@ import { AdvancedUser } from '@/model/User';
 
 interface Params {
   queryKey: (string | { filter: 'members' | 'followers' })[];
-  pageParam: string;
+  pageParam: number;
 }
 
 const getListsMember = async ({
@@ -11,7 +11,7 @@ const getListsMember = async ({
   pageParam,
 }: Params): Promise<{
   data: AdvancedUser[];
-  nextCursor?: string;
+  nextCursor?: number;
   message: string;
 }> => {
   if (typeof listid !== 'string' || typeof options !== 'object') {

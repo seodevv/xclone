@@ -15,9 +15,11 @@ import NoAccount from '@/app/(beforeLogin)/_component/_sign/_login/NoAccount';
 import useAlterModal from '@/app/_hooks/useAlterModal';
 import AccountAction from '@/app/(beforeLogin)/_component/_sign/_login/AccountAction';
 import IdentifierInput from '@/app/_component/_input/IdentifierInput';
+import { useRouter } from 'next/navigation';
 
 export default function LoginPhaseA() {
-  const { alterMessage, sendPrepareMessage } = useAlterModal();
+  const router = useRouter();
+  const { alterMessage } = useAlterModal();
   const { state, dispatch } = useContext(LoginContext);
   const { id, options } = state;
   const [response, formAction] = useFormState(AccountAction, {
@@ -103,7 +105,7 @@ export default function LoginPhaseA() {
             theme="reverse"
             text="Forgot password?"
             onClick={() => {
-              sendPrepareMessage();
+              router.push('/i/flow/password_reset');
             }}
           />
           <NoAccount />

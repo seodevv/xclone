@@ -1,28 +1,23 @@
-import { useCallback, useContext, useEffect } from 'react';
-import { ViewportContext } from '../_provider/ViewportProvider';
+import { useLayoutEffect } from 'react';
+import useViewportStore from '@/app/(afterLogin)/_store/ViewportStore';
 
 export default function useViewport() {
-  const { viewport, setViewport } = useContext(ViewportContext);
+  const { width, height, setViewport } = useViewportStore();
 
-  const settingViewport = useCallback(() => {
-    setViewport({
-      width: window.innerWidth,
-      height: window.innerHeight,
-    });
-  }, [setViewport]);
-
-  useEffect(() => {
+  useLayoutEffect(() => {
     const listener = () => {
-      settingViewport();
+      setViewport({ width: window.innerWidth, height: window.innerHeight });
     };
-    if (viewport.width === 0 && viewport.height === 0) {
-      settingViewport();
+
+    if (typeof window !== 'undefined' && (width === null || height === null)) {
+      setViewport({ width: window.innerWidth, height: window.innerHeight });
     }
+
     window.addEventListener('resize', listener);
     return () => {
       window.removeEventListener('resize', listener);
     };
-  }, [viewport.width, viewport.height, setViewport, settingViewport]);
+  }, [width, height, setViewport]);
 
-  return viewport;
+  return { width, height };
 }

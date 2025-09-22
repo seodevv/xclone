@@ -127,7 +127,7 @@ export default function IBackground({
             )}
             onClick={onClickXmark}
           >
-            <XMarkSvg width={20} />
+            <XMarkSvg width={20} theme="white" />
           </button>
         </div>
       )}

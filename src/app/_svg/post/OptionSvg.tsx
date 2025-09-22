@@ -1,29 +1,24 @@
 import styles from '../_style/svg.module.css';
 import { CSSProperties, HTMLAttributes } from 'react';
 import cx from 'classnames';
+import { SvgTheme } from '@/app/_svg/Svg';
 
 interface Props {
   className?: HTMLAttributes<HTMLOrSVGElement>['className'];
   style?: CSSProperties;
-  theme?: 'default' | 'white' | 'primary' | 'inherit';
   width?: number;
+  theme?: SvgTheme;
 }
 
 export default function OptionSvg({
   className,
   style,
-  theme = 'default',
   width = 18.75,
+  theme = 'default',
 }: Props) {
   return (
     <svg
-      className={cx(
-        theme === 'default' && styles.defaultSvg,
-        theme === 'white' && styles.white,
-        theme === 'primary' && styles.primary,
-        theme === 'inherit' && styles.inherit,
-        className
-      )}
+      className={cx(styles[theme], className)}
       style={style}
       width={width}
       viewBox="0 0 24 24"

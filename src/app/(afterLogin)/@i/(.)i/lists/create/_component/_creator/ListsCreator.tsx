@@ -26,7 +26,7 @@ export default function ListsCreator() {
     payload: string
   ) => {
     dispatch({ type, payload });
-    if (payload === '') {
+    if (type === 'setName' && payload === '') {
       dispatch({ type: 'setDisable', payload: true });
     }
   };
@@ -70,7 +70,7 @@ export default function ListsCreator() {
           minRow={3}
           maxRow={3}
           onSuccess={(value) => onSuccessHandler('setDescription', value)}
-          onError={onErrorHandler}
+          // onError={onErrorHandler}
         />
       </div>
       <ListsCreatorOptions />

@@ -9,7 +9,7 @@ import Link from 'next/link';
 import Image from 'next/image';
 import Text from '@/app/_component/_text/Text';
 import InformSvg from '@/app/_svg/input/InformSvg';
-import { useRouter, useSelectedLayoutSegment } from 'next/navigation';
+import { useSelectedLayoutSegment } from 'next/navigation';
 import BackButton from '@/app/(afterLogin)/_component/buttons/BackButton';
 import useViewport from '@/app/(afterLogin)/_hooks/useViewport';
 import { useLayoutEffect, useState } from 'react';
@@ -26,12 +26,12 @@ export default function RoomHeader({ roomId, receiverId }: Props) {
   const [back, setBack] = useState(false);
 
   useLayoutEffect(() => {
-    if (width !== 0 && width < 1024) {
+    if (width !== null && width !== 0 && width < 1024) {
       setBack(true);
     } else {
       setBack(false);
     }
-  }, []);
+  }, [width]);
 
   if (typeof user !== 'undefined') {
     return (
@@ -41,7 +41,7 @@ export default function RoomHeader({ roomId, receiverId }: Props) {
             <div className={styles.info}>
               <div className={cx(utils.d_flexRow, utils.flex_alignCenter)}>
                 {segment === 'info' ? (
-                  <>
+                  <div className={cx(utils.d_flexRow, utils.flex_alignCenter)}>
                     <BackButton prevPath={`/messages/${roomId}`} />
                     <div>
                       <Text
@@ -53,7 +53,7 @@ export default function RoomHeader({ roomId, receiverId }: Props) {
                         overflow="ellipsis"
                       />
                     </div>
-                  </>
+                  </div>
                 ) : (
                   <>
                     <div className={cx(utils.d_flexRow, utils.flexGrow_1)}>

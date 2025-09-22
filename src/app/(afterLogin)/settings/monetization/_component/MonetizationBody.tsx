@@ -14,7 +14,7 @@ import { MouseEvent, useState } from 'react';
 import useViewport from '@/app/(afterLogin)/_hooks/useViewport';
 
 export default function MonetizationBody() {
-  const viewport = useViewport();
+  const { width, height } = useViewport();
   const [pop, setPop] = useState<{
     flag: boolean;
     position: { x: number; y: number };
@@ -95,23 +95,25 @@ export default function MonetizationBody() {
     });
   };
 
+  if (width === null || height === null) return null;
+
   return (
     <div className={styles.body}>
       <div className={styles.inner}>
         <div className={styles.text}>
           <Text
             className={styles.title}
-            size={viewport.width > 1020 ? 'fs_34' : 'xxxxl'}
+            size={width > 1020 ? 'fs_34' : 'xxxxl'}
             bold="bold"
-            align={viewport.width > 1020 ? 'center' : 'left'}
+            align={width > 1020 ? 'center' : 'left'}
           >
             Make money on X
           </Text>
           <Text
             className={styles.sub}
             theme="gray"
-            size={viewport.width > 1020 ? 'xl' : 'l'}
-            align={viewport.width > 1020 ? 'center' : 'left'}
+            size={width > 1020 ? 'xl' : 'l'}
+            align={width > 1020 ? 'center' : 'left'}
           >
             The first step to monetization is getting Verified with X Premium.
           </Text>
@@ -138,15 +140,15 @@ export default function MonetizationBody() {
             <div key={i} className={styles.item}>
               <Text
                 className={styles.title}
-                size={viewport.width > 1020 ? 'xxl' : 'xl'}
-                bold={viewport.width > 1020 ? 'normal' : 'bold'}
+                size={width > 1020 ? 'xxl' : 'xl'}
+                bold={width > 1020 ? 'normal' : 'bold'}
               >
                 {v.title}
               </Text>
               <Text
                 className={styles.inform}
                 theme="gray"
-                size={viewport.width > 1020 ? 'l' : 'm'}
+                size={width > 1020 ? 'l' : 'm'}
               >
                 {v.sub}
               </Text>

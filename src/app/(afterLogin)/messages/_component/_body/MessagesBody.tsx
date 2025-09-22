@@ -5,10 +5,13 @@ import cx from 'classnames';
 import NoMessages from '@/app/(afterLogin)/messages/_component/NoMessages';
 import useGetRooms from '@/app/(afterLogin)/messages/_hooks/useGetRooms';
 import MessagesRoom from '@/app/(afterLogin)/messages/_component/_body/MessagesRoom';
-import MessagesSearchProvider from '@/app/(afterLogin)/messages/_component/_body/_search/_provider/MessagesSearchProvider';
+import MessagesSearchProvider, {
+  MessagesSearchContext,
+} from '@/app/(afterLogin)/messages/_component/_body/_search/_provider/MessagesSearchProvider';
 import MessagesSearch from '@/app/(afterLogin)/messages/_component/_body/_search/MessagesSearch';
 import Text from '@/app/_component/_text/Text';
 import { AdvancedRooms } from '@/model/Room';
+import { useContext } from 'react';
 
 interface Props {
   sessionId: string;
@@ -32,6 +35,14 @@ export default function MessagesBody({ sessionId }: Props) {
         return a.createat > b.createat ? -1 : 1;
       });
 
+    if (rooms.data.every((room) => room.Disabled)) {
+      return (
+        <div>
+          <NoMessages />
+        </div>
+      );
+    }
+
     return (
       <MessagesSearchProvider>
         <MessagesSearch sessionid={sessionId} />
@@ -45,7 +56,9 @@ export default function MessagesBody({ sessionId }: Props) {
         )}
         {
           <>
-            {pinList.length !== 0 && <ConversationTitle type="all" />}
+            {pinList.length !== 0 && unPinList.length !== 0 && (
+              <ConversationTitle type="all" />
+            )}
             {sortList(unPinList).map((room) => (
               <MessagesRoom key={room.id} room={room} sessionId={sessionId} />
             ))}
@@ -63,6 +76,10 @@ export default function MessagesBody({ sessionId }: Props) {
 }
 
 function ConversationTitle({ type }: { type: 'pin' | 'all' }) {
+  const { active } = useContext(MessagesSearchContext);
+
+  if (active) return null;
+
   return (
     <div
       className={cx(

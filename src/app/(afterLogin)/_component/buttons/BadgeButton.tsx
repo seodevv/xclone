@@ -80,8 +80,8 @@ export default function BadgeButton({
       setActive((prev) => {
         let nextPosition = { ...prev.position };
         let nextX = prev.x - offsetWidth / 2;
-        let nextX_r = prev.x + offsetWidth / 2 - viewWidth;
-        let nextY = prev.y + offsetHeight - viewHeight;
+        let nextX_r = prev.x + offsetWidth / 2 - (viewWidth || 0);
+        let nextY = prev.y + offsetHeight - (viewHeight || 0);
 
         if (nextX < 0) {
           nextPosition.x = 'left';

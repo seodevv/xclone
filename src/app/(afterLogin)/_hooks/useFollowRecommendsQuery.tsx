@@ -11,7 +11,7 @@ export const useFollowRecommendsQuery = (creator?: boolean) => {
   const query = useInfiniteQuery({
     queryKey,
     queryFn: getFollowRecommends,
-    initialPageParam: '',
+    initialPageParam: 0,
     getNextPageParam: (lastPage) => lastPage.nextCursor,
     enabled: segment !== 'message',
   });

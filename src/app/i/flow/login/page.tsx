@@ -1,10 +1,9 @@
-import styles from '../_style/beforeLogin.i.flow.page.module.css';
-import utils from '@/app/utility.module.css';
-import cx from 'classnames';
+import styles from '../_style/i.flow.page.module.css';
 import LoginModalHeader from '@/app/(beforeLogin)/_component/_sign/_login/LoginModalHeader';
 import LoginPhase from '@/app/(beforeLogin)/_component/_sign/_login/LoginPhase';
 import LoginProvider from '@/app/(beforeLogin)/_component/_sign/_login/LoginProvider';
 import HtmlOverflowHidden from '@/app/_component/_overflow/HtmlOverflowHidden';
+import IFlowBackground from '@/app/i/flow/_components/IFlowBackground';
 
 interface Props {
   searchParams: { from?: string };
@@ -13,9 +12,7 @@ interface Props {
 export default function IFlowLoginPage({ searchParams }: Props) {
   return (
     <LoginProvider>
-      <main
-        className={cx(styles.background, !searchParams.from && utils.fadeIn)}
-      >
+      <IFlowBackground from={searchParams.from}>
         <HtmlOverflowHidden />
         <div className={styles.inner}>
           <div className={styles.modal}>
@@ -25,7 +22,7 @@ export default function IFlowLoginPage({ searchParams }: Props) {
             </div>
           </div>
         </div>
-      </main>
+      </IFlowBackground>
     </LoginProvider>
   );
 }

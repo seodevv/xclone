@@ -8,11 +8,10 @@ import XLogoSvg from '@/app/_svg/logo/XLogoSvg';
 import { useContext } from 'react';
 
 interface Props {
-  isNext?: boolean;
   disabled?: boolean;
 }
 
-export default function LoginModalHeader({ isNext, disabled }: Props) {
+export default function LoginModalHeader({ disabled }: Props) {
   const { state, dispatch } = useContext(LoginContext);
 
   const onClickPrev = () => {
@@ -30,7 +29,7 @@ export default function LoginModalHeader({ isNext, disabled }: Props) {
           )}
         </div>
         <div className={styles.logo}>
-          <XLogoSvg className={styles.xLogo} />
+          <XLogoSvg className={styles.xLogo} theme="theme" />
         </div>
         <div className={styles.grow}></div>
       </div>

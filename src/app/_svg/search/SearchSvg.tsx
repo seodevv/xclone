@@ -1,14 +1,14 @@
 import styles from '../_style/svg.module.css';
 import { CSSProperties, HTMLAttributes } from 'react';
 import cx from 'classnames';
+import { SvgTheme } from '@/app/_svg/Svg';
 
 interface Props {
   className?: HTMLAttributes<HTMLOrSVGElement>['className'];
   style?: CSSProperties;
   width?: number;
   height?: number;
-  white?: boolean;
-  inherit?: boolean;
+  theme?: SvgTheme;
 }
 
 export default function SearchSvg({
@@ -16,17 +16,11 @@ export default function SearchSvg({
   style,
   width = 20,
   height,
-  white,
-  inherit,
+  theme = 'default',
 }: Props) {
   return (
     <svg
-      className={cx(
-        styles.defaultSvg,
-        white && styles.white,
-        inherit && styles.inherit,
-        className
-      )}
+      className={cx(styles[theme], className)}
       style={style}
       width={width}
       height={height ? height : width}

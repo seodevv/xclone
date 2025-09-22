@@ -1,13 +1,16 @@
+'use client';
+
 import styles from './userImage.module.css';
 import cx from 'classnames';
 import Image from 'next/image';
-import { generateImagePath } from '@/app/_lib/common';
+import { encryptRoomId, generateImagePath } from '@/app/_lib/common';
 import { Session } from 'next-auth';
 import { AdvancedUser } from '@/model/User';
 import FollowButton from '@/app/(afterLogin)/_component/buttons/FollowButton';
 import TextLink from '@/app/(afterLogin)/_component/Link/TextLink';
 import MessageButton from '@/app/(afterLogin)/_component/buttons/MessageButton';
 import Link from 'next/link';
+import { useRouter } from 'next/navigation';
 
 interface Props {
   session?: Session | null;
@@ -15,7 +18,16 @@ interface Props {
 }
 
 export default function UserImage({ session, user }: Props) {
+  const router = useRouter();
   const isMyProfile = session?.user?.email === user?.id;
+
+  const onClickMessage = () => {
+    if (!session?.user?.email) return;
+    if (typeof user === 'undefined') return;
+
+    const roomid = encryptRoomId(session.user.email, user.id);
+    router.push(`/messages/${roomid}`);
+  };
 
   return (
     <div className={styles.userImage}>
@@ -48,7 +60,12 @@ export default function UserImage({ session, user }: Props) {
             />
           ) : (
             <>
-              <MessageButton className={styles.mr_4} />
+              {session && (
+                <MessageButton
+                  className={styles.mr_4}
+                  onClick={onClickMessage}
+                />
+              )}
               <FollowButton user={user} />
             </>
           )}

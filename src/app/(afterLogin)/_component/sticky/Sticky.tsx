@@ -19,6 +19,8 @@ export default function Sticky({ children }: Props) {
 
   const calculateSticky = useCallback(
     (init: number) => {
+      if (height === null) return init;
+
       const offsetHeight = ref.current ? ref.current.offsetHeight : -(init * 2);
       return height - offsetHeight - init > 0
         ? init

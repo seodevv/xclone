@@ -12,7 +12,7 @@ const useGetListsMemberQuery = ({ listid, filter }: Params) =>
   useInfiniteQuery({
     queryKey: ['users', 'list', 'lists', listid, { filter }],
     queryFn: getListsMember,
-    initialPageParam: '',
+    initialPageParam: 0,
     getNextPageParam: (lastPage) => lastPage.nextCursor,
   });
 

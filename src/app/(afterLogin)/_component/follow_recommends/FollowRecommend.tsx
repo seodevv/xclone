@@ -31,6 +31,7 @@ export default function FollowRecommend({
       className={cx(styles.container, className)}
       style={style}
       href={`/${user.id}`}
+      scroll={true}
     >
       <div className={styles.userLogo}>
         <Image

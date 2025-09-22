@@ -1,26 +1,26 @@
 /* theme */
+.default {
+  fill: rgb(var(--link-rgb));
+  color: rgb(var(--link-rgb));
+}
 .theme {
   fill: rgb(var(--foreground-rgb));
 }
 .reverse {
   fill: rgb(var(--foreground-reverse-rgb));
 }
-
 .defaultSvg {
   fill: rgb(var(--link-rgb));
   color: rgb(var(--link-rgb));
 }
-
 .white {
   fill: #fff;
   color: #fff;
 }
-
 .primary {
   fill: rgb(var(--link-primary-rgb));
   color: rgb(var(--link-primary-rgb));
 }
-
 .inherit {
   fill: inherit;
   color: inherit;

@@ -1,8 +1,11 @@
 import { AdvancedUser } from '@/model/User';
 
 interface Params {
-  queryKey: (string | { q?: string; f?: string; pf?: string; lf?: string })[];
-  pageParam: string;
+  queryKey: (
+    | string
+    | { q?: string; f?: string; pf?: string; lf?: string; self?: 'on' }
+  )[];
+  pageParam: number;
 }
 
 export const getUserSearch = async ({
@@ -10,7 +13,7 @@ export const getUserSearch = async ({
   pageParam,
 }: Params): Promise<{
   data: AdvancedUser[];
-  nextCursor?: string;
+  nextCursor?: number;
   message: string;
 }> => {
   if (typeof options !== 'object') {
@@ -19,14 +22,15 @@ export const getUserSearch = async ({
   const isServer = typeof window === 'undefined';
   const nextHeader = isServer ? await import('next/headers') : undefined;
   const searchParams = new URLSearchParams();
-  searchParams.set('cursor', pageParam);
+  searchParams.set('cursor', pageParam.toString());
   Object.entries(options).forEach(([key, value]) => {
     searchParams.set(key, value);
   });
+
   const requestUrl = `${
     isServer ? process.env.SERVER_URL : process.env.NEXT_PUBLIC_SERVER_URL
   }/api/users/search?${searchParams.toString()}`;
-  const requestOptions: RequestInit = {
+  const requestInit: RequestInit = {
     method: 'GET',
     credentials: 'include',
     headers: nextHeader
@@ -38,7 +42,7 @@ export const getUserSearch = async ({
     cache: 'no-store',
   };
 
-  const response = await fetch(requestUrl, requestOptions);
+  const response = await fetch(requestUrl, requestInit);
   if (!response.ok) {
     throw new Error('Failed to fetch data');
   }

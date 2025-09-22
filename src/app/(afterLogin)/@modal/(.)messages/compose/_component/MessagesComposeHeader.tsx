@@ -34,7 +34,7 @@ export default function MessagesComposeHeader({ session }: Props) {
 
     const receiver = users[0];
     const roomid = encryptRoomId(session.id, receiver.id);
-    router.push(`/messages/${roomid}`);
+    router.replace(`/messages/${roomid}`);
   };
 
   return (

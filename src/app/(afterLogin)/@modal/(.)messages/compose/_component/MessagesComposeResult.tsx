@@ -34,7 +34,7 @@ export default function MessagesComposeResult({ sessionId }: Props) {
   } = useInfiniteQuery({
     queryKey: ['users', 'list', 'search', { q: search }],
     queryFn: getUserSearch,
-    initialPageParam: '',
+    initialPageParam: 0,
     getNextPageParam: (lastPage) => lastPage.nextCursor,
     enabled,
     placeholderData: keepPreviousData,

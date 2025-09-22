@@ -5,6 +5,7 @@ import {
 } from '@tanstack/react-query';
 import { getUserSearch } from '../../_lib/getUserSearch';
 import { getPostSearch } from '../../_lib/getPostSearch';
+import getListsSearch from '@/app/(afterLogin)/i/lists/search/_lib/getListsSearch';
 
 interface Props {
   children: React.ReactNode;
@@ -28,7 +29,12 @@ export default function SearchHydrationBoundary({
     queryClient.prefetchInfiniteQuery({
       queryKey: ['users', 'list', 'search', searchParams],
       queryFn: getUserSearch,
-      initialPageParam: '',
+      initialPageParam: 0,
+    }),
+    queryClient.prefetchInfiniteQuery({
+      queryKey: ['lists', 'list', 'search', searchParams],
+      queryFn: getListsSearch,
+      initialPageParam: 0,
     }),
   ]);
   const dehydrateState = dehydrate(queryClient);

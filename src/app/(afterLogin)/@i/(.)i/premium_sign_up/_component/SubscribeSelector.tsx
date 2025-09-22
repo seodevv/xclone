@@ -57,7 +57,7 @@ export default function SubsribeSelector() {
     id: Subscribes['subscribe'],
     price: Subscribes['price']
   ) => {
-    if (width < 704) return;
+    if (width !== null && width < 704) return;
     dispatch({ type: 'setSubscribe', payload: { id, price } });
   };
 
@@ -91,7 +91,7 @@ export default function SubsribeSelector() {
             <div className={styles.content}>
               <div className={styles.circle}>
                 <div className={cx(styles.whether, isActive && styles.select)}>
-                  {isActive && <CheckSvg width={20} theme="theme" />}
+                  {isActive && <CheckSvg width={20} theme="white" />}
                 </div>
               </div>
               <div className={styles.title}>
@@ -140,7 +140,7 @@ export default function SubsribeSelector() {
                   {scribe.list.map((item, i) => (
                     <div key={i} className={styles.item}>
                       <span>
-                        <CheckSvg width={18.75} theme="theme" />
+                        <CheckSvg width={18.75} theme="white" />
                         {item}
                       </span>
                     </div>

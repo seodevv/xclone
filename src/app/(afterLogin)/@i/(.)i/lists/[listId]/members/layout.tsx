@@ -8,14 +8,17 @@ interface Props {
   children: React.ReactNode;
 }
 
-export default function IListsMemberLayout({ params, children }: Props) {
+export default function IListsMemberLayout({
+  params: { listid },
+  children,
+}: Props) {
   const filter = 'members';
 
   return (
-    <ListsMemberHydrationBoundary listid={params.listid} filter={filter}>
+    <ListsMemberHydrationBoundary listid={listid} filter={filter}>
       <main className={styles.main}>
-        <LIstsMembersHeader />
-        <ListsMembersTab listid={params.listid} />
+        <LIstsMembersHeader listid={listid} />
+        <ListsMembersTab listid={listid} />
         {children}
       </main>
     </ListsMemberHydrationBoundary>

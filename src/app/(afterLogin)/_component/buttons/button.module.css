@@ -7,8 +7,7 @@
   height: 34px;
   border: none;
   border-radius: 50%;
-  background: transparent;
-  /* background: rgba(var(--background-start-rgb)); */
+  background-color: rgba(var(--background-start-rgb), 1);
   border: 1px solid transparent;
   font-size: 15px;
   font-weight: 700;
@@ -17,10 +16,10 @@
   transition: 150ms background-color ease-in;
 }
 .btn:hover:enabled {
-  background-color: rgba(15, 20, 25, 0.1);
+  background-color: rgba(var(--r-background-start-rgb), 0.1);
 }
 .btn:active:enabled {
-  background-color: rgba(15, 20, 25, 0.2);
+  background-color: rgba(var(--r-background-start-rgb), 0.2);
 }
 .btn:disabled {
   opacity: 0.5;
@@ -487,13 +486,13 @@
 }
 
 @media (prefers-color-scheme: dark) {
-  .btn:hover:enabled {
+  /* .btn:hover:enabled {
     background-color: rgba(var(--button-hover-rgb), 0.1);
   }
   .btn:active:enabled {
     background-color: rgba(var(--button-hover-rgb), 0.2);
     transition: none;
-  }
+  } */
   .followBtn:hover:enabled {
     background-color: rgb(215, 219, 220);
   }

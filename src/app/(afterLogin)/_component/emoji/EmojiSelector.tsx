@@ -59,6 +59,7 @@ const EmojiSelector = ({
     e.stopPropagation();
 
     if (!btnRef.current) return;
+    if (width === null || height === null) return;
 
     const contentWidth = 370;
     const contentHeight = 435;

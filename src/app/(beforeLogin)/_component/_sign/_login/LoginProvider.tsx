@@ -1,6 +1,7 @@
 'use client';
 
 import { IdentifierInputRef } from '@/app/_component/_input/IdentifierInput';
+import { usePathname } from 'next/navigation';
 import {
   createContext,
   Dispatch,
@@ -86,6 +87,7 @@ interface Props {
   children: React.ReactNode;
 }
 export default function LoginProvider({ children }: Props) {
+  const pathname = usePathname();
   const [state, dispatch] = useReducer(
     reducer,
     {

@@ -24,7 +24,7 @@ export default function RadioButton({
       style={style}
       onClick={onClick}
     >
-      {isChecked && <CheckSvg width={width} theme="theme" />}
+      {isChecked && <CheckSvg width={width} theme="white" />}
     </button>
   );
 }

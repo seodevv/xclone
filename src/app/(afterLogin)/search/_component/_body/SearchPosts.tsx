@@ -7,16 +7,23 @@ import { usePostSearchQuery } from '../../_hook/usePostSearchQuery';
 import PostMedia from '@/app/(afterLogin)/_component/post/body/PostMedia';
 import PageLoading from '@/app/(afterLogin)/_component/loading/PageLoading';
 import LoadingSpinner from '@/app/(afterLogin)/_component/loading/LoadingSpinner';
+import SearchNoResult from '@/app/(afterLogin)/search/_component/_body/SearchNoResult';
 
 interface Props {
   searchParams: { q?: string; f?: string; pf?: string; lf?: string };
+  loading?: boolean;
+  noResult?: boolean;
 }
 
-export default function SearchPosts({ searchParams }: Props) {
+export default function SearchPosts({
+  searchParams,
+  loading,
+  noResult,
+}: Props) {
   const {
     data: searchPosts,
-    isLoading,
     hasNextPage,
+    isLoading,
     isFetchingNextPage,
     isError,
     fetchNextPage,
@@ -25,8 +32,14 @@ export default function SearchPosts({ searchParams }: Props) {
     searchParams,
   });
 
-  if (searchPosts) {
+  if (typeof searchPosts !== 'undefined') {
+    const flatten = searchPosts.pages.map((page) => page.data).flat();
     const isMedia = searchParams.f === 'media';
+
+    if (noResult && flatten.length === 0) {
+      return <SearchNoResult q={searchParams.q} />;
+    }
+
     return (
       <div className={cx(isMedia && styles.postMedia)}>
         {searchPosts.pages.map((page, i) =>
@@ -50,7 +63,7 @@ export default function SearchPosts({ searchParams }: Props) {
     );
   }
 
-  if (isLoading) {
+  if (loading && isLoading) {
     return <LoadingSpinner />;
   }
 

@@ -24,8 +24,10 @@ export default function ListsSearchResult({ searchParams }: Props) {
   } = useGetListsSearchQuery(searchParams);
   const q = searchParams.q ? decodeURIComponent(searchParams.q) : '';
 
-  if (searchLists) {
-    if (searchLists.pages[0].data.length === 0) {
+  if (typeof searchLists !== 'undefined') {
+    const flatten = searchLists.pages.map((page) => page.data).flat();
+
+    if (flatten.length === 0) {
       return (
         <NoPost title={`No Lists matched "${q}"`} message="Why not create one?">
           <TextLink
@@ -40,9 +42,9 @@ export default function ListsSearchResult({ searchParams }: Props) {
 
     return (
       <section>
-        {searchLists.pages.map((page) =>
-          page.data.map((l) => <Lists key={l.id} lists={l} follow />)
-        )}
+        {flatten.map((list) => (
+          <Lists key={list.id} lists={list} follow />
+        ))}
         <PageLoading
           type="next"
           hasNextPage={hasNextPage}

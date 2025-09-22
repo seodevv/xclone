@@ -19,6 +19,7 @@ export default function MessagesImageModal({ params }: Props) {
   const { height } = useViewport();
 
   if (media === null) return null;
+  if (height === null) return null;
 
   const url = generateImagePath(media.url);
 

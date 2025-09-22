@@ -10,11 +10,10 @@ import { SubMenuContext } from '@/app/(afterLogin)/_provider/SubMenuProvider';
 import { useSession } from 'next-auth/react';
 
 interface Props {
-  q?: string;
   options?: boolean;
 }
 
-export default function ListsSearchBar({ q, options }: Props) {
+export default function ListsSearchBar({ options }: Props) {
   const { dispatchMenu } = useContext(SubMenuContext);
   const { data: session } = useSession();
 
@@ -55,9 +54,13 @@ export default function ListsSearchBar({ q, options }: Props) {
       {options && (
         <div className={styles.searchOptions}>
           <Link className={styles.create} href="/i/lists/create" scroll={false}>
-            <NewListsSvg width={20} white />
+            <NewListsSvg width={20} theme="theme" />
           </Link>
-          <OptionButton onClick={onClickSearchListsOptions} />
+          <OptionButton
+            onClick={onClickSearchListsOptions}
+            theme="theme"
+            primary={false}
+          />
         </div>
       )}
     </div>

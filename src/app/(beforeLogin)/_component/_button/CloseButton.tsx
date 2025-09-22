@@ -1,9 +1,9 @@
 'use client';
 
 import styles from './beforeLogin.button.module.css';
-import { useRouter } from 'next/navigation';
-import { CSSProperties } from 'react';
+import { CSSProperties, useContext } from 'react';
 import XMarkSvg from '@/app/_svg/tweet/XMarkSvg';
+import { PathRecordContext } from '@/app/_provider/PathRecordProvider';
 
 interface Props {
   className?: string;
@@ -13,10 +13,11 @@ interface Props {
 }
 
 export default function CloseButton({ width = 20, disabled }: Props) {
-  const router = useRouter();
+  const { routerBack } = useContext(PathRecordContext);
+
   const onClickClose = () => {
     if (disabled) return;
-    router.back();
+    routerBack();
   };
 
   return (

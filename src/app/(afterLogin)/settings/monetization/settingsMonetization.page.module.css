@@ -3,7 +3,7 @@
   flex-direction: column;
   flex-grow: 1;
   width: 990px;
-  height: 100dvh;
+  /* height: 100dvh; */
   border-right: 1px solid rgb(var(--border-start-rgb));
 }
 .inner {

@@ -16,20 +16,20 @@ export default function PremiumFooter() {
   const prevWidth = useRef(0);
 
   const onClickOutSide: MouseEventHandler<HTMLDivElement> = (e) => {
-    if (width > 704) return;
+    if (width !== null && width > 704) return;
     if (e.currentTarget === e.target) {
       dispatch({ type: 'setFooter', payload: false });
     }
   };
 
   useLayoutEffect(() => {
-    if (prevWidth.current <= 704 && width > 704) {
+    if (prevWidth.current <= 704 && width !== null && width > 704) {
       dispatch({ type: 'setFooter', payload: true });
-    } else if (prevWidth.current > 704 && width <= 704) {
+    } else if (prevWidth.current > 704 && width !== null && width <= 704) {
       dispatch({ type: 'setFooter', payload: false });
     }
     return () => {
-      prevWidth.current = width;
+      if (width !== null) prevWidth.current = width;
     };
   }, [width]);
 

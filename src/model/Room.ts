@@ -1,4 +1,4 @@
-import { AdvancedUser, SafeUser, UserId } from './User';
+import { AdvancedUser, SafeUser } from './User';
 
 export interface Snooze {
   type: '1h' | '8h' | '1w' | 'forever';

@@ -97,7 +97,7 @@ export default function SubMenuWrapper({
   useLayoutEffect(() => {
     if (target && client.height !== 0) {
       const { x, y, width, height } = target.getBoundingClientRect();
-      const overHeight = viewHeight < y + client.height;
+      const overHeight = (viewHeight || 0) < y + client.height;
       setOver((prev) => ({ ...prev, y: overHeight ? true : false }));
       dispatchMenu({
         type: 'setPosition',

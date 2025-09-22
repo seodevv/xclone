@@ -9,6 +9,7 @@ import Link from 'next/link';
 import Text from '@/app/_component/_text/Text';
 import UserDesc from '@/app/(afterLogin)/[username]/_component/_profile/UserDesc';
 import useGetRoomMessages from '@/app/(afterLogin)/messages/[room]/_lib/useGetRoomMessages';
+import { useRouter } from 'next/navigation';
 
 interface Props {
   receiverid: string;
@@ -21,6 +22,7 @@ export default function RoomReceiverInfo({
   sessionId,
   roomId,
 }: Props) {
+  const router = useRouter();
   const { data: user } = useUserQuery(receiverid);
   const { data: rooms, hasPreviousPage } = useGetRoomMessages({
     sessionId,
@@ -53,8 +55,12 @@ export default function RoomReceiverInfo({
         utils.bd_b_1_solid_gray,
         utils.transit_basic,
         utils.hover_bg_gray,
+        utils.active_bg_gray,
         utils.cursor_point
       )}
+      onClick={() => {
+        router.push(`/${user.data.id}`);
+      }}
     >
       <div style={{ width: '64px', height: '64px' }} className={utils.relative}>
         <div className={cx(utils.pb_100, utils.w_100p)}></div>

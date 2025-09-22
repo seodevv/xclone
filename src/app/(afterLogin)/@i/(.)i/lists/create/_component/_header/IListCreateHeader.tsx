@@ -50,7 +50,7 @@ export default function IListCreateHeader({ session }: Props) {
         onSuccess(response) {
           const listid = response.data.id;
           setSuggested(true);
-          router.push(`/i/lists/${listid}/members/suggested`);
+          router.replace(`/i/lists/${listid}/members/suggested`);
         },
         onError: (error) => {
           console.error(error);

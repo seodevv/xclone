@@ -14,7 +14,7 @@ export default function MessagesHeader() {
               <SettingSvg width={19} theme="theme" />
             </Link>
             <Link className={styles.link} href={'/messages/compose'}>
-              <AddMessageSvg width={19} white />
+              <AddMessageSvg width={19} theme="theme" />
             </Link>
           </div>
         </PageHeader>

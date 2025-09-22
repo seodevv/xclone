@@ -22,7 +22,7 @@ export default function MessageButton({
       style={style}
       onClick={onClick}
     >
-      <MessageSvg width={width} white />
+      <MessageSvg width={width} theme="theme" />
     </button>
   );
 }

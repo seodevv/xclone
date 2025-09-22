@@ -10,6 +10,7 @@ import LeftArrowSvg from '@/app/_svg/arrow/LeftArrowSvg';
 import RightArrowSvg from '@/app/_svg/arrow/RightArrowSvg';
 import XMarkSvg from '@/app/_svg/tweet/XMarkSvg';
 import EditSvg from '@/app/_svg/tweet/EditSvg';
+import useAlterModal from '@/app/_hooks/useAlterModal';
 
 interface Props {
   images: MediaType[];
@@ -17,6 +18,7 @@ interface Props {
 }
 
 export default function PostFormPreview({ images, setImages }: Props) {
+  const { sendPrepareMessage } = useAlterModal();
   const [current, setCurrent] = useState<'prev' | 'next'>('prev');
   const length = images.length;
   const isSingle = images.length === 1;
@@ -67,8 +69,14 @@ export default function PostFormPreview({ images, setImages }: Props) {
               </div>
             )}
             {image.type === 'image' && (
-              <button type="button" className={styles.previewEdit}>
-                <EditSvg />
+              <button
+                type="button"
+                className={styles.previewEdit}
+                onClick={() => {
+                  sendPrepareMessage();
+                }}
+              >
+                <EditSvg theme="theme" />
               </button>
             )}
             <button
@@ -83,7 +91,7 @@ export default function PostFormPreview({ images, setImages }: Props) {
                 if (images.length < 4) setCurrent('prev');
               }}
             >
-              <XMarkSvg />
+              <XMarkSvg theme="theme" />
             </button>
           </div>
         ))}

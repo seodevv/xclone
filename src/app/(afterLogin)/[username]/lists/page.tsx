@@ -15,7 +15,7 @@ export default async function UserListsPage({ params }: Props) {
 
   return (
     <UserListsHydrationBoundary username={params.username} filter={filter}>
-      <ListsRecommends more />
+      {session?.user?.email === params.username && <ListsRecommends more />}
       <DivideLine />
       <UserLists session={session} username={params.username} filter={filter} />
     </UserListsHydrationBoundary>

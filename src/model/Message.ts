@@ -3,7 +3,10 @@ import { AdvancedUser, SafeUser, UserId } from './User';
 export interface AdvancedMessages {
   id: number;
   parentid: number | null;
-  Parent: AdvancedMessages | null;
+  Parent: Pick<
+    AdvancedMessages,
+    'id' | 'senderid' | 'Sender' | 'content' | 'createat' | 'Media'
+  > | null;
   roomid: string;
   senderid: string;
   content: string;

@@ -19,7 +19,7 @@ export default function ImageContainer({
 }: Props) {
   return (
     <div
-      className={cx(utils.relative, utils.of_hide)}
+      className={cx(utils.flexGrow_1, utils.relative, utils.of_hide)}
       style={{ backgroundColor }}
     >
       <div className={cx(utils.pb_100, utils.w_100p)}></div>

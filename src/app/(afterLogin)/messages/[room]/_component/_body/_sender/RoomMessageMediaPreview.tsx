@@ -1,22 +1,26 @@
 'use client';
 
-import { RoomMessageImageFile } from '@/app/(afterLogin)/messages/[room]/_component/_body/_sender/RoomMessageSender';
+import useAlterModal from '@/app/_hooks/useAlterModal';
 import { generateImagePath } from '@/app/_lib/common';
 import EditSvg from '@/app/_svg/tweet/EditSvg';
 import XMarkSvg from '@/app/_svg/tweet/XMarkSvg';
 import utils from '@/app/utility.module.css';
+import { MessageMediaData } from '@/model/socket';
 import cx from 'classnames';
 import Image from 'next/image';
 import { Dispatch, MouseEventHandler, SetStateAction } from 'react';
 
 interface Props {
-  media: RoomMessageImageFile | null;
+  media: MessageMediaData | null;
   setMedia: Dispatch<SetStateAction<Props['media']>>;
 }
 
 export default function RoomMessageMediaPreview({ media, setMedia }: Props) {
+  const { sendPrepareMessage } = useAlterModal();
+
   const onClickEdit: MouseEventHandler<HTMLButtonElement> = (e) => {
     e.stopPropagation();
+    sendPrepareMessage();
   };
   const onClickXmark: MouseEventHandler<HTMLButtonElement> = (e) => {
     e.stopPropagation();

@@ -6,18 +6,24 @@ interface Props {
   className?: string;
   style?: CSSProperties;
   width?: number;
-  white?: boolean;
+  theme?: 'default' | 'theme' | 'reverse' | 'white';
 }
 
 export default function AddMessageSvg({
   className,
   style,
   width = 20,
-  white,
+  theme = 'default',
 }: Props) {
   return (
     <svg
-      className={cx(styles.defaultSvg, white && styles.white, className)}
+      className={cx(
+        theme === 'default' && styles.defaultSvg,
+        theme === 'theme' && styles.theme,
+        theme === 'reverse' && styles.theme,
+        theme === 'white' && styles.white,
+        className
+      )}
       style={style}
       width={width}
       viewBox="0 0 24 24"

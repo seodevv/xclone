@@ -24,8 +24,11 @@ export default function UserDesc({ desc, align = 'left' }: Props) {
 }
 
 export function AnalysisText({ text }: { text: string }) {
+  // const regex =
+  //   /((?:@|#)[a-zA-Z가-힣0-9_]+)|((?:http|https):\/\/)?(?:www.)?(?:[a-zA-Z0-9]+)\.[a-z]+(?:[a-zA-z0-9.?#/]+)/g;
   const regex =
-    /((?:@|#)[a-zA-Z가-힣0-9_]+)|((?:http|https):\/\/)?(?:www.)?(?:[a-zA-Z0-9]+)\.[a-z]+(?:[a-zA-z0-9.?#/]+)/g;
+    /((?:@|#)[a-zA-Z가-힣0-9_]+)|((?:https?:\/\/)?(?:localhost|\d{1,3}(?:\.\d{1,3}){3}|(?:www\.)?\w+(?:\.\w+)+)(?::\d+)?(?:\/[^\s]*)?)/g;
+
   const analaysis = [...text.matchAll(regex)];
 
   if (analaysis.length === 0) {

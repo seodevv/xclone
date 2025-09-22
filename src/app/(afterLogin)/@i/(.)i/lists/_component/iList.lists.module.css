@@ -8,8 +8,21 @@
   cursor: pointer;
 }
 .lists:hover {
-  background: rgba(var(--r-background-start-rgb), 0.1);
+  background-color: rgba(0, 0, 0, 0.03);
 }
+.lists:active {
+  background-color: rgba(0, 0, 0, 0.06);
+}
+
+@media (prefers-color-scheme: dark) {
+  .lists:hover {
+    background-color: rgba(255, 255, 255, 0.03);
+  }
+  .lists:active {
+    background-color: rgba(255, 255, 255, 0.06);
+  }
+}
+
 .content {
   display: flex;
   align-items: center;
@@ -132,7 +145,7 @@
   min-width: 32px;
   min-height: 32px;
   border-radius: 50%;
-  background: rgb(var(--r-background-start-rgb));
+  background-color: rgb(var(--r-background-start-rgb));
   border: 1px solid transparent;
   fill: rgb(var(--background-start-rgb));
   transition-duration: 200ms;
@@ -140,10 +153,10 @@
   cursor: pointer;
 }
 .follow:hover:enabled {
-  background: rgba(var(--r-background-start-rgb), 0.9);
+  background-color: rgba(var(--r-background-start-rgb), 0.75);
 }
 .follow:hover:active {
-  background: rgba(var(--r-background-start-rgb), 0.8);
+  background-color: rgba(var(--r-background-start-rgb), 0.5);
 }
 .isFollow {
   background: transparent;

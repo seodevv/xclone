@@ -10,8 +10,19 @@
   height: 0.2rem;
 }
 .bg {
-  background: rgb(32, 35, 39);
+  background: rgb(239, 243, 244);
 }
 .reply {
-  border-left: 4px solid rgb(214, 217, 219);
+  border-left-width: 4px;
+  border-left-style: solid;
+  border-left-color: rgb(36, 46, 54);
+}
+
+@media (prefers-color-scheme: dark) {
+  .bg {
+    background-color: rgb(32, 35, 39);
+  }
+  .reply {
+    border-left-color: rgb(214, 217, 219);
+  }
 }

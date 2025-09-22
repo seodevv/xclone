@@ -5,7 +5,7 @@ interface Params {
     | string
     | { type: 'verified_followers' | 'follow' | 'following' }
   )[];
-  pageParam: string;
+  pageParam: number;
 }
 
 export const getFollowList = async ({
@@ -13,7 +13,7 @@ export const getFollowList = async ({
   pageParam,
 }: Params): Promise<{
   data?: AdvancedUser[];
-  nextCursor?: string;
+  nextCursor?: number;
   message: string;
 }> => {
   if (typeof username !== 'string' || typeof options !== 'object') {

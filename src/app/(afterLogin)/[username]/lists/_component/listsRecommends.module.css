@@ -24,8 +24,17 @@
   transition-property: background-color;
 }
 .more:hover {
-  background: rgba(var(--r-background-start-rgb), 0.1);
+  background-color: rgba(0, 0, 0, 0.03);
 }
 .more:active {
-  background: rgba(var(--r-background-start-rgb), 0.15);
+  background-color: rgba(0, 0, 0, 0.06);
+}
+
+@media (prefers-color-scheme: dark) {
+  .more:hover {
+    background-color: rgba(255, 255, 255, 0.03);
+  }
+  .more:active {
+    background-color: rgba(255, 255, 255, 0.06);
+  }
 }

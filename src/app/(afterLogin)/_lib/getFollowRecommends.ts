@@ -2,7 +2,7 @@ import { AdvancedUser } from '@/model/User';
 
 interface Params {
   queryKey: string[];
-  pageParam: string;
+  pageParam: number;
 }
 
 export const getFollowRecommends = async ({
@@ -10,7 +10,7 @@ export const getFollowRecommends = async ({
   pageParam,
 }: Params): Promise<{
   data: AdvancedUser[];
-  nextCursor?: string;
+  nextCursor?: number;
   message: string;
 }> => {
   const isServer = typeof window === 'undefined';

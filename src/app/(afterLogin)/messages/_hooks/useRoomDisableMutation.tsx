@@ -27,7 +27,7 @@ const useRoomDisableMutation = () => {
   return useMutation({
     mutationFn: async ({
       roomid,
-    }: MutationParams): Promise<{ data: AdvancedRooms; message: string }> => {
+    }: MutationParams): Promise<{ data?: AdvancedRooms; message: string }> => {
       const requestUrl = `${process.env.NEXT_PUBLIC_SERVER_URL}/api/rooms/${roomid}`;
       const requestInit: RequestInit = {
         method: 'DELETE',
@@ -36,7 +36,8 @@ const useRoomDisableMutation = () => {
       };
 
       const response = await fetch(requestUrl, requestInit);
-      if (!response.ok) {
+
+      if (response.status !== 404 && !response.ok) {
         throw new Error('Failed to fetch data');
       }
 

@@ -58,7 +58,7 @@ export default function NoResult({}: Props) {
             utils.flex_justiCenter,
             utils.flexGrow_1
           )}
-          theme="theme"
+          theme="white"
           size="m"
           bold="bold"
           display="flex"

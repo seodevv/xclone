@@ -27,7 +27,7 @@ const useListsMemberMutation = () =>
       const requestOptions: RequestInit = {
         method,
         body: JSON.stringify({
-          memberId: member.id,
+          memberid: member.id,
         }),
         credentials: 'include',
         headers: {

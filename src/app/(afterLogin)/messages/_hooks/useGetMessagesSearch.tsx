@@ -3,13 +3,13 @@ import { AdvancedMessages } from '@/model/Message';
 import { useInfiniteQuery } from '@tanstack/react-query';
 
 interface Params {
-  query: AdvancedMessages['content'];
+  q: AdvancedMessages['content'];
   enabled?: boolean;
 }
 
-const useGetMessagesSearch = ({ query, enabled }: Params) =>
+const useGetMessagesSearch = ({ q, enabled }: Params) =>
   useInfiniteQuery({
-    queryKey: ['messages', 'list', 'search', query],
+    queryKey: ['messages', 'list', 'search', q],
     queryFn: getMessagesSearch,
     initialPageParam: 0,
     getNextPageParam: (lastPage) => lastPage.nextCursor,

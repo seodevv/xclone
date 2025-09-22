@@ -6,6 +6,7 @@ import RefreshButton from '@/app/(afterLogin)/_component/buttons/RefreshButton';
 import LoadingSpinner from '../loading/LoadingSpinner';
 import { useFollowRecommendsQuery } from '../../_hooks/useFollowRecommendsQuery';
 import Link from 'next/link';
+import { useSession } from 'next-auth/react';
 
 interface Props {
   title?: string;
@@ -18,6 +19,7 @@ export default function FollowRecommends({
   size = 3,
   isDesc = false,
 }: Props) {
+  const { data: session } = useSession();
   const {
     data: followRecommends,
     isLoading,
@@ -39,7 +41,10 @@ export default function FollowRecommends({
           )
           .flat()
           .slice(0, size)}
-        <Link className={styles.more} href={`/i/connect_people`}>
+        <Link
+          className={styles.more}
+          href={session ? '/i/connect_people' : '/i/flow/login'}
+        >
           Show more
         </Link>
       </div>

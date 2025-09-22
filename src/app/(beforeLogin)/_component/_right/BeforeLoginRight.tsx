@@ -4,11 +4,13 @@ import Link from 'next/link';
 import GithubLogin from './GithubLogin';
 import GoogleLogin from './GoogleLogin';
 import CredentialLogin from './CredentialLogin';
+import XLogoSvg from '@/app/_svg/logo/XLogoSvg';
 
 export default function BeforeLoginRight() {
   return (
     <div className={styles.right}>
       <div className={styles.rightInner}>
+        <XLogoSvg className={styles.XLogo} theme="theme" />
         <h1 className={styles.something}>Happening now</h1>
         <h2 className={styles.joinUs}>Join today.</h2>
         <div className={styles.buttons}>

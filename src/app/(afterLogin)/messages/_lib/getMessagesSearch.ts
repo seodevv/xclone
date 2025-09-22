@@ -12,7 +12,7 @@ export type AdvancedMessagesAddRooms = AdvancedMessages & {
 };
 
 export const getMessagesSearch = async ({
-  queryKey: [, , , query],
+  queryKey: [, , , q],
   pageParam,
 }: Params): Promise<{
   data: AdvancedMessagesAddRooms[];
@@ -23,9 +23,7 @@ export const getMessagesSearch = async ({
   const nextHeader = isServer ? await import('next/headers') : undefined;
   const requestUrl = `${
     isServer ? process.env.SERVER_URL : process.env.NEXT_PUBLIC_SERVER_URL
-  }/api/messages/search?query=${encodeURIComponent(
-    query
-  )}&cursor=${pageParam}&size=10`;
+  }/api/messages/search?q=${encodeURIComponent(q)}&cursor=${pageParam}&size=10`;
   const requestInit: RequestInit = {
     method: 'GET',
     credentials: 'include',
@@ -33,7 +31,7 @@ export const getMessagesSearch = async ({
       ? { Cookie: nextHeader.cookies().toString() }
       : undefined,
     next: {
-      tags: ['messages', 'list', 'search', query],
+      tags: ['messages', 'list', 'search', q],
     },
     cache: 'no-store',
   };

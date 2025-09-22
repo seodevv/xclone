@@ -25,7 +25,7 @@ export default async function FollowRecommendsHydrationBoundary({
   await queryClient.prefetchInfiniteQuery({
     queryKey,
     queryFn: getFollowRecommends,
-    initialPageParam: '',
+    initialPageParam: 0,
   });
   const dehydrateState = dehydrate(queryClient);
 

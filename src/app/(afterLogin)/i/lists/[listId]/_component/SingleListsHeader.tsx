@@ -4,9 +4,10 @@ import styles from './singleLists.header.module.css';
 import { MouseEventHandler, useContext } from 'react';
 import BackButton from '@/app/(afterLogin)/_component/buttons/BackButton';
 import ShareSvg from '@/app/_svg/actionbuttons/ShareSvg';
-import OptionSvg from '@/app/_svg/post/OptionSvg';
 import useGetSingleListsQuery from '@/app/(afterLogin)/i/lists/[listid]/_hooks/useGetSingleListsQuery';
 import { SubMenuContext } from '@/app/(afterLogin)/_provider/SubMenuProvider';
+import OptionButton from '@/app/(afterLogin)/_component/buttons/OptionButton';
+import CustomButton from '@/app/(afterLogin)/_component/buttons/CustomButton';
 
 interface Props {
   listid: string;
@@ -76,12 +77,11 @@ export default function SingleListsHeader({ listid }: Props) {
             </div>
             <div className={styles.options}>
               <div className={styles.buttons}>
-                <button className={styles.button} onClick={onClickShare}>
-                  <ShareSvg width={20} white />
-                </button>
-                <button className={styles.button} onClick={onClickOption}>
-                  <OptionSvg theme="white" width={20} />
-                </button>
+                <CustomButton
+                  svg={<ShareSvg width={20} theme="theme" />}
+                  onClick={onClickShare}
+                />
+                <OptionButton onClick={onClickOption} primary={false} />
               </div>
             </div>
           </div>

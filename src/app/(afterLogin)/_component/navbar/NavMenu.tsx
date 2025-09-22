@@ -149,49 +149,51 @@ export default function NavMenu({ session }: Props) {
             </li>
           );
         })}
-        <li className={styles.navList}>
-          <button
-            className={cx(
-              utils.relative,
-              utils.bg_trans,
-              utils.bd_none,
-              utils.cursor_point
-            )}
-            onClick={(e) => {
-              const { x, y, width, height } =
-                e.currentTarget.getBoundingClientRect();
-              dispatchMenu({
-                type: 'set',
-                payload: {
-                  flag: true,
-                  position: {
-                    x,
-                    y,
-                    width,
-                    height,
-                    target: e.currentTarget,
+        {session && (
+          <li className={styles.navList}>
+            <button
+              className={cx(
+                utils.relative,
+                utils.bg_trans,
+                utils.bd_none,
+                utils.cursor_point
+              )}
+              onClick={(e) => {
+                const { x, y, width, height } =
+                  e.currentTarget.getBoundingClientRect();
+                dispatchMenu({
+                  type: 'set',
+                  payload: {
+                    flag: true,
+                    position: {
+                      x,
+                      y,
+                      width,
+                      height,
+                      target: e.currentTarget,
+                    },
+                    status: {
+                      type: 'nav',
+                    },
                   },
-                  status: {
-                    type: 'nav',
-                  },
-                },
-              });
-            }}
-          >
-            <div className={styles.navPill}>
-              <div
-                className={cx(
-                  utils.relative,
-                  utils.d_flexRow,
-                  utils.flex_alignCenter
-                )}
-              >
-                <OtherMenuSvg theme="theme" width={26} />
+                });
+              }}
+            >
+              <div className={styles.navPill}>
+                <div
+                  className={cx(
+                    utils.relative,
+                    utils.d_flexRow,
+                    utils.flex_alignCenter
+                  )}
+                >
+                  <OtherMenuSvg theme="theme" width={26} />
+                </div>
+                <div className={cx(styles.navTitle)}>More</div>
               </div>
-              <div className={cx(styles.navTitle)}>More</div>
-            </div>
-          </button>
-        </li>
+            </button>
+          </li>
+        )}
       </ul>
       {session && (
         <Link

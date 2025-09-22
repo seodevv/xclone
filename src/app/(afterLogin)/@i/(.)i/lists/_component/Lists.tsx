@@ -79,7 +79,7 @@ export default function Lists({
               className={styles.image}
               src={generateImagePath(lists.thumbnail)}
               alt={lists.thumbnail}
-              width={144}
+              width={48}
               height={48}
             />
           </div>

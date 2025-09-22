@@ -1,6 +1,6 @@
+import './globals.css';
 import type { Metadata } from 'next';
 import { Inter } from 'next/font/google';
-import './globals.css';
 import AlterModalProvider from './_provider/AlterModalProvider';
 import PathRecordProvider from '@/app/_provider/PathRecordProvider';
 
@@ -12,18 +12,45 @@ export const metadata: Metadata = {
   icons: {
     icon: '/X.ico',
   },
+  openGraph: {
+    title: 'XClone.com',
+    description:
+      'This is a clone project based on the X site. It was created with the goal of practicing front-end and back-end technologies and implementing real service-level functions.',
+    url: `https://localhost:9090`,
+    siteName: 'XClone.com',
+    images: [
+      {
+        url: `${process.env.SERVER_URL}/api/image/X.jpg`,
+        width: 400,
+        height: 400,
+      },
+    ],
+    locale: 'ko_KR',
+    type: 'website',
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'XClone.com',
+    description:
+      'This is a clone project based on the X site. It was created with the goal of practicing front-end and back-end technologies and implementing real service-level functions.',
+    images: [`${process.env.SERVER_URL}/api/image/X.jpg`],
+  },
 };
 
 type Props = {
   children: React.ReactNode;
+  flow: React.ReactNode;
 };
 
-export default function RootLayout({ children }: Props) {
+export default function RootLayout({ children, flow }: Props) {
   return (
     <html lang="en">
       <body className={inter.className}>
         <PathRecordProvider>
-          <AlterModalProvider>{children}</AlterModalProvider>
+          <AlterModalProvider>
+            {children}
+            {flow}
+          </AlterModalProvider>
         </PathRecordProvider>
       </body>
     </html>

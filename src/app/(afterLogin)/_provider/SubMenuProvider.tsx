@@ -24,6 +24,8 @@ import MessageInfoNotificationSubMenu from '@/app/(afterLogin)/_component/_subMe
 import OtherNavSubMenu from '@/app/(afterLogin)/_component/_subMenu/OtherNavSubMenu';
 import SignSubMenu from '@/app/(afterLogin)/_component/_subMenu/SignSubMenu';
 import { AdvancedRooms } from '@/model/Room';
+import PostShareSubMenu from '@/app/(afterLogin)/_component/_subMenu/PostShareSubMenu';
+import SearchOptionSubmenu from '@/app/(afterLogin)/_component/_subMenu/SearchOptionSubMenu';
 
 interface State {
   status:
@@ -39,10 +41,12 @@ interface State {
           | 'repost'
           | 'highlight'
           | 'unPin'
-          | 'whoCanReply';
+          | 'whoCanReply'
+          | 'share';
         post: AdvancedPost;
         sessionid: string;
       }
+    | { type: 'search_option' }
     | { type: 'lists_search'; sessionid: string }
     | { type: 'lists_share' }
     | { type: 'lists_show'; lists: AdvancedLists }
@@ -173,6 +177,15 @@ export default function SubMenuProvider({ children }: Props) {
         )}
         {menu.flag && menu.status.type === 'whoCanReply' && (
           <WhoCanReply post={menu.status.post} />
+        )}
+        {menu.flag && menu.status.type === 'share' && (
+          <PostShareSubMenu
+            post={menu.status.post}
+            sessionid={menu.status.sessionid}
+          />
+        )}
+        {menu.flag && menu.status.type === 'search_option' && (
+          <SearchOptionSubmenu />
         )}
         {menu.flag && menu.status.type === 'lists_search' && (
           <SearchListsOptionsSubMenu sessionid={menu.status.sessionid} />

@@ -37,7 +37,7 @@ export default async function ITrendsHydrationBoundary({ children }: Props) {
     queryClient.prefetchInfiniteQuery({
       queryKey: ['users', 'list', 'recommends'],
       queryFn: getFollowRecommends,
-      initialPageParam: '',
+      initialPageParam: 0,
     }),
   ]);
 

@@ -1,5 +1,8 @@
+'use client';
+
 import PageHeader from '@/app/(afterLogin)/_component/_page/PageHeader';
 import styles from './settings.sub.module.css';
+import useViewport from '@/app/(afterLogin)/_hooks/useViewport';
 
 interface Props {
   header: string;
@@ -16,9 +19,19 @@ export default function SettingsSubWrapper({
   prevPath,
   children,
 }: Props) {
+  const { width } = useViewport();
+
+  if (width === null) {
+    return null;
+  }
+
   return (
     <div className={styles.sub}>
-      <PageHeader title={header} noBack={noBack} prevPath={prevPath}>
+      <PageHeader
+        title={header}
+        noBack={width >= 1024 ? noBack : false}
+        prevPath={prevPath}
+      >
         {option}
       </PageHeader>
       <div className={styles.content}>{children}</div>

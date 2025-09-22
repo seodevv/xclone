@@ -27,7 +27,7 @@ export default async function ListsMemberHydrationBoundary({
     queryClient.prefetchInfiniteQuery({
       queryKey: ['users', 'list', 'lists', listid, { filter }],
       queryFn: getListsMember,
-      initialPageParam: '',
+      initialPageParam: 0,
     }),
     queryClient.prefetchQuery({
       queryKey: ['lists', listid],

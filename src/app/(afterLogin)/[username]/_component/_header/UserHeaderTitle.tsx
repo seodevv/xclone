@@ -39,6 +39,7 @@ export default function UserHeaderTitle({ username }: Props) {
       case 'likes':
         sub = `${count?.data || 0} Like`;
         break;
+
       // /username/verified_followers
       // /username/followers
       // /username/following
@@ -48,6 +49,7 @@ export default function UserHeaderTitle({ username }: Props) {
         sub = `@${user.data.id}`;
         break;
       // /username/status/id
+
       case 'status':
         title = 'Post';
         // /username/status/id/quotes
@@ -57,17 +59,21 @@ export default function UserHeaderTitle({ username }: Props) {
           title = 'Post engagements';
         }
         break;
+
       // /username/lists/memberships
       case 'lists':
-        title = `Lists ${
-          session?.user?.email === username ? 'you' : 'they'
-        }'re on`;
+        title = 'Lists';
+        if (b === 'memberships') {
+          title = `Lists ${
+            session?.user?.email === username ? 'you' : 'they'
+          }'re on`;
+        }
         sub = `@${username}`;
         break;
     }
   }
 
-  if (a === 'lists' && b === undefined) {
+  if (a === 'lists' && b === undefined && session?.user?.email === username) {
     return null;
   }
 

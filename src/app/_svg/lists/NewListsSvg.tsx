@@ -6,20 +6,28 @@ interface Props {
   className?: HTMLAttributes<HTMLOrSVGElement>['className'];
   style?: CSSProperties;
   width?: number;
-  white?: boolean;
   fill?: string;
+  theme?: 'default' | 'theme' | 'reverse' | 'white' | 'primary' | 'inherit';
 }
 
 export default function NewListsSvg({
   className,
   style,
   width = 18.75,
-  white,
   fill,
+  theme = 'default',
 }: Props) {
   return (
     <svg
-      className={cx(styles.defaultSvg, white && styles.white, className)}
+      className={cx(
+        theme === 'default' && styles.defaultSvg,
+        theme === 'theme' && styles.theme,
+        theme === 'reverse' && styles.reverse,
+        theme === 'white' && styles.white,
+        theme === 'primary' && styles.primary,
+        theme === 'inherit' && styles.inherit,
+        className
+      )}
       style={style}
       width={width}
       viewBox="0 0 24 24"

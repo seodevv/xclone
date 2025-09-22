@@ -12,7 +12,7 @@ export const useUserFollowListQuery = ({ username, type }: Params) => {
   const query = useInfiniteQuery({
     queryKey: ['users', 'list', username, { type }],
     queryFn: getFollowList,
-    initialPageParam: '',
+    initialPageParam: 0,
     getNextPageParam: (lastPage) => lastPage.nextCursor,
   });
 

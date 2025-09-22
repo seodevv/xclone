@@ -1,6 +1,11 @@
 import FollowRecommendsHydrationBoundary from '@/app/(afterLogin)/_boundary/FollowRecommendsHydrationBoundary';
 import ConnectPeople from '@/app/(afterLogin)/i/connect_people/_component/ConnectPeople';
 import ConnectPeopleHeader from '@/app/(afterLogin)/i/connect_people/_component/ConnectPeopleHeader';
+import { Metadata } from 'next';
+
+export const metadata: Metadata = {
+  title: 'Connect / XClone',
+};
 
 interface Props {
   searchParams: { is_creator_only?: string };

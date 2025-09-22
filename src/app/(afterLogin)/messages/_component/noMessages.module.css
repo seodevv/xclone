@@ -25,10 +25,11 @@
   background: rgb(29, 155, 240);
   border: 1px solid transparent;
   border-radius: 9999px;
+  color: rgb(255, 255, 255);
   transition-duration: 200ms;
   transition-property: background-color;
   cursor: pointer;
 }
-.link {
-  background: rgb(26, 140, 216);
+.link:hover {
+  background-color: rgb(26, 140, 216);
 }

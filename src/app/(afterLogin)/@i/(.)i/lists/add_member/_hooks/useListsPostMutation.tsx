@@ -95,6 +95,12 @@ const useListsPostMutation = () =>
         });
       }
     },
+    onSuccess: (response, { queryClient, listid }, context) => {
+      queryClient.invalidateQueries({
+        queryKey: ['posts', 'list', 'lists', listid.toString()],
+        refetchType: 'active',
+      });
+    },
   });
 
 export default useListsPostMutation;

@@ -13,6 +13,7 @@ import useGetMessagesSearch from '@/app/(afterLogin)/messages/_hooks/useGetMessa
 import useGetRooms from '@/app/(afterLogin)/messages/_hooks/useGetRooms';
 import { useContext } from 'react';
 import Text from '@/app/_component/_text/Text';
+import PageLoading from '@/app/(afterLogin)/_component/loading/PageLoading';
 
 interface Props {
   sessionid: string;
@@ -20,22 +21,28 @@ interface Props {
 
 export default function SearchResult({ sessionid }: Props) {
   const { tab, input, enabled, set } = useContext(MessagesSearchContext);
-  const { data: people_data, isFetching: people_isFetching } =
-    useGetRooms(sessionid);
-  const { data: message_data, isFetching: message_isFetching } =
-    useGetMessagesSearch({
-      query: input,
-      enabled,
-    });
+  const { data: P_data, isLoading: P_isLoading } = useGetRooms(sessionid);
+  const {
+    data: M_data,
+    isLoading: M_isLoading,
+    hasNextPage: M_hasNextPage,
+    isFetchingNextPage: M_isFetchingNextPage,
+    isError: M_isError,
+    fetchNextPage: M_fetchNextPage,
+    refetch: M_refetch,
+  } = useGetMessagesSearch({
+    q: input,
+    enabled,
+  });
 
-  const rooms = people_data?.data.filter((room) => {
+  const rooms = P_data?.data.filter((room) => {
     const target = room.senderid === sessionid ? room.Receiver : room.Sender;
     return target.id.includes(input) || target.nickname.includes(input);
   });
-  const messages = message_data?.pages.map((page) => page.data).flat();
+  const messages = M_data?.pages.map((page) => page.data).flat();
 
   if (tab === 'people') {
-    if (people_isFetching) {
+    if (P_isLoading) {
       return <LoadingSpinner />;
     }
 
@@ -54,16 +61,29 @@ export default function SearchResult({ sessionid }: Props) {
   }
 
   if (tab === 'messages') {
-    if (message_isFetching) {
+    if (M_isLoading) {
       return <LoadingSpinner />;
     }
 
     return (
       <>
         {messages?.map((message) => (
-          <Message key={message.id} input={input} message={message} />
+          <Message
+            key={message.id}
+            input={input}
+            message={message}
+            room={message.Room}
+          />
         ))}
-        <NoMoreResult />
+        <PageLoading
+          type="next"
+          hasNextPage={M_hasNextPage}
+          isFetchingNextPage={M_isFetchingNextPage}
+          isError={M_isError}
+          fetchNextPage={M_fetchNextPage}
+          refetch={M_refetch}
+        />
+        {typeof messages !== 'undefined' && !M_hasNextPage && <NoMoreResult />}
       </>
     );
   }
@@ -72,7 +92,7 @@ export default function SearchResult({ sessionid }: Props) {
     return <NoResult />;
   }
 
-  if (people_isFetching || message_isFetching) {
+  if (P_isLoading || M_isLoading) {
     return <LoadingSpinner />;
   }
 
@@ -104,7 +124,14 @@ export default function SearchResult({ sessionid }: Props) {
           <SearchResultTitle type="messages" />
           {messages.map((message, i) => {
             if (i >= 5) return null;
-            return <Message key={message.id} input={input} message={message} />;
+            return (
+              <Message
+                key={message.id}
+                input={input}
+                message={message}
+                room={message.Room}
+              />
+            );
           })}
           {messages.length > 5 && (
             <More callback={() => set({ tab: 'messages' })} />
@@ -126,7 +153,7 @@ function NoMoreResult() {
         className={cx(utils.hover_underline, utils.cursor_point)}
         theme="primary"
         size="s"
-        bold="light"
+        // bold="light"
         align="center"
         onClick={() => set({ focus: true, input: '' })}
       >

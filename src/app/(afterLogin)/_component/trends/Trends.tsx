@@ -27,7 +27,11 @@ export default function Trends({ showTitle = true, showMore = true }: Props) {
           ))
         )}
         {showMore && (
-          <Link href={'/i/trends'} className={styles.trendMore}>
+          <Link
+            href={'/i/trends'}
+            className={styles.trendMore}
+            style={{ order: 999 }}
+          >
             Show more
           </Link>
         )}

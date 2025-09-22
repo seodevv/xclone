@@ -10,7 +10,7 @@
   position: relative;
   width: 145px;
   height: 145px;
-  background: rgb(22, 24, 28);
+  background-color: rgb(247, 249, 249);
   border: 3px solid rgb(var(--background-start-rgb));
   border-radius: 50%;
   box-sizing: content-box;
@@ -53,4 +53,10 @@
 }
 .mr_4 {
   margin-right: 4px;
+}
+
+@media (prefers-color-scheme: dark) {
+  .imageBox {
+    background-color: rgb(22, 24, 28);
+  }
 }

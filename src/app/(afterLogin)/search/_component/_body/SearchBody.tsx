@@ -1,56 +1,66 @@
 'use client';
 
-import styles from './searchBody.module.css';
+import { useUserSearchQuery } from '@/app/(afterLogin)/search/_hook/useUserSearchQuery';
 import SearchPosts from './SearchPosts';
-import { usePostSearchQuery } from '../../_hook/usePostSearchQuery';
-import { useUserSearchQuery } from '../../_hook/useUserSearchQuery';
-import LoadingSpinner from '@/app/(afterLogin)/_component/loading/LoadingSpinner';
-import SearchNoResult from './SearchNoResult';
 import SearchUsers from './SearchUsers';
-import { useEffect } from 'react';
+import { useLayoutEffect } from 'react';
+import { usePostSearchQuery } from '@/app/(afterLogin)/search/_hook/usePostSearchQuery';
+import LoadingSpinner from '@/app/(afterLogin)/_component/loading/LoadingSpinner';
+import SearchLists from '@/app/(afterLogin)/search/_component/_body/SearchLists';
+import SearchNoResult from '@/app/(afterLogin)/search/_component/_body/SearchNoResult';
 
 interface Props {
   searchParams: { q?: string; f?: string; pf?: string; lf?: string };
 }
 
 export default function SearchBody({ searchParams }: Props) {
-  const {
-    isLoading: pLoading,
-    isEmpty: pEmpty,
-    enabled: pEnabled,
-  } = usePostSearchQuery({
+  const { data: uData, isLoading: uLoading } = useUserSearchQuery({
     searchParams,
   });
-  const {
-    isLoading: uLoading,
-    isEmpty: uEmpty,
-    enabled: uEnabled,
-  } = useUserSearchQuery({
+  const { data: pData, isLoading: pLoading } = usePostSearchQuery({
     searchParams,
   });
+  const { f } = searchParams;
 
-  useEffect(() => {
-    if (pLoading || uLoading) {
-      window.scrollTo(0, 0);
+  useLayoutEffect(() => {
+    window.scrollTo(0, 0);
+  }, [f]);
+
+  if (typeof f === 'undefined') {
+    if (uLoading || pLoading) {
+      return <LoadingSpinner />;
     }
-  }, [searchParams.f, pLoading, uLoading]);
 
-  if (pLoading || uLoading) {
-    return <LoadingSpinner />;
+    if (
+      uData?.pages.map((page) => page.data).flat().length === 0 &&
+      pData?.pages.map((page) => page.data).flat().length === 0
+    ) {
+      return <SearchNoResult q={searchParams.q} />;
+    }
+
+    return (
+      <>
+        <SearchUsers searchParams={searchParams} />
+        <SearchPosts searchParams={searchParams} />
+      </>
+    );
   }
 
-  if (pEnabled && uEnabled && pEmpty && uEmpty) {
-    return <SearchNoResult q={searchParams.q} />;
-  } else if (pEnabled && !uEnabled && pEmpty) {
-    return <SearchNoResult q={searchParams.q} />;
-  } else if (!pEnabled && uEnabled && uEmpty) {
-    return <SearchNoResult q={searchParams.q} />;
+  if (f === 'live') {
+    return <SearchPosts searchParams={searchParams} loading noResult />;
   }
 
-  return (
-    <section className={styles.body}>
-      <SearchUsers searchParams={searchParams} />
-      <SearchPosts searchParams={searchParams} />
-    </section>
-  );
+  if (f === 'user') {
+    return <SearchUsers searchParams={searchParams} loading noResult />;
+  }
+
+  if (f === 'media') {
+    return <SearchPosts searchParams={searchParams} loading noResult />;
+  }
+
+  if (f === 'lists') {
+    return <SearchLists searchParams={searchParams} loading noResult />;
+  }
+
+  return <SearchNoResult q={searchParams.q} />;
 }

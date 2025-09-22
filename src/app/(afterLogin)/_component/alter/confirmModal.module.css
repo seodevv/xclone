@@ -1,3 +1,9 @@
+.xLogo {
+  margin-bottom: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
 .title {
   margin-bottom: 8px;
   font-size: 20px;

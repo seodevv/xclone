@@ -4,8 +4,10 @@ import styles from './confirmModal.module.css';
 import FlexButton from '@/app/(beforeLogin)/_component/_button/FlexButton';
 import IBackground from '@/app/(afterLogin)/@i/(.)i/_component/IBackground';
 import { MouseEventHandler } from 'react';
+import XLogoSvg from '@/app/_svg/logo/XLogoSvg';
 
 interface Props {
+  x?: boolean;
   title: string;
   sub: string;
   btnText: string;
@@ -17,6 +19,7 @@ interface Props {
 }
 
 export default function ConfirmModal({
+  x = false,
   title,
   sub,
   btnText,
@@ -36,6 +39,11 @@ export default function ConfirmModal({
 
   return (
     <IBackground size="small" onClick={onClickBackground} noHidden={noHidden}>
+      {x && (
+        <div className={styles.xLogo}>
+          <XLogoSvg theme="theme" width={40} />
+        </div>
+      )}
       {title !== '' && (
         <div className={styles.title}>
           <span>{title}</span>

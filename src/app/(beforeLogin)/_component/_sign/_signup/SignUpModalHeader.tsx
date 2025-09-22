@@ -35,7 +35,7 @@ export default function SignUpModalHeader() {
           )}
         </div>
         <div className={styles.logo}>
-          <XLogoSvg className={styles.xLogo} />
+          <XLogoSvg className={styles.xLogo} theme="theme" />
         </div>
         <div className={styles.grow}></div>
       </div>

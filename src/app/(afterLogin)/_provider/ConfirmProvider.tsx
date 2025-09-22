@@ -13,6 +13,7 @@ import {
 } from 'react';
 
 const initialState: State = {
+  x: false,
   flag: false,
   type: 'idle',
   title: '',
@@ -77,6 +78,7 @@ export default function ConfirmProvider({ children }: Props) {
       {modal.flag && modal.type === 'unLists' && <UnListsModal />}
       {modal.flag && modal.type === 'custom' && (
         <ConfirmModal
+          x={modal.x}
           title={modal.title}
           sub={modal.sub}
           btnText={modal.btnText}
@@ -94,6 +96,7 @@ export default function ConfirmProvider({ children }: Props) {
 interface State {
   flag: boolean;
   type: 'idle' | 'unFollow' | 'unLists' | 'custom';
+  x?: boolean;
   title: string;
   sub: string;
   btnText: string;
@@ -116,6 +119,7 @@ type Action =
       type: 'setCustom';
       payload: Pick<
         State,
+        | 'x'
         | 'title'
         | 'sub'
         | 'btnText'
