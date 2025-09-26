@@ -1,12 +1,14 @@
 import styles from '../_style/svg.module.css';
 import { CSSProperties, HTMLAttributes } from 'react';
 import cx from 'classnames';
+import { SvgTheme } from '@/app/_svg/Svg';
 
 interface Props {
   className?: HTMLAttributes<HTMLOrSVGElement>['className'];
   style?: CSSProperties;
   width?: number;
-  white?: boolean;
+  theme?: SvgTheme;
+
   fill?: string;
 }
 
@@ -14,12 +16,12 @@ export default function ProfileWithCheckSvg({
   className,
   style,
   width = 18.75,
-  white,
+  theme = 'default',
   fill,
 }: Props) {
   return (
     <svg
-      className={cx(styles.defaultSvg, white && styles.white, className)}
+      className={cx(styles[theme], className)}
       style={style}
       width={width}
       viewBox="0 0 24 24"

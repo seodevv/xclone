@@ -100,15 +100,24 @@
   display: flex;
   justify-content: space-between;
   min-height: 48px;
+  background-color: transparent;
   transition-duration: 200ms;
   transition-property: background-color;
   cursor: pointer;
 }
 .more:hover {
-  background: rgb(22, 24, 28);
+  background-color: rgb(247, 249, 249);
 }
 .more:active {
-  background: rgb(18, 21, 23, 0.7);
+  background-color: rgba(230, 236, 240, 0.7);
+}
+@media (prefers-color-scheme: dark) {
+  .more:hover {
+    background: rgb(22, 24, 28);
+  }
+  .more:active {
+    background: rgb(18, 21, 23, 0.7);
+  }
 }
 .footer {
   margin-top: 32px;

@@ -14,10 +14,18 @@ interface Props {
 }
 
 export default function SearchBody({ searchParams }: Props) {
-  const { data: uData, isLoading: uLoading } = useUserSearchQuery({
+  const {
+    data: uData,
+    isLoading: uLoading,
+    isError: uError,
+  } = useUserSearchQuery({
     searchParams,
   });
-  const { data: pData, isLoading: pLoading } = usePostSearchQuery({
+  const {
+    data: pData,
+    isLoading: pLoading,
+    isError: pError,
+  } = usePostSearchQuery({
     searchParams,
   });
   const { f } = searchParams;
@@ -29,6 +37,10 @@ export default function SearchBody({ searchParams }: Props) {
   if (typeof f === 'undefined') {
     if (uLoading || pLoading) {
       return <LoadingSpinner />;
+    }
+
+    if (uError || pError) {
+      throw new Error('Failed to fetch error');
     }
 
     if (

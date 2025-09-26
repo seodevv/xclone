@@ -101,7 +101,7 @@ export default function NavMenu({ session }: Props) {
     {
       title: 'profile',
       link: `/${session?.user?.email}`,
-      active: [`/${session?.user?.email}`],
+      active: `/${session?.user?.email}`,
       icon: <ProfileSvg width={width} />,
       sessionRequired: true,
     },
@@ -117,7 +117,7 @@ export default function NavMenu({ session }: Props) {
           const active = Array.isArray(menu.active)
             ? menu.active.includes(pathname)
             : typeof menu.active === 'string'
-            ? pathname.includes(menu.active)
+            ? pathname.startsWith(menu.active)
             : false;
           return (
             <li

@@ -57,7 +57,7 @@ const Progressbar = forwardRef<ProgressbarRef, Props>(
       } else {
         end();
       }
-    }, [active]);
+    }, [active, start, end]);
 
     return (
       <div
@@ -84,5 +84,6 @@ const Progressbar = forwardRef<ProgressbarRef, Props>(
     );
   }
 );
+Progressbar.displayName = 'Progressbar';
 
 export default Progressbar;

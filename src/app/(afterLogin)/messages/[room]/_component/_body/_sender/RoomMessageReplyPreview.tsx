@@ -11,7 +11,7 @@ import ImageContainer from '@/app/_component/_util/ImageContainer';
 
 interface Props {}
 
-export default function ({}: Props) {
+export default function RoomMessageReplyPreview({}: Props) {
   const { reply, resetReply } = useMessagesStore();
   const onClickXMark = () => resetReply();
 

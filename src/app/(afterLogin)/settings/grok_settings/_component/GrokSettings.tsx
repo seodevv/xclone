@@ -7,26 +7,29 @@ import TransitionTextButton from '@/app/(afterLogin)/_component/buttons/Transiti
 import useSettingsLocalStore, {
   GrokSelector,
 } from '@/app/(afterLogin)/_store/SettingsLocalStore';
-import { useContext } from 'react';
-import { ConfirmContext } from '@/app/(afterLogin)/_provider/ConfirmProvider';
+import useAlterModal from '@/app/_hooks/useAlterModal';
+import useConfirmStore, {
+  confirmSelector,
+} from '@/app/(afterLogin)/_store/ConfirmStore';
 
 export default function GrokSettings() {
-  const { dispatchModal, close } = useContext(ConfirmContext);
+  const { sendPrepareMessage } = useAlterModal();
+  const { open, close } = useConfirmStore(confirmSelector);
+
   const { grok, setGrok } = useSettingsLocalStore(GrokSelector);
   const onClickDeleteConversation = () => {
-    dispatchModal({
-      type: 'setCustom',
-      payload: {
-        title: 'Do you want to delete your conversations?',
-        sub: 'You’re about to delete your grok conversation history. You will not be able to access these conversations again.',
-        btnText: 'Delete',
-        btnTheme: 'theme',
-        onClickCancle: () => {
-          close();
-        },
-        onClickConfirm: () => {
-          close();
-        },
+    open({
+      flag: true,
+      title: 'Do you want to delete your conversations?',
+      sub: 'You’re about to delete your grok conversation history. You will not be able to access these conversations again.',
+      btnText: 'Delete',
+      btnTheme: 'theme',
+      onClickCancle: () => {
+        close();
+      },
+      onClickConfirm: () => {
+        close();
+        sendPrepareMessage();
       },
     });
   };

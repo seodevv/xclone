@@ -1,61 +1,61 @@
 'use client';
 
 import styles from './alterModal.module.css';
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useState } from 'react';
 import cx from 'classnames';
-import useAlterModal from '@/app/_hooks/useAlterModal';
-import { Modal } from '@/app/_provider/AlterModalProvider';
+import useAlterStore, {
+  AlterState,
+} from '@/app/(afterLogin)/_store/AlterStore';
 
 export default function AlterModal() {
-  const { getMessage, getDuration, getType, resetMessage } = useAlterModal();
+  const { show, type, message, duration, resetModal } = useAlterStore();
   const [fadeOut, setFadeOut] = useState(false);
-  const firstMount = useRef(true);
-  const background: { [key in Modal['type']]: string } = {
+  const background: { [key in AlterState['type']]: string } = {
     notice: '#1D9BF0',
     warning: '#FFD400',
     error: '#F4212F',
   };
 
-  const color: { [key in Modal['type']]: string } = {
+  const color: { [key in AlterState['type']]: string } = {
     notice: '#fff',
     warning: '#000',
     error: '#fff',
   };
 
   useEffect(() => {
-    if (firstMount.current) {
-      firstMount.current = false;
-      return;
+    let a: ReturnType<typeof setTimeout>;
+    let b: ReturnType<typeof setTimeout>;
+
+    if (show) {
+      a = setTimeout(() => {
+        setFadeOut(true);
+      }, duration);
+      b = setTimeout(() => {
+        resetModal();
+      }, duration + 300);
     }
-
-    const a = setTimeout(() => {
-      setFadeOut(true);
-    }, getDuration());
-    const b = setTimeout(() => {
-      resetMessage();
-    }, getDuration() + 300);
-
     return () => {
       clearTimeout(a);
       clearTimeout(b);
+      setFadeOut(false);
     };
-  }, [getDuration, resetMessage]);
+  }, [show, setFadeOut, resetModal, setFadeOut]);
+
+  if (!show) return null;
 
   return (
     <div className={cx(styles.modalGround, fadeOut && styles.fadeOut)}>
       <div
         className={styles.modalContent}
         style={{
-          backgroundColor: background[getType()],
-          color: color[getType()],
+          backgroundColor: background[type],
+          color: color[type],
           fontWeight: 'bold',
         }}
       >
-        {getMessage()
-          .split(/\r|\r\n|\n/)
-          .map((message, i) => (
-            <span key={i}>{message}</span>
-          ))}
+        {message.split(/\r|\r\n|\n/).map((message, i) => (
+          <span key={i}>{message}</span>
+        ))}
       </div>
     </div>
   );

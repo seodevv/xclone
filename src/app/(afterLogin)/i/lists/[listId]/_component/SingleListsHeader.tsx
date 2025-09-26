@@ -81,7 +81,11 @@ export default function SingleListsHeader({ listid }: Props) {
                   svg={<ShareSvg width={20} theme="theme" />}
                   onClick={onClickShare}
                 />
-                <OptionButton onClick={onClickOption} primary={false} />
+                <OptionButton
+                  onClick={onClickOption}
+                  primary={false}
+                  theme="theme"
+                />
               </div>
             </div>
           </div>

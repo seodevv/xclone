@@ -1,15 +1,17 @@
 'use client';
 
 import styles from './button.module.css';
-import { CSSProperties, MouseEventHandler, useContext, useState } from 'react';
+import { CSSProperties, MouseEventHandler, useState } from 'react';
 import { useSession } from 'next-auth/react';
 import cx from 'classnames';
 import { AdvancedUser } from '@/model/User';
 import useFollowMutation from '../../_hooks/useFollowMutation';
 import { useQueryClient } from '@tanstack/react-query';
 import useAlterModal from '@/app/_hooks/useAlterModal';
-import { ConfirmContext } from '@/app/(afterLogin)/_provider/ConfirmProvider';
 import { useRouter } from 'next/navigation';
+import useConfirmStore, {
+  confirmSelector,
+} from '@/app/(afterLogin)/_store/ConfirmStore';
 
 interface Props {
   className?: string;
@@ -26,11 +28,11 @@ export default function FollowButton({
 }: Props) {
   const router = useRouter();
   const { data: session } = useSession();
-  const { alterMessage } = useAlterModal();
-  const { dispatchModal } = useContext(ConfirmContext);
+  const { alterMessage, sendErrorMessage } = useAlterModal();
+  const { open, close } = useConfirmStore(confirmSelector);
+  const [hover, setHover] = useState(false);
   const queryClient = useQueryClient();
   const followMutation = useFollowMutation();
-  const [hover, setHover] = useState(false);
   const isFollow = user.Followers.some((u) => u.id === session?.user?.email);
 
   const onClickFollow: MouseEventHandler<HTMLButtonElement> = (e) => {
@@ -40,10 +42,38 @@ export default function FollowButton({
       router.push('/i/flow/login');
       return;
     }
+
+    const sourceId = session.user.email;
+    const targetId = user.id;
+
     if (isFollow) {
-      dispatchModal({
-        type: 'unFollow',
-        payload: { sourceId: session.user.email, targetId: user.id },
+      open({
+        flag: true,
+        title: `Unfollow @${user.id}?`,
+        sub: 'Their posts will no longer show up in your For You timeline. You can still view their profile, unless their posts are protected.',
+        btnText: 'UnFollow',
+        btnTheme: 'theme',
+        onClickCancle: () => {
+          close();
+        },
+        onClickConfirm: () => {
+          followMutation.mutate(
+            {
+              queryClient,
+              type: 'unfollow',
+              sourceId,
+              targetId,
+            },
+            {
+              onError: () => {
+                sendErrorMessage();
+              },
+              onSettled: () => {
+                close();
+              },
+            }
+          );
+        },
       });
     } else {
       followMutation.mutate(

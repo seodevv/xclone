@@ -53,7 +53,7 @@ export default function TwoFactorAuthApp() {
         </div>
       </div>
       <div className={styles.footer}>
-        <FlexButton type="submit" text="Get started" theme="white" large />
+        <FlexButton type="submit" text="Get started" theme="theme" large />
       </div>
     </form>
   );

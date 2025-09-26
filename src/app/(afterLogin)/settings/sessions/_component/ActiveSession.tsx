@@ -22,7 +22,7 @@ export default function ActiveSession() {
         href={`/settings/sessions/${randomString}`}
         svg={
           <div className={styles.desktop}>
-            <DesktopSvg white />
+            <DesktopSvg theme="theme" />
           </div>
         }
         title="Windows"

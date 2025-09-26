@@ -13,6 +13,30 @@ import { getUser } from './_lib/getUser';
 import { getUserPostsCount } from './_lib/getUserPostsCount';
 import UserHeader from './_component/_header/UserHeader';
 import ViewTabs from '@/app/(afterLogin)/[username]/status/[id]/[view]/_component/ViewTabs';
+import { Metadata } from 'next';
+
+export async function generateMetadata(args: {
+  params: { username: string };
+}): Promise<Metadata> {
+  const user = await getUser({ queryKey: ['', args.params.username] });
+
+  if (typeof user.data === 'undefined') {
+    return {
+      title: 'Profile / XClone',
+      description: 'The user does not exist.',
+    };
+  }
+
+  return {
+    title: `${user.data.nickname} (@${user.data.id}) / XClone`,
+    description: user.data.desc || '',
+    openGraph: {
+      title: `${user.data.nickname}'s profile`,
+      description: user.data.desc || '',
+      images: [user.data.image],
+    },
+  };
+}
 
 interface Props {
   children: ReactNode;
@@ -40,7 +64,7 @@ export default async function UserLayout({ children, params }: Props) {
       <main className={style.main}>
         <UserHeader username={params.username} />
         <ViewTabs session={session} username={params.username} />
-        <section>
+        <section className={style.section}>
           <UserProfile session={session} username={params.username} />
           <UserTabs session={session} username={params.username} />
           {children}

@@ -60,6 +60,12 @@
   background: transparent;
   border-color: rgb(185, 202, 211);
 }
+.check.dim {
+  border-color: rgb(92, 110, 126);
+}
+.check.lights_out {
+  border-color: rgb(62, 65, 68);
+}
 .check.active {
   background: rgb(var(--primary-rgb));
   border-color: rgb(var(--primary-rgb));

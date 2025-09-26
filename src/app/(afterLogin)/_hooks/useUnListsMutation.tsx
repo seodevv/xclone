@@ -1,16 +1,19 @@
+'use client';
+
 import { responseErrorHandler } from '@/app/_lib/error';
 import { AdvancedLists } from '@/model/Lists';
 import { AdvancedUser } from '@/model/User';
-import { QueryClient, useMutation } from '@tanstack/react-query';
+import { useMutation, useQueryClient } from '@tanstack/react-query';
 
 interface MutationParams {
-  queryClient: QueryClient;
   listid: AdvancedLists['id'];
   sessionid: AdvancedUser['id'];
 }
 
-const useUnListsMutation = () =>
-  useMutation({
+const useUnListsMutation = () => {
+  const queryClient = useQueryClient();
+
+  return useMutation({
     mutationFn: async ({
       listid,
     }: MutationParams): Promise<{ message: string }> => {
@@ -27,7 +30,7 @@ const useUnListsMutation = () =>
 
       return responseErrorHandler(response);
     },
-    onSuccess: (data, { queryClient, listid, sessionid }) => {
+    onSuccess: (data, { listid, sessionid }) => {
       queryClient.invalidateQueries({
         queryKey: ['lists', listid.toString()],
         refetchType: 'none',
@@ -42,5 +45,6 @@ const useUnListsMutation = () =>
       });
     },
   });
+};
 
 export default useUnListsMutation;

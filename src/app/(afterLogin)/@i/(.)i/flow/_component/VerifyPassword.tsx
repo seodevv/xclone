@@ -82,7 +82,7 @@ const VerifyPassword = forwardRef<VerifyPasswordRef, Props>(
             }
           },
           onError: () => {
-            alterMessage('Wrong password!');
+            alterMessage('Wrong password!', 'warning');
             setPassword('');
             passwordRef.current?.focus();
             if (typeof passwordRef.current?.setValue === 'function') {
@@ -143,5 +143,7 @@ const VerifyPassword = forwardRef<VerifyPasswordRef, Props>(
     );
   }
 );
+
+VerifyPassword.displayName = 'VerifyPassword';
 
 export default VerifyPassword;

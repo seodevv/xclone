@@ -16,9 +16,9 @@ export default function UserTopicsNotInterestedPage() {
           No interest? No problem.
         </Text>
         <Text className={utils.mb_28} theme="gray">
-          When you tell us you're not interested in a Topic, it will show up
-          here. We won't recommend Tweets, events, or ads related to Topics you
-          aren't into.
+          When you tell us you&apos;re not interested in a Topic, it will show
+          up here. We won&apos;t recommend Tweets, events, or ads related to
+          Topics you aren&apos;t into.
         </Text>
       </div>
     </div>

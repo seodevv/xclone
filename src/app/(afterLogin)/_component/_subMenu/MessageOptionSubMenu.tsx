@@ -2,8 +2,10 @@
 
 import SubMenu from '@/app/(afterLogin)/_component/_subMenu/SubMenu';
 import SubMenuWrapper from '@/app/(afterLogin)/_component/_subMenu/SubMenuWrapper';
-import { ConfirmContext } from '@/app/(afterLogin)/_provider/ConfirmProvider';
 import { SubMenuContext } from '@/app/(afterLogin)/_provider/SubMenuProvider';
+import useConfirmStore, {
+  confirmSelector,
+} from '@/app/(afterLogin)/_store/ConfirmStore';
 import useMessagesStore from '@/app/(afterLogin)/_store/MessagesStore';
 import useMessagesMutation from '@/app/(afterLogin)/messages/[room]/_hooks/useMessagesMutation';
 import useAlterModal from '@/app/_hooks/useAlterModal';
@@ -21,7 +23,7 @@ interface Props {
 }
 
 export default function MessageOptionSubMenu({ message }: Props) {
-  const confirm = useContext(ConfirmContext);
+  const { open, close } = useConfirmStore(confirmSelector);
   const subMenu = useContext(SubMenuContext);
   const { setReply } = useMessagesStore();
   const { alterMessage } = useAlterModal();
@@ -43,52 +45,50 @@ export default function MessageOptionSubMenu({ message }: Props) {
   const mutation = useMessagesMutation();
   const onClickDelete = () => {
     subMenu.hide(true);
-    confirm.dispatchModal({
-      type: 'setCustom',
-      payload: {
-        title: 'Delete message?',
-        sub: 'This message will be deleted for you. Other people in the conversation will still be able to see it.',
-        btnText: 'Delete',
-        btnTheme: 'red',
-        onClickConfirm: () => {
-          if (
-            !session?.user?.email ||
-            !session.user.name ||
-            !session.user.image
-          ) {
-            router.push('/login');
-            return;
-          }
-          mutation.mutate(
-            {
-              queryClient,
-              payload: {
-                type: 'disable',
-                messageid: message.id,
-                roomid: message.roomid,
-                session: {
-                  id: session.user.email,
-                  nickname: session.user.name,
-                  image: session.user.image,
-                },
+    open({
+      flag: true,
+      title: 'Delete message?',
+      sub: 'This message will be deleted for you. Other people in the conversation will still be able to see it.',
+      btnText: 'Delete',
+      btnTheme: 'red',
+      onClickConfirm: () => {
+        if (
+          !session?.user?.email ||
+          !session.user.name ||
+          !session.user.image
+        ) {
+          router.push('/login');
+          return;
+        }
+        mutation.mutate(
+          {
+            queryClient,
+            payload: {
+              type: 'disable',
+              messageid: message.id,
+              roomid: message.roomid,
+              session: {
+                id: session.user.email,
+                nickname: session.user.name,
+                image: session.user.image,
               },
             },
-            {
-              onSuccess: () => {},
-              onError: () => {
-                alterMessage('Something is wrong.\nPlease try again', 'error');
-              },
-              onSettled: () => {
-                confirm.close();
-                subMenu.close();
-              },
-            }
-          );
-        },
-        onClickCancle: () => {
-          confirm.close();
-          subMenu.close();
-        },
+          },
+          {
+            onSuccess: () => {},
+            onError: () => {
+              alterMessage('Something is wrong.\nPlease try again', 'error');
+            },
+            onSettled: () => {
+              close();
+              subMenu.close();
+            },
+          }
+        );
+      },
+      onClickCancle: () => {
+        close();
+        subMenu.close();
       },
     });
   };

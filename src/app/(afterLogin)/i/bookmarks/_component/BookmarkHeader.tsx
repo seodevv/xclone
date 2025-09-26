@@ -1,23 +1,30 @@
 'use client';
 
+import BackButton from '@/app/(afterLogin)/_component/buttons/BackButton';
 import styles from './i.bookmarks.header.module.css';
 import utils from '@/app/utility.module.css';
-import OptionButton from '@/app/(afterLogin)/_component/buttons/OptionButton';
+// import OptionButton from '@/app/(afterLogin)/_component/buttons/OptionButton';
 import cx from 'classnames';
 import { Session } from 'next-auth';
+// import useAlterModal from '@/app/_hooks/useAlterModal';
 
 interface Props {
   session: Session | null;
 }
 
 export default function BookmarkHeader({ session }: Props) {
-  if (!session) return null;
+  // const { sendPrepareMessage } = useAlterModal();
 
-  const onClickOption = () => {};
+  // const onClickOption = () => {
+  //   sendPrepareMessage();
+  // };
+
+  if (!session) return null;
 
   return (
     <section className={styles.header}>
       <div className={styles.inner}>
+        <BackButton />
         <div className={styles.content}>
           <h2
             className={cx(
@@ -34,7 +41,7 @@ export default function BookmarkHeader({ session }: Props) {
             <span>@{session.user?.email}</span>
           </div>
         </div>
-        <div
+        {/* <div
           className={cx(
             utils.d_flexColumn,
             utils.flex_alignEnd,
@@ -43,8 +50,8 @@ export default function BookmarkHeader({ session }: Props) {
             utils.h_min_32
           )}
         >
-          <OptionButton onClick={onClickOption} white />
-        </div>
+          <OptionButton onClick={onClickOption} theme="theme" />
+        </div> */}
       </div>
     </section>
   );

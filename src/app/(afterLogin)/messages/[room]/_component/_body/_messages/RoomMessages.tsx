@@ -22,16 +22,14 @@ export default function RoomMessages({ sessionId, roomId }: Props) {
   } = useGetRoomMessages({ sessionId, roomId });
   const [selected, setSelected] = useState(-1);
 
-  if (typeof data === 'undefined') return null;
-
-  const messages = data.pages.map((page) => page.data).flat();
-  const lastSeenIndex = messages.findLastIndex(
+  const messages = data?.pages.map((page) => page.data).flat();
+  const lastSeenIndex = messages?.findLastIndex(
     (message) =>
       message.senderid === sessionId &&
       message.seen &&
       !message.Disable.find((u) => u.id === sessionId)
   );
-  const lastSentIndex = messages.findLastIndex(
+  const lastSentIndex = messages?.findLastIndex(
     (message) =>
       message.senderid === sessionId &&
       !message.seen &&
@@ -53,6 +51,8 @@ export default function RoomMessages({ sessionId, roomId }: Props) {
     }
   }, [isFetchingPreviousPage]);
 
+  if (typeof data === 'undefined') return null;
+
   return (
     <>
       <PageLoading
@@ -63,7 +63,7 @@ export default function RoomMessages({ sessionId, roomId }: Props) {
         fetchPreviousPage={fetchPreviousPage}
         refetch={refetch}
       />
-      {messages.map((message, index) => {
+      {messages?.map((message, index) => {
         const nextMessage = messages[index + 1];
         const present =
           typeof nextMessage !== 'undefined'

@@ -15,7 +15,7 @@ export default function IFlowVerifyAccountSlot() {
     <MyProfileHydrationBoundary>
       <IBackground prevPath={prevPath}>
         <IHeader prevPath={prevPath} noBtn>
-          <XLogoHeader />
+          {/* <XLogoHeader /> */}
         </IHeader>
         <IFlowVerifyAccountController />
       </IBackground>

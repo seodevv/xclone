@@ -4,8 +4,8 @@ import SubMenu from '@/app/(afterLogin)/_component/_subMenu/SubMenu';
 import SubMenuWrapper from '@/app/(afterLogin)/_component/_subMenu/SubMenuWrapper';
 import useFollowMutation from '@/app/(afterLogin)/_hooks/useFollowMutation';
 import { useMyProfileQuery } from '@/app/(afterLogin)/_hooks/useMyProfileQuery';
-import { ConfirmContext } from '@/app/(afterLogin)/_provider/ConfirmProvider';
 import { SubMenuContext } from '@/app/(afterLogin)/_provider/SubMenuProvider';
+import useConfirmStore from '@/app/(afterLogin)/_store/ConfirmStore';
 import useListsStore from '@/app/(afterLogin)/_store/ListsStore';
 import useAlterModal from '@/app/_hooks/useAlterModal';
 import ViewSvg from '@/app/_svg/actionbuttons/ViewSvg';
@@ -70,25 +70,23 @@ export default function PostSubMenuOther({ post, width = 18.75 }: Props) {
     close();
   };
 
-  const { dispatchModal, close: closeConfirm } = useContext(ConfirmContext);
+  const { open, close: closeConfirm } = useConfirmStore();
   const onClickBlock = () => {
     hide(true);
-    dispatchModal({
-      type: 'setCustom',
-      payload: {
-        title: `Block @${post.userid}`,
-        sub: `They will be able to see your public posts, but will no longer be able to engage with them. @${post.userid} will also not be able to follow or message you, and you will not see notifications from them. `,
-        btnTheme: 'red',
-        btnText: 'Block',
-        onClickCancle: () => {
-          closeConfirm();
-          hide(false);
-        },
-        onClickConfirm: () => {
-          sendPrepareMessage();
-          closeConfirm();
-          hide(false);
-        },
+    open({
+      flag: true,
+      title: `Block @${post.userid}`,
+      sub: `They will be able to see your public posts, but will no longer be able to engage with them. @${post.userid} will also not be able to follow or message you, and you will not see notifications from them. `,
+      btnTheme: 'red',
+      btnText: 'Block',
+      onClickCancle: () => {
+        closeConfirm();
+        hide(false);
+      },
+      onClickConfirm: () => {
+        sendPrepareMessage();
+        closeConfirm();
+        hide(false);
       },
     });
   };

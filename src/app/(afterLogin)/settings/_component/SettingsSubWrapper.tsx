@@ -1,7 +1,7 @@
 'use client';
 
-import PageHeader from '@/app/(afterLogin)/_component/_page/PageHeader';
 import styles from './settings.sub.module.css';
+import PageHeader from '@/app/(afterLogin)/_component/_page/PageHeader';
 import useViewport from '@/app/(afterLogin)/_hooks/useViewport';
 
 interface Props {

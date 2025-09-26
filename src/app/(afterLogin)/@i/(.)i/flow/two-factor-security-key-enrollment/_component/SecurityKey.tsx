@@ -52,7 +52,7 @@ export default function SecurityKey() {
         <div></div>
       </div>
       <div className={styles.footer}>
-        <FlexButton type="submit" theme="white" text="Get started" large />
+        <FlexButton type="submit" theme="theme" text="Get started" large />
       </div>
     </form>
   );

@@ -54,7 +54,7 @@ export default function TwoFactorSmsBody() {
               </Text>
             </div>
             <div>
-              <FlexButton type="submit" theme="white" text="Got it" large />
+              <FlexButton type="submit" theme="theme" text="Got it" large />
             </div>
           </div>
         </div>

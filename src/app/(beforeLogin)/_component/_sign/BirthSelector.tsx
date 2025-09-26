@@ -76,6 +76,7 @@ const BirthSelector = forwardRef<BirthRef, Props>(
           onSuccess(date);
         }
       }
+      // }, [date, onSuccess]);
     }, [date]);
 
     useImperativeHandle(ref, () => ({

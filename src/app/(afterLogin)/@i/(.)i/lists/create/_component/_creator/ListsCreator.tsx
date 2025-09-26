@@ -11,15 +11,27 @@ import ListsCreatorTop from '@/app/(afterLogin)/@i/(.)i/lists/create/_component/
 import useListsStore from '@/app/(afterLogin)/_store/ListsStore';
 import Link from 'next/link';
 import GreatherArrowSvg from '@/app/_svg/arrow/GreatherArrowSvg';
-import { ConfirmContext } from '@/app/(afterLogin)/_provider/ConfirmProvider';
+import useConfirmStore, {
+  confirmSelector,
+} from '@/app/(afterLogin)/_store/ConfirmStore';
+import useUnListsMutation from '@/app/(afterLogin)/_hooks/useUnListsMutation';
+import { useSession } from 'next-auth/react';
+import useHistoryStore from '@/app/(afterLogin)/_store/HistoryStore';
+import { useRouter } from 'next/navigation';
+import useAlterModal from '@/app/_hooks/useAlterModal';
 
 export default function ListsCreator() {
+  const router = useRouter();
+  const { data: session } = useSession();
   const { mode, state, dispatch } = useContext(IListsContext);
-  const { dispatchModal } = useContext(ConfirmContext);
+  const { sendErrorMessage } = useAlterModal();
+  const { open, close } = useConfirmStore(confirmSelector);
   const { lists, setSuggested } = useListsStore((state) => ({
     lists: state.lists,
     setSuggested: state.setSuggested,
   }));
+  const unListsMutation = useUnListsMutation();
+  const resetStack = useHistoryStore((state) => state.resetStack);
 
   const onSuccessHandler = (
     type: 'setName' | 'setDescription',
@@ -33,9 +45,39 @@ export default function ListsCreator() {
   const onErrorHandler = () => {
     dispatch({ type: 'setDisable', payload: true });
   };
+
   const onClickDeleteList = () => {
-    if (!lists) return;
-    dispatchModal({ type: 'unLists', payload: lists });
+    if (typeof lists === 'undefined') return;
+    if (!session?.user?.email) return;
+
+    const sessionid = session.user.email;
+
+    open({
+      flag: true,
+      title: 'Delete List?',
+      sub: 'This can’t be undone and you’ll lose your List.',
+      btnText: 'Delete',
+      btnTheme: 'red',
+      onClickCancle: () => {
+        close();
+      },
+      onClickConfirm: () => {
+        unListsMutation.mutate(
+          { listid: lists.id, sessionid },
+          {
+            onSuccess: () => {
+              resetStack();
+              close();
+              router.replace(`/${sessionid}/lists`);
+            },
+            onError: () => {
+              sendErrorMessage();
+            },
+          }
+        );
+      },
+      noHidden: true,
+    });
   };
 
   return (

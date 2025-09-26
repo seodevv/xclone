@@ -58,7 +58,8 @@ export default function ListsShareSubMenu() {
     }
 
     const data: ShareData = {
-      url: '',
+      url: window.location.toString(),
+      title: 'Share List',
     };
     navigator.share(data);
 

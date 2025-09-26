@@ -4,6 +4,7 @@ import { useSelectedLayoutSegment } from 'next/navigation';
 import {
   createContext,
   RefObject,
+  useCallback,
   useEffect,
   useLayoutEffect,
   useRef,
@@ -43,20 +44,29 @@ export default function MessagesScrollProvider({ children }: Props) {
   const [info, setInfo] = useState<Info>(initialState.info);
   const scrollRef = useRef<HTMLDivElement>(null);
 
-  const setScroll = (scroll: Info['scroll']) => {
-    setInfo((prev) => ({ ...prev, scroll }));
-  };
-  const setPosition = (position: Info['position']) => {
-    setInfo((prev) => ({
-      ...prev,
-      position,
-    }));
-  };
-  const setY = (y: Info['y']) => {
-    setInfo((prev) => ({ ...prev, y }));
-  };
+  const setScroll = useCallback(
+    (scroll: Info['scroll']) => {
+      setInfo((prev) => ({ ...prev, scroll }));
+    },
+    [setInfo]
+  );
+  const setPosition = useCallback(
+    (position: Info['position']) => {
+      setInfo((prev) => ({
+        ...prev,
+        position,
+      }));
+    },
+    [setInfo]
+  );
+  const setY = useCallback(
+    (y: Info['y']) => {
+      setInfo((prev) => ({ ...prev, y }));
+    },
+    [setInfo]
+  );
 
-  const goBottom = () => {
+  const goBottom = useCallback(() => {
     if (!scrollRef.current) return;
 
     const { clientHeight, scrollHeight } = scrollRef.current;
@@ -67,7 +77,7 @@ export default function MessagesScrollProvider({ children }: Props) {
     if (clientHeight === scrollHeight) {
       setPosition('bottom');
     }
-  };
+  }, [setY, setPosition]);
 
   useLayoutEffect(() => {
     setInfo(initialState.info);

@@ -8,14 +8,15 @@ import IdentifierCheckBox, {
   ICheckBox,
 } from '@/app/_component/_input/IdentifierCheckBox';
 import Link from 'next/link';
-import { useContext } from 'react';
-import { ConfirmContext } from '@/app/(afterLogin)/_provider/ConfirmProvider';
 import useSettingsLocalStore, {
   AudienceSelector,
 } from '@/app/(afterLogin)/_store/SettingsLocalStore';
+import useConfirmStore, {
+  confirmSelector,
+} from '@/app/(afterLogin)/_store/ConfirmStore';
 
 export default function SettingsAudience() {
-  const confirmModal = useContext(ConfirmContext);
+  const { open, close } = useConfirmStore(confirmSelector);
   const { protectPost, protectVideo, setProtectPost, setProtectVideo } =
     useSettingsLocalStore(AudienceSelector);
   const checkBoxes: ICheckBox[] = [
@@ -36,19 +37,17 @@ export default function SettingsAudience() {
       ),
       defaultValue: protectPost,
       onCheck: (check) => {
-        confirmModal.dispatchModal({
-          type: 'setCustom',
-          payload: {
-            title: 'Protect your posts?',
-            sub: 'This will make them visible only to your X followers.',
-            btnText: 'Protect',
-            onClickCancle: () => {
-              confirmModal.close();
-            },
-            onClickConfirm: () => {
-              setProtectPost(check);
-              confirmModal.close();
-            },
+        open({
+          flag: true,
+          title: 'Protect your posts?',
+          sub: 'This will make them visible only to your X followers.',
+          btnText: 'Protect',
+          onClickCancle: () => {
+            close();
+          },
+          onClickConfirm: () => {
+            setProtectPost(check);
+            close();
           },
         });
       },

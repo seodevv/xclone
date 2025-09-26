@@ -33,25 +33,25 @@ export default function WhoCanReply({ post }: Props) {
       id: 0,
       text: 'everyone',
       active: 'every',
-      svg: <GlobalSvg width={20} white />,
+      svg: <GlobalSvg width={20} theme="white" />,
     },
     {
       id: 1,
       text: 'Accounts you follow',
       active: 'follow',
-      svg: <ProfileWithCheckSvg width={20} white />,
+      svg: <ProfileWithCheckSvg width={20} theme="white" />,
     },
     {
       id: 2,
       text: 'verified accounts',
       active: 'verified',
-      svg: <VerifiedSvg width={20} white />,
+      svg: <VerifiedSvg width={20} theme="white" />,
     },
     {
       id: 3,
       text: 'only you',
       active: 'only',
-      svg: <ProfileSvg width={20} theme="theme" />,
+      svg: <ProfileSvg width={20} theme="white" />,
     },
   ];
 

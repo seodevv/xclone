@@ -1,6 +1,8 @@
 'use client';
 
-import { ConfirmContext } from '@/app/(afterLogin)/_provider/ConfirmProvider';
+import useConfirmStore, {
+  confirmSelector,
+} from '@/app/(afterLogin)/_store/ConfirmStore';
 import useSettingsLocalStore, {
   delegateSelector,
 } from '@/app/(afterLogin)/_store/SettingsLocalStore';
@@ -13,10 +15,9 @@ import Text from '@/app/_component/_text/Text';
 import DivideLine from '@/app/_component/_util/DivideLine';
 import utils from '@/app/utility.module.css';
 import Link from 'next/link';
-import { useContext } from 'react';
 
 export default function SettingsDelegate() {
-  const { dispatchModal, close } = useContext(ConfirmContext);
+  const { open, close } = useConfirmStore(confirmSelector);
   const { delegate, setDelegate } = useSettingsLocalStore(delegateSelector);
   const subMenus: ISettingsSubMenu[] = [
     {
@@ -36,20 +37,18 @@ export default function SettingsDelegate() {
     setDelegate('anyone');
   };
   const onToggleOff = () => {
-    dispatchModal({
-      type: 'setCustom',
-      payload: {
-        title: 'Don’t allow others to invite you to their account?',
-        sub: 'In the future, you won’t receive invites to other delegations. You’ll still be able to access your existing delegations.',
-        btnText: 'Don’t allow',
-        btnTheme: 'red',
-        onClickCancle: () => {
-          close();
-        },
-        onClickConfirm: () => {
-          setDelegate('none');
-          close();
-        },
+    open({
+      flag: true,
+      title: 'Don’t allow others to invite you to their account?',
+      sub: 'In the future, you won’t receive invites to other delegations. You’ll still be able to access your existing delegations.',
+      btnText: 'Don’t allow',
+      btnTheme: 'red',
+      onClickCancle: () => {
+        close();
+      },
+      onClickConfirm: () => {
+        setDelegate('none');
+        close();
       },
     });
   };

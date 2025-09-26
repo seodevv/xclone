@@ -22,7 +22,7 @@ export default function VerifyAccount() {
       <div className={styles.inner}>
         <div className={styles.head}>
           <div className={styles.svg}>
-            <XLogoSvg width={48} />
+            <XLogoSvg width={48} theme="theme" />
           </div>
           <div className={styles.body}>
             <div className={styles.text}>

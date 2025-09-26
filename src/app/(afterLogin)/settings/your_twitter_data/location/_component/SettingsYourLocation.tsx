@@ -3,7 +3,6 @@
 import utils from '@/app/utility.module.css';
 import cx from 'classnames';
 import TransitionTextButton from '@/app/(afterLogin)/_component/buttons/TransitionTextButton';
-import { ConfirmContext } from '@/app/(afterLogin)/_provider/ConfirmProvider';
 import useSettingsLocalStore, {
   locationSelector,
 } from '@/app/(afterLogin)/_store/SettingsLocalStore';
@@ -11,27 +10,27 @@ import SettingsSubMenu from '@/app/(afterLogin)/settings/_component/SettingsSubM
 import Text from '@/app/_component/_text/Text';
 import DivideLine from '@/app/_component/_util/DivideLine';
 import LocationSvg from '@/app/_svg/tweet/LocationSvg';
-import { useContext } from 'react';
+import useConfirmStore, {
+  confirmSelector,
+} from '@/app/(afterLogin)/_store/ConfirmStore';
 
 export default function SettingsYourLocation() {
   const { location, setLocation } = useSettingsLocalStore(locationSelector);
-  const { dispatchModal, close } = useContext(ConfirmContext);
+  const { open, close } = useConfirmStore(confirmSelector);
 
   const onClickRemove = () => {
-    dispatchModal({
-      type: 'setCustom',
-      payload: {
-        title: 'Remove places you’ve been?',
-        sub: 'This will take some time, and can’t be undone.',
-        btnText: 'Remove',
-        btnTheme: 'red',
-        onClickCancle: () => {
-          close();
-        },
-        onClickConfirm: () => {
-          close();
-          setLocation({ history: [] });
-        },
+    open({
+      flag: true,
+      title: 'Remove places you’ve been?',
+      sub: 'This will take some time, and can’t be undone.',
+      btnText: 'Remove',
+      btnTheme: 'red',
+      onClickCancle: () => {
+        close();
+      },
+      onClickConfirm: () => {
+        close();
+        setLocation({ history: [] });
       },
     });
   };
@@ -59,7 +58,7 @@ export default function SettingsYourLocation() {
                       utils.br_9999
                     )}
                   >
-                    <LocationSvg white />
+                    <LocationSvg theme="theme" />
                   </div>
                 }
                 title={v}

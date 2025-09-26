@@ -13,7 +13,8 @@
   flex-grow: 1;
   gap: 16px;
   max-width: 50%;
-  background: rgb(var(--background-start-rgb));
+  /* background: rgb(var(--background-start-rgb)); */
+  background-color: rgb(var(--search-rgb));
   border: 2px solid transparent;
   border-radius: 12px;
   box-shadow: rgba(255, 255, 255, 0.2) 0px 0px 15px,
@@ -29,10 +30,12 @@
   border-color: rgb(var(--primary-rgb));
 }
 .selector:hover {
-  background: rgb(22, 24, 28);
+  /* background: rgb(22, 24, 28); */
+  background-color: rgba(var(--primary-rgb), 0.1);
 }
 .selector:active {
-  background: rgba(18, 21, 23, 0.7);
+  /* background: rgba(18, 21, 23, 0.7); */
+  background-color: rgba(var(--primary-rgb), 0.2);
 }
 .option {
   display: flex;

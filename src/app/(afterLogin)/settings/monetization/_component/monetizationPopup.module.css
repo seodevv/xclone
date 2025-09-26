@@ -19,9 +19,9 @@
   max-width: 360px;
   min-height: 30px;
   max-height: 480px;
-  background: rgb(22, 24, 28);
-  box-shadow: rgba(255, 255, 255, 0.2) 0px 0px 15px,
-    rgba(255, 255, 255, 0.15) 0px 0px 3px 1px;
+  background: rgb(var(--background-start-rgb));
+  box-shadow: rgba(101, 119, 134, 0.2) 0px 0px 15px,
+    rgba(101, 119, 134, 0.15) 0px 0px 3px 1px;
   border-radius: 16px;
   overflow: auto;
 }
@@ -38,4 +38,11 @@
 .text {
   padding-right: 10px;
   flex: 1;
+}
+
+@media (prefers-color-scheme: dark) {
+  .container {
+    box-shadow: rgba(255, 255, 255, 0.2) 0px 0px 15px,
+      rgba(255, 255, 255, 0.15) 0px 0px 3px 1px;
+  }
 }

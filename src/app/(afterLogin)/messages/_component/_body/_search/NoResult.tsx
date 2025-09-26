@@ -31,7 +31,7 @@ export default function NoResult({}: Props) {
         bold="boldest"
         whiteSpace="nowrap"
       >
-        No results for "{input}"
+        No results for &quot;{input}&quot;
       </Text>
       <Text className={utils.mb_28} theme="gray" size="s" bold="normal">
         The term you entered did not bring up any results

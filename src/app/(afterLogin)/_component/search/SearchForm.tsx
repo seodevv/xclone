@@ -62,9 +62,9 @@ export default function SearchForm({
   }, [autoFocus]);
 
   useEffect(() => {
-    if (q) {
-      setSearch(decodeURIComponent(q));
-    }
+    // if (q) {
+    setSearch(decodeURIComponent(q || ''));
+    // }
   }, [q, setSearch]);
 
   return (

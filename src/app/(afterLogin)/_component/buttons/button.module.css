@@ -7,7 +7,8 @@
   height: 34px;
   border: none;
   border-radius: 50%;
-  background-color: rgba(var(--background-start-rgb), 1);
+  background-color: transparent;
+  /* background-color: rgba(var(--background-start-rgb), 0.1); */
   border: 1px solid transparent;
   font-size: 15px;
   font-weight: 700;

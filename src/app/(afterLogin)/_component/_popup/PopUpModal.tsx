@@ -8,7 +8,13 @@ import usePopUpStore from '@/app/(afterLogin)/_store/PopUpStore';
 import { MouseEventHandler, useLayoutEffect, useRef, useState } from 'react';
 
 export default function PopUpModal() {
-  const store = usePopUpStore();
+  const {
+    type,
+    content: { title, description },
+    position: { x, y, width, height, element },
+    setPopup,
+    reset,
+  } = usePopUpStore();
   const [fadeOut, setFadeOut] = useState(false);
   const timer = useRef<ReturnType<typeof setTimeout> | null>(null);
 
@@ -17,7 +23,7 @@ export default function PopUpModal() {
     if (e.target === e.currentTarget) {
       setFadeOut(true);
       timer.current = setTimeout(() => {
-        store.reset();
+        reset();
         setFadeOut(false);
         timer.current = null;
       }, 200);
@@ -26,20 +32,20 @@ export default function PopUpModal() {
 
   useLayoutEffect(() => {
     const resizeListener = () => {
-      const target = store.position.element;
+      const target = element;
       if (!target) return;
       const { x, y } = target.getBoundingClientRect();
-      store.setPopup({ position: { x, y } });
+      setPopup({ position: { x, y } });
     };
-    if (store.type === 'pop') {
+    if (type === 'pop') {
       window.addEventListener('resize', resizeListener);
     }
     return () => {
       window.removeEventListener('resize', resizeListener);
     };
-  }, [store.type, store.position.element, store.setPopup]);
+  }, [type, element, setPopup]);
 
-  if (store.type === 'idle') return null;
+  if (type === 'idle') return null;
 
   return (
     <div className={styles.absolute}>
@@ -52,15 +58,15 @@ export default function PopUpModal() {
             fadeOut && [styles.out, utils.fadeOut]
           )}
           style={{
-            top: store.position.y + store.position.height,
-            left: store.position.x,
+            top: y + height,
+            left: x,
           }}
         >
           <div className={styles.title}>
-            <span>{store.content.title}</span>
+            <span>{title}</span>
           </div>
           <div className={styles.description}>
-            <span>{store.content.description}</span>
+            <span>{description}</span>
           </div>
         </div>
       </div>

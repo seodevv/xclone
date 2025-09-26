@@ -83,7 +83,7 @@ export default function SettingsScreenName() {
       setUsername(id);
       generateSuggest(id);
     }
-  }, [myProfile]);
+  }, [myProfile, setSuggest]);
 
   return (
     <form onSubmit={onSubmitForm}>

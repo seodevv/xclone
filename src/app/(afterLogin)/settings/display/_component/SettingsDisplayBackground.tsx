@@ -6,7 +6,7 @@ import useSettingsLocalStore, {
   DisplaySelector,
   SettingsLocalStore,
 } from '@/app/(afterLogin)/_store/SettingsLocalStore';
-import Text from '@/app/_component/_text/Text';
+import Text, { TextTheme } from '@/app/_component/_text/Text';
 import DivideLine from '@/app/_component/_util/DivideLine';
 import CheckSvg from '@/app/_svg/input/CheckSvg';
 
@@ -15,11 +15,11 @@ export default function SettingsDisplayBackground() {
   const backgrounds: {
     id: SettingsLocalStore['display']['background'];
     title: string;
-    theme?: 'theme' | 'gray' | 'primary' | 'error' | 'black' | 'green';
+    theme?: TextTheme;
   }[] = [
     { id: 'default', title: 'Default', theme: 'black' },
-    { id: 'dim', title: 'Dim' },
-    { id: 'lights_out', title: 'Lights out' },
+    { id: 'dim', title: 'Dim', theme: 'white' },
+    { id: 'lights_out', title: 'Lights out', theme: 'white' },
   ];
 
   return (
@@ -31,6 +31,7 @@ export default function SettingsDisplayBackground() {
       <div className={styles.background}>
         {backgrounds.map((v) => (
           <button
+            key={v.id}
             className={cx(
               styles.item,
               styles[v.id],

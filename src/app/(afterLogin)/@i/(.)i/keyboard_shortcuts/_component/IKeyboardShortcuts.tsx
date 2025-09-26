@@ -1,5 +1,5 @@
-import { Fragment } from 'react';
 import styles from './iKeyboardShortcut.module.css';
+import React from 'react';
 import Text from '@/app/_component/_text/Text';
 
 interface IList {
@@ -82,7 +82,7 @@ function CommandList({ list }: { list: IList }) {
       </div>
       <div className={styles.list}>
         {list.data.map((v) => (
-          <div key={v.title} className={styles.item}>
+          <div key={v.title + v.command[0]} className={styles.item}>
             <Text text={v.title} size="s" />
             <div className={styles.flex}>
               {v.command.map((c, i) => {
@@ -97,10 +97,10 @@ function CommandList({ list }: { list: IList }) {
                   );
                 }
                 return (
-                  <Fragment key={v.title + c}>
+                  <React.Fragment key={v.title + c}>
                     <Text text="+" size="s" align="center" />
                     <Text className={styles.command} text={c} align="center" />
-                  </Fragment>
+                  </React.Fragment>
                 );
               })}
             </div>

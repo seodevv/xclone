@@ -1,7 +1,6 @@
 'use client';
 
-import utils from '@/app/utility.module.css';
-import cx from 'classnames';
+import styles from '../settings.layout.module.css';
 import PageHeader from '@/app/(afterLogin)/_component/_page/PageHeader';
 import SettingsMenus from '@/app/(afterLogin)/settings/_component/SettingsMenus';
 import SettingsSearchForm from '@/app/(afterLogin)/settings/_component/SettingsSearchForm';
@@ -12,29 +11,14 @@ export default function SettingsLeftSection() {
   const pathname = usePathname();
   const { width } = useViewport();
 
-  if (pathname !== '/settings' && width !== null && width < 1024) {
+  if (pathname !== '/settings' && width !== null && width <= 1024) {
     return null;
   }
 
   return (
-    <section
-      className={cx(
-        utils.flex_1,
-        utils.w_100p,
-        utils.w_max_600,
-        utils.bd_1_solid_gray,
-        utils.of_hide
-      )}
-    >
+    <section className={styles.left}>
       <PageHeader title="Settings" noBack />
-      <div
-        className={cx(
-          utils.d_flexColumn,
-          utils.flex_justiStart,
-          utils.w_100p,
-          utils.bg_trans
-        )}
-      >
+      <div className={styles.leftInner}>
         <SettingsSearchForm />
         <SettingsMenus />
       </div>

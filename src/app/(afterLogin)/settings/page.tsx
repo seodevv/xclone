@@ -12,7 +12,7 @@ export default function SettingsPage() {
     if (width !== null && width >= 1024) {
       router.replace('/settings/account');
     }
-  }, [width]);
+  }, [width, router]);
 
   return null;
 

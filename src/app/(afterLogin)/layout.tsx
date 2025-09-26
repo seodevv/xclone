@@ -16,11 +16,11 @@ import TrendsHydrationBoundary from './_boundary/TrendsHydrationBoundary';
 import authOptions from '@/app/_lib/authOptions';
 import SubMenuProvider from '@/app/(afterLogin)/_provider/SubMenuProvider';
 import PopUpModal from '@/app/(afterLogin)/_component/_popup/PopUpModal';
-import ConfirmProvider from '@/app/(afterLogin)/_provider/ConfirmProvider';
 import RightSectionController from '@/app/(afterLogin)/_component/_layout/RightSectionController';
 import MainSectionController from '@/app/(afterLogin)/_component/_layout/MainSectionController';
 import RoomsNotificationsBoundary from '@/app/(afterLogin)/_boundary/RoomsNotificationsBoundary';
 import MyProfileHydrationBoundary from '@/app/(afterLogin)/_boundary/MyProfileHydrationBoundary';
+import NewConfirmModal from '@/app/(afterLogin)/_component/alter/NewConfirmModal';
 
 interface Props {
   children: ReactNode;
@@ -40,48 +40,45 @@ export default async function AfterLoginLayout({
     <>
       <NextAuthProvider>
         <ReactQueryProvider>
-          {/* <ViewportProvider> */}
-          <ConfirmProvider>
-            <SubMenuProvider session={session}>
-              <MyProfileHydrationBoundary>
-                <div className={style.container}>
-                  <header className={style.leftSectionWrapper}>
-                    <section className={style.leftSection}>
-                      <div className={style.leftSectionFixed}>
-                        <XLogo session={session} />
-                        <RoomsNotificationsBoundary>
-                          <NavMenu session={session} />
-                        </RoomsNotificationsBoundary>
-                        <Logout />
-                      </div>
-                    </section>
-                  </header>
-                  <div className={style.rightSectionWrapper}>
-                    <div className={style.rightSectionInner}>
-                      <MainSectionController>{children}</MainSectionController>
-                      <RightSectionController>
-                        <RightSearchZone />
-                        <Sticky>
-                          <SearchFilters />
-                          <TrendsHydrationBoundary>
-                            <TrendSection session={session} />
-                          </TrendsHydrationBoundary>
-                          <FollowRecommendsHydrationBoundary>
-                            <FollowRecommendsSection />
-                          </FollowRecommendsHydrationBoundary>
-                        </Sticky>
-                      </RightSectionController>
+          <SubMenuProvider session={session}>
+            <MyProfileHydrationBoundary>
+              <div className={style.container}>
+                <header className={style.leftSectionWrapper}>
+                  <section className={style.leftSection}>
+                    <div className={style.leftSectionFixed}>
+                      <XLogo session={session} />
+                      <RoomsNotificationsBoundary>
+                        <NavMenu session={session} />
+                      </RoomsNotificationsBoundary>
+                      <Logout />
                     </div>
+                  </section>
+                </header>
+                <div className={style.rightSectionWrapper}>
+                  <div className={style.rightSectionInner}>
+                    <MainSectionController>{children}</MainSectionController>
+                    <RightSectionController>
+                      <RightSearchZone />
+                      <Sticky>
+                        <SearchFilters />
+                        <TrendsHydrationBoundary>
+                          <TrendSection session={session} />
+                        </TrendsHydrationBoundary>
+                        <FollowRecommendsHydrationBoundary>
+                          <FollowRecommendsSection />
+                        </FollowRecommendsHydrationBoundary>
+                      </Sticky>
+                    </RightSectionController>
                   </div>
-                  {modal}
-                  {settings}
-                  {i}
-                  <PopUpModal />
                 </div>
-              </MyProfileHydrationBoundary>
-            </SubMenuProvider>
-          </ConfirmProvider>
-          {/* </ViewportProvider> */}
+                {modal}
+                {settings}
+                {i}
+                <PopUpModal />
+              </div>
+              <NewConfirmModal />
+            </MyProfileHydrationBoundary>
+          </SubMenuProvider>
         </ReactQueryProvider>
       </NextAuthProvider>
     </>

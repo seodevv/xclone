@@ -9,10 +9,12 @@ import XLogoSvg from '@/app/_svg/logo/XLogoSvg';
 import SettingSvg from '@/app/_svg/navbar/SettingSvg';
 import ListsSvg from '@/app/_svg/post/ListsSvg';
 import { useSession } from 'next-auth/react';
+import { usePathname } from 'next/navigation';
 import { useContext } from 'react';
 
 export default function OtherNavSubMenu() {
   const { data: session } = useSession();
+  const pathname = usePathname();
   const { close } = useContext(SubMenuContext);
   const width = 26;
 
@@ -23,7 +25,12 @@ export default function OtherNavSubMenu() {
         type="link"
         href={`/${session?.user?.email}/lists`}
         title="Lists"
-        svg={<ListsSvg width={width} />}
+        svg={
+          <ListsSvg
+            width={width}
+            active={pathname.startsWith(`/${session?.user?.email}/lists`)}
+          />
+        }
         onClick={() => close()}
         nav
       />
@@ -34,6 +41,7 @@ export default function OtherNavSubMenu() {
         title="Premium"
         svg={<XLogoSvg width={width} />}
         onClick={() => close()}
+        scroll={false}
         nav
       />
 
@@ -42,7 +50,12 @@ export default function OtherNavSubMenu() {
         type="link"
         href="/i/bookmarks"
         title="Bookmarks"
-        svg={<BookmarkSvg width={width} />}
+        svg={
+          <BookmarkSvg
+            width={width}
+            active={pathname.startsWith('/i/bookmarks')}
+          />
+        }
         onClick={() => close()}
         nav
       />
@@ -50,7 +63,9 @@ export default function OtherNavSubMenu() {
         type="link"
         href="/settings"
         title="Settings and privacy"
-        svg={<SettingSvg width={width} />}
+        svg={
+          <SettingSvg width={width} active={pathname.startsWith('/settings')} />
+        }
         onClick={() => close()}
         nav
       />

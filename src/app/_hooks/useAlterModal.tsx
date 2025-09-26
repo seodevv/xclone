@@ -1,45 +1,20 @@
 'use client';
 
-import { useCallback, useContext } from 'react';
-import {
-  AlterModalContext,
-  initialAlterModalState,
-  Modal,
-} from '@/app/_provider/AlterModalProvider';
+import { useCallback } from 'react';
+import useAlterStore, {
+  AlterState,
+} from '@/app/(afterLogin)/_store/AlterStore';
 
 export default function useAlterModal() {
-  const { modal, setModal } = useContext(AlterModalContext);
-
-  const getMessage = useCallback(() => {
-    return modal.message ? modal.message : 'Please try again';
-  }, [modal.message]);
-
-  const getDuration = useCallback(() => {
-    return modal.duration;
-  }, [modal.duration]);
-
-  const getType = useCallback(() => {
-    return modal.type;
-  }, [modal.type]);
-
-  const setDuration = useCallback(
-    (duration: number) => {
-      setModal((prev) => ({ ...prev, duration }));
-    },
-    [setModal]
-  );
-
-  const resetMessage = useCallback(() => {
-    setModal(initialAlterModalState.modal);
-  }, [setModal]);
+  const { setModal, resetModal } = useAlterStore();
 
   const alterMessage = useCallback(
     (
-      message: Modal['message'],
-      type?: Modal['type'],
-      duration?: Modal['duration']
+      message: AlterState['message'],
+      type?: AlterState['type'],
+      duration?: AlterState['duration']
     ) => {
-      resetMessage();
+      resetModal();
       setTimeout(() => {
         setModal({
           show: true,
@@ -49,11 +24,11 @@ export default function useAlterModal() {
         });
       });
     },
-    [resetMessage, setModal]
+    [resetModal, setModal]
   );
 
   const sendPrepareMessage = useCallback(() => {
-    resetMessage();
+    resetModal();
     setTimeout(() => {
       setModal({
         show: true,
@@ -62,10 +37,10 @@ export default function useAlterModal() {
         type: 'warning',
       });
     });
-  }, [resetMessage]);
+  }, [resetModal, setModal]);
 
   const sendErrorMessage = useCallback(() => {
-    resetMessage();
+    resetModal();
     setTimeout(() => {
       setModal({
         show: true,
@@ -74,15 +49,10 @@ export default function useAlterModal() {
         type: 'error',
       });
     });
-  }, [resetMessage]);
+  }, [resetModal, setModal]);
 
   return {
-    getMessage,
-    getDuration,
-    getType,
     alterMessage,
-    setDuration,
-    resetMessage,
     sendPrepareMessage,
     sendErrorMessage,
   };

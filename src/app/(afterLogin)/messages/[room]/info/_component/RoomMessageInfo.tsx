@@ -5,7 +5,9 @@ import FollowButton from '@/app/(afterLogin)/_component/buttons/FollowButton';
 import TransitionTextButton from '@/app/(afterLogin)/_component/buttons/TransitionTextButton';
 import LoadingSpinner from '@/app/(afterLogin)/_component/loading/LoadingSpinner';
 import OtherProfile from '@/app/(afterLogin)/_component/profile/OtherProfile';
-import { ConfirmContext } from '@/app/(afterLogin)/_provider/ConfirmProvider';
+import useConfirmStore, {
+  confirmSelector,
+} from '@/app/(afterLogin)/_store/ConfirmStore';
 import RoomMessageInfoNotifications from '@/app/(afterLogin)/messages/[room]/info/_component/RoomMessageInfoNotifications';
 import useGetRoom from '@/app/(afterLogin)/messages/_hooks/useGetRoom';
 import useRoomDisableMutation from '@/app/(afterLogin)/messages/_hooks/useRoomDisableMutation';
@@ -16,7 +18,6 @@ import utils from '@/app/utility.module.css';
 import cx from 'classnames';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
-import { useContext } from 'react';
 
 interface Props {
   roomid: string;
@@ -32,38 +33,36 @@ export default function RoomMessageInfo({
   const router = useRouter();
   const { data: user } = useUserQuery(receiverid);
   const { data: room } = useGetRoom(roomid);
-  const { dispatchModal, close } = useContext(ConfirmContext);
+  const { open, close } = useConfirmStore(confirmSelector);
   const { sendPrepareMessage, sendErrorMessage } = useAlterModal();
 
   const disableMutation = useRoomDisableMutation();
   const onClickLeave = () => {
-    dispatchModal({
-      type: 'setCustom',
-      payload: {
-        title: 'Leave conversation?',
-        sub: 'This conversation will be deleted from your inbox. Other people in the conversation will still be able to see it.',
-        btnText: 'Leave',
-        btnTheme: 'red',
-        onClickCancle: () => {
-          close();
-        },
-        onClickConfirm: () => {
-          disableMutation.mutate(
-            {
-              sessionid,
-              roomid,
+    open({
+      flag: true,
+      title: 'Leave conversation?',
+      sub: 'This conversation will be deleted from your inbox. Other people in the conversation will still be able to see it.',
+      btnText: 'Leave',
+      btnTheme: 'red',
+      onClickCancle: () => {
+        close();
+      },
+      onClickConfirm: () => {
+        disableMutation.mutate(
+          {
+            sessionid,
+            roomid,
+          },
+          {
+            onSettled: () => {
+              close();
+              router.push('/messages');
             },
-            {
-              onSettled: () => {
-                close();
-                router.push('/messages');
-              },
-              onError: () => {
-                sendErrorMessage();
-              },
-            }
-          );
-        },
+            onError: () => {
+              sendErrorMessage();
+            },
+          }
+        );
       },
     });
   };
@@ -172,14 +171,17 @@ export default function RoomMessageInfo({
             text="Block DMs"
             theme="primary"
             onClick={() => {
-              dispatchModal({
-                type: 'setCustom',
-                payload: {
-                  title: '',
-                  sub: `Block DMs from @${user.data.id}?`,
-                  btnText: 'Yes',
-                  onClickCancle: () => close(),
-                  onClickConfirm: () => sendPrepareMessage(),
+              open({
+                flag: true,
+                title: '',
+                sub: `Block DMs from @${user.data.id}?`,
+                btnText: 'Yes',
+                onClickCancle: () => {
+                  close();
+                },
+                onClickConfirm: () => {
+                  sendPrepareMessage();
+                  close();
                 },
               });
             }}
@@ -189,14 +191,17 @@ export default function RoomMessageInfo({
             text="Block everything"
             theme="primary"
             onClick={() => {
-              dispatchModal({
-                type: 'setCustom',
-                payload: {
-                  title: '',
-                  sub: `Block @${user.data.id}, @${user.data.id} will no longer be able to follow or message you, and you will not see notifications from @${user.data.id}`,
-                  btnText: 'Yes',
-                  onClickCancle: () => close(),
-                  onClickConfirm: () => sendPrepareMessage(),
+              open({
+                flag: true,
+                title: '',
+                sub: `Block @${user.data.id}, @${user.data.id} will no longer be able to follow or message you, and you will not see notifications from @${user.data.id}`,
+                btnText: 'Yes',
+                onClickCancle: () => {
+                  close();
+                },
+                onClickConfirm: () => {
+                  sendPrepareMessage();
+                  close();
                 },
               });
             }}

@@ -7,6 +7,12 @@
 .range {
   padding: 2px;
   display: flex;
-  background: rgb(32, 35, 39);
+  background-color: rgb(239, 243, 244);
   border-radius: 9999px;
+}
+
+@media (prefers-color-scheme: dark) {
+  .range {
+    background-color: rgb(32, 35, 39);
+  }
 }

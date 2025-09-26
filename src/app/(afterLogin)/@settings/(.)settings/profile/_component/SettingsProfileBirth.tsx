@@ -5,8 +5,7 @@ import Text from '@/app/_component/_text/Text';
 import Link from 'next/link';
 import BirthSelector from '@/app/(beforeLogin)/_component/_sign/BirthSelector';
 import IdentifierSelector from '@/app/_component/_input/IdentifierSelector';
-import { Dispatch, SetStateAction, useContext, useState } from 'react';
-import { ConfirmContext } from '@/app/(afterLogin)/_provider/ConfirmProvider';
+import { Dispatch, SetStateAction, useState } from 'react';
 import { MONTH_EN } from '@/app/_lib/common';
 import { useSession } from 'next-auth/react';
 import { useQueryClient } from '@tanstack/react-query';
@@ -14,6 +13,9 @@ import useDeleteUserBirth from '@/app/(afterLogin)/@settings/(.)settings/profile
 import { AdvancedUser, Birth } from '@/model/User';
 import useAlterModal from '@/app/_hooks/useAlterModal';
 import { ISettingsProfile } from '@/app/(afterLogin)/@settings/(.)settings/profile/_component/SettingsProfile';
+import useConfirmStore, {
+  confirmSelector,
+} from '@/app/(afterLogin)/_store/ConfirmStore';
 
 interface Props {
   user: AdvancedUser;
@@ -29,7 +31,7 @@ export default function SettingsProfileBirth({
   onReset,
 }: Props) {
   const { data: session } = useSession();
-  const { dispatchModal } = useContext(ConfirmContext);
+  const { open, close } = useConfirmStore(confirmSelector);
   const [edit, setEdit] = useState(false);
   const [input, setInput] = useState<Birth>({
     date: user.birth?.date || '',
@@ -46,16 +48,19 @@ export default function SettingsProfileBirth({
         onReset();
       }
     } else {
-      dispatchModal({
-        type: 'setBirthEdit',
-        payload: {
-          onClickConfirm: () => {
-            setEdit(true);
-            dispatchModal({ type: 'reset' });
-          },
-          onClickCancle: () => dispatchModal({ type: 'reset' }),
-          onClickOutSide: () => dispatchModal({ type: 'reset' }),
+      open({
+        flag: true,
+        title: 'Edit date of birth?',
+        sub: 'This can only be changed a few times. Make sure you enter the age of the person using the account.',
+        btnText: 'Edit',
+        onClickCancle: () => {
+          close();
         },
+        onClickConfirm: () => {
+          setEdit(true);
+          close();
+        },
+        noHidden: true,
       });
     }
   };
@@ -92,20 +97,19 @@ export default function SettingsProfileBirth({
     if (!session?.user?.email) return;
     if (!user?.birth) return;
 
-    dispatchModal({
-      type: 'setCustom',
-      payload: {
-        title: 'Remove birth date?',
-        sub: 'This will remove it from your profile.',
-        btnText: 'Remove',
-        onClickConfirm: () => {
-          deleteBirth();
-          dispatchModal({ type: 'reset' });
-        },
-        onClickCancle: () => dispatchModal({ type: 'reset' }),
-        onClickOutSide: () => dispatchModal({ type: 'reset' }),
-        noHidden: true,
+    open({
+      flag: true,
+      title: 'Remove birth date?',
+      sub: 'This will remove it from your profile.',
+      btnText: 'Remove',
+      onClickCancle: () => {
+        close();
       },
+      onClickConfirm: () => {
+        deleteBirth();
+        close();
+      },
+      noHidden: true,
     });
   };
   const deleteBirth = () => {

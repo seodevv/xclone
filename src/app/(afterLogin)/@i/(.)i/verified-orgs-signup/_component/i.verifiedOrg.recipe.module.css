@@ -6,7 +6,8 @@
   padding: 16px;
   display: flex;
   flex-direction: column;
-  background: rgb(22, 24, 28);
+  /* background: rgb(22, 24, 28); */
+  background-color: rgb(var(--search-rgb));
   border-radius: 16px;
 }
 .access {

@@ -10,7 +10,7 @@
   padding: 12px;
   display: flex;
   flex-flow: row nowrap;
-  align-items: center;
+  align-items: flex-end;
   background-color: rgb(var(--private-rgb));
   border-radius: 8px;
 }
@@ -20,5 +20,5 @@
 .text {
   font-size: 14px;
   font-weight: 400;
-  color: #fff;
+  color: rgb(var(--font-theme-rgb));
 }

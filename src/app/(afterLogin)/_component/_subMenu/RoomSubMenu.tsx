@@ -2,8 +2,10 @@
 
 import SubMenu from '@/app/(afterLogin)/_component/_subMenu/SubMenu';
 import SubMenuWrapper from '@/app/(afterLogin)/_component/_subMenu/SubMenuWrapper';
-import { ConfirmContext } from '@/app/(afterLogin)/_provider/ConfirmProvider';
 import { SubMenuContext } from '@/app/(afterLogin)/_provider/SubMenuProvider';
+import useConfirmStore, {
+  confirmSelector,
+} from '@/app/(afterLogin)/_store/ConfirmStore';
 import { snoozeHandler } from '@/app/(afterLogin)/messages/[room]/info/_component/RoomMessageInfoNotifications';
 import useRoomDisableMutation from '@/app/(afterLogin)/messages/_hooks/useRoomDisableMutation';
 import useRoomPinMutation from '@/app/(afterLogin)/messages/_hooks/useRoomPinMutation';
@@ -24,7 +26,7 @@ interface Props {
 
 export default function RoomSubMenu({ room }: Props) {
   const { data: session } = useSession();
-  const { close, hide } = useContext(SubMenuContext);
+  const { close: closeSubMenu, hide: hideSubMenu } = useContext(SubMenuContext);
   const { sendErrorMessage, sendPrepareMessage } = useAlterModal();
   const width = 18.75;
 
@@ -40,7 +42,7 @@ export default function RoomSubMenu({ room }: Props) {
       },
       {
         onSettled: () => {
-          close();
+          closeSubMenu();
         },
         onError: () => {
           sendErrorMessage();
@@ -64,7 +66,7 @@ export default function RoomSubMenu({ room }: Props) {
         },
         {
           onSettled: () => {
-            close();
+            closeSubMenu();
           },
           onError: () => {
             sendErrorMessage();
@@ -81,7 +83,7 @@ export default function RoomSubMenu({ room }: Props) {
         },
         {
           onSettled: () => {
-            close();
+            closeSubMenu();
           },
           onError: () => {
             sendErrorMessage();
@@ -93,47 +95,46 @@ export default function RoomSubMenu({ room }: Props) {
 
   const onClickReport = () => {
     sendPrepareMessage();
-    close();
+    closeSubMenu();
   };
 
   const router = useRouter();
   const pathname = usePathname();
-  const { dispatchModal, close: closeConfirm } = useContext(ConfirmContext);
+  const { open: openConfirm, close: closeConfirm } =
+    useConfirmStore(confirmSelector);
   const disableMutation = useRoomDisableMutation();
   const onClickDelete = () => {
-    hide(true);
-    dispatchModal({
-      type: 'setCustom',
-      payload: {
-        title: 'Leave conversation?',
-        sub: 'This conversation will be deleted from your inbox. Other people in the conversation will still be able to see it.',
-        btnTheme: 'red',
-        btnText: 'Leave',
-        onClickCancle: () => {
-          closeConfirm();
-          close();
-        },
-        onClickConfirm: () => {
-          if (!session?.user?.email) return;
-          if (pathname.includes(room.id)) {
-            router.replace('/messages');
-          }
-          disableMutation.mutate(
-            {
-              sessionid: session.user.email,
-              roomid: room.id,
+    hideSubMenu(true);
+    openConfirm({
+      flag: true,
+      title: 'Leave conversation?',
+      sub: 'This conversation will be deleted from your inbox. Other people in the conversation will still be able to see it.',
+      btnTheme: 'red',
+      btnText: 'Leave',
+      onClickCancle: () => {
+        closeConfirm();
+        closeSubMenu();
+      },
+      onClickConfirm: () => {
+        if (!session?.user?.email) return;
+        if (pathname.includes(room.id)) {
+          router.replace('/messages');
+        }
+        disableMutation.mutate(
+          {
+            sessionid: session.user.email,
+            roomid: room.id,
+          },
+          {
+            onSettled: () => {
+              closeConfirm();
+              closeSubMenu();
             },
-            {
-              onSettled: () => {
-                closeConfirm();
-                close();
-              },
-              onError: () => {
-                sendErrorMessage();
-              },
-            }
-          );
-        },
+            onError: () => {
+              sendErrorMessage();
+            },
+          }
+        );
       },
     });
   };

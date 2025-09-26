@@ -1,8 +1,8 @@
 import './globals.css';
 import type { Metadata } from 'next';
 import { Inter } from 'next/font/google';
-import AlterModalProvider from './_provider/AlterModalProvider';
 import PathRecordProvider from '@/app/_provider/PathRecordProvider';
+import AlterModal from '@/app/_component/_alter/AlterModal';
 
 const inter = Inter({ subsets: ['latin'] });
 
@@ -47,10 +47,9 @@ export default function RootLayout({ children, flow }: Props) {
     <html lang="en">
       <body className={inter.className}>
         <PathRecordProvider>
-          <AlterModalProvider>
-            {children}
-            {flow}
-          </AlterModalProvider>
+          {children}
+          {flow}
+          <AlterModal />
         </PathRecordProvider>
       </body>
     </html>

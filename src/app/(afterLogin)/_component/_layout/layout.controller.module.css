@@ -10,6 +10,7 @@
 .flex_column {
   display: flex;
   flex-direction: column;
+  flex-grow: 1;
 }
 
 @media screen and (max-width: 672px) {

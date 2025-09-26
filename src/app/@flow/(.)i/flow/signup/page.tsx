@@ -4,6 +4,6 @@ interface Props {
   searchParams: { from?: string };
 }
 
-export default function IFlowSignUpSlot({ searchParams }: Props) {
+export default function IFlowPasswordResetSlot({ searchParams }: Props) {
   return <IFlowSignUpPage searchParams={searchParams} />;
 }

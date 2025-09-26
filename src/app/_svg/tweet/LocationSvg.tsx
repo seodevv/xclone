@@ -1,23 +1,24 @@
 import styles from '../_style/svg.module.css';
 import { CSSProperties, HTMLAttributes } from 'react';
 import cx from 'classnames';
+import { SvgTheme } from '@/app/_svg/Svg';
 
 interface Props {
   className?: HTMLAttributes<HTMLOrSVGElement>['className'];
   style?: CSSProperties;
   width?: number;
-  white?: boolean;
+  theme?: SvgTheme;
 }
 
 export default function LocationSvg({
   className,
   style,
   width = 20,
-  white,
+  theme = 'default',
 }: Props) {
   return (
     <svg
-      className={cx(styles.defaultSvg, white && styles.white, className)}
+      className={cx(styles[theme], className)}
       style={style}
       width={width}
       viewBox="0 0 24 24"

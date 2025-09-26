@@ -1,6 +1,8 @@
 'use client';
 
-import useSettingsLocalStore from '@/app/(afterLogin)/_store/SettingsLocalStore';
+import useSettingsLocalStore, {
+  passProtectionSelector,
+} from '@/app/(afterLogin)/_store/SettingsLocalStore';
 import SettingsInform from '@/app/(afterLogin)/settings/_component/SettingsInform';
 import SettingsSubWrapper from '@/app/(afterLogin)/settings/_component/SettingsSubWrapper';
 import SettingsVerifyPassword from '@/app/(afterLogin)/settings/_component/SettingsVerifyPassword';
@@ -9,8 +11,8 @@ import { useState } from 'react';
 
 export default function SettingsSecurityController() {
   const [verified, setVerified] = useState(false);
-  const setPassProtection = useSettingsLocalStore(
-    (state) => state.setPassProtection
+  const { passProtection, setPassProtection } = useSettingsLocalStore(
+    passProtectionSelector
   );
 
   if (verified) {
@@ -18,7 +20,7 @@ export default function SettingsSecurityController() {
       <SettingsSubWrapper header="Save account changes" noBack={false}>
         <SettingsVerifyPassword
           onSuccess={() => {
-            setPassProtection(true);
+            setPassProtection(!passProtection);
             setVerified(false);
           }}
         />

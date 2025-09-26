@@ -31,7 +31,7 @@ export default function SSODisconnectController() {
           title="Disconnect from Google"
           sub="To disconnect from Google, please verify your password."
           btnText={password === '' ? 'Forgot password?' : 'Disconnect'}
-          btnTheme={password === '' ? 'reverse' : 'white'}
+          btnTheme={'theme'}
           onSuccess={onSuccessVerify}
           onChange={onChangePassword}
         />

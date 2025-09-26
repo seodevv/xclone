@@ -9,7 +9,7 @@
 .list {
   margin-right: 11px;
   padding-right: 11px;
-  border-right: 1px solid rgb(32, 35, 39);
+  border-right: 1px solid rgb(var(--border-start-rgb));
 }
 .item {
   margin: 2px 11px;
@@ -24,8 +24,29 @@
   padding: 1px 4px;
   min-width: 1.7em;
   font-family: monospace;
-  background: rgb(22, 24, 28);
-  border: 1px solid rgb(32, 35, 39);
+  background: rgb(247, 249, 249);
+  border-width: 1px;
+  border-style: solid;
+  border-color: rgb(239, 243, 244);
   border-radius: 4px;
-  box-shadow: rgb(51, 54, 57) 0px -1px 0px inset;
+  box-shadow: rgb(207, 217, 222) 0px -1px 0px inset;
+}
+
+@media screen and (max-width: 704px) {
+  .container {
+    flex-direction: column;
+    gap: 10px;
+    width: 100dvw;
+  }
+  .list {
+    border-right: none;
+  }
+}
+
+@media (prefers-color-scheme: dark) {
+  .command {
+    background-color: rgb(22, 24, 28);
+    border-color: rgb(32, 35, 39);
+    box-shadow: rgb(51, 54, 57) 0px -1px 0px inset;
+  }
 }

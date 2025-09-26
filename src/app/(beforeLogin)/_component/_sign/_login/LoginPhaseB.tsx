@@ -16,8 +16,8 @@ import { useRouter } from 'next/navigation';
 
 export default function LoginPhaseB() {
   const router = useRouter();
-  const sign = useSign();
-  const { alterMessage, sendPrepareMessage } = useAlterModal();
+  const { login } = useSign();
+  const { alterMessage } = useAlterModal();
   const { state, dispatch } = useContext(LoginContext);
   const { id, password, options } = state;
   const [response, onSubmit] = useFormState(LoginAction, {
@@ -28,7 +28,7 @@ export default function LoginPhaseB() {
     switch (response.message) {
       case 'ok':
         dispatch({ type: 'setLoading', payload: true });
-        sign.login(id.value, password.value, true);
+        login(id.value, password.value, true);
         break;
       case 'invalid':
         alterMessage('Please enter correct input.');
@@ -51,7 +51,15 @@ export default function LoginPhaseB() {
       default:
         break;
     }
-  }, [response]);
+  }, [
+    response,
+    id.value,
+    password.ref,
+    password.value,
+    login,
+    alterMessage,
+    dispatch,
+  ]);
 
   useEffect(() => {
     const timer = setTimeout(() => {

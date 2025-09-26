@@ -1,10 +1,11 @@
+import utils from '@/app/utility.module.css';
 import BookmarkHydrationBoundary from '@/app/(afterLogin)/i/bookmarks/_component/BookmarkHydrationBoundary';
 import BookmarkPosts from '@/app/(afterLogin)/i/bookmarks/_component/BookmarkPosts';
 
 export default async function IBookmarksPage() {
   return (
     <BookmarkHydrationBoundary>
-      <main>
+      <main className={utils.h_min_100dvh}>
         <BookmarkPosts />
       </main>
     </BookmarkHydrationBoundary>

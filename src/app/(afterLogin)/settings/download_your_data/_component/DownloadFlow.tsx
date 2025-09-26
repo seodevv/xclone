@@ -8,7 +8,7 @@ export default function DownloadFlow() {
 
   useEffect(() => {
     router.replace('/i/flow/verify_account_ownership', { scroll: false });
-  }, []);
+  }, [router]);
 
   return null;
 }

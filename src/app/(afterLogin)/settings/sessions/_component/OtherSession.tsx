@@ -5,28 +5,27 @@ import DivideLine from '@/app/_component/_util/DivideLine';
 import Text from '@/app/_component/_text/Text';
 import Link from 'next/link';
 import TransitionTextButton from '@/app/(afterLogin)/_component/buttons/TransitionTextButton';
-import { useContext } from 'react';
-import { ConfirmContext } from '@/app/(afterLogin)/_provider/ConfirmProvider';
 import useAlterModal from '@/app/_hooks/useAlterModal';
+import useConfirmStore, {
+  confirmSelector,
+} from '@/app/(afterLogin)/_store/ConfirmStore';
 
 export default function OtherSession() {
   const { sendPrepareMessage } = useAlterModal();
-  const { dispatchModal, close } = useContext(ConfirmContext);
+  const { open, close } = useConfirmStore(confirmSelector);
 
   const onClickLogOut = () => {
-    dispatchModal({
-      type: 'setCustom',
-      payload: {
-        title: 'Do you want to end your other sessions?',
-        sub: 'You’re about to end your other active X sessions, and you’ll need to log in again on those devices to start a new ones.',
-        btnText: 'Log out',
-        onClickConfirm: () => {
-          sendPrepareMessage();
-          close();
-        },
-        onClickCancle: () => {
-          close();
-        },
+    open({
+      flag: true,
+      title: 'Do you want to end your other sessions?',
+      sub: 'You’re about to end your other active X sessions, and you’ll need to log in again on those devices to start a new ones.',
+      btnText: 'Log out',
+      onClickConfirm: () => {
+        sendPrepareMessage();
+        close();
+      },
+      onClickCancle: () => {
+        close();
       },
     });
   };

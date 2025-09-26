@@ -177,6 +177,9 @@ const useFollowMutation = () =>
       queryClient.invalidateQueries({
         queryKey: ['users', 'myProfile'],
       });
+      queryClient.invalidateQueries({
+        queryKey: ['users', sourceId],
+      });
     },
     onError: (error, { queryClient }, context?: Context) => {
       if (context) {

@@ -1,5 +1,6 @@
 .container {
   display: flex;
+  align-items: center;
 }
 .identifier {
   margin-right: 8px;
@@ -33,6 +34,11 @@
   transition-property: background-color;
   cursor: pointer;
 }
+
 .link:hover {
-  background: rgba(var(--search-rgb), 0.1);
+  background-color: rgba(var(--primary-button-rgb), 0.1);
+}
+.link:active {
+  background-color: rgba(var(--primary-button-rgb), 0.2);
+  transition: none;
 }

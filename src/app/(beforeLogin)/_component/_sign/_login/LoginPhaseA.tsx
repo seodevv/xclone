@@ -58,7 +58,8 @@ export default function LoginPhaseA() {
       default:
         break;
     }
-  }, [response]);
+    // }, [response]);
+  }, [id.ref, options.page, response, alterMessage, dispatch]);
 
   useEffect(() => {
     const timer = setTimeout(() => {
@@ -105,7 +106,9 @@ export default function LoginPhaseA() {
             theme="reverse"
             text="Forgot password?"
             onClick={() => {
-              router.push('/i/flow/password_reset');
+              router.replace('/i/flow/password_reset?from=login', {
+                scroll: false,
+              });
             }}
           />
           <NoAccount />

@@ -18,7 +18,7 @@ interface Props {
 export default function SinglePost({ params, session }: Props) {
   const { data: post } = useSinglePostQuery(params);
   const queryClient = useQueryClient();
-  const viewMutation = useViewMutation({
+  const { mutate } = useViewMutation({
     userid: params.username,
     postid: ~~params.id,
   });
@@ -26,7 +26,7 @@ export default function SinglePost({ params, session }: Props) {
 
   useEffect(() => {
     if (mountRef.current) {
-      viewMutation.mutate({
+      mutate({
         queryClient,
       });
     }

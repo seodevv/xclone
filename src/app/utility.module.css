@@ -1078,6 +1078,9 @@
 .cl_primary.cl_primary {
   color: rgb(var(--primary-rgb));
 }
+.cl_error {
+  color: rgb(var(--error-rgb));
+}
 .cl_inherit {
   color: inherit;
 }

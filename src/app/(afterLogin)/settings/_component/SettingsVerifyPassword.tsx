@@ -51,7 +51,7 @@ export default function SettingsVerifyPassword({
           }
         },
         onError: (error) => {
-          alterMessage('The password you entered was incorrect.');
+          alterMessage('The password you entered was incorrect.', 'warning');
           setLoading(false);
           setPassword('');
           passwordRef.current?.setValue('');

@@ -48,7 +48,8 @@ export default function ConvertToProfessional() {
             audience, grow your brand, and increase your profits.
           </Text>
           <Text className={utils.mt_20} theme="theme" size="m" bold="normal">
-            By tapping "Agree & continue", you are agreeing to our{' '}
+            By tapping &quot;Agree & continue&quot;, you are agreeing to
+            our&nbsp;
             <Link
               className={utils.link}
               href={

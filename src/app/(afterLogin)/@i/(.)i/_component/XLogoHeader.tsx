@@ -9,7 +9,7 @@ interface Props {
 export default function XLogoHeader({ width = 32, fill }: Props) {
   return (
     <div className={styles.logo}>
-      <XLogoSvg width={width} fill={fill} />
+      <XLogoSvg width={width} fill={fill} theme="theme" />
     </div>
   );
 }
