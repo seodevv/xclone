@@ -3,6 +3,7 @@ import UserHydrationBoundary from '../_boundary/UserHydrationBoundary';
 import { getServerSession } from 'next-auth';
 import authOptions from '@/app/_lib/authOptions';
 import { Metadata } from 'next';
+import { AdvancedUser } from '@/model/User';
 
 interface Props {
   params: { username: string };
@@ -27,7 +28,7 @@ export const generateMetadata = async ({
       };
 
       return {
-        title: `People followed by ${user.data.nickname} (@${user.data.id})`,
+        title: `Posts with replies by ${user.data.nickname} (@${user.data.id})`,
       };
     }
   } catch (error) {
