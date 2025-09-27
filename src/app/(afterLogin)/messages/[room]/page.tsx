@@ -31,8 +31,8 @@ export async function generateMetadata(
       const { data }: { data: AdvancedRooms } = await response.json();
       const target =
         session.user.email === data.receiverid
-          ? data.senderid
-          : data.receiverid;
+          ? data.Sender.nickname
+          : data.Receiver.nickname;
       const notice = data.sent.find((u) => u.id === target)?.count || 0;
       return {
         title: `${notice !== 0 ? `(${notice})` : ''} ${target} / XClone`,

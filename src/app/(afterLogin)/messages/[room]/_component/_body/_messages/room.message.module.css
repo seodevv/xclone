@@ -83,5 +83,6 @@
   .content.you {
     background-color: rgb(47, 51, 54);
     border-color: rgb(51, 54, 57);
+    color: rgb(255, 255, 255);
   }
 }

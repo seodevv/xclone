@@ -44,7 +44,7 @@ export function AnalysisText({ text }: { text: string }) {
       {analaysis.map((v, i) => {
         const matched = v[0];
         const prevIndex =
-          i === 0 ? 0 : analaysis[i - 1].index + analaysis[i - 1][0].length;
+          i === 0 ? 0 : analaysis[i - 1].index! + analaysis[i - 1][0].length;
         const index = v.index;
         const isMention = /^@/.test(matched);
         const isHashtag = /^#/.test(matched);
@@ -73,7 +73,7 @@ export function AnalysisText({ text }: { text: string }) {
       {analaysis.length !== 0 && (
         <span>
           {text.substring(
-            analaysis[analaysis.length - 1].index +
+            analaysis[analaysis.length - 1].index! +
               analaysis[analaysis.length - 1][0].length
           )}
         </span>

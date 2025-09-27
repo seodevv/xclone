@@ -51,15 +51,7 @@ export default function LoginPhaseB() {
       default:
         break;
     }
-  }, [
-    response,
-    id.value,
-    password.ref,
-    password.value,
-    login,
-    alterMessage,
-    dispatch,
-  ]);
+  }, [response]);
 
   useEffect(() => {
     const timer = setTimeout(() => {
@@ -117,8 +109,7 @@ export default function LoginPhaseB() {
             theme="reverse"
             text="Forgot password?"
             onClick={() => {
-              router.push('/i/flow/password_reset');
-              // sendPrepareMessage();
+              router.replace('/i/flow/password_reset?from=login');
             }}
           />
           <NoAccount />

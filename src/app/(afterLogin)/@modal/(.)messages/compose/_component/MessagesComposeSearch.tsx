@@ -56,7 +56,7 @@ export default function MessagesComposeSearch() {
             className={cx(utils.ml_11, styles.svg)}
             width={17.5}
             height={17.5}
-            inherit
+            theme="inherit"
           />
         </div>
         <div className={cx(utils.d_flexRow, utils.flexGrow_1)}>

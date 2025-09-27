@@ -144,9 +144,9 @@ const usePostMutation = () =>
           c === session.user?.email
         ) {
           shouldBeUpdate = true;
-          shallow.pages = [...shallow.pages];
-          shallow.pages[0] = { ...shallow.pages[0] };
-          shallow.pages[0].data = [newPost, ...shallow.pages[0].data];
+          shallow.pages = [...queryData.pages];
+          shallow.pages[0] = { ...queryData.pages[0] };
+          shallow.pages[0].data = [newPost, ...queryData.pages[0].data];
         }
 
         if (parent || repost) {
@@ -186,7 +186,7 @@ const usePostMutation = () =>
         }
         if (shouldBeUpdate) {
           queryClient.setQueryData(queryKey, shallow);
-          context.push({ queryKey, queryData: shallow });
+          context.push({ queryKey, queryData });
         }
       });
       return context;
@@ -282,6 +282,7 @@ const usePostMutation = () =>
     ) => {
       console.error(error);
       if (context) {
+        console.log(context);
         context.forEach(({ queryKey, queryData }) => {
           queryClient.setQueryData(queryKey, queryData);
         });

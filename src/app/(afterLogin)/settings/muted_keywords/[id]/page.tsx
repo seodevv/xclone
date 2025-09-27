@@ -6,7 +6,7 @@ interface Props {
   params: { id: string };
 }
 
-export const metdata: Metadata = {
+export const metadata: Metadata = {
   title: 'Muted word options / XClone',
 };
 

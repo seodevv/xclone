@@ -3,6 +3,11 @@ import ListsSuggestedHydrationBoundary from '@/app/(afterLogin)/i/lists/suggeste
 import ListsSuggestedDescription from '@/app/(afterLogin)/i/lists/suggested/_component/ListsSuggestedDescription';
 import ListsSuggestedHeader from '@/app/(afterLogin)/i/lists/suggested/_component/ListsSuggestedHeader';
 import DivideLine from '@/app/_component/_util/DivideLine';
+import { Metadata } from 'next';
+
+export const metadata: Metadata = {
+  title: 'Suggested lists / XClone',
+};
 
 export default function ListsSuggested() {
   return (

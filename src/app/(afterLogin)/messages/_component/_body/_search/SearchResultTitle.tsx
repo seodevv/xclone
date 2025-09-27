@@ -23,10 +23,10 @@ export default function SearchResultTitle({
       )}
     >
       {type === 'people' && (
-        <ProfileSvg className={svgClass} width={18.75} white active />
+        <ProfileSvg className={svgClass} width={18.75} theme="theme" active />
       )}
       {type === 'messages' && (
-        <MessageSvg className={svgClass} width={18.75} white active />
+        <MessageSvg className={svgClass} width={18.75} theme="theme" active />
       )}
       <Text size="xl" bold="bold">
         {captialCase(type)}

@@ -1,7 +1,6 @@
 'use client';
 
 import style from '@/app/(afterLogin)/messages/_style/message.module.css';
-import { faker } from '@faker-js/faker';
 import dayjs from 'dayjs';
 import { useRouter } from 'next/navigation';
 import relativeTime from 'dayjs/plugin/relativeTime';

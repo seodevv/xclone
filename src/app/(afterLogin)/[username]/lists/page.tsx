@@ -3,11 +3,16 @@ import ListsRecommends from '@/app/(afterLogin)/[username]/lists/_component/List
 import UserLists from '@/app/(afterLogin)/[username]/lists/_component/UserLists';
 import DivideLine from '@/app/_component/_util/DivideLine';
 import authOptions from '@/app/_lib/authOptions';
+import { Metadata } from 'next';
 import { getServerSession } from 'next-auth';
 
 interface Props {
   params: { username: string };
 }
+
+export const metadata: Metadata = {
+  title: 'Lists / XClone',
+};
 
 export default async function UserListsPage({ params }: Props) {
   const session = await getServerSession(authOptions);

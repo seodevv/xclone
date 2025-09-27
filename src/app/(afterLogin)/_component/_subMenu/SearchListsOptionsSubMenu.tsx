@@ -19,7 +19,7 @@ export default function SearchListsOptionsSubMenu({ sessionid }: Props) {
         type="link"
         href={`/${sessionid}/lists/memberships`}
         scroll={false}
-        svg={<ListsSvg width={18.75} white />}
+        svg={<ListsSvg width={18.75} theme="theme" />}
         title="Lists you're on"
         onClick={() => close()}
       />

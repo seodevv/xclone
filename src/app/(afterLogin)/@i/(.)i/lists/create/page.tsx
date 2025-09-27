@@ -5,6 +5,11 @@ import ListsCreatePhase from '@/app/(afterLogin)/@i/(.)i/lists/create/_component
 import { getServerSession } from 'next-auth';
 import authOptions from '@/app/_lib/authOptions';
 import AddHistoryStack from '@/app/(afterLogin)/@i/(.)i/_component/AddHistoryStack';
+import { Metadata } from 'next';
+
+export const metadata: Metadata = {
+  title: 'Lists / XClone',
+};
 
 export default async function IListsCreateSlot() {
   const session = await getServerSession(authOptions);

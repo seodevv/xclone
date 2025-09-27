@@ -20,7 +20,7 @@ export default function SettingsSessionsIdPage() {
         sub="Chrome"
         svg={
           <div className={styles.desktop}>
-            <DesktopSvg white />
+            <DesktopSvg theme="theme" />
           </div>
         }
         arrow="none"
