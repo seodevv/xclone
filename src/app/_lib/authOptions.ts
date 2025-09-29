@@ -65,17 +65,26 @@ const authOptions: NextAuthOptions = {
       credentials: {
         id: { label: 'id', type: 'text' },
         password: { label: 'password', type: 'password' },
+        token: { label: 'token', type: 'text' },
       },
       authorize: async (credentials) => {
         if (!credentials) return null;
 
-        const { id, password } = credentials;
+        const { id, password, token } = credentials;
 
         const formData = new FormData();
-        formData.append('id', id);
-        formData.append('password', password);
+        const isToken = typeof token !== 'undefined';
+        if (isToken) {
+          formData.append('token', token);
+        } else {
+          formData.append('id', id);
+          formData.append('password', password);
+        }
 
-        const requestUrl = `${process.env.SERVER_URL}/api/login`;
+        let requestUrl = `${process.env.SERVER_URL}/api/login`;
+        if (isToken) {
+          requestUrl += '/token';
+        }
         const requestOptions: RequestInit = {
           method: 'POST',
           body: formData,

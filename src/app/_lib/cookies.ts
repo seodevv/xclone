@@ -1,7 +1,7 @@
 'use server';
 import { ResponseCookie } from 'next/dist/compiled/@edge-runtime/cookies';
 import { cookies } from 'next/headers';
-import cookie from 'cookie';
+import { parse } from 'cookie';
 
 export const settingCookies = (response: Response) => {
   const setCookie = response.headers.get('set-cookie');
@@ -12,7 +12,10 @@ export const settingCookies = (response: Response) => {
     path: '/',
   };
   if (setCookie) {
-    const parse = cookie.parse(setCookie);
-    cookies().set('connect.sid', parse['connect.sid'], options);
+    const parsedCookie = parse(setCookie);
+
+    if (typeof parsedCookie['connect.sid'] !== 'undefined') {
+      cookies().set('connect.sid', parsedCookie['connect.sid'], options);
+    }
   }
 };

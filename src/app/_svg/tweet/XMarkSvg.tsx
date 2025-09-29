@@ -1,3 +1,4 @@
+import { SvgTheme } from '@/app/_svg/Svg';
 import styles from '../_style/svg.module.css';
 import cx from 'classnames';
 import { CSSProperties } from 'react';
@@ -6,7 +7,7 @@ interface Props {
   className?: string;
   style?: CSSProperties;
   width?: number;
-  theme?: 'default' | 'primary' | 'theme' | 'reverse' | 'white';
+  theme?: SvgTheme;
 }
 
 export default function XMarkSvg({
@@ -17,14 +18,7 @@ export default function XMarkSvg({
 }: Props) {
   return (
     <svg
-      className={cx(
-        theme === 'default' && styles.defaultSvg,
-        theme === 'primary' && styles.primary,
-        theme === 'theme' && styles.theme,
-        theme === 'reverse' && styles.reverse,
-        theme === 'white' && styles.white,
-        className
-      )}
+      className={cx(styles[theme], className)}
       style={style}
       width={width}
       viewBox="0 0 24 24"

@@ -61,6 +61,7 @@ export default function PhotoSection({ params }: Props) {
           className={styles.photoClose}
           width={20}
           position="absolute"
+          theme="theme"
         />
         {hasPrev && (
           <PrevButton
@@ -81,12 +82,14 @@ export default function PhotoSection({ params }: Props) {
             className={styles.postFold}
             width={20}
             onClick={onClickFold}
+            theme="theme"
           />
         ) : (
           <RightFoldButton
             className={styles.postFold}
             width={20}
             onClick={onClickFold}
+            theme="theme"
           />
         )}
       </div>

@@ -7,6 +7,7 @@ import cx from 'classnames';
 import XMarkSvg from '@/app/_svg/tweet/XMarkSvg';
 import { PathRecordContext } from '@/app/_provider/PathRecordProvider';
 import useHistoryStore from '@/app/(afterLogin)/_store/HistoryStore';
+import { SvgTheme } from '@/app/_svg/Svg';
 
 interface Props {
   className?: string;
@@ -17,6 +18,7 @@ interface Props {
   prevPath?: string;
   noBack?: boolean;
   position?: 'relative' | 'absolute';
+  theme?: SvgTheme;
   onClick?: () => void;
 }
 
@@ -29,6 +31,7 @@ export default function CloseButton({
   prevPath,
   noBack,
   position = 'relative',
+  theme,
   onClick,
 }: Props) {
   const router = useRouter();
@@ -64,7 +67,7 @@ export default function CloseButton({
       style={style}
       onClick={onClickDefault}
     >
-      <XMarkSvg width={width} />
+      <XMarkSvg width={width} theme={theme} />
     </button>
   );
 }

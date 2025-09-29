@@ -1,12 +1,13 @@
 import styles from '../_style/svg.module.css';
 import { CSSProperties } from 'react';
 import cx from 'classnames';
+import { SvgTheme } from '@/app/_svg/Svg';
 
 interface Props {
   className?: string;
   style?: CSSProperties;
   width?: number;
-  theme?: 'default' | 'theme' | 'white';
+  theme?: SvgTheme;
 }
 
 export default function LeftDoubleArrowSvg({
@@ -17,12 +18,7 @@ export default function LeftDoubleArrowSvg({
 }: Props) {
   return (
     <svg
-      className={cx(
-        theme === 'default' && styles.defaultSvg,
-        theme === 'theme' && styles.theme,
-        theme === 'white' && styles.white,
-        className
-      )}
+      className={cx(styles[theme], className)}
       style={style}
       width={width}
       viewBox="0 0 24 24"
