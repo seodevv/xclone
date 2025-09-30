@@ -41,6 +41,7 @@ const AccountAction = async (
         return { message: 'something_is_wrong' };
     }
   } catch (error) {
+    console.error(error);
     return { message: 'network_error' };
   }
 };

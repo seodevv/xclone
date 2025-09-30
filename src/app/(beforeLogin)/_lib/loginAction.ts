@@ -2,7 +2,7 @@
 
 import { AdvancedUser } from '@/model/User';
 import { redirect } from 'next/navigation';
-import cookie from 'cookie';
+import { parse } from 'cookie';
 import { cookies } from 'next/headers';
 
 const loginAction = async (
@@ -42,13 +42,15 @@ const loginAction = async (
 
     const setCookie = response.headers.get('set-cookie');
     if (setCookie) {
-      const parsed = cookie.parse(setCookie);
-      cookies().set('connect.sid', parsed['connect.sid'], {
-        maxAge: 60 * 60 * 24,
-        httpOnly: true,
-        path: '/',
-      });
-      isRedirect = true;
+      const parsedCookie = parse(setCookie);
+      if (typeof parsedCookie['connect.sid'] !== 'undefined') {
+        cookies().set('connect.sid', parsedCookie['connect.sid'], {
+          maxAge: 60 * 60 * 24,
+          httpOnly: true,
+          path: '/',
+        });
+        isRedirect = true;
+      }
     }
   } catch (error) {
     console.error(error);
