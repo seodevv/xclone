@@ -9,10 +9,10 @@ export const metadata: Metadata = {
   title: 'List / XClone',
 };
 
-export default function IListsIdPage({ params }: Props) {
+export default function IListsIdPage({ params: { listid } }: Props) {
   return (
     <main>
-      <SingleListsBody listid={params.listid} />
+      <SingleListsBody listid={listid} />
     </main>
   );
 }
