@@ -33,6 +33,7 @@ const LoginAction = async (
   const requestOptions: RequestInit = {
     method: 'POST',
     body: formData,
+    credentials: 'include',
   };
 
   try {

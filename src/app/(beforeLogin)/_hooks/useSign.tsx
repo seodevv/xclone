@@ -23,6 +23,7 @@ const useSign = () => {
       }/api/login?${searchParams.toString()}`;
       const requestOption: RequestInit = {
         method: 'GET',
+        credentials: 'include',
       };
       const response = await fetch(requestUrl, requestOption);
       if (type === 'login' && !response.ok) {
@@ -56,6 +57,7 @@ const useSign = () => {
       const requestOptions: RequestInit = {
         method: 'POST',
         body: formData,
+        credentials: 'include',
       };
 
       const response = await fetch(requestUrl, requestOptions);
