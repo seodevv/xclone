@@ -5,13 +5,13 @@ interface Props {
   params: { listid: string };
 }
 
-export default function IListsMemberSlot({ params }: Props) {
+export default function IListsMemberSlot({ params: { listid } }: Props) {
   const filter = 'members';
 
   return (
     <>
       <AddHistoryStack />
-      <ListsUserList listid={params.listid} filter={filter} />
+      <ListsUserList listid={listid} filter={filter} />
     </>
   );
 }
