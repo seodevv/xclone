@@ -362,7 +362,6 @@ export default function WebSocketProvider({ children, sessionId }: Props) {
                 React: message.React,
               });
             } else {
-              // console.log('[updatedMessage]\n', updatedMessage);
             }
           }
         );

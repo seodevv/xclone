@@ -18,9 +18,9 @@ const getRoomsNotifications = async ({}: Params): Promise<{
   }/api/rooms/notifications`;
   const requestInit: RequestInit = {
     method: 'GET',
-    // headers: nextHeader
-    //   ? { Cookie: nextHeader.cookies().toString() }
-    //   : undefined,
+    headers: nextHeader
+      ? { Cookie: nextHeader.cookies().toString() }
+      : undefined,
     credentials: 'include',
   };
 

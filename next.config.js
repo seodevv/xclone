@@ -35,7 +35,7 @@ const nextConfig = {
       },
       {
         protocol: 'https',
-        hostname: 'api.seodevv.com',
+        hostname: 'api.xclone.seodevv.com',
       },
     ],
   },

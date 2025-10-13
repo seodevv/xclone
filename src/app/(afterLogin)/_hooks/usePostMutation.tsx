@@ -282,7 +282,6 @@ const usePostMutation = () =>
     ) => {
       console.error(error);
       if (context) {
-        console.log(context);
         context.forEach(({ queryKey, queryData }) => {
           queryClient.setQueryData(queryKey, queryData);
         });
