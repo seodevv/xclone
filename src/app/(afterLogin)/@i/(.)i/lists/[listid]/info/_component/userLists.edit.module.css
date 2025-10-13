@@ -1,0 +1,7 @@
+.editor {
+  display: flex;
+  flex-direction: column;
+}
+.inputs {
+  padding: 0 16px;
+}

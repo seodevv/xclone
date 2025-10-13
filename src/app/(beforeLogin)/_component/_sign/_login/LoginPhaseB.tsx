@@ -1,6 +1,6 @@
 'use client';
 
-import styles from './beforeLogin.login.module.css';
+import styles from './login.module.css';
 import utils from '@/app/utility.module.css';
 import cx from 'classnames';
 import FlexButton from '@/app/(beforeLogin)/_component/_button/FlexButton';
