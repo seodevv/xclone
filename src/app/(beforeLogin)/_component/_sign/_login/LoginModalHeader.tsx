@@ -1,6 +1,6 @@
 'use client';
 
-import styles from './beforeLogin.login.module.css';
+import styles from './login.module.css';
 import CloseButton from '@/app/(beforeLogin)/_component/_button/CloseButton';
 import PrevButton from '@/app/(beforeLogin)/_component/_button/PrevButton';
 import { LoginContext } from '@/app/(beforeLogin)/_component/_sign/_login/LoginProvider';
