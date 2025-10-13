@@ -12,7 +12,9 @@ export const getRooms = async ({
   const isServer = typeof window === 'undefined';
   const nextHeader = isServer ? await import('next/headers') : undefined;
   const requestUrl = `${
-    isServer ? process.env.SERVER_URL : process.env.NEXT_PUBLIC_SERVER_URL
+    isServer
+      ? process.env.NEXT_PUBLIC_SERVER_URL
+      : process.env.NEXT_PUBLIC_SERVER_URL
   }/api/rooms`;
   const requestInit: RequestInit = {
     method: 'GET',

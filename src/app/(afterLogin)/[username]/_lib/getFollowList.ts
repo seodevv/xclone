@@ -22,7 +22,9 @@ export const getFollowList = async ({
   const isServer = typeof window === 'undefined';
   const nextHeader = isServer ? await import('next/headers') : undefined;
   const requestUrl = `${
-    isServer ? process.env.SERVER_URL : process.env.NEXT_PUBLIC_SERVER_URL
+    isServer
+      ? process.env.NEXT_PUBLIC_SERVER_URL
+      : process.env.NEXT_PUBLIC_SERVER_URL
   }/api/users/${username}/follow?cursor=${pageParam}&type=${options.type}`;
   const requestOptions: RequestInit = {
     method: 'GET',

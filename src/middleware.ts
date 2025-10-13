@@ -28,7 +28,7 @@ export async function middleware(req: NextRequest) {
   //     ? '__Secure-next-auth.session-token'
   //     : 'next-auth.session-token';
 
-  //   const userResponse = await fetch(`${process.env.SERVER_URL}/api/users`, {
+  //   const userResponse = await fetch(`${process.env.NEXT_PUBLIC_SERVER_URL}/api/users`, {
   //     method: 'GET',
   //     credentials: 'include',
   //     headers: {

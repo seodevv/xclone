@@ -14,7 +14,9 @@ export const getSinglePost = async ({
   }
   const isServer = typeof window === 'undefined';
   const requestUrl = `${
-    isServer ? process.env.SERVER_URL : process.env.NEXT_PUBLIC_SERVER_URL
+    isServer
+      ? process.env.NEXT_PUBLIC_SERVER_URL
+      : process.env.NEXT_PUBLIC_SERVER_URL
   }/api/posts/${id}?userid=${username}`;
   const requestOptions: RequestInit = {
     method: 'GET',

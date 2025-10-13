@@ -1,4 +1,4 @@
-import styles from './useridentifier.module.css';
+import styles from './userIdentifier.module.css';
 import { AdvancedUser } from '@/model/User';
 import BadgeButton from '@/app/(afterLogin)/_component/buttons/BadgeButton';
 import Link from 'next/link';

@@ -8,7 +8,7 @@
     "start": "next start",
     "build:start": "next build && next start",
     "lint": "next lint",
-    "dev:secure": "next dev --experimental-https --experimental-https-key ./localhost-key.pem --experimental-https-cert ./localhost.pem"
+    "dev:secure": "next dev --experimental-https --experimental-https-key ./certs/localhost-key.pem --experimental-https-cert ./certs/localhost.pem"
   },
   "dependencies": {
     "@emoji-mart/data": "^1.2.1",

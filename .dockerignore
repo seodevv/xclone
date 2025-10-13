@@ -1,0 +1,25 @@
+# modules
+node_modules
+
+# environment
+.env.default
+
+# build result
+.nest
+
+# Test
+# __tests__
+# jest.config.ts
+
+# Git
+.git
+.gitignore
+
+# nginx
+nginx
+
+# certificate
+certs
+*.pem
+
+# etc

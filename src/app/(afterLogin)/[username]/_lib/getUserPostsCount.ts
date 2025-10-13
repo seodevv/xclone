@@ -7,7 +7,9 @@ export const getUserPostsCount = async ({
 }: Params): Promise<{ data: number; message: string }> => {
   const isServer = typeof window === 'undefined';
   const requestUrl = `${
-    isServer ? process.env.SERVER_URL : process.env.NEXT_PUBLIC_SERVER_URL
+    isServer
+      ? process.env.NEXT_PUBLIC_SERVER_URL
+      : process.env.NEXT_PUBLIC_SERVER_URL
   }/api/users/${username}/posts/count?filter=${filter}`;
   const requestOptions: RequestInit = {
     method: 'GET',

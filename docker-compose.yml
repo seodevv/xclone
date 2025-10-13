@@ -1,0 +1,38 @@
+version: '3.8'
+
+services:
+  xclone:
+    build: .
+    image: xclone:1.0.0
+    environment:
+      - NODE_ENV=production
+      - NEXT_PUBLIC_SERVER_URL=${NEXT_PUBLIC_SERVER_URL}
+      - NEXTAUTH_URL=${NEXTAUTH_URL}
+      - NEXTAUTH_SECRET=${NEXTAUTH_SECRET}
+      - GOOGLE_CLIENT_ID=${GOOGLE_CLIENT_ID}
+      - GOOGLE_CLIENT_SECRET=${GOOGLE_CLIENT_SECRET}
+      - GITHUB_CLIENT_ID=${GITHUB_CLIENT_ID}
+      - GITHUB_CLIENT_SECRET=${GITHUB_CLIENT_SECRET}
+      - NEXT_PUBLIC_TENOR_API=${NEXT_PUBLIC_TENOR_API}
+    ports:
+      - '3000:3000'
+  nginx:
+    image: nginx:alpine
+    container_name: nginx
+    ports:
+      - '80:80'
+      - '443:443'
+    volumes:
+      - ./nginx/xclone.conf:/etc/nginx/conf.d/xclone.conf
+      - ./certs:/etc/nginx/certs
+    restart: always
+    depends_on:
+      - xclone
+    deploy:
+      resources:
+        limits:
+          cpus: '0.2'
+          memory: 64M
+        reservations:
+          cpus: '0.1'
+          memory: 32M

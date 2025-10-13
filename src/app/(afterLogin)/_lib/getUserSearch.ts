@@ -28,7 +28,9 @@ export const getUserSearch = async ({
   });
 
   const requestUrl = `${
-    isServer ? process.env.SERVER_URL : process.env.NEXT_PUBLIC_SERVER_URL
+    isServer
+      ? process.env.NEXT_PUBLIC_SERVER_URL
+      : process.env.NEXT_PUBLIC_SERVER_URL
   }/api/users/search?${searchParams.toString()}`;
   const requestInit: RequestInit = {
     method: 'GET',

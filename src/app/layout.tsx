@@ -16,11 +16,11 @@ export const metadata: Metadata = {
     title: 'XClone.com',
     description:
       'This is a clone project based on the X site. It was created with the goal of practicing front-end and back-end technologies and implementing real service-level functions.',
-    url: `https://localhost:9090`,
+    // url: `https://localhost:9090`,
     siteName: 'XClone.com',
     images: [
       {
-        url: `${process.env.SERVER_URL}/api/image/X.jpg`,
+        url: `${process.env.NEXT_PUBLIC_SERVER_URL}/api/image/X.jpg`,
         width: 400,
         height: 400,
       },
@@ -33,7 +33,7 @@ export const metadata: Metadata = {
     title: 'XClone.com',
     description:
       'This is a clone project based on the X site. It was created with the goal of practicing front-end and back-end technologies and implementing real service-level functions.',
-    images: [`${process.env.SERVER_URL}/api/image/X.jpg`],
+    images: [`${process.env.NEXT_PUBLIC_SERVER_URL}/api/image/X.jpg`],
   },
 };
 

@@ -14,6 +14,7 @@ import { getUserPostsCount } from './_lib/getUserPostsCount';
 import UserHeader from './_component/_header/UserHeader';
 import ViewTabs from '@/app/(afterLogin)/[username]/status/[id]/[view]/_component/ViewTabs';
 import { Metadata } from 'next';
+import { generateImagePath } from '@/app/_lib/common';
 
 export async function generateMetadata(args: {
   params: { username: string };
@@ -33,7 +34,7 @@ export async function generateMetadata(args: {
     openGraph: {
       title: `${user.data.nickname}'s profile`,
       description: user.data.desc || '',
-      images: [user.data.image],
+      images: [generateImagePath(user.data.image)],
     },
   };
 }

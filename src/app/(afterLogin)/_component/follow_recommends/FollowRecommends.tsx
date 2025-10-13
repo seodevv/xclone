@@ -29,7 +29,7 @@ export default function FollowRecommends({
     refetch,
   } = useFollowRecommendsQuery();
 
-  if (followRecommends) {
+  if (typeof followRecommends !== 'undefined') {
     return (
       <div className={styles.followRecommend}>
         <h3>{title}</h3>
