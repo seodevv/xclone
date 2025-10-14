@@ -29,6 +29,7 @@ export default function LoginPhaseB() {
       case 'ok':
         dispatch({ type: 'setLoading', payload: true });
         // login(id.value, password.value, true);
+        login(id.value, password.value, false);
         break;
       case 'invalid':
         alterMessage('Please enter correct input.');

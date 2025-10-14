@@ -39,6 +39,8 @@ const LoginAction = async (
   try {
     const response = await fetch(requestUrl, requestOptions);
 
+    console.log(response);
+
     switch (response.status) {
       case 200:
         return { message: 'ok' };
