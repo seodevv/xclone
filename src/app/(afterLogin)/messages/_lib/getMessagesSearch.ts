@@ -21,9 +21,9 @@ export const getMessagesSearch = async ({
 }> => {
   const isServer = typeof window === 'undefined';
   const nextHeader = isServer ? await import('next/headers') : undefined;
-  const requestUrl = `${
-    process.env.NEXT_PUBLIC_SERVER_URL
-  }/api/messages/search?q=${encodeURIComponent(q)}&cursor=${pageParam}&size=10`;
+  const requestUrl = `/api/v1/messages/search?q=${encodeURIComponent(
+    q
+  )}&cursor=${pageParam}&size=10`;
   const requestInit: RequestInit = {
     method: 'GET',
     credentials: 'include',

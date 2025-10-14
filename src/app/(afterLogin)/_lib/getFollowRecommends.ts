@@ -16,9 +16,7 @@ export const getFollowRecommends = async ({
   const isServer = typeof window === 'undefined';
   const nextHeaders = isServer ? await import('next/headers') : undefined;
 
-  const requestUrl = `${
-    process.env.NEXT_PUBLIC_SERVER_URL
-  }/api/users/followRecommends?cursor=${pageParam}${
+  const requestUrl = `/api/v1/users/followRecommends?cursor=${pageParam}${
     typeof mode !== 'undefined' ? '&mode=creator' : ''
   }`;
   const requestOptions: RequestInit = {

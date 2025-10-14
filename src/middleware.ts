@@ -17,56 +17,9 @@ export const config = {
 
 export async function middleware(req: NextRequest) {
   const token = await getToken({ req, secret: process.env.NEXTAUTH_SECRET });
-  const sid = req.cookies.get('connect.sid');
+  const sid = req.cookies.get('access.token');
 
   if (!token || typeof sid === 'undefined') {
     return NextResponse.redirect(new URL('/', req.url));
   }
-
-  // if (/^\/api\/auth\/session/.test(pathname)) {
-  //   const sessionCookie = process.env.NEXTAUTH_URL?.startsWith('https://')
-  //     ? '__Secure-next-auth.session-token'
-  //     : 'next-auth.session-token';
-
-  //   const userResponse = await fetch(`${process.env.NEXT_PUBLIC_SERVER_URL}/api/users`, {
-  //     method: 'GET',
-  //     credentials: 'include',
-  //     headers: {
-  //       Cookie: cookies().toString(),
-  //     },
-  //   });
-  //   if (!userResponse.ok) {
-  //     return NextResponse.next();
-  //   }
-
-  //   const userInfo = (await userResponse.json()) as {
-  //     data: AdvancedUser;
-  //     message: string;
-  //   };
-  //   const res = NextResponse.next();
-
-  //   const jwt = req.cookies.get(sessionCookie);
-  //   if (!jwt) {
-  //     return NextResponse.next();
-  //   }
-  //   const decoded = await decode({
-  //     secret: process.env.NEXTAUTH_SECRET || 'secret',
-  //     token: jwt.value,
-  //   });
-  //   const newToken = await encode({
-  //     secret: process.env.NEXTAUTH_SECRET || 'secret',
-  //     token: {
-  //       ...decoded,
-  //       picture: userInfo.data.image,
-  //     },
-  //     maxAge: 30 * 24 * 60 * 60,
-  //   });
-  //   res.cookies.set(sessionCookie, newToken);
-
-  //   return res;
-  // }
 }
-
-// export const config = {
-//   matcher: ['/:path*'],
-// };

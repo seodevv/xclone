@@ -22,7 +22,7 @@ const loginAction = async (
 
   let isRedirect = false;
   try {
-    const requestUrl = `${process.env.BACKEND_URL}/api/login`;
+    const requestUrl = `/api/v1/login`;
     const options: RequestInit = {
       method: 'post',
       body: formData,

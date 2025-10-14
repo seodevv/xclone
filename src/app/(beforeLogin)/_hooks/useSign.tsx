@@ -18,9 +18,7 @@ const useSign = () => {
       searchParams.set('id', id);
       if (nickname) searchParams.set('nickname', nickname);
 
-      const requestUrl = `${
-        process.env.NEXT_PUBLIC_SERVER_URL
-      }/api/login?${searchParams.toString()}`;
+      const requestUrl = `/api/v1/login?${searchParams.toString()}`;
       const requestOption: RequestInit = {
         method: 'GET',
         credentials: 'include',
