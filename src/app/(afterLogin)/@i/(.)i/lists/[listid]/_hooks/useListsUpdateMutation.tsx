@@ -70,7 +70,7 @@ const useListsUpdateMutation = () =>
         );
       }
 
-      const requestUrl = `/api/v1/lists/${listid}/edit`;
+      const requestUrl = `${process.env.NEXT_PUBLIC_SERVER_URL}/api/lists/${listid}/edit`;
       const requestOptions: RequestInit = {
         method: 'POST',
         body: formData,

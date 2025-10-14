@@ -13,7 +13,7 @@ export const getSinglePost = async ({
     throw new Error(ERROR_STATUS.notFound);
   }
   const isServer = typeof window === 'undefined';
-  const requestUrl = `/api/v1/posts/${id}?userid=${username}`;
+  const requestUrl = `${process.env.NEXT_PUBLIC_SERVER_URL}/api/posts/${id}?userid=${username}`;
   const requestOptions: RequestInit = {
     method: 'GET',
     credentials: 'include',

@@ -19,11 +19,14 @@ const authOptions: NextAuthOptions = {
         formData.append('id', user.id);
         formData.append('nickname', user.name);
         formData.append('image', user.image);
-        const response = await fetch(`/api/v1/login/oauth`, {
-          method: 'post',
-          body: formData,
-          credentials: 'include',
-        });
+        const response = await fetch(
+          `${process.env.NEXT_PUBLIC_SERVER_URL}/api/login/oauth`,
+          {
+            method: 'post',
+            body: formData,
+            credentials: 'include',
+          }
+        );
 
         if (!response.ok) return false;
 
@@ -78,7 +81,7 @@ const authOptions: NextAuthOptions = {
           formData.append('password', password);
         }
 
-        let requestUrl = `/api/v1/login`;
+        let requestUrl = `${process.env.NEXT_PUBLIC_SERVER_URL}/api/login`;
         if (isToken) {
           requestUrl += '/token';
         }

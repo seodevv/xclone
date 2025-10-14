@@ -23,7 +23,9 @@ export const getPostSearch = async ({
   Object.entries(option).forEach(([key, value]) => {
     searchParams.set(key, value);
   });
-  const requestUrl = `/api/v1/posts?${searchParams.toString()}`;
+  const requestUrl = `${
+    process.env.NEXT_PUBLIC_SERVER_URL
+  }/api/posts?${searchParams.toString()}`;
   const requestOptions: RequestInit = {
     method: 'GET',
     credentials: 'include',

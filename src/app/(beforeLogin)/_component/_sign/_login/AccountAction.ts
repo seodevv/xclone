@@ -20,7 +20,7 @@ const AccountAction = async (
     return { message: 'invalid' };
   }
 
-  const requestUrl = `/api/v1/login?type=login&id=${id}`;
+  const requestUrl = `${process.env.NEXT_PUBLIC_SERVER_URL}/api/login?type=login&id=${id}`;
   const requestOptions: RequestInit = {
     method: 'GET',
     credentials: 'include',

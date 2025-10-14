@@ -16,7 +16,7 @@ const getSingleListsPosts = async ({
 }> => {
   const isServer = typeof window === 'undefined';
   const nextHeader = isServer ? await import('next/headers') : undefined;
-  const requestUrl = `/api/v1/lists/${listid}/posts?cursor=${pageParam}`;
+  const requestUrl = `${process.env.NEXT_PUBLIC_SERVER_URL}/api/lists/${listid}/posts?cursor=${pageParam}`;
   const requestOptions: RequestInit = {
     method: 'GET',
     credentials: 'include',

@@ -24,7 +24,7 @@ const getPostQuotes = async ({
   }
   const isServer = typeof window === 'undefined';
   const nextHeader = isServer ? await import('next/headers') : undefined;
-  const requestUrl = `/api/v1/posts/${postid}/engagements?userid=${options.username}&filter=${options.filter}&cursor=${pageParam}`;
+  const requestUrl = `${process.env.NEXT_PUBLIC_SERVER_URL}/api/posts/${postid}/engagements?userid=${options.username}&filter=${options.filter}&cursor=${pageParam}`;
   const requestOptions: RequestInit = {
     method: 'GET',
     credentials: 'include',

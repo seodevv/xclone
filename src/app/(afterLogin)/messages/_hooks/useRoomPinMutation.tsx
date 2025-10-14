@@ -17,7 +17,7 @@ const useRoomPinMutation = () => {
       method,
       roomid,
     }: MutationParam): Promise<{ data: AdvancedRooms; message: string }> => {
-      const requestUrl = `/api/v1/rooms/${roomid}/pin`;
+      const requestUrl = `${process.env.NEXT_PUBLIC_SERVER_URL}/api/rooms/${roomid}/pin`;
       const requestInit: RequestInit = {
         method,
         credentials: 'include',

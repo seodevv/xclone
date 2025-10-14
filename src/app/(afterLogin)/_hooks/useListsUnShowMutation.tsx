@@ -23,7 +23,7 @@ const useListsUnShowMutation = () =>
       listid,
       userid,
     }: MutationParams): Promise<{ data: AdvancedLists; message: string }> => {
-      const requestUrl = `/api/v1/lists/${listid}/unshow`;
+      const requestUrl = `${process.env.NEXT_PUBLIC_SERVER_URL}/api/lists/${listid}/unshow`;
       const requestOptions: RequestInit = {
         method,
         body: JSON.stringify({

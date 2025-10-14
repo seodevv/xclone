@@ -20,7 +20,7 @@ export const getPostRecommends = async ({
 
   const isServer = typeof window === 'undefined';
   const response = await fetch(
-    `/api/v1/posts/recommends?cursor=${pageParam}&filter=${options.filter}`,
+    `${process.env.NEXT_PUBLIC_SERVER_URL}/api/posts/recommends?cursor=${pageParam}&filter=${options.filter}`,
     {
       method: 'GET',
       credentials: 'include',

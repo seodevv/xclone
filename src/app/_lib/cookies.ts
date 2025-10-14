@@ -1,21 +1,37 @@
 'use server';
-import { ResponseCookie } from 'next/dist/compiled/@edge-runtime/cookies';
+
 import { cookies } from 'next/headers';
-import { parse } from 'cookie';
 
 export const settingCookies = (response: Response) => {
-  const setCookie = response.headers.get('set-cookie');
-  const options: Partial<ResponseCookie> = {
-    maxAge: 60 * 60 * 24 * 30,
-    httpOnly: true,
-    secure: true,
-    path: '/',
-  };
-  if (setCookie) {
-    const parsedCookie = parse(setCookie);
+  const cookiesFromRes = response.headers.getSetCookie?.() ?? [];
+  const cookieStore = cookies();
 
-    if (typeof parsedCookie['connect.sid'] !== 'undefined') {
-      cookies().set('connect.sid', parsedCookie['connect.sid'], options);
-    }
+  function isSameSite(str?: string): str is 'lax' | 'strict' | 'none' {
+    return (
+      typeof str !== 'undefined' && ['lax', 'strict', 'none'].includes(str)
+    );
+  }
+
+  for (const cookie of cookiesFromRes) {
+    const [nameValue, ...attrs] = cookie.split(';');
+    const [name, value] = nameValue.split('=');
+    cookieStore.set({
+      name,
+      value,
+      httpOnly: attrs.some((a) => /httponly/i.test(a)),
+      secure: attrs.some((a) => /secure/i.test(a)),
+      path:
+        attrs
+          .find((a) => /path/i.test(a))
+          ?.split('=')
+          .at(1) || '/',
+      sameSite:
+        isSameSite(
+          attrs
+            .find((a) => /samesite/i.test(a))
+            ?.split('=')
+            .at(1)
+        ) || 'none',
+    });
   }
 };

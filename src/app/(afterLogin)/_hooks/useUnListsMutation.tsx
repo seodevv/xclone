@@ -17,7 +17,7 @@ const useUnListsMutation = () => {
     mutationFn: async ({
       listid,
     }: MutationParams): Promise<{ message: string }> => {
-      const requestUrl = `/api/v1/lists/${listid}`;
+      const requestUrl = `${process.env.NEXT_PUBLIC_SERVER_URL}/api/lists/${listid}`;
       const requestOptions: RequestInit = {
         method: 'DELETE',
         credentials: 'include',

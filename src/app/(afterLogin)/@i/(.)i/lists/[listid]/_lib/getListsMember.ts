@@ -19,7 +19,9 @@ const getListsMember = async ({
   }
   const isServer = typeof window === 'undefined';
   const nextHeader = isServer ? await import('next/headers') : undefined;
-  const requestUrl = `/api/v1/lists/${listid}/${
+  const requestUrl = `${
+    process.env.NEXT_PUBLIC_SERVER_URL
+  }/api/lists/${listid}/${
     options.filter === 'members' ? 'member' : 'follow'
   }?cursor=${pageParam}`;
   const requestOptions: RequestInit = {

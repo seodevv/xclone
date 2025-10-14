@@ -20,7 +20,7 @@ export const metadata: Metadata = {
     siteName: 'XClone.com',
     images: [
       {
-        url: `/api/v1/image/X.jpg`,
+        url: `${process.env.NEXT_PUBLIC_SERVER_URL}/api/image/X.jpg`,
         width: 400,
         height: 400,
       },
@@ -33,7 +33,7 @@ export const metadata: Metadata = {
     title: 'XClone.com',
     description:
       'This is a clone project based on the X site. It was created with the goal of practicing front-end and back-end technologies and implementing real service-level functions.',
-    images: [`/api/v1/image/X.jpg`],
+    images: [`${process.env.NEXT_PUBLIC_SERVER_URL}/api/image/X.jpg`],
   },
 };
 

@@ -57,7 +57,7 @@ const useAddListsMutation = () =>
         );
       }
 
-      const requestUrl = `/api/v1/lists`;
+      const requestUrl = `${process.env.NEXT_PUBLIC_SERVER_URL}/api/lists`;
       const requestOptions: RequestInit = {
         method: 'POST',
         body: formData,

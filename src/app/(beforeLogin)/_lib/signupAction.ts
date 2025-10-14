@@ -31,7 +31,7 @@ const signupAction = async (
   }
 
   try {
-    const requestUrl = `/api/v1/users`;
+    const requestUrl = `${process.env.NEXT_PUBLIC_SERVER_URL}/api/users`;
     const options: RequestInit = {
       method: 'post',
       body: formData,

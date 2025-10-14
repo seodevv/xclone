@@ -11,7 +11,7 @@ export const getRoom = async ({
 }: Params): Promise<{ data: AdvancedRooms; message: string }> => {
   const isServer = typeof window === 'undefined';
   const nextHeader = isServer ? await import('next/headers') : undefined;
-  const requestUrl = `/api/v1/rooms/${roomid}`;
+  const requestUrl = `${process.env.NEXT_PUBLIC_SERVER_URL}/api/rooms/${roomid}`;
   const requestInit: RequestInit = {
     method: 'GET',
     credentials: 'include',
