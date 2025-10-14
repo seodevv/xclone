@@ -19,7 +19,7 @@ interface MutationParams {
 const useListsPinnedMutation = () =>
   useMutation({
     mutationFn: async ({ method, listid, userid }: MutationParams) => {
-      const requestUrl = `${process.env.NEXT_PUBLIC_SERVER_URL}/api/lists/${listid}/pinned`;
+      const requestUrl = `/api/v1/lists/${listid}/pinned`;
       const requestOptions: RequestInit = {
         method,
         body: JSON.stringify({

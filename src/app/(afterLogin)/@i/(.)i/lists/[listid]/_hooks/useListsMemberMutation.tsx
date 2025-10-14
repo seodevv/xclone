@@ -23,7 +23,7 @@ const useListsMemberMutation = () =>
       listid,
       member,
     }: MutationParams): Promise<{ data: AdvancedLists; message: string }> => {
-      const requestUrl = `${process.env.NEXT_PUBLIC_SERVER_URL}/api/lists/${listid}/member`;
+      const requestUrl = `/api/v1/lists/${listid}/member`;
       const requestOptions: RequestInit = {
         method,
         body: JSON.stringify({

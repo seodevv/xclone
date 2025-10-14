@@ -53,7 +53,7 @@ const useSign = () => {
     async (
       formData: FormData
     ): Promise<{ data: AdvancedUser; message: string }> => {
-      const requestUrl = `${process.env.NEXT_PUBLIC_SERVER_URL}/api/users`;
+      const requestUrl = `/api/v1/users`;
       const requestOptions: RequestInit = {
         method: 'POST',
         body: formData,

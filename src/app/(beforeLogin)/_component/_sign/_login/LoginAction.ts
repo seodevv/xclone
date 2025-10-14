@@ -29,7 +29,7 @@ const LoginAction = async (
     return { message: 'invalid' };
   }
 
-  const requestUrl = `${process.env.NEXT_PUBLIC_SERVER_URL}/api/login`;
+  const requestUrl = `/api/v1/login`;
   const requestOptions: RequestInit = {
     method: 'POST',
     body: formData,

@@ -13,11 +13,7 @@ export const getPostFollowings = async ({
 }> => {
   const isServer = typeof window === 'undefined';
   const nextHeaders = isServer ? await import('next/headers') : undefined;
-  const requestUrl = `${
-    isServer
-      ? process.env.NEXT_PUBLIC_SERVER_URL
-      : process.env.NEXT_PUBLIC_SERVER_URL
-  }/api/posts/followings?cursor=${pageParam}`;
+  const requestUrl = `/api/v1/posts/followings?cursor=${pageParam}`;
   const requestOptions: RequestInit = {
     method: 'GET',
     credentials: 'include',

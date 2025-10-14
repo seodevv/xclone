@@ -17,11 +17,7 @@ export const getComments = async ({
     throw new Error('Invalid query key');
   }
   const isServer = typeof window === 'undefined';
-  const requestUrl = `${
-    isServer
-      ? process.env.NEXT_PUBLIC_SERVER_URL
-      : process.env.NEXT_PUBLIC_SERVER_URL
-  }/api/posts/${id}/comments?cursor=${pageParam}&userid=${params.username}`;
+  const requestUrl = `/api/v1/posts/${id}/comments?cursor=${pageParam}&userid=${params.username}`;
   const requestOptions: RequestInit = {
     method: 'GET',
     credentials: 'include',

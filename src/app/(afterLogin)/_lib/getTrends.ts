@@ -7,11 +7,7 @@ export const getTrends = async (): Promise<{
 }> => {
   const isServer = typeof window === 'undefined';
   const nextHeaders = isServer ? await import('next/headers') : undefined;
-  const requestUrl = `${
-    isServer
-      ? process.env.NEXT_PUBLIC_SERVER_URL
-      : process.env.NEXT_PUBLIC_SERVER_URL
-  }/api/hashtags/trends`;
+  const requestUrl = `/api/v1/hashtags/trends`;
   const requestOptions: RequestInit = {
     method: 'GET',
     credentials: 'include',

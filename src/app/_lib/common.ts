@@ -1,14 +1,8 @@
 import { InfiniteData } from '@tanstack/react-query';
 
 export const generateImagePath = (image: string) => {
-  // if (!image) {
-  //   return `${process.env.NEXT_PUBLIC_SERVER_URL}/api/image/default_profile.png`;
-  // }
-
   const regex = /^http?s|^data:image/;
-  return regex.test(image)
-    ? image
-    : `${process.env.NEXT_PUBLIC_SERVER_URL}/api/image/${image}`;
+  return regex.test(image) ? image : `/api/v1/image/${image}`;
 };
 
 export const generateRandomString = (length: number) => {

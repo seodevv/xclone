@@ -9,7 +9,7 @@ interface MutationParams {
 export const useChangePasswordMutation = () =>
   useMutation({
     mutationFn: async ({ current, newPassword }: MutationParams) => {
-      const requestUrl = `${process.env.NEXT_PUBLIC_SERVER_URL}/api/password`;
+      const requestUrl = `/api/v1/password`;
       const requestInit: RequestInit = {
         method: 'POST',
         body: JSON.stringify({

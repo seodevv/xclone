@@ -12,7 +12,7 @@ interface Props {
 export const generateMetadata = async ({
   params: { username, id },
 }: Props): Promise<Metadata> => {
-  const requestUrl = `${process.env.NEXT_PUBLIC_SERVER_URL}/api/posts/${id}?userid=${username}`;
+  const requestUrl = `/api/v1/posts/${id}?userid=${username}`;
   const requestInit: RequestInit = {
     method: 'GET',
     credentials: 'include',

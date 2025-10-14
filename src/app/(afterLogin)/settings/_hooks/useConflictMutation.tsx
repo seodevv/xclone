@@ -8,7 +8,7 @@ interface MutationParams {
 export const useConflictMutation = () =>
   useMutation({
     mutationFn: async ({ username }: MutationParams) => {
-      const requestUrl = `${process.env.NEXT_PUBLIC_SERVER_URL}/api/login?type=signup&id=${username}`;
+      const requestUrl = `/api/v1/login?type=signup&id=${username}`;
       const requestOptions: RequestInit = {
         method: 'GET',
         credentials: 'include',

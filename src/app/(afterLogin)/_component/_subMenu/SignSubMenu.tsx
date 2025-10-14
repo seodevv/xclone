@@ -43,7 +43,7 @@ export default function SignSubMenu() {
 
   const logout = async () => {
     try {
-      await fetch(`${process.env.NEXT_PUBLIC_SERVER_URL}/api/logout`, {
+      await fetch(`/api/v1/logout`, {
         method: 'post',
         credentials: 'include',
       });

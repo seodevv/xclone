@@ -10,11 +10,7 @@ export const getMyProfile = async ({
 }: Params): Promise<{ data: AdvancedUser; message: string }> => {
   const isServer = typeof window === 'undefined';
   const nextHeader = isServer ? await import('next/headers') : undefined;
-  const requestUrl = `${
-    isServer
-      ? process.env.NEXT_PUBLIC_SERVER_URL
-      : process.env.NEXT_PUBLIC_SERVER_URL
-  }/api/users`;
+  const requestUrl = `/api/v1/users`;
   const requestOptions: RequestInit = {
     method: 'GET',
     headers: nextHeader

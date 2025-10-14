@@ -55,7 +55,7 @@ const usePostMutation = () =>
         formData.append('repostid', repost.postid.toString());
       }
 
-      const requestUrl = `${process.env.NEXT_PUBLIC_SERVER_URL}/api/posts${
+      const requestUrl = `/api/v1/posts${
         parent ? `/${parent.postid}/comments` : ''
       }`;
       const requestOptions: RequestInit = {

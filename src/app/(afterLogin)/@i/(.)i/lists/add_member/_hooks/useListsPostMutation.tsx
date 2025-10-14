@@ -24,7 +24,7 @@ const useListsPostMutation = () =>
       listid,
       postid,
     }: MutationParams): Promise<{ data: AdvancedLists; message: string }> => {
-      const requestUrl = `${process.env.NEXT_PUBLIC_SERVER_URL}/api/lists/${listid}/post`;
+      const requestUrl = `/api/v1/lists/${listid}/post`;
       const requestOptions: RequestInit = {
         method,
         body: JSON.stringify({

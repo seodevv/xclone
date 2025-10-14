@@ -33,7 +33,7 @@ const useFollowMutation = () =>
       type,
       targetId,
     }: MutationParams): Promise<{ data?: AdvancedUser; message: string }> => {
-      const requestUrl = `${process.env.NEXT_PUBLIC_SERVER_URL}/api/users/${targetId}/follow`;
+      const requestUrl = `/api/v1/users/${targetId}/follow`;
       const requestOptions: RequestInit = {
         method: type === 'follow' ? 'POST' : 'DELETE',
         credentials: 'include',

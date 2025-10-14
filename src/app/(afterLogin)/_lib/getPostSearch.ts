@@ -24,9 +24,7 @@ export const getPostSearch = async ({
     searchParams.set(key, value);
   });
   const requestUrl = `${
-    isServer
-      ? process.env.NEXT_PUBLIC_SERVER_URL
-      : process.env.NEXT_PUBLIC_SERVER_URL
+    process.env.NEXT_PUBLIC_SERVER_URL
   }/api/posts?${searchParams.toString()}`;
   const requestOptions: RequestInit = {
     method: 'GET',

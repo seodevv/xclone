@@ -8,11 +8,7 @@ export const getUser = async ({
   queryKey: [, username],
 }: Params): Promise<{ data: AdvancedUser; message: string }> => {
   const isServer = typeof window === 'undefined';
-  const requestUrl = `${
-    isServer
-      ? process.env.NEXT_PUBLIC_SERVER_URL
-      : process.env.NEXT_PUBLIC_SERVER_URL
-  }/api/users/${username}`;
+  const requestUrl = `/api/v1/users/${username}`;
   const requestOptions: RequestInit = {
     method: 'GET',
     credentials: 'include',

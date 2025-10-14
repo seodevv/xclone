@@ -15,7 +15,7 @@ const useDeleteUserBirth = () =>
       data: AdvancedUser;
       message: string;
     }> => {
-      const requestUrl = `${process.env.NEXT_PUBLIC_SERVER_URL}/api/users/birth`;
+      const requestUrl = `/api/v1/users/birth`;
       const requestOptions: RequestInit = {
         method: 'DELETE',
         credentials: 'include',

@@ -33,7 +33,7 @@ const useMessagesMutation = () =>
     mutationFn: async ({
       payload: { type, roomid, messageid, content },
     }: MutationParams) => {
-      let requestUrl = `${process.env.NEXT_PUBLIC_SERVER_URL}/api/messages/${roomid}`;
+      let requestUrl = `/api/v1/messages/${roomid}`;
       let requestInit: RequestInit = {
         credentials: 'include',
         headers: {

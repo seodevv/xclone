@@ -39,6 +39,15 @@ const nextConfig = {
       },
     ],
   },
+
+  async rewrites() {
+    return [
+      {
+        source: '/api/v1/:path*',
+        destination: 'https://api.xclone.seodevv.com/api/:path*',
+      },
+    ];
+  },
   // experimental: {
   //   scrollRestoration: true,
   // },

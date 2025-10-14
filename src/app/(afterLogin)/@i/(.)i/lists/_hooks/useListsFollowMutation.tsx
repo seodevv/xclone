@@ -19,7 +19,7 @@ interface MutationParams {
 const useListsFollowMutation = () =>
   useMutation({
     mutationFn: async ({ method, lists }: MutationParams) => {
-      const requestUrl = `${process.env.NEXT_PUBLIC_SERVER_URL}/api/lists/${lists.id}/follow`;
+      const requestUrl = `/api/v1/lists/${lists.id}/follow`;
       const requestOptions: RequestInit = {
         method,
         credentials: 'include',
