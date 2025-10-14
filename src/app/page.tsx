@@ -13,7 +13,7 @@ interface Props {
 
 export default async function Home({ searchParams }: Props) {
   const session = await getServerSession(authOptions);
-  const sid = cookies().get('connect.sid');
+  const sid = cookies().get('access.token');
 
   if (session && typeof sid !== 'undefined') {
     redirect('/home');

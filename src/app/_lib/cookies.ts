@@ -15,6 +15,7 @@ export const settingCookies = (response: Response) => {
   for (const cookie of cookiesFromRes) {
     const [nameValue, ...attrs] = cookie.split(';');
     const [name, value] = nameValue.split('=');
+
     cookieStore.set({
       name,
       value,
