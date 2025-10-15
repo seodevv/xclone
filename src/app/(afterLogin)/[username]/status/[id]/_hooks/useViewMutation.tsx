@@ -25,7 +25,7 @@ const useViewMutation = ({
         throw new Error(ERROR_STATUS.badRequest);
       }
 
-      const requestUrl = `${process.env.NEXT_PUBLIC_SERVER_URL}/api/posts/${postid}/views`;
+      const requestUrl = `${process.env.NEXT_PUBLIC_API_URL}/api/posts/${postid}/views`;
       const requestOptions: RequestInit = {
         method: 'POST',
         body: JSON.stringify({ userid }),

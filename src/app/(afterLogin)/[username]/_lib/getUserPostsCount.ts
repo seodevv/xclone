@@ -6,7 +6,7 @@ export const getUserPostsCount = async ({
   queryKey: [, , username, { filter = 'all' }],
 }: Params): Promise<{ data: number; message: string }> => {
   const isServer = typeof window === 'undefined';
-  const requestUrl = `${process.env.NEXT_PUBLIC_SERVER_URL}/api/users/${username}/posts/count?filter=${filter}`;
+  const requestUrl = `${process.env.NEXT_PUBLIC_API_URL}/api/users/${username}/posts/count?filter=${filter}`;
   const requestOptions: RequestInit = {
     method: 'GET',
     credentials: 'include',

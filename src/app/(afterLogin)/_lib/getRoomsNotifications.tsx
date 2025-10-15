@@ -11,7 +11,7 @@ const getRoomsNotifications = async ({}: Params): Promise<{
 }> => {
   const isServer = typeof window === 'undefined';
   const nextHeader = isServer ? await import('next/headers') : undefined;
-  const requestUrl = `${process.env.NEXT_PUBLIC_SERVER_URL}/api/rooms/notifications`;
+  const requestUrl = `${process.env.NEXT_PUBLIC_API_URL}/api/rooms/notifications`;
   const requestInit: RequestInit = {
     method: 'GET',
     headers: nextHeader

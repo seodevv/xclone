@@ -21,7 +21,7 @@ const getListsSearch = async ({
   const q = options.q || '';
   const isServer = typeof window === 'undefined';
   const nextHeader = isServer ? await import('next/headers') : undefined;
-  const requestUrl = `${process.env.NEXT_PUBLIC_SERVER_URL}/api/lists?q=${q}&cursor=${pageParam}`;
+  const requestUrl = `${process.env.NEXT_PUBLIC_API_URL}/api/lists?q=${q}&cursor=${pageParam}`;
   const requestOptions: RequestInit = {
     method: 'GET',
     credentials: 'include',

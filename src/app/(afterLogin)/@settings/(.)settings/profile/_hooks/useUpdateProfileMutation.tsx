@@ -49,7 +49,7 @@ const useUpdateProfileMutation = () =>
         formData.append('banner', profile.banner.file);
       }
 
-      const requestUrl = `${process.env.NEXT_PUBLIC_SERVER_URL}/api/users/edit`;
+      const requestUrl = `${process.env.NEXT_PUBLIC_API_URL}/api/users/edit`;
       const requestInit: RequestInit = {
         method: 'POST',
         body: formData,

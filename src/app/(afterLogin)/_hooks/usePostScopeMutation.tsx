@@ -19,7 +19,7 @@ const usePostScopeMutation = () =>
       post,
       scope,
     }: MutationParam): Promise<{ data: AdvancedPost; message: string }> => {
-      const requestUrl = `${process.env.NEXT_PUBLIC_SERVER_URL}/api/posts/${post.postid}/scope`;
+      const requestUrl = `${process.env.NEXT_PUBLIC_API_URL}/api/posts/${post.postid}/scope`;
       const requestOptions: RequestInit = {
         method: 'POST',
         body: JSON.stringify({

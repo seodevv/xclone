@@ -8,6 +8,7 @@
   max-width: 100%;
   flex-shrink: 0;
   transition: 300ms transform ease-in;
+  overflow-y: auto;
 }
 .slideFlex {
   display: flex;
@@ -15,8 +16,6 @@
   flex-grow: 1;
   flex-shrink: 1;
   min-width: 100%;
-  overflow-x: hidden;
-  overflow-y: auto;
 }
 .content {
   margin: auto;

@@ -17,8 +17,8 @@ const getBookmarks = async ({
   const isServer = typeof window === 'undefined';
   const nextHeader = isServer ? await import('next/headers') : undefined;
   const requestUrl = isServer
-    ? `${process.env.NEXT_PUBLIC_SERVER_URL}/api/posts/bookmarks?cursor=${pageParam}`
-    : `${process.env.NEXT_PUBLIC_SERVER_URL}/api/posts/bookmarks?cursor=${pageParam}`;
+    ? `${process.env.NEXT_PUBLIC_API_URL}/api/posts/bookmarks?cursor=${pageParam}`
+    : `${process.env.NEXT_PUBLIC_API_URL}/api/posts/bookmarks?cursor=${pageParam}`;
   const requestOptions: RequestInit = {
     method: 'GET',
     credentials: 'include',

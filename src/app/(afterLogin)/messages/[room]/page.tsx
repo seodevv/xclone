@@ -13,7 +13,7 @@ export async function generateMetadata(
   const session = await getServerSession(authOptions);
   if (!session?.user?.email) return { title: 'XClone' };
 
-  const requestUrl = `${process.env.NEXT_PUBLIC_SERVER_URL}/api/rooms/${roomId}`;
+  const requestUrl = `${process.env.NEXT_PUBLIC_API_URL}/api/rooms/${roomId}`;
   const requestInit: RequestInit = {
     method: 'GET',
     credentials: 'include',

@@ -29,7 +29,7 @@ const useReactionMutation = () =>
         }
       | undefined
     > => {
-      const requestUrl = `${process.env.NEXT_PUBLIC_SERVER_URL}/api/posts/${
+      const requestUrl = `${process.env.NEXT_PUBLIC_API_URL}/api/posts/${
         post.postid
       }/${type.toLowerCase()}`;
       const requestOptions: RequestInit = {

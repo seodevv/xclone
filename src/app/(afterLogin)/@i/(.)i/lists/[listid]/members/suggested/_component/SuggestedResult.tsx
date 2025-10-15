@@ -27,7 +27,7 @@ export default function SuggestedResult({ lists }: Props) {
 
   useEffect(() => {
     if (search && isFetching) {
-      const frame = 1000 / 60;
+      const frame = 120;
       timerRef.current = setInterval(() => {
         setProgress((prev) => {
           const origin = prev.value * timeout;

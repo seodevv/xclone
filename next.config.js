@@ -10,15 +10,13 @@ const nextConfig = {
         protocol: 'https',
         hostname: 'localhost',
       },
-      { protocol: 'https', hostname: '127.0.0.1' },
       {
         protocol: 'https',
-        hostname: 'media.tenor.com',
+        hostname: '127.0.0.1',
       },
       {
         protocol: 'https',
-        hostname: 'loremflickr.com',
-        pathname: '/640/480',
+        hostname: 'media.tenor.com',
       },
       {
         protocol: 'https',
@@ -35,6 +33,10 @@ const nextConfig = {
       {
         protocol: 'https',
         hostname: 'api.xclone.seodevv.com',
+      },
+      {
+        protocol: 'https',
+        hostname: 'api.xclone.com',
       },
     ],
   },

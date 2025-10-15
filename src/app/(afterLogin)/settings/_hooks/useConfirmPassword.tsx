@@ -10,7 +10,7 @@ const useConfirmPassword = () =>
     mutationFn: async ({
       password,
     }: MutationParams): Promise<{ data: AdvancedUser; message: string }> => {
-      const requestUrl = `${process.env.NEXT_PUBLIC_SERVER_URL}/api/confirm`;
+      const requestUrl = `${process.env.NEXT_PUBLIC_API_URL}/api/confirm`;
       const requestOptions: RequestInit = {
         method: 'POST',
         headers: {

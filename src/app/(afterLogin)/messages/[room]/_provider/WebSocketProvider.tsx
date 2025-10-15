@@ -88,11 +88,12 @@ export default function WebSocketProvider({ children, sessionId }: Props) {
       sessionId,
     });
   const [socket] = useState<CustomSocket>(
-    io(`${process.env.NEXT_PUBLIC_SERVER_URL}/messages`, {
+    io(`${process.env.NEXT_PUBLIC_API_URL}/messages`, {
       autoConnect: false,
       auth: {
         sessionId,
       },
+      transports: ['websocket'],
     })
   );
   const [status, setStatus] = useState<Status>(initialContext.status);

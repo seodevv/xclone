@@ -19,7 +19,7 @@ const useRoomNotificationMutation = (sessionid: string) => {
 
   return useMutation({
     mutationFn: async ({ roomid }: MutationParams) => {
-      const requestUrl = `${process.env.NEXT_PUBLIC_SERVER_URL}/api/rooms/${roomid}/seen`;
+      const requestUrl = `${process.env.NEXT_PUBLIC_API_URL}/api/rooms/${roomid}/seen`;
       const requestInit: RequestInit = {
         method: 'POST',
         credentials: 'include',

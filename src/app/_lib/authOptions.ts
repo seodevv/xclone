@@ -20,7 +20,7 @@ const authOptions: NextAuthOptions = {
         formData.append('nickname', user.name);
         formData.append('image', user.image);
         const response = await fetch(
-          `${process.env.NEXT_PUBLIC_SERVER_URL}/api/login/oauth`,
+          `${process.env.NEXT_PUBLIC_API_URL}/api/login/oauth`,
           {
             method: 'post',
             body: formData,
@@ -81,7 +81,7 @@ const authOptions: NextAuthOptions = {
           formData.append('password', password);
         }
 
-        let requestUrl = `${process.env.NEXT_PUBLIC_SERVER_URL}/api/login`;
+        let requestUrl = `${process.env.NEXT_PUBLIC_API_URL}/api/login`;
         if (isToken) {
           requestUrl += '/token';
         }

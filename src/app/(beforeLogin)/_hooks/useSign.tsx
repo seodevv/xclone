@@ -19,7 +19,7 @@ const useSign = () => {
       if (nickname) searchParams.set('nickname', nickname);
 
       const requestUrl = `${
-        process.env.NEXT_PUBLIC_SERVER_URL
+        process.env.NEXT_PUBLIC_API_URL
       }/api/login?${searchParams.toString()}`;
       const requestOption: RequestInit = {
         method: 'GET',
@@ -53,7 +53,7 @@ const useSign = () => {
     async (
       formData: FormData
     ): Promise<{ data: AdvancedUser; message: string }> => {
-      const requestUrl = `${process.env.NEXT_PUBLIC_SERVER_URL}/api/users`;
+      const requestUrl = `${process.env.NEXT_PUBLIC_API_URL}/api/users`;
       const requestOptions: RequestInit = {
         method: 'POST',
         body: formData,

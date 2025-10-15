@@ -23,7 +23,7 @@ const usePostPinnedMutation = () => {
       method,
       postid,
     }: Variables): Promise<{ data: AdvancedPost; message: string }> => {
-      const requestUrl = `${process.env.NEXT_PUBLIC_SERVER_URL}/api/posts/${postid}/pinned`;
+      const requestUrl = `${process.env.NEXT_PUBLIC_API_URL}/api/posts/${postid}/pinned`;
       const requestOptions: RequestInit = {
         method,
         credentials: 'include',

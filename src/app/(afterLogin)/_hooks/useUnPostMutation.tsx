@@ -17,7 +17,7 @@ interface MutationParams {
 const useUnPostMutation = () =>
   useMutation({
     mutationFn: async ({ post }: MutationParams) => {
-      const requestUrl = `${process.env.NEXT_PUBLIC_SERVER_URL}/api/posts/${post.postid}`;
+      const requestUrl = `${process.env.NEXT_PUBLIC_API_URL}/api/posts/${post.postid}`;
       const requestOptions: RequestInit = {
         method: 'DELETE',
         credentials: 'include',

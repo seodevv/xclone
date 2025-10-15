@@ -10,7 +10,7 @@ const getSingleLists = async ({
 }: Params): Promise<{ data: AdvancedLists; message: string }> => {
   const isServer = typeof window === 'undefined';
   const nextHeader = isServer ? await import('next/headers') : undefined;
-  const requestUrl = `${process.env.NEXT_PUBLIC_SERVER_URL}/api/lists/${listid}`;
+  const requestUrl = `${process.env.NEXT_PUBLIC_API_URL}/api/lists/${listid}`;
   const requestOptions: RequestInit = {
     method: 'GET',
     credentials: 'include',

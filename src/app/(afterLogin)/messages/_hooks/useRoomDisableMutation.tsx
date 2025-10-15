@@ -28,7 +28,7 @@ const useRoomDisableMutation = () => {
     mutationFn: async ({
       roomid,
     }: MutationParams): Promise<{ data?: AdvancedRooms; message: string }> => {
-      const requestUrl = `${process.env.NEXT_PUBLIC_SERVER_URL}/api/rooms/${roomid}`;
+      const requestUrl = `${process.env.NEXT_PUBLIC_API_URL}/api/rooms/${roomid}`;
       const requestInit: RequestInit = {
         method: 'DELETE',
         credentials: 'include',

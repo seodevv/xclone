@@ -23,7 +23,7 @@ const useRoomSnoozeMutation = () => {
     mutationFn: async (
       params: PostParams | DeleteParams
     ): Promise<{ data: AdvancedRooms; message: string }> => {
-      const requestUrl = `${process.env.NEXT_PUBLIC_SERVER_URL}/api/rooms/${params.roomid}/snooze`;
+      const requestUrl = `${process.env.NEXT_PUBLIC_API_URL}/api/rooms/${params.roomid}/snooze`;
       const requestInit: RequestInit = {
         method: params.method,
         credentials: 'include',

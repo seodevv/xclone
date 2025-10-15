@@ -28,7 +28,7 @@ export const getUserSearch = async ({
   });
 
   const requestUrl = `${
-    process.env.NEXT_PUBLIC_SERVER_URL
+    process.env.NEXT_PUBLIC_API_URL
   }/api/users/search?${searchParams.toString()}`;
   const requestInit: RequestInit = {
     method: 'GET',
