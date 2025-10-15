@@ -26,6 +26,10 @@ const AccountAction = async (
     credentials: 'include',
   };
 
+  console.log('SERVER_URL', process.env.NEXT_PUBLIC_SERVER_URL);
+  console.log('API_URL', process.env.NEXT_PUBLIC_API_URL);
+  console.log('REQUEST URL', requestUrl);
+
   try {
     const response = await fetch(requestUrl, requestOptions);
 
