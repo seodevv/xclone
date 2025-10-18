@@ -12,6 +12,12 @@ export const metadata: Metadata = {
   icons: {
     icon: '/X.ico',
   },
+  viewport: {
+    width: 'device-width',
+    initialScale: 1.0,
+    maximumScale: 1.0,
+    userScalable: false,
+  },
   openGraph: {
     title: 'XClone.com',
     description:

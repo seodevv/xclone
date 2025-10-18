@@ -2,6 +2,11 @@
   position: relative;
 }
 
+.gifPicker input,
+.gifPicker textarea {
+  font-size: 16px !important;
+}
+
 .gifOutside {
   position: fixed;
   top: 0;

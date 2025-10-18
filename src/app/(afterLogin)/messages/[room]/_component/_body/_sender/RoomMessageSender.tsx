@@ -171,6 +171,9 @@ export default function RoomMessageSender({ roomId }: Props) {
                   utils.outline_none,
                   utils.resize_none
                 )}
+                style={{
+                  fontSize: 16,
+                }}
                 placeholder="Start a new message"
                 minRows={1}
                 maxRows={8}

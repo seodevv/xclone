@@ -1,24 +1,15 @@
 'use client';
 
 import styles from './gifPicker.module.css';
-import {
-  Dispatch,
-  MouseEventHandler,
-  SetStateAction,
-  useEffect,
-  useState,
-} from 'react';
+import { MouseEventHandler, useEffect, useState } from 'react';
 import Gif, { TenorImage, Theme } from 'gif-picker-react';
 import cx from 'classnames';
-import useAlterModal from '@/app/_hooks/useAlterModal';
 import GifSvg from '@/app/_svg/tweet/GifSvg';
-import { MediaType } from '@/app/(afterLogin)/_component/post/form/PostForm';
 
 interface Props {
   className?: string;
   theme?: 'default' | 'white' | 'primary';
   width?: number;
-  // setState?: Dispatch<SetStateAction<MediaType[]>>;
   onSuccess?: (gif: TenorImage) => void;
   disabled?: boolean;
 }
@@ -27,11 +18,9 @@ export default function GifPicker({
   className,
   theme = 'default',
   width = 20,
-  // setState,
   onSuccess,
   disabled,
 }: Props) {
-  const { alterMessage } = useAlterModal();
   const [active, setActive] = useState(false);
   const [fadeOut, setFadeOut] = useState(false);
 
@@ -53,18 +42,7 @@ export default function GifPicker({
     if (typeof onSuccess === 'function') {
       onSuccess(gif);
     }
-    // if (typeof setState === 'function') {
-    //   setState((prev) => {
-    //     if (prev.length === 4) {
-    //       alterMessage('Please choose up to 4 photos, videos, or GIFs.');
-    //       return prev;
-    //     }
-    //     return [
-    //       ...prev,
-    //       { type: 'gif', link: gif.url, width: gif.width, height: gif.height },
-    //     ];
-    //   });
-    // }
+
     setActive(false);
   };
 
