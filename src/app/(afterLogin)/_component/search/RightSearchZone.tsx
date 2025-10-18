@@ -13,20 +13,16 @@ export default function RightSearchZone() {
   return (
     <div
       style={{
-        width: 'inherit',
+        paddingTop: 5,
+        position: 'sticky',
+        top: 0,
+        zIndex: 2,
+        height: 60,
+        background: 'rgba(var(--background-start-rgb), 0.5)',
+        backdropFilter: 'blur(12px)',
       }}
     >
-      <SearchForm style={{ marginTop: '5px', position: 'fixed', zIndex: 2 }} />
-      <div
-        style={{
-          position: 'fixed',
-          zIndex: 1,
-          width: 'inherit',
-          height: 60,
-          background: 'rgba(var(--background-start-rgb), 0.5)',
-          backdropFilter: 'blur(12px)',
-        }}
-      ></div>
+      <SearchForm />
     </div>
   );
 }

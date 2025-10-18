@@ -3,11 +3,15 @@
 import styles from '../_style/tab.module.css';
 import utils from '@/app/utility.module.css';
 import cx from 'classnames';
-import { useContext } from 'react';
+import { useContext, useEffect } from 'react';
 import { HomeTabContext } from './HomeTabProvider';
+import XLogoSvg from '@/app/_svg/logo/XLogoSvg';
+import useMobileHeader from '@/app/_hooks/useMobileHeader';
+import ProfileNav from '@/app/_component/_mobile/ProfileNav';
 
 export default function HomeTab() {
   const { tab, setTab } = useContext(HomeTabContext);
+  const { dir, transitClass } = useMobileHeader();
 
   const onClickRec = () => {
     setTab('rec');
@@ -17,9 +21,21 @@ export default function HomeTab() {
   };
 
   return (
-    <div className={styles.homeSticky}>
+    <div
+      className={cx(
+        styles.homeSticky,
+        transitClass,
+        dir === 'down' && styles.hide
+      )}
+    >
       <div className={styles.homeTitle}>
-        <span>Home</span>
+        <div className={styles.side}>
+          <ProfileNav />
+        </div>
+        <div className={styles.logo}>
+          <XLogoSvg width={25} theme="theme" />
+        </div>
+        <div className={styles.side}></div>
       </div>
       <div className={styles.homeTab}>
         <div onClick={onClickRec}>

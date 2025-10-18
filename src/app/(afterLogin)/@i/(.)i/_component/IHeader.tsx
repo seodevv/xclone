@@ -5,8 +5,6 @@ import cx from 'classnames';
 import CloseButton from '@/app/(afterLogin)/_component/buttons/CloseButton';
 import BackButton from '@/app/(afterLogin)/_component/buttons/BackButton';
 import useHistoryStore from '@/app/(afterLogin)/_store/HistoryStore';
-import Text from '@/app/_component/_text/Text';
-import AddHistoryStack from '@/app/(afterLogin)/@i/(.)i/_component/AddHistoryStack';
 
 interface Props {
   type?: 'auto' | 'back';

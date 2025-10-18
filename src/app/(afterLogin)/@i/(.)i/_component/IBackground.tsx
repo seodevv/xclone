@@ -23,6 +23,7 @@ interface Props {
   onClick?: () => void;
   noHidden?: boolean;
   xmark?: boolean;
+  confirm?: boolean;
 }
 
 export default function IBackground({
@@ -38,6 +39,7 @@ export default function IBackground({
   onClick,
   noHidden,
   xmark,
+  confirm,
 }: Props) {
   const router = useRouter();
   const searchParams = useSearchParams();
@@ -139,7 +141,8 @@ export default function IBackground({
           styles[size],
           styles[`height-${height}`],
           styles[`maxHeight_${maxHeight}`],
-          overflow === 'auto' && styles.auto
+          overflow === 'auto' && styles.auto,
+          confirm && styles.confirm
         )}
       >
         {children}

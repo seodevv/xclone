@@ -45,3 +45,9 @@
     margin: 32px 19px;
   }
 }
+
+@media screen and (max-width: 500px), screen and (max-height: 500px) {
+  .noPost {
+    margin-bottom: 250px;
+  }
+}

@@ -1,4 +1,4 @@
-import { captialCase } from '@/app/_lib/common';
+import { capitalCase } from '@/app/_lib/common';
 import styles from './i.toggle.module.css';
 import cx from 'classnames';
 import { MouseEventHandler } from 'react';
@@ -31,7 +31,7 @@ export default function IToggleSelector({
     >
       <div className={styles.option}>
         <label className={cx(styles.label, active && styles.bold)}>
-          <span>{captialCase(text)}</span>
+          <span>{capitalCase(text)}</span>
         </label>
         {best && (
           <div className={styles.best}>

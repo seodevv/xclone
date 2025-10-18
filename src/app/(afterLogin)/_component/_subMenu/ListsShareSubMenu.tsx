@@ -70,7 +70,7 @@ export default function ListsShareSubMenu() {
     <SubMenuWrapper position="left">
       <SubMenu
         type="div"
-        svg={<TweetSvg width={18.75} white />}
+        svg={<TweetSvg width={18.75} theme="white" />}
         title="Post this"
         onClick={onClickPostList}
       />

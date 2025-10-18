@@ -21,7 +21,7 @@ export default function UserSince({ session, user }: Props) {
       {user.refer && (
         <UserAdditional
           type="link"
-          href={user.refer}
+          href={/^http/.test(user.refer) ? user.refer : '//' + user.refer}
           icon="refer"
           text={user.refer}
         />

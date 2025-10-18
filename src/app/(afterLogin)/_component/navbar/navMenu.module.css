@@ -76,9 +76,6 @@
   line-height: 12px;
   word-wrap: break-word;
 }
-/* .bookmarks {
-  display: ;
-} */
 
 @media all and (max-width: 1300px) {
   .tweet {
@@ -103,19 +100,31 @@
 }
 
 @media all and (max-height: 764px) {
+  .navList {
+    padding: 3px 0;
+  }
   .bookmarks {
     display: none;
   }
 }
 
-@media all and (max-height: 724px) {
+@media all and (max-height: 704px) {
   .premium {
     display: none;
   }
 }
 
-@media all and (max-height: 684px) {
+@media all and (max-height: 644px) {
+  .navList {
+    padding: 2px 0;
+  }
   .lists {
+    display: none;
+  }
+}
+
+@media all and (max-height: 584px) {
+  .business {
     display: none;
   }
 }

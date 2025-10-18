@@ -10,9 +10,3 @@
   align-items: center;
   background: rgba(var(--background-modal-rgb), 0.4);
 }
-
-@media screen and (max-width: 705px) {
-  .background {
-    background: rgb(var(--background-start-rgb));
-  }
-}

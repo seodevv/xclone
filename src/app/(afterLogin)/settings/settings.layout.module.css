@@ -19,7 +19,7 @@
 .right {
   width: 100%;
   max-width: 600px;
-  overflow: hidden;
+  /* overflow: hidden; */
 }
 .w_0 {
   width: 0;

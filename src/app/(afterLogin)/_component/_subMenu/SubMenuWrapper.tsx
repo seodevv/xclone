@@ -25,6 +25,7 @@ interface Props {
     | 'top-left'
     | 'top-center'
     | 'top-right'
+    | 'middle-right'
     | 'bottom-left'
     | 'bottom-center'
     | 'bottom-right';
@@ -62,6 +63,7 @@ export default function SubMenuWrapper({
 
     case 'right':
     case 'top-right':
+    case 'middle-right':
     case 'bottom-right':
       minusX = 0;
       break;
@@ -73,6 +75,9 @@ export default function SubMenuWrapper({
     case 'top-center':
     case 'top-right':
       minusY = client.height;
+      break;
+    case 'middle-right':
+      minusY = client.height - height;
       break;
     case 'bottom-left':
     case 'bottom-center':
@@ -88,30 +93,44 @@ export default function SubMenuWrapper({
   };
 
   useLayoutEffect(() => {
-    if (menuRef.current) {
-      const { clientWidth, clientHeight } = menuRef.current;
-      setClient({ width: clientWidth, height: clientHeight });
-    }
-  }, [setClient]);
-
-  useLayoutEffect(() => {
     if (target && client.height !== 0) {
       const { x, y, width, height } = target.getBoundingClientRect();
-      const overHeight = (viewHeight || 0) < y + client.height;
-      setOver((prev) => ({ ...prev, y: overHeight ? true : false }));
+      // const overHeight = (viewHeight || 0) < y + client.height;
+      // const overTop = y < client.height;
+      console.log(
+        `[${y}]`,
+        `[${height}]`,
+        `[${viewHeight}]`,
+        `[${client.height}]`,
+        `[${minusY}]`,
+        // overHeight,
+        // overTop,
+        position
+      );
+      // setOver((prev) => ({ ...prev, y: overTop || overHeight ? true : false }));
       dispatchMenu({
         type: 'setPosition',
         payload: {
           x,
-          y: overHeight
-            ? y + window.scrollY - client.height + width
-            : y + window.scrollY,
+          y: y + window.scrollY,
+          // y: overTop
+          //   ? position.startsWith('top')
+          //     ? client.height
+          //     : 0
+          //   : overHeight
+          //   ? y + window.scrollY - client.height + width
+          //   : y + window.scrollY,
           width,
           height,
         },
       });
     }
-  }, [viewWidth, viewHeight, dispatchMenu, target, client.height]);
+
+    if (menuRef.current) {
+      const { clientWidth, clientHeight } = menuRef.current;
+      setClient({ width: clientWidth, height: clientHeight });
+    }
+  }, [viewWidth, viewHeight, dispatchMenu, target, client.height, setClient]);
 
   return (
     <div className={cx(styles.background)}>

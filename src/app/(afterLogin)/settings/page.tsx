@@ -15,6 +15,4 @@ export default function SettingsPage() {
   }, [width, router]);
 
   return null;
-
-  // redirect('/settings/account');
 }

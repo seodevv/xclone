@@ -12,26 +12,39 @@ import useViewport from '@/app/(afterLogin)/_hooks/useViewport';
 export default function PremiumFooter() {
   const { alterMessage } = useAlterModal();
   const { state, dispatch } = useContext(PremiumSignUpContext);
-  const { width } = useViewport();
+  const { width, height } = useViewport();
   const prevWidth = useRef(0);
+  const prevHeight = useRef(0);
 
   const onClickOutSide: MouseEventHandler<HTMLDivElement> = (e) => {
-    if (width !== null && width > 704) return;
+    if (width !== null && width > 704 && height !== null && height > 500)
+      return;
     if (e.currentTarget === e.target) {
       dispatch({ type: 'setFooter', payload: false });
     }
   };
 
   useLayoutEffect(() => {
-    if (prevWidth.current <= 704 && width !== null && width > 704) {
+    if (width === null) return;
+    if (height === null) return;
+
+    if (prevWidth.current <= 704 && width > 704 && height > 500) {
       dispatch({ type: 'setFooter', payload: true });
-    } else if (prevWidth.current > 704 && width !== null && width <= 704) {
+    } else if (prevWidth.current > 704 && width <= 704 && height > 500) {
       dispatch({ type: 'setFooter', payload: false });
     }
+
+    if (prevHeight.current > 500 && height <= 500 && width > 500) {
+      dispatch({ type: 'setFooter', payload: false });
+    } else if (prevHeight.current <= 500 && height > 500 && width > 500) {
+      dispatch({ type: 'setFooter', payload: true });
+    }
+
     return () => {
       if (width !== null) prevWidth.current = width;
+      if (height !== null) prevHeight.current = height;
     };
-  }, [width]);
+  }, [width, height]);
 
   return (
     <>

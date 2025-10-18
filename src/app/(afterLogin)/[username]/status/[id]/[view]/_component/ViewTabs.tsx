@@ -3,7 +3,7 @@
 import utils from '@/app/utility.module.css';
 import cx from 'classnames';
 import TabLink from '@/app/(afterLogin)/_component/tab/TabLink';
-import { captialCase } from '@/app/_lib/common';
+import { capitalCase } from '@/app/_lib/common';
 import { useSelectedLayoutSegments } from 'next/navigation';
 import { Session } from 'next-auth';
 
@@ -24,7 +24,7 @@ export default function ViewTabs({ session, username }: Props) {
         <TabLink
           key={tab.link}
           href={tab.link}
-          text={tab.text ? captialCase(tab.text) : captialCase(tab.link)}
+          text={tab.text ? capitalCase(tab.text) : capitalCase(tab.link)}
           active={segment === tab.link}
         />
       ))}

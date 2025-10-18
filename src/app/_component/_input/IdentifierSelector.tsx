@@ -1,5 +1,5 @@
 import stylse from './selector.module.css';
-import { captialCase } from '@/app/_lib/common';
+import { capitalCase } from '@/app/_lib/common';
 import {
   ChangeEventHandler,
   forwardRef,
@@ -60,7 +60,7 @@ const IdentifierSelector = forwardRef<IdentifierRef, Props>(
     return (
       <div className={stylse.selector}>
         <label className={stylse.label}>
-          <Text text={captialCase(placeholder)} size="xs" theme="gray" />
+          <Text text={capitalCase(placeholder)} size="xs" theme="gray" />
         </label>
         <select
           ref={selectRef}

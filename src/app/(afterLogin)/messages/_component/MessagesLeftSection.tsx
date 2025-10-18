@@ -17,12 +17,8 @@ export default function MessagesLeftSection({ sessionid }: Props) {
   return (
     <section
       className={cx(
-        utils.relative,
-        utils.flex_1,
-        utils.w_100p,
-        utils.bd_r_1_solid_gray,
-        utils.of_hide,
         styles.left,
+        utils.relative,
         segment !== null && styles.visible
       )}
     >

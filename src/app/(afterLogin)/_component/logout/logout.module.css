@@ -1,6 +1,7 @@
 .container {
   margin: 12px 0;
-  padding: 12px;
+  padding-bottom: 12px;
+  /* padding: 12px; */
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -36,7 +37,7 @@
 }
 @media all and (max-width: 1300px) {
   .logOutButton {
-    width: 42px;
+    width: 45px;
   }
   .logOutUserName {
     display: none;
@@ -45,4 +46,10 @@
 .logOutButton:hover:enabled {
   opacity: 0.75;
   border-radius: 33px;
+}
+
+@media all and (max-height: 464px) {
+  .container {
+    margin: 0;
+  }
 }

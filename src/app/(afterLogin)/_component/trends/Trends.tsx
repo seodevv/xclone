@@ -35,6 +35,7 @@ export default function Trends({ showTitle = true, showMore = true }: Props) {
             Show more
           </Link>
         )}
+        <div style={{ paddingBottom: 100, order: 9999 }}></div>
       </>
     );
   }

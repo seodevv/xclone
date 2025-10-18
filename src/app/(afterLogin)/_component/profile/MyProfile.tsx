@@ -10,17 +10,28 @@ import { useSession } from 'next-auth/react';
 interface Props {
   width?: number;
   height?: number;
+  onClick?: () => void;
 }
 
-export default function MyProfile({ width = 45, height = 45 }: Props) {
+export default function MyProfile({ width = 45, height = 45, onClick }: Props) {
   const { data: session } = useSession();
+
+  const onClickImage = () => {
+    if (typeof onClick === 'function') {
+      onClick();
+    }
+  };
 
   if (!session || !session.user?.image) {
     return null;
   }
 
   return (
-    <div className={cx(utils.br_9999, utils.of_hide)}>
+    <div
+      className={cx(utils.br_9999, utils.of_hide)}
+      onClick={onClickImage}
+      style={{ width, height }}
+    >
       <Image
         className={styles.profile}
         src={generateImagePath(session.user.image)}

@@ -59,9 +59,14 @@ export default function PostSubMenuOther({ post, width = 18.75 }: Props) {
           console.error(error);
           alterMessage('Follow failed. please try again', 'error');
         },
+        onSuccess: () => {
+          alterMessage(`you ${isFollow ? 'un' : ''}followed @${post.userid}`);
+        },
+        onSettled: () => {
+          close();
+        },
       }
     );
-    close();
   };
 
   const setPostId = useListsStore((state) => state.setPostId);

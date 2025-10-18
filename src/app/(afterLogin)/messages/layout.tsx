@@ -5,6 +5,12 @@ import authOptions from '@/app/_lib/authOptions';
 import WebSocketProvider from '@/app/(afterLogin)/messages/[room]/_provider/WebSocketProvider';
 import MessagesLeftSection from '@/app/(afterLogin)/messages/_component/MessagesLeftSection';
 import MessagesScrollProvider from '@/app/(afterLogin)/messages/[room]/_provider/MessagesScrollProvider';
+import { Metadata } from 'next';
+import MessagesRightSectionWrapper from '@/app/(afterLogin)/messages/_component/MessagesRightSectionWrapper';
+
+export const metadata: Metadata = {
+  title: 'Messages / XClone',
+};
 
 interface Props {
   children: React.ReactNode;
@@ -21,7 +27,9 @@ export default async function MessagesLayout({ children }: Props) {
         <WebSocketProvider sessionId={session.user.email}>
           <main className={styles.main}>
             <MessagesLeftSection sessionid={session.user.email} />
-            <section className={styles.right}>{children}</section>
+            <MessagesRightSectionWrapper>
+              {children}
+            </MessagesRightSectionWrapper>
           </main>
         </WebSocketProvider>
       </MessagesScrollProvider>

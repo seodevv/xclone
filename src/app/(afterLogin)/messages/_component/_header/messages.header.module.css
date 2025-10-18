@@ -1,4 +1,5 @@
 .header {
+  padding-left: 1px;
   position: sticky;
   top: 0;
   z-index: 2;

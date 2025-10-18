@@ -2,7 +2,7 @@
 
 import TabLink from '@/app/(afterLogin)/_component/tab/TabLink';
 import useListsStore from '@/app/(afterLogin)/_store/ListsStore';
-import { captialCase } from '@/app/_lib/common';
+import { capitalCase } from '@/app/_lib/common';
 import { usePathname } from 'next/navigation';
 
 interface Props {
@@ -25,7 +25,7 @@ export default function ListsMembersTab({ listid }: Props) {
       {tabs.map((tab) => (
         <TabLink
           key={tab.id}
-          text={captialCase(tab.id)}
+          text={capitalCase(tab.id)}
           href={tab.link}
           active={pathname === tab.link}
         />

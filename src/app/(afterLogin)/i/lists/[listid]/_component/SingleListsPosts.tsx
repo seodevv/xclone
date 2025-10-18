@@ -25,8 +25,7 @@ export default function SingleListsPosts({ listid }: Props) {
       return (
         <NoPost
           title="Waiting for posts"
-          message="Posts from people in this List will show up here.
-"
+          message="Posts from people in this List will show up here."
         />
       );
     }

@@ -1,28 +1,25 @@
 'use client';
 
-import BackButton from '@/app/(afterLogin)/_component/buttons/BackButton';
 import styles from './i.bookmarks.header.module.css';
-import utils from '@/app/utility.module.css';
-// import OptionButton from '@/app/(afterLogin)/_component/buttons/OptionButton';
 import cx from 'classnames';
+import BackButton from '@/app/(afterLogin)/_component/buttons/BackButton';
+import utils from '@/app/utility.module.css';
 import { Session } from 'next-auth';
-// import useAlterModal from '@/app/_hooks/useAlterModal';
+import useMobileHeader from '@/app/_hooks/useMobileHeader';
 
 interface Props {
   session: Session | null;
 }
 
 export default function BookmarkHeader({ session }: Props) {
-  // const { sendPrepareMessage } = useAlterModal();
-
-  // const onClickOption = () => {
-  //   sendPrepareMessage();
-  // };
+  const { dir, transitClass } = useMobileHeader();
 
   if (!session) return null;
 
   return (
-    <section className={styles.header}>
+    <section
+      className={cx(styles.header, transitClass, dir === 'down' && styles.hide)}
+    >
       <div className={styles.inner}>
         <BackButton />
         <div className={styles.content}>
@@ -41,17 +38,6 @@ export default function BookmarkHeader({ session }: Props) {
             <span>@{session.user?.email}</span>
           </div>
         </div>
-        {/* <div
-          className={cx(
-            utils.d_flexColumn,
-            utils.flex_alignEnd,
-            utils.flex_justiCenter,
-            utils.w_min_56,
-            utils.h_min_32
-          )}
-        >
-          <OptionButton onClick={onClickOption} theme="theme" />
-        </div> */}
       </div>
     </section>
   );

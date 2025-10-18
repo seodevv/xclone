@@ -21,9 +21,5 @@ export function generateMetadata({ searchParams: { q } }: Props): Metadata {
 export default async function SearchPage({ searchParams }: Props) {
   if (!searchParams.q) redirect('/explore');
 
-  return (
-    // <SearchHydrationBoundary searchParams={searchParams}>
-    <SearchBody searchParams={searchParams} />
-    // </SearchHydrationBoundary>
-  );
+  return <SearchBody searchParams={searchParams} />;
 }

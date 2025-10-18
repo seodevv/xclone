@@ -1,6 +1,6 @@
 import styles from './beforeLogin.selector.module.css';
 import {
-  captialCase,
+  capitalCase,
   getDaysArray,
   getMonthsArray,
   getYearsArray,
@@ -56,7 +56,7 @@ const DateSelector = forwardRef<BirthRef, Props>(
     return (
       <div className={cx(styles.date, styles[type])}>
         <label className={styles.label}>
-          <span>{captialCase(type)}</span>
+          <span>{capitalCase(type)}</span>
         </label>
         <select
           ref={selectRef}

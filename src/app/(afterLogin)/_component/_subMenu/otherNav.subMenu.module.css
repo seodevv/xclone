@@ -7,6 +7,9 @@
 .bookmarks {
   display: none;
 }
+.business {
+  display: none;
+}
 
 @media all and (max-height: 764px) {
   .bookmarks {
@@ -14,14 +17,20 @@
   }
 }
 
-@media all and (max-height: 724px) {
+@media all and (max-height: 704px) {
   .premium {
     display: flex;
   }
 }
 
-@media all and (max-height: 684px) {
+@media all and (max-height: 644px) {
   .lists {
+    display: flex;
+  }
+}
+
+@media all and (max-height: 584px) {
+  .business {
     display: flex;
   }
 }

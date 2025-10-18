@@ -1,5 +1,6 @@
 'use client';
 
+import utils from '@/app/utility.module.css';
 import { useContext } from 'react';
 import { HomeTabContext } from './HomeTabProvider';
 import Post from '@/app/(afterLogin)/_component/post/Post';

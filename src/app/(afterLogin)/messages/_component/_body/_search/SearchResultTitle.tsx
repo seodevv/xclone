@@ -1,6 +1,6 @@
 import { MessageSearchTab } from '@/app/(afterLogin)/messages/_component/_body/_search/MessagesSearchBody';
 import Text from '@/app/_component/_text/Text';
-import { captialCase } from '@/app/_lib/common';
+import { capitalCase } from '@/app/_lib/common';
 import MessageSvg from '@/app/_svg/navbar/MessageSvg';
 import ProfileSvg from '@/app/_svg/navbar/ProfileSvg';
 import utils from '@/app/utility.module.css';
@@ -29,7 +29,7 @@ export default function SearchResultTitle({
         <MessageSvg className={svgClass} width={18.75} theme="theme" active />
       )}
       <Text size="xl" bold="bold">
-        {captialCase(type)}
+        {capitalCase(type)}
       </Text>
     </div>
   );

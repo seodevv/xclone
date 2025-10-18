@@ -10,7 +10,7 @@
 .flex_column {
   display: flex;
   flex-direction: column;
-  flex-grow: 1;
+  flex: 2 1;
 }
 
 @media screen and (max-width: 672px) {
@@ -19,19 +19,18 @@
   }
 }
 
-/* RightSectionController */
-.rightSection {
-  margin-right: 70px;
-  display: flex;
-  flex-flow: column nowrap;
-  width: 350px;
-  height: 100%;
+@media screen and (max-width: 720px) {
+  .main {
+    max-width: 100%;
+  }
 }
 
-@media all and (max-width: 1110px) {
-  .rightSection {
-    width: 290px;
-  }
+/* RightSectionController */
+.rightSection {
+  margin-right: 25px;
+  display: flex;
+  flex-flow: column nowrap;
+  flex: 1 2;
 }
 
 @media all and (max-width: 1020px) {

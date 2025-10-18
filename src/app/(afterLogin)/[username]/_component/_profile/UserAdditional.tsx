@@ -24,7 +24,11 @@ interface PropsB extends DefaultProps {
 export default function UserAdditional(props: PropsA | PropsB) {
   if (props.type === 'link') {
     return (
-      <Link className={cx(styles.additional, styles.link)} href={props.href}>
+      <Link
+        className={cx(styles.additional, styles.link)}
+        href={props.href}
+        target="_blank"
+      >
         <div className={styles.svg}>
           <SvgSelector icon={props.icon} />
         </div>

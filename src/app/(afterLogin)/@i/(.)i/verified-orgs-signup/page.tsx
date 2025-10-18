@@ -13,10 +13,12 @@ export default function IVerifiedOrgSignUpSlot() {
       <IBackground overflow="auto">
         <AddHistoryStack />
         <IHeader title="Verified Organizations" />
-        <div className={styles.body}>
-          <AccessSelector />
-          <VerifiedOrgRecipe />
-          <VerifiedOrgPayment />
+        <div className={styles.container}>
+          <div className={styles.body}>
+            <AccessSelector />
+            <VerifiedOrgRecipe />
+            <VerifiedOrgPayment />
+          </div>
         </div>
       </IBackground>
     </VerifiedOrgProvider>

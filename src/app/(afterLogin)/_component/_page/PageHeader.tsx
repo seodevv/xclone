@@ -1,6 +1,10 @@
+'use client';
+
 import styles from './pageHeader.module.css';
+import cx from 'classnames';
 import Text from '@/app/_component/_text/Text';
 import BackButton from '@/app/(afterLogin)/_component/buttons/BackButton';
+import useMobileHeader from '@/app/_hooks/useMobileHeader';
 
 interface Props {
   title?: string;
@@ -19,9 +23,11 @@ export default function PageHeader({
   prevPath = '/home',
   children,
 }: Props) {
+  const { dir, transitClass } = useMobileHeader();
+
   return (
     <div
-      className={styles.header}
+      className={cx(styles.header, transitClass, dir === 'down' && styles.hide)}
       style={{
         height,
       }}

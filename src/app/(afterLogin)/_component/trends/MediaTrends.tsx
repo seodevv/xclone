@@ -40,6 +40,8 @@ export default function MediaTrends() {
     }));
   };
   const onClickNext: MouseEventHandler<HTMLButtonElement> = (e) => {
+    console.log('onCLick', medias, position);
+
     e.stopPropagation();
     if (typeof medias === 'undefined') return;
     if (position.leftOver <= 0) return;
@@ -73,11 +75,7 @@ export default function MediaTrends() {
               onClick={onClickPrev}
             />
           )}
-          <div
-            className={styles.inner}
-            style={{ transform: `translateX(${-position.index}px)` }}
-            ref={innerRef}
-          >
+          <div className={styles.inner} ref={innerRef}>
             {medias.pages.map((page) =>
               page.data.map((p) => {
                 const link = p.images[0].link;
@@ -87,6 +85,7 @@ export default function MediaTrends() {
                     key={p.postid}
                     className={styles.media}
                     onClick={() => onClickMedia(p)}
+                    style={{ transform: `translateX(${-position.index}px)` }}
                   >
                     <Image
                       className={cx(styles.image, styles.absolute)}

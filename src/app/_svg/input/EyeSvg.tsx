@@ -1,25 +1,26 @@
 import styles from '../_style/svg.module.css';
 import { CSSProperties } from 'react';
 import cx from 'classnames';
+import { SvgTheme } from '@/app/_svg/Svg';
 
 interface Props {
   className?: string;
   style?: CSSProperties;
   width?: number;
-  white?: boolean;
   active?: boolean;
+  theme?: SvgTheme;
 }
 
 export default function EyeSvg({
   className,
   style,
   width = 22,
-  white,
   active,
+  theme = 'default',
 }: Props) {
   return (
     <svg
-      className={cx(styles.defaultSvg, white && styles.white, className)}
+      className={cx(styles[theme], className)}
       style={style}
       width={width}
       viewBox="0 0 24 24"

@@ -1,7 +1,7 @@
 'use client';
 
 import TabLink from '@/app/(afterLogin)/_component/tab/TabLink';
-import { captialCase } from '@/app/_lib/common';
+import { capitalCase } from '@/app/_lib/common';
 import utils from '@/app/utility.module.css';
 import cx from 'classnames';
 import { useSelectedLayoutSegment } from 'next/navigation';
@@ -16,7 +16,7 @@ export default function SettingsBlockedTabs() {
         <TabLink
           key={tab.link}
           href={`/settings/blocked/${tab.link}`}
-          text={captialCase(tab.link)}
+          text={capitalCase(tab.link)}
           active={segment === tab.link}
         />
       ))}

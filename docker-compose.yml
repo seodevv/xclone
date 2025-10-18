@@ -4,6 +4,7 @@ services:
   xclone:
     build: .
     image: xclone:1.0.1
+    container_name: web_xclone
     env_file:
       - .env
     expose:

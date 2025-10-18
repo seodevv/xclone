@@ -5,7 +5,7 @@ import CheckSvg from '@/app/_svg/input/CheckSvg';
 import ProfileSvg from '@/app/_svg/navbar/ProfileSvg';
 import ProfileWithCheckSvg from '@/app/_svg/post/ProfileWithCheckSvg';
 import VerifiedSvg from '@/app/_svg/post/VerifiedSvg';
-import { captialCase } from '@/app/_lib/common';
+import { capitalCase } from '@/app/_lib/common';
 import { useContext } from 'react';
 import { SubMenuContext } from '@/app/(afterLogin)/_provider/SubMenuProvider';
 import usePostScopeMutation from '@/app/(afterLogin)/_hooks/usePostScopeMutation';
@@ -83,7 +83,7 @@ export default function WhoCanReply({ post }: Props) {
   };
 
   return (
-    <SubMenuWrapper>
+    <SubMenuWrapper position="left">
       <div className={styles.whoCanReply}>
         <div className={styles.description}>
           <div className={styles.title}>
@@ -105,7 +105,7 @@ export default function WhoCanReply({ post }: Props) {
             >
               <div className={styles.icon}>{option.svg}</div>
               <div className={styles.scope}>
-                <span>{captialCase(option.text)}</span>
+                <span>{capitalCase(option.text)}</span>
               </div>
               {(typeof post?.scope === 'undefined'
                 ? option.active === 'every'

@@ -1,13 +1,19 @@
 import { HashTags } from '@/model/Hashtag';
 
-export const getTrends = async (): Promise<{
+interface Params {
+  pageParam: number;
+}
+
+export const getTrends = async ({
+  pageParam,
+}: Params): Promise<{
   data: HashTags[];
   nextCursor?: number;
   message: string;
 }> => {
   const isServer = typeof window === 'undefined';
   const nextHeaders = isServer ? await import('next/headers') : undefined;
-  const requestUrl = `${process.env.NEXT_PUBLIC_API_URL}/api/hashtags/trends`;
+  const requestUrl = `${process.env.NEXT_PUBLIC_API_URL}/api/hashtags/trends?cursor=${pageParam}`;
   const requestOptions: RequestInit = {
     method: 'GET',
     credentials: 'include',

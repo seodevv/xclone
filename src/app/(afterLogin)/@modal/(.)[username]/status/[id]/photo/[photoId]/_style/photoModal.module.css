@@ -76,6 +76,7 @@
   position: absolute;
   top: 50%;
   left: 12px;
+  background-color: rgba(255, 255, 255, 0.1);
   transform: translateY(-50%);
 }
 
@@ -109,7 +110,7 @@
     display: none;
   }
   .postFold {
-    display: none;
+    display: none !important;
   }
   .reaction {
     padding: 0 28px;

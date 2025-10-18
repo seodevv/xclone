@@ -11,6 +11,7 @@ interface Props {
   sub?: string;
   onClick?: () => void;
   nav?: boolean;
+  inActive?: boolean;
 }
 interface A extends Props {
   type: 'link';
@@ -29,6 +30,10 @@ export default function SubMenu(props: A | B) {
       props.onClick();
     }
   };
+
+  if (props.inActive) {
+    return null;
+  }
 
   if (props.type === 'link') {
     return (

@@ -1,4 +1,4 @@
-import { useInfiniteQuery, useQuery } from '@tanstack/react-query';
+import { useInfiniteQuery } from '@tanstack/react-query';
 import { getTrends } from '../_lib/getTrends';
 
 export const useTrendsQuery = () =>

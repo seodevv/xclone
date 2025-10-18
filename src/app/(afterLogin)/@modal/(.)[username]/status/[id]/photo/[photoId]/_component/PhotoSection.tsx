@@ -62,6 +62,7 @@ export default function PhotoSection({ params }: Props) {
           width={20}
           position="absolute"
           theme="theme"
+          bg
         />
         {hasPrev && (
           <PrevButton

@@ -18,7 +18,7 @@ export default function PrevButton({
 }: Props) {
   return (
     <button
-      className={cx(styles.btn, className)}
+      className={cx(styles.btn, styles.bg, className)}
       style={style}
       onClick={onClick}
     >

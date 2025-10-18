@@ -2,14 +2,15 @@ import styles from './beforeLogin.button.module.css';
 import { CSSProperties, MouseEventHandler } from 'react';
 import cx from 'classnames';
 import EyeSvg from '@/app/_svg/input/EyeSvg';
+import { SvgTheme } from '@/app/_svg/Svg';
 
 interface Props {
   className?: string;
   style?: CSSProperties;
   onClick?: MouseEventHandler<HTMLButtonElement>;
   width?: number;
-  white?: boolean;
   active?: boolean;
+  theme?: SvgTheme;
 }
 
 export default function PasswordButton({
@@ -17,8 +18,8 @@ export default function PasswordButton({
   style,
   onClick,
   width,
-  white,
   active,
+  theme,
 }: Props) {
   return (
     <button
@@ -27,7 +28,7 @@ export default function PasswordButton({
       type="button"
       onClick={onClick}
     >
-      <EyeSvg width={width} white={white} active={active} />
+      <EyeSvg width={width} active={active} theme={theme} />
     </button>
   );
 }

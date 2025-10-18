@@ -1,7 +1,7 @@
 'use client';
 
 import TabLink from '@/app/(afterLogin)/_component/tab/TabLink';
-import { captialCase } from '@/app/_lib/common';
+import { capitalCase } from '@/app/_lib/common';
 import utils from '@/app/utility.module.css';
 import cx from 'classnames';
 import { useSelectedLayoutSegment } from 'next/navigation';
@@ -25,7 +25,7 @@ export default function UserTopicsTabs({ username }: Props) {
           <TabLink
             key={tab.link}
             href={`/${username}/topics/${tab.link}`}
-            text={tab.text ? captialCase(tab.text) : captialCase(tab.link)}
+            text={tab.text ? capitalCase(tab.text) : capitalCase(tab.link)}
             active={tab.link === 'followed' ? active || !segment : active}
           />
         );

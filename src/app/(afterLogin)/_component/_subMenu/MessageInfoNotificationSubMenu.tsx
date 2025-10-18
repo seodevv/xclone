@@ -15,7 +15,7 @@ export default function MessageInfoNotificationSubMenu({ callback }: Props) {
   };
 
   return (
-    <SubMenuWrapper>
+    <SubMenuWrapper position="left">
       <SubMenu type="div" title="1 hour" onClick={() => onClickSubMenu('1h')} />
       <SubMenu
         type="div"

@@ -1,0 +1,8 @@
+.transit {
+  transition-property: transform;
+  transition-duration: 170ms;
+  transition-timing-function: linear;
+}
+.transform {
+  transform: translateY(-53px);
+}

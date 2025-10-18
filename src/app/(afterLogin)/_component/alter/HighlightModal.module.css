@@ -1,5 +1,5 @@
 .container {
-  padding-bottom: 48px;
+  padding-bottom: 53px;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -73,5 +73,11 @@
 @media (prefers-color-scheme: dark) {
   .alter {
     background-color: rgb(2, 17, 61);
+  }
+}
+
+@media screen and (max-height: 500px) {
+  .container {
+    padding-top: 53px;
   }
 }

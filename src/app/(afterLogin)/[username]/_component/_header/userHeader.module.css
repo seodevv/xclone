@@ -12,6 +12,12 @@
   border: 1px solid transparent;
   backdrop-filter: blur(12px);
   box-sizing: border-box;
+  transition-property: transform;
+  transition-duration: 170ms;
+  transition-timing-function: linear;
+}
+.hide {
+  transform: translateY(-53px);
 }
 
 /* UserHeaderTitle */

@@ -3,7 +3,7 @@
 import { CSSProperties, MouseEventHandler } from 'react';
 import styles from './tab.module.css';
 import cx from 'classnames';
-import { captialCase } from '@/app/_lib/common';
+import { capitalCase } from '@/app/_lib/common';
 
 interface Props {
   className?: string;
@@ -27,7 +27,7 @@ export default function TabButton({
       onClick={onClick}
     >
       <div className={cx(styles.navigation, active && styles.active)}>
-        <div className={styles.text}>{captialCase(text)}</div>
+        <div className={styles.text}>{capitalCase(text)}</div>
         <div className={styles.underline}></div>
       </div>
     </button>

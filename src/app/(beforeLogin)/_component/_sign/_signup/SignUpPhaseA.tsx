@@ -8,6 +8,7 @@ import AlreadyAccount from '@/app/(beforeLogin)/_component/_sign/_signup/Already
 import BirthSelector from '@/app/(beforeLogin)/_component/_sign/BirthSelector';
 import useSignUp from '@/app/(beforeLogin)/_hooks/useSignUp';
 import IdentifierInput from '@/app/_component/_input/IdentifierInput';
+import { useEffect } from 'react';
 
 export default function SignUpPhaseA() {
   const {
@@ -19,6 +20,12 @@ export default function SignUpPhaseA() {
     set,
     nextPage,
   } = useSignUp();
+
+  useEffect(() => {
+    setTimeout(() => {
+      id.ref?.current?.focus();
+    }, 100);
+  }, []);
 
   return (
     <div

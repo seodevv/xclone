@@ -38,7 +38,12 @@ export default function ConfirmModal({
   };
 
   return (
-    <IBackground size="small" onClick={onClickBackground} noHidden={noHidden}>
+    <IBackground
+      size="small"
+      onClick={onClickBackground}
+      noHidden={noHidden}
+      confirm
+    >
       {x && (
         <div className={styles.xLogo}>
           <XLogoSvg theme="theme" width={40} />

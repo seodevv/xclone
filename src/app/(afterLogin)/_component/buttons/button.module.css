@@ -8,7 +8,6 @@
   border: none;
   border-radius: 50%;
   background-color: transparent;
-  /* background-color: rgba(var(--background-start-rgb), 0.1); */
   border: 1px solid transparent;
   font-size: 15px;
   font-weight: 700;
@@ -24,6 +23,9 @@
 }
 .btn:disabled {
   opacity: 0.5;
+}
+.bg {
+  background-color: rgba(var(--background-start-rgb), 0.2);
 }
 .relative {
   position: relative;

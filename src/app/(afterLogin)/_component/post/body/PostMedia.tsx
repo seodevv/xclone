@@ -23,7 +23,6 @@ export default function PostMedia({ post, row = 3, gap = 2 }: Props) {
   return (
     <Link
       href={`/${post.User.id}/status/${post.postid}/photo/${first.imageId}`}
-      className={styles.postMedia}
       style={{ width: `calc(${100 / row}% - ${gap}px)` }}
       onMouseOver={() => {
         setHover(true);
@@ -33,17 +32,23 @@ export default function PostMedia({ post, row = 3, gap = 2 }: Props) {
       }}
       scroll={false}
     >
-      <Image
-        src={generateImagePath(first.link)}
-        alt={first.imageId.toString()}
-        width={first.width}
-        height={first.height}
-        unoptimized={first.link.endsWith('.gif')}
-      />
-      {post.images.length > 1 && (
-        <MultySvg className={styles.postMediaMulty} white />
-      )}
-      {hover && <div className={styles.postMediaHover}></div>}
+      <div className={styles.relative}>
+        <div className={styles.pad}></div>
+        <div className={styles.absolute}>
+          <Image
+            className={styles.media}
+            src={generateImagePath(first.link)}
+            alt={first.imageId.toString()}
+            width={first.width}
+            height={first.height}
+            unoptimized={first.link.endsWith('.gif')}
+          />
+        </div>
+        {hover && <div className={styles.postMediaHover}></div>}
+        {post.images.length > 1 && (
+          <MultySvg className={styles.postMediaMulty} white />
+        )}
+      </div>
     </Link>
   );
 }

@@ -1,6 +1,19 @@
 .main {
   width: 100%;
+  min-height: 100dvh;
   display: flex;
   flex-direction: column;
   align-items: stretch;
+}
+
+@media screen and (max-width: 500px) {
+  .main {
+    margin-bottom: 53px;
+  }
+}
+
+@media screen and (max-height: 500px) {
+  .main {
+    margin-bottom: 53px;
+  }
 }

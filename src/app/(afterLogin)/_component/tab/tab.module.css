@@ -28,7 +28,7 @@
   color: rgb(var(--link-rgb));
 }
 .underline {
-  min-width: 56px;
+  /* min-width: 56px; */
   min-height: 4px;
   background: rgb(var(--primary-button-rgb));
   visibility: hidden;

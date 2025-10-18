@@ -11,6 +11,9 @@
   backdrop-filter: blur(12px);
   box-sizing: border-box;
 }
+.header.hide {
+  transform: translateY(-53px);
+}
 .title {
   display: flex;
   flex-flow: column nowrap;

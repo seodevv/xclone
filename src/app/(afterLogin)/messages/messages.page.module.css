@@ -4,6 +4,9 @@
   align-items: center;
   justify-content: center;
   flex-grow: 1;
+  border-right-style: solid;
+  border-right-width: 1px;
+  border-color: rgb(var(--border-start-rgb));
 }
 
 @media screen and (max-width: 1024px) {

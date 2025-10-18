@@ -19,6 +19,7 @@ interface Props {
   noBack?: boolean;
   position?: 'relative' | 'absolute';
   theme?: SvgTheme;
+  bg?: boolean;
   onClick?: () => void;
 }
 
@@ -32,6 +33,7 @@ export default function CloseButton({
   noBack,
   position = 'relative',
   theme,
+  bg,
   onClick,
 }: Props) {
   const router = useRouter();
@@ -62,6 +64,7 @@ export default function CloseButton({
         isSearch && styles.searchBtn,
         isVisible && styles.visible,
         styles[position],
+        bg && styles.bg,
         className
       )}
       style={style}

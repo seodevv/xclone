@@ -60,7 +60,7 @@ export default function ListsShowSubMenu({ lists }: Props) {
 
   return (
     <SubMenuWrapper position="left">
-      <div style={{ width: 384 }}>
+      <div style={{ width: 325 }}>
         <SubMenu
           type="div"
           title={title}

@@ -9,9 +9,10 @@ import { MouseEventHandler } from 'react';
 
 interface Props {
   user?: AdvancedUser;
+  afterLink?: () => void;
 }
 
-export default function UserFollowInfo({ user }: Props) {
+export default function UserFollowInfo({ user, afterLink }: Props) {
   const router = useRouter();
   const { data: session } = useSession();
 
@@ -19,6 +20,10 @@ export default function UserFollowInfo({ user }: Props) {
     if (!session) {
       e.preventDefault();
       router.push('/i/flow/login');
+    }
+
+    if (typeof afterLink === 'function') {
+      afterLink();
     }
   };
 

@@ -244,7 +244,7 @@ const IdentifierInput = forwardRef<IdentifierInputRef, Props>(
                 />
                 {type === 'password' && !passwordHide && (
                   <PasswordButton
-                    white
+                    theme="theme"
                     onClick={onClickPasswordEye}
                     active={!passwordShow}
                   />

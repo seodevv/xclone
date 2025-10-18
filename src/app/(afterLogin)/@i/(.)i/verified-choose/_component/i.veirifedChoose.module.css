@@ -34,19 +34,18 @@
   border: 2px solid transparent;
   border-radius: 12px;
   outline: none;
-  box-shadow: rgba(255, 255, 255, 0.2) 0px 0px 15px,
-    rgba(255, 255, 255, 0.15) 0px 0px 3px 1px;
+  background-color: rgb(var(--search-rgb));
   transition: 200ms background-color ease-in;
   cursor: pointer;
   overflow: hidden;
 }
 .radio:hover {
-  background: rgb(22, 24, 28);
+  background-color: rgba(var(--primary-rgb), 0.1);
 }
 .radio:active {
-  background: rgba(18, 21, 23, 0.7);
-  transition: none;
+  background-color: rgba(var(--primary-rgb), 0.2);
 }
+
 .radio:last-child {
   margin-right: 0;
 }
@@ -96,4 +95,10 @@
 }
 .link:hover {
   text-decoration: underline;
+}
+
+@media screen and (max-height: 500px) {
+  .verifiedChoose {
+    margin-top: 53px;
+  }
 }

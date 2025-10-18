@@ -1,23 +1,24 @@
 import styles from '../_style/svg.module.css';
 import { CSSProperties } from 'react';
 import cx from 'classnames';
+import { SvgTheme } from '@/app/_svg/Svg';
 
 interface Props {
   className?: string;
   style?: CSSProperties;
   width?: number;
-  white?: boolean;
+  theme?: SvgTheme;
 }
 
 export default function PostSvg({
   className,
   style,
   width = 18.75,
-  white,
+  theme = 'default',
 }: Props) {
   return (
     <svg
-      className={cx(styles.defaultSvg, white && styles.white, className)}
+      className={cx(styles[theme], className)}
       style={style}
       width={width}
       viewBox="0 0 24 24"

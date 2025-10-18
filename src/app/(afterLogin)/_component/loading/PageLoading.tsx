@@ -12,6 +12,7 @@ import {
 import ObserveElement from '../observer/ObserveElement';
 import LoadingSpinner from './LoadingSpinner';
 import DisConnection from '../error/DisConnection';
+import PostBlank from '@/app/(afterLogin)/_component/post/PostBlank';
 
 interface PreviousProps<TData> {
   type: 'previous';
@@ -89,6 +90,7 @@ export default function PageLoading<TData>(
       {isPrev && props.isFetchingPreviousPage && (
         <LoadingSpinner className={styles.pageLoadingSpinner} />
       )}
+      {isNext && <PostBlank hasNextPage={isNext && props.hasNextPage} />}
     </>
   );
 }

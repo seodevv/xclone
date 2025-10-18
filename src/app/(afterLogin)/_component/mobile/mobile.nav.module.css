@@ -1,0 +1,63 @@
+.slide {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  display: flex;
+  flex-direction: column;
+  flex: 1 1;
+  width: 280px;
+  background-color: rgb(var(--background-start-rgb));
+  box-shadow: rgba(101, 119, 134, 0.2) 0px 0px 8px,
+    rgba(101, 119, 134, 0.25) 0px 1px 3px 1px;
+  transition-property: transform;
+  transition-duration: 250ms;
+  transition-timing-function: ease;
+  animation-name: slide-in;
+  animation-duration: 250ms;
+  animation-timing-function: ease-out;
+  animation-iteration-count: 1;
+  overflow-y: auto;
+}
+
+@media (prefers-color-scheme: dark) {
+  .slide {
+    box-shadow: rgba(217, 217, 217, 0.2) 0px 0px 5px,
+      rgba(217, 217, 217, 0.25) 0px 1px 4px 1px;
+  }
+}
+
+.scroll {
+  padding-bottom: 45px;
+  display: flex;
+  flex-direction: column;
+  flex: 1 1;
+}
+
+.profile {
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+}
+
+.menu {
+  padding: 16px;
+  display: flex;
+  align-items: center;
+  width: 100%;
+  cursor: pointer;
+}
+
+.menu > svg {
+  margin-right: 24px;
+}
+
+@keyframes slide-in {
+  from {
+    transform: translateX(-100%);
+  }
+
+  to {
+    transform: translateX(0);
+  }
+}

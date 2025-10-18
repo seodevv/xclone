@@ -4,7 +4,7 @@ import styles from './i.premiumSignUp.subscribe.module.css';
 import cx from 'classnames';
 import { useContext } from 'react';
 import { PremiumSignUpContext } from '@/app/(afterLogin)/@i/(.)i/premium_sign_up/_provider/PremiumSignUpProvider';
-import { captialCase } from '@/app/_lib/common';
+import { capitalCase } from '@/app/_lib/common';
 import useViewport from '@/app/(afterLogin)/_hooks/useViewport';
 import FlexButton from '@/app/(beforeLogin)/_component/_button/FlexButton';
 import CheckSvg from '@/app/_svg/input/CheckSvg';
@@ -95,7 +95,7 @@ export default function SubsribeSelector() {
                 </div>
               </div>
               <div className={styles.title}>
-                <span>{captialCase(scribe.subscribe)}</span>
+                <span>{capitalCase(scribe.subscribe)}</span>
               </div>
               <div className={styles.type}>
                 <div className={styles.recipe}>
@@ -132,7 +132,7 @@ export default function SubsribeSelector() {
                   {i !== 0 && (
                     <div className={cx(styles.item, styles.addOn)}>
                       <span>
-                        Everything in {captialCase(subscribes[i - 1].subscribe)}
+                        Everything in {capitalCase(subscribes[i - 1].subscribe)}
                         , and
                       </span>
                     </div>

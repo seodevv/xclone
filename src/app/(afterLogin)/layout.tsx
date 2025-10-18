@@ -3,7 +3,6 @@ import { ReactNode } from 'react';
 import { getServerSession } from 'next-auth';
 import ReactQueryProvider from './_provider/ReactQueryProvider';
 import NextAuthProvider from '@/app/(afterLogin)/_provider/NextAuthProvider';
-import NavMenu from '@/app/(afterLogin)/_component/navbar/NavMenu';
 import XLogo from './_component/XLogo';
 import FollowRecommendsSection from './_component/follow_recommends/FollowRecommendsSection';
 import RightSearchZone from '@/app/(afterLogin)/_component/search/RightSearchZone';
@@ -21,6 +20,10 @@ import MainSectionController from '@/app/(afterLogin)/_component/_layout/MainSec
 import RoomsNotificationsBoundary from '@/app/(afterLogin)/_boundary/RoomsNotificationsBoundary';
 import MyProfileHydrationBoundary from '@/app/(afterLogin)/_boundary/MyProfileHydrationBoundary';
 import NewConfirmModal from '@/app/(afterLogin)/_component/alter/NewConfirmModal';
+import LayoutFooter from '@/app/(afterLogin)/_component/_footer/LayoutFooter';
+import NavMenuContainer from '@/app/(afterLogin)/_component/navbar/NavMenuContainer';
+import MobileNav from '@/app/(afterLogin)/_component/mobile/MobileNav';
+import SingleUserHydrationBoundary from '@/app/(afterLogin)/@settings/(.)settings/profile/_boundaray/SingleUserHydrationBoundary';
 
 interface Props {
   children: ReactNode;
@@ -44,15 +47,13 @@ export default async function AfterLoginLayout({
             <MyProfileHydrationBoundary>
               <div className={style.container}>
                 <header className={style.leftSectionWrapper}>
-                  <section className={style.leftSection}>
-                    <div className={style.leftSectionFixed}>
-                      <XLogo session={session} />
-                      <RoomsNotificationsBoundary>
-                        <NavMenu session={session} />
-                      </RoomsNotificationsBoundary>
-                      <Logout />
-                    </div>
-                  </section>
+                  <div className={style.leftSectionInner}>
+                    <XLogo session={session} />
+                    <RoomsNotificationsBoundary>
+                      <NavMenuContainer session={session} />
+                    </RoomsNotificationsBoundary>
+                    <Logout />
+                  </div>
                 </header>
                 <div className={style.rightSectionWrapper}>
                   <div className={style.rightSectionInner}>
@@ -75,7 +76,15 @@ export default async function AfterLoginLayout({
                 {settings}
                 {i}
                 <PopUpModal />
+                {session?.user?.email && (
+                  <SingleUserHydrationBoundary username={session.user.email}>
+                    <MobileNav sessionid={session.user.email} />
+                  </SingleUserHydrationBoundary>
+                )}
               </div>
+              <RoomsNotificationsBoundary>
+                <LayoutFooter session={session} />
+              </RoomsNotificationsBoundary>
               <NewConfirmModal />
             </MyProfileHydrationBoundary>
           </SubMenuProvider>

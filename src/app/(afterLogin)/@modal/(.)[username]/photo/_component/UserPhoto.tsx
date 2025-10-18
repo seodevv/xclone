@@ -24,7 +24,7 @@ export default function UserPhoto({ mode, username }: Props) {
     return (
       <div className={styles.container}>
         <div className={cx(styles.content, mode === 'banner' && styles.banner)}>
-          <div className={cx(styles.absolute, styles.pad)}></div>
+          <div className={styles.pad}></div>
           <div className={styles.absolute}>
             <Image
               className={styles.image}

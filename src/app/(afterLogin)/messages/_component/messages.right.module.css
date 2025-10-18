@@ -1,0 +1,24 @@
+.right {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  max-width: 600px;
+  overflow: hidden;
+  border-right: 1px solid rgb(var(--border-start-rgb));
+}
+
+@media screen and (max-width: 720px) {
+  .right {
+    max-width: 100%;
+  }
+}
+
+@media screen and (max-width: 1024px) and (max-height: 500px) {
+  .right {
+    justify-content: center;
+  }
+  .messages {
+    display: none;
+  }
+}

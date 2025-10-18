@@ -1,6 +1,6 @@
 /* UserFollowNoContent */
 .noContent {
-  margin: 32px 99px;
+  margin: 32px auto;
   padding: 0 32px;
   width: 400px;
 }
@@ -19,4 +19,22 @@
   line-height: 20px;
   word-break: keep-all;
   word-wrap: break-word;
+}
+
+@media screen and (max-width: 700px) {
+  .title {
+    font-size: 28px;
+    line-height: 33px;
+  }
+}
+
+@media screen and (max-width: 500px) {
+  .noContent {
+    padding: 0 25px;
+    width: 100%;
+  }
+  .title {
+    font-size: 25px;
+    line-height: 30px;
+  }
 }
