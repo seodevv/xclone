@@ -87,6 +87,7 @@ export default function GifPicker({
         <div
           className={cx(styles.gifOutside, fadeOut && styles.fadeOut)}
           onClick={onClickClose}
+          onTouchStart={(e) => e.stopPropagation()}
         >
           <div className={styles.gifContainer}>
             <Gif

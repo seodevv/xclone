@@ -48,12 +48,12 @@ export default function PostBody({
             href={`/${post.User.id}`}
             onClick={(e) => e.stopPropagation()}
           >
-            <span>
+            <span className={styles.nick}>
               {post.User.nickname}
               <BadgeButton verified={post.User.verified} unClickable />
             </span>
-            <span>@{post.User.id}</span>
-            <span>·</span>
+            <span className={styles.id}>@{post.User.id}</span>
+            <span className={styles.dot}>·</span>
           </Link>
           <PostDate mode={mode} date={post.createat} />
         </div>

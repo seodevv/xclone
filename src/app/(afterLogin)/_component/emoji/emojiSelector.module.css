@@ -77,3 +77,9 @@
     filter: blur(15px);
   }
 }
+
+@media (hover: none) and (pointer: coarse) {
+  .emojiPicker {
+    display: none;
+  }
+}

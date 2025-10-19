@@ -1,10 +1,11 @@
-/* PostBody */
 .postBody {
   display: flex;
   flex-direction: column;
   width: 100%;
+  overflow: hidden;
 }
 .postMeta {
+  margin-right: 34px;
   margin-bottom: 2px;
   display: flex;
   flex-direction: row;
@@ -14,18 +15,34 @@
   display: flex;
   align-items: center;
   color: rgb(var(--link-rgb));
+  min-width: 0;
 }
-.postUserInfo > span {
+.nick {
   margin-right: 5px;
-}
-.postUserInfo > span:first-child {
-  display: flex;
-  align-items: center;
+  flex-shrink: 1;
+  min-width: 0;
   color: rgb(var(--foreground-rgb));
   font-weight: bold;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
 }
-.postUserInfo > span:hover {
+.nick:hover {
   text-decoration: underline;
+}
+.id {
+  flex-shrink: 2;
+  min-width: 0;
+  font-weight: bold;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+}
+.dot {
+  margin-right: 4px;
+  margin-left: 4px;
+  flex-shrink: 0;
+  min-width: 0;
 }
 .postDateView {
   margin: 16px 0;
@@ -86,7 +103,11 @@
 
 /* PostDate */
 .postDate {
+  display: flex;
+  flex-shrink: 0;
+  min-width: 0;
   color: rgb(var(--link-rgb));
+  white-space: nowrap;
   cursor: pointer;
 }
 .postDate.isCompose:hover {

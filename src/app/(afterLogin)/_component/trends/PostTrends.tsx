@@ -3,6 +3,7 @@
 import styles from './postTrends.module.css';
 import DisConnection from '@/app/(afterLogin)/_component/error/DisConnection';
 import LoadingSpinner from '@/app/(afterLogin)/_component/loading/LoadingSpinner';
+import PageLoading from '@/app/(afterLogin)/_component/loading/PageLoading';
 import Post from '@/app/(afterLogin)/_component/post/Post';
 import { usePostTrendsQuery } from '@/app/(afterLogin)/_hooks/usePostTrendsQuery';
 import Text from '@/app/_component/_text/Text';
@@ -10,8 +11,11 @@ import Text from '@/app/_component/_text/Text';
 export default function PostTrends() {
   const {
     data: posts,
+    hasNextPage,
+    isFetchingNextPage,
     isLoading,
     isError,
+    fetchNextPage,
     refetch,
   } = usePostTrendsQuery('all');
 
@@ -22,6 +26,14 @@ export default function PostTrends() {
           {posts.pages.map((page) =>
             page.data.map((p) => <Post key={p.postid} post={p} />)
           )}
+          <PageLoading
+            type="next"
+            hasNextPage={hasNextPage}
+            isFetchingNextPage={isFetchingNextPage}
+            isError={isError}
+            fetchNextPage={fetchNextPage}
+            refetch={refetch}
+          />
         </div>
       </PostTrendsWrapper>
     );

@@ -27,6 +27,7 @@ export default function MessageReactionInfoSubMenu({
     <SubMenuWrapper
       className={cx(utils.ptb_12, utils.w_min_320, utils.h_max_35vh)}
       position="bottom-center"
+      noCancle
     >
       {message.React.map((r) => (
         <ReactionInfo

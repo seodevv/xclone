@@ -13,7 +13,9 @@ export default async function ExplorePage() {
     <main className={styles.main}>
       <ExploreHeader />
       <TrendsHydrationBoundary>
-        <Trends showTitle={false} />
+        <div className={styles.blank}>
+          <Trends showTitle={false} />
+        </div>
       </TrendsHydrationBoundary>
     </main>
   );

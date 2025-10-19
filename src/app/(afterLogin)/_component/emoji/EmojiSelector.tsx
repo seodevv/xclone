@@ -73,7 +73,7 @@ const EmojiSelector = ({
     setActive((prev) => ({
       flag: !prev.flag,
       position: isTop ? 'top' : 'bottom',
-      x: _x,
+      x: width <= 500 ? 0 : _x,
       y: _y,
     }));
   };

@@ -135,6 +135,7 @@ html {
 html,
 body {
   max-width: 100dvw;
+  overscroll-behavior: none;
   /* overflow-x: hidden; */
   scrollbar-color: rgb(var(--scroll-thumb)) rgb(var(--scroll-background));
 }
@@ -154,6 +155,7 @@ textarea {
   background: rgb(var(--background-start-rgb));
   color: rgb(var(--foreground-rgb));
   font-family: sans-serif;
+  font-size: 16px;
 }
 
 /* @media (prefers-color-scheme: dark) {

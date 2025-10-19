@@ -13,6 +13,7 @@ import {
   useState,
 } from 'react';
 import useViewport from '@/app/(afterLogin)/_hooks/useViewport';
+import FlexButton from '@/app/(beforeLogin)/_component/_button/FlexButton';
 
 interface Props {
   className?: string;
@@ -30,6 +31,7 @@ interface Props {
     | 'bottom-center'
     | 'bottom-right';
   nav?: boolean;
+  noCancle?: boolean;
   children?: React.ReactNode;
 }
 
@@ -39,6 +41,7 @@ export default function SubMenuWrapper({
   direction = 'column',
   position = 'center',
   nav,
+  noCancle,
   children,
 }: Props) {
   const { width: viewWidth, height: viewHeight } = useViewport();
@@ -97,16 +100,6 @@ export default function SubMenuWrapper({
       const { x, y, width, height } = target.getBoundingClientRect();
       // const overHeight = (viewHeight || 0) < y + client.height;
       // const overTop = y < client.height;
-      console.log(
-        `[${y}]`,
-        `[${height}]`,
-        `[${viewHeight}]`,
-        `[${client.height}]`,
-        `[${minusY}]`,
-        // overHeight,
-        // overTop,
-        position
-      );
       // setOver((prev) => ({ ...prev, y: overTop || overHeight ? true : false }));
       dispatchMenu({
         type: 'setPosition',
@@ -135,7 +128,7 @@ export default function SubMenuWrapper({
   return (
     <div className={cx(styles.background)}>
       <div
-        className={cx(utils.fixed, utils.t_r_b_l_0)}
+        className={cx(utils.fixed, utils.t_r_b_l_0, styles.bg)}
         onClick={onClickOutSide}
       ></div>
       <div className={utils.relative}>
@@ -161,6 +154,15 @@ export default function SubMenuWrapper({
               style={style}
             >
               {children}
+              {noCancle && (
+                <div className={styles.cancle}>
+                  <FlexButton
+                    text="Cancle"
+                    theme="reverse"
+                    onClick={() => close()}
+                  />
+                </div>
+              )}
             </div>
           </div>
         </div>

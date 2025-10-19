@@ -10,7 +10,10 @@ export default function useMobileHeader() {
   const [scrollDir, setScrollDir] = useState<'up' | 'down' | null>(null);
 
   useEffect(() => {
-    if ((width && width < 500) || (height && height < 500)) {
+    if (width === null) return;
+    if (height === null) return;
+
+    if (width < 500 || height < 500) {
       return scrollHeaderHandler(setScrollDir);
     }
   }, [width, height, scrollHeaderHandler, setScrollDir]);

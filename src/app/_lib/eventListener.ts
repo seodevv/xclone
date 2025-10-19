@@ -5,7 +5,9 @@ export const scrollHeaderHandler = (set: (value: 'up' | 'down') => void) => {
 
   let lastScrollY = 0;
   const listener = () => {
-    if (lastScrollY < window.scrollY) {
+    if (window.scrollY === 0) {
+      set('up');
+    } else if (lastScrollY < window.scrollY) {
       set('down');
     } else {
       set('up');

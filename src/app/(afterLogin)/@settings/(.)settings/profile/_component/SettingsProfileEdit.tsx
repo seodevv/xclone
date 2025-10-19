@@ -227,7 +227,7 @@ export default function SettingsProfileEdit({
           <IdentifierInput
             placeholder="Name"
             defaultValue={profile.nickname ? profile.nickname : user.nickname}
-            validate={{ allowBlank: true, maxLength: 50 }}
+            validate={{ allowBlank: true, maxLength: 24 }}
             onSuccess={(value) => {
               setProfile((prev) => ({ ...prev, nickname: value }));
               errorHandler('nickname', false);
