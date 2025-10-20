@@ -5,10 +5,14 @@
   bottom: 0;
   z-index: 9999;
   transform: translateX(-50%);
+  transition-property: opacity;
+  transition-duration: 170ms;
+  transition-timing-function: cubic-bezier(0, 0, 1, 1);
   animation-name: fade-in;
   animation-duration: 300ms;
   animation-timing-function: ease-in;
   animation-iteration-count: 1;
+  --fade-opacity: 1;
 }
 
 .modalContent {
@@ -22,6 +26,11 @@
 .modalContent span {
   padding: 0 12px;
   display: block;
+}
+
+.opacity {
+  opacity: 0.3;
+  --fade-opacity: 0.3;
 }
 
 .fadeOut {
@@ -60,7 +69,7 @@
   }
   to {
     visibility: visible;
-    opacity: 1;
+    opacity: var(--fade-opacity, 1);
     filter: unset;
   }
 }
@@ -68,7 +77,7 @@
 @keyframes fade-out {
   from {
     visibility: visible;
-    opacity: 1;
+    opacity: var(--fade-opacity, 1);
   }
   to {
     visibility: hidden;

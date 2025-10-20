@@ -1,16 +1,19 @@
-version: '3.8'
-
 services:
   xclone:
     build: .
-    image: xclone:1.0.1
+    image: xclone:1.0.2
     container_name: web_xclone
+    environment:
+      - NODE_ENV=production
+      - NEXT_PUBLIC_API_URL=https://localhost
+      - NEXTAUTH_URL=https://localhost:8443
+      - DOMAIN_NAME=localhost
     env_file:
       - .env
     expose:
       - '3000'
-    extra_hosts:
-      - 'api.xclone.com:172.30.0.1'
+    # extra_hosts:
+    #   - 'api.xclone.com:172.30.0.1'
 
   web_nginx:
     image: nginx:alpine

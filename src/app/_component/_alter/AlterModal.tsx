@@ -6,9 +6,11 @@ import cx from 'classnames';
 import useAlterStore, {
   AlterState,
 } from '@/app/(afterLogin)/_store/AlterStore';
+import useMobileHeader from '@/app/_hooks/useMobileHeader';
 
 export default function AlterModal() {
   const { show, type, message, duration, resetModal } = useAlterStore();
+  const { dir } = useMobileHeader();
   const [fadeOut, setFadeOut] = useState(false);
   const background: { [key in AlterState['type']]: string } = {
     notice: '#1D9BF0',
@@ -23,8 +25,8 @@ export default function AlterModal() {
   };
 
   useEffect(() => {
-    let a: ReturnType<typeof setTimeout>;
-    let b: ReturnType<typeof setTimeout>;
+    let a: NodeJS.Timeout;
+    let b: NodeJS.Timeout;
 
     if (show) {
       a = setTimeout(() => {
@@ -44,7 +46,13 @@ export default function AlterModal() {
   if (!show) return null;
 
   return (
-    <div className={cx(styles.modalGround, fadeOut && styles.fadeOut)}>
+    <div
+      className={cx(
+        styles.modalGround,
+        fadeOut && styles.fadeOut,
+        dir === 'down' && styles.opacity
+      )}
+    >
       <div
         className={styles.modalContent}
         style={{
