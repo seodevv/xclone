@@ -30,6 +30,8 @@ export default function UserTabs({ session, username }: Props) {
   ];
   const likeTab = { text: 'Likes', segment: 'likes' };
 
+  console.log(username, user?.data.id);
+
   if (
     segment === 'status' ||
     segment === 'lists' ||

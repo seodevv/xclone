@@ -43,9 +43,10 @@ export default function SignUpPhaseA() {
           defaultValue={id.value}
           validate={{
             minLength: 3,
-            maxLength: 50,
+            maxLength: 24,
             required: true,
-            message: 'What’s your name?',
+            message: 'Only lowercase letters, numbers can be used.',
+            regex: /^[a-z][a-z0-9._]{3,19}$/,
           }}
           onSuccess={(value) => {
             set({ type: 'id', payload: { value, disabled: false } });

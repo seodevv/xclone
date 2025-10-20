@@ -46,6 +46,12 @@
   }
 }
 
+@media screen and (max-width: 500px) {
+  .modalGround {
+    margin-bottom: 50px;
+  }
+}
+
 @keyframes fade-in {
   from {
     visibility: hidden;

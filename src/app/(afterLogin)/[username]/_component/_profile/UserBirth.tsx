@@ -11,6 +11,10 @@ interface Props {
 export default function UserBirth({ sessionid, user }: Props) {
   if (!user.birth) return;
 
+  console.log('user birth', user.birth, new Date(user.birth.date));
+  console.log('user follower', user.Followers);
+  console.log('user following', user.Followings);
+
   const date = new Date(user.birth.date);
   const scope = user.birth.scope;
   const isOwn = sessionid === user.id;
