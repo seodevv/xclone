@@ -5,7 +5,7 @@ import utils from '@/app/utility.module.css';
 import IBackground from '@/app/(afterLogin)/@i/(.)i/_component/IBackground';
 import { useUserQuery } from '@/app/(afterLogin)/[username]/_hooks/useUserQuery';
 import MyProfile from '@/app/(afterLogin)/_component/profile/MyProfile';
-import useMobileNavStore from '@/app/(afterLogin)/_store/MbileNavStore';
+import useMobileNavStore from '@/app/(afterLogin)/_store/MobileNavStore';
 import Link from 'next/link';
 import Text from '@/app/_component/_text/Text';
 import UserFollowInfo from '@/app/(afterLogin)/[username]/_component/_profile/UserFollowInfo';

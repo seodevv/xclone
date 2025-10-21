@@ -4,15 +4,15 @@ import Link from 'next/link';
 import styles from './footer.buttons.module.css';
 import AddMessageSvg from '@/app/_svg/_settings/AddMessageSvg';
 import Text from '@/app/_component/_text/Text';
-import { usePathname } from 'next/navigation';
 import TweetSvg from '@/app/_svg/navbar/TweetSvg';
+import useFooterButtonStore from '@/app/(afterLogin)/_store/FooterButtonStore';
+import CommentSvg from '@/app/_svg/actionbuttons/CommentSvg';
 
 export default function FooterButtons() {
-  const pathname = usePathname();
+  const store = useFooterButtonStore();
   let button = <></>;
-  switch (pathname) {
-    case '/home':
-    case '/explore':
+  switch (store.type) {
+    case 'post':
       button = (
         <Link className={styles.link} href={`/compose/post`}>
           <TweetSvg theme="white" width={24} />
@@ -24,7 +24,19 @@ export default function FooterButtons() {
         </Link>
       );
       break;
-    case '/messages':
+    case 'comment':
+      button = (
+        <Link className={styles.link} href={`/compose/post`}>
+          <CommentSvg theme="white" width={24} />
+          <div className={styles.title}>
+            <Text theme="white" size="l" bold="bold">
+              Comment
+            </Text>
+          </div>
+        </Link>
+      );
+      break;
+    case 'dm':
       button = (
         <Link className={styles.link} href={`/messages/compose`}>
           <AddMessageSvg theme="white" width={24} />
@@ -37,6 +49,8 @@ export default function FooterButtons() {
       );
       break;
   }
+
+  if (!store.flag) return;
 
   return (
     <div className={styles.container}>

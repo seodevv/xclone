@@ -3,14 +3,12 @@ import { AdvancedPost } from '@/model/Post';
 import { AdvancedUser } from '@/model/User';
 import {
   InfiniteData,
-  QueryClient,
   QueryKey,
   useMutation,
+  useQueryClient,
 } from '@tanstack/react-query';
 
-interface ViewMutationParams {
-  queryClient: QueryClient;
-}
+interface ViewMutationParams {}
 
 const useViewMutation = ({
   userid,
@@ -18,9 +16,11 @@ const useViewMutation = ({
 }: {
   userid: AdvancedUser['id'];
   postid: AdvancedPost['postid'];
-}) =>
-  useMutation({
-    mutationFn: async ({}: ViewMutationParams) => {
+}) => {
+  const queryClient = useQueryClient();
+
+  return useMutation({
+    mutationFn: async () => {
       if (postid < 1) {
         throw new Error(ERROR_STATUS.badRequest);
       }
@@ -42,7 +42,7 @@ const useViewMutation = ({
 
       return responseErrorHandler(response);
     },
-    onMutate: ({ queryClient }) => {
+    onMutate: ({}) => {
       const queryKeys = queryClient
         .getQueryCache()
         .getAll()
@@ -127,7 +127,7 @@ const useViewMutation = ({
 
       return context;
     },
-    onError: (error, { queryClient }, context) => {
+    onError: (error, {}, context) => {
       console.error(error);
       if (context) {
         context.forEach(({ queryKey, queryData }) => {
@@ -136,6 +136,7 @@ const useViewMutation = ({
       }
     },
   });
+};
 
 export default useViewMutation;
 

@@ -19,29 +19,39 @@ interface Props {
 }
 
 export default function HighlightModal({ post, sessionid }: Props) {
-  const { dispatchMenu, close } = useContext(SubMenuContext);
+  const { close } = useContext(SubMenuContext);
   const [alter, setAlter] = useState(false);
-  const pinMutation = usePostPinnedMutation();
   const { alterMessage } = useAlterModal();
 
   const onClickHighlight = () => {
     setAlter(true);
   };
-  const onClickPin = () => {
-    pinMutation.mutate({
-      method: 'post',
-      postid: post.postid,
-      sessionid,
-    });
 
-    alterMessage('Your post was pinned to your profile.');
-    close();
+  const pinMutation = usePostPinnedMutation();
+  const onClickPin = () => {
+    pinMutation.mutate(
+      {
+        method: 'post',
+        postid: post.postid,
+        sessionid,
+      },
+      {
+        onSuccess: () => {
+          alterMessage('Your post was pinned to your profile.');
+        },
+        onError: (error) => {
+          console.error(error);
+          alterMessage('Failed to pin post.\nPlease try again', 'error');
+        },
+        onSettled: () => {
+          close();
+        },
+      }
+    );
   };
+
   const onClickClose = () => {
-    dispatchMenu({
-      type: 'set',
-      payload: { status: { type: 'post', post, sessionid } },
-    });
+    close();
   };
 
   return (

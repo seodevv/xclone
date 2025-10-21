@@ -4,6 +4,7 @@ import SinglePost from './_component/SinglePost';
 import SinglePostHydrationBoundary from './_component/SinglePostHydrationBoundary';
 import { Metadata } from 'next';
 import { AdvancedPost } from '@/model/Post';
+import FooterController from '@/app/(afterLogin)/_component/_footer/FooterController';
 
 interface Props {
   params: { username: string; id: string };
@@ -46,6 +47,7 @@ export default async function SinglePostPage({ params }: Props) {
   return (
     <SinglePostHydrationBoundary params={params}>
       <SinglePost session={session} params={params} />
+      <FooterController type="comment" />
     </SinglePostHydrationBoundary>
   );
 }

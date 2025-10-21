@@ -154,7 +154,7 @@ export default function SubMenuWrapper({
               style={style}
             >
               {children}
-              {noCancle && (
+              {!noCancle && (
                 <div className={styles.cancle}>
                   <FlexButton
                     text="Cancle"

@@ -9,7 +9,6 @@ import { capitalCase } from '@/app/_lib/common';
 import { useContext } from 'react';
 import { SubMenuContext } from '@/app/(afterLogin)/_provider/SubMenuProvider';
 import usePostScopeMutation from '@/app/(afterLogin)/_hooks/usePostScopeMutation';
-import { useQueryClient } from '@tanstack/react-query';
 import useAlterModal from '@/app/_hooks/useAlterModal';
 import { AdvancedPost } from '@/model/Post';
 
@@ -55,31 +54,39 @@ export default function WhoCanReply({ post }: Props) {
     },
   ];
 
-  const queryClient = useQueryClient();
   const scopeMutation = usePostScopeMutation();
   const scopeHandler = (scope: Options['active']) => {
-    scopeMutation.mutate({
-      queryClient,
-      post,
-      scope,
-    });
-
-    switch (scope) {
-      case 'every':
-        alterMessage('Everyone can reply now');
-        break;
-      case 'follow':
-        alterMessage('Accounts you follow can reply now');
-        break;
-      case 'verified':
-        alterMessage('Verified accounts can reply now');
-        break;
-      case 'only':
-        alterMessage('Only you can reply now');
-        break;
-    }
-
-    close();
+    scopeMutation.mutate(
+      {
+        post,
+        scope,
+      },
+      {
+        onSuccess: () => {
+          switch (scope) {
+            case 'every':
+              alterMessage('Everyone can reply now');
+              break;
+            case 'follow':
+              alterMessage('Accounts you follow can reply now');
+              break;
+            case 'verified':
+              alterMessage('Verified accounts can reply now');
+              break;
+            case 'only':
+              alterMessage('Only you can reply now');
+              break;
+          }
+        },
+        onError: (error) => {
+          console.error(error);
+          alterMessage('Failed to set scope.\nPlease try again', 'error');
+        },
+        onSettled: () => {
+          close();
+        },
+      }
+    );
   };
 
   return (

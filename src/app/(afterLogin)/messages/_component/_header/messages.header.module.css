@@ -7,9 +7,11 @@
   flex-direction: column;
 }
 .inner {
+  padding-left: 16px;
   display: flex;
+  align-items: center;
   flex-grow: 1;
-  height: 50px;
+  height: 53px;
   background: rgba(var(--background-start-rgb), 0.65);
   backdrop-filter: blur(12px);
 }

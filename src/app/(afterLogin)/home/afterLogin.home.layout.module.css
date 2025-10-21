@@ -10,10 +10,16 @@
   .main {
     margin-bottom: 53px;
   }
+  .form {
+    display: none;
+  }
 }
 
 @media screen and (max-height: 500px) {
   .main {
     margin-bottom: 53px;
+  }
+  .form {
+    display: none;
   }
 }

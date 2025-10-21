@@ -4,12 +4,10 @@ import utils from '@/app/utility.module.css';
 import cx from 'classnames';
 import HighlightModal from '@/app/(afterLogin)/_component/alter/HighlightModal';
 import RepostSubMenu from '@/app/(afterLogin)/_component/_subMenu/RepostSubMenu';
-import UnPinModal from '@/app/(afterLogin)/_component/alter/UnPinModal';
 import { AdvancedPost } from '@/model/Post';
 import { createContext, Dispatch, Reducer, useReducer, useState } from 'react';
 import PostSubMenuSelector from '@/app/(afterLogin)/_component/_subMenu/PostSubMenuSelector';
 import WhoCanReply from '@/app/(afterLogin)/_component/_subMenu/WhoCanReply';
-import UnPostModal from '@/app/(afterLogin)/_component/alter/UnPostModal';
 import SearchListsOptionsSubMenu from '@/app/(afterLogin)/_component/_subMenu/SearchListsOptionsSubMenu';
 import { AdvancedLists } from '@/model/Lists';
 import ListsShareSubMenu from '@/app/(afterLogin)/_component/_subMenu/ListsShareSubMenu';
@@ -35,14 +33,7 @@ interface State {
     | { type: 'nav' }
     | { type: 'sign' }
     | {
-        type:
-          | 'post'
-          | 'delete'
-          | 'repost'
-          | 'highlight'
-          | 'unPin'
-          | 'whoCanReply'
-          | 'share';
+        type: 'post' | 'repost' | 'highlight' | 'whoCanReply' | 'share';
         post: AdvancedPost;
         sessionid: string;
       }
@@ -157,20 +148,8 @@ export default function SubMenuProvider({ children }: Props) {
             sessionid={menu.status.sessionid}
           />
         )}
-        {menu.flag && menu.status.type === 'delete' && (
-          <UnPostModal
-            post={menu.status.post}
-            sessionid={menu.status.sessionid}
-          />
-        )}
         {menu.flag && menu.status.type === 'highlight' && (
           <HighlightModal
-            post={menu.status.post}
-            sessionid={menu.status.sessionid}
-          />
-        )}
-        {menu.flag && menu.status.type === 'unPin' && (
-          <UnPinModal
             post={menu.status.post}
             sessionid={menu.status.sessionid}
           />

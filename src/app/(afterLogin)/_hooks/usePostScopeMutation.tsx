@@ -1,20 +1,23 @@
+'use client';
+
 import { responseErrorHandler } from '@/app/_lib/error';
 import { AdvancedPost } from '@/model/Post';
 import {
   InfiniteData,
-  QueryClient,
   QueryKey,
   useMutation,
+  useQueryClient,
 } from '@tanstack/react-query';
 
 interface MutationParam {
-  queryClient: QueryClient;
   post: AdvancedPost;
   scope: AdvancedPost['scope'];
 }
 
-const usePostScopeMutation = () =>
-  useMutation({
+const usePostScopeMutation = () => {
+  const queryClient = useQueryClient();
+
+  return useMutation({
     mutationFn: async ({
       post,
       scope,
@@ -39,7 +42,7 @@ const usePostScopeMutation = () =>
 
       return responseErrorHandler(response);
     },
-    onMutate: ({ queryClient, post, scope }) => {
+    onMutate: ({ post, scope }) => {
       const queryKeys = queryClient
         .getQueryCache()
         .getAll()
@@ -108,7 +111,7 @@ const usePostScopeMutation = () =>
 
       return context;
     },
-    onSuccess: (response, { queryClient }, context) => {
+    onSuccess: (response, {}, context) => {
       context.forEach(({ queryKey }) => {
         queryClient.invalidateQueries({
           queryKey,
@@ -116,7 +119,7 @@ const usePostScopeMutation = () =>
         });
       });
     },
-    onError: (error, { queryClient }, context) => {
+    onError: (error, {}, context) => {
       if (context) {
         context.forEach(({ queryKey, queryData }) => {
           queryClient.setQueryData(queryKey, queryData);
@@ -124,6 +127,7 @@ const usePostScopeMutation = () =>
       }
     },
   });
+};
 
 export default usePostScopeMutation;
 

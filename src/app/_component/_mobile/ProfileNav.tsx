@@ -1,6 +1,6 @@
 import MyProfile from '@/app/(afterLogin)/_component/profile/MyProfile';
 import useViewport from '@/app/(afterLogin)/_hooks/useViewport';
-import useMobileNavStore from '@/app/(afterLogin)/_store/MbileNavStore';
+import useMobileNavStore from '@/app/(afterLogin)/_store/MobileNavStore';
 
 export default function ProfileNav() {
   const { width, height } = useViewport();

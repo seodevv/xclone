@@ -77,7 +77,6 @@ export default function PostSubMenuOther({ post, width = 18.75 }: Props) {
 
   const { open, close: closeConfirm } = useConfirmStore();
   const onClickBlock = () => {
-    hide(true);
     open({
       flag: true,
       title: `Block @${post.userid}`,
@@ -86,12 +85,12 @@ export default function PostSubMenuOther({ post, width = 18.75 }: Props) {
       btnText: 'Block',
       onClickCancle: () => {
         closeConfirm();
-        hide(false);
+        close();
       },
       onClickConfirm: () => {
         sendPrepareMessage();
         closeConfirm();
-        hide(false);
+        close();
       },
     });
   };

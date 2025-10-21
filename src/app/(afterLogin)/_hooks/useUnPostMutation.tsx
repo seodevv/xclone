@@ -4,18 +4,19 @@ import { responseErrorHandler } from '@/app/_lib/error';
 import { AdvancedPost } from '@/model/Post';
 import {
   InfiniteData,
-  QueryClient,
   QueryKey,
   useMutation,
+  useQueryClient,
 } from '@tanstack/react-query';
 
 interface MutationParams {
-  queryClient: QueryClient;
   post: AdvancedPost;
 }
 
-const useUnPostMutation = () =>
-  useMutation({
+const useUnPostMutation = () => {
+  const queryClient = useQueryClient();
+
+  return useMutation({
     mutationFn: async ({ post }: MutationParams) => {
       const requestUrl = `${process.env.NEXT_PUBLIC_API_URL}/api/posts/${post.postid}`;
       const requestOptions: RequestInit = {
@@ -31,7 +32,7 @@ const useUnPostMutation = () =>
 
       return responseErrorHandler(response);
     },
-    onMutate: ({ queryClient, post }) => {
+    onMutate: ({ post }) => {
       const queryKeys = queryClient
         .getQueryCache()
         .getAll()
@@ -79,7 +80,7 @@ const useUnPostMutation = () =>
       });
       return context;
     },
-    onSuccess: (response, { queryClient }, context) => {
+    onSuccess: (response, {}, context) => {
       context.forEach(({ queryKey }) => {
         queryClient.invalidateQueries({
           queryKey,
@@ -87,7 +88,7 @@ const useUnPostMutation = () =>
         });
       });
     },
-    onError: (error, { queryClient }, context) => {
+    onError: (error, {}, context) => {
       if (context) {
         context.forEach(({ queryKey, queryData }) => {
           queryClient.setQueryData(queryKey, queryData);
@@ -95,6 +96,7 @@ const useUnPostMutation = () =>
       }
     },
   });
+};
 
 interface TData<T> {
   data: T;

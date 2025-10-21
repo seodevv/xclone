@@ -15,6 +15,11 @@ import PinedSvg from '@/app/_svg/post/PinedSvg';
 import useAlterModal from '@/app/_hooks/useAlterModal';
 import useListsStore from '@/app/(afterLogin)/_store/ListsStore';
 import { AdvancedPost } from '@/model/Post';
+import useConfirmStore, {
+  confirmSelector,
+} from '@/app/(afterLogin)/_store/ConfirmStore';
+import useUnPostMutation from '@/app/(afterLogin)/_hooks/useUnPostMutation';
+import usePostPinnedMutation from '@/app/(afterLogin)/_hooks/usePostPinnedMutation';
 
 interface Props {
   width?: number;
@@ -27,19 +32,50 @@ export default function PostSubMenuSession({
   post,
   sessionid,
 }: Props) {
-  const { sendPrepareMessage } = useAlterModal();
+  const { alterMessage, sendPrepareMessage } = useAlterModal();
   const { dispatchMenu, close } = useContext(SubMenuContext);
+  const confirmStore = useConfirmStore(confirmSelector);
   const setPostId = useListsStore((state) => state.setPostId);
 
   const closeMenu = () => {
     close();
   };
+
+  const unPostMutation = useUnPostMutation();
   const onClickDelete = () => {
-    dispatchMenu({
-      type: 'set',
-      payload: { status: { type: 'delete', post, sessionid } },
+    confirmStore.open({
+      flag: true,
+      title: 'Delete post?',
+      sub: 'This can’t be undone and it will be removed from your profile, the timeline of any accounts that follow you, and from search results.',
+      btnText: 'Delete',
+      btnTheme: 'red',
+      onClickCancle: () => {
+        confirmStore.close();
+      },
+      onClickConfirm: () => {
+        unPostMutation.mutate(
+          {
+            post,
+          },
+          {
+            onSuccess: () => {
+              alterMessage('Your post was deleted');
+            },
+            onError: (error) => {
+              console.error(error);
+              alterMessage('Failed to delete post.\nPlease try again', 'error');
+            },
+            onSettled: () => {
+              confirmStore.close();
+              close();
+            },
+          }
+        );
+      },
     });
   };
+
+  const unPinMutation = usePostPinnedMutation();
   const onClickPinned = () => {
     if (!post.pinned) {
       dispatchMenu({
@@ -47,15 +83,30 @@ export default function PostSubMenuSession({
         payload: { status: { type: 'highlight', post, sessionid } },
       });
     } else {
-      dispatchMenu({
-        type: 'set',
-        payload: { status: { type: 'unPin', post, sessionid } },
-      });
+      unPinMutation.mutate(
+        {
+          method: 'delete',
+          postid: post.postid,
+          sessionid,
+        },
+        {
+          onSuccess: () => {
+            alterMessage('Your post was unpinned from your profile');
+          },
+          onError: (error) => {
+            console.error(error);
+            alterMessage('Failed to unpin post.\nPlease try again', 'error');
+          },
+          onSettled: () => {
+            close();
+          },
+        }
+      );
     }
   };
   const onClickAddMember = () => {
     setPostId(post.postid);
-    closeMenu();
+    close();
   };
   const onClickWhoCanReply = () => {
     dispatchMenu({
@@ -65,12 +116,15 @@ export default function PostSubMenuSession({
   };
   const onClickEmbedPost = () => {
     sendPrepareMessage();
+    close();
   };
   const onClickViewPostAnalytics = () => {
     sendPrepareMessage();
+    close();
   };
   const onClickRequestCommunityNote = () => {
     sendPrepareMessage();
+    close();
   };
 
   return (

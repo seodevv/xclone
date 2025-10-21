@@ -40,8 +40,6 @@ export default function MediaTrends() {
     }));
   };
   const onClickNext: MouseEventHandler<HTMLButtonElement> = (e) => {
-    console.log('onCLick', medias, position);
-
     e.stopPropagation();
     if (typeof medias === 'undefined') return;
     if (position.leftOver <= 0) return;

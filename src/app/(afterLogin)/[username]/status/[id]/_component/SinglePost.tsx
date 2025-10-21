@@ -1,6 +1,6 @@
 'use client';
 
-import style from '../_style/singlePost.module.css';
+import styles from '../_style/singlePost.module.css';
 import { useSinglePostQuery } from '../_hooks/useSinglePostQuery';
 import { Session } from 'next-auth';
 import Comments from './Comments';
@@ -8,7 +8,7 @@ import Post from '@/app/(afterLogin)/_component/post/Post';
 import PostForm from '@/app/(afterLogin)/_component/post/form/PostForm';
 import { useEffect, useRef } from 'react';
 import useViewMutation from '@/app/(afterLogin)/[username]/status/[id]/_hooks/useViewMutation';
-import { useQueryClient } from '@tanstack/react-query';
+import useComposeStore from '@/app/(afterLogin)/_store/ComposeStore';
 
 interface Props {
   params: { username: string; id: string };
@@ -17,31 +17,41 @@ interface Props {
 
 export default function SinglePost({ params, session }: Props) {
   const { data: post } = useSinglePostQuery(params);
-  const queryClient = useQueryClient();
-  const { mutate } = useViewMutation({
+  const { setCompose, reset } = useComposeStore((state) => ({
+    setCompose: state.set,
+    reset: state.reset,
+  }));
+  const viewMutate = useViewMutation({
     userid: params.username,
     postid: ~~params.id,
-  });
+  }).mutate;
   const mountRef = useRef(false);
 
   useEffect(() => {
     if (mountRef.current) {
-      mutate({
-        queryClient,
-      });
+      viewMutate();
     }
     mountRef.current = true;
   }, []);
 
+  useEffect(() => {
+    setCompose({ type: 'comment', post: post.data });
+    return () => {
+      reset();
+    };
+  }, [post]);
+
   return (
-    <div className={style.main}>
+    <div className={styles.main}>
       <Post mode="single" post={post.data} />
       {session && (
-        <PostForm
-          session={session}
-          mode="comment"
-          parent={{ postid: post.data.postid, userid: post.data.User.id }}
-        />
+        <div className={styles.form}>
+          <PostForm
+            session={session}
+            mode="comment"
+            parent={{ postid: post.data.postid, userid: post.data.User.id }}
+          />
+        </div>
       )}
       <Comments params={params} />
     </div>

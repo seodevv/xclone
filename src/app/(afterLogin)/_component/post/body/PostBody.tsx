@@ -48,10 +48,12 @@ export default function PostBody({
             href={`/${post.User.id}`}
             onClick={(e) => e.stopPropagation()}
           >
-            <span className={styles.nick}>
-              {post.User.nickname}
-              <BadgeButton verified={post.User.verified} unClickable />
-            </span>
+            <span className={styles.nick}>{post.User.nickname}</span>
+            <BadgeButton
+              verified={post.User.verified}
+              unClickable
+              style={{ marginRight: 5 }}
+            />
             <span className={styles.id}>@{post.User.id}</span>
             <span className={styles.dot}>·</span>
           </Link>
