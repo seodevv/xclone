@@ -1,7 +1,7 @@
 import BalloonSvg from '@/app/_svg/profile/BalloonSvg';
 import styles from './userSince.module.css';
 import { AdvancedUser } from '@/model/User';
-import { MONTH_EN } from '@/app/_lib/common';
+import { MONTH_EN, nomalizedISO } from '@/app/_lib/common';
 
 interface Props {
   sessionid?: string | null;
@@ -11,11 +11,7 @@ interface Props {
 export default function UserBirth({ sessionid, user }: Props) {
   if (!user.birth) return;
 
-  console.log('user birth', user.birth, new Date(user.birth.date));
-  console.log('user follower', user.Followers);
-  console.log('user following', user.Followings);
-
-  const date = new Date(user.birth.date);
+  const date = new Date(nomalizedISO(user.birth.date));
   const scope = user.birth.scope;
   const isOwn = sessionid === user.id;
   const isFollower = user.Followers.some((u) => u.id === sessionid);

@@ -10,7 +10,7 @@ import {
 } from 'react';
 import styles from './beforeLogin.selector.module.css';
 import DateSelector from './DateSelector';
-import { getLastDay } from '@/app/_lib/common';
+import { getLastDay, nomalizedISO } from '@/app/_lib/common';
 
 interface Props {
   defaultValue?: string;
@@ -29,7 +29,9 @@ interface Status {
 
 const BirthSelector = forwardRef<BirthRef, Props>(
   ({ defaultValue, onSuccess, disabled }, ref) => {
-    const [date, setDate] = useState(new Date(defaultValue || Date.now()));
+    const [date, setDate] = useState(
+      new Date(defaultValue ? nomalizedISO(defaultValue) : Date.now())
+    );
     const status = useRef<Status>({
       a: { disabled: !!defaultValue, ref: useRef<BirthRef>(null) },
       b: { disabled: !!defaultValue, ref: useRef<BirthRef>(null) },

@@ -135,7 +135,7 @@ html {
 html,
 body {
   max-width: 100dvw;
-  /* overscroll-behavior: none; */
+  overscroll-behavior: none;
   /* overflow-x: hidden; */
   scrollbar-color: rgb(var(--scroll-thumb)) rgb(var(--scroll-background));
 }

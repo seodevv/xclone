@@ -8,7 +8,7 @@ import SettingsSubMenu, {
   ISettingsSubMenu,
 } from '@/app/(afterLogin)/settings/_component/SettingsSubMenu';
 import DivideLine from '@/app/_component/_util/DivideLine';
-import { MONTH_EN } from '@/app/_lib/common';
+import { MONTH_EN, nomalizedISO } from '@/app/_lib/common';
 import { AdvancedUser } from '@/model/User';
 import Link from 'next/link';
 import { useState } from 'react';
@@ -124,9 +124,13 @@ export default function SettingsAccountInformation({ user, gender }: Props) {
           {user.birth?.date && (
             <>
               <span>
-                {`${MONTH_EN[new Date(user.birth.date).getMonth()]} ${new Date(
-                  user.birth.date
-                ).getDate()}, ${new Date(user.birth.date).getFullYear()}`}
+                {`${
+                  MONTH_EN[new Date(nomalizedISO(user.birth.date)).getMonth()]
+                } ${new Date(
+                  nomalizedISO(user.birth.date)
+                ).getDate()}, ${new Date(
+                  nomalizedISO(user.birth.date)
+                ).getFullYear()}`}
               </span>
               <br />
             </>
@@ -153,7 +157,8 @@ export default function SettingsAccountInformation({ user, gender }: Props) {
       title: 'Age',
       sub: user.birth?.date
         ? `${Math.round(
-            (new Date().getTime() - new Date(user.birth.date).getTime()) /
+            (new Date().getTime() -
+              new Date(nomalizedISO(user.birth.date)).getTime()) /
               1000 /
               60 /
               60 /

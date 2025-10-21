@@ -92,6 +92,11 @@ export const capitalCase = (word: string) => {
   return word.substring(0, 1).toUpperCase() + word.substring(1).toLowerCase();
 };
 
+export const nomalizedISO = (str: string) => {
+  const [y, m, d] = str.split('-');
+  return `${y}-${m.padStart(2, '0')}-${d.padStart(2, '0')}T00:00:00`;
+};
+
 export const getYearsArray = () => {
   return new Array(200)
     .fill(undefined)
