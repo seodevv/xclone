@@ -33,6 +33,7 @@ export default function PostImages({
         styles.postImages,
         styles[`postImages-${images.length}`],
         mode === 'single' && styles.single,
+        mode === 'analytics' && styles.analytics,
         short && styles.short,
         className
       )}
@@ -42,11 +43,17 @@ export default function PostImages({
         return (
           <Link
             className={cx(
-              ['compose'].includes(mode) && utils.pointer_event_none
+              ['compose', 'analytics'].includes(mode) &&
+                utils.pointer_event_none
             )}
             key={index}
             href={`/${userid}/status/${postid}/photo/${image.imageId}`}
-            onClick={(e) => e.stopPropagation()}
+            onClick={(e) => {
+              if (mode === 'analytics') {
+                e.preventDefault();
+              }
+              e.stopPropagation();
+            }}
             scroll={false}
           >
             <Image

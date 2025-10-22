@@ -1,0 +1,40 @@
+.container {
+  display: flex;
+  flex-direction: column;
+}
+
+.border {
+  border-width: 1px;
+  border-radius: 16px;
+  border-style: solid;
+  border-color: rgb(var(--border-input-rgb));
+}
+
+.post {
+  min-height: 64px;
+}
+
+.reaction {
+}
+
+.views {
+  margin-top: 40px;
+  margin-right: 32px;
+  margin-left: 32px;
+  margin-bottom: 40px;
+  display: grid;
+  gap: 40px;
+  grid-template-columns: 1fr 2fr;
+}
+
+.sub {
+  display: grid;
+  gap: 40px;
+  grid-template-columns: repeat(2, 1fr);
+}
+
+@media screen and (max-width: 500px) {
+  .views {
+    grid-template-columns: 1fr;
+  }
+}

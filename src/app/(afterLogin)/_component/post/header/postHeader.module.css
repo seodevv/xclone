@@ -41,6 +41,11 @@
   flex-flow: row nowrap;
   width: unset;
 }
+.postUserSection.analytics {
+  flex-direction: row;
+  width: 100%;
+}
+
 .composeLine {
   margin-bottom: -30px;
   flex-grow: 1;

@@ -34,7 +34,7 @@ export default function PostArticle({
   const onClickArticle: MouseEventHandler<HTMLButtonElement> = (e) => {
     e.preventDefault();
     e.stopPropagation();
-    if (['single', 'compose'].includes(mode) || disabled) return;
+    if (['single', 'compose', 'analytics'].includes(mode) || disabled) return;
     router.push(`/${post.User.id}/status/${post.postid}`);
   };
 
@@ -42,7 +42,7 @@ export default function PostArticle({
     <article
       className={cx(
         styles.post,
-        ['single', 'compose'].includes(mode) && styles.notHover,
+        ['single', 'compose', 'analytics'].includes(mode) && styles.notHover,
         qoute && [styles.quote, utils.cursor_point],
         disabled && [styles.disabled, utils.maxHeight],
         noEvent && utils.pointer_event_none,

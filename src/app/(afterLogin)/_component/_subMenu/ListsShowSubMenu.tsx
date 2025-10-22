@@ -5,6 +5,8 @@ import SubMenuWrapper from '@/app/(afterLogin)/_component/_subMenu/SubMenuWrappe
 import useListsUnShowMutation from '@/app/(afterLogin)/_hooks/useListsUnShowMutation';
 import { SubMenuContext } from '@/app/(afterLogin)/_provider/SubMenuProvider';
 import useAlterModal from '@/app/_hooks/useAlterModal';
+import CheckSvg from '@/app/_svg/input/CheckSvg';
+import BlockSvg from '@/app/_svg/post/BlockSvg';
 import { AdvancedLists } from '@/model/Lists';
 import { useQueryClient } from '@tanstack/react-query';
 import { useSession } from 'next-auth/react';
@@ -57,6 +59,7 @@ export default function ListsShowSubMenu({ lists }: Props) {
       }
     );
   };
+  const width = 18.75;
 
   return (
     <SubMenuWrapper position="left">
@@ -65,6 +68,9 @@ export default function ListsShowSubMenu({ lists }: Props) {
           type="div"
           title={title}
           sub={sub}
+          svg={
+            isUnShow ? <CheckSvg width={width} /> : <BlockSvg width={width} />
+          }
           onClick={onClickListsShow}
         />
       </div>

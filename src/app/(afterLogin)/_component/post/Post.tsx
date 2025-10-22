@@ -13,7 +13,7 @@ import { CSSProperties } from 'react';
 import PostOptions from '@/app/(afterLogin)/_component/post/header/PostOptions';
 import PostPinned from '@/app/(afterLogin)/_component/post/header/PostPinned';
 
-export type Mode = 'post' | 'single' | 'comment' | 'compose';
+export type Mode = 'post' | 'single' | 'comment' | 'compose' | 'analytics';
 interface Props {
   className?: string;
   style?: CSSProperties;
@@ -49,7 +49,10 @@ export default function Post({
       {isRepost && <PostRepostInfo session={session} userid={post.User.id} />}
       {hasPinned && post.pinned && <PostPinned />}
       <div
-        className={cx(styles.postWrapper, mode === 'single' && styles.single)}
+        className={cx(
+          styles.postWrapper,
+          ['single', 'analytics'].includes(mode) && styles.column
+        )}
       >
         <PostHeader mode={mode} post={data} />
         <PostBody mode={mode} post={data} noImage={noImage} noReact={noReact} />

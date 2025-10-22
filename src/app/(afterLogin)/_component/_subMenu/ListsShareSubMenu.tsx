@@ -29,6 +29,7 @@ export default function ListsShareSubMenu() {
 
   const onClickDirectMessage = () => {
     alterMessage('This feature is in preparation.', 'warning');
+    close();
   };
 
   const onClickCopyLink = () => {

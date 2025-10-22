@@ -37,8 +37,10 @@ export default function PostBody({
   const isPhoto = /\/.*\/status\/[0-9]+\/photo\/[0-9]+/.test(pathname);
 
   return (
-    <div className={styles.postBody}>
-      {mode !== 'single' && (
+    <div
+      className={cx(styles.postBody, mode === 'analytics' && styles.analytics)}
+    >
+      {mode !== 'single' && mode !== 'analytics' && (
         <div className={styles.postMeta}>
           <Link
             className={cx(
@@ -60,15 +62,26 @@ export default function PostBody({
           <PostDate mode={mode} date={post.createat} />
         </div>
       )}
-      {post.Parent && !['single', 'comment', 'compose'].includes(mode) && (
-        <PostReplyInfo id={post.Parent.User.id} />
-      )}
-      <PostContent
-        mode={mode}
-        postid={post.postid}
-        userid={post.User.id}
-        content={post.content}
-      />
+      {post.Parent &&
+        !['single', 'comment', 'compose', 'analytics'].includes(mode) && (
+          <PostReplyInfo id={post.Parent.User.id} />
+        )}
+      <div
+        className={cx(
+          styles.postContentSection,
+          mode === 'analytics' && styles.analytics
+        )}
+      >
+        {mode === 'analytics' && post.Parent && (
+          <PostReplyInfo id={post.Parent.User.id} />
+        )}
+        <PostContent
+          mode={mode}
+          postid={post.postid}
+          userid={post.User.id}
+          content={post.content}
+        />
+      </div>
       {!noImage && (
         <PostImages
           mode={mode}
@@ -78,6 +91,7 @@ export default function PostBody({
         />
       )}
       {post.quote &&
+        mode !== 'analytics' &&
         (post.Original ? (
           <PostQuote
             mode={

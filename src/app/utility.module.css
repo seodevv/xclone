@@ -35,6 +35,9 @@
 .ma_20.ma_20 {
   margin: 20px;
 }
+.ma_32 {
+  margin: 32px;
+}
 .mt_0.mt_0 {
   margin-top: 0;
 }
@@ -1098,6 +1101,11 @@
 }
 .cl_inherit {
   color: inherit;
+}
+
+/* vertical-align */
+.vertical_middle {
+  vertical-align: middle;
 }
 
 /* fill */

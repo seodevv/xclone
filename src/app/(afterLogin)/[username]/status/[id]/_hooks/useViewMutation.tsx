@@ -8,19 +8,16 @@ import {
   useQueryClient,
 } from '@tanstack/react-query';
 
-interface ViewMutationParams {}
-
-const useViewMutation = ({
-  userid,
-  postid,
-}: {
+interface ViewMutationParams {
   userid: AdvancedUser['id'];
   postid: AdvancedPost['postid'];
-}) => {
+}
+
+const useViewMutation = () => {
   const queryClient = useQueryClient();
 
   return useMutation({
-    mutationFn: async () => {
+    mutationFn: async ({ postid, userid }: ViewMutationParams) => {
       if (postid < 1) {
         throw new Error(ERROR_STATUS.badRequest);
       }
@@ -42,7 +39,7 @@ const useViewMutation = ({
 
       return responseErrorHandler(response);
     },
-    onMutate: ({}) => {
+    onMutate: ({ postid }) => {
       const queryKeys = queryClient
         .getQueryCache()
         .getAll()

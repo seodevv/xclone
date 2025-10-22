@@ -36,6 +36,7 @@ export default function PostContent({
       className={cx(
         styles.postContent,
         mode === 'single' && utils.mt_12,
+        mode === 'analytics' && styles.analytics,
         className
       )}
       style={style}

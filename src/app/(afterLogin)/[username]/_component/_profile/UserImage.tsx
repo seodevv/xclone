@@ -45,6 +45,7 @@ export default function UserImage({ session, user }: Props) {
               alt={user.id}
               width={145}
               height={145}
+              priority
             />
           )}
         </div>

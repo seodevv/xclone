@@ -1,3 +1,10 @@
+.reaction.analytics {
+  padding: 16px;
+  flex: 1;
+  flex-direction: column;
+  justify-content: center;
+  cursor: default;
+}
 .reactionBtn {
   margin-right: 4px;
   display: flex;
@@ -10,6 +17,12 @@
   fill: rgb(var(--link-rgb));
   outline: none;
   cursor: pointer;
+}
+.reactionBtn.analytics {
+  flex-direction: column;
+  color: rgb(var(--foreground-rgb));
+  fill: rgb(var(--link-rgb));
+  cursor: default;
 }
 .reactionBtn > svg {
   fill: inherit;
@@ -37,4 +50,8 @@
 .tertiary {
   color: rgb(var(--tertiary-rgb));
   fill: rgb(var(--tertiary-rgb));
+}
+.count.analytics {
+  margin-top: 4px;
+  font-size: 16px;
 }

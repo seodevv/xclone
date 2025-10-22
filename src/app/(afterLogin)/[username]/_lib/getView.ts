@@ -1,15 +1,16 @@
-import { AdvancedUser } from '@/model/User';
+import { PostViews } from '@/model/Post';
 
+// ['post', 'views', :postid]
 interface Params {
-  queryKey: [string, string];
+  queryKey: [string, string, string];
 }
 
-export const getUser = async ({
-  queryKey: [, username],
-}: Params): Promise<{ data: AdvancedUser; message: string }> => {
+export const getView = async ({
+  queryKey: [, , postid],
+}: Params): Promise<{ data: PostViews; message: string }> => {
   const isServer = typeof window === 'undefined';
   const nextHeaders = isServer ? await import('next/headers') : undefined;
-  const requestUrl = `${process.env.NEXT_PUBLIC_API_URL}/api/users/${username}`;
+  const requestUrl = `${process.env.NEXT_PUBLIC_API_URL}/api/posts/${postid}/views`;
   const requestOptions: RequestInit = {
     method: 'GET',
     credentials: 'include',
@@ -17,7 +18,7 @@ export const getUser = async ({
       ? { Cookie: nextHeaders.cookies().toString() }
       : undefined,
     next: {
-      tags: ['users', username],
+      tags: ['posts', 'views', postid],
     },
     cache: 'no-store',
   };

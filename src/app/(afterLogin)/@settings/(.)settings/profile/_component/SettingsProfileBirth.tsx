@@ -6,7 +6,7 @@ import Link from 'next/link';
 import BirthSelector from '@/app/(beforeLogin)/_component/_sign/BirthSelector';
 import IdentifierSelector from '@/app/_component/_input/IdentifierSelector';
 import { Dispatch, SetStateAction, useState } from 'react';
-import { MONTH_EN } from '@/app/_lib/common';
+import { MONTH_EN, nomalizedISO } from '@/app/_lib/common';
 import { useSession } from 'next-auth/react';
 import { useQueryClient } from '@tanstack/react-query';
 import useDeleteUserBirth from '@/app/(afterLogin)/@settings/(.)settings/profile/_hooks/useDeleteUserBirth';
@@ -34,7 +34,7 @@ export default function SettingsProfileBirth({
   const { open, close } = useConfirmStore(confirmSelector);
   const [edit, setEdit] = useState(false);
   const [input, setInput] = useState<Birth>({
-    date: user.birth?.date || '',
+    date: user.birth?.date ? nomalizedISO(user.birth.date) : '',
     scope: {
       month: user.birth?.scope.month || 'each',
       year: user.birth?.scope.year || 'only',
@@ -66,9 +66,9 @@ export default function SettingsProfileBirth({
   };
 
   const onChangeDate = (date: Date) => {
-    const value = `${date.getFullYear()}-${
-      date.getMonth() + 1
-    }-${date.getDate()}`;
+    const value = `${date.getFullYear()}-${(date.getMonth() + 1)
+      .toString()
+      .padStart(2, '0')}-${date.getDate().toString().padStart(2, '0')}`;
     inputHandler({ id: 'date', value });
   };
 

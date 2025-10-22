@@ -37,3 +37,12 @@ export interface PostImage {
   width: number;
   height: number;
 }
+
+export interface PostViews {
+  postid: AdvancedPost['postid'];
+  impressions: number;
+  engagements: number;
+  detailexpands: number;
+  newfollowers: number;
+  profilevisit: number;
+}

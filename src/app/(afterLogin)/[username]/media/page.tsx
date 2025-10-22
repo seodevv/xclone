@@ -4,6 +4,7 @@ import { getServerSession } from 'next-auth';
 import authOptions from '@/app/_lib/authOptions';
 import { AdvancedUser } from '@/model/User';
 import { Metadata } from 'next';
+import FooterController from '@/app/(afterLogin)/_component/_footer/FooterController';
 
 interface Props {
   params: { username: string };
@@ -47,6 +48,7 @@ export default async function MediaPage({ params }: Props) {
   return (
     <UserHydrationBoundary username={params.username} filter={filter}>
       <UserPosts session={session} username={params.username} filter="media" />
+      <FooterController type="post" />
     </UserHydrationBoundary>
   );
 }

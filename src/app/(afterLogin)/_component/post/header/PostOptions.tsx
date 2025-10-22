@@ -42,6 +42,7 @@ export default function PostOptions({ mode, post }: Props) {
   };
 
   if (mode === 'compose') return null;
+  if (mode === 'analytics') return null;
   return (
     <div className={cx(styles.postOptions)}>
       <OptionButton onClick={onClickOption} />

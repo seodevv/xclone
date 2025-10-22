@@ -19,9 +19,10 @@ export default function UserBanner({ username, banner }: Props) {
           <Image
             className={styles.image}
             src={generateImagePath(banner)}
-            alt=""
+            alt={banner}
             width={600}
             height={200}
+            priority
           />
         )}
       </div>

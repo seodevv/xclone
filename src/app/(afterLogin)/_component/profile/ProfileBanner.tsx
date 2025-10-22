@@ -59,6 +59,7 @@ export default function ProfileBanner({
                 alt={imageSrc}
                 width={600}
                 height={200}
+                priority
               />
             )}
           </div>

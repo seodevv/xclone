@@ -21,7 +21,12 @@ export default function PostQuote({ mode, post, noImage, noEvent }: Props) {
     <PostArticle post={post} noEvent={noEvent} qoute>
       <div className={cx(utils.d_flexColumn)}>
         <div className={styles.info}>
-          <OtherProfile user={post.User} width={24} noevent />
+          <OtherProfile
+            user={post.User}
+            width={24}
+            noevent
+            style={{ flexShrink: 0 }}
+          />
           <span className={styles.nick}>
             {post.User.nickname}
             <BadgeButton verified={post.User.verified} unClickable />

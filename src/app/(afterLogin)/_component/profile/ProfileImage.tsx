@@ -44,6 +44,7 @@ export default function ProfileImage({ mode, imageSrc, onLoad }: Props) {
                 alt={imageSrc}
                 width={125}
                 height={125}
+                priority
               />
             </div>
           )}

@@ -53,6 +53,7 @@
 
 .postUserSection {
   margin-right: 8px;
+  min-width: 0;
   width: 40px;
 }
 
@@ -65,6 +66,7 @@
   display: flex;
   flex-flow: column nowrap;
   flex-grow: 1;
+  min-width: 0;
   width: 100%;
 }
 

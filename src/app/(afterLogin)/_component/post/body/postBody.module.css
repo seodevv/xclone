@@ -4,6 +4,9 @@
   width: 100%;
   overflow: hidden;
 }
+.postBody.analytics {
+  flex-direction: row;
+}
 .postMeta {
   margin-right: 34px;
   margin-bottom: 2px;
@@ -30,6 +33,7 @@
   text-decoration: underline;
 }
 .id {
+  margin-left: 2px;
   flex-shrink: 2;
   min-width: 0;
   font-weight: bold;
@@ -83,10 +87,18 @@
 }
 
 /* PostContent */
+.postContentSection.analytics {
+  margin: 4px 12px 12px 12px;
+  order: 1;
+  flex: 4 1;
+}
 .postContent {
   font-size: 15px;
   line-height: 20px;
   word-break: break-word;
+}
+.postContent.analytics {
+  margin-top: 4px;
 }
 .hashtag {
   color: rgb(var(--primary-rgb));
@@ -141,6 +153,9 @@
   padding: 12px 0;
   border-top: 1px solid rgb(var(--border-start-rgb));
   border-bottom: 1px solid rgb(var(--border-start-rgb));
+}
+.actionButtons.analytics {
+  margin-top: 0;
 }
 .actionButton {
   display: flex;

@@ -9,11 +9,13 @@ import { getComments } from '../_lib/getComments';
 interface Props {
   children: React.ReactNode;
   params: { username: string; id: string; photoId?: string };
+  disabled?: boolean;
 }
 
 export default async function SinglePostHydrationBoundary({
   children,
   params,
+  disabled,
 }: Props) {
   const queryClient = new QueryClient();
   queryClient.setDefaultOptions({
@@ -39,6 +41,8 @@ export default async function SinglePostHydrationBoundary({
     }),
   ]);
   const dehydrateState = dehydrate(queryClient);
+
+  if (disabled) return <>{children}</>;
 
   return (
     <HydrationBoundary state={dehydrateState}>{children}</HydrationBoundary>

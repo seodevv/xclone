@@ -19,16 +19,19 @@ import ShareSvg from '@/app/_svg/actionbuttons/ShareSvg';
 import useAlterModal from '@/app/_hooks/useAlterModal';
 import useComposeStore from '@/app/(afterLogin)/_store/ComposeStore';
 import { SubMenuContext } from '@/app/(afterLogin)/_provider/SubMenuProvider';
+import { Mode } from '@/app/(afterLogin)/_component/post/Post';
 
 interface Props {
   type: 'Comments' | 'Hearts' | 'Reposts' | 'Views' | 'Bookmarks' | 'Shares';
   post: AdvancedPost;
+  mode?: Mode;
   width?: number;
   white?: boolean;
 }
 
 export default function ReactionButton({
   type,
+  mode = 'post',
   post,
   width = 18.75,
   white = false,
@@ -56,6 +59,8 @@ export default function ReactionButton({
       router.push('/i/flow/login');
       return;
     }
+
+    if (mode === 'analytics') return;
 
     const { x, y, width, height } = e.currentTarget.getBoundingClientRect();
     switch (type) {
@@ -105,6 +110,7 @@ export default function ReactionButton({
         }
         break;
       case 'Views':
+        router.push(`/${post.userid}/status/${post.postid}/analytics`);
         break;
       case 'Shares':
         dispatchMenu({
@@ -135,6 +141,11 @@ export default function ReactionButton({
         utils.d_flexRow,
         utils.flex_alignCenter,
         utils.cursor_point,
+        styles.reaction,
+        mode === 'analytics' && styles.analytics,
+        mode === 'analytics' && type === 'Hearts' && utils.flexOrder_1,
+        mode === 'analytics' && type === 'Reposts' && utils.flexOrder_2,
+        mode === 'analytics' && type === 'Comments' && utils.flexOrder_3,
       ])}
     >
       <button
@@ -146,7 +157,8 @@ export default function ReactionButton({
             styles.primary,
           type === 'Reposts' && (active || hover) && styles.secondary,
           type === 'Hearts' && (active || hover) && styles.tertiary,
-          type === 'Bookmarks' && (active || hover) && styles.primary
+          type === 'Bookmarks' && (active || hover) && styles.primary,
+          mode === 'analytics' && styles.analytics
         )}
         onClick={onClickReaction}
         onMouseEnter={() => setHover(true)}
@@ -154,12 +166,25 @@ export default function ReactionButton({
       >
         {type === 'Comments' && <CommentSvg width={width} />}
         {type === 'Reposts' && <RepostSvg width={width} />}
-        {type === 'Hearts' && <HeartSvg width={width} active={active} />}
+        {type === 'Hearts' && (
+          <HeartSvg width={width} active={mode !== 'analytics' && active} />
+        )}
         {type === 'Views' && <ViewSvg width={width} />}
         {type === 'Bookmarks' && <BookmarkSvg width={width} active={active} />}
         {type === 'Shares' && <ShareSvg width={width} />}
-        <div className={cx(utils.pl_4, utils.pr_4, utils.fs_xs, utils.fw_bold)}>
-          <span>{count === 0 ? '' : unitConversion(count)}</span>
+        <div
+          className={cx(
+            utils.pl_4,
+            utils.pr_4,
+            utils.fs_xs,
+            utils.fw_bold,
+            styles.count,
+            mode === 'analytics' && styles.analytics
+          )}
+        >
+          <span>
+            {count === 0 && mode !== 'analytics' ? '' : unitConversion(count)}
+          </span>
         </div>
       </button>
     </div>

@@ -43,8 +43,9 @@
   display: flex;
   flex-direction: row;
 }
-.postWrapper.single {
+.postWrapper.column {
   flex-direction: column;
+  width: 100%;
 }
 .postWrapper.quote {
   margin: 12px;
@@ -63,5 +64,14 @@
   }
   .post.quote {
     border-color: rgb(47, 51, 54);
+  }
+}
+
+@media (hover: none) and (pointer: coarse) {
+  .post:hover {
+    background: transparent;
+  }
+  .post:active {
+    background: transparent;
   }
 }

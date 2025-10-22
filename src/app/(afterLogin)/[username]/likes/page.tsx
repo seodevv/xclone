@@ -6,6 +6,7 @@ import LikePrivateMessage from './_component/LikePrivateMessage';
 import LikePosts from './_component/LikePosts';
 import { AdvancedUser } from '@/model/User';
 import { Metadata } from 'next';
+import FooterController from '@/app/(afterLogin)/_component/_footer/FooterController';
 
 interface Props {
   params: { username: string };
@@ -52,6 +53,7 @@ export default async function LikesPage({ params }: Props) {
         <LikePrivateMessage />
         <LikePosts username={params.username} />
       </main>
+      <FooterController type="post" />
     </LikeHydrationBoundary>
   );
 }

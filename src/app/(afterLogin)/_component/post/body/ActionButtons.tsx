@@ -22,31 +22,70 @@ export default function ActionButtons({
   width = 18.75,
 }: Props) {
   return (
-    <div className={cx(style.actionButtons, mode === 'single' && style.single)}>
-      <ReactionButton type="Comments" post={post} width={width} white={white} />
-      <ReactionButton type="Reposts" post={post} width={width} white={white} />
-      <ReactionButton type="Hearts" post={post} width={width} white={white} />
+    <div
+      className={cx(
+        style.actionButtons,
+        mode === 'single' && style.single,
+        mode === 'analytics' && style.analytics
+      )}
+    >
+      <ReactionButton
+        type="Comments"
+        post={post}
+        mode={mode}
+        width={width}
+        white={white}
+      />
+      <ReactionButton
+        type="Reposts"
+        post={post}
+        mode={mode}
+        width={width}
+        white={white}
+      />
+      <ReactionButton
+        type="Hearts"
+        post={post}
+        mode={mode}
+        width={width}
+        white={white}
+      />
       {mode === 'single' ? (
         <ReactionButton
           type="Bookmarks"
           post={post}
+          mode={mode}
           width={width}
           white={white}
         />
       ) : (
-        <ReactionButton type="Views" post={post} width={width} white={white} />
-      )}
-      <div className={style.doubleButton}>
-        {mode !== 'single' && mode !== 'comment' && !isPhoto && (
+        mode !== 'analytics' && (
           <ReactionButton
-            type="Bookmarks"
+            type="Views"
             post={post}
             width={width}
             white={white}
           />
-        )}
-        <ReactionButton type="Shares" post={post} width={width} white={white} />
-      </div>
+        )
+      )}
+      {mode !== 'analytics' && (
+        <div className={style.doubleButton}>
+          {mode !== 'single' && mode !== 'comment' && !isPhoto && (
+            <ReactionButton
+              type="Bookmarks"
+              post={post}
+              width={width}
+              white={white}
+            />
+          )}
+          <ReactionButton
+            type="Shares"
+            post={post}
+            width={width}
+            white={white}
+          />
+        </div>
+      )}
     </div>
   );
 }

@@ -161,7 +161,7 @@ export default function NavMenuContainer({ session }: Props) {
           href="/compose/post"
           className={styles.tweet}
           scroll={false}
-          onClick={() => reset()}
+          onClick={reset}
         >
           <span className={styles.post}>Post</span>
           <TweetSvg theme="theme" />

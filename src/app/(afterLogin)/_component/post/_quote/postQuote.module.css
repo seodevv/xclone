@@ -6,14 +6,27 @@
 }
 .nick {
   margin-left: 4px;
-  display: flex;
-  align-items: center;
+  flex-shrink: 1;
   font-weight: bold;
+  min-width: 0;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+}
+.id {
+  flex-shrink: 2;
+  min-width: 0;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
 }
 .id,
 .dot {
   margin-right: 4px;
   color: rgb(var(--link-rgb));
+}
+.dot {
+  flex-shrink: 0;
 }
 .body {
   display: flex;

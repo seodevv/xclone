@@ -1,6 +1,6 @@
 import { create } from 'zustand';
 
-export type FooterButtonType = 'post' | 'dm' | 'comment';
+export type FooterButtonType = 'post' | 'dm' | 'comment' | 'lists';
 
 interface State {
   flag: boolean;

@@ -1,6 +1,7 @@
 import UserListsHydrationBoundary from '@/app/(afterLogin)/@i/(.)i/lists/add_member/_boundary/ListsListHydrationBoundary';
 import ListsRecommends from '@/app/(afterLogin)/[username]/lists/_component/ListsRecommends';
 import UserLists from '@/app/(afterLogin)/[username]/lists/_component/UserLists';
+import FooterController from '@/app/(afterLogin)/_component/_footer/FooterController';
 import DivideLine from '@/app/_component/_util/DivideLine';
 import authOptions from '@/app/_lib/authOptions';
 import { Metadata } from 'next';
@@ -23,6 +24,7 @@ export default async function UserListsPage({ params }: Props) {
       {session?.user?.email === params.username && <ListsRecommends more />}
       <DivideLine />
       <UserLists session={session} username={params.username} filter={filter} />
+      <FooterController type="lists" />
     </UserListsHydrationBoundary>
   );
 }

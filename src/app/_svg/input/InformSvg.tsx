@@ -1,5 +1,5 @@
 import styles from '../_style/svg.module.css';
-import { CSSProperties, HTMLAttributes } from 'react';
+import { CSSProperties, HTMLAttributes, MouseEventHandler } from 'react';
 import cx from 'classnames';
 
 interface Props {

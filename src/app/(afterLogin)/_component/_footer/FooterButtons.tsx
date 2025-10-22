@@ -7,14 +7,22 @@ import Text from '@/app/_component/_text/Text';
 import TweetSvg from '@/app/_svg/navbar/TweetSvg';
 import useFooterButtonStore from '@/app/(afterLogin)/_store/FooterButtonStore';
 import CommentSvg from '@/app/_svg/actionbuttons/CommentSvg';
+import useComposeStore from '@/app/(afterLogin)/_store/ComposeStore';
+import NewListsSvg from '@/app/_svg/lists/NewListsSvg';
 
 export default function FooterButtons() {
   const store = useFooterButtonStore();
+  const reset = useComposeStore((state) => state.reset);
   let button = <></>;
   switch (store.type) {
     case 'post':
       button = (
-        <Link className={styles.link} href={`/compose/post`}>
+        <Link
+          className={styles.link}
+          href={`/compose/post`}
+          onClick={reset}
+          scroll={false}
+        >
           <TweetSvg theme="white" width={24} />
           <div className={styles.title}>
             <Text theme="white" size="l" bold="bold">
@@ -26,8 +34,20 @@ export default function FooterButtons() {
       break;
     case 'comment':
       button = (
-        <Link className={styles.link} href={`/compose/post`}>
+        <Link className={styles.link} href={`/compose/post`} scroll={false}>
           <CommentSvg theme="white" width={24} />
+          <div className={styles.title}>
+            <Text theme="white" size="l" bold="bold">
+              Comment
+            </Text>
+          </div>
+        </Link>
+      );
+      break;
+    case 'lists':
+      button = (
+        <Link className={styles.link} href={`/i/lists/create`} scroll={false}>
+          <NewListsSvg theme="white" width={24} />
           <div className={styles.title}>
             <Text theme="white" size="l" bold="bold">
               Comment
@@ -38,7 +58,7 @@ export default function FooterButtons() {
       break;
     case 'dm':
       button = (
-        <Link className={styles.link} href={`/messages/compose`}>
+        <Link className={styles.link} href={`/messages/compose`} scroll={false}>
           <AddMessageSvg theme="white" width={24} />
           <div className={styles.title}>
             <Text theme="white" size="l" bold="bold">
