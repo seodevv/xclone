@@ -4,6 +4,7 @@ import styles from './settingsProfile.module.css';
 import SettingsProfileEdit from '@/app/(afterLogin)/@settings/(.)settings/profile/_component/SettingsProfileEdit';
 import { useUserQuery } from '@/app/(afterLogin)/[username]/_hooks/useUserQuery';
 import PhotoEditor from '@/app/_component/_photo/PhotoEditor';
+import { nomalizedISO } from '@/app/_lib/common';
 import { Birth } from '@/model/User';
 import { useEffect, useRef, useState } from 'react';
 
@@ -64,7 +65,12 @@ export default function SettingsProfile({ sessionid }: Props) {
           desc: user.data.desc,
           location: user.data.location,
           refer: user.data.refer,
-          birth: user.data.birth,
+          birth: user.data.birth
+            ? {
+                date: nomalizedISO(user.data.birth.date),
+                scope: user.data.birth.scope,
+              }
+            : null,
           image: {
             link: user.data.image,
           },

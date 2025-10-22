@@ -36,6 +36,9 @@ export default function NewConfirmModal() {
       onClick={onClickBackground}
       noHidden={noHidden}
       confirm
+      style={{
+        zIndex: 10000,
+      }}
     >
       {x && (
         <div className={styles.xLogo}>

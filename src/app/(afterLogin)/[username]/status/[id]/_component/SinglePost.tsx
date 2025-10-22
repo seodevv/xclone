@@ -21,12 +21,12 @@ export default function SinglePost({ params, session }: Props) {
     setCompose: state.set,
     reset: state.reset,
   }));
-  const viewMutate = useViewMutation().mutate;
+  const viewMutation = useViewMutation();
   const mountRef = useRef(false);
 
   useEffect(() => {
     if (mountRef.current) {
-      viewMutate({
+      viewMutation.mutate({
         userid: params.username,
         postid: ~~params.id,
       });

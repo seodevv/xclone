@@ -51,6 +51,7 @@ export default function PostSubMenuSession({
       btnTheme: 'red',
       onClickCancle: () => {
         confirmStore.close();
+        close();
       },
       onClickConfirm: () => {
         unPostMutation.mutate(

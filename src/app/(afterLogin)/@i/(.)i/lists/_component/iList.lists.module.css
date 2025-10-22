@@ -73,6 +73,7 @@
   color: rgb(var(--link-rgb));
   line-height: 16px;
   text-wrap: nowrap;
+  white-space: nowrap;
 }
 .master {
   display: flex;
