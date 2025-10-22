@@ -79,6 +79,12 @@
   margin-bottom: -28px;
 }
 
+@media (hover: none) and (pointer: coarse) {
+  .action {
+    opacity: 1;
+  }
+}
+
 @media (prefers-color-scheme: dark) {
   .content.you {
     background-color: rgb(47, 51, 54);

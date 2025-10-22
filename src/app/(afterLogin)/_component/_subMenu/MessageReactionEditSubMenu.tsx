@@ -1,5 +1,6 @@
 'use client';
 
+import styles from './subMenu.module.css';
 import utils from '@/app/utility.module.css';
 import cx from 'classnames';
 import SubMenuWrapper from '@/app/(afterLogin)/_component/_subMenu/SubMenuWrapper';
@@ -35,9 +36,10 @@ export default function MessageReactionEditSubMenu({
 
   return (
     <SubMenuWrapper
-      className={utils.pa_8}
+      className={cx(utils.pa_8, styles.reaction)}
       direction="row"
       position="top-center"
+      noCancle
     >
       {emojis.map((emoji, index) => (
         <EmojiReaction

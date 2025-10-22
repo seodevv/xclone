@@ -56,6 +56,12 @@
   white-space: pre-wrap;
 }
 
+@media screen and (max-width: 500px) {
+  .reaction {
+    justify-content: space-between;
+  }
+}
+
 @media (prefers-color-scheme: dark) {
   .menu:hover {
     background: rgba(var(--r-background-start-rgb), 0.1);
