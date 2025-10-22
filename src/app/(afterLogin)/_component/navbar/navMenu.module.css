@@ -129,6 +129,13 @@
   }
 }
 
+@media screen and (max-width: 500px), screen and (max-height: 500px) {
+  .badge {
+    top: 4px;
+    right: 4px;
+  }
+}
+
 @media (prefers-color-scheme: dark) {
   .badge {
     border-color: rgb(0, 0, 0);

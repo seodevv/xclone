@@ -118,10 +118,6 @@ export default function PostSubMenuSession({
     sendPrepareMessage();
     close();
   };
-  const onClickViewPostAnalytics = () => {
-    sendPrepareMessage();
-    close();
-  };
   const onClickRequestCommunityNote = () => {
     sendPrepareMessage();
     close();
@@ -179,10 +175,11 @@ export default function PostSubMenuSession({
           onClick={onClickEmbedPost}
         />
         <SubMenu
-          type="div"
+          type="link"
+          href={`/${post.userid}/status/${post.postid}/analytics`}
           title="View post analytics"
           svg={<ViewSvg width={width} />}
-          onClick={onClickViewPostAnalytics}
+          onClick={closeMenu}
         />
         <SubMenu
           type="div"

@@ -35,13 +35,10 @@ export default function MessagesImageModal({ params }: Props) {
         if (loading) {
           return (
             <IBackground
-              className={cx(
-                utils.d_flexColumn,
-                utils.flex_alignCenter,
-                utils.flex_justiCenter
-              )}
+              className={cx(utils.d_flexColumn)}
               color="none"
               xmark
+              center
             >
               <LoadingSpinner />
             </IBackground>
@@ -66,7 +63,7 @@ export default function MessagesImageModal({ params }: Props) {
               )}
             >
               <Image
-                className={cx(utils.obj_contain)}
+                className={cx(utils.w_100p, utils.obj_contain)}
                 src={url}
                 alt={media.url}
                 width={media.width * heightRatio}

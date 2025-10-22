@@ -24,6 +24,7 @@ interface Props {
   noHidden?: boolean;
   xmark?: boolean;
   confirm?: boolean;
+  center?: boolean;
 }
 
 export default function IBackground({
@@ -40,6 +41,7 @@ export default function IBackground({
   noHidden,
   xmark,
   confirm,
+  center,
 }: Props) {
   const router = useRouter();
   const searchParams = useSearchParams();
@@ -142,7 +144,8 @@ export default function IBackground({
           styles[`height-${height}`],
           styles[`maxHeight_${maxHeight}`],
           overflow === 'auto' && styles.auto,
-          confirm && styles.confirm
+          confirm && styles.confirm,
+          center && cx(utils.flex_alignCenter, utils.flex_justiCenter)
         )}
       >
         {children}

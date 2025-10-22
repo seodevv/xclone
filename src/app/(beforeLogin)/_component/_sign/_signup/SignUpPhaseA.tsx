@@ -46,7 +46,7 @@ export default function SignUpPhaseA() {
             maxLength: 24,
             required: true,
             message: 'Only lowercase letters, numbers can be used.',
-            regex: /^[a-z][a-z0-9._]{3,19}$/,
+            regex: /^[a-z][a-z0-9._]{2,23}$/,
           }}
           onSuccess={(value) => {
             set({ type: 'id', payload: { value, disabled: false } });
