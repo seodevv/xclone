@@ -98,9 +98,12 @@ export default function SignUpPhaseA() {
             ref={birth.ref}
             defaultValue={birth.value}
             onSuccess={(date) => {
-              const value = `${date.getFullYear()}-${
-                date.getMonth() + 1
-              }-${date.getDate()}`;
+              const value = `${date.getFullYear()}-${(date.getMonth() + 1)
+                .toString()
+                .padStart(2, '0')}-${date
+                .getDate()
+                .toString()
+                .padStart(2, '0')}`;
               set({ type: 'birth', payload: { value, disabled: false } });
             }}
             disabled={isLoading}

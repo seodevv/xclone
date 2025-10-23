@@ -85,6 +85,10 @@ export default function SettingsProfile({ sessionid }: Props) {
     }
   }, [user, setProfile]);
 
+  useEffect(() => {
+    console.log('profile', profile);
+  }, [profile]);
+
   return (
     <section className={styles.main}>
       {profile.editor === 'idle' && (
